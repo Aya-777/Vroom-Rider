@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   Image,
 } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import LinearGradient from 'react-native-linear-gradient';
 import PhoneNumberIcon from '../../../assets/svg/phoneNumber.svg';
@@ -15,10 +16,13 @@ import PasswordIcon from '../../../assets/svg/password.svg';
 import VisibilityOnIcon from '../../../assets/svg/visibilityOn.svg';
 import VisibilityOffIcon from '../../../assets/svg/visibilityOff.svg';
 import LinearBg from '../../../shared/components/LinearBg';
-import { BlurView } from '@react-native-community/blur';
 import Logo from '../../../shared/components/logo';
 
-const LoginScreen = () => {
+type LoginScreenProps = {
+  navigation: NativeStackNavigationProp<any>;
+};
+
+const LoginScreen = ({ navigation }: LoginScreenProps) => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -81,7 +85,11 @@ const LoginScreen = () => {
         </View>
 
         {/* Continue Button */}
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity 
+        style={styles.button}
+        // just for testing
+        onPress={() => navigation.navigate('Home')}
+        >
           <LinearBg
             style={styles.button}
             colors={['#0F1E52', '#625A7A']}
