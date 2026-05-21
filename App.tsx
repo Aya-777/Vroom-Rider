@@ -1,8 +1,8 @@
 import React from 'react';
-import LoginScreen from './src/modules/auth/screens/LoginScreen';
+import AppNavigator from './src/navigation/AppNavigator';
 
 function App() {
-  return <LoginScreen />;
+  return <AppNavigator />;
 }
 
 export default App;

@@ -6,16 +6,30 @@ import {
   TextInput,
   TouchableOpacity,
   SafeAreaView,
+  Image,
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/Feather';
-
+import LinearGradient from 'react-native-linear-gradient';
+import PhoneNumberIcon from '../../../assets/svg/phoneNumber.svg';
+import PasswordIcon from '../../../assets/svg/password.svg';
+import VisibilityOnIcon from '../../../assets/svg/visibilityOn.svg';
+import VisibilityOffIcon from '../../../assets/svg/visibilityOff.svg';
+import LinearBg from '../../../shared/components/LinearBg';
+import { BlurView } from '@react-native-community/blur';
+import Logo from '../../../shared/components/logo';
 
 const LoginScreen = () => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   return (
+  <LinearGradient
+    colors={['#F0EBFF', '#FAFAFF']}
+    start={{ x: 0, y: 0 }}
+    end={{ x: 0, y: 1 }}
+    style={{ flex: 1 }}
+  >
     <SafeAreaView style={styles.container}>
       {/* Background Circle */}
       <View style={styles.backgroundCircle} />
@@ -27,14 +41,12 @@ const LoginScreen = () => {
       <View style={styles.pinContainer}>
         {/* Circle Part */}
         <View style={styles.pinCircle}>
-          {/* Logo Circle */}
-          <View style={styles.logoCircle}>
-            <Text style={styles.logoIcon}>V</Text>
-          </View>
+          {/* Logo */}
+          <Logo />
 
           {/* Phone Input */}
           <View style={styles.inputContainer}>
-            <Icon name="phone" size={20} color="#7A7AA0" />
+            <PhoneNumberIcon width='20' height='20' fill="#7A7AA0" />
 
             <TextInput
               placeholder="Phone Number"
@@ -47,25 +59,36 @@ const LoginScreen = () => {
 
           {/* Password Input */}
           <View style={styles.inputContainer}>
-            <Icon name="more-horizontal" size={20} color="#7A7AA0" />
+            <PasswordIcon width='20' height='20' fill="#7A7AA0" />
 
             <TextInput
               placeholder="Password"
               placeholderTextColor="#9B9BB5"
-              secureTextEntry
+              secureTextEntry={!passwordVisible}
               value={password}
               onChangeText={setPassword}
               style={styles.input}
             />
 
-            <Icon name="eye" size={20} color="#7A7AA0" />
+            <TouchableOpacity onPress ={() => setPasswordVisible(!passwordVisible)}>
+              {passwordVisible ? (
+              <VisibilityOnIcon width='20' height='20' fill="#7A7AA0" />
+              ) : (
+                <VisibilityOffIcon width='20' height='20' fill="#7A7AA0" />
+              )}
+            </TouchableOpacity>
           </View>
-
-          {/* Continue Button */}
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Continue</Text>
-          </TouchableOpacity>
         </View>
+
+        {/* Continue Button */}
+        <TouchableOpacity style={styles.button}>
+          <LinearBg
+            style={styles.button}
+            colors={['#0F1E52', '#625A7A']}
+          >
+            <Text style={styles.buttonText}>Continue</Text>
+          </LinearBg>
+        </TouchableOpacity>
 
         {/* Triangle Bottom */}
         <View style={styles.triangle} />
@@ -73,7 +96,7 @@ const LoginScreen = () => {
 
       {/* Bottom Texts */}
       <View style={styles.bottomContainer}>
-        <Text style={styles.registerText}>
+        <Text style={styles.registerText} adjustsFontSizeToFit={true} numberOfLines={1}>
           Don't have an account?{' '}
           <Text style={styles.register}>Register</Text>
         </Text>
@@ -81,7 +104,8 @@ const LoginScreen = () => {
         <Text style={styles.forgot}>Forgot Password?</Text>
       </View>
     </SafeAreaView>
-  );
+  </LinearGradient>
+);
 };
 
 export default LoginScreen;
@@ -89,72 +113,62 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FAFAFF',
     alignItems: 'center',
   },
+  gradient: {
+  width: '100%',
+  alignItems: 'center',
+},
 
   backgroundCircle: {
     position: 'absolute',
-    width: 600,
-    height: 600,
+    width: 780,
+    height: 884,
     borderRadius: 300,
-    backgroundColor: '#E4DFF5',
-    bottom: -250,
+    backgroundColor: '#E4D9FF',
+    left: -300,
   },
 
   logoText: {
-    marginTop: 40,
-    fontSize: 42,
+    marginTop: 30,
+    marginBottom: 20,
+    fontSize: 35,
     fontWeight: '700',
     color: '#7E7BAA',
-    letterSpacing: 2,
   },
 
   pinContainer: {
-    marginTop: 40,
+    marginTop: 70,
     alignItems: 'center',
   },
-
+  
   pinCircle: {
-    width: 320,
-    backgroundColor: '#F3F1FA',
-    borderTopLeftRadius: 160,
-    borderTopRightRadius: 160,
+    width: 340,
+    backgroundColor: 'rgba(255,255,255,0.5)',
+    borderRadius: 180,
+    borderBottomLeftRadius:230,
+    borderBottomRightRadius:230,
     alignItems: 'center',
     paddingTop: 40,
-    paddingBottom: 20,
+    paddingBottom: 70,
+    zIndex: 2,
   },
 
   triangle: {
     width: 0,
     height: 0,
-    borderLeftWidth: 120,
-    borderRightWidth: 120,
-    borderTopWidth: 170,
+    borderLeftWidth: 163,
+    borderRightWidth: 163,
+    borderTopWidth: 310,
     borderLeftColor: 'transparent',
     borderRightColor: 'transparent',
-    borderTopColor: '#F3F1FA',
-    marginTop: -1,
-  },
-
-  logoCircle: {
-    width: 90,
-    height: 90,
-    borderRadius: 45,
-    backgroundColor: '#D7D0F0',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-
-  logoIcon: {
-    fontSize: 42,
-    color: '#1F1D5A',
-    fontWeight: 'bold',
+    borderTopColor: 'rgba(255, 255, 255, 0.4)',
+    marginTop: -150,
+    zIndex: 0,
   },
 
   inputContainer: {
-    width: 250,
+    width: 290,
     height: 55,
     backgroundColor: '#fff',
     borderRadius: 14,
@@ -172,39 +186,49 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    width: 250,
+    width: 280,
     height: 60,
-    backgroundColor: '#23205F',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
+    borderRadius: 14,
+    zIndex: 3,
+    marginTop: -30,
   },
 
   buttonText: {
-    color: '#fff',
-    fontSize: 22,
+    color: '#FAFAFF',
+    fontSize: 18,
     fontWeight: '700',
   },
 
   bottomContainer: {
-    marginTop: 30,
     alignItems: 'center',
+    justifyContent: 'center',
   },
 
   registerText: {
-    fontSize: 16,
-    color: '#3F3B59',
+    fontSize: 14,
+    color: '#1A1C20',
+    fontWeight: '500',
   },
 
   register: {
-    color: '#1F1D5A',
+    color: '#0F1E52',
     fontWeight: '700',
   },
 
   forgot: {
-    marginTop: 20,
-    fontSize: 18,
-    color: '#2D295F',
+    marginTop: 10,
+    fontSize: 14,
+    color: '#0F1E52',
     fontWeight: '700',
+  },
+  absoluteBlurCard: {
+    width: 280,
+    height: 180,
+    borderRadius: 16,
+    overflow: 'hidden', // Crucial for iOS border radius to work with BlurView
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
