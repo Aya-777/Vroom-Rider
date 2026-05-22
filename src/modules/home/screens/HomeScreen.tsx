@@ -33,13 +33,26 @@ const services = [
   },
 ];
 
+const savedDestinations = [
+  {
+    id: 'home',
+    title: 'Home',
+    subtitle: '248 West 35th St, New York'
+  },
+  {
+    id: 'office',
+    title: 'Office',
+    subtitle: 'One World Trade Center'
+  }
+];
+
 export default function HomeScreen() {
   return (
   <LinearBg
     colors={['#F0EBFF', '#FAFAFF']}
     start={{ x: 0, y: 0 }}
     end={{ x: 0, y: 1 }}
-    style={{ flex: 1 }}
+    style={styles.gradientContainer}
     >
     <SafeAreaView style={styles.container}>
       {/* Header Section */}
@@ -67,7 +80,7 @@ export default function HomeScreen() {
             <TouchableOpacity style={[styles.gridItem, styles.activeGridItem]}>
               <RideIcon fill="#1E2243" />
             </TouchableOpacity>
-            <Text style={[styles.gridLabel, styles.activeGridLabel]}>Ride</Text>
+            <Text style={[styles.gridLabel, styles.activeGridLabel]}>{services[0].title}</Text>
           </View>
 
           {/* Reserve Service */}
@@ -75,7 +88,7 @@ export default function HomeScreen() {
             <TouchableOpacity style={styles.gridItem}>
               <ReserveIcon fill="#A0A5BA" />
             </TouchableOpacity>
-            <Text style={styles.gridLabel}>Reserve</Text>
+            <Text style={styles.gridLabel}>{services[1].title}</Text>
           </View>
         </View>
 
@@ -95,8 +108,8 @@ export default function HomeScreen() {
               <HomeIcon fill="#FAFAFF" />
             </View>
             <View style={styles.destTextContainer}>
-              <Text style={styles.destTitle}>Home</Text>
-              <Text style={styles.destSubtitle}>248 West 35th St, New York</Text>
+              <Text style={styles.destTitle}>{savedDestinations[0].title}</Text>
+              <Text style={styles.destSubtitle}>{savedDestinations[0].subtitle}</Text>
             </View>
           </TouchableOpacity>
 
@@ -106,8 +119,8 @@ export default function HomeScreen() {
               <WorkIcon fill="#FAFAFF" />
             </View>
             <View style={styles.destTextContainer}>
-              <Text style={styles.destTitle}>Office</Text>
-              <Text style={styles.destSubtitle}>One World Trade Center</Text>
+              <Text style={styles.destTitle}>{savedDestinations[1].title}</Text>
+              <Text style={styles.destSubtitle}>{savedDestinations[1].subtitle}</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -119,6 +132,9 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
+  gradientContainer: {
+    flex: 1 
+  },
   container: {
     flex: 1,
   },
