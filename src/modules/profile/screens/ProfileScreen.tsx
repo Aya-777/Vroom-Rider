@@ -27,9 +27,14 @@ import InfoIcon from '../../../assets/svg/info.svg'
 import LogoutIcon from '../../../assets/svg/logout.svg';
 import LinearBg from '../../../shared/components/LinearBg';
 
+import { useState } from 'react';
+
 const { width } = Dimensions.get('window');
+type BottomNavTab = 'HOME' | 'ACTIVITY' | 'PROFILE';
 
 export default function ProfileScreen() {
+    const [currentTab, setCurrentTab] = useState<BottomNavTab>('PROFILE');
+  
   return (
     
       <SafeAreaView style={styles.container}>
@@ -169,7 +174,7 @@ export default function ProfileScreen() {
               </Text>
             </TouchableOpacity>
           </ScrollView>
-        <BottomNav />
+        <BottomNav currentTab={currentTab} onTabChange={setCurrentTab}/>
       </SafeAreaView>
   );
 }

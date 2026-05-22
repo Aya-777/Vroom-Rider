@@ -6,28 +6,53 @@ import ProfileIcon from '../../assets/svg/profile.svg';
 import HomeIcon from '../../assets/svg/home.svg';
 import { Colors, Typography, Spacing, Radius, Shadows } from '../../core/theme';
 
-function BottomNav() {
+type BottomNavTab = 'HOME' | 'ACTIVITY' | 'PROFILE';
+
+type BottomNavProps = {
+  currentTab: BottomNavTab;
+  onTabChange: (tabId: BottomNavTab) => void;
+};
+
+function BottomNav({ currentTab, onTabChange }: BottomNavProps) {
   const navigation = useNavigation<any>();
+
+  const tabs = [
+    { id: 'HOME' as const, label: 'Home', Icon: HomeIcon, route: 'Home' as const },
+    { id: 'ACTIVITY' as const, label: 'Activity', Icon: HistoryIcon, route: 'Activity' as const },
+    { id: 'PROFILE' as const, label: 'Profile', Icon: ProfileIcon, route: 'Profile' as const },
+  ];
+
   return (
     <View style={styles.bottomNav}>
-      <TouchableOpacity style={[styles.navItem, styles.activeNavItem]}>
-        <HomeIcon fill={Colors.primary} />
-        <Text style={[styles.navLabel, styles.activeNavLabel]}>Home</Text>
-      </TouchableOpacity>
+      {tabs.map((tab) => {
+        // Check if this specific tab is selected
+        const isActive = currentTab === tab.id;
 
-      <TouchableOpacity style={styles.navItem}>
-        <HistoryIcon fill={Colors.textMuted} />
-        <Text style={styles.navLabel}>Activity</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.navItem} onPress={()=> navigation.navigate('Profile')}>
-        <ProfileIcon fill={Colors.textMuted} />
-        <Text style={styles.navLabel}>Profile</Text>
-      </TouchableOpacity>
+        return (
+          <TouchableOpacity
+            key={tab.id}
+            style={[styles.navItem, isActive && styles.activeNavItem]}
+            onPress={() => {
+              onTabChange(tab.id);
+              navigation.navigate(tab.route);
+            }}
+          >
+            <tab.Icon fill={isActive ? Colors.primary : Colors.textMuted} />
+            
+            <Text 
+              style={[
+                styles.navLabel, 
+                isActive && styles.activeNavLabel
+              ]}
+            >
+              {tab.label}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   bottomNav: {
     position: 'absolute',

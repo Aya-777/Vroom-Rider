@@ -15,7 +15,7 @@ import HomeIcon from '../../../assets/svg/home.svg';
 import BottomNav from '../../../shared/components/BottomNav'
 import SearchBar from '../../../shared/components/SearchBar'
 import Header from '../../../shared/components/Header';
-
+import { useState } from 'react';
 import { Colors , Typography, Spacing, Radius, Shadows} from '../../../core/theme';
 
 
@@ -47,8 +47,10 @@ const savedDestinations = [
     subtitle: 'One World Trade Center'
   }
 ];
+type BottomNavTab = 'HOME' | 'ACTIVITY' | 'PROFILE';
 
 export default function HomeScreen() {
+  const [currentTab, setCurrentTab] = useState<BottomNavTab>('HOME');
   return (
   <LinearBg
     colors={['#F0EBFF', '#FAFAFF']}
@@ -117,7 +119,7 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </View>
       </ScrollView>
-      <BottomNav />
+      <BottomNav currentTab={currentTab} onTabChange={setCurrentTab} />
     </SafeAreaView>
   </LinearBg>
   );
