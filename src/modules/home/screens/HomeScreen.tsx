@@ -9,14 +9,13 @@ import {
   ScrollView,
 } from 'react-native';
 import LinearBg from '../../../shared/components/LinearBg';
-import MenuIcon from '../../../assets/svg/menu.svg';
 import WorkIcon from '../../../assets/svg/work.svg';
 import ReserveIcon from '../../../assets/svg/reserve.svg';
 import RideIcon from '../../../assets/svg/ride.svg';
-import NotificationsIcon from '../../../assets/svg/notifications.svg';
 import HomeIcon from '../../../assets/svg/home.svg';
 import BottomNav from '../../../shared/components/BottomNav'
 import SearchBar from '../../../shared/components/SearchBar'
+import Header from '../../../shared/components/Header';
 
 const services = [
   {
@@ -55,17 +54,7 @@ export default function HomeScreen() {
     style={styles.gradientContainer}
     >
     <SafeAreaView style={styles.container}>
-      {/* Header Section */}
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.iconButton}>
-          <MenuIcon fill='#0F1E52'/>
-        </TouchableOpacity>
-        <Text style={styles.logoText}>VROOM</Text>
-        <TouchableOpacity style={styles.iconButton}>
-          <NotificationsIcon fill='#0F1E52'/>
-        </TouchableOpacity>
-      </View>
-
+      <Header />
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         <SearchBar />
         {/* For You Section */}
