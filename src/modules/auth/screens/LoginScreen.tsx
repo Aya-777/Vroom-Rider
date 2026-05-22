@@ -340,14 +340,13 @@ const styles = StyleSheet.create({
   },
 
   register: {
+    ...Typography.boldCaption,
     color: Colors.primary,
-    fontWeight: '700',
   },
 
   forgot: {
     marginTop: Spacing.sm,
-    ...Typography.caption,
+    ...Typography.boldCaption,
     color: Colors.primary,
-    fontWeight: '700',
   },
 });
