@@ -8,11 +8,17 @@ import {
   SafeAreaView,
   ScrollView,
 } from 'react-native';
-// Assuming you use react-native-vector-icons. 
-// If not installed, replace these with Image components or your preferred icon library.
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import LinearBg from '../../../shared/components/LinearBg';
+import MenuIcon from '../../../assets/svg/menu.svg';
+import HomeIcon from '../../../assets/svg/home.svg';
+import WorkIcon from '../../../assets/svg/work.svg';
+import ProfileIcon from '../../../assets/svg/profile.svg';
+import ReserveIcon from '../../../assets/svg/reserve.svg';
+import RideIcon from '../../../assets/svg/ride.svg';
+import ScheduleIcon from '../../../assets/svg/schedule.svg';
+import NotificationsIcon from '../../../assets/svg/notifications.svg';
+import SearchIcon from '../../../assets/svg/search.svg';
+import HistoryIcon from '../../../assets/svg/history.svg';
 
 export default function HomeScreen() {
   return (
@@ -26,18 +32,18 @@ export default function HomeScreen() {
       {/* Header Section */}
       <View style={styles.header}>
         <TouchableOpacity style={styles.iconButton}>
-          <MaterialIcons name="menu" size={24} color="#2E3192" />
+          <MenuIcon fill='#0F1E52'/>
         </TouchableOpacity>
         <Text style={styles.logoText}>VROOM</Text>
         <TouchableOpacity style={styles.iconButton}>
-          <MaterialIcons name="notifications-none" size={24} color="#2E3192" />
+          <NotificationsIcon fill='#0F1E52'/>
         </TouchableOpacity>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         {/* Search Bar */}
         <View style={styles.searchContainer}>
-          <MaterialIcons name="search" size={24} color="#1E2243" style={styles.searchIcon} />
+          <SearchIcon fill="#0F1E52"/>
           <TextInput 
             placeholder="Where to?" 
             placeholderTextColor="#A0A5BA" 
@@ -45,7 +51,7 @@ export default function HomeScreen() {
           />
           <View style={styles.divider} />
           <TouchableOpacity style={styles.timeButton}>
-            <MaterialIcons name="access-time" size={20} color="#1E2243" />
+            <ScheduleIcon fill="#1E2243" />
             <Text style={styles.timeText}>Now</Text>
           </TouchableOpacity>
         </View>
@@ -60,31 +66,15 @@ export default function HomeScreen() {
           {/* Active Ride Service */}
           <View style={styles.gridItemContainer}>
             <TouchableOpacity style={[styles.gridItem, styles.activeGridItem]}>
-              <FontAwesome5 name="car" size={24} color="#1E2243" />
+              <RideIcon fill="#1E2243" />
             </TouchableOpacity>
             <Text style={[styles.gridLabel, styles.activeGridLabel]}>Ride</Text>
-          </View>
-
-          {/* Package Service */}
-          <View style={styles.gridItemContainer}>
-            <TouchableOpacity style={styles.gridItem}>
-              <MaterialIcons name="inventory" size={24} color="#A0A5BA" />
-            </TouchableOpacity>
-            <Text style={styles.gridLabel}>Package</Text>
-          </View>
-
-          {/* Rent Service */}
-          <View style={styles.gridItemContainer}>
-            <TouchableOpacity style={styles.gridItem}>
-              <FontAwesome5 name="key" size={20} color="#A0A5BA" />
-            </TouchableOpacity>
-            <Text style={styles.gridLabel}>Rent</Text>
           </View>
 
           {/* Reserve Service */}
           <View style={styles.gridItemContainer}>
             <TouchableOpacity style={styles.gridItem}>
-              <MaterialIcons name="calendar-today" size={22} color="#A0A5BA" />
+              <ReserveIcon fill="#A0A5BA" />
             </TouchableOpacity>
             <Text style={styles.gridLabel}>Reserve</Text>
           </View>
@@ -103,44 +93,42 @@ export default function HomeScreen() {
           {/* Home Item */}
           <TouchableOpacity style={styles.destinationCard}>
             <View style={styles.destIconContainer}>
-              <MaterialIcons name="home" size={24} color="#FFF" />
+              <HomeIcon fill="#FAFAFF" />
             </View>
             <View style={styles.destTextContainer}>
               <Text style={styles.destTitle}>Home</Text>
               <Text style={styles.destSubtitle}>248 West 35th St, New York</Text>
             </View>
-            <MaterialIcons name="chevron-right" size={24} color="#8E8E93" />
           </TouchableOpacity>
 
           {/* Office Item */}
           <TouchableOpacity style={styles.destinationCard}>
             <View style={styles.destIconContainer}>
-              <MaterialIcons name="business-center" size={22} color="#FFF" />
+              <WorkIcon fill="#FAFAFF" />
             </View>
             <View style={styles.destTextContainer}>
               <Text style={styles.destTitle}>Office</Text>
               <Text style={styles.destSubtitle}>One World Trade Center</Text>
             </View>
-            <MaterialIcons name="chevron-right" size={24} color="#8E8E93" />
           </TouchableOpacity>
         </View>
       </ScrollView>
 
       {/* Bottom Navigation Bar */}
       <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem}>
-          <MaterialIcons name="home" size={26} color="#A0A5BA" />
-          <Text style={styles.navLabel}>Home</Text>
+        <TouchableOpacity style={[styles.navItem, styles.activeNavItem]}>
+          <HomeIcon fill={'#0F1E52'}/>
+          <Text style={[styles.navLabel, styles.activeNavLabel]}>Home</Text>
         </TouchableOpacity>
         
         <TouchableOpacity style={styles.navItem}>
-          <FontAwesome5 name="car" size={22} color="#A0A5BA" />
+          <HistoryIcon fill={'#45464F50'}/>
           <Text style={styles.navLabel}>Activity</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.navItem, styles.activeNavItem]}>
-          <MaterialIcons name="person" size={26} color="#2E3192" />
-          <Text style={[styles.navLabel, styles.activeNavLabel]}>PROFILE</Text>
+        <TouchableOpacity style={styles.navItem}>
+          <ProfileIcon fill={'#45464F50'} />
+          <Text style={styles.navLabel}>Profile</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -151,7 +139,6 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#EAE8FC', // Soft lavender tint matching the screenshot background
   },
   scrollContent: {
     paddingHorizontal: 20,
@@ -189,6 +176,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#FFF',
     borderRadius: 30,
+    borderWidth: 1,
+    borderColor: '#C6C5D133',
     paddingHorizontal: 15,
     alignItems: 'center',
     height: 55,
@@ -206,13 +195,13 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     fontSize: 18,
-    color: '#1E2243',
+    color: '#0F1E52',
     fontWeight: '400',
   },
   divider: {
     width: 1,
     height: 24,
-    backgroundColor: '#E2E4EB',
+    backgroundColor: '#C6C5D133',
     marginHorizontal: 10,
   },
   timeButton: {
@@ -223,7 +212,7 @@ const styles = StyleSheet.create({
   timeText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1E2243',
+    color: '#0F1E52',
     marginLeft: 4,
   },
   // Section Headers
@@ -245,13 +234,13 @@ const styles = StyleSheet.create({
   seeAllText: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#1E2243',
+    color: '#0F1E52',
   },
   // Grid Services Styles
   gridContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
   },
   gridItemContainer: {
     alignItems: 'center',
@@ -262,16 +251,16 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#E2E4EB',
+    backgroundColor: '#E8E8ED',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 8,
   },
   activeGridItem: {
-    backgroundColor: '#D6D3FA', // Highlighted light purple accent background
-    shadowColor: '#2E3192',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
+    backgroundColor: '#E4D9FF', // Highlighted light purple accent background
+    shadowColor: '#111317',
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.25,
     shadowRadius: 6,
     elevation: 2,
   },
@@ -281,7 +270,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   activeGridLabel: {
-    color: '#1E2243',
+    color: '#0F1E52',
     fontWeight: '700',
   },
   // Destination Cards Styles
@@ -290,7 +279,7 @@ const styles = StyleSheet.create({
   },
   destinationCard: {
     flexDirection: 'row',
-    backgroundColor: '#F3F1FF',
+    backgroundColor: '#FFF',
     padding: 16,
     borderRadius: 16,
     alignItems: 'center',
@@ -299,7 +288,7 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 22,
-    backgroundColor: '#303463',
+    backgroundColor: '#0F1E52',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 14,
@@ -310,12 +299,12 @@ const styles = StyleSheet.create({
   destTitle: {
     fontSize: 17,
     fontWeight: '700',
-    color: '#1E2243',
+    color: '#0F1E52',
     marginBottom: 2,
   },
   destSubtitle: {
     fontSize: 13,
-    color: '#A0A5BA',
+    color: '#45464F50',
   },
   // Bottom Navigation Styles
   bottomNav: {
@@ -339,19 +328,19 @@ const styles = StyleSheet.create({
   },
   activeNavItem: {
     borderTopWidth: 3,
-    borderTopColor: '#2E3192',
+    borderTopColor: '#0F1E52',
     height: '100%',
     justifyContent: 'center',
     paddingTop: 4,
   },
   navLabel: {
     fontSize: 11,
-    color: '#A0A5BA',
+    color: '#45464F50',
     marginTop: 4,
     fontWeight: '600',
   },
   activeNavLabel: {
-    color: '#2E3192',
+    color: '#0F1E52',
     fontWeight: 'bold',
   },
 });
