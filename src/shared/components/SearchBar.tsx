@@ -1,79 +1,71 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  SafeAreaView,
-  ScrollView,
-} from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import ScheduleIcon from '../../assets/svg/schedule.svg';
 import SearchIcon from '../../assets/svg/search.svg';
+import { Colors, Typography, Spacing, Radius, Shadows } from '../../core/theme';
 
-function SearchBar(){
-  return(
+function SearchBar() {
+  return (
     <View style={styles.searchContainer}>
-      <SearchIcon fill="#0F1E52"/>
-      <TextInput 
-        placeholder="Where to?" 
-        placeholderTextColor="#A0A5BA" 
+      <SearchIcon fill={Colors.primary} />
+
+      <TextInput
+        placeholder="Where to?"
+        placeholderTextColor={Colors.textMuted}
         style={styles.searchInput}
       />
+
       <View style={styles.divider} />
+
       <TouchableOpacity style={styles.timeButton}>
-        <ScheduleIcon fill="#1E2243" />
+        <ScheduleIcon fill={Colors.secondary} />
         <Text style={styles.timeText}>Now</Text>
       </TouchableOpacity>
     </View>
-
   );
 }
 
 const styles = StyleSheet.create({
-  // Search Bar Styles
   searchContainer: {
     flexDirection: 'row',
-    backgroundColor: '#FFF',
-    borderRadius: 30,
+    backgroundColor: Colors.surface,
+    borderRadius: Radius.full,
     borderWidth: 1,
-    borderColor: '#C6C5D133',
-    paddingHorizontal: 15,
+    borderColor: Colors.border,
+    paddingHorizontal: Spacing.md,
     alignItems: 'center',
+    justifyContent: 'center',
     height: 55,
-    marginTop: 10,
-    marginBottom: 25,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.05,
-    shadowRadius: 8,
-    elevation: 3,
+    marginTop: Spacing.sm,
+    marginBottom: Spacing.lg,
+    ...Shadows.small,
   },
-  searchIcon: {
-    marginRight: 10,
-  },
+
   searchInput: {
     flex: 1,
-    fontSize: 18,
-    color: '#0F1E52',
-    fontWeight: '400',
+    ...Typography.body,
+    color: Colors.primary,
   },
+
   divider: {
     width: 1,
     height: 24,
-    backgroundColor: '#C6C5D133',
-    marginHorizontal: 10,
+    backgroundColor: Colors.border,
+    marginHorizontal: Spacing.sm,
   },
+
   timeButton: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
   },
+
   timeText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#0F1E52',
-    marginLeft: 4,
+    ...Typography.body,
+    fontFamily: 'Lora-SemiBold',
+    color: Colors.primary,
+    marginLeft: Spacing.xs,
+    marginBottom: Spacing.xs,
   },
 });
 

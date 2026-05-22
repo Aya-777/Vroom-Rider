@@ -24,8 +24,18 @@ export const Typography = {
     fontFamily: 'Lora-Regular',
   },
 
+  boldBody: {
+    fontSize: 16,
+    fontFamily: 'Lora-Bold',
+  },
+
   caption: {
     fontSize: 13,
     fontFamily: 'Lora-Regular',
   },
+  
+  boldCaption:{
+    fontSize: 13,
+    fontFamily: 'Lora-Bold',
+  }
 };

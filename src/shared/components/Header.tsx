@@ -1,26 +1,20 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  SafeAreaView,
-  ScrollView,
-} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import MenuIcon from '../../assets/svg/menu.svg';
 import NotificationsIcon from '../../assets/svg/notifications.svg';
+import { Colors, Typography, Spacing, Radius, Shadows } from '../../core/theme';
 
-
-function Header(){
-  return(
+function Header() {
+  return (
     <View style={styles.header}>
       <TouchableOpacity style={styles.iconButton}>
-        <MenuIcon fill='#0F1E52'/>
+        <MenuIcon fill={Colors.primary} />
       </TouchableOpacity>
+
       <Text style={styles.logoText}>VROOM</Text>
+
       <TouchableOpacity style={styles.iconButton}>
-        <NotificationsIcon fill='#0F1E52'/>
+        <NotificationsIcon fill={Colors.primary} />
       </TouchableOpacity>
     </View>
   );
@@ -31,23 +25,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
+    paddingHorizontal: Spacing.lg,
+    paddingVertical: Spacing.md,
   },
+
   iconButton: {
-    backgroundColor: '#FFF',
-    padding: 8,
-    borderRadius: 50,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 4,
-    elevation: 2,
+    backgroundColor: Colors.surface,
+    padding: Spacing.sm,
+    borderRadius: Radius.full,
+    ...Shadows.small,
   },
+
   logoText: {
-    fontSize: 28,
-    fontWeight: '900',
-    color: '#1E2243',
+    ...Typography.h2,
+    color: Colors.secondary,
     letterSpacing: 1,
     flex: 1,
     textAlign: 'center',

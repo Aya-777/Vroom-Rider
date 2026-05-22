@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
@@ -16,6 +15,10 @@ import HomeIcon from '../../../assets/svg/home.svg';
 import BottomNav from '../../../shared/components/BottomNav'
 import SearchBar from '../../../shared/components/SearchBar'
 import Header from '../../../shared/components/Header';
+
+import { Colors , Typography, Spacing, Radius, Shadows} from '../../../core/theme';
+
+
 
 const services = [
   {
@@ -122,131 +125,140 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   gradientContainer: {
-    flex: 1 
+    flex: 1,
   },
+
   container: {
     flex: 1,
   },
+
   scrollContent: {
-    paddingHorizontal: 20,
+    paddingHorizontal: Spacing.lg,
     paddingBottom: 100,
   },
-  // Header Styles
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-  },
+
+  // Header Styles (you can remove this if Header is reusable)
+  // header: {
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+  //   alignItems: 'center',
+  //   paddingHorizontal: Spacing.lg,
+  //   paddingVertical: Spacing.md,
+  // },
+
   logoText: {
-    fontSize: 28,
-    fontWeight: '900',
-    color: '#1E2243',
+    ...Typography.h2,
+    color: Colors.primary,
     letterSpacing: 1,
     flex: 1,
     textAlign: 'center',
   },
+
   iconButton: {
-    backgroundColor: '#FFF',
-    padding: 8,
-    borderRadius: 50,
-    // Soft shadow for top action items
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 4,
-    elevation: 2,
+    backgroundColor: Colors.surface,
+    padding: Spacing.sm,
+    borderRadius: Radius.full,
+    ...Shadows.small,
   },
+
   // Section Headers
   sectionHeader: {
-    marginBottom: 15,
+    marginBottom: Spacing.md,
   },
+
   destinationHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 25,
-    marginBottom: 15,
+    marginTop: Spacing.xl,
+    marginBottom: Spacing.md,
   },
+
   sectionTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#3A3D63',
+    ...Typography.h3,
+    color: Colors.textPrimary,
   },
+
   seeAllText: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: '#0F1E52',
+    ...Typography.body,
+    // fontWeight: '600',
+    color: Colors.primary,
   },
-  // Grid Services Styles
+
+  // Grid Services
   gridContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-evenly',
   },
+
   gridItemContainer: {
     alignItems: 'center',
     width: '23%',
-    marginBottom: 15,
+    marginBottom: Spacing.md,
   },
+
   gridItem: {
     width: 60,
     height: 60,
-    borderRadius: 30,
-    backgroundColor: '#E8E8ED',
+    borderRadius: Radius.full,
+    backgroundColor: Colors.border,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: Spacing.sm,
   },
+
   activeGridItem: {
-    backgroundColor: '#E4D9FF', // Highlighted light purple accent background
-    shadowColor: '#111317',
-    shadowOffset: { width: 4, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 6,
-    elevation: 2,
+    backgroundColor: Colors.accent,
+    ...Shadows.small,
   },
+
   gridLabel: {
-    fontSize: 14,
-    color: '#8A8D9F',
-    fontWeight: '500',
+    ...Typography.caption,
+    color: Colors.textSecondary,
+    textAlign: 'center',
   },
+
   activeGridLabel: {
-    color: '#0F1E52',
-    fontWeight: '700',
+    ...Typography.boldCaption,
+    color: Colors.textPrimary,
   },
-  // Destination Cards Styles
+
+  // Destinations
   destinationList: {
-    gap: 12,
+    gap: Spacing.sm,
   },
+
   destinationCard: {
     flexDirection: 'row',
-    backgroundColor: '#FFF',
-    padding: 16,
-    borderRadius: 16,
+    backgroundColor: Colors.surface,
+    padding: Spacing.md,
+    borderRadius: Radius.lg,
     alignItems: 'center',
   },
+
   destIconContainer: {
     width: 44,
     height: 44,
-    borderRadius: 22,
-    backgroundColor: '#0F1E52',
+    borderRadius: Radius.full,
+    backgroundColor: Colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 14,
+    marginRight: Spacing.md,
   },
+
   destTextContainer: {
     flex: 1,
   },
+
   destTitle: {
-    fontSize: 17,
-    fontWeight: '700',
-    color: '#0F1E52',
+    ...Typography.boldBody,
+     color: Colors.primary,
     marginBottom: 2,
   },
+
   destSubtitle: {
-    fontSize: 13,
-    color: '#45464F50',
+    ...Typography.caption,
+    color: Colors.textMuted,
   },
 });
