@@ -1,11 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import HistoryIcon from '../../assets/svg/history.svg';
 import ProfileIcon from '../../assets/svg/profile.svg';
 import HomeIcon from '../../assets/svg/home.svg';
 import { Colors, Typography, Spacing, Radius, Shadows } from '../../core/theme';
 
 function BottomNav() {
+  const navigation = useNavigation<any>();
   return (
     <View style={styles.bottomNav}>
       <TouchableOpacity style={[styles.navItem, styles.activeNavItem]}>
@@ -18,7 +20,7 @@ function BottomNav() {
         <Text style={styles.navLabel}>Activity</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.navItem}>
+      <TouchableOpacity style={styles.navItem} onPress={()=> navigation.navigate('Profile')}>
         <ProfileIcon fill={Colors.textMuted} />
         <Text style={styles.navLabel}>Profile</Text>
       </TouchableOpacity>
