@@ -1,31 +1,31 @@
+export const FontFamily = {
+  regular: 'Lora-Regular',
+  bold: 'Lora-Bold',
+  semiBold: 'Lora-SemiBold',
+};
 export const Typography = {
   h1: {
     fontSize: 32,
-    fontWeight: '700' as const,
+    fontFamily: 'Lora-Bold',
   },
 
   h2: {
     fontSize: 24,
-    fontWeight: '700' as const,
+    fontFamily: 'Lora-Bold',
   },
 
   h3: {
     fontSize: 20,
-    fontWeight: '600' as const,
+    fontFamily: 'Lora-SemiBold',
   },
 
   body: {
     fontSize: 16,
-    fontWeight: '400' as const,
-  },
-
-  bodyBold: {
-    fontSize: 16,
-    fontWeight: '600' as const,
+    fontFamily: 'Lora-Regular',
   },
 
   caption: {
     fontSize: 13,
-    fontWeight: '500' as const,
+    fontFamily: 'Lora-Regular',
   },
 };

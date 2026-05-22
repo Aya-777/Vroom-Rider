@@ -1,5 +1,4 @@
 export const Colors = {
-  // Primary Brand Colors
   primary: '#0F1E52',
   secondary: '#1E2243',
 
@@ -11,7 +10,7 @@ export const Colors = {
   accent: '#E4D9FF',
 
   // Text Colors
-  textPrimary: '#1E2243',
+  textPrimary: '#0F1E52',
   textSecondary: '#8A8D9F',
   textMuted: '#A0A5BA',
 
@@ -23,6 +22,5 @@ export const Colors = {
   warning: '#F39C12',
   error: '#E74C3C',
 
-  // Extra
   shadow: '#000000',
 };
