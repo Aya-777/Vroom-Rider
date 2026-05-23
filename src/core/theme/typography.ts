@@ -24,6 +24,11 @@ export const Typography = {
     fontFamily: 'Lora-Regular',
   },
 
+  semiBoldBody: {
+    fontSize: 16,
+    fontFamily: 'Lora-SemiBold',
+  },
+
   boldBody: {
     fontSize: 16,
     fontFamily: 'Lora-Bold',
@@ -32,6 +37,11 @@ export const Typography = {
   caption: {
     fontSize: 13,
     fontFamily: 'Lora-Regular',
+  },
+  
+  semiBoldCaption: {
+    fontSize: 13,
+    fontFamily: 'Lora-SemiBold',
   },
   
   boldCaption:{

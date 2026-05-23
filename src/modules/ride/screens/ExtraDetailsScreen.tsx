@@ -10,29 +10,33 @@ import {
   Alert,
   Image
 } from 'react-native';
-import { Colors } from '../../../core/theme';
+import { Colors, Shadows, Typography } from '../../../core/theme';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 import Header from '../../../shared/components/ride/Header';
-
-// SVG Asset Imports (Make sure these paths match your assets folder)
-import ClockIcon from '../../../assets/svg/schedule.svg'; // Or reuse ScheduleIcon
 import LinearBg from '../../../shared/components/LinearBg';
-// import CardIcon from '../../../assets/svg/card.svg';   // For cash/payment icon
-// import FilterIcon from '../../../assets/svg/filters.svg';
+
+// SVGs
+import ClockIcon from '../../../assets/svg/schedule.svg';
+import EstimatedPriceIcon from '../../../assets/svg/price.svg';
+import CardIcon from '../../../assets/svg/creditcard.svg';
+import CashIcon from '../../../assets/svg/cash.svg';
+import FilterIcon from '../../../assets/svg/filters.svg';
+import ArrowRightIcon from '../../../assets/svg/arrows/arrow.svg';
+
 
 interface VehicleOption {
   id: string;
-  name: string;
+  type_name: string;
   image: any;
 }
 
 // Mock vehicle data - Later get it from back side 
 const VEHICLE_DATA: VehicleOption[] = [
-  { id: 'economy', name: 'Economy', image: 'car' },
-  { id: 'comfort', name: 'Comfort', image: 'car' },
-  { id: 'xl', name: 'XL', image:'car' },
+  { id: 'economy', type_name: 'Economy', image: 'car' },
+  { id: 'comfort', type_name: 'Comfort', image: 'car' },
+  { id: 'xl', type_name: 'XL', image:'car' },
 ];
 
 interface ExtraDetailsScreenProps {
@@ -65,7 +69,7 @@ export default function ExtraDetailsScreen({
           {/* Time Box */}
           <View style={styles.infoBox}>
             <View style={styles.infoTitleRow}>
-              <ClockIcon width={16} height={16} fill="#443366" />
+              <ClockIcon width={16} height={16} fill={Colors.primary} />
               <Text style={styles.infoBoxTitle}>Time</Text>
             </View>
             <Text style={styles.infoBoxValue}>{timeEstimate}</Text>
@@ -75,7 +79,7 @@ export default function ExtraDetailsScreen({
           {/* Estimated Price Box */}
           <View style={styles.infoBox}>
             <View style={styles.infoTitleRow}>
-              {/* <CardIcon width={16} height={16} fill="#443366" /> */}
+              <EstimatedPriceIcon width={16} height={16} fill={Colors.primary} />
               <Text style={styles.infoBoxTitle}>Estimated</Text>
             </View>
             <Text style={styles.infoBoxValue}>{priceEstimate}</Text>
@@ -90,8 +94,8 @@ export default function ExtraDetailsScreen({
             start={{ x: 0, y: 0 }}
             end={{ x: 0, y: 1 }}
             style={styles.outlineButton}>
-            <TouchableOpacity >
-              {/* <FilterIcon width={18} height={18} fill="#1A1C29" /> */}
+            <FilterIcon width={18} height={18} fill={Colors.primary} />
+            <TouchableOpacity style={styles.insideButton}>
               <Text style={styles.outlineButtonText}>Filters</Text>
             </TouchableOpacity>
           </LinearBg>
@@ -101,8 +105,8 @@ export default function ExtraDetailsScreen({
             start={{ x: 0, y: 0 }}
             end={{ x: 0, y: 1 }}
             style={styles.outlineButton}>
-            <TouchableOpacity >
-              {/* <CardIcon width={18} height={18} fill="#1A1C29" /> */}
+            <CashIcon width={18} height={18} fill={Colors.primary} />
+            <TouchableOpacity style={styles.insideButton}>
               <Text style={styles.outlineButtonText}>Cash</Text>
             </TouchableOpacity>
           </LinearBg>
@@ -128,7 +132,7 @@ export default function ExtraDetailsScreen({
                   styles.vehicleName,
                   isSelected && styles.selectedVehicleName
                 ]}>
-                  {vehicle.name}
+                  {vehicle.type_name}
                 </Text>
               </TouchableOpacity>
             );
@@ -138,7 +142,7 @@ export default function ExtraDetailsScreen({
         {/* 4. FOOTER ACTION BUTTON */}
         <TouchableOpacity style={styles.nextButton} onPress={onNextPress}>
           <Text style={styles.nextButtonText}>Next</Text>
-          <Text style={styles.arrowIcon}>→</Text> 
+          <ArrowRightIcon fill={Colors.background}/>
         </TouchableOpacity>
       </BottomSheetCard>
     </View>
@@ -158,17 +162,13 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   infoBox: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: Colors.surface,
     width: '48%',
     borderRadius: 12,
     paddingTop: 12,
     paddingHorizontal: 14,
     paddingBottom: 6,
-    elevation: 1,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.08,
-    shadowRadius: 2,
+    ...Shadows.medium
   },
   infoTitleRow: {
     flexDirection: 'row',
@@ -176,14 +176,12 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   infoBoxTitle: {
-    fontSize: 13,
-    fontWeight: '700',
-    color: '#3B335C',
+    color: Colors.textPrimary,
     marginLeft: 6,
+    ...Typography.boldCaption
   },
   infoBoxValue: {
-    fontSize: 15,
-    fontWeight: '600',
+    ...Typography.semiBoldBody,
     color: '#1A1C29',
     textAlign: 'center',
     marginVertical: 4,
@@ -202,26 +200,30 @@ const styles = StyleSheet.create({
   },
   outlineButton: {
     flexDirection: 'row',
-    backgroundColor: 'transparent',
-    borderWidth: 1.5,
-    borderColor: '#221A3B',
+    borderWidth: 1,
+    borderColor: Colors.secondary,
     width: '48%',
     paddingVertical: 12,
     borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
+    ...Shadows.small
+  },
+  insideButton:{
+    flexDirection: 'row',
+    justifyContent: "center",
+    alignContent: 'center',
   },
   outlineButtonText: {
-    color: '#1A1C29',
-    fontWeight: '600',
+    color: Colors.secondary,
+    ...Typography.semiBoldCaption,
     fontSize: 14,
     marginLeft: 6,
   },
   sectionTitle: {
     alignSelf: 'flex-start',
-    fontSize: 12,
-    fontWeight: '700',
-    color: '#5C4E75',
+    ...Typography.boldCaption,
+    color: Colors.textSecondary,
     letterSpacing: 1,
     marginBottom: 12,
   },
@@ -237,16 +239,12 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingVertical: 12,
     alignItems: 'center',
-    elevation: 1,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.08,
-    shadowRadius: 2,
+    ...Shadows.small
   },
   selectedVehicleCard: {
-    backgroundColor: '#DDD8F0',
+    backgroundColor: Colors.lightAccent,
     borderWidth: 1.5,
-    borderColor: '#443366',
+    borderColor: Colors.secondary,
   },
   vehicleImage: {
     width: 50,
@@ -254,37 +252,27 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   vehicleName: {
-    fontSize: 13,
-    fontWeight: '500',
-    color: '#5C4E75',
+    ...Typography.caption,
+    color: Colors.textMuted,
   },
   selectedVehicleName: {
-    color: '#443366',
-    fontWeight: '700',
+    ...Typography.boldCaption,
+    color: Colors.secondary,
   },
   nextButton: {
     flexDirection: 'row',
-    backgroundColor: '#FFFFFF', // Clean custom text frame styling matching screenshot 2
-    width: '52%',
-    paddingVertical: 12,
+    backgroundColor: '#443366',
+    width: '50%',
+    paddingVertical: 14,
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 3,
+    ...Shadows.small,
   },
   nextButtonText: {
-    color: '#1A1C29',
-    fontSize: 16,
-    fontWeight: '600',
+    ...Typography.semiBoldBody,
     marginRight: 6,
-  },
-  arrowIcon: {
-    color: '#1A1C29',
-    fontSize: 16,
-    fontWeight: '600',
+    marginBottom: 4,
+    color: Colors.background,
   },
 });
