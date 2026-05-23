@@ -12,7 +12,7 @@ import { Colors , Typography, Spacing, Radius, Shadows} from '../../../core/them
 import BottomNav from '../../../shared/components/BottomNav';
 import HistoryIcon from '../../../assets/svg/history.svg';
 import NotificationsIcon from '../../../assets/svg/notifications.svg';
-import ArrowIcon from '../../../assets/svg/arrow.svg';
+import ArrowIcon from '../../../assets/svg/arrows/arrow.svg';
 import EditIcon from '../../../assets/svg/edit.svg';
 import CallIcon from '../../../assets/svg/call.svg'
 import MailIcon from '../../../assets/svg/mail.svg';

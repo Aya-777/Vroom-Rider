@@ -17,6 +17,7 @@ import SearchBar from '../../../shared/components/SearchBar'
 import Header from '../../../shared/components/Header';
 import { useState } from 'react';
 import { Colors , Typography, Spacing, Radius, Shadows} from '../../../core/theme';
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -50,7 +51,9 @@ const savedDestinations = [
 type BottomNavTab = 'HOME' | 'ACTIVITY' | 'PROFILE';
 
 export default function HomeScreen() {
+  const navigation = useNavigation<any>();
   const [currentTab, setCurrentTab] = useState<BottomNavTab>('HOME');
+  
   return (
   <LinearBg
     colors={['#F0EBFF', '#FAFAFF']}
@@ -71,7 +74,7 @@ export default function HomeScreen() {
         <View style={styles.gridContainer}>
           {/* Active Ride Service */}
           <View style={styles.gridItemContainer}>
-            <TouchableOpacity style={[styles.gridItem, styles.activeGridItem]}>
+            <TouchableOpacity style={[styles.gridItem, styles.activeGridItem]} onPress={() => {navigation.navigate('StartRide')}}>
               <RideIcon fill="#1E2243" />
             </TouchableOpacity>
             <Text style={[styles.gridLabel, styles.activeGridLabel]}>{services[0].title}</Text>
