@@ -12,6 +12,7 @@ import { Colors } from '../../../core/theme';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Header from '../../../shared/components/ride/Header';
+import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 
 import ProfileIcon from '../../../assets/svg/profile.svg';
 import ScheduleIcon from '../../../assets/svg/schedule.svg';
@@ -42,14 +43,8 @@ export default function StartRideScreen() {
       />
       {/* MAP VIEW COMPONENT */}
 
-      {/* FLOATING LOCATION BUTTON */}
-      <TouchableOpacity style={styles.locationButton}>
-        <MyLocationIcon fill={Colors.primary}/>
-      </TouchableOpacity>
-
       {/* 4. BOTTOM SHEET PANEL */}
-      <View style={styles.bottomSheet}>
-
+        <BottomSheetCard>
         {/* Dropdowns Row */}
         <View style={styles.dropdownRow}>
           
@@ -172,8 +167,8 @@ export default function StartRideScreen() {
           <Text style={styles.nextButtonText}>Next</Text>
           <ArrowIcon fill={Colors.background}/>
         </TouchableOpacity>
-      </View>
-    </View>
+        </BottomSheetCard>
+      </View>    
   );
 }
 
@@ -182,10 +177,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#151324',
-  },
-  map: {
-    width: width,
-    height: height * 0.65,
   },
   pickupDot: {
     width: 12,
@@ -210,19 +201,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
-  },
-  bottomSheet: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: '#EAE6F8',
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-    paddingHorizontal: 20,
-    paddingTop: 16,
-    paddingBottom: 30,
-    alignItems: 'center',
   },
   dropdownRow: {
     flexDirection: 'row',
@@ -249,11 +227,9 @@ const styles = StyleSheet.create({
     marginRight: 4,
     marginLeft: 4,
   },
-  ///
-  // Floating Dropdown Menu Container
   dropdownMenu: {
     position: 'absolute',
-    top: 42, // Positions it directly underneath the button
+    top: 42, 
     left: 6,
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
@@ -284,7 +260,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#EAE6F8',
     marginHorizontal: 8,
   },
-  ///
   inputCard: {
     backgroundColor: '#FFFFFF',
     width: '100%',
