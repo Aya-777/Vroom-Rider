@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   TextInput,
   Dimensions,
+  StatusBar
 } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
 import { Colors } from '../../../core/theme';
@@ -33,6 +34,7 @@ export default function StartRideScreen() {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="#F5F4FA" translucent={false} />
       {/* MAP VIEW COMPONENT */}
 
       {/* FLOATING HEADER */}
@@ -72,7 +74,7 @@ export default function StartRideScreen() {
                 <TouchableOpacity 
                   style={styles.menuItem} 
                   onPress={() => {
-                    setSelectedTime('Now');
+                    setSelectedTime('Now'); 
                     setIsNowDropdownOpen(false);
                   }}
                 >
@@ -132,13 +134,6 @@ export default function StartRideScreen() {
             )}
           </View>
         </View>
-
-          {/* "For Me" Dropdown remains here unchanged */}
-          {/* <TouchableOpacity style={styles.dropdown}>
-            <Icon name="account" size={18} color="#4A3B63" style={styles.dropdownIcon} />
-            <Text style={styles.dropdownText}>For Me</Text>
-            <Icon name="chevron-down" size={18} color="#4A3B63" />
-          </TouchableOpacity> */}
               
         {/* Inputs Card */}
         <View style={styles.inputCard}>
@@ -151,13 +146,15 @@ export default function StartRideScreen() {
             <TextInput 
               style={styles.input} 
               placeholder="From" 
-              placeholderTextColor="#C0BCC7" 
+              placeholderTextColor="#C0BCC7"
+              editable={!isNowDropdownOpen && !isForMeDropdownOpen} 
             />
             <View style={styles.divider} />
             <TextInput 
               style={styles.input} 
               placeholder="To?" 
               placeholderTextColor="#C0BCC7" 
+              editable={!isNowDropdownOpen && !isForMeDropdownOpen}
             />
           </View>
         </View>
@@ -208,6 +205,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
+    paddingTop: 10,
     backgroundColor: '#F5F4FA',
   },
   header: {
