@@ -2,26 +2,12 @@ import React from 'react';
 import {
   StyleSheet,
   View,
-  Text,
   TouchableOpacity,
-  TextInput,
   Dimensions,
-  StatusBar,
-  experimental_LayoutConformance
 } from 'react-native';
 
 const { height } = Dimensions.get('window');
 import { Colors } from '../../../core/theme';
-import { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-
-import ProfileIcon from '../../../assets/svg/profile.svg';
-import ScheduleIcon from '../../../assets/svg/schedule.svg';
-import PinIcon from '../../../assets/svg/pin.svg';
-import StarIcon from '../../../assets/svg/star.svg';
-import DropDownArrowIcon from '../../../assets/svg/arrows/dropdownArrow.svg';
-import ArrowIcon from '../../../assets/svg/arrows/arrow.svg';
-import ArrowUp from '../../../assets/svg/arrows/arrowUp.svg';
 import MyLocationIcon from '../../../assets/svg/myLocation.svg';
 
 
@@ -33,12 +19,11 @@ interface BottomSheetCardProps {
 export const BottomSheetCard: React.FC<BottomSheetCardProps> = ({ children, onLocationPress }) => {
   return (
     <View style={styles.bottomWrapper}>
-      {/* FLOATING LOCATION BUTTON (Positions itself right above the sheet layout) */}
+      {/* FLOATING LOCATION BUTTON */}
       <TouchableOpacity style={styles.locationButton} onPress={onLocationPress}>
         <MyLocationIcon fill={Colors.primary} />
       </TouchableOpacity>
 
-      {/* EMPTY CONTAINER SHELL FOR HANGING CONTENT */}
       <View style={styles.bottomSheetInner}>
         {children}
       </View>
@@ -53,7 +38,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    alignItems: 'flex-end', // Aligns location button to the right side
+    alignItems: 'flex-end',
   },
   bottomSheetInner: {
     position: 'absolute',
