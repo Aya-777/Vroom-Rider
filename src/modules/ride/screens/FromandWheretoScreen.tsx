@@ -4,15 +4,14 @@ import {
   View,
   Text,
   TouchableOpacity,
-  SafeAreaView,
   TextInput,
   Dimensions,
   StatusBar
 } from 'react-native';
-import MapView, { Marker, Polyline } from 'react-native-maps';
 import { Colors } from '../../../core/theme';
 import { useState } from 'react';
-
+import { useNavigation } from '@react-navigation/native';
+import Header from '../../../shared/components/ride/Header';
 
 import ProfileIcon from '../../../assets/svg/profile.svg';
 import ScheduleIcon from '../../../assets/svg/schedule.svg';
@@ -20,13 +19,14 @@ import PinIcon from '../../../assets/svg/pin.svg';
 import StarIcon from '../../../assets/svg/star.svg';
 import DropDownArrowIcon from '../../../assets/svg/arrows/dropdownArrow.svg';
 import ArrowIcon from '../../../assets/svg/arrows/arrow.svg';
-import ArrowLeft from '../../../assets/svg/arrows/arrowLeft.svg';
 import ArrowUp from '../../../assets/svg/arrows/arrowUp.svg';
 import MyLocationIcon from '../../../assets/svg/myLocation.svg';
 
 const { width, height } = Dimensions.get('window');
 
 export default function StartRideScreen() {
+  const navigation = useNavigation<any>();
+
   const [isNowDropdownOpen, setIsNowDropdownOpen] = useState(false);
   const [isForMeDropdownOpen, setIsForMeDropdownOpen] = useState(false);
   const [selectedPerson, setSelectedPerson] = useState('For me');
@@ -35,17 +35,12 @@ export default function StartRideScreen() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#F5F4FA" translucent={false} />
+      <Header
+        title="Ride"
+        onBackPress={() => {navigation.goBack()
+        }}
+      />
       {/* MAP VIEW COMPONENT */}
-
-      {/* FLOATING HEADER */}
-      <SafeAreaView style={styles.headerContainer}>
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton}>
-            <ArrowLeft fill={Colors.primary}/>
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>Ride</Text>
-        </View>
-      </SafeAreaView>
 
       {/* FLOATING LOCATION BUTTON */}
       <TouchableOpacity style={styles.locationButton}>
@@ -199,29 +194,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderWidth: 2,
     borderColor: 'rgba(255,255,255,0.4)',
-  },
-  headerContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    paddingTop: 10,
-    backgroundColor: '#F5F4FA',
-  },
-  header: {
-    height: 56,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-  },
-  backButton: {
-    padding: 4,
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#1A1C29',
-    marginLeft: 24,
   },
   locationButton: {
     position: 'absolute',
