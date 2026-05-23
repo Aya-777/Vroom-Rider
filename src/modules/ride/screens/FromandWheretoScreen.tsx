@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   TextInput,
   Dimensions,
-  StatusBar
+  StatusBar,
+  Alert
 } from 'react-native';
 import { Colors } from '../../../core/theme';
 import { useState } from 'react';
@@ -21,7 +22,6 @@ import StarIcon from '../../../assets/svg/star.svg';
 import DropDownArrowIcon from '../../../assets/svg/arrows/dropdownArrow.svg';
 import ArrowIcon from '../../../assets/svg/arrows/arrow.svg';
 import ArrowUp from '../../../assets/svg/arrows/arrowUp.svg';
-import MyLocationIcon from '../../../assets/svg/myLocation.svg';
 
 const { width, height } = Dimensions.get('window');
 
@@ -32,6 +32,18 @@ export default function StartRideScreen() {
   const [isForMeDropdownOpen, setIsForMeDropdownOpen] = useState(false);
   const [selectedPerson, setSelectedPerson] = useState('For me');
   const [selectedTime, setSelectedTime] = useState('Now');
+
+  const [fromLocation, setFromLocation] = useState('');
+  const [toLocation, setToLocation] = useState('');
+
+  const handleNextPress = () => {
+    if (!fromLocation.trim() || !toLocation.trim()) {
+      Alert.alert('Missing Information', 'Please fill in both your pickup and destination locations.');
+      return;
+    }
+
+    navigation.navigate('ExtraDetailsRide'); 
+  };
 
   return (
     <View style={styles.container}>
@@ -138,6 +150,7 @@ export default function StartRideScreen() {
               placeholder="From" 
               placeholderTextColor="#C0BCC7"
               editable={!isNowDropdownOpen && !isForMeDropdownOpen} 
+              onChangeText={setFromLocation}
             />
             <View style={styles.divider} />
             <TextInput 
@@ -145,6 +158,7 @@ export default function StartRideScreen() {
               placeholder="To?" 
               placeholderTextColor="#C0BCC7" 
               editable={!isNowDropdownOpen && !isForMeDropdownOpen}
+              onChangeText={setToLocation}
             />
           </View>
         </View>
@@ -163,7 +177,7 @@ export default function StartRideScreen() {
         </View>
 
         {/* Next Button */}
-        <TouchableOpacity style={styles.nextButton}>
+        <TouchableOpacity style={styles.nextButton} onPress={handleNextPress}>
           <Text style={styles.nextButtonText}>Next</Text>
           <ArrowIcon fill={Colors.background}/>
         </TouchableOpacity>

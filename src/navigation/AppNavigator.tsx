@@ -6,6 +6,7 @@ import LoginScreen from '../modules/auth/screens/LoginScreen';
 import HomeScreen from '../modules/home/screens/HomeScreen';
 import ProfileScreen from '../modules/profile/screens/ProfileScreen';
 import FromandWheretoScreen from '../modules/ride/screens/FromandWheretoScreen';
+import ExtraDetailsScreen from '../modules/ride/screens/ExtraDetailsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="StartRide" component={FromandWheretoScreen} />
+        <Stack.Screen name="ExtraDetailsRide" component={ExtraDetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
