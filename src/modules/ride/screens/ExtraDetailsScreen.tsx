@@ -42,13 +42,11 @@ const VEHICLE_DATA: VehicleOption[] = [
 interface ExtraDetailsScreenProps {
   timeEstimate?: string;
   priceEstimate?: string;
-  onNextPress?: () => void;
 }
 
 export default function ExtraDetailsScreen({
   timeEstimate = "30 : 00 m",
   priceEstimate = "$24.50",
-  onNextPress,
 }: ExtraDetailsScreenProps) {
   const [selectedVehicle, setSelectedVehicle] = useState('economy');
   const navigation = useNavigation<any>();
@@ -140,7 +138,10 @@ export default function ExtraDetailsScreen({
         </View>
 
         {/* 4. FOOTER ACTION BUTTON */}
-        <TouchableOpacity style={styles.nextButton} onPress={onNextPress}>
+        <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('ConfirmRide' , {
+          price: priceEstimate,
+          time: timeEstimate
+        }) }>
           <Text style={styles.nextButtonText}>Next</Text>
           <ArrowRightIcon fill={Colors.background}/>
         </TouchableOpacity>

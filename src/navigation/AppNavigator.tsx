@@ -7,6 +7,7 @@ import HomeScreen from '../modules/home/screens/HomeScreen';
 import ProfileScreen from '../modules/profile/screens/ProfileScreen';
 import FromandWheretoScreen from '../modules/ride/screens/FromandWheretoScreen';
 import ExtraDetailsScreen from '../modules/ride/screens/ExtraDetailsScreen';
+import RideConfirmationScreen from '../modules/ride/screens/RideConfirmationScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="StartRide" component={FromandWheretoScreen} />
         <Stack.Screen name="ExtraDetailsRide" component={ExtraDetailsScreen} />
+        <Stack.Screen name="ConfirmRide" component={RideConfirmationScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
