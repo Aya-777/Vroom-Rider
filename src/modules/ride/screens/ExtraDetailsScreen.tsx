@@ -49,7 +49,7 @@ export default function ExtraDetailsScreen({
   priceEstimate = "$24.50",
 }: ExtraDetailsScreenProps) {
   const [selectedVehicle, setSelectedVehicle] = useState('economy');
-  const [selectedPayment, setSelectedPayment] = useState('cash');
+  const [selectedPayment, setSelectedPayment] = useState('Cash');
   const navigation = useNavigation<any>();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -110,7 +110,7 @@ export default function ExtraDetailsScreen({
                 onPress={() => setIsDropdownOpen(!isDropdownOpen)}
               >
                 <Text style={styles.dropdownText}>
-                  {selectedPayment.charAt(0).toUpperCase() + selectedPayment.slice(1)}
+                  {selectedPayment}
                 </Text>
                 {isDropdownOpen ? <ArrowUp fill={Colors.primary} /> : <DropDownArrowIcon fill={Colors.primary}/>}
               </TouchableOpacity>
@@ -127,7 +127,7 @@ export default function ExtraDetailsScreen({
                   >
                     <Text style={[
                       styles.menuItemText, 
-                      selectedPayment === 'cash' && styles.selectedMenuText
+                      selectedPayment === 'Cash' && styles.selectedMenuText
                     ]}>Cash</Text>
                   </TouchableOpacity>
 
@@ -136,13 +136,13 @@ export default function ExtraDetailsScreen({
                   <TouchableOpacity 
                     style={styles.menuItem} 
                     onPress={() => {
-                      setSelectedPayment('wallet');
+                      setSelectedPayment('Wallet');
                       setIsDropdownOpen(false);
                     }}
                   >
                     <Text style={[
                       styles.menuItemText, 
-                      selectedPayment === 'wallet' && styles.selectedMenuText
+                      selectedPayment === 'Wallet' && styles.selectedMenuText
                     ]}>Wallet</Text>
                   </TouchableOpacity>
                 </View>
@@ -157,7 +157,7 @@ export default function ExtraDetailsScreen({
         
         <View style={styles.vehicleRow}>
           {VEHICLE_DATA.map((vehicle) => {
-            const isSelected = selectedVehicle === vehicle.id;
+            const isSelected = selectedVehicle === vehicle.type_name;
             return (
               <TouchableOpacity
                 key={vehicle.id}
@@ -165,7 +165,7 @@ export default function ExtraDetailsScreen({
                   styles.vehicleCard,
                   isSelected && styles.selectedVehicleCard
                 ]}
-                onPress={() => setSelectedVehicle(vehicle.id)}
+                onPress={() => setSelectedVehicle(vehicle.type_name)}
               >
                 <Image source={vehicle.image} style={styles.vehicleImage} resizeMode="contain" />
                 <Text style={[
@@ -185,8 +185,8 @@ export default function ExtraDetailsScreen({
           onPress={() => navigation.navigate('ConfirmRide', {
             price: priceEstimate,
             time: timeEstimate,
-            paymentMethod: selectedPayment, 
-            vehicleType: selectedVehicle     
+            car: selectedVehicle,
+            payement: selectedPayment, 
           })}
         >
           <Text style={styles.nextButtonText}>Next</Text>

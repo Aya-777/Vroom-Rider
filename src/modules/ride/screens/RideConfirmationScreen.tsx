@@ -30,15 +30,16 @@ import PhoneNumberIcon from '../../../assets/svg/phoneNumber.svg';
 type RideRouteParams = {
   price?: string;
   time?: string;
+  car?: string;
+  payement?: string;
 };
 
 export default function RideConfirmationScreen() {
   const navigation = useNavigation();
   const route = useRoute();
   
-  // 4. Extract your parameters safely from route.params
-  const { price, time } = (route.params as RideRouteParams) || {};
-
+  // Extract your parameters safely 
+  const { price, time, car, payement } = (route.params as RideRouteParams) || {};
   return (
     <View style={styles.contentContainer}>
       <StatusBar barStyle="dark-content" backgroundColor="#F5F4FA" translucent={false} />
@@ -72,7 +73,7 @@ export default function RideConfirmationScreen() {
               <CarIcon width={16} height={16} fill={Colors.textSecondary} />
               <Text style={styles.infoBoxTitle}>Selected Car</Text>
             </View>
-            <Text style={styles.infoBoxValue}></Text>
+            <Text style={styles.infoBoxValue}>{car}</Text>
             <View style={styles.underline} />
           </View>
 
@@ -81,7 +82,7 @@ export default function RideConfirmationScreen() {
               <CashIcon width={16} height={16} fill={Colors.textSecondary} />
               <Text style={styles.infoBoxTitle}>Payement</Text>
             </View>
-            <Text style={styles.infoBoxValue}></Text>
+            <Text style={styles.infoBoxValue}>{payement}</Text>
             <View style={styles.underline} />
           </View>
         </View>
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
     ...Typography.boldCaption
   },
   infoBoxValue: {
-    ...Typography.semiBoldBody,
+    ...Typography.semiBoldCaption,
     color: '#1A1C29',
     textAlign: 'center',
     marginVertical: 4,
