@@ -4,7 +4,7 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import { Colors } from '../../../core/theme';
+import { Colors, Typography } from '../../../core/theme';
 
 import ArrowLeft from '../../../assets/svg/arrows/arrowLeft.svg';
 
@@ -45,9 +45,8 @@ const styles = StyleSheet.create({
     padding: 4,
   },
   headerTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#1A1C29',
+    ...Typography.h3,
+    color: Colors.textPrimary,
     marginLeft: 24,
   },
 });

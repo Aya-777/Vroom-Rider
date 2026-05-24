@@ -20,7 +20,6 @@ import LinearBg from '../../../shared/components/LinearBg';
 // SVGs
 import ClockIcon from '../../../assets/svg/schedule.svg';
 import EstimatedPriceIcon from '../../../assets/svg/price.svg';
-import CashIcon from '../../../assets/svg/cash.svg';
 import FilterIcon from '../../../assets/svg/filters.svg';
 import ArrowRightIcon from '../../../assets/svg/arrows/arrow.svg';
 import DropDownArrowIcon from '../../../assets/svg/arrows/dropdownArrow.svg';
@@ -121,7 +120,7 @@ export default function ExtraDetailsScreen({
                   <TouchableOpacity 
                     style={styles.menuItem} 
                     onPress={() => {
-                      setSelectedPayment('cash');
+                      setSelectedPayment('Cash');
                       setIsDropdownOpen(false);
                     }}
                   >

@@ -11,21 +11,18 @@ import {
   Image
 } from 'react-native';
 import { Colors, Shadows, Typography, Radius, Spacing } from '../../../core/theme';
-import { useState } from 'react';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 import Header from '../../../shared/components/ride/Header';
-import LinearBg from '../../../shared/components/LinearBg';
 import { useNavigation, useRoute } from '@react-navigation/native'; 
 
 // SVGs
 import ClockIcon from '../../../assets/svg/schedule.svg';
 import EstimatedPriceIcon from '../../../assets/svg/price.svg';
-import CardIcon from '../../../assets/svg/creditcard.svg';
 import CashIcon from '../../../assets/svg/cash.svg';
-import FilterIcon from '../../../assets/svg/filters.svg';
 import ArrowRightIcon from '../../../assets/svg/arrows/arrow.svg';
 import CarIcon from '../../../assets/svg/car.svg';
 import PhoneNumberIcon from '../../../assets/svg/phoneNumber.svg';
+import SearchIcon from '../../../assets/svg/search.svg';
 
 type RideRouteParams = {
   price?: string;
@@ -44,7 +41,7 @@ export default function RideConfirmationScreen() {
     <View style={styles.contentContainer}>
       <StatusBar barStyle="dark-content" backgroundColor="#F5F4FA" translucent={false} />
       <Header
-        title="Ride"
+        title="Ride Confirmation"
         onBackPress={() => { navigation.goBack(); }}
       />
       {/* MAP VIEW COMPONENT */}
@@ -89,15 +86,25 @@ export default function RideConfirmationScreen() {
 
         <View style={styles.ContactNumberContainer}>
           <View style={styles.ContactTitleContainer}>
-            <PhoneNumberIcon width={18} height={18} fill={Colors.primary} />
+            <PhoneNumberIcon width={18} height={18} fill={Colors.textPrimary} />
             <Text style={styles.contactNumberText}>Contact Number</Text>
           </View>
           <TextInput 
             style={styles.input} 
-            placeholder=" +963 935916399" 
+            placeholder="  +963 935916399" 
             placeholderTextColor="#C0BCC7"  
           />
         </View>
+        
+        {/* Find BUTTON */}
+        <TouchableOpacity 
+          style={styles.findButton} 
+          onPress={() => {}}  
+        >
+          <Text style={styles.findButtonText}>Find a Driver</Text>
+          <SearchIcon fill={Colors.background}/>
+        </TouchableOpacity>
+
       </BottomSheetCard>
     </View>
   );
@@ -139,7 +146,7 @@ const styles = StyleSheet.create({
   },
   infoBoxValue: {
     ...Typography.semiBoldCaption,
-    color: '#1A1C29',
+    color: Colors.textPrimary,
     textAlign: 'center',
     marginVertical: 4,
   },
@@ -157,31 +164,33 @@ const styles = StyleSheet.create({
     alignContent: 'center',
   },
   contactNumberText: {
+    color: Colors.textPrimary,
     marginLeft: 10,
-    ...Typography.caption
+    ...Typography.semiBoldCaption
   },
   input: {
     height: 35,
     width: 300,
     fontSize: 15,
-    // color: '#1A1C29',
     backgroundColor: Colors.background,
     padding: 0,
     borderRadius: Radius.lg,
     marginTop: Spacing.sm,
+    marginBottom: Spacing.xxl,
     ...Shadows.small,
   },
-  nextButton: {
+  findButton: {
     flexDirection: 'row',
-    backgroundColor: '#443366',
-    width: '50%',
+    backgroundColor: Colors.primary,
+    width: '70%',
     paddingVertical: 14,
-    borderRadius: 25,
+    borderRadius: Radius.full,
     justifyContent: 'center',
     alignItems: 'center',
     ...Shadows.small,
+    marginBottom: Spacing.xl,
   },
-  nextButtonText: {
+  findButtonText: {
     ...Typography.semiBoldBody,
     marginRight: 6,
     marginBottom: 4,
