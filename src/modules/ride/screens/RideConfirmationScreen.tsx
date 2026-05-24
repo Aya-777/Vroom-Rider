@@ -91,7 +91,7 @@ export default function RideConfirmationScreen() {
           </View>
           <TextInput 
             style={styles.input} 
-            placeholder="  +963 935916399" 
+            placeholder="+963 935916399" 
             placeholderTextColor="#C0BCC7"  
           />
         </View>
@@ -173,7 +173,9 @@ const styles = StyleSheet.create({
     width: 300,
     fontSize: 15,
     backgroundColor: Colors.background,
-    padding: 0,
+    color: Colors.textPrimary,
+    paddingBottom: Spacing.sm,
+    paddingLeft: Spacing.md,
     borderRadius: Radius.lg,
     marginTop: Spacing.sm,
     marginBottom: Spacing.xxl,
