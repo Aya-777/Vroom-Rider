@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     flexDirection: 'row',
-    backgroundColor: '#DDD8F0',
+    backgroundColor: Colors.light,
     paddingVertical: 8,
     paddingHorizontal: 14,
     borderRadius: 20,

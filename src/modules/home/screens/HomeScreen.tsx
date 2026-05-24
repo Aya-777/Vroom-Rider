@@ -56,7 +56,7 @@ export default function HomeScreen() {
   
   return (
   <LinearBg
-    colors={['#F0EBFF', '#FAFAFF']}
+    colors={['#F0EBFF', Colors.background]}
     start={{ x: 0, y: 0 }}
     end={{ x: 0, y: 1 }}
     style={styles.gradientContainer}

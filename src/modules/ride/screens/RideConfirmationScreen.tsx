@@ -10,7 +10,7 @@ import {
   Alert,
   Image
 } from 'react-native';
-import { Colors, Shadows, Typography } from '../../../core/theme';
+import { Colors, Shadows, Typography, Radius, Spacing } from '../../../core/theme';
 import { useState } from 'react';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 import Header from '../../../shared/components/ride/Header';
@@ -88,8 +88,15 @@ export default function RideConfirmationScreen() {
         </View>
 
         <View style={styles.ContactNumberContainer}>
-          <PhoneNumberIcon width={16} height={16} fill={Colors.primary} />
-          <Text style={styles.contactNumberText}>Contact Number</Text>
+          <View style={styles.ContactTitleContainer}>
+            <PhoneNumberIcon width={18} height={18} fill={Colors.primary} />
+            <Text style={styles.contactNumberText}>Contact Number</Text>
+          </View>
+          <TextInput 
+            style={styles.input} 
+            placeholder=" +963 935916399" 
+            placeholderTextColor="#C0BCC7"  
+          />
         </View>
       </BottomSheetCard>
     </View>
@@ -143,11 +150,26 @@ const styles = StyleSheet.create({
     marginTop: -4,
   },
   ContactNumberContainer: {
+  },
+  ContactTitleContainer:{
     flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignContent: 'center',
   },
   contactNumberText: {
     marginLeft: 10,
     ...Typography.caption
+  },
+  input: {
+    height: 35,
+    width: 300,
+    fontSize: 15,
+    // color: '#1A1C29',
+    backgroundColor: Colors.background,
+    padding: 0,
+    borderRadius: Radius.lg,
+    marginTop: Spacing.sm,
+    ...Shadows.small,
   },
   nextButton: {
     flexDirection: 'row',
