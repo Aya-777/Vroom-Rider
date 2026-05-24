@@ -85,7 +85,7 @@ export default function ProfileScreen() {
             {/* --- Grid Menu Cards --- */}
             <View style={styles.gridContainer}>
               <LinearBg 
-                colors={['#F0EBFF', '#FAFAFF']}
+                colors={[Colors.light, Colors.surface]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 0, y: 1 }}
                 style={styles.gridCard}>
@@ -98,7 +98,7 @@ export default function ProfileScreen() {
               </LinearBg>
 
               <LinearBg 
-                colors={['#F0EBFF', '#FAFAFF']}
+                colors={[Colors.light, Colors.surface]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 0, y: 1 }}
                 style={styles.gridCard}>
@@ -111,7 +111,7 @@ export default function ProfileScreen() {
                 </LinearBg>
 
               <LinearBg 
-                colors={['#F0EBFF', '#FAFAFF']}
+                colors={[Colors.light, Colors.surface]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 0, y: 1 }}
                 style={styles.gridCard}>
@@ -124,7 +124,7 @@ export default function ProfileScreen() {
               </LinearBg>
 
               <LinearBg 
-                colors={['#F0EBFF', '#FAFAFF']}
+                colors={[Colors.light, Colors.surface]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 0, y: 1 }}
                 style={styles.gridCard}>

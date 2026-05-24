@@ -348,7 +348,7 @@ const styles = StyleSheet.create({
   },
   nextButton: {
     flexDirection: 'row',
-    backgroundColor: '#443366',
+    backgroundColor: Colors.primary,
     width: '50%',
     paddingVertical: 14,
     borderRadius: 25,

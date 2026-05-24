@@ -47,7 +47,7 @@ export default function ExtraDetailsScreen({
   timeEstimate = "30 : 00 m",
   priceEstimate = "$24.50",
 }: ExtraDetailsScreenProps) {
-  const [selectedVehicle, setSelectedVehicle] = useState('economy');
+  const [selectedVehicle, setSelectedVehicle] = useState('Economy');
   const [selectedPayment, setSelectedPayment] = useState('Cash');
   const navigation = useNavigation<any>();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
