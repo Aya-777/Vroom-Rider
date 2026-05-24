@@ -20,11 +20,11 @@ import LinearBg from '../../../shared/components/LinearBg';
 // SVGs
 import ClockIcon from '../../../assets/svg/schedule.svg';
 import EstimatedPriceIcon from '../../../assets/svg/price.svg';
-import CardIcon from '../../../assets/svg/creditcard.svg';
 import CashIcon from '../../../assets/svg/cash.svg';
 import FilterIcon from '../../../assets/svg/filters.svg';
 import ArrowRightIcon from '../../../assets/svg/arrows/arrow.svg';
-
+import DropDownArrowIcon from '../../../assets/svg/arrows/dropdownArrow.svg';
+import ArrowUp from '../../../assets/svg/arrows/arrowUp.svg';
 
 interface VehicleOption {
   id: string;
@@ -49,7 +49,9 @@ export default function ExtraDetailsScreen({
   priceEstimate = "$24.50",
 }: ExtraDetailsScreenProps) {
   const [selectedVehicle, setSelectedVehicle] = useState('economy');
+  const [selectedPayment, setSelectedPayment] = useState('cash');
   const navigation = useNavigation<any>();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
     <View style={styles.contentContainer}>
@@ -57,12 +59,11 @@ export default function ExtraDetailsScreen({
       <StatusBar barStyle="dark-content" backgroundColor="#F5F4FA" translucent={false} />
       <Header
         title="Ride"
-        onBackPress={() => {navigation.goBack()
-        }}
+        onBackPress={() => { navigation.goBack() }}
       />
       {/* MAP VIEW COMPONENT */}
       <BottomSheetCard>
-        {/* 1. INFO BOXES ROW (Time & Price Estimate) */}
+        {/* 1. (Time & Price Estimate) */}
         <View style={styles.infoRow}>
           {/* Time Box */}
           <View style={styles.infoBox}>
@@ -103,14 +104,55 @@ export default function ExtraDetailsScreen({
             start={{ x: 0, y: 0 }}
             end={{ x: 0, y: 1 }}
             style={styles.outlineButton}>
-            <CashIcon width={18} height={18} fill={Colors.primary} />
-            <TouchableOpacity style={styles.insideButton}>
-              <Text style={styles.outlineButtonText}>Cash</Text>
-            </TouchableOpacity>
+            <View style={{ zIndex: 10, width: '100%' }}> 
+              <TouchableOpacity 
+                style={styles.dropdown} 
+                onPress={() => setIsDropdownOpen(!isDropdownOpen)}
+              >
+                <Text style={styles.dropdownText}>
+                  {selectedPayment.charAt(0).toUpperCase() + selectedPayment.slice(1)}
+                </Text>
+                {isDropdownOpen ? <ArrowUp fill={Colors.primary} /> : <DropDownArrowIcon fill={Colors.primary}/>}
+              </TouchableOpacity>
+
+              {/* Custom Payment Dropdown Overlay */}
+              {isDropdownOpen && (
+                <View style={styles.dropdownMenu}>
+                  <TouchableOpacity 
+                    style={styles.menuItem} 
+                    onPress={() => {
+                      setSelectedPayment('cash');
+                      setIsDropdownOpen(false);
+                    }}
+                  >
+                    <Text style={[
+                      styles.menuItemText, 
+                      selectedPayment === 'cash' && styles.selectedMenuText
+                    ]}>Cash</Text>
+                  </TouchableOpacity>
+
+                  <View style={styles.menuDivider} />
+
+                  <TouchableOpacity 
+                    style={styles.menuItem} 
+                    onPress={() => {
+                      setSelectedPayment('wallet');
+                      setIsDropdownOpen(false);
+                    }}
+                  >
+                    <Text style={[
+                      styles.menuItemText, 
+                      selectedPayment === 'wallet' && styles.selectedMenuText
+                    ]}>Wallet</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
           </LinearBg>
+          
         </View>
 
-        {/* 3. VEHICLE SELECTION ZONE */}
+        {/* VEHICLE SELECTION ZONE */}
         <Text style={styles.sectionTitle}>SELECT VEHICLE</Text>
         
         <View style={styles.vehicleRow}>
@@ -137,11 +179,16 @@ export default function ExtraDetailsScreen({
           })}
         </View>
 
-        {/* 4. FOOTER ACTION BUTTON */}
-        <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('ConfirmRide' , {
-          price: priceEstimate,
-          time: timeEstimate
-        }) }>
+        {/* NEXT BUTTON */}
+        <TouchableOpacity 
+          style={styles.nextButton} 
+          onPress={() => navigation.navigate('ConfirmRide', {
+            price: priceEstimate,
+            time: timeEstimate,
+            paymentMethod: selectedPayment, 
+            vehicleType: selectedVehicle     
+          })}
+        >
           <Text style={styles.nextButtonText}>Next</Text>
           <ArrowRightIcon fill={Colors.background}/>
         </TouchableOpacity>
@@ -198,6 +245,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     marginBottom: 20,
+    zIndex: 50,
+    elevation: 5,
   },
   outlineButton: {
     flexDirection: 'row',
@@ -233,6 +282,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     marginBottom: 24,
+    zIndex: 1,
   },
   vehicleCard: {
     backgroundColor: '#FFFFFF',
@@ -275,5 +325,54 @@ const styles = StyleSheet.create({
     marginRight: 6,
     marginBottom: 4,
     color: Colors.background,
+  },
+  dropdown: {
+    flexDirection: 'row',
+    paddingVertical: 6, 
+    paddingHorizontal: 14,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    minWidth: 120,
+  },
+  dropdownIcon: {
+    marginRight: 6,
+  },
+  dropdownText: {
+    color: '#1A1C29',
+    fontWeight: '600',
+    fontSize: 14,
+    marginRight: 8,
+  },
+  dropdownMenu: {
+    position: 'absolute',
+    top: 40, 
+    left: 0,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    width: 120,
+    ...Shadows.small,
+    paddingVertical: 4,
+    zIndex: 100,
+    elevation: 10,     
+  },
+  menuItem: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    alignItems: 'center',
+  },
+  menuItemText: {
+    fontSize: 14,
+    color: '#5C4E75',
+    fontWeight: '500',
+  },
+  selectedMenuText: {
+    color: '#443366',
+    fontWeight: '700',
+  },
+  menuDivider: {
+    height: 1,
+    backgroundColor: '#EAE6F8',
+    marginHorizontal: 8,
   },
 });
