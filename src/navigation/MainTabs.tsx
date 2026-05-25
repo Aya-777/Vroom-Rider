@@ -20,9 +20,8 @@ const Tab = createBottomTabNavigator();
 const baseTabBarStyle = {
   height: 80,
   backgroundColor: '#FFFFFF',
-  borderTopWidth: 1,
+  borderTopWidth: 2,
   borderTopColor: '#EBEBEB',
-  ...Shadows.medium,
 };
 
 export default function MainTabs() {
