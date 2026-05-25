@@ -9,7 +9,6 @@ import {
   Dimensions,
 } from 'react-native';
 import { Colors , Typography, Spacing, Radius, Shadows} from '../../../core/theme';
-import BottomNav from '../../../shared/components/BottomNav';
 import HistoryIcon from '../../../assets/svg/history.svg';
 import NotificationsIcon from '../../../assets/svg/notifications.svg';
 import ArrowIcon from '../../../assets/svg/arrows/arrow.svg';
@@ -27,13 +26,9 @@ import InfoIcon from '../../../assets/svg/info.svg'
 import LogoutIcon from '../../../assets/svg/logout.svg';
 import LinearBg from '../../../shared/components/LinearBg';
 
-import { useState } from 'react';
-
 const { width } = Dimensions.get('window');
-type BottomNavTab = 'HOME' | 'ACTIVITY' | 'PROFILE';
 
 export default function ProfileScreen() {
-    const [currentTab, setCurrentTab] = useState<BottomNavTab>('PROFILE');
   
   return (
     
@@ -174,7 +169,6 @@ export default function ProfileScreen() {
               </Text>
             </TouchableOpacity>
           </ScrollView>
-        <BottomNav currentTab={currentTab} onTabChange={setCurrentTab}/>
       </SafeAreaView>
   );
 }

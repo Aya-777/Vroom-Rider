@@ -12,10 +12,8 @@ import WorkIcon from '../../../assets/svg/work.svg';
 import ReserveIcon from '../../../assets/svg/reserve.svg';
 import RideIcon from '../../../assets/svg/ride.svg';
 import HomeIcon from '../../../assets/svg/home.svg';
-import BottomNav from '../../../shared/components/BottomNav'
 import SearchBar from '../../../shared/components/SearchBar'
 import Header from '../../../shared/components/Header';
-import { useState } from 'react';
 import { Colors , Typography, Spacing, Radius, Shadows} from '../../../core/theme';
 import { useNavigation } from '@react-navigation/native';
 
@@ -48,11 +46,9 @@ const savedDestinations = [
     subtitle: 'One World Trade Center'
   }
 ];
-type BottomNavTab = 'HOME' | 'ACTIVITY' | 'PROFILE';
 
 export default function HomeScreen() {
   const navigation = useNavigation<any>();
-  const [currentTab, setCurrentTab] = useState<BottomNavTab>('HOME');
   
   return (
   <LinearBg
@@ -74,7 +70,7 @@ export default function HomeScreen() {
         <View style={styles.gridContainer}>
           {/* Active Ride Service */}
           <View style={styles.gridItemContainer}>
-            <TouchableOpacity style={[styles.gridItem, styles.activeGridItem]} onPress={() => {navigation.navigate('StartRide')}}>
+            <TouchableOpacity style={[styles.gridItem, styles.activeGridItem]} onPress={() => {navigation.navigate('SelectRide')}}>
               <RideIcon fill="#1E2243" />
             </TouchableOpacity>
             <Text style={[styles.gridLabel, styles.activeGridLabel]}>{services[0].title}</Text>
@@ -122,7 +118,6 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </View>
       </ScrollView>
-      <BottomNav currentTab={currentTab} onTabChange={setCurrentTab} />
     </SafeAreaView>
   </LinearBg>
   );
