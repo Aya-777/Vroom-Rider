@@ -6,7 +6,7 @@ import ProfileIcon from '../../assets/svg/profile.svg';
 import HomeIcon from '../../assets/svg/home.svg';
 import { Colors, Typography, Spacing, Radius, Shadows } from '../../core/theme';
 
-type BottomNavTab = 'HOME' | 'ACTIVITY' | 'PROFILE';
+type BottomNavTab = 'HOME' | 'ACTIVITY' | 'P  ROFILE';
 
 type BottomNavProps = {
   currentTab: BottomNavTab;

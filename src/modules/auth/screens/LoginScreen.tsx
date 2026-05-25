@@ -1,227 +1,62 @@
-import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  SafeAreaView,
-  Image,
-} from 'react-native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Colors , Typography, Spacing, Radius, Shadows} from '../../../core/theme';
-
+import React from 'react';
+import { View, StyleSheet, SafeAreaView, KeyboardAvoidingView, Platform, ScrollView, Text } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import PhoneNumberIcon from '../../../assets/svg/phoneNumber.svg';
-import PasswordIcon from '../../../assets/svg/password.svg';
-import VisibilityOnIcon from '../../../assets/svg/visibilityOn.svg';
-import VisibilityOffIcon from '../../../assets/svg/visibilityOff.svg';
-import LinearBg from '../../../shared/components/LinearBg';
-import Logo from '../../../shared/components/logo';
 
-type LoginScreenProps = {
-  navigation: NativeStackNavigationProp<any>;
-};
+import LoginPin from '../components/LoginPin';
+import LoginForm from '../components/LoginForm';
+import LoginFooter from '../components/LoginFooter';
 
-const LoginScreen = ({ navigation }: LoginScreenProps) => {
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordVisible, setPasswordVisible] = useState(false);
+import { useLoginViewModel } from '../viewmodels/useLoginViewModel';
+import { Colors, Typography, Spacing } from '../../../core/theme';
+
+const LoginScreen = ({ navigation }: any) => {
+  const vm = useLoginViewModel(navigation);
 
   return (
-  <LinearGradient
-    colors={['#F0EBFF', '#FAFAFF']}
-    start={{ x: 0, y: 0 }}
-    end={{ x: 0, y: 1 }}
-    style={{ flex: 1 }}
-  >
-    <SafeAreaView style={styles.container}>
-      {/* Background Circle */}
-      <View style={styles.backgroundCircle} />
+    <LinearGradient colors={['#F0EBFF', '#FAFAFF']} style={styles.gradient}>
+      <SafeAreaView style={styles.container}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.flex}>
+          <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
 
-      {/* Logo */}
-      <Text style={styles.logoText}>VROOM</Text>
+            <View style={styles.bgCircle} />
 
-      {/* Pin Shape */}
-      <View style={styles.pinContainer}>
-        {/* Circle Part */}
-        <View style={styles.pinCircle}>
-          {/* Logo */}
-          <Logo />
+            <Text style={styles.title}>VROOM</Text>
 
-          {/* Phone Input */}
-          <View style={styles.inputContainer}>
-            <PhoneNumberIcon width='20' height='20' fill="#7A7AA0" />
+            <LoginPin>
+              <LoginForm vm={vm} />
+            </LoginPin>
 
-            <TextInput
-              placeholder="Phone Number"
-              placeholderTextColor="#9B9BB5"
-              value={phone}
-              onChangeText={setPhone}
-              style={styles.input}
-            />
-          </View>
+            <LoginFooter />
 
-          {/* Password Input */}
-          <View style={styles.inputContainer}>
-            <PasswordIcon width='20' height='20' fill="#7A7AA0" />
-
-            <TextInput
-              placeholder="Password"
-              placeholderTextColor="#9B9BB5"
-              secureTextEntry={!passwordVisible}
-              value={password}
-              onChangeText={setPassword}
-              style={styles.input}
-            />
-
-            <TouchableOpacity onPress ={() => setPasswordVisible(!passwordVisible)}>
-              {passwordVisible ? (
-              <VisibilityOnIcon width='20' height='20' fill="#7A7AA0" />
-              ) : (
-                <VisibilityOffIcon width='20' height='20' fill="#7A7AA0" />
-              )}
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* Continue Button */}
-        <TouchableOpacity 
-        style={styles.button}
-        // just for testing
-        onPress={() => navigation.navigate('Home')}
-        >
-          <LinearBg
-            style={styles.button}
-            colors={['#0F1E52', '#625A7A']}
-          >
-            <Text style={styles.buttonText}>Continue</Text>
-          </LinearBg>
-        </TouchableOpacity>
-
-        {/* Triangle Bottom */}
-        <View style={styles.triangle} />
-      </View>
-
-      {/* Bottom Texts */}
-      <View style={styles.bottomContainer}>
-        <Text style={styles.registerText} adjustsFontSizeToFit={true} numberOfLines={1}>
-          Don't have an account?{' '}
-          <Text style={styles.register}>Register</Text>
-        </Text>
-
-        <Text style={styles.forgot}>Forgot Password?</Text>
-      </View>
-    </SafeAreaView>
-  </LinearGradient>
-);
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </LinearGradient>
+  );
 };
 
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
+  gradient: { flex: 1 },
+  container: { flex: 1 },
+  flex: { flex: 1 },
+  scroll: { alignItems: 'center', paddingBottom: 40 },
 
-  backgroundCircle: {
+  bgCircle: {
     position: 'absolute',
-    width: 780,
-    height: 884,
-    borderRadius: 300,
+    width: 700,
+    height: 900,
+    borderRadius: 350,
     backgroundColor: Colors.accent,
-    left: -300,
+    left: -280,
+    top: -30,
   },
 
-  logoText: {
+  title: {
     marginTop: Spacing.xl,
-    marginBottom: Spacing.lg,
+    marginBottom: 10,
     ...Typography.h1,
-    color: '#7E7BAA', // keep brand-specific accent (optional to move later)
-  },
-
-  pinContainer: {
-    marginTop: 70,
-    alignItems: 'center',
-  },
-
-  pinCircle: {
-    width: 340,
-    backgroundColor: 'rgba(255,255,255,0.5)',
-    borderRadius: Radius.full,
-    borderBottomLeftRadius: Radius.full,
-    borderBottomRightRadius: Radius.full,
-    alignItems: 'center',
-    paddingTop: Spacing.xl,
-    paddingBottom: 70,
-    zIndex: 2,
-  },
-
-  triangle: {
-    width: 0,
-    height: 0,
-    borderLeftWidth: 163,
-    borderRightWidth: 163,
-    borderTopWidth: 310,
-    borderLeftColor: 'transparent',
-    borderRightColor: 'transparent',
-    borderTopColor: 'rgba(255, 255, 255, 0.4)',
-    marginTop: -150,
-    zIndex: 0,
-  },
-
-  inputContainer: {
-    width: 290,
-    height: 55,
-    backgroundColor: Colors.surface,
-    borderRadius: Radius.md,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: Spacing.md,
-    marginBottom: Spacing.md,
-  },
-
-  input: {
-    flex: 1,
-    marginLeft: Spacing.sm,
-    color: Colors.primary,
-    ...Typography.body,
-  },
-
-  button: {
-    width: 280,
-    height: 60,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: Radius.md,
-    zIndex: 3,
-    marginTop: -30,
-  },
-
-  buttonText: {
-    color: Colors.background,
-    ...Typography.h3,
-  },
-
-  bottomContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  registerText: {
-    ...Typography.caption,
-    color: Colors.secondary,
-  },
-
-  register: {
-    ...Typography.boldCaption,
-    color: Colors.primary,
-  },
-
-  forgot: {
-    marginTop: Spacing.sm,
-    ...Typography.boldCaption,
-    color: Colors.primary,
+    color: '#7E7BAA',
   },
 });
