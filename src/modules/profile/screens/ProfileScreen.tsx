@@ -9,7 +9,6 @@ import {
   Dimensions,
 } from 'react-native';
 import { Colors , Typography, Spacing, Radius, Shadows} from '../../../core/theme';
-import BottomNav from '../../../shared/components/BottomNav';
 import HistoryIcon from '../../../assets/svg/history.svg';
 import NotificationsIcon from '../../../assets/svg/notifications.svg';
 import ArrowIcon from '../../../assets/svg/arrows/arrow.svg';
@@ -27,13 +26,9 @@ import InfoIcon from '../../../assets/svg/info.svg'
 import LogoutIcon from '../../../assets/svg/logout.svg';
 import LinearBg from '../../../shared/components/LinearBg';
 
-import { useState } from 'react';
-
 const { width } = Dimensions.get('window');
-type BottomNavTab = 'HOME' | 'ACTIVITY' | 'PROFILE';
 
 export default function ProfileScreen() {
-    const [currentTab, setCurrentTab] = useState<BottomNavTab>('PROFILE');
   
   return (
     
@@ -85,7 +80,7 @@ export default function ProfileScreen() {
             {/* --- Grid Menu Cards --- */}
             <View style={styles.gridContainer}>
               <LinearBg 
-                colors={['#F0EBFF', '#FAFAFF']}
+                colors={[Colors.light, Colors.surface]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 0, y: 1 }}
                 style={styles.gridCard}>
@@ -98,7 +93,7 @@ export default function ProfileScreen() {
               </LinearBg>
 
               <LinearBg 
-                colors={['#F0EBFF', '#FAFAFF']}
+                colors={[Colors.light, Colors.surface]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 0, y: 1 }}
                 style={styles.gridCard}>
@@ -111,7 +106,7 @@ export default function ProfileScreen() {
                 </LinearBg>
 
               <LinearBg 
-                colors={['#F0EBFF', '#FAFAFF']}
+                colors={[Colors.light, Colors.surface]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 0, y: 1 }}
                 style={styles.gridCard}>
@@ -124,7 +119,7 @@ export default function ProfileScreen() {
               </LinearBg>
 
               <LinearBg 
-                colors={['#F0EBFF', '#FAFAFF']}
+                colors={[Colors.light, Colors.surface]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 0, y: 1 }}
                 style={styles.gridCard}>
@@ -174,7 +169,6 @@ export default function ProfileScreen() {
               </Text>
             </TouchableOpacity>
           </ScrollView>
-        <BottomNav currentTab={currentTab} onTabChange={setCurrentTab}/>
       </SafeAreaView>
   );
 }

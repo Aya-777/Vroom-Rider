@@ -32,7 +32,7 @@ type RideRouteParams = {
 };
 
 export default function RideConfirmationScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   const route = useRoute();
   
   // Extract your parameters safely 
@@ -99,7 +99,7 @@ export default function RideConfirmationScreen() {
         {/* Find BUTTON */}
         <TouchableOpacity 
           style={styles.findButton} 
-          onPress={() => {}}  
+          onPress={() => navigation.navigate('DriverFound')}  
         >
           <Text style={styles.findButtonText}>Find a Driver</Text>
           <SearchIcon fill={Colors.background}/>

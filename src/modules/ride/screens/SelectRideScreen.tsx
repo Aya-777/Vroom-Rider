@@ -25,7 +25,7 @@ import ArrowUp from '../../../assets/svg/arrows/arrowUp.svg';
 
 const { width, height } = Dimensions.get('window');
 
-export default function StartRideScreen() {
+export default function SelectRideScreen() {
   const navigation = useNavigation<any>();
 
   const [isNowDropdownOpen, setIsNowDropdownOpen] = useState(false);
@@ -42,7 +42,7 @@ export default function StartRideScreen() {
       return;
     }
 
-    navigation.navigate('ExtraDetailsRide'); 
+    navigation.navigate('RideDetails'); 
   };
 
   return (
@@ -348,7 +348,7 @@ const styles = StyleSheet.create({
   },
   nextButton: {
     flexDirection: 'row',
-    backgroundColor: '#443366',
+    backgroundColor: Colors.primary,
     width: '50%',
     paddingVertical: 14,
     borderRadius: 25,
