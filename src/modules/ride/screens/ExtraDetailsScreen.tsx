@@ -24,6 +24,7 @@ import FilterIcon from '../../../assets/svg/filters.svg';
 import ArrowRightIcon from '../../../assets/svg/arrows/arrow.svg';
 import DropDownArrowIcon from '../../../assets/svg/arrows/dropdownArrow.svg';
 import ArrowUp from '../../../assets/svg/arrows/arrowUp.svg';
+import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 
 interface VehicleOption {
   id: string;
@@ -49,7 +50,7 @@ export default function ExtraDetailsScreen({
 }: ExtraDetailsScreenProps) {
   const [selectedVehicle, setSelectedVehicle] = useState('Economy');
   const [selectedPayment, setSelectedPayment] = useState('Cash');
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<HomeStackScreenProps<'RideDetails'>['navigation']>();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (

@@ -9,9 +9,14 @@ export type HomeStackParamList = {
     dropoffLocation: string; 
   };
   
-  ConfirmRide: { rideId: string }; 
+  ConfirmRide: { 
+    price: string,
+    time: string,
+    car: string,
+    payement: string,
+  }; 
   
-  DriverFound: { rideId: string };
+  DriverFound: { driverId: string };
 };
 
 export type HomeStackScreenProps<T extends keyof HomeStackParamList> = 

@@ -23,6 +23,7 @@ import ArrowRightIcon from '../../../assets/svg/arrows/arrow.svg';
 import CarIcon from '../../../assets/svg/car.svg';
 import PhoneNumberIcon from '../../../assets/svg/phoneNumber.svg';
 import SearchIcon from '../../../assets/svg/search.svg';
+import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 
 type RideRouteParams = {
   price?: string;
@@ -32,7 +33,7 @@ type RideRouteParams = {
 };
 
 export default function RideConfirmationScreen() {
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<HomeStackScreenProps<'ConfirmRide'>['navigation']>();
   const route = useRoute();
   
   // Extract your parameters safely 
@@ -99,7 +100,7 @@ export default function RideConfirmationScreen() {
         {/* Find BUTTON */}
         <TouchableOpacity 
           style={styles.findButton} 
-          onPress={() => navigation.navigate('DriverFound')}  
+          onPress={() => navigation.navigate('DriverFound', {driverId: "1"})} // hardcoded for now (back later)
         >
           <Text style={styles.findButtonText}>Find a Driver</Text>
           <SearchIcon fill={Colors.background}/>
