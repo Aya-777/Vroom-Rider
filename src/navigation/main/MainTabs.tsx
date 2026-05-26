@@ -1,23 +1,24 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ViewStyle } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { getFocusedRouteNameFromRoute, RouteProp } from '@react-navigation/native';
 
-import HomeStack from './HomeStack';
-import ProfileStack from './ProfileStack';
+import { MainTabsParamList } from './mainTypes';
 
-import { Shadows, Typography } from '../core/theme';
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import HomeStack from './home/HomeStack';
+import ProfileStack from './profile/ProfileStack';
 
+import { Typography } from '../../core/theme';
 import { SvgProps } from 'react-native-svg';
-import HomeActive from '../assets/svg/home.svg';
-import HomeInactive from '../assets/svg/home.svg';
-import CarActive from '../assets/svg/car.svg';
-import ProfileActive from '../assets/svg/profile.svg';
-import ProfileInactive from '../assets/svg/profile.svg';
+import HomeActive from '../../assets/svg/home.svg';
+import HomeInactive from '../../assets/svg/home.svg';
+import CarActive from '../../assets/svg/car.svg';
+import ProfileActive from '../../assets/svg/profile.svg';
+import ProfileInactive from '../../assets/svg/profile.svg';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<MainTabsParamList>();
 
-const baseTabBarStyle = {
+const baseTabBarStyle: ViewStyle = {
   height: 80,
   backgroundColor: '#FFFFFF',
   borderTopWidth: 2,
@@ -28,8 +29,11 @@ export default function MainTabs() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => {
-        // 1. Extract the active screen name from whatever stack is currently open
-        const routeName = getFocusedRouteNameFromRoute(route) ?? '';
+        // Explicitly type the route object to catch typos in your logic
+        const currentRoute = route as RouteProp<MainTabsParamList, keyof MainTabsParamList>;
+
+        // 1. Extract the active inner screen name from whatever stack is currently open
+        const routeName = getFocusedRouteNameFromRoute(currentRoute) ?? '';
         
         // 2. Global checklist of screens that should hide the tab bar completely
         const hideOnScreens = ['SelectRide', 'RideDetails', 'ConfirmRide', 'DriverFound'];
@@ -53,11 +57,12 @@ export default function MainTabs() {
           tabBarIcon: ({ focused, color }) => {
             let Icon: React.FC<SvgProps> | null = null;
 
-            if (route.name === 'HomeTab') {
+            // TypeScript now strictly validates these strings!
+            if (currentRoute.name === 'HomeTab') {
               Icon = focused ? HomeActive : HomeInactive;
-            } else if (route.name === 'ActivityTab') {
+            } else if (currentRoute.name === 'ActivityTab') {
               Icon = focused ? CarActive : CarActive;
-            } else if (route.name === 'ProfileTab') {
+            } else if (currentRoute.name === 'ProfileTab') {
               Icon = focused ? ProfileActive : ProfileInactive;
             }
 
@@ -78,7 +83,6 @@ export default function MainTabs() {
         };
       }}
     >
-      {/* Screens are now super clean and don't need independent tabBarStyle toggles */}
       <Tab.Screen
         name="HomeTab"
         component={HomeStack}
@@ -88,7 +92,7 @@ export default function MainTabs() {
       />
       <Tab.Screen
         name="ActivityTab"
-        component={HomeStack} // Swap out with your real ActivityStack component when ready
+        component={HomeStack} 
         options={{
           tabBarLabel: 'Activity',
         }}

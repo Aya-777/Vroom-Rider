@@ -16,6 +16,7 @@ import SearchBar from '../../../shared/components/SearchBar'
 import Header from '../../../shared/components/Header';
 import { Colors , Typography, Spacing, Radius, Shadows} from '../../../core/theme';
 import { useNavigation } from '@react-navigation/native';
+import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 
 
 
@@ -47,8 +48,7 @@ const savedDestinations = [
   }
 ];
 
-export default function HomeScreen() {
-  const navigation = useNavigation<any>();
+export default function HomeScreen({ navigation }: HomeStackScreenProps<'HomeScreen'>) {
   
   return (
   <LinearBg
