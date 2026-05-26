@@ -55,7 +55,7 @@ const LoginForm = ({ vm }: any) => {
 
       {/* BUTTON */}
       <View style={styles.bottom}>
-        <TouchableOpacity onPress={vm.onLogin}>
+        <TouchableOpacity onPress={vm.handleLogin}>
           <LinearBg
             style={styles.button}
             colors={['#0F1E52', '#E4D9FF']}

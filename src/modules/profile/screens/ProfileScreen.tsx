@@ -25,10 +25,12 @@ import HelpIcon from '../../../assets/svg/questionMark.svg';
 import InfoIcon from '../../../assets/svg/info.svg'
 import LogoutIcon from '../../../assets/svg/logout.svg';
 import LinearBg from '../../../shared/components/LinearBg';
+import { useAuthActions } from '../../auth/authStore';
 
 const { width } = Dimensions.get('window');
 
 export default function ProfileScreen() {
+  const { logout } = useAuthActions();
   
   return (
     
@@ -162,7 +164,7 @@ export default function ProfileScreen() {
             </View>
 
             {/* --- Logout Button --- */}
-            <TouchableOpacity style={styles.logoutButton}>
+            <TouchableOpacity style={styles.logoutButton} onPress={() => logout()}>
                 <LogoutIcon fill={Colors.error}/>
               <Text style={styles.logoutText}>
                 Logout

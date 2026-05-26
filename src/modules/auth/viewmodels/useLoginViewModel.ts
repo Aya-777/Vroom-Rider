@@ -1,26 +1,28 @@
 import { useState } from 'react';
+import { useAuthActions } from '../authStore';
 
-export const useLoginViewModel = (navigation: any) => {
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
-  const [visible, setVisible] = useState(false);
+export function useLoginViewModel() {
+  const { login } = useAuthActions(); 
+  const [isLoading, setIsLoading] = useState(false);
 
-  const togglePassword = () => setVisible(v => !v);
+  const handleLogin = async (email: string, password: string) => {
+    setIsLoading(true);
+    try {
+      // 1. Fire your actual API request here
+      // const response = await loginApi(email, password);
+      const mockToken = "your_received_jwt_token_here";
 
-  const onLogin = () => {
-    // هنا لاحقاً API call
-    console.log({ phone, password });
-
-    navigation.navigate('Home');
+      login(mockToken); 
+      
+    } catch (error) {
+      console.error("Login failed", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  return {
-    phone,
-    password,
-    visible,
-    setPhone,
-    setPassword,
-    togglePassword,
-    onLogin,
+  return { 
+    handleLogin, 
+    isLoading 
   };
-};
+}

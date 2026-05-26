@@ -9,8 +9,8 @@ import LoginFooter from '../components/LoginFooter';
 import { useLoginViewModel } from '../viewmodels/useLoginViewModel';
 import { Colors, Typography, Spacing } from '../../../core/theme';
 
-const LoginScreen = ({ navigation }: any) => {
-  const vm = useLoginViewModel(navigation);
+const LoginScreen = () => {
+  const vm = useLoginViewModel();
 
   return (
     <LinearGradient colors={['#F0EBFF', '#FAFAFF']} style={styles.gradient}>
