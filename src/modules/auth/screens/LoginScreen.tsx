@@ -1,5 +1,13 @@
 import React from 'react';
-import { View, StyleSheet, SafeAreaView, KeyboardAvoidingView, Platform, ScrollView, Text } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Text,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import LoginPin from '../components/LoginPin';
@@ -7,27 +15,47 @@ import LoginForm from '../components/LoginForm';
 import LoginFooter from '../components/LoginFooter';
 
 import { useLoginViewModel } from '../viewmodels/useLoginViewModel';
-import { Colors, Typography, Spacing } from '../../../core/theme';
+import { useTheme } from '../../../core/theme/useTheme';
 
 const LoginScreen = ({ navigation }: any) => {
   const vm = useLoginViewModel(navigation);
+  const { colors } = useTheme();
 
   return (
-    <LinearGradient colors={['#F0EBFF', '#FAFAFF']} style={styles.gradient}>
+    <LinearGradient
+      colors={[colors.backgroundSoft, colors.background]}
+      style={styles.gradient}
+    >
       <SafeAreaView style={styles.container}>
-        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.flex}>
-          <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+          style={styles.flex}
+        >
+          <ScrollView
+            contentContainerStyle={styles.scroll}
+            showsVerticalScrollIndicator={false}
+          >
+            <View
+              style={[
+                styles.bgCircle,
+                { backgroundColor: colors.surfaceAccent },
+              ]}
+            />
 
-            <View style={styles.bgCircle} />
-
-            <Text style={styles.title}>VROOM</Text>
+            <Text
+              style={[
+                styles.title,
+                { color: colors.textSecondary },
+              ]}
+            >
+              VROOM
+            </Text>
 
             <LoginPin>
               <LoginForm vm={vm} />
             </LoginPin>
 
             <LoginFooter />
-
           </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
@@ -48,15 +76,14 @@ const styles = StyleSheet.create({
     width: 700,
     height: 900,
     borderRadius: 350,
-    backgroundColor: Colors.accent,
     left: -280,
     top: -30,
   },
 
   title: {
-    marginTop: Spacing.xl,
+    marginTop: 24,
     marginBottom: 10,
-    ...Typography.h1,
-    color: '#7E7BAA',
+    fontSize: 32,
+    fontFamily: 'Lora-Bold',
   },
 });

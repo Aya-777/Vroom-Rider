@@ -1,48 +1,95 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+
 import MenuIcon from '../../assets/svg/menu.svg';
 import NotificationsIcon from '../../assets/svg/notifications.svg';
-import { Colors, Typography, Spacing, Radius, Shadows } from '../../core/theme';
 
-function Header() {
+import {
+  Typography,
+  Spacing,
+  Radius,
+  Shadows,
+} from '../../core/theme/tokens';
+
+import { useTheme } from '../../core/theme/useTheme';
+
+interface HeaderProps {
+  title?: string;
+  onMenuPress?: () => void;
+  onNotificationPress?: () => void;
+}
+
+export default function Header({
+  title = 'VROOM',
+  onMenuPress,
+  onNotificationPress,
+}: HeaderProps) {
+  const { colors } = useTheme();
+
+  const styles = createStyles(colors);
+
   return (
-    <View style={styles.header}>
-      <TouchableOpacity style={styles.iconButton}>
-        <MenuIcon fill={Colors.primary} />
-      </TouchableOpacity>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        {/* Menu */}
+        <TouchableOpacity
+          style={styles.iconButton}
+          onPress={onMenuPress}
+          activeOpacity={0.7}
+        >
+          <MenuIcon fill={colors.primary} />
+        </TouchableOpacity>
 
-      <Text style={styles.logoText}>VROOM</Text>
+        {/* Title */}
+        <Text numberOfLines={1} style={styles.title}>
+          {title}
+        </Text>
 
-      <TouchableOpacity style={styles.iconButton}>
-        <NotificationsIcon fill={Colors.primary} />
-      </TouchableOpacity>
+        {/* Notifications */}
+        <TouchableOpacity
+          style={styles.iconButton}
+          onPress={onNotificationPress}
+          activeOpacity={0.7}
+        >
+          <NotificationsIcon fill={colors.primary} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: Spacing.lg,
-    paddingVertical: Spacing.md,
-  },
+/* ---------------- DYNAMIC STYLES ---------------- */
 
-  iconButton: {
-    backgroundColor: Colors.surface,
-    padding: Spacing.sm,
-    borderRadius: Radius.full,
-    ...Shadows.small,
-  },
+const createStyles = (colors: any) =>
+  StyleSheet.create({
+    container: {
+      paddingTop: Spacing.xl,
+      backgroundColor: colors.surface,
+      ...Shadows.small,
+    },
 
-  logoText: {
-    ...Typography.h2,
-    color: Colors.secondary,
-    letterSpacing: 1,
-    flex: 1,
-    textAlign: 'center',
-  },
-});
+    header: {
+      height: 56,
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: Spacing.lg,
+    },
 
-export default Header;
+    iconButton: {
+      width: 40,
+      height: 40,
+      borderRadius: Radius.full,
+      backgroundColor: colors.surface,
+      justifyContent: 'center',
+      alignItems: 'center',
+      ...Shadows.small,
+    },
+
+    title: {
+      flex: 1,
+      textAlign: 'center',
+      ...Typography.h2,
+      color: colors.textSecondary,
+      letterSpacing: 1,
+    },
+  });

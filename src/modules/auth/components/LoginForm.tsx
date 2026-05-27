@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+} from 'react-native';
 
 import PhoneNumberIcon from '../../../assets/svg/phoneNumber.svg';
 import PasswordIcon from '../../../assets/svg/password.svg';
@@ -9,9 +15,13 @@ import VisibilityOffIcon from '../../../assets/svg/visibilityOff.svg';
 import Logo from '../../../shared/components/logo';
 import LinearBg from '../../../shared/components/LinearBg';
 
-import { Colors, Typography, Radius } from '../../../core/theme';
+import { useTheme } from '../../../core/theme/useTheme';
+import { Radius } from '../../../core/theme/tokens/radius';
+import { Typography } from '../../../core/theme/tokens/typography';
 
 const LoginForm = ({ vm }: any) => {
+  const { colors } = useTheme();
+
   return (
     <>
       {/* LOGO */}
@@ -21,25 +31,38 @@ const LoginForm = ({ vm }: any) => {
 
       {/* INPUTS */}
       <View style={styles.middle}>
-
-        <View style={styles.inputBox}>
+        <View
+          style={[
+            styles.inputBox,
+            { backgroundColor: colors.surface },
+          ]}
+        >
           <PhoneNumberIcon width={20} height={20} />
+
           <TextInput
             placeholder="Phone Number"
+            placeholderTextColor={colors.textSecondary}
             value={vm.phone}
             onChangeText={vm.setPhone}
-            style={styles.input}
+            style={[styles.input, { color: colors.textPrimary }]}
           />
         </View>
 
-        <View style={styles.inputBox}>
+        <View
+          style={[
+            styles.inputBox,
+            { backgroundColor: colors.surface },
+          ]}
+        >
           <PasswordIcon width={20} height={20} />
+
           <TextInput
             placeholder="Password"
+            placeholderTextColor={colors.textSecondary}
             secureTextEntry={!vm.visible}
             value={vm.password}
             onChangeText={vm.setPassword}
-            style={styles.input}
+            style={[styles.input, { color: colors.textPrimary }]}
           />
 
           <TouchableOpacity onPress={vm.togglePassword}>
@@ -50,7 +73,6 @@ const LoginForm = ({ vm }: any) => {
             )}
           </TouchableOpacity>
         </View>
-
       </View>
 
       {/* BUTTON */}
@@ -58,9 +80,11 @@ const LoginForm = ({ vm }: any) => {
         <TouchableOpacity onPress={vm.onLogin}>
           <LinearBg
             style={styles.button}
-            colors={['#0F1E52', '#E4D9FF']}
+            colors={['#0F1E52', '#E4D9FF']} // (مؤقتاً - بنحسنه بعدين)
           >
-            <Text style={styles.btnText}>Continue</Text>
+            <Text style={[styles.btnText, { color: '#FAFAFF' }]}>
+              Continue
+            </Text>
           </LinearBg>
         </TouchableOpacity>
       </View>
@@ -89,7 +113,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 16,
     borderRadius: 12,
-    backgroundColor: Colors.surface,
   },
 
   input: {
@@ -112,7 +135,6 @@ const styles = StyleSheet.create({
   },
 
   btnText: {
-    color: Colors.background,
     ...Typography.h3,
   },
 });
