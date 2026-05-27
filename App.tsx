@@ -4,9 +4,7 @@ import RootNavigator from './src/navigation/RootNavigator';
 
 function App() {
   return (
-    <NavigationContainer>
-      <RootNavigator />
-    </NavigationContainer>
+    <RootNavigator />
   );
 }
 

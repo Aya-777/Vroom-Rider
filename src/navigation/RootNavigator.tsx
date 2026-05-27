@@ -1,17 +1,19 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { navigationRef, RootStackParamList } from './rootTypes';
 
 import { useAuthLoggedIn } from '../modules/auth/authStore'; 
 import MainTabs from './main/MainTabs';
 import AuthStack from './auth/AuthStack';
-
-const Stack = createNativeStackNavigator();
+// import SplashScreen from '../features/auth/screens/SplashScreen';
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function RootNavigator() {
   const isLoggedIn = useAuthLoggedIn(); 
 
   return (
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {isLoggedIn ? (
           // Protected Routes (App Stack)
@@ -22,6 +24,7 @@ export default function RootNavigator() {
             />
           </Stack.Group>
         ) : (
+          // Public Routes (Auth Stack)
           <Stack.Group>
             <Stack.Screen
               name="AuthStack"
@@ -30,5 +33,6 @@ export default function RootNavigator() {
           </Stack.Group>
         )}
       </Stack.Navigator>
+    </NavigationContainer>
   );
 }
