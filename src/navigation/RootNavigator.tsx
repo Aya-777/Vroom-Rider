@@ -7,7 +7,6 @@ import { useAuthLoggedIn } from '../modules/auth/authStore';
 import MainTabs from './main/MainTabs';
 import AuthStack from './auth/AuthStack';
 import { deepLinkingConfig } from './deepLinkingConfig';
-import { ActivityIndicator } from 'react-native/Libraries/Components/ActivityIndicator/ActivityIndicator';
 // import SplashScreen from '../features/auth/screens/SplashScreen';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -17,8 +16,7 @@ export default function RootNavigator() {
   return (
     <NavigationContainer 
     linking={deepLinkingConfig}
-    ref={navigationRef}
-    fallback={<ActivityIndicator size="large" color="#000" />}>
+    ref={navigationRef}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {isLoggedIn ? (
           // Protected Routes (App Stack)
