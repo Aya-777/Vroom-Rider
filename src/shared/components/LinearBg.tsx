@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { useTheme } from '../../core/theme/useTheme';
 
 type Props = {
   children?: ReactNode;
@@ -14,13 +15,16 @@ type Props = {
 const LinearBg = ({
   children,
   style,
-  colors = ['#FFFFFF', '#E9E9E9'],
+  colors,
   start = { x: 0, y: 0 },
   end = { x: 1, y: 1 },
 }: Props) => {
+  const theme = useTheme();
+  const themeColors = theme?.colors || {};
+  const resolvedColors = colors && colors.length > 0 ? colors : [themeColors.surface || '#FFFFFF', themeColors.background || '#F7F7F7'];
   return (
     <LinearGradient
-      colors={colors}
+      colors={resolvedColors}
       start={start}
       end={end}
       style={style}

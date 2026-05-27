@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
   Text,
   TouchableOpacity,
   TextInput,
-  Dimensions,
+  // Dimensions,
   StatusBar,
-  Alert
+  Alert,
 } from 'react-native';
-import { Colors } from '../../../core/theme';
-import { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import Header from '../../../shared/components/ride/Header';
-import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 
+import { useNavigation } from '@react-navigation/native';
+
+import {
+  Shadows,
+} from '../../../core/theme/tokens';
+
+import { useTheme } from '../../../core/theme/useTheme';
+
+import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
+import Header from '../../../shared/components/ride/Header';
+
+// SVGs
 import ProfileIcon from '../../../assets/svg/profile.svg';
 import ScheduleIcon from '../../../assets/svg/schedule.svg';
 import PinIcon from '../../../assets/svg/pin.svg';
@@ -24,10 +31,11 @@ import ArrowIcon from '../../../assets/svg/arrows/arrow.svg';
 import ArrowUp from '../../../assets/svg/arrows/arrowUp.svg';
 import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 
-const { width, height } = Dimensions.get('window');
+// const { height } = Dimensions.get('window');
 
 export default function SelectRideScreen() {
   const navigation = useNavigation<HomeStackScreenProps<'SelectRide'>['navigation']>();
+  const { colors, mode } = useTheme();
 
   const [isNowDropdownOpen, setIsNowDropdownOpen] = useState(false);
   const [isForMeDropdownOpen, setIsForMeDropdownOpen] = useState(false);
@@ -39,332 +47,377 @@ export default function SelectRideScreen() {
 
   const handleNextPress = () => {
     if (!fromLocation.trim() || !toLocation.trim()) {
-      Alert.alert('Missing Information', 'Please fill in both your pickup and destination locations.');
+      Alert.alert(
+        'Missing Information',
+        'Please fill in both pickup and destination locations.',
+      );
       return;
     }
 
     navigation.navigate('RideDetails',{
       pickupLocation: fromLocation,
       dropoffLocation: toLocation
-    }); 
+    });
   };
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#F5F4FA" translucent={false} />
-      <Header
-        title="Ride"
-        onBackPress={() => {navigation.goBack()
-        }}
-      />
-      {/* MAP VIEW COMPONENT */}
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <StatusBar barStyle={mode === 'dark' ? 'light-content' : 'dark-content'} backgroundColor={colors.background} />
 
-      {/* 4. BOTTOM SHEET PANEL */}
-        <BottomSheetCard>
-        {/* Dropdowns Row */}
+      <Header title="Ride" onBackPress={() => navigation.goBack()} />
+
+      <BottomSheetCard>
+        {/* DROPDOWNS */}
         <View style={styles.dropdownRow}>
-          
-          <View style={{ zIndex: 10 }}> 
-            <TouchableOpacity 
-              style={styles.dropdown} 
+          {/* TIME */}
+          <View style={styles.dropdownContainer}>
+            <TouchableOpacity
+              style={[
+                styles.dropdown,
+                { backgroundColor: colors.surface },
+              ]}
               onPress={() => setIsNowDropdownOpen(!isNowDropdownOpen)}
             >
-              <ScheduleIcon fill={Colors.primary}/>
-              <Text style={styles.dropdownText}>{selectedTime}</Text>
-              {isNowDropdownOpen ? <ArrowUp fill={Colors.primary} /> : <DropDownArrowIcon fill={Colors.primary}/>}
+              <ScheduleIcon fill={colors.primary} />
+              <Text style={[styles.dropdownText, { color: colors.textPrimary }]}>
+                {selectedTime}
+              </Text>
+              {isNowDropdownOpen ? (
+                <ArrowUp fill={colors.primary} />
+              ) : (
+                <DropDownArrowIcon fill={colors.primary} />
+              )}
             </TouchableOpacity>
 
-            {/* Conditional Dropdown List Menu */}
             {isNowDropdownOpen && (
-              <View style={styles.dropdownMenu}>
-                <TouchableOpacity 
-                  style={styles.menuItem} 
-                  onPress={() => {
-                    setSelectedTime('Now'); 
-                    setIsNowDropdownOpen(false);
-                  }}
-                >
-                  <Text style={[styles.menuItemText, selectedTime === 'Now' && styles.selectedMenuText]}>Now</Text>
-                </TouchableOpacity>
-                
-                <View style={styles.menuDivider} />
-                
-                <TouchableOpacity 
-                  style={styles.menuItem} 
-                  onPress={() => {
-                    setSelectedTime('Schedule');
-                    setIsNowDropdownOpen(false);
-                  }}
-                >
-                  <Text style={[styles.menuItemText, selectedTime === 'Schedule' && styles.selectedMenuText]}>Schedule</Text>
-                </TouchableOpacity>
+              <View
+                style={[
+                  styles.dropdownMenu,
+                  { backgroundColor: colors.surface },
+                ]}
+              >
+                {['Now', 'Schedule'].map((item) => (
+                  <TouchableOpacity
+                    key={item}
+                    style={styles.menuItem}
+                    onPress={() => {
+                      setSelectedTime(item);
+                      setIsNowDropdownOpen(false);
+                    }}
+                  >
+                    <Text
+                      style={[
+                        styles.menuItemText,
+                        {
+                          color:
+                            selectedTime === item
+                              ? colors.primary
+                              : colors.textSecondary,
+                        },
+                      ]}
+                    >
+                      {item}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
               </View>
             )}
           </View>
-          
-          <View style={{ zIndex: 10 }}> 
-            <TouchableOpacity 
-              style={styles.dropdown} 
-              onPress={() => setIsForMeDropdownOpen(!isForMeDropdownOpen)}
+
+          {/* PERSON */}
+          <View style={styles.dropdownContainer}>
+            <TouchableOpacity
+              style={[
+                styles.dropdown,
+                { backgroundColor: colors.surface },
+              ]}
+              onPress={() =>
+                setIsForMeDropdownOpen(!isForMeDropdownOpen)
+              }
             >
-              <ProfileIcon fill={Colors.primary}/>
-              <Text style={styles.dropdownText}>{selectedPerson}</Text>
-              {isForMeDropdownOpen ? <ArrowUp fill={Colors.primary} /> : <DropDownArrowIcon fill={Colors.primary}/>}
+              <ProfileIcon fill={colors.primary} />
+              <Text style={[styles.dropdownText, { color: colors.textPrimary }]}>
+                {selectedPerson}
+              </Text>
+              {isForMeDropdownOpen ? (
+                <ArrowUp fill={colors.primary} />
+              ) : (
+                <DropDownArrowIcon fill={colors.primary} />
+              )}
             </TouchableOpacity>
 
-            {/* Conditional Dropdown List Menu */}
             {isForMeDropdownOpen && (
-              <View style={styles.dropdownMenu}>
-                <TouchableOpacity 
-                  style={styles.menuItem} 
-                  onPress={() => {
-                    setSelectedPerson('For Me');
-                    setIsForMeDropdownOpen(false);
-                  }}
-                >
-                  <Text style={[styles.menuItemText, selectedPerson === "For Me" && styles.selectedMenuText]}>For Me</Text>
-                </TouchableOpacity>
-                
-                <View style={styles.menuDivider} />
-                
-                <TouchableOpacity 
-                  style={styles.menuItem} 
-                  onPress={() => {
-                    setSelectedPerson('Other Contact');
-                    setIsForMeDropdownOpen(false);
-                  }}
-                >
-                  <Text style={[styles.menuItemText, selectedPerson === "Other Contact" && styles.selectedMenuText]}>Other Contact</Text>
-                </TouchableOpacity>
+              <View
+                style={[
+                  styles.dropdownMenu,
+                  { backgroundColor: colors.surface },
+                ]}
+              >
+                {['For me', 'Other Contact'].map((item) => (
+                  <TouchableOpacity
+                    key={item}
+                    style={styles.menuItem}
+                    onPress={() => {
+                      setSelectedPerson(item);
+                      setIsForMeDropdownOpen(false);
+                    }}
+                  >
+                    <Text
+                      style={[
+                        styles.menuItemText,
+                        {
+                          color:
+                            selectedPerson === item
+                              ? colors.primary
+                              : colors.textSecondary,
+                        },
+                      ]}
+                    >
+                      {item}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
               </View>
             )}
           </View>
         </View>
-              
-        {/* Inputs Card */}
-        <View style={styles.inputCard}>
+
+        {/* INPUTS */}
+        <View
+          style={[
+            styles.inputCard,
+            { backgroundColor: colors.surface },
+          ]}
+        >
           <View style={styles.inputTimeline}>
-            <View style={styles.timelineDot} />
-            <View style={styles.timelineLine} />
-            <View style={styles.timelineDot} />
+            <View
+              style={[
+                styles.timelineDot,
+                { backgroundColor: colors.border },
+              ]}
+            />
+            <View
+              style={[
+                styles.timelineLine,
+                { backgroundColor: colors.border },
+              ]}
+            />
+            <View
+              style={[
+                styles.timelineDot,
+                { backgroundColor: colors.border },
+              ]}
+            />
           </View>
+
           <View style={styles.inputContainer}>
-            <TextInput 
-              style={styles.input} 
-              placeholder="From" 
-              placeholderTextColor="#C0BCC7"
-              editable={!isNowDropdownOpen && !isForMeDropdownOpen} 
+            <TextInput
+              style={[styles.input, { color: colors.textPrimary }]}
+              placeholder="From"
+              placeholderTextColor={colors.textMuted}
               onChangeText={setFromLocation}
             />
-            <View style={styles.divider} />
-            <TextInput 
-              style={styles.input} 
-              placeholder="To?" 
-              placeholderTextColor="#C0BCC7" 
-              editable={!isNowDropdownOpen && !isForMeDropdownOpen}
+
+            <View style={[styles.divider, { backgroundColor: colors.border }]} />
+
+            <TextInput
+              style={[styles.input, { color: colors.textPrimary }]}
+              placeholder="To?"
+              placeholderTextColor={colors.textMuted}
               onChangeText={setToLocation}
             />
           </View>
         </View>
 
-        {/* Quick Action Buttons Row */}
+        {/* ACTIONS */}
         <View style={styles.actionRow}>
-          <TouchableOpacity style={styles.actionButton}>
-            <PinIcon fill={'#5C4E75'}/>
-            <Text style={styles.actionButtonText}>Set on map</Text>
+          <TouchableOpacity
+            style={[
+              styles.actionButton,
+              { backgroundColor: colors.surface },
+            ]}
+          >
+            <PinIcon fill={colors.textSecondary} />
+            <Text
+              style={[
+                styles.actionButtonText,
+                { color: colors.textSecondary },
+              ]}
+            >
+              Set on map
+            </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.actionButton}>
-            <StarIcon fill={'#5C4E75'} />
-            <Text style={styles.actionButtonText}>Saved places</Text>
+          <TouchableOpacity
+            style={[
+              styles.actionButton,
+              { backgroundColor: colors.surface },
+            ]}
+          >
+            <StarIcon fill={colors.textSecondary} />
+            <Text
+              style={[
+                styles.actionButtonText,
+                { color: colors.textSecondary },
+              ]}
+            >
+              Saved places
+            </Text>
           </TouchableOpacity>
         </View>
 
-        {/* Next Button */}
-        <TouchableOpacity style={styles.nextButton} onPress={handleNextPress}>
-          <Text style={styles.nextButtonText}>Next</Text>
-          <ArrowIcon fill={Colors.background}/>
+        {/* NEXT */}
+        <TouchableOpacity
+          style={[
+            styles.nextButton,
+            { backgroundColor: colors.primary },
+          ]}
+          onPress={handleNextPress}
+        >
+          <Text
+            style={[
+              styles.nextButtonText,
+              { color: colors.background },
+            ]}
+          >
+            Next
+          </Text>
+          <ArrowIcon fill={colors.background} />
         </TouchableOpacity>
-        </BottomSheetCard>
-      </View>    
+      </BottomSheetCard>
+    </View>
   );
 }
 
-// --- STYLES ---
+/* ---------------- STYLES ---------------- */
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#151324',
   },
-  pickupDot: {
-    width: 12,
-    height: 12,
-    borderRadius: 6,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 2,
-    borderColor: 'rgba(255,255,255,0.4)',
-  },
-  locationButton: {
-    position: 'absolute',
-    top: height * 0.53,
-    right: 20,
-    backgroundColor: '#E8E5F2',
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-  },
+
   dropdownRow: {
     flexDirection: 'row',
     justifyContent: 'center',
     marginBottom: 16,
   },
+
+  dropdownContainer: {
+    zIndex: 10,
+  },
+
   dropdown: {
     flexDirection: 'row',
-    backgroundColor: Colors.light,
     paddingVertical: 8,
     paddingHorizontal: 14,
     borderRadius: 20,
     alignItems: 'center',
     marginHorizontal: 6,
-    elevation: 1,
   },
-  dropdownIcon: {
-    marginRight: 6,
-  },
+
   dropdownText: {
-    color: '#1A1C29',
     fontWeight: '600',
     fontSize: 14,
-    marginRight: 4,
-    marginLeft: 4,
+    marginLeft: 6,
+    marginRight: 6,
   },
+
   dropdownMenu: {
     position: 'absolute',
-    top: 42, 
+    top: 42,
     left: 6,
-    backgroundColor: '#FFFFFF',
     borderRadius: 12,
-    width: 120,
-    elevation: 5, // Shadow for Android
-    shadowColor: '#000', // Shadows for iOS
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 6,
+    width: 140,
+    elevation: 5,
     paddingVertical: 4,
   },
+
   menuItem: {
     paddingVertical: 12,
-    paddingHorizontal: 16,
     alignItems: 'center',
   },
+
   menuItemText: {
     fontSize: 14,
-    color: '#5C4E75',
     fontWeight: '500',
   },
-  selectedMenuText: {
-    color: '#443366',
-    fontWeight: '700',
-  },
-  menuDivider: {
-    height: 1,
-    backgroundColor: '#EAE6F8',
-    marginHorizontal: 8,
-  },
+
   inputCard: {
-    backgroundColor: '#FFFFFF',
     width: '100%',
     borderRadius: 16,
     padding: 16,
     flexDirection: 'row',
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    ...Shadows.small,
   },
+
   inputTimeline: {
     width: 20,
     alignItems: 'center',
     justifyContent: 'space-between',
-    verticalAlign: 'middle',
     paddingVertical: 10,
   },
+
   timelineDot: {
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#D1C9E8',
   },
+
   timelineLine: {
     flex: 1,
     width: 2,
-    backgroundColor: '#EAE6F8',
-    marginVertical: 4,
   },
+
   inputContainer: {
     flex: 1,
     marginLeft: 10,
   },
+
   input: {
     height: 35,
     fontSize: 15,
-    color: '#1A1C29',
-    padding: 0,
   },
+
   divider: {
     height: 1,
-    backgroundColor: '#F0Edf7',
     marginVertical: 4,
   },
+
   actionRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%',
     marginTop: 16,
     marginBottom: 20,
   },
+
   actionButton: {
     flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
     width: '48%',
     paddingVertical: 12,
     borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 1,
   },
-  actionIcon: {
-    marginRight: 6,
-  },
+
   actionButtonText: {
-    color: '#5C4E75',
     fontWeight: '600',
     fontSize: 14,
-    marginLeft: 4,
+    marginLeft: 6,
   },
+
   nextButton: {
     flexDirection: 'row',
-    backgroundColor: Colors.primary,
     width: '50%',
     paddingVertical: 14,
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 3,
+    alignSelf: 'center',
   },
+
   nextButtonText: {
-    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
     marginRight: 5,
-    marginBottom: 2,
   },
 });

@@ -7,238 +7,248 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import { Colors, Shadows, Typography } from '../../../core/theme';
+import { useNavigation } from '@react-navigation/native';
+
+import { useTheme } from '../../../core/theme/useTheme';
+import { Typography, Spacing, Radius, Shadows } from '../../../core/theme/tokens';
+
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 import Header from '../../../shared/components/ride/Header';
-import { useNavigation, useRoute } from '@react-navigation/native'; 
 import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 
 // SVGs
 import CarIcon from '../../../assets/svg/car.svg';
 import PhoneNumberIcon from '../../../assets/svg/phoneNumber.svg';
 import MessageIcon from '../../../assets/svg/chat.svg';
-import WhatsAppIcon from '../../../assets/svg/whatsapp.svg'; 
+import WhatsAppIcon from '../../../assets/svg/whatsapp.svg';
 
 export default function RideConfirmationScreen() {
-  const route = useRoute();
+  // const navigation = useNavigation<any>();
+  const { colors, mode } = useTheme();
+
+  // const route = useRoute();
   const navigation = useNavigation<HomeStackScreenProps<'DriverFound'>['navigation']>();
 
   // Example mock data for the driver and car (can be fetched via route.params later)
   const driverData = {
     name: 'Alex Driver',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80', // Replace with dynamic image require or URI
+    avatar:
+      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
     statusMessage: 'Your driver is on his way to you. 💜',
     car: {
       model: 'Mercedes-Benz S-Class',
       color: 'Silver',
       plate: 'NY-772-DX',
-    }
+    },
   };
 
   return (
-    <View style={styles.contentContainer}>
-      <StatusBar barStyle="dark-content" backgroundColor="#F5F4FA" translucent={false} />
+    <View style={[styles.contentContainer, { backgroundColor: colors.background }]}>
+      <StatusBar barStyle={mode === 'dark' ? 'light-content' : 'dark-content'} backgroundColor={colors.background} />
+
       <Header
         title="Track your trip"
-        onBackPress={() => { navigation.goBack(); }}
+        onBackPress={() => navigation.goBack()}
       />
-      
-      {/* Background map view placeholder element goes here */}
 
       <BottomSheetCard>
-        {/* Top Handle bar line */}
-        <View style={styles.handleBar} />
+        <View style={[styles.handleBar, { backgroundColor: colors.border }]} />
 
-        {/* Status Message */}
-        <Text style={styles.statusText}>{driverData.statusMessage}</Text>
+        <Text style={[styles.statusText, { color: colors.textPrimary }]}>
+          {driverData.statusMessage}
+        </Text>
 
-        {/* Driver Profile Image */}
-        <View style={styles.avatarContainer}>
-          {/* If using a local asset, replace source={{ uri: ... }} with source={require('path')} */}
+        <View style={[styles.avatarContainer, { backgroundColor: colors.surface }]}>
           <Image source={{ uri: driverData.avatar }} style={styles.avatarImage} />
         </View>
 
-        {/* Driver Name */}
-        <Text style={styles.driverName}>{driverData.name}</Text>
+        <Text style={[styles.driverName, { color: colors.textPrimary }]}>
+          {driverData.name}
+        </Text>
 
-        {/* Action Communication Buttons */}
         <View style={styles.communicationRow}>
           <TouchableOpacity style={styles.iconButton}>
-            <PhoneNumberIcon width={24} height={24} fill="#2E2344" />
+            <PhoneNumberIcon width={24} height={24} fill={colors.textPrimary} />
           </TouchableOpacity>
+
           <TouchableOpacity style={styles.iconButton}>
-            <MessageIcon width={24} height={24} fill="#2E2344" />
+            <MessageIcon width={24} height={24} fill={colors.textPrimary} />
           </TouchableOpacity>
+
           <TouchableOpacity style={styles.iconButton}>
-            <WhatsAppIcon width={24} height={24} fill={Colors.primary} />
+            <WhatsAppIcon width={24} height={24} fill={colors.primary} />
           </TouchableOpacity>
         </View>
 
-        {/* Progress Slider Line Indicator */}
         <View style={styles.progressContainer}>
-          <View style={styles.trackLine} />
-          {/* <View style={styles.progressDot} /> */}
+          <View style={[styles.trackLine, { backgroundColor: colors.border }]} />
         </View>
 
-        {/* Car Details Card Box */}
-        <View style={styles.carDetailsCard}>
+        <View style={[styles.carDetailsCard, { backgroundColor: colors.primary }]}>
           <View style={styles.carIconContainer}>
-            <CarIcon width={24} height={24} fill="#FFFFFF" />
+            <CarIcon width={24} height={24} fill={colors.surface} />
           </View>
+
           <View style={styles.carInfoTextDetails}>
-            <Text style={styles.carDetailsTitle}>CAR DETAILS</Text>
-            <Text style={styles.carModelText}>{driverData.car.model}</Text>
+            <Text style={[styles.carDetailsTitle, { color: colors.surface }]}>
+              CAR DETAILS
+            </Text>
+
+            <Text style={[styles.carModelText, { color: colors.surface }]}>
+              {driverData.car.model}
+            </Text>
+
             <View style={styles.plateRow}>
-              <Text style={styles.carColorText}>{driverData.car.color}</Text>
+              <Text style={[styles.carColorText, { color: colors.surface }]}>
+                {driverData.car.color}
+              </Text>
+
               <View style={styles.bulletSeparator} />
+
               <View style={styles.plateContainer}>
-                <Text style={styles.plateText}>{driverData.car.plate}</Text>
+                <Text style={[styles.plateText, { color: colors.surface }]}>
+                  {driverData.car.plate}
+                </Text>
               </View>
             </View>
           </View>
         </View>
+
       </BottomSheetCard>
     </View>
   );
 }
 
-// --- COMPONENT STYLES ---
+/* ---------------- STYLES ---------------- */
+
 const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
-    backgroundColor: '#151324',
   },
+
   handleBar: {
-    width: 38,
+    width: 40,
     height: 4,
-    backgroundColor: '#C5B6E2',
-    borderRadius: 2,
+    borderRadius: Radius.full,
     alignSelf: 'center',
-    marginBottom: 20,
+    marginBottom: Spacing.md,
   },
+
   statusText: {
     ...Typography.semiBoldBody,
-    color: Colors.textPrimary,
     textAlign: 'center',
-    marginBottom: 24,
+    marginBottom: Spacing.lg,
   },
+
   avatarContainer: {
     width: 84,
     height: 84,
     borderRadius: 42,
     overflow: 'hidden',
     alignSelf: 'center',
-    backgroundColor: '#E2DDF4',
-    marginBottom: 12,
+    marginBottom: Spacing.sm,
     ...Shadows.small,
   },
+
   avatarImage: {
     width: '100%',
     height: '100%',
     resizeMode: 'cover',
   },
+
   driverName: {
     ...Typography.h2,
-    color: Colors.textPrimary,
     textAlign: 'center',
-    marginBottom: 14,
+    marginBottom: Spacing.md,
   },
+
   communicationRow: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
-    gap: 28,
-    marginBottom: 24,
+    gap: Spacing.lg,
+    marginBottom: Spacing.lg,
   },
+
   iconButton: {
-    padding: 4,
+    padding: Spacing.xs,
   },
+
   progressContainer: {
     width: '100%',
     height: 20,
     justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: Spacing.md,
   },
+
   trackLine: {
     width: '100%',
     height: 2,
-    backgroundColor: Colors.lightAccent,
-    position: 'absolute',
   },
-  progressDot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: '#2E2344',
-    borderWidth: 2,
-    borderColor: '#FFFFFF',
-    position: 'absolute',
-    left: '65%', // Adjust position percentage dynamically depending on trip calculation
-    transform: [{ translateX: -5 }],
-    ...Shadows.small,
-  },
+
   carDetailsCard: {
-    backgroundColor: Colors.primary,
-    width: '100%',
-    borderRadius: 18,
-    padding: 18,
+    borderRadius: Radius.lg,
+    padding: Spacing.md,
     flexDirection: 'row',
     alignItems: 'center',
     ...Shadows.medium,
   },
+
   carIconContainer: {
     width: 44,
     height: 44,
-    borderRadius: 10,
-    backgroundColor: 'rgba(255,255,255,0.1)',
+    borderRadius: Radius.sm,
+    backgroundColor: 'rgba(255,255,255,0.15)',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 16,
+    marginRight: Spacing.md,
   },
+
   carInfoTextDetails: {
     flex: 1,
   },
+
   carDetailsTitle: {
     ...Typography.semiBoldCaption,
-    color: Colors.lightAccent,
-    letterSpacing: 1.2,
     marginBottom: 4,
   },
+
   carModelText: {
     ...Typography.semiBoldBody,
-    color: Colors.surface,
     marginBottom: 6,
   },
+
   plateRow: {
     flexDirection: 'row',
     alignItems: 'center',
   },
+
   carColorText: {
     ...Typography.caption,
-    color: Colors.lightAccent,
-    marginBottom: 4,
+    opacity: 0.8,
   },
+
   bulletSeparator: {
     width: 4,
     height: 4,
     borderRadius: 2,
-    backgroundColor: Colors.lightAccent,
     marginHorizontal: 8,
+    opacity: 0.7,
+    backgroundColor: '#fff',
   },
+
   plateContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255,255,255,0.15)',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: 6,
+    borderColor: 'rgba(255,255,255,0.25)',
+    borderRadius: Radius.sm,
     paddingHorizontal: 8,
     paddingVertical: 2,
   },
+
   plateText: {
     fontSize: 13,
     fontWeight: '700',
-    color: '#FFFFFF',
     letterSpacing: 0.5,
   },
 });
