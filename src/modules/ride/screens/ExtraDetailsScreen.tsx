@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
   Text,
   TouchableOpacity,
-  TextInput,
-  Dimensions,
   StatusBar,
-  Alert,
-  Image
+  Image,
 } from 'react-native';
-import { Colors, Shadows, Typography } from '../../../core/theme';
-import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+
+import {
+  Shadows,
+  Typography,
+  Spacing,
+  Radius,
+} from '../../../core/theme/tokens';
+
+import { useTheme } from '../../../core/theme/useTheme';
+
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 import Header from '../../../shared/components/ride/Header';
 import LinearBg from '../../../shared/components/LinearBg';
@@ -31,347 +36,325 @@ interface VehicleOption {
   image: any;
 }
 
-// Mock vehicle data - Later get it from back side 
 const VEHICLE_DATA: VehicleOption[] = [
   { id: 'economy', type_name: 'Economy', image: 'car' },
   { id: 'comfort', type_name: 'Comfort', image: 'car' },
-  { id: 'xl', type_name: 'XL', image:'car' },
+  { id: 'xl', type_name: 'XL', image: 'car' },
 ];
 
-interface ExtraDetailsScreenProps {
+interface Props {
   timeEstimate?: string;
   priceEstimate?: string;
 }
 
 export default function ExtraDetailsScreen({
-  timeEstimate = "30 : 00 m",
-  priceEstimate = "$24.50",
-}: ExtraDetailsScreenProps) {
+  timeEstimate = '30:00 m',
+  priceEstimate = '$24.50',
+}: Props) {
+  const navigation = useNavigation<any>();
+  const { colors, mode } = useTheme();
+
   const [selectedVehicle, setSelectedVehicle] = useState('Economy');
   const [selectedPayment, setSelectedPayment] = useState('Cash');
-  const navigation = useNavigation<any>();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
-    <View style={styles.contentContainer}>
-      
-      <StatusBar barStyle="dark-content" backgroundColor="#F5F4FA" translucent={false} />
-      <Header
-        title="Ride"
-        onBackPress={() => { navigation.goBack() }}
-      />
-      {/* MAP VIEW COMPONENT */}
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <StatusBar barStyle={mode === 'dark' ? 'light-content' : 'dark-content'} backgroundColor={colors.background} />
+
+      <Header title="Ride" onBackPress={() => navigation.goBack()} />
+
       <BottomSheetCard>
-        {/* 1. (Time & Price Estimate) */}
+        {/* TIME & PRICE */}
         <View style={styles.infoRow}>
-          {/* Time Box */}
-          <View style={styles.infoBox}>
+          <View style={[styles.infoBox, { backgroundColor: colors.surface }]}>
             <View style={styles.infoTitleRow}>
-              <ClockIcon width={16} height={16} fill={Colors.primary} />
-              <Text style={styles.infoBoxTitle}>Time</Text>
+              <ClockIcon width={16} height={16} fill={colors.primary} />
+              <Text style={[styles.infoTitle, { color: colors.textPrimary }]}>
+                Time
+              </Text>
             </View>
-            <Text style={styles.infoBoxValue}>{timeEstimate}</Text>
-            <View style={styles.underline} />
+
+            <Text style={[styles.infoValue, { color: colors.textPrimary }]}>
+              {timeEstimate}
+            </Text>
+            <View style={[styles.line, { backgroundColor: colors.border }]} />
           </View>
 
-          {/* Estimated Price Box */}
-          <View style={styles.infoBox}>
+          <View style={[styles.infoBox, { backgroundColor: colors.surface }]}>
             <View style={styles.infoTitleRow}>
-              <EstimatedPriceIcon width={16} height={16} fill={Colors.primary} />
-              <Text style={styles.infoBoxTitle}>Estimated</Text>
+              <EstimatedPriceIcon width={16} height={16} fill={colors.primary} />
+              <Text style={[styles.infoTitle, { color: colors.textPrimary }]}>
+                Estimated
+              </Text>
             </View>
-            <Text style={styles.infoBoxValue}>{priceEstimate}</Text>
-            <View style={styles.underline} />
+
+            <Text style={[styles.infoValue, { color: colors.textPrimary }]}>
+              {priceEstimate}
+            </Text>
+            <View style={[styles.line, { backgroundColor: colors.border }]} />
           </View>
         </View>
 
-        {/* 2. FILTER & PAYMENT BUTTONS ROW */}
-        <View style={styles.buttonRow}>
-          <LinearBg
-            colors={['#F0EBFF', '#FAFAFF']}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 0, y: 1 }}
-            style={styles.outlineButton}>
-            <FilterIcon width={18} height={18} fill={Colors.primary} />
-            <TouchableOpacity style={styles.insideButton}>
-              <Text style={styles.outlineButtonText}>Filters</Text>
-            </TouchableOpacity>
+        {/* FILTER + PAYMENT */}
+        <View style={styles.row}>
+          <LinearBg style={styles.actionBtn}>
+            <FilterIcon width={18} height={18} fill={colors.primary} />
+            <Text style={[styles.actionText, { color: colors.primary }]}>
+              Filters
+            </Text>
           </LinearBg>
 
-          <LinearBg
-            colors={['#F0EBFF', '#FAFAFF']}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 0, y: 1 }}
-            style={styles.outlineButton}>
-            <View style={{ zIndex: 10, width: '100%' }}> 
-              <TouchableOpacity 
-                style={styles.dropdown} 
-                onPress={() => setIsDropdownOpen(!isDropdownOpen)}
-              >
-                <Text style={styles.dropdownText}>
-                  {selectedPayment}
-                </Text>
-                {isDropdownOpen ? <ArrowUp fill={Colors.primary} /> : <DropDownArrowIcon fill={Colors.primary}/>}
-              </TouchableOpacity>
+          <LinearBg style={styles.actionBtn}>
+            <TouchableOpacity
+              style={styles.dropdown}
+              onPress={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <Text style={[styles.dropdownText, { color: colors.textPrimary }]}>
+                {selectedPayment}
+              </Text>
 
-              {/* Custom Payment Dropdown Overlay */}
-              {isDropdownOpen && (
-                <View style={styles.dropdownMenu}>
-                  <TouchableOpacity 
-                    style={styles.menuItem} 
-                    onPress={() => {
-                      setSelectedPayment('Cash');
-                      setIsDropdownOpen(false);
-                    }}
-                  >
-                    <Text style={[
-                      styles.menuItemText, 
-                      selectedPayment === 'Cash' && styles.selectedMenuText
-                    ]}>Cash</Text>
-                  </TouchableOpacity>
-
-                  <View style={styles.menuDivider} />
-
-                  <TouchableOpacity 
-                    style={styles.menuItem} 
-                    onPress={() => {
-                      setSelectedPayment('Wallet');
-                      setIsDropdownOpen(false);
-                    }}
-                  >
-                    <Text style={[
-                      styles.menuItemText, 
-                      selectedPayment === 'Wallet' && styles.selectedMenuText
-                    ]}>Wallet</Text>
-                  </TouchableOpacity>
-                </View>
+              {isDropdownOpen ? (
+                <ArrowUp fill={colors.primary} />
+              ) : (
+                <DropDownArrowIcon fill={colors.primary} />
               )}
-            </View>
+            </TouchableOpacity>
+
+            {isDropdownOpen && (
+              <View style={[styles.dropdownMenu, { backgroundColor: colors.surface }]}>
+                {['Cash', 'Wallet'].map((item, index) => (
+                  <TouchableOpacity
+                    key={item}
+                    style={styles.menuItem}
+                    onPress={() => {
+                      setSelectedPayment(item);
+                      setIsDropdownOpen(false);
+                    }}
+                  >
+                    <Text
+                      style={[
+                        styles.menuText,
+                        { color: colors.textSecondary },
+                        selectedPayment === item && { color: colors.primary },
+                      ]}
+                    >
+                      {item}
+                    </Text>
+
+                    {index === 0 && (
+                      <View style={[styles.divider, { backgroundColor: colors.border }]} />
+                    )}
+                  </TouchableOpacity>
+                ))}
+              </View>
+            )}
           </LinearBg>
-          
         </View>
 
-        {/* VEHICLE SELECTION ZONE */}
-        <Text style={styles.sectionTitle}>SELECT VEHICLE</Text>
-        
+        {/* VEHICLES */}
+        <Text style={[styles.sectionTitle, { color: colors.textSecondary }]}>
+          SELECT VEHICLE
+        </Text>
+
         <View style={styles.vehicleRow}>
-          {VEHICLE_DATA.map((vehicle) => {
-            const isSelected = selectedVehicle === vehicle.type_name;
+          {VEHICLE_DATA.map((v) => {
+            const active = selectedVehicle === v.type_name;
+
             return (
               <TouchableOpacity
-                key={vehicle.id}
+                key={v.id}
                 style={[
                   styles.vehicleCard,
-                  isSelected && styles.selectedVehicleCard
+                  { backgroundColor: colors.surface },
+                  active && { borderColor: colors.primary },
                 ]}
-                onPress={() => setSelectedVehicle(vehicle.type_name)}
+                onPress={() => setSelectedVehicle(v.type_name)}
               >
-                <Image source={vehicle.image} style={styles.vehicleImage} resizeMode="contain" />
-                <Text style={[
-                  styles.vehicleName,
-                  isSelected && styles.selectedVehicleName
-                ]}>
-                  {vehicle.type_name}
+                <Image
+                  source={v.image}
+                  style={styles.vehicleImage}
+                  resizeMode="contain"
+                />
+
+                <Text
+                  style={[
+                    styles.vehicleText,
+                    { color: colors.textMuted },
+                    active && { color: colors.primary },
+                  ]}
+                >
+                  {v.type_name}
                 </Text>
               </TouchableOpacity>
             );
           })}
         </View>
 
-        {/* NEXT BUTTON */}
-        <TouchableOpacity 
-          style={styles.nextButton} 
-          onPress={() => navigation.navigate('ConfirmRide', {
-            price: priceEstimate,
-            time: timeEstimate,
-            car: selectedVehicle,
-            payement: selectedPayment, 
-          })}
+        {/* NEXT */}
+        <TouchableOpacity
+          style={[styles.nextButton, { backgroundColor: colors.primary }]}
+          onPress={() =>
+            navigation.navigate('ConfirmRide', {
+              price: priceEstimate,
+              time: timeEstimate,
+              car: selectedVehicle,
+              payment: selectedPayment,
+            })
+          }
         >
-          <Text style={styles.nextButtonText}>Next</Text>
-          <ArrowRightIcon fill={Colors.background}/>
+          <Text style={[styles.nextText, { color: colors.background }]}>
+            Next
+          </Text>
+          <ArrowRightIcon fill={colors.background} />
         </TouchableOpacity>
       </BottomSheetCard>
     </View>
   );
 }
 
-// --- COMPONENT STYLES ---
+/* ---------------- STYLES ---------------- */
+
 const styles = StyleSheet.create({
-  contentContainer: {
+  container: {
     flex: 1,
-    backgroundColor: '#151324',
   },
+
   infoRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%',
-    marginBottom: 16,
+    marginBottom: Spacing.md,
   },
+
   infoBox: {
-    backgroundColor: Colors.surface,
-    width: '48%',
-    borderRadius: 12,
-    paddingTop: 12,
-    paddingHorizontal: 14,
-    paddingBottom: 6,
-    ...Shadows.medium
+    flex: 1,
+    borderRadius: Radius.md,
+    padding: Spacing.sm,
+    marginHorizontal: 4,
+    ...Shadows.medium,
   },
+
   infoTitleRow: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 4,
   },
-  infoBoxTitle: {
-    color: Colors.textPrimary,
+
+  infoTitle: {
+    ...Typography.boldCaption,
     marginLeft: 6,
-    ...Typography.boldCaption
   },
-  infoBoxValue: {
+
+  infoValue: {
     ...Typography.semiBoldBody,
-    color: '#1A1C29',
     textAlign: 'center',
     marginVertical: 4,
   },
-  underline: {
+
+  line: {
     height: 1,
-    backgroundColor: '#EAE6F8',
-    width: '100%',
     marginTop: 4,
   },
-  buttonRow: {
+
+  row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%',
-    marginBottom: 20,
-    zIndex: 50,
-    elevation: 5,
+    marginBottom: Spacing.md,
   },
-  outlineButton: {
+
+  actionBtn: {
+    flex: 1,
     flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: Colors.secondary,
-    width: '48%',
-    paddingVertical: 12,
-    borderRadius: 12,
-    justifyContent: 'center',
     alignItems: 'center',
-    ...Shadows.small
+    justifyContent: 'center',
+    marginHorizontal: 4,
+    borderRadius: Radius.md,
+    paddingVertical: Spacing.sm,
+    ...Shadows.small,
   },
-  insideButton:{
-    flexDirection: 'row',
-    justifyContent: "center",
-    alignContent: 'center',
-  },
-  outlineButtonText: {
-    color: Colors.secondary,
-    ...Typography.semiBoldCaption,
-    fontSize: 14,
+
+  actionText: {
     marginLeft: 6,
+    ...Typography.semiBoldCaption,
   },
+
   sectionTitle: {
-    alignSelf: 'flex-start',
     ...Typography.boldCaption,
-    color: Colors.textSecondary,
-    letterSpacing: 1,
-    marginBottom: 12,
+    marginBottom: Spacing.sm,
   },
+
   vehicleRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%',
-    marginBottom: 24,
-    zIndex: 1,
+    marginBottom: Spacing.lg,
   },
+
   vehicleCard: {
-    backgroundColor: '#FFFFFF',
-    width: '30%',
-    borderRadius: 12,
-    paddingVertical: 12,
+    flex: 1,
+    marginHorizontal: 4,
+    borderRadius: Radius.md,
     alignItems: 'center',
-    ...Shadows.small
+    padding: Spacing.sm,
+    borderWidth: 1,
+    borderColor: 'transparent',
+    ...Shadows.small,
   },
-  selectedVehicleCard: {
-    backgroundColor: Colors.lightAccent,
-    borderWidth: 1.5,
-    borderColor: Colors.secondary,
-  },
+
   vehicleImage: {
     width: 50,
     height: 35,
     marginBottom: 6,
   },
-  vehicleName: {
+
+  vehicleText: {
     ...Typography.caption,
-    color: Colors.textMuted,
   },
-  selectedVehicleName: {
-    ...Typography.boldCaption,
-    color: Colors.secondary,
-  },
+
   nextButton: {
     flexDirection: 'row',
-    backgroundColor: Colors.primary,
-    width: '50%',
-    paddingVertical: 14,
-    borderRadius: 25,
-    justifyContent: 'center',
+    alignSelf: 'center',
+    paddingHorizontal: 28,
+    paddingVertical: 12,
+    borderRadius: Radius.full,
     alignItems: 'center',
     ...Shadows.small,
   },
-  nextButtonText: {
-    ...Typography.semiBoldBody,
+
+  nextText: {
     marginRight: 6,
-    marginBottom: 4,
-    color: Colors.background,
+    ...Typography.semiBoldBody,
   },
+
   dropdown: {
     flexDirection: 'row',
-    paddingVertical: 6, 
-    paddingHorizontal: 14,
-    borderRadius: 12,
     alignItems: 'center',
-    justifyContent: 'center',
-    minWidth: 120,
   },
-  dropdownIcon: {
-    marginRight: 6,
-  },
+
   dropdownText: {
-    color: '#1A1C29',
-    fontWeight: '600',
-    fontSize: 14,
-    marginRight: 8,
+    marginRight: 6,
+    ...Typography.semiBoldCaption,
   },
+
   dropdownMenu: {
     position: 'absolute',
-    top: 40, 
-    left: 0,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
+    top: 45,
+    borderRadius: Radius.md,
     width: 120,
     ...Shadows.small,
-    paddingVertical: 4,
     zIndex: 100,
-    elevation: 10,     
   },
+
   menuItem: {
-    paddingVertical: 12,
-    paddingHorizontal: 16,
+    padding: Spacing.sm,
     alignItems: 'center',
   },
-  menuItemText: {
-    fontSize: 14,
-    color: '#5C4E75',
-    fontWeight: '500',
+
+  menuText: {
+    ...Typography.semiBoldCaption,
   },
-  selectedMenuText: {
-    color: '#443366',
-    fontWeight: '700',
-  },
-  menuDivider: {
+
+  divider: {
     height: 1,
-    backgroundColor: '#EAE6F8',
-    marginHorizontal: 8,
+    marginVertical: 4,
   },
 });

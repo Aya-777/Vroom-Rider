@@ -7,119 +7,149 @@ import {
   SafeAreaView,
   ScrollView,
 } from 'react-native';
+
 import LinearBg from '../../../shared/components/LinearBg';
 import WorkIcon from '../../../assets/svg/work.svg';
 import ReserveIcon from '../../../assets/svg/reserve.svg';
 import RideIcon from '../../../assets/svg/ride.svg';
 import HomeIcon from '../../../assets/svg/home.svg';
-import SearchBar from '../../../shared/components/SearchBar'
+import SearchBar from '../../../shared/components/SearchBar';
 import Header from '../../../shared/components/Header';
-import { Colors , Typography, Spacing, Radius, Shadows} from '../../../core/theme';
+
+import { useTheme } from '../../../core/theme/useTheme';
+import { Typography, Spacing, Radius, Shadows } from '../../../core/theme/tokens';
 import { useNavigation } from '@react-navigation/native';
-
-
-
-const services = [
-  {
-    id: 'ride',
-    title: 'Ride',
-    icon: RideIcon,
-    active: true,
-  },
-  {
-    id: 'reserve',
-    title: 'Reserve',
-    icon: ReserveIcon,
-    active: false,
-  },
-];
-
-const savedDestinations = [
-  {
-    id: 'home',
-    title: 'Home',
-    subtitle: '248 West 35th St, New York'
-  },
-  {
-    id: 'office',
-    title: 'Office',
-    subtitle: 'One World Trade Center'
-  }
-];
 
 export default function HomeScreen() {
   const navigation = useNavigation<any>();
-  
+  const { colors } = useTheme();
+
   return (
-  <LinearBg
-    colors={['#F0EBFF', Colors.background]}
-    start={{ x: 0, y: 0 }}
-    end={{ x: 0, y: 1 }}
-    style={styles.gradientContainer}
+    <LinearBg
+      colors={[colors.backgroundSoft, colors.background]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 0, y: 1 }}
+      style={styles.gradientContainer}
     >
-    <SafeAreaView style={styles.container}>
-      <Header />
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        <SearchBar />
-        {/* For You Section */}
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>For you</Text>
-        </View>
+      <SafeAreaView style={styles.container}>
+        <Header />
 
-        {/* Grid Services */}
-        <View style={styles.gridContainer}>
-          {/* Active Ride Service */}
-          <View style={styles.gridItemContainer}>
-            <TouchableOpacity style={[styles.gridItem, styles.activeGridItem]} onPress={() => {navigation.navigate('SelectRide')}}>
-              <RideIcon fill="#1E2243" />
-            </TouchableOpacity>
-            <Text style={[styles.gridLabel, styles.activeGridLabel]}>{services[0].title}</Text>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          <SearchBar />
+
+          <View style={styles.sectionHeader}>
+            <Text style={[styles.sectionTitle, { color: colors.textPrimary }]}>
+              For you
+            </Text>
           </View>
 
-          {/* Reserve Service */}
-          <View style={styles.gridItemContainer}>
-            <TouchableOpacity style={styles.gridItem}>
-              <ReserveIcon fill="#A0A5BA" />
-            </TouchableOpacity>
-            <Text style={styles.gridLabel}>{services[1].title}</Text>
+          <View style={styles.gridContainer}>
+            <View style={styles.gridItemContainer}>
+              <TouchableOpacity
+                style={[
+                  styles.gridItem,
+                  { backgroundColor: colors.backgroundSoft },
+                  styles.activeGridItem,
+                ]}
+                onPress={() => navigation.navigate('SelectRide')}
+              >
+                <RideIcon fill={colors.textSecondary} />
+              </TouchableOpacity>
+
+              <Text style={[styles.gridLabel, { color: colors.textSecondary }]}>
+                Ride
+              </Text>
+            </View>
+
+            <View style={styles.gridItemContainer}>
+              <TouchableOpacity
+                style={[
+                  styles.gridItem,
+                  { backgroundColor: colors.border },
+                ]}
+              >
+                <ReserveIcon fill={colors.textMuted} />
+              </TouchableOpacity>
+
+              <Text style={[styles.gridLabel, { color: colors.textSecondary }]}>
+                Reserve
+              </Text>
+            </View>
           </View>
-        </View>
 
-        {/* Recent Destinations Section */}
-        <View style={styles.destinationHeader}>
-          <Text style={styles.sectionTitle}>Recent destinations</Text>
-          <TouchableOpacity>
-            <Text style={styles.seeAllText}>See all</Text>
-          </TouchableOpacity>
-        </View>
+          <View style={styles.destinationHeader}>
+            <Text style={[styles.sectionTitle, { color: colors.textPrimary }]}>
+              Recent destinations
+            </Text>
 
-        {/* Destination List */}
-        <View style={styles.destinationList}>
-          {/* Home Item */}
-          <TouchableOpacity style={styles.destinationCard}>
-            <View style={styles.destIconContainer}>
-              <HomeIcon fill="#FAFAFF" />
-            </View>
-            <View style={styles.destTextContainer}>
-              <Text style={styles.destTitle}>{savedDestinations[0].title}</Text>
-              <Text style={styles.destSubtitle}>{savedDestinations[0].subtitle}</Text>
-            </View>
-          </TouchableOpacity>
+            <TouchableOpacity>
+              <Text style={{ color: colors.primary }}>See all</Text>
+            </TouchableOpacity>
+          </View>
 
-          {/* Office Item */}
-          <TouchableOpacity style={styles.destinationCard}>
-            <View style={styles.destIconContainer}>
-              <WorkIcon fill="#FAFAFF" />
-            </View>
-            <View style={styles.destTextContainer}>
-              <Text style={styles.destTitle}>{savedDestinations[1].title}</Text>
-              <Text style={styles.destSubtitle}>{savedDestinations[1].subtitle}</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  </LinearBg>
+          <View style={styles.destinationList}>
+            <TouchableOpacity
+              style={[
+                styles.destinationCard,
+                { backgroundColor: colors.surface },
+              ]}
+            >
+              <View
+                style={[
+                  styles.destIconContainer,
+                  { backgroundColor: colors.primary },
+                ]}
+              >
+                <HomeIcon fill={colors.background} />
+              </View>
+
+              <View style={styles.destTextContainer}>
+                <Text style={[styles.destTitle, { color: colors.textPrimary }]}>
+                  Home
+                </Text>
+
+                <Text
+                  style={[styles.destSubtitle, { color: colors.textSecondary }]}
+                >
+                  248 West 35th St, New York
+                </Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[
+                styles.destinationCard,
+                { backgroundColor: colors.surface },
+              ]}
+            >
+              <View
+                style={[
+                  styles.destIconContainer,
+                  { backgroundColor: colors.primary },
+                ]}
+              >
+                <WorkIcon fill={colors.background} />
+              </View>
+
+              <View style={styles.destTextContainer}>
+                <Text style={[styles.destTitle, { color: colors.textPrimary }]}>
+                  Office
+                </Text>
+
+                <Text
+                  style={[styles.destSubtitle, { color: colors.textSecondary }]}
+                >
+                  One World Trade Center
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </LinearBg>
   );
 }
 
@@ -137,31 +167,6 @@ const styles = StyleSheet.create({
     paddingBottom: 100,
   },
 
-  // Header Styles (you can remove this if Header is reusable)
-  // header: {
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   alignItems: 'center',
-  //   paddingHorizontal: Spacing.lg,
-  //   paddingVertical: Spacing.md,
-  // },
-
-  logoText: {
-    ...Typography.h2,
-    color: Colors.primary,
-    letterSpacing: 1,
-    flex: 1,
-    textAlign: 'center',
-  },
-
-  iconButton: {
-    backgroundColor: Colors.surface,
-    padding: Spacing.sm,
-    borderRadius: Radius.full,
-    ...Shadows.small,
-  },
-
-  // Section Headers
   sectionHeader: {
     marginBottom: Spacing.md,
   },
@@ -176,19 +181,10 @@ const styles = StyleSheet.create({
 
   sectionTitle: {
     ...Typography.h3,
-    color: Colors.textPrimary,
   },
 
-  seeAllText: {
-    ...Typography.body,
-    // fontWeight: '600',
-    color: Colors.primary,
-  },
-
-  // Grid Services
   gridContainer: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     justifyContent: 'space-evenly',
   },
 
@@ -202,36 +198,26 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: Radius.full,
-    backgroundColor: Colors.border,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: Spacing.sm,
   },
 
   activeGridItem: {
-    backgroundColor: Colors.accent,
     ...Shadows.small,
   },
 
   gridLabel: {
     ...Typography.caption,
-    color: Colors.textSecondary,
     textAlign: 'center',
   },
 
-  activeGridLabel: {
-    ...Typography.boldCaption,
-    color: Colors.textPrimary,
-  },
-
-  // Destinations
   destinationList: {
     gap: Spacing.sm,
   },
 
   destinationCard: {
     flexDirection: 'row',
-    backgroundColor: Colors.surface,
     padding: Spacing.md,
     borderRadius: Radius.lg,
     alignItems: 'center',
@@ -241,7 +227,6 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: Radius.full,
-    backgroundColor: Colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: Spacing.md,
@@ -253,12 +238,10 @@ const styles = StyleSheet.create({
 
   destTitle: {
     ...Typography.boldBody,
-     color: Colors.primary,
     marginBottom: 2,
   },
 
   destSubtitle: {
     ...Typography.caption,
-    color: Colors.textMuted,
   },
 });

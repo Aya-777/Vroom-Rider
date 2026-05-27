@@ -2,19 +2,23 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import MaskedView from '@react-native-masked-view/masked-view';
 
+import { useTheme } from '../../../core/theme/useTheme';
 import { PinMask } from '../../../shared/components/PinShape';
 
 const LoginPin = ({ children }: { children: React.ReactNode }) => {
+  const { colors } = useTheme();
+
   return (
     <View style={styles.wrapper}>
       <MaskedView style={styles.flex} maskElement={<PinMask />}>
-        
-        <View style={styles.background} />
+        <View
+          style={[
+            styles.background,
+            { backgroundColor: colors.surface + '99' }, // transparency
+          ]}
+        />
 
-        <View style={styles.content}>
-          {children}
-        </View>
-
+        <View style={styles.content}>{children}</View>
       </MaskedView>
     </View>
   );
@@ -32,7 +36,6 @@ const styles = StyleSheet.create({
 
   background: {
     ...StyleSheet.absoluteFill,
-    backgroundColor: 'rgba(255,255,255,0.55)',
   },
 
   content: {

@@ -1,128 +1,142 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 import HomeStack from './HomeStack';
 import ProfileStack from './ProfileStack';
 
-import { Shadows, Typography } from '../core/theme';
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { useTheme } from '../core/theme/useTheme';
+import { Typography, Radius, Shadows } from '../core/theme/tokens';
 
-import { SvgProps } from 'react-native-svg';
-import HomeActive from '../assets/svg/home.svg';
-import HomeInactive from '../assets/svg/home.svg';
-import CarActive from '../assets/svg/car.svg';
-import ProfileActive from '../assets/svg/profile.svg';
-import ProfileInactive from '../assets/svg/profile.svg';
+// SVGs
+import HomeIcon from '../assets/svg/home.svg';
+import CarIcon from '../assets/svg/car.svg';
+import ProfileIcon from '../assets/svg/profile.svg';
 
 const Tab = createBottomTabNavigator();
 
-const baseTabBarStyle = {
-  height: 80,
-  backgroundColor: '#FFFFFF',
-  borderTopWidth: 2,
-  borderTopColor: '#EBEBEB',
+const HIDE_TAB_ROUTES = [
+  'SelectRide',
+  'RideDetails',
+  'ConfirmRide',
+  'DriverFound',
+];
+
+/* ---------------- ICON ---------------- */
+
+type IconProps = {
+  routeName: string;
+  color: string;
+};
+
+const TabIcon = ({ routeName, color }: IconProps) => {
+  let Icon = HomeIcon;
+
+  switch (routeName) {
+    case 'HomeTab':
+      Icon = HomeIcon;
+      break;
+
+    case 'ActivityTab':
+      Icon = CarIcon;
+      break;
+
+    case 'ProfileTab':
+      Icon = ProfileIcon;
+      break;
+  }
+
+  return (
+    <View style={styles.iconWrapper}>
+      <View style={[styles.activeIndicator, { backgroundColor: color }]} />
+      <Icon width={24} height={24} fill={color} />
+    </View>
+  );
 };
 
 export default function MainTabs() {
+  const { colors } = useTheme();
+
+  const BASE_TAB_STYLE = {
+    height: 80,
+    backgroundColor: colors.surface,
+    borderTopWidth: 1,
+    borderTopColor: colors.border,
+    ...Shadows.small,
+  };
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => {
-        // 1. Extract the active screen name from whatever stack is currently open
-        const routeName = getFocusedRouteNameFromRoute(route) ?? '';
-        
-        // 2. Global checklist of screens that should hide the tab bar completely
-        const hideOnScreens = ['SelectRide', 'RideDetails', 'ConfirmRide', 'DriverFound'];
-        const shouldHide = hideOnScreens.includes(routeName);
+        const focusedRoute =
+          getFocusedRouteNameFromRoute(route) ?? '';
+
+        const shouldHideTab =
+          HIDE_TAB_ROUTES.includes(focusedRoute);
 
         return {
           headerShown: false,
-          tabBarActiveTintColor: '#0F1E52',
-          tabBarInactiveTintColor: '#A0A4AB',
 
-          // 3. Set the layout style globally based on the screen visibility checklist
-          tabBarStyle: shouldHide ? { display: 'none' } : baseTabBarStyle,
+          tabBarActiveTintColor: colors.primary,
+          tabBarInactiveTintColor: colors.textMuted,
+
+          tabBarStyle: shouldHideTab
+            ? styles.hiddenTabBar
+            : BASE_TAB_STYLE,
 
           tabBarLabelStyle: {
             ...Typography.caption,
-            marginBottom: 0,
             textTransform: 'none',
+            marginBottom: 2,
           },
 
-          // Custom icon renderer using local SVGs and the top active bar line
-          tabBarIcon: ({ focused, color }) => {
-            let Icon: React.FC<SvgProps> | null = null;
-
-            if (route.name === 'HomeTab') {
-              Icon = focused ? HomeActive : HomeInactive;
-            } else if (route.name === 'ActivityTab') {
-              Icon = focused ? CarActive : CarActive;
-            } else if (route.name === 'ProfileTab') {
-              Icon = focused ? ProfileActive : ProfileInactive;
-            }
-
-            return (
-              <View style={styles.iconContainer}>
-                {focused && <View style={styles.activeLine} />}
-                {Icon ? (
-                  <Icon 
-                    width={24} 
-                    height={24} 
-                    style={styles.tabIcon} 
-                    fill={color} 
-                  />
-                ) : null}
-              </View>
-            );
-          },
+          tabBarIcon: ({ color }) => (
+            <TabIcon routeName={route.name} color={color} />
+          ),
         };
       }}
     >
-      {/* Screens are now super clean and don't need independent tabBarStyle toggles */}
       <Tab.Screen
         name="HomeTab"
         component={HomeStack}
-        options={{
-          tabBarLabel: 'Home',
-        }}
+        options={{ tabBarLabel: 'Home' }}
       />
+
       <Tab.Screen
         name="ActivityTab"
-        component={HomeStack} // Swap out with your real ActivityStack component when ready
-        options={{
-          tabBarLabel: 'Activity',
-        }}
+        component={HomeStack}
+        options={{ tabBarLabel: 'Activity' }}
       />
+
       <Tab.Screen
         name="ProfileTab"
         component={ProfileStack}
-        options={{
-          tabBarLabel: 'PROFILE',
-        }}
+        options={{ tabBarLabel: 'Profile' }}
       />
     </Tab.Navigator>
   );
 }
 
+/* ---------------- STYLES ---------------- */
+
 const styles = StyleSheet.create({
-  iconContainer: {
-    flex: 1,
+  hiddenTabBar: {
+    display: 'none',
+  },
+
+  iconWrapper: {
     alignItems: 'center',
     justifyContent: 'center',
+    flex: 1,
     width: '100%',
-    height: '100%',
   },
-  activeLine: {
+
+  activeIndicator: {
     position: 'absolute',
-    top: -5,
-    width: 70,
+    top: -6,
+    width: 60,
     height: 3,
-    backgroundColor: '#0F1E52',
-    borderRadius: 1.5,
-  },
-  tabIcon: {
-    width: 26,
-    height: 26,
-    marginTop: 12,
+    borderRadius: Radius.full,
   },
 });

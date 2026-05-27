@@ -1,15 +1,23 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Colors, Typography } from '../../../core/theme';
+import { useTheme } from '../../../core/theme/useTheme';
+import { Typography } from '../../../core/theme/tokens/typography';
 
 const LoginFooter = () => {
+  const { colors } = useTheme();
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>
-        Don't have an account? <Text style={styles.link}>Register</Text>
+      <Text style={[styles.text, { color: colors.textSecondary }]}>
+        Don't have an account?{' '}
+        <Text style={[styles.link, { color: colors.primary }]}>
+          Register
+        </Text>
       </Text>
 
-      <Text style={styles.link}>Forgot Password?</Text>
+      <Text style={[styles.link, { color: colors.primary }]}>
+        Forgot Password?
+      </Text>
     </View>
   );
 };
@@ -24,11 +32,9 @@ const styles = StyleSheet.create({
 
   text: {
     ...Typography.caption,
-    color: Colors.secondary,
   },
 
   link: {
     ...Typography.boldCaption,
-    color: Colors.primary,
   },
 });

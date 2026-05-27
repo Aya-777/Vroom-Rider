@@ -1,11 +1,14 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
-import { Colors, Typography } from '../../../core/theme';
+import React from 'react';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
+import {
+  Typography,
+  Radius,
+  Shadows,
+  Spacing,
+} from '../../../core/theme/tokens';
+
+import { useTheme } from '../../../core/theme/useTheme';
 import ArrowLeft from '../../../assets/svg/arrows/arrowLeft.svg';
 
 interface HeaderProps {
@@ -13,42 +16,70 @@ interface HeaderProps {
   onBackPress?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ title, onBackPress }) => {
+export default function Header({ title, onBackPress }: HeaderProps) {
+  const { colors } = useTheme();
+
+  const styles = createStyles(colors);
+
   return (
-    <View style={styles.headerContainer}>
+    <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={onBackPress}>
-          <ArrowLeft fill={Colors.primary} />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>{title}</Text>
+        {onBackPress ? (
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={onBackPress}
+            activeOpacity={0.7}
+          >
+            <ArrowLeft fill={colors.primary} />
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.placeholder} />
+        )}
+
+        <Text numberOfLines={1} style={styles.title}>
+          {title}
+        </Text>
+
+        <View style={styles.placeholder} />
       </View>
     </View>
   );
-};
+}
 
-const styles = StyleSheet.create({
-  headerContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    paddingTop: 30,
-    backgroundColor: Colors.lightAccent,
-  },
-  header: {
-    height: 56,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-  },
-  backButton: {
-    padding: 4,
-  },
-  headerTitle: {
-    ...Typography.h3,
-    color: Colors.textPrimary,
-    marginLeft: 24,
-  },
-});
+/* ---------------- DYNAMIC STYLES ---------------- */
 
-export default Header;
+const createStyles = (colors: any) =>
+  StyleSheet.create({
+    container: {
+      paddingTop: Spacing.xl,
+      backgroundColor: colors.surface,
+      ...Shadows.small,
+    },
+
+    header: {
+      height: 56,
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: Spacing.md,
+    },
+
+    backButton: {
+      width: 40,
+      height: 40,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: Radius.full,
+    },
+
+    title: {
+      flex: 1,
+      textAlign: 'center',
+      ...Typography.h3,
+      color: colors.textPrimary,
+    },
+
+    placeholder: {
+      width: 40,
+      height: 40,
+    },
+  });
