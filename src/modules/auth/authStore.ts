@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { storageAdapter } from '../../core/storage/storage.adapter';
 
 interface AuthState {
   isLoggedIn: boolean;
@@ -23,7 +23,11 @@ const useAuthStoreInner = create<AuthState>()(
     }),
     {
       name: 'auth-storage',
-      storage: createJSONStorage(() => AsyncStorage), 
+      storage: createJSONStorage(() => ({
+        getItem: storageAdapter.getItem,
+        setItem: storageAdapter.setItem,
+        removeItem: storageAdapter.removeItem,
+      })),
       partialize: (state) => ({
         isLoggedIn: state.isLoggedIn,
         token: state.token,
