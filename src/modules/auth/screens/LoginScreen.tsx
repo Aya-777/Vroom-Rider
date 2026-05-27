@@ -17,8 +17,8 @@ import LoginFooter from '../components/LoginFooter';
 import { useLoginViewModel } from '../viewmodels/useLoginViewModel';
 import { useTheme } from '../../../core/theme/useTheme';
 
-const LoginScreen = ({ navigation }: any) => {
-  const vm = useLoginViewModel(navigation);
+const LoginScreen = () => {
+  const vm = useLoginViewModel();
   const { colors } = useTheme();
 
   return (

@@ -18,10 +18,9 @@ import Header from '../../../shared/components/Header';
 
 import { useTheme } from '../../../core/theme/useTheme';
 import { Typography, Spacing, Radius, Shadows } from '../../../core/theme/tokens';
-import { useNavigation } from '@react-navigation/native';
+import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 
-export default function HomeScreen() {
-  const navigation = useNavigation<any>();
+export default function HomeScreen({ navigation }: HomeStackScreenProps<'HomeScreen'>) {
   const { colors } = useTheme();
 
   return (

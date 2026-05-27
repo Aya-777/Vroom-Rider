@@ -29,11 +29,12 @@ import StarIcon from '../../../assets/svg/star.svg';
 import DropDownArrowIcon from '../../../assets/svg/arrows/dropdownArrow.svg';
 import ArrowIcon from '../../../assets/svg/arrows/arrow.svg';
 import ArrowUp from '../../../assets/svg/arrows/arrowUp.svg';
+import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 
 // const { height } = Dimensions.get('window');
 
 export default function SelectRideScreen() {
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<HomeStackScreenProps<'SelectRide'>['navigation']>();
   const { colors, mode } = useTheme();
 
   const [isNowDropdownOpen, setIsNowDropdownOpen] = useState(false);
@@ -53,7 +54,10 @@ export default function SelectRideScreen() {
       return;
     }
 
-    navigation.navigate('RideDetails');
+    navigation.navigate('RideDetails',{
+      pickupLocation: fromLocation,
+      dropoffLocation: toLocation
+    });
   };
 
   return (

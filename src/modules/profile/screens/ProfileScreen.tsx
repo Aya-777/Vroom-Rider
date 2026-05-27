@@ -29,11 +29,13 @@ import InfoIcon from '../../../assets/svg/info.svg';
 import LogoutIcon from '../../../assets/svg/logout.svg';
 
 import LinearBg from '../../../shared/components/LinearBg';
+import { useAuthActions } from '../../auth/authStore';
 
 const { width } = Dimensions.get('window');
 
 export default function ProfileScreen() {
   const { colors } = useTheme();
+  const { logout } = useAuthActions();
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
@@ -42,17 +44,17 @@ export default function ProfileScreen() {
         {/* --- Header Profile Card --- */}
         <View style={[styles.profileCard, { backgroundColor: colors.primary }]}>
           <TouchableOpacity style={styles.editButton}>
-            <EditIcon />
+            <EditIcon fill={colors.background} />
           </TouchableOpacity>
 
           <View style={styles.avatarContainer}>
-            <View style={styles.avatarPlaceholder}>
-              <View style={styles.avatarHead} />
-              <View style={styles.avatarBody} />
+            <View style={[styles.avatarPlaceholder, { backgroundColor: colors.surfaceAccent }] }>
+              <View style={[styles.avatarHead, { backgroundColor: colors.surface }]} />
+              <View style={[styles.avatarBody, { backgroundColor: colors.surface }]} />
             </View>
           </View>
 
-          <View style={[styles.verticalDivider, { backgroundColor: 'rgba(255,255,255,0.25)' }]}>
+          <View style={[styles.verticalDivider, { backgroundColor: `${colors.background}40` }]}>
             <View style={[styles.dotIndicator, { backgroundColor: colors.background }]} />
           </View>
 
@@ -62,22 +64,22 @@ export default function ProfileScreen() {
             </Text>
 
             <View style={styles.iconText}>
-              <CallIcon width={18} height={18} />
-              <Text style={[styles.infoText, { color: colors.background }]}>
+              <CallIcon width={18} height={18} fill={colors.background} />
+              <Text style={[styles.infoText, { color: colors.background }]}> 
                 +1 (555) 012-3456
               </Text>
             </View>
 
             <View style={styles.iconText}>
-              <MailIcon width={18} height={18} />
-              <Text style={[styles.infoText, { color: colors.background }]}>
+              <MailIcon width={18} height={18} fill={colors.background} />
+              <Text style={[styles.infoText, { color: colors.background }]}> 
                 alex.driver@vroom.io
               </Text>
             </View>
 
             <View style={styles.iconText}>
-              <PinIcon width={18} height={18} />
-              <Text style={[styles.infoText, { color: colors.background }]}>
+              <PinIcon width={18} height={18} fill={colors.background} />
+              <Text style={[styles.infoText, { color: colors.background }]}> 
                 Damascus, Jaramana
               </Text>
             </View>
@@ -90,7 +92,7 @@ export default function ProfileScreen() {
           <LinearBg colors={[colors.surfaceAccent, colors.surface]} style={styles.gridCard}>
             <TouchableOpacity>
               <View style={styles.iconCircle}>
-                <HistoryIcon width={30} height={30} />
+                <HistoryIcon width={30} height={30} fill={colors.primary} />
               </View>
               <Text style={[styles.gridText, { color: colors.textPrimary }]}>
                 Ride History
@@ -101,7 +103,7 @@ export default function ProfileScreen() {
           <LinearBg colors={[colors.surfaceAccent, colors.surface]} style={styles.gridCard}>
             <TouchableOpacity>
               <View style={styles.iconCircle}>
-                <NotificationsIcon width={30} height={30} />
+                <NotificationsIcon width={30} height={30} fill={colors.primary} />
               </View>
               <Text style={[styles.gridText, { color: colors.textPrimary }]}>
                 Notifications
@@ -112,7 +114,7 @@ export default function ProfileScreen() {
           <LinearBg colors={[colors.surfaceAccent, colors.surface]} style={styles.gridCard}>
             <TouchableOpacity>
               <View style={styles.iconCircle}>
-                <StarIcon width={30} height={30} />
+                <StarIcon width={30} height={30} fill={colors.primary} />
               </View>
               <Text style={[styles.gridText, { color: colors.textPrimary }]}>
                 Favorite Drivers
@@ -123,7 +125,7 @@ export default function ProfileScreen() {
           <LinearBg colors={[colors.surfaceAccent, colors.surface]} style={styles.gridCard}>
             <TouchableOpacity>
               <View style={styles.iconCircle}>
-                <SafetyIcon width={30} height={30} />
+                <SafetyIcon width={30} height={30} fill={colors.primary} />
               </View>
               <Text style={[styles.gridText, { color: colors.textPrimary }]}>
                 Safety
@@ -162,11 +164,9 @@ export default function ProfileScreen() {
         </View>
 
         {/* --- Logout --- */}
-        <TouchableOpacity style={[styles.logoutButton, { backgroundColor: '#FFF1F1' }]}>
-          <LogoutIcon />
-          <Text style={[styles.logoutText, { color: '#EF4444' }]}>
-            Logout
-          </Text>
+        <TouchableOpacity style={[styles.logoutButton, { backgroundColor: colors.surface }]} onPress={() => logout()}>
+          <LogoutIcon fill={colors.primary} />
+          <Text style={[styles.logoutText, { color: colors.primary }]}>Logout</Text>
         </TouchableOpacity>
 
       </ScrollView>
@@ -176,8 +176,15 @@ export default function ProfileScreen() {
 
 /* ---------------- LIST ITEM ---------------- */
 
-const ListItem = ({ icon, title, isLast }: any) => {
+type ListItemProps = {
+  icon: React.ReactElement<{ fill?: string }>;
+  title: string;
+  isLast?: boolean;
+};
+
+const ListItem = ({ icon, title, isLast }: ListItemProps) => {
   const { colors } = useTheme();
+  const listItemBorderWidth = isLast ? 0 : 1;
 
   return (
     <TouchableOpacity
@@ -185,18 +192,18 @@ const ListItem = ({ icon, title, isLast }: any) => {
         styles.listItem,
         {
           backgroundColor: colors.surface,
-          borderBottomWidth: isLast ? 0 : 1,
+          borderBottomWidth: listItemBorderWidth,
           borderBottomColor: colors.border,
         },
       ]}
     >
       <View style={styles.listLeft}>
-        {icon}
+        {React.cloneElement(icon, { fill: colors.textSecondary })}
         <Text style={[styles.listTitle, { color: colors.textPrimary }]}>
           {title}
         </Text>
       </View>
-      <ArrowIcon />
+      <ArrowIcon fill={colors.textSecondary} />
     </TouchableOpacity>
   );
 };
@@ -235,7 +242,6 @@ const styles = StyleSheet.create({
     width: 76,
     height: 76,
     borderRadius: 38,
-    backgroundColor: '#E6E5FF',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -244,14 +250,12 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     borderRadius: 12,
-    backgroundColor: '#B4B2F0',
   },
 
   avatarBody: {
     width: 44,
     height: 24,
     borderRadius: 12,
-    backgroundColor: '#B4B2F0',
   },
 
   verticalDivider: {

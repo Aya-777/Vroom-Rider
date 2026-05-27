@@ -14,6 +14,7 @@ import { Typography, Spacing, Radius, Shadows } from '../../../core/theme/tokens
 
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 import Header from '../../../shared/components/ride/Header';
+import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 
 // SVGs
 import CarIcon from '../../../assets/svg/car.svg';
@@ -22,9 +23,13 @@ import MessageIcon from '../../../assets/svg/chat.svg';
 import WhatsAppIcon from '../../../assets/svg/whatsapp.svg';
 
 export default function RideConfirmationScreen() {
-  const navigation = useNavigation<any>();
+  // const navigation = useNavigation<any>();
   const { colors, mode } = useTheme();
 
+  // const route = useRoute();
+  const navigation = useNavigation<HomeStackScreenProps<'DriverFound'>['navigation']>();
+
+  // Example mock data for the driver and car (can be fetched via route.params later)
   const driverData = {
     name: 'Alex Driver',
     avatar:

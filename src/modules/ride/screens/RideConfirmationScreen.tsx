@@ -28,6 +28,7 @@ import CashIcon from '../../../assets/svg/cash.svg';
 import CarIcon from '../../../assets/svg/car.svg';
 import PhoneNumberIcon from '../../../assets/svg/phoneNumber.svg';
 import SearchIcon from '../../../assets/svg/search.svg';
+import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 
 type RideRouteParams = {
   price?: string;
@@ -37,7 +38,7 @@ type RideRouteParams = {
 };
 
 export default function RideConfirmationScreen() {
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<HomeStackScreenProps<'ConfirmRide'>['navigation']>();
   const route = useRoute();
 
   const { colors, mode } = useTheme();
@@ -113,11 +114,11 @@ export default function RideConfirmationScreen() {
             placeholderTextColor={colors.textMuted}
           />
         </View>
-
-        {/* BUTTON */}
-        <TouchableOpacity
-          style={[styles.button, { backgroundColor: colors.primary }]}
-          onPress={() => navigation.navigate('DriverFound')}
+        
+        {/* Find BUTTON */}
+        <TouchableOpacity 
+          style={[styles.button , { backgroundColor: colors.primary }]} 
+          onPress={() => navigation.navigate('DriverFound', {driverId: "1"})} // hardcoded for now (back later)
         >
           <Text style={[styles.buttonText, { color: colors.background }]}>
             Find a Driver
