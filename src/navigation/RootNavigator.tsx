@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { navigationRef, RootStackParamList } from './rootTypes';
 
-import { useAuthLoggedIn } from '../modules/auth/authStore'; 
+import { useAuthLoggedIn } from '../core/store/authStore'; 
 import MainTabs from './main/MainTabs';
 import AuthStack from './auth/AuthStack';
 import { deepLinkingConfig } from './deepLinkingConfig';

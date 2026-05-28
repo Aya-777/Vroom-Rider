@@ -10,7 +10,7 @@ enableFreeze(true);
 
 function App() {
   return (
-    <ThemeProvider>
+    <ThemeProvider >
         <RootNavigator />
       </ThemeProvider>
   );

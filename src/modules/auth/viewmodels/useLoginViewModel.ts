@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
-import { useAuthActions } from '../authStore';
+import { useAuthActions } from '../../../core/store/authStore';
 
 export function useLoginViewModel() {
   const { login } = useAuthActions(); 
