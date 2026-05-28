@@ -1,9 +1,8 @@
-
 export const darkColors= {
   background: '#111317',
   backgroundSoft: '#1E2749',
 
-  surface: '#1E1E1E',
+  surface: '#273469',
   surfaceAccent: '#273469',
 
   textPrimary: '#E4D9FF',

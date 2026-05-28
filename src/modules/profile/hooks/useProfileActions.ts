@@ -1,4 +1,4 @@
-import { useAuthActions } from '../../auth/authStore';
+import { useAuthActions } from '../../../core/store/authStore';
 
 export const useProfileActions = () => {
   const { logout } = useAuthActions();
