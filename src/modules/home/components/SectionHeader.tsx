@@ -13,29 +13,36 @@ interface Props {
   title: string;
   actionText?: string;
   onPress?: () => void;
+  icon?: React.ReactNode;
 }
 
 export default function SectionHeader({
   title,
   actionText,
   onPress,
+  icon,
 }: Props) {
 
   const { colors } = useTheme();
-
-  const styles = createStyles();
+  const styles = createStyles(colors);
 
   return (
     <View style={styles.destinationHeader}>
 
-      <Text
-        style={[
-          styles.sectionTitle,
-          { color: colors.textPrimary },
-        ]}
+      <View
+        style={styles.forYouHeader}
       >
-        {title}
-      </Text>
+        {icon}
+
+        <Text
+          style={[
+            styles.sectionTitle,
+            { color: colors.textPrimary },
+          ]}
+        >
+          {title}
+        </Text>
+      </View>
 
       {actionText && (
         <TouchableOpacity onPress={onPress}>

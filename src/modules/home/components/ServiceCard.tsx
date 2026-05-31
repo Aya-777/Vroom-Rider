@@ -25,7 +25,7 @@ export default function ServiceCard({
 
   const { colors } = useTheme();
 
-  const styles = createStyles();
+  const styles = createStyles(colors);
 
   return (
     <View style={styles.gridItemContainer}>

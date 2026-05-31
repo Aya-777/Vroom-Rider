@@ -84,7 +84,7 @@ export default function MainTabs() {
 
   const tabBarStyle: ViewStyle = {
     height: 80,
-    backgroundColor: colors.surface,
+    backgroundColor: colors.backgroundSoft,
     borderTopWidth: 1,
     borderTopColor: colors.border,
     ...Shadows.small,

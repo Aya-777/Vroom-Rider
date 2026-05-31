@@ -7,7 +7,7 @@ import {
   Shadows,
 } from '../../../core/theme/tokens';
 
-export const createStyles = () =>
+export const createStyles = (colors: any) =>
   StyleSheet.create({
 
     gradientContainer: {
@@ -64,6 +64,12 @@ export const createStyles = () =>
       marginBottom: Spacing.md,
     },
 
+    forYouHeader: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 8,
+    },
+
     destinationList: {
       gap: Spacing.sm,
     },
@@ -73,6 +79,8 @@ export const createStyles = () =>
       padding: Spacing.md,
       borderRadius: Radius.lg,
       alignItems: 'center',
+      borderWidth: 1 ,
+      borderColor: colors.surface,
     },
 
     destIconContainer: {

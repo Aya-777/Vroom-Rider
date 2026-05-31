@@ -11,8 +11,8 @@ enableFreeze(true);
 function App() {
   return (
     <ThemeProvider >
-        <RootNavigator />
-      </ThemeProvider>
+      <RootNavigator />
+    </ThemeProvider>
   );
 }
 
