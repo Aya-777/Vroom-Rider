@@ -7,7 +7,7 @@ import {
 
 import LinearBg from '../../../shared/components/LinearBg';
 import SearchBar from '../../../shared/components/SearchBar';
-import Header from '../../../shared/components/Header';
+import ForYouStar from '../../../assets/svg/ForYouStar.svg';
 
 import ServiceCard from '../components/ServiceCard';
 import DestinationCard from '../components/DestinationCard';
@@ -18,6 +18,7 @@ import { createStyles } from '../styles/home.styles';
 import { useHomeViewModel } from '../viewmodels/useHomeViewModel';
 
 import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
+import HeaderTopAppBar from '../components/HomeHeader';
 
 export default function HomeScreen({
   navigation,
@@ -25,7 +26,7 @@ export default function HomeScreen({
 
   const { colors } = useTheme();
 
-  const styles = createStyles();
+  const styles = createStyles(colors);
 
   const {
     services,
@@ -41,7 +42,7 @@ export default function HomeScreen({
     >
       <SafeAreaView style={styles.container}>
 
-        <Header />
+        <HeaderTopAppBar />
 
         <ScrollView
           contentContainerStyle={styles.scrollContent}
@@ -49,8 +50,9 @@ export default function HomeScreen({
         >
 
           <SearchBar />
-
-          <SectionHeader title="For you" />
+          <SectionHeader title="For you"
+            icon={<ForYouStar width={20} height={20} />}
+          />
 
           <View style={styles.gridContainer}>
             {services.map(service => (
@@ -83,6 +85,6 @@ export default function HomeScreen({
         </ScrollView>
 
       </SafeAreaView>
-    </LinearBg>
+    </LinearBg >
   );
 }

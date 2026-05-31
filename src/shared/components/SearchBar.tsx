@@ -25,7 +25,7 @@ function SearchBar() {
       <View style={styles.divider} />
 
       <TouchableOpacity style={styles.timeButton}>
-        <ScheduleIcon fill={colors.secondary} />
+        <ScheduleIcon fill={colors.primary} />
         <Text style={styles.timeText}>Now</Text>
       </TouchableOpacity>
     </View>
@@ -58,7 +58,7 @@ const createStyles = (colors: any) =>
     divider: {
       width: 1,
       height: 24,
-      backgroundColor: colors.border,
+      backgroundColor: colors.primary,
       marginHorizontal: Spacing.sm,
     },
 

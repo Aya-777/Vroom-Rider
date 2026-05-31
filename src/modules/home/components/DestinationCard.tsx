@@ -23,20 +23,20 @@ export default function DestinationCard({
 
   const { colors } = useTheme();
 
-  const styles = createStyles();
+  const styles = createStyles(colors);
 
   return (
     <TouchableOpacity
       style={[
         styles.destinationCard,
-        { backgroundColor: colors.surface },
+        { backgroundColor: colors.backgroundSoft },
       ]}
     >
 
       <View
         style={[
           styles.destIconContainer,
-          { backgroundColor: colors.primary },
+          { backgroundColor: colors.surface },
         ]}
       >
         {icon}
