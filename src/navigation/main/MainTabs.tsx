@@ -146,10 +146,10 @@ const styles = StyleSheet.create({
   },
 
   activeLine: {
-    width: 32,
+    width: 60,
     height: 3,
     borderRadius: Radius.full,
-    marginBottom: 4,
+    marginBottom: 10,
   },
 
   tabIcon: {},
