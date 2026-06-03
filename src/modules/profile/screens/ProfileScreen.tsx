@@ -17,22 +17,6 @@ export default function ProfileScreen() {
   const { colors } = useTheme();
   const { gridItems, listItems, logout } = useProfileViewModel();
 
-  // return (
-  //   <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
-  //     <ScrollView showsVerticalScrollIndicator={false}>
-  //       <ProfileCard />
-
-  //       <GridSection items={gridItems} />
-
-  //       <PromoBanner />
-
-  //       <ListSection items={listItems} />
-
-  //       <LogoutButton onPress={logout} />
-  //     </ScrollView>
-  //   </SafeAreaView>
-  // );
-
   const styles = createStyles(colors);
 
   return (

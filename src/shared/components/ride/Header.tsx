@@ -1,5 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  StatusBar,
+  Platform,
+} from 'react-native';
 
 import {
   Typography,
@@ -15,6 +22,9 @@ interface HeaderProps {
   title: string;
   onBackPress?: () => void;
 }
+
+const STATUS_BAR_HEIGHT =
+  Platform.OS === 'android' ? StatusBar.currentHeight ?? 0 : 20;
 
 export default function Header({ title, onBackPress }: HeaderProps) {
   const { colors } = useTheme();
@@ -51,15 +61,17 @@ export default function Header({ title, onBackPress }: HeaderProps) {
 const createStyles = (colors: any) =>
   StyleSheet.create({
     container: {
-      paddingTop: Spacing.xl,
+      paddingTop: STATUS_BAR_HEIGHT,
+      paddingBottom: Spacing.sm,
       backgroundColor: colors.surface,
       ...Shadows.small,
     },
 
     header: {
-      height: 30,
+      minHeight: 56,
       flexDirection: 'row',
-      alignItems: 'stretch',
+      alignItems: 'center',
+      justifyContent: 'space-between',
       paddingHorizontal: Spacing.md,
     },
 

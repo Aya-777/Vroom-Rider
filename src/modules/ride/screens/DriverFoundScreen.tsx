@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from '../../../core/theme/useTheme';
@@ -25,6 +25,7 @@ export default function DriverFoundScreen() {
 
   return (
     <View style={styles.contentContainer}>
+      <StatusBar translucent backgroundColor="transparent" />
       <Header title="Track your trip" onBackPress={() => navigation.goBack()} />
 
       <BottomSheetCard>

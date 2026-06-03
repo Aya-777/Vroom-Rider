@@ -36,8 +36,9 @@ export default function ExtraDetailsScreen() {
   return (
     <View style={styles.container}>
       <StatusBar
+        translucent
         barStyle={mode === 'dark' ? 'light-content' : 'dark-content'}
-        backgroundColor={colors.background}
+        backgroundColor="transparent"
       />
 
       <Header title="Ride" onBackPress={() => navigation.goBack()} />
