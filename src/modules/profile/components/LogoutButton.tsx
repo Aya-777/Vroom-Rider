@@ -18,15 +18,13 @@ export default function LogoutButton({ onPress }: Props) {
       onPress={onPress}
       style={[
         styles.logoutButton,
-        { backgroundColor: colors.surface },
       ]}
     >
-      <LogoutIcon fill={colors.primary} />
+      <LogoutIcon fill={'red'} />
 
       <Text
         style={[
           styles.logoutText,
-          { color: colors.primary },
         ]}
       >
         Logout

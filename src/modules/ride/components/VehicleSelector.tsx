@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { VEHICLE_DATA } from '../constants/vehicleData';
@@ -23,23 +22,11 @@ export default function VehicleSelector({ selected, onSelect }: Props) {
           <TouchableOpacity
             key={v.id}
             onPress={() => onSelect(v.type_name)}
-            style={[
-              styles.vehicleCard,
-              {
-                borderColor: active ? colors.primary : 'transparent',
-              },
-            ]}
+            style={[styles.vehicleCard, active && styles.activeVehicleCard]}
           >
             <Image source={v.image} style={styles.vehicleImage} />
 
-            <Text
-              style={[
-                styles.vehicleText,
-                {
-                  color: active ? colors.primary : colors.textMuted,
-                },
-              ]}
-            >
+            <Text style={[styles.vehicleText, active && styles.activeVehicleText]}>
               {v.type_name}
             </Text>
           </TouchableOpacity>

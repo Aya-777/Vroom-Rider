@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import type { ThemeColors } from '../../../core/theme/types';
 
 import {
   Shadows,
@@ -7,7 +8,7 @@ import {
   Spacing,
 } from '../../../core/theme/tokens';
 
-export const createStyles = (colors: any) =>
+export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
     container: {
       flex: 1,
@@ -23,9 +24,11 @@ export const createStyles = (colors: any) =>
 
     box: {
       width: '48%',
-      borderRadius: Radius.md,
-      padding: Spacing.sm,
-      marginBottom: Spacing.sm,
+      borderRadius: 12,
+      paddingTop: 12,
+      paddingHorizontal: 14,
+      paddingBottom: 6,
+      marginBottom: 15,
       backgroundColor: colors.surface,
       ...Shadows.medium,
     },
@@ -51,7 +54,8 @@ export const createStyles = (colors: any) =>
 
     line: {
       height: 1,
-      marginTop: Spacing.xs,
+      width: '100%',
+      marginTop: -4,
       backgroundColor: colors.border,
     },
 
@@ -67,28 +71,33 @@ export const createStyles = (colors: any) =>
     },
 
     input: {
-      flex: 1,
+      height: 35,
+      width: 300,
+      fontSize: 15,
       borderRadius: Radius.lg,
-      paddingHorizontal: Spacing.md,
-      paddingVertical: Spacing.sm,
-      backgroundColor: colors.surface,
+      paddingBottom: Spacing.sm,
+      marginTop: Spacing.sm,
+      backgroundColor: colors.background,
       color: colors.textPrimary,
       ...Shadows.small,
     },
 
     button: {
       flexDirection: 'row',
+      width: '70%',
+      paddingVertical: 14,
       borderRadius: Radius.full,
-      paddingVertical: Spacing.md,
       justifyContent: 'center',
       alignItems: 'center',
-      gap: Spacing.sm,
       backgroundColor: colors.primary,
       ...Shadows.small,
+      marginBottom: Spacing.xl,
     },
 
     buttonText: {
       color: colors.background,
       ...Typography.semiBoldBody,
+      marginRight: 6,
+      marginBottom: 4,
     },
   });
