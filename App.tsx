@@ -5,6 +5,8 @@ import { ThemeProvider } from './src/core/theme/ThemeProvider';
 
 import { enableScreens, enableFreeze } from 'react-native-screens';
 
+import './src/core/i18n';
+
 enableScreens(true);
 enableFreeze(true);
 
