@@ -28,7 +28,7 @@ type RideRouteParams = {
   payment?: string;
 };
 
-export default function ConfirmRideScreen() {
+export default function RideConfirmationScreen() {
   const navigation =
     useNavigation<HomeStackScreenProps<'ConfirmRide'>['navigation']>();
 
@@ -43,8 +43,9 @@ export default function ConfirmRideScreen() {
   return (
     <View style={styles.container}>
       <StatusBar
+        translucent
         barStyle={mode === 'dark' ? 'light-content' : 'dark-content'}
-        backgroundColor={colors.background}
+        backgroundColor="transparent"
       />
 
       <Header

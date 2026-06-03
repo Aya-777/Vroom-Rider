@@ -10,11 +10,11 @@ export type HomeStackParamList = {
   };
   
   ConfirmRide: { 
-    price: string,
-    time: string,
-    car: string,
-    payement: string,
-  }; 
+    price: string;
+    time: string;
+    car: string;
+    payment: string;
+  };
   
   DriverFound: { driverId: string };
 };

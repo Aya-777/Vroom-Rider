@@ -6,7 +6,6 @@ export type Car = {
 
 export type Driver = {
   name: string;
-  avatar: string;
   statusMessage: string;
   car: Car;
 };

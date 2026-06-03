@@ -1,17 +1,21 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Text } from 'react-native';
 import type { ThemeColors } from '../../../core/theme/types';
 import type { DriverFoundStyles } from '../styles/DriverFound.styles';
 
-type ProgressBarProps = {
+type DriverNameProps = {
+  name: string;
   styles: DriverFoundStyles;
   colors: ThemeColors;
 };
 
-export default function ProgressBar({ styles }: ProgressBarProps) {
+export default function DriverName({
+  name,
+  styles,
+}: DriverNameProps) {
   return (
-    <View style={styles.progressContainer}>
-      <View style={styles.trackLine} />
-    </View>
+    <Text style={styles.driverName}>
+      {name}
+    </Text>
   );
 }

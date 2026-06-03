@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { SafeAreaView, ScrollView } from 'react-native';
 
@@ -10,24 +9,39 @@ import GridSection from '../components/GridSection';
 import PromoBanner from '../components/PromoBanner';
 import ListSection from '../components/ListSection';
 import LogoutButton from '../components/LogoutButton';
+import { createStyles } from '../styles/profile.styles';
+import LinearBg from '../../../shared/components/LinearBg';
+
 
 export default function ProfileScreen() {
   const { colors } = useTheme();
   const { gridItems, listItems, logout } = useProfileViewModel();
 
+  const styles = createStyles(colors);
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <ProfileCard />
+    <LinearBg
+      colors={[colors.backgroundSoft, colors.background]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 0, y: 1 }}
+      style={styles.container}
+    >
+      <SafeAreaView style={styles.container}>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          <ProfileCard />
 
-        <GridSection items={gridItems} />
+          <GridSection items={gridItems} />
 
-        <PromoBanner />
+          <PromoBanner />
 
-        <ListSection items={listItems} />
+          <ListSection items={listItems} />
 
-        <LogoutButton onPress={logout} />
-      </ScrollView>
-    </SafeAreaView>
+          <LogoutButton onPress={logout} />
+        </ScrollView>
+      </SafeAreaView>
+    </LinearBg>
   );
 }

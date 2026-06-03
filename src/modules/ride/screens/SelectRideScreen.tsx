@@ -65,8 +65,9 @@ export default function SelectRideScreen() {
   return (
     <View style={styles.container}>
       <StatusBar
+        translucent
         barStyle={mode === 'dark' ? 'light-content' : 'dark-content'}
-        backgroundColor={colors.background}
+        backgroundColor="transparent"
       />
 
       <Header

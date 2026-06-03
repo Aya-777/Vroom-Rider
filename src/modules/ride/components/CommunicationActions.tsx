@@ -1,11 +1,18 @@
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
+import type { ThemeColors } from '../../../core/theme/types';
+import type { DriverFoundStyles } from '../styles/DriverFound.styles';
 
 import PhoneNumberIcon from '../../../assets/svg/phoneNumber.svg';
 import MessageIcon from '../../../assets/svg/chat.svg';
 import WhatsAppIcon from '../../../assets/svg/whatsapp.svg';
 
-export default function CommunicationActions({ styles, colors }: any) {
+type CommunicationActionsProps = {
+  styles: DriverFoundStyles;
+  colors: ThemeColors;
+};
+
+export default function CommunicationActions({ styles, colors }: CommunicationActionsProps) {
   return (
     <View style={styles.communicationRow}>
       <TouchableOpacity style={styles.iconButton}>
