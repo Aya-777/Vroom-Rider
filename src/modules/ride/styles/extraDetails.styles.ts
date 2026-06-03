@@ -8,23 +8,24 @@ export const createStyles = (colors: any) =>
       backgroundColor: colors.background,
     },
 
-    /* ---------------- NextButton ---------------- */
     nextButton: {
-      backgroundColor: colors.primary,
-      padding: 14,
-      borderRadius: 30,
-      alignItems: 'center',
       flexDirection: 'row',
+      width: '50%',
+      paddingVertical: 14,
+      borderRadius: 25,
       justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: colors.primary,
       ...Shadows.small,
     },
 
     nextText: {
       color: colors.background,
       fontWeight: '600',
+      marginRight: 6,
+      marginBottom: 4,
     },
 
-    /* ---------------- TimePriceBox ---------------- */
     timePriceRow: {
       flexDirection: 'row',
       marginBottom: 12,
@@ -53,17 +54,25 @@ export const createStyles = (colors: any) =>
       marginTop: 4,
     },
 
-    /* ---------------- VehicleSelector ---------------- */
     vehicleRow: {
       flexDirection: 'row',
+      justifyContent: 'space-between',
+      width: '100%',
+      marginBottom: 24,
+      zIndex: 1,
+    },
+
+    infoRow: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      width: '100%',
+      marginBottom: 16,
     },
 
     vehicleCard: {
-      flex: 1,
-      margin: 4,
-      padding: 10,
-      borderRadius: Radius.md,
-      borderWidth: 1,
+      width: '30%',
+      borderRadius: 12,
+      paddingVertical: 12,
       alignItems: 'center',
       backgroundColor: colors.surface,
       ...Shadows.small,
@@ -78,4 +87,20 @@ export const createStyles = (colors: any) =>
     vehicleText: {
       color: colors.textMuted,
     },
+
+    underline: {
+      height: 1,
+      width: '100%',
+      marginTop: 4,
+    },
+
+    infoBox: {
+      backgroundColor: colors.surface,
+      width: '48%',
+      borderRadius: 12,
+      paddingTop: 12,
+      paddingHorizontal: 14,
+      paddingBottom: 6,
+      ...Shadows.medium,
+    }
   });

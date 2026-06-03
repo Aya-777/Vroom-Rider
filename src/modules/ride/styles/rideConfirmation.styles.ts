@@ -12,7 +12,8 @@ export const createStyles = (colors: any) =>
       flexDirection: 'row',
       flexWrap: 'wrap',
       justifyContent: 'space-between',
-      marginBottom: Spacing.lg,
+      width: '100%',
+      marginBottom: 50,
     },
 
     contactSection: {

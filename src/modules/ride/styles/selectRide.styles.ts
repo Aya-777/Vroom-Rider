@@ -1,9 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-import {
-  Shadows,
-} from '../../../core/theme/tokens';
-
 export const createStyles = (colors: any) =>
   StyleSheet.create({
     container: {
@@ -28,6 +24,7 @@ export const createStyles = (colors: any) =>
       borderRadius: 20,
       alignItems: 'center',
       marginHorizontal: 6,
+      elevation: 1,
       backgroundColor: colors.surface,
     },
 
@@ -44,10 +41,13 @@ export const createStyles = (colors: any) =>
       top: 42,
       left: 6,
       borderRadius: 12,
-      width: 140,
+      width: 120,
       elevation: 5,
+      shadowColor: colors.shadow,
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.15,
+      shadowRadius: 6,
       paddingVertical: 4,
-      backgroundColor: colors.surface,
     },
 
     menuItem: {
@@ -57,7 +57,8 @@ export const createStyles = (colors: any) =>
 
     menuItemText: {
       fontSize: 14,
-      fontWeight: '500',
+      fontWeight: '700',
+      color: '#443366',
     },
 
     inputCard: {
@@ -65,8 +66,12 @@ export const createStyles = (colors: any) =>
       borderRadius: 16,
       padding: 16,
       flexDirection: 'row',
+      elevation: 2,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.1,
+      shadowRadius: 2,
       backgroundColor: colors.surface,
-      ...Shadows.small,
     },
 
     inputTimeline: {
@@ -74,6 +79,7 @@ export const createStyles = (colors: any) =>
       alignItems: 'center',
       justifyContent: 'space-between',
       paddingVertical: 10,
+      marginVertical: 4
     },
 
     timelineDot: {
@@ -102,12 +108,13 @@ export const createStyles = (colors: any) =>
 
     divider: {
       height: 1,
-      marginVertical: 4,
-      backgroundColor: colors.border,
+      marginVertical: 8,
+      backgroundColor: colors.primary,
     },
 
     actionRow: {
       flexDirection: 'row',
+      width: '100%',
       justifyContent: 'space-between',
       marginTop: 16,
       marginBottom: 20,
@@ -120,6 +127,7 @@ export const createStyles = (colors: any) =>
       borderRadius: 12,
       justifyContent: 'center',
       alignItems: 'center',
+      elevation: 1,
       backgroundColor: colors.surface,
     },
 
@@ -127,6 +135,7 @@ export const createStyles = (colors: any) =>
       fontWeight: '600',
       fontSize: 14,
       marginLeft: 6,
+      color:'#5C4E75'
     },
 
     nextButton: {
@@ -138,12 +147,14 @@ export const createStyles = (colors: any) =>
       alignItems: 'center',
       alignSelf: 'center',
       backgroundColor: colors.primary,
+      elevation: 3,
     },
 
     nextButtonText: {
       fontSize: 16,
       fontWeight: '600',
       marginRight: 5,
+      marginBottom: 2,
       color: colors.background,
     },
   });

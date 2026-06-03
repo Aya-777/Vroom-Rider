@@ -1,18 +1,20 @@
 import { StyleSheet } from 'react-native';
-import { Typography, Spacing, Radius, Shadows } from '../../../core/theme/tokens';
+import { Typography, Spacing, Shadows } from '../../../core/theme/tokens';
 
-export const createStyles = (_colors: any) =>
+export const createStyles = (colors: any) =>
   StyleSheet.create({
     contentContainer: {
       flex: 1,
+      backgroundColor: colors.background,
     },
 
     handleBar: {
-      width: 40,
+      width: 38,
       height: 4,
-      borderRadius: Radius.full,
+      borderRadius: 2,
       alignSelf: 'center',
-      marginBottom: Spacing.md,
+      marginBottom: 20,
+      backgroundColor: colors.primary,
     },
 
     statusText: {
@@ -28,6 +30,7 @@ export const createStyles = (_colors: any) =>
       overflow: 'hidden',
       alignSelf: 'center',
       marginBottom: Spacing.sm,
+      backgroundColor: colors.primary,
       ...Shadows.small,
     },
 
@@ -47,12 +50,17 @@ export const createStyles = (_colors: any) =>
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      gap: Spacing.lg,
-      marginBottom: Spacing.lg,
+      gap: 28,
+      marginBottom: 24,
     },
 
     iconButton: {
-      padding: Spacing.xs,
+      padding: 4,
+      width: 44,
+      height: 44,
+      borderRadius: 22,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
 
     progressContainer: {
@@ -60,28 +68,36 @@ export const createStyles = (_colors: any) =>
       height: 20,
       justifyContent: 'center',
       marginBottom: Spacing.md,
+      alignItems: 'center',
     },
 
     trackLine: {
       width: '100%',
+      position: 'absolute',
       height: 2,
+      backgroundColor: colors.primary,
     },
 
     carDetailsCard: {
-      borderRadius: Radius.lg,
-      padding: Spacing.md,
+      width: '100%',
+      borderRadius: 18,
+      padding: 18,
       flexDirection: 'row',
       alignItems: 'center',
+      color: colors.primary,
+      letterSpacing: 1.2,
+      backgroundColor: colors.primary,
       ...Shadows.medium,
     },
 
     carIconContainer: {
+      backgroundColor: colors.natural,
       width: 44,
       height: 44,
-      borderRadius: Radius.sm,
+      borderRadius: 10,
       justifyContent: 'center',
       alignItems: 'center',
-      marginRight: Spacing.md,
+      marginRight: 16,
     },
 
     carInfoTextDetails: {
@@ -96,6 +112,7 @@ export const createStyles = (_colors: any) =>
     carModelText: {
       ...Typography.semiBoldBody,
       marginBottom: 6,
+      color: colors.surface
     },
 
     plateRow: {
@@ -113,12 +130,16 @@ export const createStyles = (_colors: any) =>
       height: 4,
       borderRadius: 2,
       marginHorizontal: 8,
+      backgroundColor: colors.primary,
     },
 
     plateContainer: {
-      borderRadius: Radius.sm,
+      borderWidth: 1,
+      borderRadius: 6,
       paddingHorizontal: 8,
       paddingVertical: 2,
+      backgroundColor: colors.natural,
+      borderColor: colors.natural,
     },
 
     plateText: {
