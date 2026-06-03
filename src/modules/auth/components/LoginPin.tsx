@@ -1,12 +1,14 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import MaskedView from '@react-native-masked-view/masked-view';
 
 import { useTheme } from '../../../core/theme/useTheme';
 import { PinMask } from '../../../shared/components/PinShape';
+import { createStyles } from '../styles/login.styles';
 
 const LoginPin = ({ children }: { children: React.ReactNode }) => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
 
   return (
     <View style={styles.wrapper}>
@@ -14,7 +16,7 @@ const LoginPin = ({ children }: { children: React.ReactNode }) => {
         <View
           style={[
             styles.background,
-            { backgroundColor: colors.surface + '99' }, // transparency
+            { backgroundColor: colors.backgroundSoft + '8C' }, // transparency
           ]}
         />
 
@@ -26,25 +28,3 @@ const LoginPin = ({ children }: { children: React.ReactNode }) => {
 
 export default LoginPin;
 
-const styles = StyleSheet.create({
-  wrapper: {
-    width: '90%',
-    maxWidth: 348,
-    aspectRatio: 348 / 520,
-    overflow: 'hidden',
-  },
-
-  background: {
-    ...StyleSheet.absoluteFill,
-  },
-
-  content: {
-    flex: 1,
-    paddingTop: 35,
-    paddingHorizontal: 24,
-  },
-
-  flex: {
-    flex: 1,
-  },
-});
