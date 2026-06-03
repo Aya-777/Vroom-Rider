@@ -4,5 +4,13 @@
   "continue": "Continue",
   "back": "Back",
   "confirm": "Confirm",
-  "next": "Next"
+  "next": "Next",
+
+  "now": "Now",
+  "later": "Later",
+
+  "forme": "For me",
+  "othercontact": "Other contact",
+
+  "savedplaces": "Saved places"
 }
