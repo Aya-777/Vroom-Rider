@@ -4,13 +4,13 @@
 
   "phoneNumber": "رقم الهاتف",
   "password": "كلمة المرور",
-  "firstname": "الاسم الأول",
-  "lastname": "اسم العائلة",
+  "firstName": "الاسم الأول",
+  "lastName": "اسم العائلة",
   "confirmPassword": "تأكيد كلمة المرور",
 
   "forgotPassword": "هل نسيت كلمة المرور؟",
   "dontHaveAccount": "ليس لديك حساب؟ أنشئ حسابًا",
   "alreadyHaveAccount": "لديك حساب بالفعل؟ سجّل الدخول",
   "signup": "إنشاء حساب",
-  "termsandprivacy": "بالمتابعة، فإنك توافق على شروط وأحكام .Vroom وسياسة الخصوصية الخاصة ب"
+  "termsAndPrivacy": "بالمتابعة، فإنك توافق على شروط وأحكام .Vroom وسياسة الخصوصية الخاصة ب"
 }

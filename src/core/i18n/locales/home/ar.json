@@ -1,13 +1,13 @@
 {
-  "whereto": "إلى أين؟",
-  "foryou": "من أجلك",
+  "whereTo": "إلى أين؟",
+  "forYou": "من أجلك",
   "ride": "رحلة",
   "package": "حزمة",
   "rent": "استئجار",
   "reserve": "احجز",
 
-  "recentdestinations": "الوجهات الأخيرة",
-  "seeall": "عرض الكل",
+  "recentDestinations": "الوجهات الأخيرة",
+  "seeAll": "عرض الكل",
   "office": "المكتب"
   
 }

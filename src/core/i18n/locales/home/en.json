@@ -1,13 +1,13 @@
 {
-  "whereto": "Where to?",
-  "foryou": "For you",
+  "whereTo": "Where to?",
+  "forYou": "For you",
   "ride": "Ride",
   "package": "Package",
   "rent": "Rent",
   "reserve": "Reserve",
 
-  "recentdestinations": "Recent Destinations",
-  "seeall": "See all",
+  "recentDestinations": "Recent Destinations",
+  "seeAll": "See all",
   "office": "Office"
   
 }

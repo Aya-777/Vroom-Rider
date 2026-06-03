@@ -1,19 +1,19 @@
 {
   "rideHistory": "سجل الرحلات",
   "notifications": "الإشعارات",
-  "favoritedrivers": "السائقون المفضلون",
+  "favoriteDrivers": "السائقون المفضلون",
   "safety": "الأمان",
 
-  "becomeadriver": "كن سائقًا",
-  "earnonyourownschedule": "اكسب وفقاً لجدولك الخاص",
-  "learnmore": "تعرف على المزيد",
+  "becomeaDriver": "كن سائقًا",
+  "earnOnYourOwnSchedule": "اكسب وفقاً لجدولك الخاص",
+  "learnMore": "تعرف على المزيد",
   
   "settings": "الإعدادات",
-  "privacyandsecurity": "الخصوصية والأمان",
-  "emergencycontacts": "جهات الاتصال الطارئة",
+  "privacyAndSecurity": "الخصوصية والأمان",
+  "emergencyContacts": "جهات الاتصال الطارئة",
   "help": "المساعدة",
-  "savedlocations": "المواقع المحفوظة",
-  "aboutus": "معلومات عنا",
-  "contactus": "تواصل معنا",
+  "savedLocations": "المواقع المحفوظة",
+  "aboutUs": "معلومات عنا",
+  "contactUs": "تواصل معنا",
   "logout": "تسجيل الخروج"
 }

@@ -4,13 +4,13 @@
 
   "phoneNumber": "Phone Number",
   "password": "Password",
-  "firstname": "First Name",
-  "lastname": "Last Name",
+  "firstName": "First Name",
+  "lastName": "Last Name",
   "confirmPassword": "Confirm Password",
   
   "forgotPassword": "Forgot Password?",
   "dontHaveAccount": "Don't have an account? Register",
   "alreadyHaveAccount": "Already have an account? Login",
   "signup": "Sign Up",
-  "termsandprivacy": "By continuing, you agree to Vroom's Terms and Privacy Policy."
+  "termsAndPrivacy": "By continuing, you agree to Vroom's Terms and Privacy Policy."
 }
