@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View,
+  // View,
   SafeAreaView,
   KeyboardAvoidingView,
   Platform,
@@ -8,23 +8,24 @@ import {
   Text,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+// import { BlurView } from '@react-native-community/blur';
+// import LoginPin from '../components/LoginPin';
+import SignupForm from '../components/SignupForm';
+import SignupFooter from '../components/SignupFooter';
 
-import LoginPin from '../components/LoginPin';
-import LoginForm from '../components/LoginForm';
-import LoginFooter from '../components/LoginFooter';
-
-import { useLoginViewModel } from '../viewmodels/useLoginViewModel';
 import { useTheme } from '../../../core/theme/useTheme';
-import { createStyles } from '../styles/login.styles';
+import { useSignupViewModel } from '../viewmodels/useSignupViewModel';
+import { createStyles } from '../styles/signup.styles';
+import SignupCard from '../components/SignupCard';
 
-const LoginScreen = () => {
-  const vm = useLoginViewModel();
+const SignupScreen = () => {
+  const vm = useSignupViewModel();
   const { colors } = useTheme();
-  const styles = createStyles();
+  const styles = createStyles(colors);
 
   return (
     <LinearGradient
-      colors={[colors.backgroundٍ, colors.backgroundSoft]}
+      colors={[colors.backgroundSoft, colors.background]}
       style={styles.gradient}
     >
       <SafeAreaView style={styles.container}>
@@ -36,12 +37,12 @@ const LoginScreen = () => {
             contentContainerStyle={styles.scroll}
             showsVerticalScrollIndicator={false}
           >
-            <View
+            {/* <View
               style={[
                 styles.bgCircle,
                 { backgroundColor: colors.surfaceAccent },
               ]}
-            />
+            /> */}
 
             <Text
               style={[
@@ -52,11 +53,11 @@ const LoginScreen = () => {
               VROOM
             </Text>
 
-            <LoginPin>
-              <LoginForm vm={vm} />
-            </LoginPin>
+            <SignupCard>
+              <SignupForm vm={vm} />
+            </SignupCard>
 
-            <LoginFooter />
+            <SignupFooter />
           </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
@@ -64,5 +65,4 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
-
+export default SignupScreen;

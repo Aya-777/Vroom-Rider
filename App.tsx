@@ -8,6 +8,7 @@ import { ThemeProvider } from './src/core/theme/ThemeProvider';
 import { useTheme } from './src/core/theme/useTheme';
 
 import { enableScreens, enableFreeze } from 'react-native-screens';
+import SignupScreen from './src/modules/auth/screens/SignupScreen';
 
 enableScreens(true);
 enableFreeze(true);

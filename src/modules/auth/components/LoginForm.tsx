@@ -4,7 +4,7 @@ import {
   TextInput,
   TouchableOpacity,
   Text,
-  StyleSheet,
+  // StyleSheet,
 } from 'react-native';
 
 import PhoneNumberIcon from '../../../assets/svg/phoneNumber.svg';
@@ -16,12 +16,11 @@ import Logo from '../../../shared/components/logo';
 import LinearBg from '../../../shared/components/LinearBg';
 
 import { useTheme } from '../../../core/theme/useTheme';
-import { Radius } from '../../../core/theme/tokens/radius';
-import { Typography } from '../../../core/theme/tokens/typography';
+import { createStyles } from '../styles/login.styles';
 
 const LoginForm = ({ vm }: any) => {
   const { colors } = useTheme();
-
+  const styles = createStyles(colors);
   return (
     <>
       {/* LOGO */}
@@ -41,7 +40,7 @@ const LoginForm = ({ vm }: any) => {
 
           <TextInput
             placeholder="Phone Number"
-            placeholderTextColor={colors.textSecondary}
+            placeholderTextColor={colors.textMuted}
             value={vm.phone}
             onChangeText={vm.setPhone}
             style={[styles.input, { color: colors.textPrimary }]}
@@ -58,7 +57,7 @@ const LoginForm = ({ vm }: any) => {
 
           <TextInput
             placeholder="Password"
-            placeholderTextColor={colors.textSecondary}
+            placeholderTextColor={colors.textMuted}
             secureTextEntry={!vm.visible}
             value={vm.password}
             onChangeText={vm.setPassword}
@@ -80,9 +79,9 @@ const LoginForm = ({ vm }: any) => {
         <TouchableOpacity onPress={vm.handleLogin}>
           <LinearBg
             style={styles.button}
-            colors={['#0F1E52', '#E4D9FF']} // (مؤقتاً - بنحسنه بعدين)
+            colors={[colors.textPrimary, colors.surface]} // (مؤقتاً - بنحسنه بعدين)
           >
-            <Text style={[styles.btnText, { color: '#FAFAFF' }]}>
+            <Text style={[styles.btnText, { color: colors.backgroundSoft }]}>
               Continue
             </Text>
           </LinearBg>
@@ -94,47 +93,3 @@ const LoginForm = ({ vm }: any) => {
 
 export default LoginForm;
 
-const styles = StyleSheet.create({
-  top: {
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-
-  middle: {
-    width: '100%',
-    alignItems: 'center',
-    gap: 12,
-  },
-
-  inputBox: {
-    width: 280,
-    height: 55,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    borderRadius: 12,
-  },
-
-  input: {
-    flex: 1,
-    marginLeft: 12,
-    ...Typography.body,
-  },
-
-  bottom: {
-    marginTop: 25,
-    alignItems: 'center',
-  },
-
-  button: {
-    width: 290,
-    height: 60,
-    borderRadius: Radius.md,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  btnText: {
-    ...Typography.h3,
-  },
-});
