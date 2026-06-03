@@ -57,9 +57,9 @@ const createStyles = (colors: any) =>
     },
 
     header: {
-      height: 56,
+      height: 30,
       flexDirection: 'row',
-      alignItems: 'center',
+      alignItems: 'stretch',
       paddingHorizontal: Spacing.md,
     },
 
@@ -73,7 +73,7 @@ const createStyles = (colors: any) =>
 
     title: {
       flex: 1,
-      textAlign: 'center',
+      textAlign: 'left',
       ...Typography.h3,
       color: colors.textPrimary,
     },

@@ -63,12 +63,12 @@ export const createStyles = (colors: ThemeColors) =>
       zIndex: 1,
     },
 
-    infoRow: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      width: '100%',
-      marginBottom: 16,
-    },
+    // infoRow: {
+    //   flexDirection: 'row',
+    //   justifyContent: 'space-between',
+    //   width: '100%',
+    //   marginBottom: 16,
+    // },
 
     vehicleCard: {
       width: '30%',
@@ -98,19 +98,19 @@ export const createStyles = (colors: ThemeColors) =>
       color: colors.primary,
     },
 
-    underline: {
-      height: 1,
-      width: '100%',
-      marginTop: 4,
-    },
+    // underline: {
+    //   height: 1,
+    //   width: '100%',
+    //   marginTop: 4,
+    // },
 
-    infoBox: {
-      backgroundColor: colors.surface,
-      width: '48%',
-      borderRadius: 12,
-      paddingTop: 12,
-      paddingHorizontal: 14,
-      paddingBottom: 6,
-      ...Shadows.medium,
-    }
+    // infoBox: {
+    //   backgroundColor: colors.surface,
+    //   width: '48%',
+    //   borderRadius: 12,
+    //   paddingTop: 12,
+    //   paddingHorizontal: 14,
+    //   paddingBottom: 6,
+    //   ...Shadows.medium,
+    // }
   });

@@ -9,14 +9,14 @@ export const createStyles = (colors: ThemeColors) =>
       backgroundColor: colors.background,
     },
 
-    handleBar: {
-      width: 38,
-      height: 4,
-      borderRadius: 2,
-      alignSelf: 'center',
-      marginBottom: 20,
-      backgroundColor: colors.primary,
-    },
+    // handleBar: {
+    //   width: 38,
+    //   height: 4,
+    //   borderRadius: 2,
+    //   alignSelf: 'center',
+    //   marginBottom: 20,
+    //   backgroundColor: colors.primary,
+    // },
 
     statusText: {
       ...Typography.semiBoldBody,
@@ -129,29 +129,29 @@ export const createStyles = (colors: ThemeColors) =>
       color: colors.surface,
     },
 
-    bulletSeparator: {
-      width: 4,
-      height: 4,
-      borderRadius: 2,
-      marginHorizontal: 8,
-      backgroundColor: colors.primary,
-    },
+    // bulletSeparator: {
+    //   width: 4,
+    //   height: 4,
+    //   borderRadius: 2,
+    //   marginHorizontal: 8,
+    //   backgroundColor: colors.primary,
+    // },
 
-    plateContainer: {
-      borderWidth: 1,
-      borderRadius: 6,
-      paddingHorizontal: 8,
-      paddingVertical: 2,
-      backgroundColor: colors.surface,
-      borderColor: colors.surface,
-    },
+    // plateContainer: {
+    //   borderWidth: 1,
+    //   borderRadius: 6,
+    //   paddingHorizontal: 8,
+    //   paddingVertical: 2,
+    //   backgroundColor: colors.surface,
+    //   borderColor: colors.surface,
+    // },
 
-    plateText: {
-      fontSize: 13,
-      fontWeight: '700',
-      letterSpacing: 0.5,
-      color: colors.textPrimary,
-    },
+    // plateText: {
+    //   fontSize: 13,
+    //   fontWeight: '700',
+    //   letterSpacing: 0.5,
+    //   color: colors.textPrimary,
+    // },
   });
 
 export type DriverFoundStyles = ReturnType<typeof createStyles>;
