@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
+import type { ThemeColors } from '../../../core/theme/types';
 import { Radius, Shadows } from '../../../core/theme/tokens';
 
-export const createStyles = (colors: any) =>
+export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
     container: {
       flex: 1,
@@ -78,6 +79,11 @@ export const createStyles = (colors: any) =>
       ...Shadows.small,
     },
 
+    activeVehicleCard: {
+      borderWidth: 1,
+      borderColor: colors.primary,
+    },
+
     vehicleImage: {
       width: 50,
       height: 35,
@@ -86,6 +92,10 @@ export const createStyles = (colors: any) =>
 
     vehicleText: {
       color: colors.textMuted,
+    },
+
+    activeVehicleText: {
+      color: colors.primary,
     },
 
     underline: {

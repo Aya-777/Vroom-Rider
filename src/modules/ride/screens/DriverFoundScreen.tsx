@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from '../../../core/theme/useTheme';
+import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 import Header from '../../../shared/components/ride/Header';
 
@@ -16,10 +16,10 @@ import CommunicationActions from '../components/CommunicationActions';
 import CarDetailsCard from '../components/CarDetailsCard';
 import ProgressBar from '../components/ProgressBar';
 
-export default function RideConfirmationScreen() {
-  const { colors, mode } = useTheme();
+export default function DriverFoundScreen() {
+  const { colors } = useTheme();
   const styles = createStyles(colors);
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<HomeStackScreenProps<'DriverFound'>['navigation']>();
 
   const { driver } = useRideConfirmationViewModel();
 
@@ -28,11 +28,11 @@ export default function RideConfirmationScreen() {
       <Header title="Track your trip" onBackPress={() => navigation.goBack()} />
 
       <BottomSheetCard>
-        <DriverStatus text={driver.statusMessage} styles={styles} colors={colors} />
+        <DriverStatus text={driver.statusMessage} styles={styles} />
 
         <DriverAvatar uri={driver.avatar} styles={styles} />
 
-        <DriverStatus text={driver.name} styles={styles} colors={colors} />
+        <DriverStatus text={driver.name} styles={styles} />
 
         <CommunicationActions styles={styles} colors={colors} />
 

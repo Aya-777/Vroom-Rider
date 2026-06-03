@@ -3,6 +3,7 @@ import { View, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { useTheme } from '../../../core/theme/useTheme';
+import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 import Header from '../../../shared/components/ride/Header';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 
@@ -17,7 +18,7 @@ import { createStyles } from '../styles/extraDetails.styles';
 
 export default function ExtraDetailsScreen() {
   const { colors, mode } = useTheme();
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<HomeStackScreenProps<'RideDetails'>['navigation']>();
 
   const {
     timeEstimate,

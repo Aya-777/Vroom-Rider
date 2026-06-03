@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
+import type { ThemeColors } from '../../../core/theme/types';
 import { Typography, Spacing, Shadows } from '../../../core/theme/tokens';
 
-export const createStyles = (colors: any) =>
+export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
     contentContainer: {
       flex: 1,
@@ -21,6 +22,7 @@ export const createStyles = (colors: any) =>
       ...Typography.semiBoldBody,
       textAlign: 'center',
       marginBottom: Spacing.lg,
+      color: colors.textPrimary,
     },
 
     avatarContainer: {
@@ -44,6 +46,7 @@ export const createStyles = (colors: any) =>
       ...Typography.h2,
       textAlign: 'center',
       marginBottom: Spacing.md,
+      color: colors.textPrimary,
     },
 
     communicationRow: {
@@ -75,7 +78,7 @@ export const createStyles = (colors: any) =>
       width: '100%',
       position: 'absolute',
       height: 2,
-      backgroundColor: colors.primary,
+      backgroundColor: colors.border,
     },
 
     carDetailsCard: {
@@ -84,14 +87,13 @@ export const createStyles = (colors: any) =>
       padding: 18,
       flexDirection: 'row',
       alignItems: 'center',
-      color: colors.primary,
       letterSpacing: 1.2,
       backgroundColor: colors.primary,
       ...Shadows.medium,
     },
 
     carIconContainer: {
-      backgroundColor: colors.natural,
+      backgroundColor: colors.surface,
       width: 44,
       height: 44,
       borderRadius: 10,
@@ -107,12 +109,13 @@ export const createStyles = (colors: any) =>
     carDetailsTitle: {
       ...Typography.semiBoldCaption,
       marginBottom: 4,
+      color: colors.surface,
     },
 
     carModelText: {
       ...Typography.semiBoldBody,
       marginBottom: 6,
-      color: colors.surface
+      color: colors.surface,
     },
 
     plateRow: {
@@ -123,6 +126,7 @@ export const createStyles = (colors: any) =>
     carColorText: {
       ...Typography.caption,
       opacity: 0.8,
+      color: colors.surface,
     },
 
     bulletSeparator: {
@@ -138,13 +142,16 @@ export const createStyles = (colors: any) =>
       borderRadius: 6,
       paddingHorizontal: 8,
       paddingVertical: 2,
-      backgroundColor: colors.natural,
-      borderColor: colors.natural,
+      backgroundColor: colors.surface,
+      borderColor: colors.surface,
     },
 
     plateText: {
       fontSize: 13,
       fontWeight: '700',
       letterSpacing: 0.5,
+      color: colors.textPrimary,
     },
   });
+
+export type DriverFoundStyles = ReturnType<typeof createStyles>;

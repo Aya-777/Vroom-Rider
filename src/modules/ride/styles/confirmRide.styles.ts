@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import type { ThemeColors } from '../../../core/theme/types';
 
 import {
   Shadows,
@@ -7,7 +8,7 @@ import {
   Spacing,
 } from '../../../core/theme/tokens';
 
-export const createStyles = (colors: any) =>
+export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
     container: {
       flex: 1,

@@ -28,7 +28,7 @@ type RideRouteParams = {
   payment?: string;
 };
 
-export default function ConfirmRideScreen() {
+export default function RideConfirmationScreen() {
   const navigation =
     useNavigation<HomeStackScreenProps<'ConfirmRide'>['navigation']>();
 
