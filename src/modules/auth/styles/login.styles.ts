@@ -8,20 +8,24 @@ import {
 export const createStyles = (colors: any) =>
     StyleSheet.create({
         container: {
-            marginTop: -20,
-            alignItems: 'center',
+            flex: 1,
         },
 
         text: {
             ...Typography.caption,
+            color: colors.textSecondary
         },
 
         link: {
+            marginTop: 20,
             ...Typography.boldCaption,
+            color: colors.primary,
+            textAlign: 'center'
         },
         top: {
             alignItems: 'center',
             marginBottom: 30,
+            marginTop: 40,
         },
 
         middle: {
@@ -37,12 +41,14 @@ export const createStyles = (colors: any) =>
             alignItems: 'center',
             paddingHorizontal: 16,
             borderRadius: 12,
+            backgroundColor: colors.backgroundSoft,
         },
 
         input: {
             flex: 1,
             marginLeft: 12,
             ...Typography.body,
+            color: colors.textPrimary
         },
 
         bottom: {
@@ -60,9 +66,11 @@ export const createStyles = (colors: any) =>
 
         btnText: {
             ...Typography.h3,
+            color: colors.backgroundSoft
         },
+
         wrapper: {
-            width: '90%',
+            width: '100%',
             maxWidth: 348,
             aspectRatio: 348 / 520,
             overflow: 'hidden',
@@ -70,6 +78,7 @@ export const createStyles = (colors: any) =>
 
         background: {
             ...StyleSheet.absoluteFill,
+            backgroundColor: colors.backgroundSoft + '8C'
         },
 
         content: {
@@ -82,7 +91,8 @@ export const createStyles = (colors: any) =>
             flex: 1,
         },
         gradient: { flex: 1 },
-        scroll: { alignItems: 'center', paddingBottom: 40 },
+
+        scroll: { flexGrow: 1, width: '100%', minHeight: '100%', alignItems: 'center', paddingTop: 48, paddingBottom: 40 },
 
         bgCircle: {
             position: 'absolute',
@@ -91,6 +101,7 @@ export const createStyles = (colors: any) =>
             borderRadius: 350,
             left: -280,
             top: -30,
+            backgroundColor: colors.surfaceAccent + 'AC',
         },
 
         title: {
@@ -98,5 +109,6 @@ export const createStyles = (colors: any) =>
             marginBottom: 10,
             fontSize: 32,
             fontFamily: 'Lora-Bold',
+            color: colors.textMuted + '8C'
         },
     });

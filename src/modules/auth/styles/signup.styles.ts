@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { StyleSheet } from 'react-native';
 
 import {
@@ -9,23 +8,26 @@ import {
 export const createStyles = (colors: any) =>
     StyleSheet.create({
         signupWrapper: {
-            width: 500,
-            height: 650,
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'center',
             position: 'relative',
+            minHeight: 520,
         },
 
         pinShape: {
             position: 'absolute',
+            top: 30,
+            left: 25,
         },
 
         signupContent: {
-            position: 'absolute',
-            top: 60,
-            left: 0,
-            right: 0,
-
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'center',
             paddingHorizontal: 24,
         },
+
         container: {
             flex: 1,
         },
@@ -49,12 +51,15 @@ export const createStyles = (colors: any) =>
         },
 
         inputBox: {
-            width: 300,
+            width: 290,
             height: 55,
             flexDirection: 'row',
             alignItems: 'center',
             paddingHorizontal: 16,
             borderRadius: 12,
+            borderColor: colors.surface,
+            borderWidth: 2,
+            backgroundColor: colors.backgroundSoft + '80',
         },
 
         input: {
@@ -84,6 +89,8 @@ export const createStyles = (colors: any) =>
             maxWidth: 348,
             aspectRatio: 348 / 520,
             overflow: 'hidden',
+            justifyContent: 'center',
+            alignItems: 'center',
         },
 
         background: {
@@ -100,23 +107,25 @@ export const createStyles = (colors: any) =>
             flex: 1,
         },
         gradient: { flex: 1 },
-        scroll: { alignItems: 'center', paddingBottom: 40 },
 
-        bgCircle: {
-            position: 'absolute',
-            width: 700,
-            height: 900,
-            borderRadius: 350,
-            left: -280,
-            top: -30,
+        scroll: {
+            flexGrow: 1,
+            width: '100%',
+            minHeight: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingTop: 16,
+            paddingBottom: 24,
         },
 
         title: {
-            marginTop: 50,
-            // marginBottom: 5,
+            marginTop: -30,
+            marginBottom: 25,
             fontSize: 32,
             fontFamily: 'Lora-Bold',
+            color: colors.textMuted,
         },
+
         row: {
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -124,12 +133,15 @@ export const createStyles = (colors: any) =>
         },
 
         halfInput: {
-            width: 140,
+            width: 143,
             height: 55,
             flexDirection: 'row',
             alignItems: 'center',
             paddingHorizontal: 12,
             borderRadius: 12,
+            borderColor: colors.surface,
+            borderWidth: 2,
+            backgroundColor: colors.backgroundSoft + '80',
         },
 
         halfInputText: {
@@ -140,7 +152,7 @@ export const createStyles = (colors: any) =>
 
         footerContainer: {
             alignItems: 'center',
-            marginTop: 20,
+            marginTop: 28,
         },
 
         footerText: {
@@ -154,5 +166,80 @@ export const createStyles = (colors: any) =>
         linksRow: {
             flexDirection: 'row',
             marginTop: 4,
+        },
+
+        logoWrapper: {
+            position: 'relative',
+            alignSelf: 'center',
+        },
+
+        cameraButton: {
+            position: 'absolute',
+            right: -2,
+            bottom: 10,
+        },
+
+        cameraCircle: {
+            width: 32,
+            height: 32,
+            borderRadius: 16,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderWidth: 2,
+            borderColor: colors.primary,
+            backgroundColor: colors.surface,
+        },
+        glowWrapper: {
+            position: 'absolute',
+            width: 348,
+            height: 600,
+            justifyContent: 'center',
+            alignItems: 'center',
+            transform: [{ scale: 1.2 }, { translateX: 10 }],
+            opacity: 0.60,
+        },
+
+        pinWrapper: {
+            position: 'absolute',
+            width: 348,
+            height: 520,
+            justifyContent: 'center',
+            alignItems: 'center',
+            transform: [{ scale: 1.1 }],
+        },
+
+        viewpinCanva: {
+            flex: 1,
+            width: '100%',
+            height: '100%'
+        },
+
+        pinCanva: {
+            flex: 1,
+            width: '100%',
+            height: '100%'
+        },
+
+        viewglowCanva: {
+            flex: 1,
+            width: '100%',
+            height: '100%'
+        },
+
+        glowCanva: {
+            flex: 1,
+            width: '100%',
+            height: '100%'
+        },
+
+        pinContainer: {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: -1,
         },
     });

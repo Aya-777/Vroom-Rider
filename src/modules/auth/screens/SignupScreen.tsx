@@ -1,22 +1,18 @@
 import React from 'react';
 import {
-  // View,
   SafeAreaView,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   Text,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-// import { BlurView } from '@react-native-community/blur';
-// import LoginPin from '../components/LoginPin';
 import SignupForm from '../components/SignupForm';
 import SignupFooter from '../components/SignupFooter';
-
 import { useTheme } from '../../../core/theme/useTheme';
 import { useSignupViewModel } from '../viewmodels/useSignupViewModel';
 import { createStyles } from '../styles/signup.styles';
 import SignupCard from '../components/SignupCard';
+import LinearBg from '../../../shared/components/LinearBg';
 
 const SignupScreen = () => {
   const vm = useSignupViewModel();
@@ -24,7 +20,7 @@ const SignupScreen = () => {
   const styles = createStyles(colors);
 
   return (
-    <LinearGradient
+    <LinearBg
       colors={[colors.backgroundSoft, colors.background]}
       style={styles.gradient}
     >
@@ -37,17 +33,10 @@ const SignupScreen = () => {
             contentContainerStyle={styles.scroll}
             showsVerticalScrollIndicator={false}
           >
-            {/* <View
-              style={[
-                styles.bgCircle,
-                { backgroundColor: colors.surfaceAccent },
-              ]}
-            /> */}
 
             <Text
               style={[
                 styles.title,
-                { color: colors.textMuted },
               ]}
             >
               VROOM
@@ -61,7 +50,7 @@ const SignupScreen = () => {
           </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
-    </LinearGradient>
+    </LinearBg>
   );
 };
 

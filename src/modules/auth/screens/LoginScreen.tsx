@@ -7,24 +7,22 @@ import {
   ScrollView,
   Text,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-
 import LoginPin from '../components/LoginPin';
 import LoginForm from '../components/LoginForm';
 import LoginFooter from '../components/LoginFooter';
-
 import { useLoginViewModel } from '../viewmodels/useLoginViewModel';
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/login.styles';
+import LinearBg from '../../../shared/components/LinearBg';
 
 const LoginScreen = () => {
   const vm = useLoginViewModel();
   const { colors } = useTheme();
-  const styles = createStyles();
+  const styles = createStyles(colors);
 
   return (
-    <LinearGradient
-      colors={[colors.backgroundٍ, colors.backgroundSoft]}
+    <LinearBg
+      colors={[colors.background , colors.backgroundSoft ]}
       style={styles.gradient}
     >
       <SafeAreaView style={styles.container}>
@@ -39,14 +37,12 @@ const LoginScreen = () => {
             <View
               style={[
                 styles.bgCircle,
-                { backgroundColor: colors.surfaceAccent },
               ]}
             />
 
             <Text
               style={[
                 styles.title,
-                { color: colors.textMuted },
               ]}
             >
               VROOM
@@ -60,7 +56,7 @@ const LoginScreen = () => {
           </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
-    </LinearGradient>
+    </LinearBg>
   );
 };
 
