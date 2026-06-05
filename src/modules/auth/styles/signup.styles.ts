@@ -192,11 +192,11 @@ export const createStyles = (colors: any) =>
         glowWrapper: {
             position: 'absolute',
             width: 348,
-            height: 520,
+            height: 600,
             justifyContent: 'center',
             alignItems: 'center',
-            transform: [{ scale: 2 }, { translateX: 10 }],
-            opacity: 0.9,
+            transform: [{ scale: 1.2 }, { translateX: 10 }],
+            opacity: 0.60,
         },
 
         pinWrapper: {
@@ -208,7 +208,19 @@ export const createStyles = (colors: any) =>
             transform: [{ scale: 1.1 }],
         },
 
+        viewpinCanva: {
+            flex: 1,
+            width: '100%',
+            height: '100%'
+        },
+
         pinCanva: {
+            flex: 1,
+            width: '100%',
+            height: '100%'
+        },
+
+        viewglowCanva: {
             flex: 1,
             width: '100%',
             height: '100%'
@@ -216,8 +228,8 @@ export const createStyles = (colors: any) =>
 
         glowCanva: {
             flex: 1,
-            width: '60%',
-            height: '80%'
+            width: '100%',
+            height: '100%'
         },
 
         pinContainer: {

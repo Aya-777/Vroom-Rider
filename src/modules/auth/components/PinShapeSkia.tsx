@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Canvas, Path, Group } from '@shopify/react-native-skia';
-import { LayoutChangeEvent } from 'react-native';
+import { LayoutChangeEvent, View } from 'react-native';
 import { createStyles } from '../styles/signup.styles';
 import { useTheme } from '../../../core/theme/useTheme';
 
@@ -41,22 +41,24 @@ export default function PinShapeSkia({
   const styles = createStyles(colors);
 
   return (
-    <Canvas style={styles.pinCanva} onLayout={onLayout}>
-      <Group transform={[{ translateX: dx }, { translateY: dy }, { scale }]}>
-        <Path
-          path={PATH}
-          color={color}
-          style="stroke"
-        />
-        {strokeWidth > 0 && (
+    <View style={styles.viewpinCanva} onLayout={onLayout}>
+      <Canvas style={styles.pinCanva}>
+        <Group transform={[{ translateX: dx }, { translateY: dy }, { scale }]}>
           <Path
             path={PATH}
             color={color}
             style="stroke"
-            strokeWidth={strokeWidth}
           />
-        )}
-      </Group>
-    </Canvas>
+          {strokeWidth > 0 && (
+            <Path
+              path={PATH}
+              color={color}
+              style="stroke"
+              strokeWidth={strokeWidth}
+            />
+          )}
+        </Group>
+      </Canvas>
+    </View>
   );
 }

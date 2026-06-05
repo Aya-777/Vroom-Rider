@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Canvas, Path, BlurMask, Group } from '@shopify/react-native-skia';
-import { LayoutChangeEvent } from 'react-native';
+import { LayoutChangeEvent, View } from 'react-native';
 import { createStyles } from '../styles/signup.styles';
 import { useTheme } from '../../../core/theme/useTheme';
 
@@ -38,17 +38,19 @@ export default function PinGlow({ color = '#7B61FF' }: Props) {
     const styles = createStyles(colors);
 
     return (
-        <Canvas style={styles.glowCanva} onLayout={onLayout}>
-            <Group transform={[{ translateX: dx }, { translateY: dy }, { scale }]}>
-                <Path
-                    path={PATH}
-                    color={color}
-                    style="fill"
-                    opacity={0.35}
-                >
-                    <BlurMask blur={50} style="normal" />
-                </Path>
-            </Group>
-        </Canvas>
+        <View style={styles.viewglowCanva} onLayout={onLayout}>
+            <Canvas style={styles.glowCanva} >
+                <Group transform={[{ translateX: dx }, { translateY: dy }, { scale }]}>
+                    <Path
+                        path={PATH}
+                        color={color}
+                        style="fill"
+                        opacity={0.35}
+                    >
+                        <BlurMask blur={50} style="normal" />
+                    </Path>
+                </Group>
+            </Canvas>
+        </View>
     );
 }
