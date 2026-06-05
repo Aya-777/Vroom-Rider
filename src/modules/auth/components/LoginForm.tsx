@@ -76,7 +76,7 @@ const LoginForm = ({ vm }: any) => {
             colors={[colors.textPrimary, colors.surface]}
           >
             <Text style={[styles.btnText]}>
-              Continue
+              Login
             </Text>
           </LinearBg>
         </TouchableOpacity>

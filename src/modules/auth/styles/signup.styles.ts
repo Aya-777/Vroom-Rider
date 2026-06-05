@@ -8,23 +8,23 @@ import {
 export const createStyles = (colors: any) =>
     StyleSheet.create({
         signupWrapper: {
-            width: 500,
-            height: 650,
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'center',
             position: 'relative',
+            minHeight: 520,
         },
 
         pinShape: {
             position: 'absolute',
-            top: -25,
-            left: -25,
+            top: 30,
+            left: 25,
         },
 
         signupContent: {
-            position: 'absolute',
-            top: 60,
-            left: 0,
-            right: 0,
-
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'center',
             paddingHorizontal: 24,
         },
 
@@ -51,7 +51,7 @@ export const createStyles = (colors: any) =>
         },
 
         inputBox: {
-            width: 300,
+            width: 290,
             height: 55,
             flexDirection: 'row',
             alignItems: 'center',
@@ -89,6 +89,8 @@ export const createStyles = (colors: any) =>
             maxWidth: 348,
             aspectRatio: 348 / 520,
             overflow: 'hidden',
+            justifyContent: 'center',
+            alignItems: 'center',
         },
 
         background: {
@@ -106,26 +108,22 @@ export const createStyles = (colors: any) =>
         },
         gradient: { flex: 1 },
 
-
         scroll: {
+            flexGrow: 1,
+            width: '100%',
+            minHeight: '100%',
+            justifyContent: 'center',
             alignItems: 'center',
-            paddingBottom: 40
-        },
-
-        bgCircle: {
-            position: 'absolute',
-            width: 700,
-            height: 900,
-            borderRadius: 350,
-            left: -280,
-            top: -30,
+            paddingTop: 16,
+            paddingBottom: 24,
         },
 
         title: {
-            marginTop: 50,
+            marginTop: -30,
+            marginBottom: 25,
             fontSize: 32,
             fontFamily: 'Lora-Bold',
-            color: colors.textMuted
+            color: colors.textMuted,
         },
 
         row: {
@@ -154,7 +152,7 @@ export const createStyles = (colors: any) =>
 
         footerContainer: {
             alignItems: 'center',
-            marginTop: 20,
+            marginTop: 28,
         },
 
         footerText: {
@@ -190,5 +188,46 @@ export const createStyles = (colors: any) =>
             borderWidth: 2,
             borderColor: colors.primary,
             backgroundColor: colors.surface,
+        },
+        glowWrapper: {
+            position: 'absolute',
+            width: 348,
+            height: 520,
+            justifyContent: 'center',
+            alignItems: 'center',
+            transform: [{ scale: 2 }, { translateX: 10 }],
+            opacity: 0.9,
+        },
+
+        pinWrapper: {
+            position: 'absolute',
+            width: 348,
+            height: 520,
+            justifyContent: 'center',
+            alignItems: 'center',
+            transform: [{ scale: 1.1 }],
+        },
+
+        pinCanva: {
+            flex: 1,
+            width: '100%',
+            height: '100%'
+        },
+
+        glowCanva: {
+            flex: 1,
+            width: '60%',
+            height: '80%'
+        },
+
+        pinContainer: {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: -1,
         },
     });

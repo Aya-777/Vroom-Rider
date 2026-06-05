@@ -1,8 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
-import SignupPinShape from '../../../assets/svg/pinContainerMainCard.svg';
 import { createStyles } from '../styles/signup.styles';
 import { useTheme } from '../../../core/theme/useTheme';
+import PinShapeSkia from '../components/PinShapeSkia';
+import PinGlow from '../components/PinGlow';
 
 const SignupCard = ({
     children,
@@ -14,13 +15,15 @@ const SignupCard = ({
 
     return (
         <View style={styles.signupWrapper}>
-            <SignupPinShape
-                width="110%"
-                height="110%"
-                style={[
-                    styles.pinShape,
-                ]}
-            />
+            <View style={styles.pinContainer}>
+                <View style={styles.glowWrapper}>
+                    <PinGlow color={colors.surface } />
+                </View>
+
+                <View style={styles.pinWrapper}>
+                    <PinShapeSkia color={colors.backgroundSoft } />
+                </View>
+            </View>
 
             <View style={styles.signupContent}>
                 {children}

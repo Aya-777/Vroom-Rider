@@ -21,7 +21,7 @@ const SignupScreen = () => {
 
   return (
     <LinearBg
-      colors={[colors.backgroundSoft || '#F7F7F7', colors.background || '#FFFFFF']}
+      colors={[colors.backgroundSoft, colors.background]}
       style={styles.gradient}
     >
       <SafeAreaView style={styles.container}>
@@ -33,7 +33,7 @@ const SignupScreen = () => {
             contentContainerStyle={styles.scroll}
             showsVerticalScrollIndicator={false}
           >
-         
+
             <Text
               style={[
                 styles.title,
