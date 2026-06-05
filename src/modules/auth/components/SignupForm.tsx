@@ -5,16 +5,14 @@ import {
     TouchableOpacity,
     Text,
 } from 'react-native';
-
-import Logo from '../../../shared/components/logo';
+import Logo from './logo';
 import LinearBg from '../../../shared/components/LinearBg';
-
 import Profile from '../../../assets/svg/profile.svg';
 import PhoneNumberIcon from '../../../assets/svg/phoneNumber.svg';
 import PasswordIcon from '../../../assets/svg/password.svg';
 import VisibilityOnIcon from '../../../assets/svg/visibilityOn.svg';
 import VisibilityOffIcon from '../../../assets/svg/visibilityOff.svg';
-
+import CameraIcon from '../../../assets/svg/camera.svg';
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/signup.styles';
 
@@ -23,10 +21,25 @@ const SignupForm = ({ vm }: any) => {
     const styles = createStyles(colors);
 
     return (
-        <>
+        <View>
             {/* LOGO */}
+            {/* <View style={styles.top}>
+                <Logo type="signup" />
+            </View> */}
             <View style={styles.top}>
-                <Logo />
+                <View style={styles.logoWrapper}>
+                    <Logo type="signup" />
+
+                    <TouchableOpacity style={styles.cameraButton}>
+                        <View style={styles.cameraCircle}>
+                            <CameraIcon
+                                width={16}
+                                height={16}
+                                fill={colors.primary}
+                            />
+                        </View>
+                    </TouchableOpacity>
+                </View>
             </View>
 
             {/* FORM */}
@@ -36,10 +49,9 @@ const SignupForm = ({ vm }: any) => {
                     <View
                         style={[
                             styles.halfInput,
-                            { backgroundColor: colors.surface },
                         ]}
                     >
-                        <Profile width={18} height={18} />
+                        <Profile width={18} height={18} fill={colors.primary} />
 
                         <TextInput
                             placeholder="First Name"
@@ -56,10 +68,9 @@ const SignupForm = ({ vm }: any) => {
                     <View
                         style={[
                             styles.halfInput,
-                            { backgroundColor: colors.surface },
                         ]}
                     >
-                        <Profile width={18} height={18} />
+                        <Profile width={18} height={18} fill={colors.primary} />
 
                         <TextInput
                             placeholder="Last Name"
@@ -78,10 +89,9 @@ const SignupForm = ({ vm }: any) => {
                 <View
                     style={[
                         styles.inputBox,
-                        { backgroundColor: colors.surface },
                     ]}
                 >
-                    <PhoneNumberIcon width={20} height={20} />
+                    <PhoneNumberIcon width={20} height={20} fill={colors.primary} />
 
                     <TextInput
                         placeholder="Phone Number"
@@ -100,10 +110,9 @@ const SignupForm = ({ vm }: any) => {
                 <View
                     style={[
                         styles.inputBox,
-                        { backgroundColor: colors.surface },
                     ]}
                 >
-                    <PasswordIcon width={20} height={20} />
+                    <PasswordIcon width={20} height={20} fill={colors.primary} />
 
                     <TextInput
                         placeholder="Password"
@@ -124,11 +133,13 @@ const SignupForm = ({ vm }: any) => {
                             <VisibilityOnIcon
                                 width={20}
                                 height={20}
+                                fill={colors.primary}
                             />
                         ) : (
                             <VisibilityOffIcon
                                 width={20}
                                 height={20}
+                                fill={colors.primary}
                             />
                         )}
                     </TouchableOpacity>
@@ -138,10 +149,9 @@ const SignupForm = ({ vm }: any) => {
                 <View
                     style={[
                         styles.inputBox,
-                        { backgroundColor: colors.surface },
                     ]}
                 >
-                    <PasswordIcon width={20} height={20} />
+                    <PasswordIcon width={20} height={20} fill={colors.primary} />
 
                     <TextInput
                         placeholder="Confirm Password"
@@ -164,11 +174,13 @@ const SignupForm = ({ vm }: any) => {
                             <VisibilityOnIcon
                                 width={20}
                                 height={20}
+                                fill={colors.primary}
                             />
                         ) : (
                             <VisibilityOffIcon
                                 width={20}
                                 height={20}
+                                fill={colors.primary}
                             />
                         )}
                     </TouchableOpacity>
@@ -188,7 +200,7 @@ const SignupForm = ({ vm }: any) => {
                     </LinearBg>
                 </TouchableOpacity>
             </View>
-        </>
+        </View>
     );
 };
 

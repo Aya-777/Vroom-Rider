@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { StyleSheet } from 'react-native';
 
 import {
@@ -16,6 +15,8 @@ export const createStyles = (colors: any) =>
 
         pinShape: {
             position: 'absolute',
+            top: -25,
+            left: -25,
         },
 
         signupContent: {
@@ -26,6 +27,7 @@ export const createStyles = (colors: any) =>
 
             paddingHorizontal: 24,
         },
+
         container: {
             flex: 1,
         },
@@ -55,6 +57,9 @@ export const createStyles = (colors: any) =>
             alignItems: 'center',
             paddingHorizontal: 16,
             borderRadius: 12,
+            borderColor: colors.surface,
+            borderWidth: 2,
+            backgroundColor: colors.backgroundSoft + '80',
         },
 
         input: {
@@ -100,7 +105,12 @@ export const createStyles = (colors: any) =>
             flex: 1,
         },
         gradient: { flex: 1 },
-        scroll: { alignItems: 'center', paddingBottom: 40 },
+
+
+        scroll: {
+            alignItems: 'center',
+            paddingBottom: 40
+        },
 
         bgCircle: {
             position: 'absolute',
@@ -113,10 +123,11 @@ export const createStyles = (colors: any) =>
 
         title: {
             marginTop: 50,
-            // marginBottom: 5,
             fontSize: 32,
             fontFamily: 'Lora-Bold',
+            color: colors.textMuted
         },
+
         row: {
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -124,12 +135,15 @@ export const createStyles = (colors: any) =>
         },
 
         halfInput: {
-            width: 140,
+            width: 143,
             height: 55,
             flexDirection: 'row',
             alignItems: 'center',
             paddingHorizontal: 12,
             borderRadius: 12,
+            borderColor: colors.surface,
+            borderWidth: 2,
+            backgroundColor: colors.backgroundSoft + '80',
         },
 
         halfInputText: {
@@ -154,5 +168,27 @@ export const createStyles = (colors: any) =>
         linksRow: {
             flexDirection: 'row',
             marginTop: 4,
+        },
+
+        logoWrapper: {
+            position: 'relative',
+            alignSelf: 'center',
+        },
+
+        cameraButton: {
+            position: 'absolute',
+            right: -2,
+            bottom: 10,
+        },
+
+        cameraCircle: {
+            width: 32,
+            height: 32,
+            borderRadius: 16,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderWidth: 2,
+            borderColor: colors.primary,
+            backgroundColor: colors.surface,
         },
     });

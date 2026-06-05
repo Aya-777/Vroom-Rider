@@ -10,7 +10,7 @@ import MenuIcon from '../../../assets/svg/menu.svg';
 import NotificationsIcon from '../../../assets/svg/notifications.svg';
 
 import {
-//   Typography,
+  //   Typography,
   Spacing,
   Radius,
   Shadows,
@@ -79,7 +79,7 @@ const createStyles = (colors: any) =>
   StyleSheet.create({
     container: {
       paddingTop: Spacing.smm,
-    //   backgroundColor: 'red',
+      //   backgroundColor: 'red',
     },
 
     header: {
@@ -104,12 +104,10 @@ const createStyles = (colors: any) =>
     logoText: {
       flex: 1,
       textAlign: 'center',
-
       fontSize: 32,
       lineHeight: 42,
       letterSpacing: -1.6,
-
       color: colors.primary,
-      fontFamily: 'SpaceGrotesk-Bold',
+      fontFamily: 'Lora-Bold',
     },
   });
