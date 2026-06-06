@@ -2,12 +2,13 @@
 import React from 'react';
 import { StatusBar, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import RootNavigator from './src/navigation/RootNavigator';
+// import RootNavigator from './src/navigation/RootNavigator';
 
 import { ThemeProvider } from './src/core/theme/ThemeProvider';
 import { useTheme } from './src/core/theme/useTheme';
 
 import { enableScreens, enableFreeze } from 'react-native-screens';
+import SignupScreen from './src/modules/auth/screens/SignupScreen';
 
 enableScreens(true);
 enableFreeze(true);
@@ -22,7 +23,7 @@ function AppContent() {
         backgroundColor="transparent"
         barStyle={mode === 'dark' ? 'light-content' : 'dark-content'}
       />
-      <RootNavigator />
+      <SignupScreen />
     </View>
   );
 }

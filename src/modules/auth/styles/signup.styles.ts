@@ -66,7 +66,7 @@ export const createStyles = (colors: ThemeColors) =>
         input: {
             flex: 1,
             marginLeft: 12,
-            ...Typography.body,
+            ...Typography.caption,
         },
 
         bottom: {
@@ -148,7 +148,7 @@ export const createStyles = (colors: ThemeColors) =>
         halfInputText: {
             flex: 1,
             marginLeft: 8,
-            ...Typography.body,
+            ...Typography.caption,
         },
 
         footerContainer: {
