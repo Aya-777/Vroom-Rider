@@ -5,16 +5,16 @@ import {
     TouchableOpacity,
     Text,
 } from 'react-native';
-import Logo from './logo';
-import LinearBg from '../../../shared/components/LinearBg';
-import Profile from '../../../assets/svg/profile.svg';
-import PhoneNumberIcon from '../../../assets/svg/phoneNumber.svg';
-import PasswordIcon from '../../../assets/svg/password.svg';
-import VisibilityOnIcon from '../../../assets/svg/visibilityOn.svg';
-import VisibilityOffIcon from '../../../assets/svg/visibilityOff.svg';
-import CameraIcon from '../../../assets/svg/camera.svg';
-import { useTheme } from '../../../core/theme/useTheme';
-import { createStyles } from '../styles/signup.styles';
+import Logo from '../shared/logo';
+import LinearBg from '../../../../shared/components/LinearBg';
+import Profile from '../../../../assets/svg/profile.svg';
+import PhoneNumberIcon from '../../../../assets/svg/phoneNumber.svg';
+import PasswordIcon from '../../../../assets/svg/password.svg';
+import VisibilityOnIcon from '../../../../assets/svg/visibilityOn.svg';
+import VisibilityOffIcon from '../../../../assets/svg/visibilityOff.svg';
+import CameraIcon from '../../../../assets/svg/camera.svg';
+import { useTheme } from '../../../../core/theme/useTheme';
+import { createStyles } from '../../styles/signup.styles';
 
 const SignupForm = ({ vm }: any) => {
     const { colors } = useTheme();

@@ -4,8 +4,9 @@ import {
     Typography,
     Radius,
 } from '../../../core/theme/tokens';
+import { ThemeColors } from '../../../core/theme/theme.types';
 
-export const createStyles = (colors: any) =>
+export const createStyles = (colors: ThemeColors) =>
     StyleSheet.create({
         signupWrapper: {
             width: '100%',

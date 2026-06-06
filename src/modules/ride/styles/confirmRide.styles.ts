@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import type { ThemeColors } from '../../../core/theme/types';
 
 import {
   Shadows,
@@ -7,6 +6,7 @@ import {
   Radius,
   Spacing,
 } from '../../../core/theme/tokens';
+import { ThemeColors } from '../../../core/theme/theme.types';
 
 export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({

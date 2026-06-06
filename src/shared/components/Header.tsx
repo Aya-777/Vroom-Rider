@@ -25,7 +25,6 @@ export default function Header({
   onNotificationPress,
 }: HeaderProps) {
   const { colors } = useTheme();
-
   const styles = createStyles(colors);
 
   return (
