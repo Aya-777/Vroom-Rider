@@ -13,10 +13,12 @@ import { useSignupViewModel } from '../viewmodels/useSignupViewModel';
 import { createStyles } from '../styles/signup.styles';
 import SignupCard from '../components/signup/SignupCard';
 import LinearBg from '../../../shared/components/LinearBg';
-import LoginFooter from '../components/signup/HaveAccount';
+import SignupLoginFooter from '../components/signup/HaveAccount';
 
 const SignupScreen = () => {
+
   const vm = useSignupViewModel();
+  const { handleNavigateToLogin } = vm;
   const { colors } = useTheme();
   const styles = createStyles(colors);
 
@@ -46,7 +48,7 @@ const SignupScreen = () => {
             <SignupCard>
               <SignupForm vm={vm} />
             </SignupCard>
-            <LoginFooter />
+            <SignupLoginFooter onLoginPress={handleNavigateToLogin} />
             <SignupFooter />
           </ScrollView>
         </KeyboardAvoidingView>

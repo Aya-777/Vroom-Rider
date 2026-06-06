@@ -17,12 +17,13 @@ import LinearBg from '../../../shared/components/LinearBg';
 
 const LoginScreen = () => {
   const vm = useLoginViewModel();
+  const { handleNavigateToSignup } = vm;
   const { colors } = useTheme();
   const styles = createStyles(colors);
 
   return (
     <LinearBg
-      colors={[colors.background , colors.backgroundSoft ]}
+      colors={[colors.background, colors.backgroundSoft]}
       style={styles.gradient}
     >
       <SafeAreaView style={styles.container}>
@@ -52,7 +53,10 @@ const LoginScreen = () => {
               <LoginForm vm={vm} />
             </LoginPin>
 
-            <LoginFooter />
+            <LoginFooter
+              onSignupPress={handleNavigateToSignup}
+              onForgotPasswordPress={() => console.log('Forgot password pressed')}
+            />
           </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>

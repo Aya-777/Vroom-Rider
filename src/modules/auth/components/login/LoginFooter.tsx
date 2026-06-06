@@ -1,9 +1,15 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/login.styles';
 
-const LoginFooter = () => {
+type Props = {
+  onSignupPress?: () => void;
+  onForgotPasswordPress?: () => void;
+};
+
+const LoginFooter = ({ onSignupPress, onForgotPasswordPress }: Props) => {
+
   const { colors } = useTheme();
   const styles = createStyles(colors);
 
@@ -14,20 +20,23 @@ const LoginFooter = () => {
           styles.text,
         ]}>
         Don't have an account?{' '}
+        <TouchableOpacity onPress={onSignupPress}>
+          <Text
+            style={[
+              styles.link,
+            ]}>
+            Signup
+          </Text>
+        </TouchableOpacity>
+      </Text>
+      <TouchableOpacity onPress={onForgotPasswordPress}>
         <Text
           style={[
             styles.link,
           ]}>
-          Register
+          Forgot Password?
         </Text>
-      </Text>
-
-      <Text
-        style={[
-          styles.link,
-        ]}>
-        Forgot Password?
-      </Text>
+      </TouchableOpacity>
     </View>
   );
 };
