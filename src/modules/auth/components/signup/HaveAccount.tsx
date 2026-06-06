@@ -11,7 +11,7 @@ type Props = {
   onLoginPress?: () => void;
 };
 
-const LoginFooter = ({ onLoginPress }: Props) => {
+const SignupLoginFooter = ({ onLoginPress }: Props) => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
 
@@ -42,4 +42,4 @@ const LoginFooter = ({ onLoginPress }: Props) => {
   );
 };
 
-export default LoginFooter;
+export default SignupLoginFooter;
