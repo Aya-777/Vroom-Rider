@@ -1,8 +1,8 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
-import { useTheme } from '../../../core/theme/useTheme';
-import LinearBg from '../../../shared/components/LinearBg';
-import Profile from '../../../assets/svg/profile.svg';
+import { useTheme } from '../../../../core/theme/useTheme';
+import LinearBg from '../../../../shared/components/LinearBg';
+import Profile from '../../../../assets/svg/profile.svg';
 
 type LogoProps = {
   type?: 'login' | 'signup';
@@ -19,7 +19,7 @@ const Logo = ({ type = 'login' }: LogoProps) => {
     >
       {type === 'login' ? (
         <Image
-          source={require('../../../assets/images/logo.png')}
+          source={require('../../../../assets/images/logo.png')}
           style={styles.logo  }
           resizeMode="contain"
         />

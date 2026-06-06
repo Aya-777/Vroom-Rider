@@ -5,18 +5,19 @@ import {
   TouchableOpacity,
   Text,
 } from 'react-native';
-import PhoneNumberIcon from '../../../assets/svg/phoneNumber.svg';
-import PasswordIcon from '../../../assets/svg/password.svg';
-import VisibilityOnIcon from '../../../assets/svg/visibilityOn.svg';
-import VisibilityOffIcon from '../../../assets/svg/visibilityOff.svg';
-import Logo from './logo';
-import LinearBg from '../../../shared/components/LinearBg';
-import { useTheme } from '../../../core/theme/useTheme';
-import { createStyles } from '../styles/login.styles';
+import PhoneNumberIcon from '../../../../assets/svg/phoneNumber.svg';
+import PasswordIcon from '../../../../assets/svg/password.svg';
+import VisibilityOnIcon from '../../../../assets/svg/visibilityOn.svg';
+import VisibilityOffIcon from '../../../../assets/svg/visibilityOff.svg';
+import Logo from '../shared/logo';
+import LinearBg from '../../../../shared/components/LinearBg';
+import { useTheme } from '../../../../core/theme/useTheme';
+import { createStyles } from '../../styles/login.styles';
 
 const LoginForm = ({ vm }: any) => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
+  
   return (
     <View>
       {/* LOGO */}

@@ -4,8 +4,8 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import { useTheme } from '../../../core/theme/useTheme';
-import { createStyles } from '../styles/signup.styles';
+import { useTheme } from '../../../../core/theme/useTheme';
+import { createStyles } from '../../styles/signup.styles';
 
 const SignupFooter = () => {
   const { colors } = useTheme();

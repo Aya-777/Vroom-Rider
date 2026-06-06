@@ -5,10 +5,11 @@ import {
     Shadows,
     Typography,
 } from '../../../core/theme/tokens';
+import { ThemeColors } from '../../../core/theme/theme.types';
 
 const { width } = Dimensions.get('window');
 
-export const createStyles = (colors: any) =>
+export const createStyles = (colors: ThemeColors) =>
     StyleSheet.create({
         container: {
             flex: 1,
@@ -100,7 +101,7 @@ export const createStyles = (colors: any) =>
         },
 
         infoText: {
-            color: colors.backgroundSecondary,
+            color: colors.background,
             opacity: 0.9,
             marginLeft: 4,
             ...Typography.caption,

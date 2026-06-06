@@ -1,0 +1,341 @@
+Vroom-Rider/
+├── .bundle
+│   └── config
+├── .eslintrc.js
+├── .git
+├── .gitignore
+├── .prettierrc.js
+├── .vscode
+│   └── .react
+├── .watchmanconfig
+├── App.tsx
+├── Gemfile
+├── README.md
+├── __tests__
+│   └── App.test.tsx
+├── android
+│   ├── .gradle
+│   ├── .kotlin
+│   │   └── sessions
+│   ├── app
+│   │   ├── .cxx
+│   │   ├── build
+│   │   ├── build.gradle
+│   │   ├── debug.keystore
+│   │   ├── proguard-rules.pro
+│   │   └── src
+│   │       └── main
+│   │           ├── AndroidManifest.xml
+│   │           ├── assets
+│   │           │   └── fonts
+│   │           │       ├── Lora-Bold.ttf
+│   │           │       ├── Lora-Regular.ttf
+│   │           │       └── Lora-SemiBold.ttf
+│   │           ├── java
+│   │           │   └── com
+│   │           │       └── vroomrider
+│   │           │           ├── MainActivity.kt
+│   │           │           └── MainApplication.kt
+│   │           └── res
+│   │               ├── drawable
+│   │               │   └── rn_edit_text_material.xml
+│   │               ├── mipmap-hdpi
+│   │               │   ├── ic_launcher.png
+│   │               │   └── ic_launcher_round.png
+│   │               ├── mipmap-mdpi
+│   │               │   ├── ic_launcher.png
+│   │               │   └── ic_launcher_round.png
+│   │               ├── mipmap-xhdpi
+│   │               │   ├── ic_launcher.png
+│   │               │   └── ic_launcher_round.png
+│   │               ├── mipmap-xxhdpi
+│   │               │   ├── ic_launcher.png
+│   │               │   └── ic_launcher_round.png
+│   │               ├── mipmap-xxxhdpi
+│   │               │   ├── ic_launcher.png
+│   │               │   └── ic_launcher_round.png
+│   │               └── values
+│   │                   ├── strings.xml
+│   │                   └── styles.xml
+│   ├── build
+│   ├── build.gradle
+│   ├── gradle
+│   │   └── wrapper
+│   │       ├── gradle-wrapper.jar
+│   │       └── gradle-wrapper.properties
+│   ├── gradle.properties
+│   ├── gradlew
+│   ├── gradlew.bat
+│   ├── link-assets-manifest.json
+│   └── settings.gradle
+├── app.json
+├── babel.config.js
+├── gen_tree.py
+├── gen_tree_filtered.py
+├── index.js
+├── ios
+│   ├── .xcode.env
+│   ├── Podfile
+│   ├── VroomRider
+│   │   ├── AppDelegate.swift
+│   │   ├── Images.xcassets
+│   │   │   ├── AppIcon.appiconset
+│   │   │   │   └── Contents.json
+│   │   │   └── Contents.json
+│   │   ├── Info.plist
+│   │   ├── LaunchScreen.storyboard
+│   │   └── PrivacyInfo.xcprivacy
+│   ├── VroomRider.xcodeproj
+│   │   ├── project.pbxproj
+│   │   └── xcshareddata
+│   │       └── xcschemes
+│   │           └── VroomRider.xcscheme
+│   └── link-assets-manifest.json
+├── jest.config.js
+├── metro.config.js
+├── node_modules
+├── package-lock.json
+├── package.json
+├── project_tree.txt
+├── project_tree_filtered.txt
+├── react-native.config.js
+├── src
+│   ├── assets
+│   │   ├── fonts
+│   │   │   ├── Lora-Bold.ttf
+│   │   │   ├── Lora-Regular.ttf
+│   │   │   └── Lora-SemiBold.ttf
+│   │   ├── images
+│   │   │   ├── comfort.png
+│   │   │   ├── economy.png
+│   │   │   ├── logo.png
+│   │   │   ├── logoWithName.png
+│   │   │   └── xl.png
+│   │   └── svg
+│   │       ├── ForYouStar.svg
+│   │       ├── arrows
+│   │       │   ├── arrow.svg
+│   │       │   ├── arrowLeft.svg
+│   │       │   ├── arrowUp.svg
+│   │       │   └── dropdownArrow.svg
+│   │       ├── call.svg
+│   │       ├── camera.svg
+│   │       ├── car.svg
+│   │       ├── cash.svg
+│   │       ├── chat.svg
+│   │       ├── creditcard.svg
+│   │       ├── edit.svg
+│   │       ├── emergencyContact.svg
+│   │       ├── filters.svg
+│   │       ├── help.svg
+│   │       ├── history.svg
+│   │       ├── home.svg
+│   │       ├── info.svg
+│   │       ├── logout.svg
+│   │       ├── mail.svg
+│   │       ├── menu.svg
+│   │       ├── myLocation.svg
+│   │       ├── notifications.svg
+│   │       ├── password.svg
+│   │       ├── phoneNumber.svg
+│   │       ├── pin.svg
+│   │       ├── pinContainerMainCard.svg
+│   │       ├── price.svg
+│   │       ├── privacy.svg
+│   │       ├── profile.svg
+│   │       ├── questionMark.svg
+│   │       ├── reserve.svg
+│   │       ├── ride.svg
+│   │       ├── safety.svg
+│   │       ├── schedule.svg
+│   │       ├── search.svg
+│   │       ├── settings.svg
+│   │       ├── star.svg
+│   │       ├── visibilityOff.svg
+│   │       ├── visibilityOn.svg
+│   │       ├── whatsapp.svg
+│   │       └── work.svg
+│   ├── core
+│   │   ├── i18n
+│   │   │   ├── index.ts
+│   │   │   ├── locales
+│   │   │   │   ├── ar
+│   │   │   │   │   ├── auth.json
+│   │   │   │   │   ├── common.json
+│   │   │   │   │   ├── home.json
+│   │   │   │   │   ├── profile.json
+│   │   │   │   │   └── ride.json
+│   │   │   │   └── en
+│   │   │   │       ├── auth.json
+│   │   │   │       ├── common.json
+│   │   │   │       ├── home.json
+│   │   │   │       ├── profile.json
+│   │   │   │       └── ride.json
+│   │   │   ├── resources.ts
+│   │   │   ├── types.ts
+│   │   │   └── utils
+│   │   │       ├── getCurrentLanguage.ts
+│   │   │       └── isRTL.ts
+│   │   ├── storage
+│   │   │   ├── asyncStorage.adapter.ts
+│   │   │   ├── index.ts
+│   │   │   ├── mmkv.adapter.ts
+│   │   │   ├── secureStorage.adapter.ts
+│   │   │   ├── storage.adapter.ts
+│   │   │   ├── storage.keys.ts
+│   │   │   ├── storage.service.ts
+│   │   │   └── storage.types.ts
+│   │   ├── store
+│   │   │   ├── authStore.ts
+│   │   │   ├── languageStore.ts
+│   │   │   └── themeStore.ts
+│   │   └── theme
+│   │       ├── ThemeProvider.tsx
+│   │       ├── colors
+│   │       │   ├── darkColors.ts
+│   │       │   ├── index.ts
+│   │       │   └── lightColors.ts
+│   │       ├── theme.types.ts
+│   │       ├── themes.ts
+│   │       ├── tokens
+│   │       │   ├── index.ts
+│   │       │   ├── radius.ts
+│   │       │   ├── shadows.ts
+│   │       │   ├── spacing.ts
+│   │       │   └── typography.ts
+│   │       └── useTheme.ts
+│   ├── modules
+│   │   ├── auth
+│   │   │   ├── components
+│   │   │   │   ├── login
+│   │   │   │   │   ├── LoginFooter.tsx
+│   │   │   │   │   ├── LoginForm.tsx
+│   │   │   │   │   ├── LoginPin.tsx
+│   │   │   │   │   └── PinShape.tsx
+│   │   │   │   ├── shared
+│   │   │   │   │   └── logo.tsx
+│   │   │   │   └── signup
+│   │   │   │       ├── PinGlow.tsx
+│   │   │   │       ├── PinShapeSkia.tsx
+│   │   │   │       ├── SignupCard.tsx
+│   │   │   │       ├── SignupFooter.tsx
+│   │   │   │       └── SignupForm.tsx
+│   │   │   ├── constants
+│   │   │   ├── hooks
+│   │   │   ├── screens
+│   │   │   │   ├── LoginScreen.tsx
+│   │   │   │   └── SignupScreen.tsx
+│   │   │   ├── services
+│   │   │   ├── store
+│   │   │   ├── styles
+│   │   │   │   ├── login.styles.ts
+│   │   │   │   └── signup.styles.ts
+│   │   │   ├── types
+│   │   │   └── viewmodels
+│   │   │       ├── useLoginViewModel.ts
+│   │   │       └── useSignupViewModel.ts
+│   │   ├── home
+│   │   │   ├── components
+│   │   │   │   ├── DestinationCard.tsx
+│   │   │   │   ├── HomeHeader.tsx
+│   │   │   │   ├── SectionHeader.tsx
+│   │   │   │   └── ServiceCard.tsx
+│   │   │   ├── constants
+│   │   │   │   └── homeData.ts
+│   │   │   ├── hooks
+│   │   │   │   └── useHomeActions.ts
+│   │   │   ├── screens
+│   │   │   │   └── HomeScreen.tsx
+│   │   │   ├── styles
+│   │   │   │   └── home.styles.ts
+│   │   │   ├── types
+│   │   │   │   └── home.types.ts
+│   │   │   └── viewmodels
+│   │   │       └── useHomeViewModel.ts
+│   │   ├── profile
+│   │   │   ├── components
+│   │   │   │   ├── GridCard.tsx
+│   │   │   │   ├── GridSection.tsx
+│   │   │   │   ├── ListItem.tsx
+│   │   │   │   ├── ListSection.tsx
+│   │   │   │   ├── LogoutButton.tsx
+│   │   │   │   ├── ProfileCard.tsx
+│   │   │   │   └── PromoBanner.tsx
+│   │   │   ├── constants
+│   │   │   │   └── profileData.ts
+│   │   │   ├── hooks
+│   │   │   │   └── useProfileActions.ts
+│   │   │   ├── screens
+│   │   │   │   └── ProfileScreen.tsx
+│   │   │   ├── styles
+│   │   │   │   └── profile.styles.ts
+│   │   │   ├── types
+│   │   │   │   └── profile.types.ts
+│   │   │   └── viewmodels
+│   │   │       └── useProfileViewModel.ts
+│   │   └── ride
+│   │       ├── components
+│   │       │   ├── CarDetailsCard.tsx
+│   │       │   ├── CommunicationActions.tsx
+│   │       │   ├── DriverAvatar.tsx
+│   │       │   ├── DriverName.tsx
+│   │       │   ├── DriverStatus.tsx
+│   │       │   ├── FindDriverButton.tsx
+│   │       │   ├── InfoBox.tsx
+│   │       │   ├── NextButton.tsx
+│   │       │   ├── PaymentDropdown.tsx
+│   │       │   ├── ProgressBar.tsx
+│   │       │   ├── RideActionButton.tsx
+│   │       │   ├── RideDropdown.tsx
+│   │       │   ├── RideLocationInputs.tsx
+│   │       │   ├── RideNextButton.tsx
+│   │       │   ├── TimePriceBox.tsx
+│   │       │   └── VehicleSelector.tsx
+│   │       ├── constants
+│   │       │   ├── rideConfirmation.data.ts
+│   │       │   ├── vehicleData.ts
+│   │       │   └── vehicleImages.ts
+│   │       ├── hooks
+│   │       │   ├── useExtraDetails.ts
+│   │       │   └── useSelectRide.ts
+│   │       ├── screens
+│   │       │   ├── DriverFoundScreen.tsx
+│   │       │   ├── ExtraDetailsScreen.tsx
+│   │       │   ├── RideConfirmationScreen.tsx
+│   │       │   └── SelectRideScreen.tsx
+│   │       ├── styles
+│   │       │   ├── DriverFound.styles.ts
+│   │       │   ├── confirmRide.styles.ts
+│   │       │   ├── extraDetails.styles.ts
+│   │       │   └── selectRide.styles.ts
+│   │       ├── types
+│   │       │   └── ride.types.ts
+│   │       └── viewmodels
+│   │           └── useRideConfirmationViewModel.ts
+│   ├── navigation
+│   │   ├── RootNavigator.tsx
+│   │   ├── auth
+│   │   │   ├── AuthStack.tsx
+│   │   │   └── authTypes.ts
+│   │   ├── deepLinkingConfig.ts
+│   │   ├── main
+│   │   │   ├── MainTabs.tsx
+│   │   │   ├── home
+│   │   │   │   ├── HomeStack.tsx
+│   │   │   │   └── homeTypes.ts
+│   │   │   ├── mainTypes.ts
+│   │   │   └── profile
+│   │   │       ├── ProfileStack.tsx
+│   │   │       └── profileTypes.ts
+│   │   └── rootTypes.ts
+│   ├── shared
+│   │   └── components
+│   │       ├── Header.tsx
+│   │       ├── LinearBg.tsx
+│   │       ├── SearchBar.tsx
+│   │       └── ride
+│   │           ├── BottomSheetCard.tsx
+│   │           └── Header.tsx
+│   └── types
+│       └── svg.d.ts
+└── tsconfig.json

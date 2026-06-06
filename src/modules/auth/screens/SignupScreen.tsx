@@ -6,12 +6,12 @@ import {
   ScrollView,
   Text,
 } from 'react-native';
-import SignupForm from '../components/SignupForm';
-import SignupFooter from '../components/SignupFooter';
+import SignupForm from '../components/signup/SignupForm';
+import SignupFooter from '../components/signup/SignupFooter';
 import { useTheme } from '../../../core/theme/useTheme';
 import { useSignupViewModel } from '../viewmodels/useSignupViewModel';
 import { createStyles } from '../styles/signup.styles';
-import SignupCard from '../components/SignupCard';
+import SignupCard from '../components/signup/SignupCard';
 import LinearBg from '../../../shared/components/LinearBg';
 
 const SignupScreen = () => {

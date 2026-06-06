@@ -7,9 +7,9 @@ import {
   ScrollView,
   Text,
 } from 'react-native';
-import LoginPin from '../components/LoginPin';
-import LoginForm from '../components/LoginForm';
-import LoginFooter from '../components/LoginFooter';
+import LoginPin from '../components/login/LoginPin';
+import LoginForm from '../components/login/LoginForm';
+import LoginFooter from '../components/login/LoginFooter';
 import { useLoginViewModel } from '../viewmodels/useLoginViewModel';
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/login.styles';

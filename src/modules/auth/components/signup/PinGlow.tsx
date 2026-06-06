@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Canvas, Path, BlurMask, Group } from '@shopify/react-native-skia';
 import { LayoutChangeEvent, View } from 'react-native';
-import { createStyles } from '../styles/signup.styles';
-import { useTheme } from '../../../core/theme/useTheme';
+import { createStyles } from '../../styles/signup.styles';
+import { useTheme } from '../../../../core/theme/useTheme';
 
 const PATH = `
   M174 510
