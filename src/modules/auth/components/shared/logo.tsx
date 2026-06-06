@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
-import { useTheme } from '../../../core/theme/useTheme';
-import LinearBg from '../../../shared/components/LinearBg';
+import { useTheme } from '../../../../core/theme/useTheme';
+import LinearBg from '../../../../shared/components/LinearBg';
 import Profile from '../../../assets/svg/profile.svg';
 
 type LogoProps = {

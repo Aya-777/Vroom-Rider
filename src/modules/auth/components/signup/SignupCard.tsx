@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
-import { createStyles } from '../styles/signup.styles';
-import { useTheme } from '../../../core/theme/useTheme';
-import PinShapeSkia from '../components/PinShapeSkia';
-import PinGlow from '../components/PinGlow';
+import { createStyles } from '../../styles/signup.styles';
+import { useTheme } from '../../../../core/theme/useTheme';
+import PinShapeSkia from './PinShapeSkia';
+import PinGlow from './PinGlow';
 
 const SignupCard = ({
     children,

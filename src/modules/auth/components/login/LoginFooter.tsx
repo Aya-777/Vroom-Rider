@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { useTheme } from '../../../core/theme/useTheme';
-import { createStyles } from '../styles/login.styles';
+import { useTheme } from '../../../../core/theme/useTheme';
+import { createStyles } from '../../styles/login.styles';
 
 const LoginFooter = () => {
   const { colors } = useTheme();
