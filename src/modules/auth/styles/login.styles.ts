@@ -4,8 +4,9 @@ import {
     Typography,
     Radius,
 } from '../../../core/theme/tokens';
+import { ThemeColors } from '../../../core/theme/theme.types';
 
-export const createStyles = (colors: any) =>
+export const createStyles = (colors: ThemeColors) =>
     StyleSheet.create({
         container: {
             flex: 1,
@@ -41,7 +42,9 @@ export const createStyles = (colors: any) =>
             alignItems: 'center',
             paddingHorizontal: 16,
             borderRadius: 12,
-            backgroundColor: colors.backgroundSoft,
+            borderColor: colors.surface,
+            borderWidth: 2,
+            backgroundColor: colors.backgroundSoft ,
         },
 
         input: {

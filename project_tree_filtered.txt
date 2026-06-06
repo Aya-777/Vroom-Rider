@@ -97,6 +97,7 @@ Vroom-Rider/
 ├── package-lock.json
 ├── package.json
 ├── project_tree.txt
+├── project_tree_filtered.txt
 ├── react-native.config.js
 ├── src
 │   ├── assets
@@ -202,7 +203,6 @@ Vroom-Rider/
 │   │       │   ├── shadows.ts
 │   │       │   ├── spacing.ts
 │   │       │   └── typography.ts
-│   │       ├── types.ts
 │   │       └── useTheme.ts
 │   ├── modules
 │   │   ├── auth
@@ -212,19 +212,25 @@ Vroom-Rider/
 │   │   │   │   │   ├── LoginForm.tsx
 │   │   │   │   │   ├── LoginPin.tsx
 │   │   │   │   │   └── PinShape.tsx
-│   │   │   │   ├── logo.tsx
+│   │   │   │   ├── shared
+│   │   │   │   │   └── logo.tsx
 │   │   │   │   └── signup
 │   │   │   │       ├── PinGlow.tsx
 │   │   │   │       ├── PinShapeSkia.tsx
 │   │   │   │       ├── SignupCard.tsx
 │   │   │   │       ├── SignupFooter.tsx
 │   │   │   │       └── SignupForm.tsx
+│   │   │   ├── constants
+│   │   │   ├── hooks
 │   │   │   ├── screens
 │   │   │   │   ├── LoginScreen.tsx
 │   │   │   │   └── SignupScreen.tsx
+│   │   │   ├── services
+│   │   │   ├── store
 │   │   │   ├── styles
 │   │   │   │   ├── login.styles.ts
 │   │   │   │   └── signup.styles.ts
+│   │   │   ├── types
 │   │   │   └── viewmodels
 │   │   │       ├── useLoginViewModel.ts
 │   │   │       └── useSignupViewModel.ts

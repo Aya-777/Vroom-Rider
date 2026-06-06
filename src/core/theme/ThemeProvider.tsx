@@ -1,10 +1,17 @@
 import React from 'react';
 import { themes } from './themes';
 import { useThemeStore } from '../store/themeStore';
+import { AppTheme } from './theme.types';
 
-export const ThemeContext = React.createContext<any>(null);
+export const ThemeContext =
+  React.createContext<AppTheme | null>(null);
 
-export const ThemeProvider = ({ children }: any) => {
+type Props = {
+  children: React.ReactNode;
+};
+
+export const ThemeProvider = ({ children }: Props) => {
+  
   const mode = useThemeStore((state) => state.mode);
 
   const theme = themes[mode];
