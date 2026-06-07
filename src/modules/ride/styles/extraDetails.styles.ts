@@ -75,7 +75,7 @@ export const createStyles = (colors: ThemeColors) =>
     activeVehicleCard: {
       borderWidth: 2,
       borderColor: colors.primary,
-      backgroundColor : colors.primary + '20'
+      backgroundColor : colors.primary + '80'
     },
 
     vehicleImage: {
