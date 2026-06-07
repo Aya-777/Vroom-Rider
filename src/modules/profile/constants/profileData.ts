@@ -1,14 +1,14 @@
-import HistoryIcon from '../../../assets/svg/history.svg';
-import NotificationsIcon from '../../../assets/svg/notifications.svg';
-import StarIcon from '../../../assets/svg/star.svg';
-import SafetyIcon from '../../../assets/svg/safety.svg';
+import HistoryIcon from '../../../assets/svg/common/history.svg';
+import NotificationsIcon from '../../../assets/svg/common/notifications.svg';
+import StarIcon from '../../../assets/svg/common/star.svg';
+import SafetyIcon from '../../../assets/svg/profile/safety.svg';
 
-import SettingsIcon from '../../../assets/svg/settings.svg';
-import PrivacyIcon from '../../../assets/svg/privacy.svg';
-import EmergencyContactIcon from '../../../assets/svg/emergencyContact.svg';
-import HelpIcon from '../../../assets/svg/questionMark.svg';
-import InfoIcon from '../../../assets/svg/info.svg';
-import MailIcon from '../../../assets/svg/mail.svg';
+import SettingsIcon from '../../../assets/svg/profile/settings.svg';
+import PrivacyIcon from '../../../assets/svg/profile/privacy.svg';
+import EmergencyContactIcon from '../../../assets/svg/contact/emergencyContact.svg';
+import HelpIcon from '../../../assets/svg/profile/help.svg';
+import InfoIcon from '../../../assets/svg/common/info.svg';
+import MailIcon from '../../../assets/svg/contact/mail.svg';
 
 export const profileGridItems = [
   { id: '1', title: 'Ride History', icon: HistoryIcon },

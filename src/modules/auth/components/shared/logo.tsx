@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { useTheme } from '../../../../core/theme/useTheme';
 import LinearBg from '../../../../shared/components/LinearBg';
-import Profile from '../../../../assets/svg/profile.svg';
+import Profile from '../../../../assets/svg/profile/profile.svg';
 
 type LogoProps = {
   type?: 'login' | 'signup';

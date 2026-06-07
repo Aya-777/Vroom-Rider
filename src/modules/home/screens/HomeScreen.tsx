@@ -7,7 +7,7 @@ import {
 
 import LinearBg from '../../../shared/components/LinearBg';
 import SearchBar from '../../../shared/components/SearchBar';
-import ForYouStar from '../../../assets/svg/ForYouStar.svg';
+import ForYouStar from '../../../assets/svg/home/ForYouStar.svg';
 
 import ServiceCard from '../components/ServiceCard';
 import DestinationCard from '../components/DestinationCard';

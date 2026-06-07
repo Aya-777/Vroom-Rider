@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import type { Driver } from '../types/ride.types';
-import type { ThemeColors } from '../../../core/theme/types';
+import type { ThemeColors } from '../../../core/theme/theme.types';
 import type { DriverFoundStyles } from '../styles/DriverFound.styles';
-import CarIcon from '../../../assets/svg/car.svg';
+import CarIcon from '../../../assets/svg/common/ride.svg';
 
 type CarDetailsCardProps = {
   driver: Driver;

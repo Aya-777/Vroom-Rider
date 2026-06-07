@@ -1,5 +1,5 @@
-import HomeIcon from '../../../assets/svg/home.svg';
-import WorkIcon from '../../../assets/svg/work.svg';
+import HomeIcon from '../../../assets/svg/common/home.svg';
+import WorkIcon from '../../../assets/svg/common/work.svg';
 
 export const recentDestinations = [
   {

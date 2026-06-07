@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
-import type { ThemeColors } from '../../../core/theme/types';
+import type { ThemeColors } from '../../../core/theme/theme.types';
 import type { DriverFoundStyles } from '../styles/DriverFound.styles';
 
 type DriverNameProps = {

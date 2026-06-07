@@ -13,7 +13,7 @@ import {
 
 import { useTheme } from '../../../core/theme/useTheme';
 
-import MyLocationIcon from '../../../assets/svg/myLocation.svg';
+import MyLocationIcon from '../../../assets/svg/common/myLocation.svg';
 import LinearBg from '../LinearBg';
 
 interface BottomSheetCardProps {

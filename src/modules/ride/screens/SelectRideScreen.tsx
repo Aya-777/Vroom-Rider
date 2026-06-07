@@ -19,10 +19,10 @@ import { useSelectRide } from '../hooks/useSelectRide';
 import { createStyles } from '../styles/selectRide.styles';
 
 // SVGs
-import ProfileIcon from '../../../assets/svg/profile.svg';
-import ScheduleIcon from '../../../assets/svg/schedule.svg';
-import PinIcon from '../../../assets/svg/pin.svg';
-import StarIcon from '../../../assets/svg/star.svg';
+import ProfileIcon from '../../../assets/svg/profile/profile.svg';
+import ScheduleIcon from '../../../assets/svg/common/schedule.svg';
+import PinIcon from '../../../assets/svg/common/pin.svg';
+import StarIcon from '../../../assets/svg/common/star.svg';
 
 export default function SelectRideScreen() {
   const navigation =

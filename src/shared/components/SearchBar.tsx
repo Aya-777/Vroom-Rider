@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
-import ScheduleIcon from '../../assets/svg/schedule.svg';
-import SearchIcon from '../../assets/svg/search.svg';
+import ScheduleIcon from '../../assets/svg/common/schedule.svg';
+import SearchIcon from '../../assets/svg/common/search.svg';
 
 import { Typography, Spacing, Radius, Shadows } from '../../core/theme/tokens';
 import { useTheme } from '../../core/theme/useTheme';

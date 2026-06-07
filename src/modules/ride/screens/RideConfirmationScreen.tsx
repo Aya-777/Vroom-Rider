@@ -15,11 +15,11 @@ import FindDriverButton from '../components/FindDriverButton';
 import { createStyles } from '../styles/confirmRide.styles';
 
 // SVGs
-import ClockIcon from '../../../assets/svg/schedule.svg';
-import EstimatedPriceIcon from '../../../assets/svg/price.svg';
-import CashIcon from '../../../assets/svg/cash.svg';
-import CarIcon from '../../../assets/svg/car.svg';
-import PhoneNumberIcon from '../../../assets/svg/phoneNumber.svg';
+import ClockIcon from '../../../assets/svg/common/schedule.svg';
+import EstimatedPriceIcon from '../../../assets/svg/payment/price.svg';
+import CashIcon from '../../../assets/svg/payment/cash.svg';
+import CarIcon from '../../../assets/svg/common/ride.svg';
+import PhoneNumberIcon from '../../../assets/svg/contact/call.svg';
 
 type RideRouteParams = {
   price?: string;

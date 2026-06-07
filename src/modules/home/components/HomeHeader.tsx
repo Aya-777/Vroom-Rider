@@ -6,8 +6,8 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import MenuIcon from '../../../assets/svg/menu.svg';
-import NotificationsIcon from '../../../assets/svg/notifications.svg';
+import MenuIcon from '../../../assets/svg/common/menu.svg';
+import NotificationsIcon from '../../../assets/svg/common/notifications.svg';
 
 import {
   //   Typography,

@@ -12,12 +12,12 @@ import HomeStack from './home/HomeStack';
 import ProfileStack from './profile/ProfileStack';
 
 import { SvgProps } from 'react-native-svg';
-import HomeActive from '../../assets/svg/home.svg';
-import HomeInactive from '../../assets/svg/home.svg';
-import CarActive from '../../assets/svg/car.svg';
-import CarInactive from '../../assets/svg/car.svg';
-import ProfileActive from '../../assets/svg/profile.svg';
-import ProfileInactive from '../../assets/svg/profile.svg';
+import HomeActive from '../../assets/svg/common/home.svg';
+import HomeInactive from '../../assets/svg/common/home.svg';
+import CarActive from '../../assets/svg/common/ride.svg';
+import CarInactive from '../../assets/svg/common/ride.svg';
+import ProfileActive from '../../assets/svg/profile/profile.svg';
+import ProfileInactive from '../../assets/svg/profile/profile.svg';
 
 const Tab = createBottomTabNavigator<MainTabsParamList>();
 

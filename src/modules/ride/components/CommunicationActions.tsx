@@ -1,11 +1,11 @@
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import type { ThemeColors } from '../../../core/theme/types';
+import type { ThemeColors } from '../../../core/theme/theme.types';
 import type { DriverFoundStyles } from '../styles/DriverFound.styles';
 
-import PhoneNumberIcon from '../../../assets/svg/phoneNumber.svg';
-import MessageIcon from '../../../assets/svg/chat.svg';
-import WhatsAppIcon from '../../../assets/svg/whatsapp.svg';
+import PhoneNumberIcon from '../../../assets/svg/contact/call.svg';
+import MessageIcon from '../../../assets/svg/contact/chat.svg';
+import WhatsAppIcon from '../../../assets/svg/contact/whatsapp.svg';
 
 type CommunicationActionsProps = {
   styles: DriverFoundStyles;

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import RideIcon from '../../../assets/svg/ride.svg';
-import ReserveIcon from '../../../assets/svg/reserve.svg';
+import RideIcon from '../../../assets/svg/common/ride.svg';
+import ReserveIcon from '../../../assets/svg/home/reserve.svg';
 
 import { useTheme } from '../../../core/theme/useTheme';
 
