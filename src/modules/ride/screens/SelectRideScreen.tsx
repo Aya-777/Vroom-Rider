@@ -9,10 +9,10 @@ import Header from '../../../shared/components/ride/Header';
 
 import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 
-import RideDropdown from '../components/RideDropdown';
-import RideLocationInputs from '../components/RideLocationInputs';
-import RideActionButton from '../components/RideActionButton';
-import RideNextButton from '../components/RideNextButton';
+import RideDropdown from '../components/shared/RideDropdown';
+import RideLocationInputs from '../components/SelectRideScreen/RideLocationInputs';
+import RideActionButton from '../components/SelectRideScreen/RideActionButton';
+import RideNextButton from '../components/shared/RideNextButton';
 
 import { useSelectRide } from '../hooks/useSelectRide';
 

@@ -9,8 +9,8 @@ import Header from '../../../shared/components/ride/Header';
 
 import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 
-import InfoBox from '../components/InfoBox';
-import FindDriverButton from '../components/FindDriverButton';
+import InfoBox from '../components/RideConfirmationScreen/InfoBox';
+import FindDriverButton from '../components/RideConfirmationScreen/FindDriverButton';
 
 import { createStyles } from '../styles/confirmRide.styles';
 

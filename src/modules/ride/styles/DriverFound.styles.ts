@@ -9,15 +9,6 @@ export const createStyles = (colors: ThemeColors) =>
       backgroundColor: colors.background,
     },
 
-    // handleBar: {
-    //   width: 38,
-    //   height: 4,
-    //   borderRadius: 2,
-    //   alignSelf: 'center',
-    //   marginBottom: 20,
-    //   backgroundColor: colors.primary,
-    // },
-
     statusText: {
       ...Typography.semiBoldBody,
       textAlign: 'center',

@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { useTheme } from '../../../core/theme/useTheme';
-import { createStyles } from '../styles/extraDetails.styles';
+import { useTheme } from '../../../../core/theme/useTheme';
+import { createStyles } from '../../styles/extraDetails.styles';
 
-import ClockIcon from '../../../assets/svg/common/schedule.svg';
-import PriceIcon from '../../../assets/svg/payment/price.svg';
+import ClockIcon from '../../../../assets/svg/common/schedule.svg';
+import PriceIcon from '../../../../assets/svg/payment/price.svg';
 
 type Props = {
   time: string;

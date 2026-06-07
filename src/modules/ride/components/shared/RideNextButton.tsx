@@ -3,9 +3,9 @@ import {
   TouchableOpacity,
   Text,
 } from 'react-native';
-import { useTheme } from '../../../core/theme/useTheme';
-import { createStyles } from '../styles/selectRide.styles';
-import ArrowIcon from '../../../assets/svg/arrows/arrow.svg';
+import { useTheme } from '../../../../core/theme/useTheme';
+import { createStyles } from '../../styles/selectRide.styles';
+import ArrowIcon from '../../../../assets/svg/arrows/arrow.svg';
 
 type Props = {
   onPress: () => void;

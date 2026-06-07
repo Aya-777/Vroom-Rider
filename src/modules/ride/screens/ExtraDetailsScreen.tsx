@@ -1,20 +1,16 @@
 import React from 'react';
 import { View, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
 import { useTheme } from '../../../core/theme/useTheme';
 import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 import Header from '../../../shared/components/ride/Header';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
-
 import { useExtraDetails } from '../hooks/useExtraDetails';
-
-import TimePriceBox from '../components/TimePriceBox';
-import PaymentDropdown from '../components/PaymentDropdown';
-import VehicleSelector from '../components/VehicleSelector';
-import NextButton from '../components/NextButton';
-
+import TimePriceBox from '../components/ExtraDetailsScreen/TimePriceBox';
+import VehicleSelector from '../components/ExtraDetailsScreen/VehicleSelector';
 import { createStyles } from '../styles/extraDetails.styles';
+import RideNextButton from '../components/shared/RideNextButton';
+import RideDropdown from '../components/shared/RideDropdown';
 
 export default function ExtraDetailsScreen() {
   const { colors, mode } = useTheme();
@@ -31,6 +27,15 @@ export default function ExtraDetailsScreen() {
     setIsDropdownOpen,
   } = useExtraDetails();
 
+  const handleNextPress = () => {
+    navigation.navigate('ConfirmRide', {
+      price: priceEstimate,
+      time: timeEstimate,
+      car: selectedVehicle,
+      payment: selectedPayment,
+    })
+  }
+
   const styles = createStyles(colors);
 
   return (
@@ -46,11 +51,15 @@ export default function ExtraDetailsScreen() {
       <BottomSheetCard>
         <TimePriceBox time={timeEstimate} price={priceEstimate} />
 
-        <PaymentDropdown
-          selected={selectedPayment}
+        <RideDropdown
+          value={selectedPayment}
           isOpen={isDropdownOpen}
+          items={['Cash', 'Wallet']}
           onToggle={() => setIsDropdownOpen(!isDropdownOpen)}
-          onSelect={setSelectedPayment}
+          onSelect={(item) => {
+            setSelectedPayment(item);
+            setIsDropdownOpen(false);
+          }}
         />
 
         <VehicleSelector
@@ -58,16 +67,7 @@ export default function ExtraDetailsScreen() {
           onSelect={setSelectedVehicle}
         />
 
-        <NextButton
-          onPress={() =>
-            navigation.navigate('ConfirmRide', {
-              price: priceEstimate,
-              time: timeEstimate,
-              car: selectedVehicle,
-              payment: selectedPayment,
-            })
-          }
-        />
+        <RideNextButton onPress={handleNextPress} />
       </BottomSheetCard>
     </View>
   );

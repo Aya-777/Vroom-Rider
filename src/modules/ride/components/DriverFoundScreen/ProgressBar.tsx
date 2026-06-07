@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import type { ThemeColors } from '../../../core/theme/theme.types';
-import type { DriverFoundStyles } from '../styles/DriverFound.styles';
+import type { ThemeColors } from '../../../../core/theme/theme.types';
+import type { DriverFoundStyles } from '../../styles/DriverFound.styles';
 
 type ProgressBarProps = {
   styles: DriverFoundStyles;

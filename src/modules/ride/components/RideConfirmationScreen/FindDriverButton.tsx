@@ -1,10 +1,10 @@
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 
-import { useTheme } from '../../../core/theme/useTheme';
-import { createStyles } from '../styles/confirmRide.styles';
+import { useTheme } from '../../../../core/theme/useTheme';
+import { createStyles } from '../../styles/confirmRide.styles';
 
-import SearchIcon from '../../../assets/svg/common/search.svg';
+import SearchIcon from '../../../../assets/svg/common/search.svg';
 
 type Props = {
   onPress: () => void;
