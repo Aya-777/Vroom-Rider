@@ -224,9 +224,11 @@ Vroom-Rider/
 │   │   │   │       └── SignupForm.tsx
 │   │   │   ├── constants
 │   │   │   ├── hooks
+│   │   │   │   └── useSplashAnimation.ts
 │   │   │   ├── screens
 │   │   │   │   ├── LoginScreen.tsx
-│   │   │   │   └── SignupScreen.tsx
+│   │   │   │   ├── SignupScreen.tsx
+│   │   │   │   └── SplashScreen.tsx
 │   │   │   ├── services
 │   │   │   ├── store
 │   │   │   ├── styles
@@ -235,7 +237,8 @@ Vroom-Rider/
 │   │   │   ├── types
 │   │   │   └── viewmodels
 │   │   │       ├── useLoginViewModel.ts
-│   │   │       └── useSignupViewModel.ts
+│   │   │       ├── useSignupViewModel.ts
+│   │   │       └── useSplashViewModel.ts
 │   │   ├── home
 │   │   │   ├── components
 │   │   │   │   ├── DestinationCard.tsx
