@@ -14,12 +14,15 @@ import { useLoginViewModel } from '../viewmodels/useLoginViewModel';
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/login.styles';
 import LinearBg from '../../../shared/components/LinearBg';
+import {useAuthActions} from '../hooks/useAuthActions';
 
 const LoginScreen = () => {
-  const vm = useLoginViewModel();
-  const { handleNavigateToSignup } = vm;
+  
   const { colors } = useTheme();
   const styles = createStyles(colors);
+
+  const vm = useLoginViewModel();
+  const { navigateToSignup } = useAuthActions();
 
   return (
     <LinearBg
@@ -54,7 +57,7 @@ const LoginScreen = () => {
             </LoginPin>
 
             <LoginFooter
-              onSignupPress={handleNavigateToSignup}
+              onSignupPress={navigateToSignup}
               onForgotPasswordPress={() => console.log('Forgot password pressed')}
             />
           </ScrollView>

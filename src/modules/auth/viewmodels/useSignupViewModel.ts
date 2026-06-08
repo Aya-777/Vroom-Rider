@@ -1,11 +1,6 @@
 import { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import type { AuthNavigationProp } from '../../../navigation/auth/authTypes';
 
 export const useSignupViewModel = () => {
-
-  const navigation =
-    useNavigation<AuthNavigationProp>();
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -25,10 +20,6 @@ export const useSignupViewModel = () => {
 
   const toggleConfirmPassword = () =>
     setShowConfirmPassword(prev => !prev);
-
-  const handleNavigateToLogin = () => {
-    navigation.navigate('Login');
-  };
 
   const handleSignup = async () => {
     console.log('Signup');
@@ -57,6 +48,5 @@ export const useSignupViewModel = () => {
     toggleConfirmPassword,
 
     handleSignup,
-    handleNavigateToLogin,
   };
 };
