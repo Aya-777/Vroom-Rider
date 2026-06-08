@@ -18,6 +18,7 @@ import { createStyles } from '../styles/home.styles';
 import { useHomeViewModel } from '../viewmodels/useHomeViewModel';
 
 import HeaderTopAppBar from '../components/HomeHeader';
+import { useHomeActions } from '../hooks/useHomeActions';
 
 export default function HomeScreen() {
 
@@ -28,6 +29,14 @@ export default function HomeScreen() {
     services,
     recentDestinations,
   } = useHomeViewModel();
+  const { 
+    navigateToSelectRide
+  } = useHomeActions();
+
+  const serviceActions: Record<string, () => void> = {
+  '1': navigateToSelectRide,
+  // '2': navigateToReserve,
+};
 
   return (
     <LinearBg
@@ -53,8 +62,9 @@ export default function HomeScreen() {
           <View style={styles.gridContainer}>
             {services.map(service => (
               <ServiceCard
-                key={service.id}
-                {...service}
+              key={service.id}
+              onPress={serviceActions[service.id]}
+              {...service}
               />
             ))}
           </View>

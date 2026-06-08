@@ -8,11 +8,12 @@ import {
 
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/home.styles';
+import { SvgProps } from 'react-native-svg/lib/typescript/elements/Svg';
 
 interface Props {
   title: string;
-  icon: React.ReactNode;
-  active?: boolean;
+  icon: React.ElementType<SvgProps>; 
+  active: boolean;
   onPress?: () => void;
 }
 
@@ -24,8 +25,9 @@ export default function ServiceCard({
 }: Props) {
 
   const { colors } = useTheme();
-
   const styles = createStyles(colors);
+
+  const Icon = icon;
 
   return (
     <View style={styles.gridItemContainer}>
@@ -42,7 +44,7 @@ export default function ServiceCard({
         ]}
         onPress={onPress}
       >
-        {icon}
+        <Icon width={24} height={24} fill={active ? colors.textSecondary : colors.textMuted} />
       </TouchableOpacity>
 
       <Text
