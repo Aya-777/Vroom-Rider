@@ -2,21 +2,25 @@ import React from 'react';
 import { SafeAreaView, ScrollView } from 'react-native';
 
 import { useTheme } from '../../../core/theme/useTheme';
+import { createStyles } from '../styles/profile.styles';
+
 import { useProfileViewModel } from '../viewmodels/useProfileViewModel';
+import { useProfileActions } from '../hooks/useProfileActions';
 
 import ProfileCard from '../components/ProfileCard';
 import GridSection from '../components/GridSection';
 import PromoBanner from '../components/PromoBanner';
 import ListSection from '../components/ListSection';
 import LogoutButton from '../components/LogoutButton';
-import { createStyles } from '../styles/profile.styles';
 import LinearBg from '../../../shared/components/LinearBg';
 
 
 export default function ProfileScreen() {
-  const { colors } = useTheme();
-  const { gridItems, listItems, logout } = useProfileViewModel();
 
+  const { gridItems, listItems} = useProfileViewModel();
+  const { logout } = useProfileActions();
+  
+  const { colors } = useTheme();
   const styles = createStyles(colors);
 
   return (
