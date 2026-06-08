@@ -1,37 +1,34 @@
-import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
+import { Alert } from 'react-native';
 
-export function useSelectRide() {
-  const [isNowDropdownOpen, setIsNowDropdownOpen] =
-    useState(false);
 
-  const [isForMeDropdownOpen, setIsForMeDropdownOpen] =
-    useState(false);
+export function useSelectRide(fromLocation: string, toLocation: string) {
+  
+    const navigation =
+      useNavigation<HomeStackScreenProps<'SelectRide'>['navigation']>();
 
-  const [selectedPerson, setSelectedPerson] =
-    useState('For me');
+    const handleNextPress = () => {
+      if (!fromLocation.trim() || !toLocation.trim()) {
+        Alert.alert(
+          'Missing Information',
+          'Please fill in both pickup and destination locations.',
+        );
+        return;
+      }
+  
+      navigation.navigate('RideDetails', {
+        pickupLocation: fromLocation,
+        dropoffLocation: toLocation,
+      });
+    };
 
-  const [selectedTime, setSelectedTime] =
-    useState('Now');
+    const handleBackPress = () => {
+      navigation.goBack();
+    }
 
-  const [fromLocation, setFromLocation] =
-    useState('');
-
-  const [toLocation, setToLocation] =
-    useState('');
-
-  return {
-    isNowDropdownOpen,
-    isForMeDropdownOpen,
-    selectedPerson,
-    selectedTime,
-    fromLocation,
-    toLocation,
-
-    setIsNowDropdownOpen,
-    setIsForMeDropdownOpen,
-    setSelectedPerson,
-    setSelectedTime,
-    setFromLocation,
-    setToLocation,
-  };
-}
+    return{
+      handleNextPress,
+      handleBackPress,
+    }
+  }

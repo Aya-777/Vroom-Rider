@@ -1,132 +1,125 @@
-import React from 'react';
-import { View, StatusBar, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+  import React from 'react';
+  import { View, StatusBar } from 'react-native';
 
-import { useTheme } from '../../../core/theme/useTheme';
+  import { useTheme } from '../../../core/theme/useTheme';
 
-import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
-import Header from '../../../shared/components/ride/Header';
+  import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
+  import Header from '../../../shared/components/ride/Header';
 
-import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
+  import RideDropdown from '../components/RideDropdown';
+  import RideLocationInputs from '../components/RideLocationInputs';
+  import RideActionButton from '../components/RideActionButton';
+  import RideNextButton from '../components/RideNextButton';
 
-import RideDropdown from '../components/RideDropdown';
-import RideLocationInputs from '../components/RideLocationInputs';
-import RideActionButton from '../components/RideActionButton';
-import RideNextButton from '../components/RideNextButton';
+  import { useSelectRideViewModel } from '../viewmodels/useSelectRideViewModel';
+  import { useSelectRide } from '../hooks/useSelectRide';
 
-import { useSelectRide } from '../hooks/useSelectRide';
+  import { createStyles } from '../styles/selectRide.styles';
 
-import { createStyles } from '../styles/selectRide.styles';
+  // SVGs
+  import ProfileIcon from '../../../assets/svg/profile/profile.svg';
+  import ScheduleIcon from '../../../assets/svg/common/schedule.svg';
+  import PinIcon from '../../../assets/svg/common/pin.svg';
+  import StarIcon from '../../../assets/svg/common/star.svg';
 
-// SVGs
-import ProfileIcon from '../../../assets/svg/profile/profile.svg';
-import ScheduleIcon from '../../../assets/svg/common/schedule.svg';
-import PinIcon from '../../../assets/svg/common/pin.svg';
-import StarIcon from '../../../assets/svg/common/star.svg';
 
-export default function SelectRideScreen() {
-  const navigation =
-    useNavigation<HomeStackScreenProps<'SelectRide'>['navigation']>();
+  export default function SelectRideScreen() {
+    
+    const { colors, mode } = useTheme();
+    const styles = createStyles(colors);
+    
+    const {
+      isNowDropdownOpen,
+      isForMeDropdownOpen,
+      selectedPerson,
+      selectedTime,
+      fromLocation,
+      toLocation,
+      errors,
+      
+      setIsNowDropdownOpen,
+      setIsForMeDropdownOpen,
+      setSelectedPerson,
+      setSelectedTime,
+      setFromLocation,
+      setToLocation,
+      
+      validate,
+    } = useSelectRideViewModel();
+    const {handleNextPress, handleBackPress} = useSelectRide(fromLocation, toLocation);
 
-  const { colors, mode } = useTheme();
-  const styles = createStyles(colors);
+    const onNextPress = () => {
+      if (validate()) {
+        handleNextPress();
+      }
+    };
 
-  const {
-    isNowDropdownOpen,
-    isForMeDropdownOpen,
-    selectedPerson,
-    selectedTime,
-    fromLocation,
-    toLocation,
-
-    setIsNowDropdownOpen,
-    setIsForMeDropdownOpen,
-    setSelectedPerson,
-    setSelectedTime,
-    setFromLocation,
-    setToLocation,
-  } = useSelectRide();
-
-  const handleNextPress = () => {
-    if (!fromLocation.trim() || !toLocation.trim()) {
-      Alert.alert(
-        'Missing Information',
-        'Please fill in both pickup and destination locations.',
-      );
-      return;
-    }
-
-    navigation.navigate('RideDetails', {
-      pickupLocation: fromLocation,
-      dropoffLocation: toLocation,
-    });
-  };
-
-  return (
-    <View style={styles.container}>
-      <StatusBar
-        translucent
-        barStyle={mode === 'dark' ? 'light-content' : 'dark-content'}
-        backgroundColor="transparent"
-      />
-
-      <Header
-        title="Ride"
-        onBackPress={() => navigation.goBack()}
-      />
-
-      <BottomSheetCard>
-        <View style={styles.dropdownRow}>
-          <RideDropdown
-            icon={<ScheduleIcon fill={colors.primary} />}
-            value={selectedTime}
-            isOpen={isNowDropdownOpen}
-            items={['Now', 'Schedule']}
-            onToggle={() =>
-              setIsNowDropdownOpen(!isNowDropdownOpen)
-            }
-            onSelect={item => {
-              setSelectedTime(item);
-              setIsNowDropdownOpen(false);
-            }}
-          />
-
-          <RideDropdown
-            icon={<ProfileIcon fill={colors.primary} />}
-            value={selectedPerson}
-            isOpen={isForMeDropdownOpen}
-            items={['For me', 'Other Contact']}
-            onToggle={() =>
-              setIsForMeDropdownOpen(!isForMeDropdownOpen)
-            }
-            onSelect={item => {
-              setSelectedPerson(item);
-              setIsForMeDropdownOpen(false);
-            }}
-          />
-        </View>
-
-        <RideLocationInputs
-          fromLocation={fromLocation}
-          toLocation={toLocation}
-          onChangeFrom={setFromLocation}
-          onChangeTo={setToLocation}
+    return (
+      <View style={styles.container}>
+        <StatusBar
+          translucent
+          barStyle={mode === 'dark' ? 'light-content' : 'dark-content'}
+          backgroundColor="transparent"
         />
 
-        <View style={styles.actionRow}>
-          <RideActionButton
-            icon={<PinIcon fill={colors.textSecondary} />}
-            title="Set on map"
+        <Header
+          title="Ride"
+          onBackPress={handleBackPress}
+        />
+
+        <BottomSheetCard>
+          <View style={styles.dropdownRow}>
+            <RideDropdown
+              icon={<ScheduleIcon fill={colors.primary} />}
+              value={selectedTime}
+              isOpen={isNowDropdownOpen}
+              items={['Now', 'Schedule']}
+              onToggle={() =>
+                setIsNowDropdownOpen(!isNowDropdownOpen)
+              }
+              onSelect={item => {
+                setSelectedTime(item);
+                setIsNowDropdownOpen(false);
+              }}
+            />
+
+            <RideDropdown
+              icon={<ProfileIcon fill={colors.primary} />}
+              value={selectedPerson}
+              isOpen={isForMeDropdownOpen}
+              items={['For me', 'Other Contact']}
+              onToggle={() =>
+                setIsForMeDropdownOpen(!isForMeDropdownOpen)
+              }
+              onSelect={item => {
+                setSelectedPerson(item);
+                setIsForMeDropdownOpen(false);
+              }}
+            />
+          </View>
+
+          <RideLocationInputs
+            fromLocation={fromLocation}
+            toLocation={toLocation}
+            onChangeFrom={setFromLocation}
+            onChangeTo={setToLocation}
+            errors={errors}
           />
 
-          <RideActionButton
-            icon={<StarIcon fill={colors.textSecondary} />}
-            title="Saved places"
-          />
-        </View>
+          <View style={styles.actionRow}>
+            <RideActionButton
+              icon={<PinIcon fill={colors.textSecondary} />}
+              title="Set on map"
+            />
 
-        <RideNextButton onPress={handleNextPress} />
-      </BottomSheetCard>
-    </View>
-  );
-}
+            <RideActionButton
+              icon={<StarIcon fill={colors.textSecondary} />}
+              title="Saved places"
+            />
+          </View>
+
+          <RideNextButton onPress={onNextPress} />
+        </BottomSheetCard>
+      </View>
+    );
+  }

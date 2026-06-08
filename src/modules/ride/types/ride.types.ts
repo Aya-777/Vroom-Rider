@@ -9,3 +9,8 @@ export type Driver = {
   statusMessage: string;
   car: Car;
 };
+
+export interface RideValidationErrors {
+  fromLocation?: string;
+  toLocation?: string;
+}

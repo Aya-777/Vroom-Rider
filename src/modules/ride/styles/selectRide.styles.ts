@@ -105,6 +105,9 @@ export const createStyles = (colors: ThemeColors) =>
       height: 35,
       fontSize: 15,
       color: colors.textPrimary,
+      paddingTop: 5,
+      paddingBottom: 5,
+      paddingLeft: 10,
     },
 
     divider: {
