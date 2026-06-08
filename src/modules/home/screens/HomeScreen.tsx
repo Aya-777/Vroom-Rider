@@ -17,21 +17,17 @@ import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/home.styles';
 import { useHomeViewModel } from '../viewmodels/useHomeViewModel';
 
-import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 import HeaderTopAppBar from '../components/HomeHeader';
 
-export default function HomeScreen({
-  navigation,
-}: HomeStackScreenProps<'HomeScreen'>) {
+export default function HomeScreen() {
 
   const { colors } = useTheme();
-
   const styles = createStyles(colors);
 
   const {
     services,
     recentDestinations,
-  } = useHomeViewModel(navigation);
+  } = useHomeViewModel();
 
   return (
     <LinearBg

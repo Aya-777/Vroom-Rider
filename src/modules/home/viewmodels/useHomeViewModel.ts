@@ -8,13 +8,13 @@ import { useTheme } from '../../../core/theme/useTheme';
 import { recentDestinations } from '../constants/homeData';
 import { useHomeActions } from '../hooks/useHomeActions';
 
-export const useHomeViewModel = (navigation: any) => {
+export const useHomeViewModel = () => {
 
   const { colors } = useTheme();
 
   const {
-    handleRidePress,
-  } = useHomeActions(navigation);
+    navigateToSelectRide,
+  } = useHomeActions();
 
   const services = [
     {
@@ -22,7 +22,7 @@ export const useHomeViewModel = (navigation: any) => {
       title: 'Ride',
       icon: React.createElement(RideIcon, { fill: colors.textSecondary }),
       active: true,
-      onPress: handleRidePress,
+      onPress: navigateToSelectRide,
     },
 
     {
