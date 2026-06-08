@@ -43,7 +43,7 @@ export default function BottomSheetCard({
 
       {/* Bottom Sheet */}
       <LinearBg
-        colors={[colors.surface, colors.background]}
+        colors={[colors.backgroundSoft, colors.background]}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
         style={styles.sheet}

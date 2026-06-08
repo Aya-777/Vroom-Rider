@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-import { useTheme } from '../../../core/theme/useTheme';
-import { createStyles } from '../styles/confirmRide.styles';
+import { useTheme } from '../../../../core/theme/useTheme';
+import { createStyles } from '../../styles/confirmRide.styles';
 
 type Props = {
   icon: React.ReactNode;

@@ -21,9 +21,10 @@ export const createStyles = (colors: ThemeColors) =>
         },
 
         profileCard: {
-            backgroundColor: colors.primary,
-            opacity: 0.9,
+            backgroundColor: colors.primary + '80',
             borderRadius: Radius.md,
+            borderWidth : 2,
+            borderColor: colors.primary,
             padding: Spacing.mmd,
             paddingBottom: Spacing.lg,
             flexDirection: 'row',

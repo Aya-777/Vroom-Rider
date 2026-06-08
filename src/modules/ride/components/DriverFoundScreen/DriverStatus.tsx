@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
-import type { DriverFoundStyles } from '../styles/DriverFound.styles';
+import type { DriverFoundStyles } from '../../styles/DriverFound.styles';
 
 type DriverStatusProps = {
   text: string;
