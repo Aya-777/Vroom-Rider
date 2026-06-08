@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   View,
-  SafeAreaView,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -26,7 +25,7 @@ const LoginScreen = () => {
       colors={[colors.background, colors.backgroundSoft]}
       style={styles.gradient}
     >
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}
           style={styles.flex}
@@ -59,7 +58,7 @@ const LoginScreen = () => {
             />
           </ScrollView>
         </KeyboardAvoidingView>
-      </SafeAreaView>
+      </View>
     </LinearBg>
   );
 };

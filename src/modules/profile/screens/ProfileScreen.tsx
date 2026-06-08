@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 
 import { useTheme } from '../../../core/theme/useTheme';
 import { useProfileViewModel } from '../viewmodels/useProfileViewModel';
@@ -26,7 +26,7 @@ export default function ProfileScreen() {
       end={{ x: 0, y: 1 }}
       style={styles.container}
     >
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <ScrollView
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
@@ -41,7 +41,7 @@ export default function ProfileScreen() {
 
           <LogoutButton onPress={logout} />
         </ScrollView>
-      </SafeAreaView>
+      </View>
     </LinearBg>
   );
 }
