@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   View,
 } from 'react-native';
@@ -40,7 +39,7 @@ export default function HomeScreen({
       end={{ x: 0, y: 1 }}
       style={styles.gradientContainer}
     >
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
 
         <HeaderTopAppBar />
 
@@ -84,7 +83,7 @@ export default function HomeScreen({
 
         </ScrollView>
 
-      </SafeAreaView>
+      </View>
     </LinearBg >
   );
 }
