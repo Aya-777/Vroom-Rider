@@ -4,9 +4,9 @@ import {
 } from 'react-native';
 import Input from '../../../shared/components/Input';
 
-import { useTheme } from '../../../core/theme/useTheme';
+import { useTheme } from '../../../../core/theme/useTheme';
 
-import { createStyles } from '../styles/selectRide.styles';
+import { createStyles } from '../../styles/selectRide.styles';
 
 type Props = {
   fromLocation: string;

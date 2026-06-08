@@ -10,11 +10,11 @@ import Header from '../../../shared/components/ride/Header';
 import { useRideConfirmationViewModel } from '../viewmodels/useRideConfirmationViewModel';
 import { createStyles } from '../styles/DriverFound.styles';
 
-import DriverStatus from '../components/DriverStatus';
-import DriverAvatar from '../components/DriverAvatar';
-import CommunicationActions from '../components/CommunicationActions';
-import CarDetailsCard from '../components/CarDetailsCard';
-import ProgressBar from '../components/ProgressBar';
+import DriverStatus from '../components/DriverFoundScreen/DriverStatus';
+import DriverAvatar from '../components/DriverFoundScreen/DriverAvatar';
+import CommunicationActions from '../components/DriverFoundScreen/CommunicationActions';
+import CarDetailsCard from '../components/DriverFoundScreen/CarDetailsCard';
+import ProgressBar from '../components/DriverFoundScreen/ProgressBar';
 
 export default function DriverFoundScreen() {
   const { colors } = useTheme();

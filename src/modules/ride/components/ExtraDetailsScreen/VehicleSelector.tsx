@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import { VEHICLE_DATA } from '../constants/vehicleData';
-import { useTheme } from '../../../core/theme/useTheme';
-import { createStyles } from '../styles/extraDetails.styles';
+import { VEHICLE_DATA } from '../../constants/vehicleData';
+import { useTheme } from '../../../../core/theme/useTheme';
+import { createStyles } from '../../styles/extraDetails.styles';
 
 type Props = {
   selected: string;

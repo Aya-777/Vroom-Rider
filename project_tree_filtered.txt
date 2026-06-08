@@ -8,6 +8,7 @@ Vroom-Rider/
 ├── .vscode
 │   └── .react
 ├── .watchmanconfig
+├── ARCHITECTURE.md
 ├── App.tsx
 ├── Gemfile
 ├── README.md
@@ -70,7 +71,6 @@ Vroom-Rider/
 │   └── settings.gradle
 ├── app.json
 ├── babel.config.js
-├── gen_tree.py
 ├── gen_tree_filtered.py
 ├── index.js
 ├── ios
@@ -96,7 +96,6 @@ Vroom-Rider/
 ├── node_modules
 ├── package-lock.json
 ├── package.json
-├── project_tree.txt
 ├── project_tree_filtered.txt
 ├── react-native.config.js
 ├── src
@@ -112,49 +111,51 @@ Vroom-Rider/
 │   │   │   ├── logoWithName.png
 │   │   │   └── xl.png
 │   │   └── svg
-│   │       ├── ForYouStar.svg
 │   │       ├── arrows
 │   │       │   ├── arrow.svg
 │   │       │   ├── arrowLeft.svg
 │   │       │   ├── arrowUp.svg
 │   │       │   └── dropdownArrow.svg
-│   │       ├── call.svg
-│   │       ├── camera.svg
-│   │       ├── car.svg
-│   │       ├── cash.svg
-│   │       ├── chat.svg
-│   │       ├── creditcard.svg
-│   │       ├── edit.svg
-│   │       ├── emergencyContact.svg
-│   │       ├── filters.svg
-│   │       ├── help.svg
-│   │       ├── history.svg
-│   │       ├── home.svg
-│   │       ├── info.svg
-│   │       ├── logout.svg
-│   │       ├── mail.svg
-│   │       ├── menu.svg
-│   │       ├── myLocation.svg
-│   │       ├── notifications.svg
-│   │       ├── password.svg
-│   │       ├── phoneNumber.svg
-│   │       ├── pin.svg
-│   │       ├── pinContainerMainCard.svg
-│   │       ├── price.svg
-│   │       ├── privacy.svg
-│   │       ├── profile.svg
-│   │       ├── questionMark.svg
-│   │       ├── reserve.svg
-│   │       ├── ride.svg
-│   │       ├── safety.svg
-│   │       ├── schedule.svg
-│   │       ├── search.svg
-│   │       ├── settings.svg
-│   │       ├── star.svg
-│   │       ├── visibilityOff.svg
-│   │       ├── visibilityOn.svg
-│   │       ├── whatsapp.svg
-│   │       └── work.svg
+│   │       ├── common
+│   │       │   ├── camera.svg
+│   │       │   ├── edit.svg
+│   │       │   ├── history.svg
+│   │       │   ├── home.svg
+│   │       │   ├── info.svg
+│   │       │   ├── menu.svg
+│   │       │   ├── myLocation.svg
+│   │       │   ├── notifications.svg
+│   │       │   ├── password.svg
+│   │       │   ├── pin.svg
+│   │       │   ├── ride.svg
+│   │       │   ├── schedule.svg
+│   │       │   ├── search.svg
+│   │       │   ├── star.svg
+│   │       │   ├── visibilityOff.svg
+│   │       │   ├── visibilityOn.svg
+│   │       │   └── work.svg
+│   │       ├── contact
+│   │       │   ├── call.svg
+│   │       │   ├── chat.svg
+│   │       │   ├── emergencyContact.svg
+│   │       │   ├── mail.svg
+│   │       │   └── whatsapp.svg
+│   │       ├── home
+│   │       │   ├── ForYouStar.svg
+│   │       │   └── reserve.svg
+│   │       ├── payment
+│   │       │   ├── cash.svg
+│   │       │   ├── creditcard.svg
+│   │       │   └── price.svg
+│   │       ├── profile
+│   │       │   ├── help.svg
+│   │       │   ├── logout.svg
+│   │       │   ├── privacy.svg
+│   │       │   ├── profile.svg
+│   │       │   ├── safety.svg
+│   │       │   └── settings.svg
+│   │       └── ride
+│   │           └── filters.svg
 │   ├── core
 │   │   ├── i18n
 │   │   │   ├── index.ts
@@ -215,6 +216,7 @@ Vroom-Rider/
 │   │   │   │   ├── shared
 │   │   │   │   │   └── logo.tsx
 │   │   │   │   └── signup
+│   │   │   │       ├── HaveAccount.tsx
 │   │   │   │       ├── PinGlow.tsx
 │   │   │   │       ├── PinShapeSkia.tsx
 │   │   │   │       ├── SignupCard.tsx
@@ -275,22 +277,25 @@ Vroom-Rider/
 │   │   │       └── useProfileViewModel.ts
 │   │   └── ride
 │   │       ├── components
-│   │       │   ├── CarDetailsCard.tsx
-│   │       │   ├── CommunicationActions.tsx
-│   │       │   ├── DriverAvatar.tsx
-│   │       │   ├── DriverName.tsx
-│   │       │   ├── DriverStatus.tsx
-│   │       │   ├── FindDriverButton.tsx
-│   │       │   ├── InfoBox.tsx
-│   │       │   ├── NextButton.tsx
-│   │       │   ├── PaymentDropdown.tsx
-│   │       │   ├── ProgressBar.tsx
-│   │       │   ├── RideActionButton.tsx
-│   │       │   ├── RideDropdown.tsx
-│   │       │   ├── RideLocationInputs.tsx
-│   │       │   ├── RideNextButton.tsx
-│   │       │   ├── TimePriceBox.tsx
-│   │       │   └── VehicleSelector.tsx
+│   │       │   ├── DriverFoundScreen
+│   │       │   │   ├── CarDetailsCard.tsx
+│   │       │   │   ├── CommunicationActions.tsx
+│   │       │   │   ├── DriverAvatar.tsx
+│   │       │   │   ├── DriverStatus.tsx
+│   │       │   │   └── ProgressBar.tsx
+│   │       │   ├── ExtraDetailsScreen
+│   │       │   │   ├── RideActionFilters.tsx
+│   │       │   │   ├── TimePriceBox.tsx
+│   │       │   │   └── VehicleSelector.tsx
+│   │       │   ├── RideConfirmationScreen
+│   │       │   │   ├── FindDriverButton.tsx
+│   │       │   │   └── InfoBox.tsx
+│   │       │   ├── SelectRideScreen
+│   │       │   │   ├── RideActionButton.tsx
+│   │       │   │   └── RideLocationInputs.tsx
+│   │       │   └── shared
+│   │       │       ├── RideDropdown.tsx
+│   │       │       └── RideNextButton.tsx
 │   │       ├── constants
 │   │       │   ├── rideConfirmation.data.ts
 │   │       │   ├── vehicleData.ts
@@ -307,7 +312,8 @@ Vroom-Rider/
 │   │       │   ├── DriverFound.styles.ts
 │   │       │   ├── confirmRide.styles.ts
 │   │       │   ├── extraDetails.styles.ts
-│   │       │   └── selectRide.styles.ts
+│   │       │   ├── selectRide.styles.ts
+│   │       │   └── shared.styles.ts
 │   │       ├── types
 │   │       │   └── ride.types.ts
 │   │       └── viewmodels

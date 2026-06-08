@@ -1,27 +1,21 @@
-  import React from 'react';
-  import { View, StatusBar } from 'react-native';
-
-  import { useTheme } from '../../../core/theme/useTheme';
-
-  import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
-  import Header from '../../../shared/components/ride/Header';
-
-  import RideDropdown from '../components/RideDropdown';
-  import RideLocationInputs from '../components/RideLocationInputs';
-  import RideActionButton from '../components/RideActionButton';
-  import RideNextButton from '../components/RideNextButton';
-
-  import { useSelectRideViewModel } from '../viewmodels/useSelectRideViewModel';
-  import { useSelectRide } from '../hooks/useSelectRide';
-
-  import { createStyles } from '../styles/selectRide.styles';
-
-  // SVGs
-  import ProfileIcon from '../../../assets/svg/profile/profile.svg';
-  import ScheduleIcon from '../../../assets/svg/common/schedule.svg';
-  import PinIcon from '../../../assets/svg/common/pin.svg';
-  import StarIcon from '../../../assets/svg/common/star.svg';
-
+import React from 'react';
+import { View, StatusBar, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useTheme } from '../../../core/theme/useTheme';
+import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
+import Header from '../../../shared/components/ride/Header';
+import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
+import RideDropdown from '../components/shared/RideDropdown';
+import RideLocationInputs from '../components/SelectRideScreen/RideLocationInputs';
+import RideActionButton from '../components/SelectRideScreen/RideActionButton';
+import RideNextButton from '../components/shared/RideNextButton';
+import { useSelectRide } from '../hooks/useSelectRide';
+ import { useSelectRideViewModel } from '../viewmodels/useSelectRideViewModel';
+import { createStyles } from '../styles/selectRide.styles';
+import ProfileIcon from '../../../assets/svg/profile/profile.svg';
+import ScheduleIcon from '../../../assets/svg/common/schedule.svg';
+import PinIcon from '../../../assets/svg/common/pin.svg';
+import StarIcon from '../../../assets/svg/common/star.svg';
 
   export default function SelectRideScreen() {
     
