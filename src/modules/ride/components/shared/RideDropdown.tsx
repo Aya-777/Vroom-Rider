@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 import { useTheme } from '../../../../core/theme/useTheme';
-import { createStyles } from '../../styles/selectRide.styles';
+import { createStyles } from '../../styles/shared.styles';
 import DropDownArrowIcon from '../../../../assets/svg/arrows/dropdownArrow.svg';
 import ArrowUp from '../../../../assets/svg/arrows/arrowUp.svg';
 

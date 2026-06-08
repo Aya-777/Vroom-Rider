@@ -1,20 +1,13 @@
 import React from 'react';
 import { View, StatusBar, TextInput } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-
 import { useTheme } from '../../../core/theme/useTheme';
-
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 import Header from '../../../shared/components/ride/Header';
-
 import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
-
 import InfoBox from '../components/RideConfirmationScreen/InfoBox';
 import FindDriverButton from '../components/RideConfirmationScreen/FindDriverButton';
-
 import { createStyles } from '../styles/confirmRide.styles';
-
-// SVGs
 import ClockIcon from '../../../assets/svg/common/schedule.svg';
 import EstimatedPriceIcon from '../../../assets/svg/payment/price.svg';
 import CashIcon from '../../../assets/svg/payment/cash.svg';
