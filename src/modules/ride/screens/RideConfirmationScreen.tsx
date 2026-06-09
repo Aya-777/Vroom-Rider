@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, StatusBar, TextInput } from 'react-native';
-import { useRoute } from '@react-navigation/native';
 import { useTheme } from '../../../core/theme/useTheme';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 import Header from '../../../shared/components/ride/Header';
@@ -13,17 +12,13 @@ import EstimatedPriceIcon from '../../../assets/svg/payment/price.svg';
 import CashIcon from '../../../assets/svg/payment/cash.svg';
 import CarIcon from '../../../assets/svg/common/ride.svg';
 import PhoneNumberIcon from '../../../assets/svg/contact/call.svg';
-import { RideParams } from '../types/ride.types';
 
 export default function RideConfirmationScreen() {
-
-  const route = useRoute();
-  const params = (route.params as RideParams) || {};
 
   const { colors, mode } = useTheme();
   const styles = createStyles(colors);
   
-  const vm = useConfirmRideViewModel(params);
+  const vm = useConfirmRideViewModel();
   
   return (
     <View style={styles.container}>
@@ -35,7 +30,7 @@ export default function RideConfirmationScreen() {
 
       <Header
         title="Ride Confirmation"
-        onBackPress={() => vm.handleBackPress}
+        onBackPress={vm.handleBackPress}
       />
 
       <BottomSheetCard>
@@ -43,7 +38,7 @@ export default function RideConfirmationScreen() {
           <InfoBox
             icon={<ClockIcon width={16} height={16} fill={colors.primary} />}
             title="Time"
-            value={params.time || 'N/A'}
+            value={vm.rideData.time || 'N/A'}
           />
 
           <InfoBox
@@ -55,19 +50,19 @@ export default function RideConfirmationScreen() {
               />
             }
             title="Total Price"
-            value={params.price || 'N/A'}
+            value={vm.rideData.price || 'N/A'}
           />
 
           <InfoBox
             icon={<CarIcon width={16} height={16} fill={colors.primary} />}
             title="Selected Car"
-            value={params.vehicleType || 'N/A'}
+            value={vm.rideData.vehicleType || 'N/A'}
           />
 
           <InfoBox
             icon={<CashIcon width={16} height={16} fill={colors.primary} />}
             title="Payment"
-            value={params.payment || 'N/A'}
+            value={vm.rideData.payment || 'N/A'}
           />
         </View>
 

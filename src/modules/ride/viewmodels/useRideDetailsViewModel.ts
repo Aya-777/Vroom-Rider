@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
+import { useRideStore } from '../store/useRideStore';
 
 export function useRideDetailsViewModel() {
   
   const navigation = useNavigation<HomeStackScreenProps<'RideDetails'>['navigation']>();
+  const setRideDetails = useRideStore((state) => state.setRideDetails)
 
   const [timeEstimate, setTimeEstimate] = useState('30:00 m');
   const [priceEstimate, setPriceEstimate] = useState('$24.50');
@@ -14,12 +16,15 @@ export function useRideDetailsViewModel() {
 
 
   const handleNextPress = () => {
-    navigation.navigate('ConfirmRide', {
-      price: priceEstimate,
-      time: timeEstimate,
-      car: selectedVehicle,
+
+    setRideDetails({
       payment: selectedPayment,
-    });
+      vehicleType: selectedVehicle,
+      price: priceEstimate,
+      timeEstimate: timeEstimate,
+    })
+
+    navigation.navigate('ConfirmRide');
   }
 
   const handleBackPress= () => {

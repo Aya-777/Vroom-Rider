@@ -19,7 +19,8 @@ export interface RideParams {
   pickupLocation: string;
   dropoffLocation: string;
   selectedPerson: string;
-  time: string; 
+  timeEstimate: string; 
+  time: string;
   payment: string;
   vehicleType: string;
   price: string;

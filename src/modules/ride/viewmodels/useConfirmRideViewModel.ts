@@ -1,12 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 import { useState } from 'react';
-import { RideParams } from '../types/ride.types';
+import { useRideStore } from '../store/useRideStore';
 
-export function useConfirmRideViewModel(initialParams : RideParams) {
+export function useConfirmRideViewModel() {
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation<HomeStackScreenProps<'ConfirmRide'>['navigation']>();
-  const [rideData] = useState<RideParams>(initialParams);
+  const rideData = useRideStore((state) => state.activeRide);
 
   const handleFindDriver = async () => {
     // setIsLoading(true);
@@ -21,12 +21,12 @@ export function useConfirmRideViewModel(initialParams : RideParams) {
     // } finally {
       // setIsLoading(false);
     // }
-    navigation.navigate('DriverFound', {driverId: '1'});
+    navigation.navigate('DriverFound', {driverId: '1'});  
   };
 
   const handleBackPress = () => {
     navigation.goBack();
   }
 
-  return { handleFindDriver, isLoading, handleBackPress };
+  return { handleFindDriver, isLoading, handleBackPress, rideData };
 }

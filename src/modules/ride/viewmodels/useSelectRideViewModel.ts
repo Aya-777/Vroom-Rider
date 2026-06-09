@@ -3,9 +3,11 @@ import { useNavigation } from '@react-navigation/native';
 import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 import { RideValidationErrors } from '../types/ride.types';
 import { validateRideInputs } from '../utils/selectRideValidation';
+import { useRideStore } from '../store/useRideStore';
 
 export function useSelectRideViewModel(showAlert: (title: string, msg: string) => void) {
   const navigation = useNavigation<HomeStackScreenProps<'SelectRide'>['navigation']>();
+  const { setRideDetails } = useRideStore();
 
   // --- UI State ---
   const [isNowDropdownOpen, setIsNowDropdownOpen] = useState(false);
@@ -14,6 +16,7 @@ export function useSelectRideViewModel(showAlert: (title: string, msg: string) =
   const [selectedTime, setSelectedTime] = useState('Now');
   const [fromLocation, setFromLocation] = useState('');
   const [toLocation, setToLocation] = useState('');
+  const [contactPhone, setContactPhone] = useState('');
   const [errors, setErrors] = useState<RideValidationErrors>({});
 
   // --- Logic ---
@@ -30,10 +33,15 @@ export function useSelectRideViewModel(showAlert: (title: string, msg: string) =
       return;
     }
 
-    navigation.navigate('RideDetails', {
+    setRideDetails({
       pickupLocation: fromLocation,
       dropoffLocation: toLocation,
+      selectedPerson: selectedPerson,
+      time: selectedTime,
+      contactPhone: contactPhone
     });
+
+    navigation.navigate('RideDetails');
   };
 
   const handleBackPress = () => {
@@ -48,6 +56,7 @@ export function useSelectRideViewModel(showAlert: (title: string, msg: string) =
     selectedTime,
     fromLocation,
     toLocation,
+    contactPhone,
     errors,
     
     // Setters
@@ -57,6 +66,7 @@ export function useSelectRideViewModel(showAlert: (title: string, msg: string) =
     setSelectedTime,
     setFromLocation,
     setToLocation,
+    setContactPhone,
     
     // Actions
     validate,
