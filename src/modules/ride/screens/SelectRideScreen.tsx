@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StatusBar } from 'react-native';
+import { View, StatusBar, Alert } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 import Header from '../../../shared/components/ride/Header';
@@ -7,7 +7,6 @@ import RideDropdown from '../components/shared/RideDropdown';
 import RideLocationInputs from '../components/SelectRideScreen/RideLocationInputs';
 import RideActionButton from '../components/SelectRideScreen/RideActionButton';
 import RideNextButton from '../components/shared/RideNextButton';
-import { useSelectRide } from '../hooks/useSelectRide';
 import { useSelectRideViewModel } from '../viewmodels/useSelectRideViewModel';
 import { createStyles } from '../styles/selectRide.styles';
 import ProfileIcon from '../../../assets/svg/profile/profile.svg';
@@ -15,8 +14,12 @@ import ScheduleIcon from '../../../assets/svg/common/schedule.svg';
 import PinIcon from '../../../assets/svg/common/pin.svg';
 import StarIcon from '../../../assets/svg/common/star.svg';
 
-  export default function SelectRideScreen() {
-    
+function showAlert(title: string, msg: string) {
+  Alert.alert(title, msg)
+}
+
+export default function SelectRideScreen() {
+  
     const { colors, mode } = useTheme();
     const styles = createStyles(colors);
     
@@ -37,8 +40,9 @@ import StarIcon from '../../../assets/svg/common/star.svg';
       setToLocation,
       
       validate,
-    } = useSelectRideViewModel();
-    const {handleNextPress, handleBackPress} = useSelectRide(fromLocation, toLocation);
+      handleNextPress,
+      handleBackPress
+    } = useSelectRideViewModel(showAlert);
 
     const onNextPress = () => {
       if (validate()) {
