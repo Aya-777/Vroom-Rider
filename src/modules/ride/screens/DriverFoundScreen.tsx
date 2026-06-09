@@ -7,7 +7,7 @@ import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 import Header from '../../../shared/components/ride/Header';
 
-import { useRideConfirmationViewModel } from '../viewmodels/useRideConfirmationViewModel';
+import { useDriverHereViewModel } from '../viewmodels/useDriverHereViewModel';
 import { createStyles } from '../styles/DriverFound.styles';
 
 import DriverStatus from '../components/DriverFoundScreen/DriverStatus';
@@ -21,7 +21,7 @@ export default function DriverFoundScreen() {
   const styles = createStyles(colors);
   const navigation = useNavigation<HomeStackScreenProps<'DriverFound'>['navigation']>();
 
-  const { driver } = useRideConfirmationViewModel();
+  const { driver } = useDriverHereViewModel();
 
   return (
     <View style={styles.contentContainer}>
