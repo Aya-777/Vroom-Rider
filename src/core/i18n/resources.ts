@@ -18,6 +18,8 @@ import driverHereAr from './locales/ride/driverHere/ar.json'
 import driverHereEn from './locales/ride/driverHere/en.json'
 import reviewAr from './locales/ride/review/ar.json'
 import reviewEn from './locales/ride/review/en.json'
+import commonEn from './locales/common/en.json'
+import commonAr from './locales/common/ar.json'
 
 export const resources = {
   en: {
@@ -30,7 +32,8 @@ export const resources = {
     driverFound: driverFoundEn,
     review: reviewEn,
     nav: navEn,
-    profile: profileEn
+    profile: profileEn,
+    common: commonEn
   },
   
   ar: {
@@ -43,6 +46,7 @@ export const resources = {
     driverFound: driverFoundAr,
     review: reviewAr,
     nav: navAr,
-    profile: profileAr
+    profile: profileAr,
+    common: commonAr
   },
 };

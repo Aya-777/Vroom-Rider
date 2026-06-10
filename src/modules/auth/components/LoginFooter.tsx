@@ -2,21 +2,23 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
 import { Typography } from '../../../core/theme/tokens/typography';
+import { useTranslation } from 'react-i18next';
 
 const LoginFooter = () => {
   const { colors } = useTheme();
+  const { t } = useTranslation('auth');
 
   return (
     <View style={styles.container}>
       <Text style={[styles.text, { color: colors.textSecondary }]}>
-        Don't have an account?{' '}
+        {t("dontHaveAccount")}
         <Text style={[styles.link, { color: colors.primary }]}>
-          Register
+          {t("register")}
         </Text>
       </Text>
 
       <Text style={[styles.link, { color: colors.primary }]}>
-        Forgot Password?
+        {t("forgotPassword")}
       </Text>
     </View>
   );

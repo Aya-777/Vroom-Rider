@@ -18,9 +18,11 @@ import LinearBg from '../../../shared/components/LinearBg';
 import { useTheme } from '../../../core/theme/useTheme';
 import { Radius } from '../../../core/theme/tokens/radius';
 import { Typography } from '../../../core/theme/tokens/typography';
+import { useTranslation } from 'react-i18next';
 
 const LoginForm = ({ vm }: any) => {
   const { colors } = useTheme();
+  const { t } = useTranslation('common');
 
   return (
     <>
@@ -83,7 +85,7 @@ const LoginForm = ({ vm }: any) => {
             colors={['#0F1E52', '#E4D9FF']} // (مؤقتاً - بنحسنه بعدين)
           >
             <Text style={[styles.btnText, { color: '#FAFAFF' }]}>
-              Continue
+              {t("continue")}
             </Text>
           </LinearBg>
         </TouchableOpacity>
