@@ -1,11 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
 import { useAuthActions } from '../../../core/store/authStore';
-import type { AuthNavigationProp } from '../../../navigation/auth/authTypes';
 
 export function useLoginViewModel() {
-  const navigation = useNavigation<AuthNavigationProp>();
   const { login } = useAuthActions();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -23,13 +19,8 @@ export function useLoginViewModel() {
     }
   };
 
-  const handleNavigateToSignup = () => {
-    navigation.navigate('Signup');
-  };
-
   return {
     handleLogin,
     isLoading,
-    handleNavigateToSignup
   };
 }

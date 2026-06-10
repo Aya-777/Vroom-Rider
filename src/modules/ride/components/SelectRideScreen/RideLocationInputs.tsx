@@ -1,8 +1,8 @@
 import React from 'react';
 import {
   View,
-  TextInput,
 } from 'react-native';
+import Input from '../../../../shared/components/Input';
 
 import { useTheme } from '../../../../core/theme/useTheme';
 
@@ -13,6 +13,10 @@ type Props = {
   toLocation: string;
   onChangeFrom: (text: string) => void;
   onChangeTo: (text: string) => void;
+  errors: {
+    fromLocation?: string;
+    toLocation?: string;
+  };
 };
 
 export default function RideLocationInputs({
@@ -20,6 +24,7 @@ export default function RideLocationInputs({
   toLocation,
   onChangeFrom,
   onChangeTo,
+  errors
 }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
@@ -35,22 +40,24 @@ export default function RideLocationInputs({
       </View>
 
       <View style={styles.inputContainer}>
-        <TextInput
+        <Input
           style={styles.input}
           placeholder="From"
           placeholderTextColor={colors.textMuted}
           value={fromLocation}
           onChangeText={onChangeFrom}
+          error={errors.fromLocation}
         />
 
         <View style={styles.divider} />
 
-        <TextInput
+        <Input
           style={styles.input}
           placeholder="To?"
           placeholderTextColor={colors.textMuted}
           value={toLocation}
           onChangeText={onChangeTo}
+          error={errors.toLocation}
         />
       </View>
     </View>

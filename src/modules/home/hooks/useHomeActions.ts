@@ -1,10 +1,14 @@
-export const useHomeActions = (navigation: any) => {
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
 
-  const handleRidePress = () => {
+export const useHomeActions = () => {
+  
+  const navigation = useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
+  
+  const navigateToSelectRide = () => {
     navigation.navigate('SelectRide');
   };
-
-  return {
-    handleRidePress,
-  };
+  
+  return { navigateToSelectRide };
 };

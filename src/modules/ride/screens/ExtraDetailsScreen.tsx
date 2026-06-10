@@ -1,20 +1,17 @@
 import React from 'react';
 import { View, StatusBar } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '../../../core/theme/useTheme';
-import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 import Header from '../../../shared/components/ride/Header';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
-import { useExtraDetails } from '../hooks/useExtraDetails';
 import VehicleSelector from '../components/ExtraDetailsScreen/VehicleSelector';
 import { createStyles } from '../styles/shared.styles';
 import RideNextButton from '../components/shared/RideNextButton';
 import TimePriceBox from '../components/ExtraDetailsScreen/TimePriceBox';
 import RideActionFilters from '../components/ExtraDetailsScreen/RideActionFilters';
+import {useRideDetailsViewModel} from '../viewmodels/useRideDetailsViewModel';
 
 export default function ExtraDetailsScreen() {
   const { colors, mode } = useTheme();
-  const navigation = useNavigation<HomeStackScreenProps<'RideDetails'>['navigation']>();
 
   const {
     timeEstimate,
@@ -25,15 +22,13 @@ export default function ExtraDetailsScreen() {
     setSelectedVehicle,
     setSelectedPayment,
     setIsDropdownOpen,
-  } = useExtraDetails();
 
-  const handleNextPress = () => {
-    navigation.navigate('ConfirmRide', {
-      price: priceEstimate,
-      time: timeEstimate,
-      car: selectedVehicle,
-      payment: selectedPayment,
-    });
+    handleNextPress,
+    handleBackPress
+  } = useRideDetailsViewModel();
+
+  const onNextPress = () => {
+    handleNextPress();
   };
 
   const styles = createStyles(colors);
@@ -46,7 +41,7 @@ export default function ExtraDetailsScreen() {
         backgroundColor="transparent"
       />
 
-      <Header title="Ride" onBackPress={() => navigation.goBack()} />
+      <Header title="Ride" onBackPress={handleBackPress} />
 
       <BottomSheetCard>
         <TimePriceBox time={timeEstimate} price={priceEstimate} />
@@ -67,7 +62,7 @@ export default function ExtraDetailsScreen() {
           onSelect={setSelectedVehicle}
         />
 
-        <RideNextButton onPress={handleNextPress} />
+        <RideNextButton onPress={onNextPress} />
       </BottomSheetCard>
     </View>
   );

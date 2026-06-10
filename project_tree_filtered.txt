@@ -5,8 +5,6 @@ Vroom-Rider/
 ├── .git
 ├── .gitignore
 ├── .prettierrc.js
-├── .vscode
-│   └── .react
 ├── .watchmanconfig
 ├── ARCHITECTURE.md
 ├── App.tsx
@@ -237,6 +235,18 @@ Vroom-Rider/
 │   │   │   │   └── SplashScreen.tsx
 │   │   │   ├── services
 │   │   │   ├── store
+│   │   │   │   └── signup
+│   │   │   │       ├── HaveAccount.tsx
+│   │   │   │       ├── PinGlow.tsx
+│   │   │   │       ├── PinShapeSkia.tsx
+│   │   │   │       ├── SignupCard.tsx
+│   │   │   │       ├── SignupFooter.tsx
+│   │   │   │       └── SignupForm.tsx
+│   │   │   ├── hooks
+│   │   │   │   └── useAuthActions.ts
+│   │   │   ├── screens
+│   │   │   │   ├── LoginScreen.tsx
+│   │   │   │   └── SignupScreen.tsx
 │   │   │   ├── styles
 │   │   │   │   ├── Splash.styles.ts
 │   │   │   │   ├── login.styles.ts
@@ -309,17 +319,18 @@ Vroom-Rider/
 │   │       │       ├── RideDropdown.tsx
 │   │       │       └── RideNextButton.tsx
 │   │       ├── constants
-│   │       │   ├── rideConfirmation.data.ts
+│   │       │   ├── driverData.ts
 │   │       │   ├── vehicleData.ts
 │   │       │   └── vehicleImages.ts
 │   │       ├── hooks
-│   │       │   ├── useExtraDetails.ts
-│   │       │   └── useSelectRide.ts
+│   │       │   └── useLocationPermission.ts
 │   │       ├── screens
 │   │       │   ├── DriverFoundScreen.tsx
 │   │       │   ├── ExtraDetailsScreen.tsx
 │   │       │   ├── RideConfirmationScreen.tsx
 │   │       │   └── SelectRideScreen.tsx
+│   │       ├── store
+│   │       │   └── useRideStore.ts
 │   │       ├── styles
 │   │       │   ├── DriverFound.styles.ts
 │   │       │   ├── confirmRide.styles.ts
@@ -328,8 +339,13 @@ Vroom-Rider/
 │   │       │   └── shared.styles.ts
 │   │       ├── types
 │   │       │   └── ride.types.ts
+│   │       ├── utils
+│   │       │   └── selectRideValidation.ts
 │   │       └── viewmodels
-│   │           └── useRideConfirmationViewModel.ts
+│   │           ├── useConfirmRideViewModel.ts
+│   │           ├── useDriverHereViewModel.ts
+│   │           ├── useRideDetailsViewModel.ts
+│   │           └── useSelectRideViewModel.ts
 │   ├── navigation
 │   │   ├── RootNavigator.tsx
 │   │   ├── auth
@@ -349,6 +365,7 @@ Vroom-Rider/
 │   ├── shared
 │   │   └── components
 │   │       ├── Header.tsx
+│   │       ├── Input.tsx
 │   │       ├── LinearBg.tsx
 │   │       ├── SearchBar.tsx
 │   │       └── ride

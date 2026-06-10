@@ -2,19 +2,10 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 export type HomeStackParamList = {
   HomeScreen: undefined;       
+  
   SelectRide: undefined;
-  
-  RideDetails: { 
-    pickupLocation: string; 
-    dropoffLocation: string; 
-  };
-  
-  ConfirmRide: { 
-    price: string;
-    time: string;
-    car: string;
-    payment: string;
-  };
+  RideDetails: undefined;
+  ConfirmRide: undefined;
   
   DriverFound: { driverId: string };
 };
