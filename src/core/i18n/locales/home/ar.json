@@ -1,12 +1,14 @@
 {
   "whereTo": "إلى أين؟",
   "forYou": "من أجلك",
-  "package": "حزمة",
-  "rent": "استئجار",
-  "reserve": "احجز",
-
   "recentDestinations": "الوجهات الأخيرة",
   "seeAll": "عرض الكل",
-  "office": "المكتب"
-  
+
+  "services":{
+    "package": "حزمة",
+    "rent": "استئجار",
+    "reserve": "احجز"
+  },
+
+  "office": "المكتب"  
 }

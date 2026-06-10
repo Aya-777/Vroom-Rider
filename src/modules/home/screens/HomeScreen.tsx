@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  View,
-} from 'react-native';
+import { SafeAreaView, ScrollView, View } from 'react-native';
 
 import LinearBg from '../../../shared/components/LinearBg';
 import SearchBar from '../../../shared/components/SearchBar';
@@ -19,19 +15,16 @@ import { useHomeViewModel } from '../viewmodels/useHomeViewModel';
 
 import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 import HeaderTopAppBar from '../components/HomeHeader';
+import { useTranslation } from 'react-i18next';
 
 export default function HomeScreen({
   navigation,
 }: HomeStackScreenProps<'HomeScreen'>) {
-
   const { colors } = useTheme();
-
   const styles = createStyles(colors);
+  const { t } = useTranslation(['home']);
 
-  const {
-    services,
-    recentDestinations,
-  } = useHomeViewModel(navigation);
+  const { services, recentDestinations } = useHomeViewModel(navigation);
 
   return (
     <LinearBg
@@ -41,31 +34,27 @@ export default function HomeScreen({
       style={styles.gradientContainer}
     >
       <SafeAreaView style={styles.container}>
-
         <HeaderTopAppBar />
 
         <ScrollView
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
-
           <SearchBar />
-          <SectionHeader title="For you"
+          <SectionHeader
+            title={t('forYou')}
             icon={<ForYouStar width={20} height={20} />}
           />
 
           <View style={styles.gridContainer}>
             {services.map(service => (
-              <ServiceCard
-                key={service.id}
-                {...service}
-              />
+              <ServiceCard key={service.id} {...service} />
             ))}
           </View>
 
           <SectionHeader
-            title="Recent destinations"
-            actionText="See all"
+            title={t('recentDestinations')}
+            actionText={t('seeAll')}
           />
 
           <View style={styles.destinationList}>
@@ -76,15 +65,15 @@ export default function HomeScreen({
                 <DestinationCard
                   key={destination.id}
                   {...destination}
+                  title={destination.title}
+                  subtitle={destination.subtitle}
                   icon={<DestinationIcon />}
                 />
               );
             })}
           </View>
-
         </ScrollView>
-
       </SafeAreaView>
-    </LinearBg >
+    </LinearBg>
   );
 }
