@@ -223,11 +223,14 @@ Vroom-Rider/
 │   │   │   │   │   ├── SignupFooter.tsx
 │   │   │   │   │   └── SignupForm.tsx
 │   │   │   │   └── splash
+│   │   │   │       ├── SplashLoader.tsx
+│   │   │   │       ├── SplashLogo.tsx
 │   │   │   │       ├── SplashRoad.tsx
 │   │   │   │       └── SplashText.tsx
 │   │   │   ├── constants
 │   │   │   ├── hooks
-│   │   │   │   └── useSplashAnimation.ts
+│   │   │   │   ├── useSplashAnimation.ts
+│   │   │   │   └── useSplashLayout.ts
 │   │   │   ├── screens
 │   │   │   │   ├── LoginScreen.tsx
 │   │   │   │   ├── SignupScreen.tsx

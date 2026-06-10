@@ -26,4 +26,27 @@ export const createStyles = (colors: ThemeColors) =>
       top: SCREEN_HEIGHT * 0.35 - LOGO_SIZE / 2 - (GLOW_SIZE - LOGO_SIZE) / 2,
       left: SCREEN_WIDTH / 2 - LOGO_SIZE / 2 - (GLOW_SIZE - LOGO_SIZE) / 2,
     },
+
+    loaderWrapper: {
+      width: 110,         
+      height: 50,        
+      position: 'relative',
+      justifyContent: 'center',
+      alignItems: 'center', 
+    },
+    loaderCanvas: {
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
+    },
+    pinContainer: {
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      width: 35,
+      height: 35,
+    },
+    pinCanvas: {
+      flex: 1,
+    },
   });

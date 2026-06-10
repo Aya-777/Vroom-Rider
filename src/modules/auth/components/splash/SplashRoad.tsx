@@ -28,7 +28,7 @@ export const SplashRoad = React.memo(({ styles, roadPath, customDashPath, roadPr
         style="stroke"
         strokeWidth={14}
         end={roadProgress}
-        opacity={0.9}
+        opacity={0.5}
       >
         <BlurMask blur={40} style="normal" />
       </Path>
