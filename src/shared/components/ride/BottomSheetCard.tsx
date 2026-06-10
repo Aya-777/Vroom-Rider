@@ -13,7 +13,7 @@ import {
 
 import { useTheme } from '../../../core/theme/useTheme';
 
-import MyLocationIcon from '../../../assets/svg/myLocation.svg';
+import MyLocationIcon from '../../../assets/svg/common/myLocation.svg';
 import LinearBg from '../LinearBg';
 
 interface BottomSheetCardProps {
@@ -43,7 +43,7 @@ export default function BottomSheetCard({
 
       {/* Bottom Sheet */}
       <LinearBg
-        colors={[colors.surface, colors.background]}
+        colors={[colors.backgroundSoft, colors.background]}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
         style={styles.sheet}

@@ -1,23 +1,17 @@
 import React from 'react';
 import { View, StatusBar } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
 import { useTheme } from '../../../core/theme/useTheme';
 import Header from '../../../shared/components/ride/Header';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
-
-import { useExtraDetails } from '../hooks/useExtraDetails';
-
-import TimePriceBox from '../components/TimePriceBox';
-import PaymentDropdown from '../components/PaymentDropdown';
-import VehicleSelector from '../components/VehicleSelector';
-import NextButton from '../components/NextButton';
-
-import { createStyles } from '../styles/extraDetails.styles';
+import VehicleSelector from '../components/ExtraDetailsScreen/VehicleSelector';
+import { createStyles } from '../styles/shared.styles';
+import RideNextButton from '../components/shared/RideNextButton';
+import TimePriceBox from '../components/ExtraDetailsScreen/TimePriceBox';
+import RideActionFilters from '../components/ExtraDetailsScreen/RideActionFilters';
+import {useRideDetailsViewModel} from '../viewmodels/useRideDetailsViewModel';
 
 export default function ExtraDetailsScreen() {
   const { colors, mode } = useTheme();
-  const navigation = useNavigation<any>();
 
   const {
     timeEstimate,
@@ -28,44 +22,47 @@ export default function ExtraDetailsScreen() {
     setSelectedVehicle,
     setSelectedPayment,
     setIsDropdownOpen,
-  } = useExtraDetails();
+
+    handleNextPress,
+    handleBackPress
+  } = useRideDetailsViewModel();
+
+  const onNextPress = () => {
+    handleNextPress();
+  };
 
   const styles = createStyles(colors);
 
   return (
     <View style={styles.container}>
       <StatusBar
+        translucent
         barStyle={mode === 'dark' ? 'light-content' : 'dark-content'}
-        backgroundColor={colors.background}
+        backgroundColor="transparent"
       />
 
-      <Header title="Ride" onBackPress={() => navigation.goBack()} />
+      <Header title="Ride" onBackPress={handleBackPress} />
 
       <BottomSheetCard>
         <TimePriceBox time={timeEstimate} price={priceEstimate} />
-
-        <PaymentDropdown
-          selected={selectedPayment}
+        
+        <RideActionFilters
+          selectedValue={selectedPayment}
           isOpen={isDropdownOpen}
-          onToggle={() => setIsDropdownOpen(!isDropdownOpen)}
-          onSelect={setSelectedPayment}
+          styles={styles}
+          onToggleDropdown={() => setIsDropdownOpen(!isDropdownOpen)}
+          onSelectPayment={(item) => {
+            setSelectedPayment(item);
+            setIsDropdownOpen(false);
+          }}
+          onFiltersPress={() => console.log('Filters Pressed from Screen')}
         />
-
         <VehicleSelector
           selected={selectedVehicle}
           onSelect={setSelectedVehicle}
         />
 
-        <NextButton
-          onPress={() =>
-            navigation.navigate('ConfirmRide', {
-              price: priceEstimate,
-              time: timeEstimate,
-              car: selectedVehicle,
-              payment: selectedPayment,
-            })
-          }
-        />
+        <RideNextButton onPress={onNextPress} />
       </BottomSheetCard>
     </View>
   );

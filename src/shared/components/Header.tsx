@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-import MenuIcon from '../../assets/svg/menu.svg';
-import NotificationsIcon from '../../assets/svg/notifications.svg';
+import MenuIcon from '../../assets/svg/common/menu.svg';
+import NotificationsIcon from '../../assets/svg/common/notifications.svg';
 
 import {
   Typography,
@@ -25,7 +25,6 @@ export default function Header({
   onNotificationPress,
 }: HeaderProps) {
   const { colors } = useTheme();
-
   const styles = createStyles(colors);
 
   return (
@@ -69,9 +68,9 @@ const createStyles = (colors: any) =>
     },
 
     header: {
-      height: 56,
+      height: 30,
       flexDirection: 'row',
-      alignItems: 'center',
+      alignItems: 'stretch',
       paddingHorizontal: Spacing.lg,
     },
 
@@ -87,7 +86,7 @@ const createStyles = (colors: any) =>
 
     title: {
       flex: 1,
-      textAlign: 'center',
+      textAlign: 'left',
       ...Typography.h2,
       color: colors.textSecondary,
       letterSpacing: 1,

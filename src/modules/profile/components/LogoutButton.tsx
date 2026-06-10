@@ -3,7 +3,7 @@ import { TouchableOpacity, Text } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/profile.styles';
 
-import LogoutIcon from '../../../assets/svg/logout.svg';
+import LogoutIcon from '../../../assets/svg/profile/logout.svg';
 
 type Props = {
   onPress: () => void;
@@ -18,15 +18,13 @@ export default function LogoutButton({ onPress }: Props) {
       onPress={onPress}
       style={[
         styles.logoutButton,
-        { backgroundColor: colors.surface },
       ]}
     >
-      <LogoutIcon fill={colors.primary} />
+      <LogoutIcon fill={'red'} />
 
       <Text
         style={[
           styles.logoutText,
-          { color: colors.primary },
         ]}
       >
         Logout

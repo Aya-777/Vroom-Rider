@@ -1,9 +1,13 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, View } from 'react-native';
+import {
+  ScrollView,
+  View,
+} from 'react-native';
+import { SafeAreaView} from 'react-native';
 
 import LinearBg from '../../../shared/components/LinearBg';
 import SearchBar from '../../../shared/components/SearchBar';
-import ForYouStar from '../../../assets/svg/ForYouStar.svg';
+import ForYouStar from '../../../assets/svg/home/ForYouStar.svg';
 
 import ServiceCard from '../components/ServiceCard';
 import DestinationCard from '../components/DestinationCard';
@@ -13,18 +17,29 @@ import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/home.styles';
 import { useHomeViewModel } from '../viewmodels/useHomeViewModel';
 
-import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 import HeaderTopAppBar from '../components/HomeHeader';
+import { useHomeActions } from '../hooks/useHomeActions';
 import { useTranslation } from 'react-i18next';
 
-export default function HomeScreen({
-  navigation,
-}: HomeStackScreenProps<'HomeScreen'>) {
+export default function HomeScreen() {
+
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['home']);
 
-  const { services, recentDestinations } = useHomeViewModel(navigation);
+  const {
+    services,
+    recentDestinations,
+  } = useHomeViewModel();
+
+  const { 
+    navigateToSelectRide
+  } = useHomeActions();
+
+  const serviceActions: Record<string, () => void> = {
+  '1': navigateToSelectRide,
+  // '2': navigateToReserve,
+};
 
   return (
     <LinearBg
@@ -33,7 +48,8 @@ export default function HomeScreen({
       end={{ x: 0, y: 1 }}
       style={styles.gradientContainer}
     >
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+
         <HeaderTopAppBar />
 
         <ScrollView
@@ -48,7 +64,11 @@ export default function HomeScreen({
 
           <View style={styles.gridContainer}>
             {services.map(service => (
-              <ServiceCard key={service.id} {...service} />
+              <ServiceCard
+              key={service.id}
+              onPress={serviceActions[service.id]}
+              {...service}
+              />
             ))}
           </View>
 
@@ -73,7 +93,8 @@ export default function HomeScreen({
             })}
           </View>
         </ScrollView>
-      </SafeAreaView>
-    </LinearBg>
+
+      </View>
+    </LinearBg >
   );
 }

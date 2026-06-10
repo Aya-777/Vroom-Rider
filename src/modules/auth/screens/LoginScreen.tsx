@@ -1,32 +1,34 @@
 import React from 'react';
 import {
   View,
-  StyleSheet,
-  SafeAreaView,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   Text,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-
-import LoginPin from '../components/LoginPin';
-import LoginForm from '../components/LoginForm';
-import LoginFooter from '../components/LoginFooter';
-
+import LoginPin from '../components/login/LoginPin';
+import LoginForm from '../components/login/LoginForm';
+import LoginFooter from '../components/login/LoginFooter';
 import { useLoginViewModel } from '../viewmodels/useLoginViewModel';
 import { useTheme } from '../../../core/theme/useTheme';
+import { createStyles } from '../styles/login.styles';
+import LinearBg from '../../../shared/components/LinearBg';
+import {useAuthActions} from '../hooks/useAuthActions';
 
 const LoginScreen = () => {
-  const vm = useLoginViewModel();
+  
   const { colors } = useTheme();
+  const styles = createStyles(colors);
+
+  const vm = useLoginViewModel();
+  const { navigateToSignup } = useAuthActions();
 
   return (
-    <LinearGradient
-      colors={[colors.backgroundSoft, colors.background]}
+    <LinearBg
+      colors={[colors.background, colors.backgroundSoft]}
       style={styles.gradient}
     >
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}
           style={styles.flex}
@@ -38,14 +40,12 @@ const LoginScreen = () => {
             <View
               style={[
                 styles.bgCircle,
-                { backgroundColor: colors.surfaceAccent },
               ]}
             />
 
             <Text
               style={[
                 styles.title,
-                { color: colors.textSecondary },
               ]}
             >
               VROOM
@@ -55,35 +55,16 @@ const LoginScreen = () => {
               <LoginForm vm={vm} />
             </LoginPin>
 
-            <LoginFooter />
+            <LoginFooter
+              onSignupPress={navigateToSignup}
+              onForgotPasswordPress={() => console.log('Forgot password pressed')}
+            />
           </ScrollView>
         </KeyboardAvoidingView>
-      </SafeAreaView>
-    </LinearGradient>
+      </View>
+    </LinearBg>
   );
 };
 
 export default LoginScreen;
 
-const styles = StyleSheet.create({
-  gradient: { flex: 1 },
-  container: { flex: 1 },
-  flex: { flex: 1 },
-  scroll: { alignItems: 'center', paddingBottom: 40 },
-
-  bgCircle: {
-    position: 'absolute',
-    width: 700,
-    height: 900,
-    borderRadius: 350,
-    left: -280,
-    top: -30,
-  },
-
-  title: {
-    marginTop: 24,
-    marginBottom: 10,
-    fontSize: 32,
-    fontFamily: 'Lora-Bold',
-  },
-});

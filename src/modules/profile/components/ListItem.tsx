@@ -21,9 +21,6 @@ export default function ListItem({ title, Icon, onPress }: Props) {
             onPress={onPress}
             style={[
                 styles.listItem,
-                {
-                    backgroundColor: colors.surface,
-                },
             ]}
         >
             <View style={styles.listItemLeft}>
@@ -32,7 +29,6 @@ export default function ListItem({ title, Icon, onPress }: Props) {
                 <Text
                     style={[
                         styles.listItemTitle,
-                        { color: colors.textPrimary },
                     ]}
                 >
                     {title}

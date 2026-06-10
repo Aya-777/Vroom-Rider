@@ -1,72 +1,36 @@
 import { StyleSheet } from 'react-native';
-import { Radius, Shadows } from '../../../core/theme/tokens';
+import { Shadows, Typography } from '../../../core/theme/tokens';
+import { ThemeColors } from '../../../core/theme/theme.types';
 
-export const createStyles = (colors: any) =>
+export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: colors.background,
-    },
-
-    /* ---------------- NextButton ---------------- */
-    nextButton: {
-      backgroundColor: colors.primary,
-      padding: 14,
-      borderRadius: 30,
-      alignItems: 'center',
-      flexDirection: 'row',
-      justifyContent: 'center',
-      ...Shadows.small,
-    },
-
-    nextText: {
-      color: colors.background,
-      fontWeight: '600',
-    },
-
-    /* ---------------- TimePriceBox ---------------- */
     timePriceRow: {
       flexDirection: 'row',
       marginBottom: 12,
+      gap : 15,
     },
 
-    timeBox: {
-      flex: 1,
-      backgroundColor: colors.surface,
-      padding: 10,
-      marginRight: 6,
-      borderRadius: Radius.md,
-      ...Shadows.small,
-    },
-
-    priceBox: {
-      flex: 1,
-      backgroundColor: colors.surface,
-      padding: 10,
-      marginLeft: 6,
-      borderRadius: Radius.md,
-      ...Shadows.small,
-    },
-
-    timePriceText: {
-      color: colors.textPrimary,
-      marginTop: 4,
-    },
-
-    /* ---------------- VehicleSelector ---------------- */
     vehicleRow: {
       flexDirection: 'row',
+      justifyContent: 'space-between',
+      width: '100%',
+      marginBottom: 24,
+      zIndex: 1,
     },
 
     vehicleCard: {
-      flex: 1,
-      margin: 4,
-      padding: 10,
-      borderRadius: Radius.md,
-      borderWidth: 1,
+      width: '30%',
+      borderRadius: 12,
+      paddingVertical: 12,
       alignItems: 'center',
       backgroundColor: colors.surface,
       ...Shadows.small,
+    },
+
+    activeVehicleCard: {
+      borderWidth: 2,
+      borderColor: colors.primary,
+      backgroundColor : colors.primary + '80'
     },
 
     vehicleImage: {
@@ -77,5 +41,11 @@ export const createStyles = (colors: any) =>
 
     vehicleText: {
       color: colors.textMuted,
+      ...Typography.semiBoldCaption,
     },
+
+    activeVehicleText: {
+      color: colors.primary,
+    },
+
   });

@@ -6,7 +6,23 @@ export type Car = {
 
 export type Driver = {
   name: string;
-  avatar: string;
   statusMessage: string;
   car: Car;
 };
+
+export interface RideValidationErrors {
+  fromLocation?: string;
+  toLocation?: string;
+}
+
+export interface RideParams {
+  pickupLocation: string;
+  dropoffLocation: string;
+  selectedPerson: string;
+  timeEstimate: string; 
+  time: string;
+  payment: string;
+  vehicleType: string;
+  price: string;
+  contactPhone: string;
+}

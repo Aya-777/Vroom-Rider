@@ -1,38 +1,33 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
-import { View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
+import { View, StatusBar } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 import Header from '../../../shared/components/ride/Header';
-
-import { useRideConfirmationViewModel } from '../viewmodels/useRideConfirmationViewModel';
+import { useDriverHereViewModel } from '../viewmodels/useDriverHereViewModel';
 import { createStyles } from '../styles/DriverFound.styles';
+import DriverStatus from '../components/DriverFoundScreen/DriverStatus';
+import DriverAvatar from '../components/DriverFoundScreen/DriverAvatar';
+import CommunicationActions from '../components/DriverFoundScreen/CommunicationActions';
+import CarDetailsCard from '../components/DriverFoundScreen/CarDetailsCard';
+import ProgressBar from '../components/DriverFoundScreen/ProgressBar';
 
-import DriverStatus from '../components/DriverStatus';
-import DriverAvatar from '../components/DriverAvatar';
-import CommunicationActions from '../components/CommunicationActions';
-import CarDetailsCard from '../components/CarDetailsCard';
-import ProgressBar from '../components/ProgressBar';
-
-export default function RideConfirmationScreen() {
-  const { colors, mode } = useTheme();
+export default function DriverFoundScreen() {
+  const { colors } = useTheme();
   const styles = createStyles(colors);
-  const navigation = useNavigation<any>();
 
-  const { driver } = useRideConfirmationViewModel();
+  const { driver, handleBackPress } = useDriverHereViewModel();
 
   return (
     <View style={styles.contentContainer}>
-      <Header title="Track your trip" onBackPress={() => navigation.goBack()} />
+      <StatusBar translucent backgroundColor="transparent" />
+      <Header title="Track your trip" onBackPress={handleBackPress} />
 
       <BottomSheetCard>
-        <DriverStatus text={driver.statusMessage} styles={styles} colors={colors} />
+        <DriverStatus text={driver.statusMessage} styles={styles} />
 
         <DriverAvatar uri={driver.avatar} styles={styles} />
 
-        <DriverStatus text={driver.name} styles={styles} colors={colors} />
+        <DriverStatus text={driver.name} styles={styles} />
 
         <CommunicationActions styles={styles} colors={colors} />
 

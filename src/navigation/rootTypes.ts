@@ -3,6 +3,7 @@ import { AuthStackParamList } from './auth/authTypes';
 import { MainTabsParamList } from './main/mainTypes';
 
 export type RootStackParamList = {
+  Splash: undefined;
   AuthStack: NavigatorScreenParams<AuthStackParamList>;
   MainTabs: NavigatorScreenParams<MainTabsParamList>;
 };
