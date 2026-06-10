@@ -1,9 +1,10 @@
-import { StyleSheet ,Dimensions } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { ThemeColors } from "../../../core/theme/theme.types";
 
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 const LOGO_SIZE = 150;
+const GLOW_SIZE = 260;
 
 export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
@@ -20,9 +21,9 @@ export const createStyles = (colors: ThemeColors) =>
     },
     logoLayer: {
       position: 'absolute',
-      width: LOGO_SIZE,
-      height: LOGO_SIZE,
-      top: SCREEN_HEIGHT * 0.35 - LOGO_SIZE / 2,
-      left: SCREEN_WIDTH / 2 - LOGO_SIZE / 2,
+      width: GLOW_SIZE,
+      height: GLOW_SIZE,
+      top: SCREEN_HEIGHT * 0.35 - LOGO_SIZE / 2 - (GLOW_SIZE - LOGO_SIZE) / 2,
+      left: SCREEN_WIDTH / 2 - LOGO_SIZE / 2 - (GLOW_SIZE - LOGO_SIZE) / 2,
     },
   });

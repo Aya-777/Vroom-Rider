@@ -215,13 +215,16 @@ Vroom-Rider/
 │   │   │   │   │   └── PinShape.tsx
 │   │   │   │   ├── shared
 │   │   │   │   │   └── logo.tsx
-│   │   │   │   └── signup
-│   │   │   │       ├── HaveAccount.tsx
-│   │   │   │       ├── PinGlow.tsx
-│   │   │   │       ├── PinShapeSkia.tsx
-│   │   │   │       ├── SignupCard.tsx
-│   │   │   │       ├── SignupFooter.tsx
-│   │   │   │       └── SignupForm.tsx
+│   │   │   │   ├── signup
+│   │   │   │   │   ├── HaveAccount.tsx
+│   │   │   │   │   ├── PinGlow.tsx
+│   │   │   │   │   ├── PinShapeSkia.tsx
+│   │   │   │   │   ├── SignupCard.tsx
+│   │   │   │   │   ├── SignupFooter.tsx
+│   │   │   │   │   └── SignupForm.tsx
+│   │   │   │   └── splash
+│   │   │   │       ├── SplashRoad.tsx
+│   │   │   │       └── SplashText.tsx
 │   │   │   ├── constants
 │   │   │   ├── hooks
 │   │   │   │   └── useSplashAnimation.ts
@@ -232,9 +235,12 @@ Vroom-Rider/
 │   │   │   ├── services
 │   │   │   ├── store
 │   │   │   ├── styles
+│   │   │   │   ├── Splash.styles.ts
 │   │   │   │   ├── login.styles.ts
 │   │   │   │   └── signup.styles.ts
 │   │   │   ├── types
+│   │   │   ├── utils
+│   │   │   │   └── SplashPathUtils.ts
 │   │   │   └── viewmodels
 │   │   │       ├── useLoginViewModel.ts
 │   │   │       ├── useSignupViewModel.ts
