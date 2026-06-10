@@ -5,6 +5,8 @@ Vroom-Rider/
 ├── .git
 ├── .gitignore
 ├── .prettierrc.js
+├── .vscode
+│   └── .react
 ├── .watchmanconfig
 ├── ARCHITECTURE.md
 ├── App.tsx
@@ -227,6 +229,7 @@ Vroom-Rider/
 │   │   │   │       └── SplashText.tsx
 │   │   │   ├── constants
 │   │   │   ├── hooks
+│   │   │   │   ├── useAuthActions.ts
 │   │   │   │   ├── useSplashAnimation.ts
 │   │   │   │   └── useSplashLayout.ts
 │   │   │   ├── screens
@@ -235,18 +238,6 @@ Vroom-Rider/
 │   │   │   │   └── SplashScreen.tsx
 │   │   │   ├── services
 │   │   │   ├── store
-│   │   │   │   └── signup
-│   │   │   │       ├── HaveAccount.tsx
-│   │   │   │       ├── PinGlow.tsx
-│   │   │   │       ├── PinShapeSkia.tsx
-│   │   │   │       ├── SignupCard.tsx
-│   │   │   │       ├── SignupFooter.tsx
-│   │   │   │       └── SignupForm.tsx
-│   │   │   ├── hooks
-│   │   │   │   └── useAuthActions.ts
-│   │   │   ├── screens
-│   │   │   │   ├── LoginScreen.tsx
-│   │   │   │   └── SignupScreen.tsx
 │   │   │   ├── styles
 │   │   │   │   ├── Splash.styles.ts
 │   │   │   │   ├── login.styles.ts
