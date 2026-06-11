@@ -12,8 +12,8 @@ export function useSelectRideViewModel(showAlert: (title: string, msg: string) =
   // --- UI State ---
   const [isNowDropdownOpen, setIsNowDropdownOpen] = useState(false);
   const [isForMeDropdownOpen, setIsForMeDropdownOpen] = useState(false);
-  const [selectedPerson, setSelectedPerson] = useState('For me');
-  const [selectedTime, setSelectedTime] = useState('Now');
+  const [selectedPerson, setSelectedPerson] = useState('forMe');
+  const [selectedTime, setSelectedTime] = useState('now');
   const [fromLocation, setFromLocation] = useState('');
   const [toLocation, setToLocation] = useState('');
   const [contactPhone, setContactPhone] = useState('');

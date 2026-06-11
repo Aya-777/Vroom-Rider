@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/shared.styles';
@@ -32,15 +28,10 @@ export default function RideDropdown({
 
   return (
     <View style={styles.dropdownContainer}>
-      <TouchableOpacity
-        style={styles.dropdown}
-        onPress={onToggle}
-      >
+      <TouchableOpacity style={styles.dropdown} onPress={onToggle}>
         {icon && icon}
 
-        <Text style={styles.dropdownText}>
-          {value}
-        </Text>
+        <Text style={styles.dropdownText}>{value}</Text>
 
         {isOpen ? (
           <ArrowUp fill={colors.primary} />
@@ -62,9 +53,7 @@ export default function RideDropdown({
                   styles.menuItemText,
                   {
                     color:
-                      value === item
-                        ? colors.primary
-                        : colors.textSecondary,
+                      value === item ? colors.primary : colors.textSecondary,
                   },
                 ]}
               >

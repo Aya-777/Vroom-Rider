@@ -13,6 +13,8 @@ import ProfileIcon from '../../../assets/svg/profile/profile.svg';
 import ScheduleIcon from '../../../assets/svg/common/schedule.svg';
 import PinIcon from '../../../assets/svg/common/pin.svg';
 import StarIcon from '../../../assets/svg/common/star.svg';
+import { useTranslation } from 'react-i18next';
+
 
 function showAlert(title: string, msg: string) {
   Alert.alert(title, msg)
@@ -20,8 +22,9 @@ function showAlert(title: string, msg: string) {
 
 export default function SelectRideScreen() {
   
-    const { colors, mode } = useTheme();
-    const styles = createStyles(colors);
+  const { colors, mode } = useTheme();
+  const styles = createStyles(colors);
+  const { t } = useTranslation(['ride.selectRide','common']);
     
     const {
       isNowDropdownOpen,
@@ -59,7 +62,7 @@ export default function SelectRideScreen() {
         />
 
         <Header
-          title="Ride"
+          title= {t('common:ride')}
           onBackPress={handleBackPress}
         />
 
@@ -67,9 +70,9 @@ export default function SelectRideScreen() {
           <View style={styles.dropdownRow}>
             <RideDropdown
               icon={<ScheduleIcon fill={colors.primary} />}
-              value={selectedTime}
+              value={t(selectedTime)}
               isOpen={isNowDropdownOpen}
-              items={['Now', 'Schedule']}
+              items={[t('now'), t('schedule')]}
               onToggle={() =>
                 setIsNowDropdownOpen(!isNowDropdownOpen)
               }
@@ -83,7 +86,7 @@ export default function SelectRideScreen() {
               icon={<ProfileIcon fill={colors.primary} />}
               value={selectedPerson}
               isOpen={isForMeDropdownOpen}
-              items={['For me', 'Other Contact']}
+              items={['forMe', 'otherContact']}
               onToggle={() =>
                 setIsForMeDropdownOpen(!isForMeDropdownOpen)
               }
@@ -105,12 +108,12 @@ export default function SelectRideScreen() {
           <View style={styles.actionRow}>
             <RideActionButton
               icon={<PinIcon fill={colors.textSecondary} />}
-              title="Set on map"
+              title={t('setOnMap')}
             />
 
             <RideActionButton
               icon={<StarIcon fill={colors.textSecondary} />}
-              title="Saved places"
+              title={t('common:savedPlaces')}
             />
           </View>
 
