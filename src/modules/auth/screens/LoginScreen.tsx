@@ -13,10 +13,11 @@ import { useLoginViewModel } from '../viewmodels/useLoginViewModel';
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/login.styles';
 import LinearBg from '../../../shared/components/LinearBg';
-import {useAuthActions} from '../hooks/useAuthActions';
+import { useAuthActions } from '../hooks/useAuthActions';
+import { AuthStackScreenProps } from '../../../navigation/auth/authTypes';
 
-const LoginScreen = () => {
-  
+const LoginScreen = ({ navigation }: AuthStackScreenProps<'Login'>) => {
+
   const { colors } = useTheme();
   const styles = createStyles(colors);
 
@@ -57,7 +58,7 @@ const LoginScreen = () => {
 
             <LoginFooter
               onSignupPress={navigateToSignup}
-              onForgotPasswordPress={() => console.log('Forgot password pressed')}
+              onForgotPasswordPress={() => navigation.navigate('ForgotPassword')}
             />
           </ScrollView>
         </KeyboardAvoidingView>
