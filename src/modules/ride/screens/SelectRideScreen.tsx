@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StatusBar, Alert } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
-import Header from '../../../shared/components/ride/Header';
+import Header from '../../../shared/components/SubHeader';
 import RideDropdown from '../components/shared/RideDropdown';
 import RideLocationInputs from '../components/SelectRideScreen/RideLocationInputs';
 import RideActionButton from '../components/SelectRideScreen/RideActionButton';

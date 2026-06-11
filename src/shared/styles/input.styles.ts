@@ -16,6 +16,7 @@ export const createStyles = () =>
             flex: 1,
             paddingVertical: 10,
             paddingHorizontal: 12,
+            ...Typography.caption
         },
         container: {},
         inputError: {

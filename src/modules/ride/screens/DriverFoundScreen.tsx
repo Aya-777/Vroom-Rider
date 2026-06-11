@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StatusBar } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
-import Header from '../../../shared/components/ride/Header';
+import Header from '../../../shared/components/SubHeader';
 import { useDriverHereViewModel } from '../viewmodels/useDriverHereViewModel';
 import { createStyles } from '../styles/DriverFound.styles';
 import DriverStatus from '../components/DriverFoundScreen/DriverStatus';

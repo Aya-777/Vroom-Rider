@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StatusBar, TextInput } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
-import Header from '../../../shared/components/ride/Header';
+import Header from '../../../shared/components/SubHeader';
 import InfoBox from '../components/RideConfirmationScreen/InfoBox';
 import FindDriverButton from '../components/RideConfirmationScreen/FindDriverButton';
 import { createStyles } from '../styles/confirmRide.styles';

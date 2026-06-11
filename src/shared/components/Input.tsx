@@ -10,6 +10,7 @@ import {
   TextStyle,
 } from 'react-native';
 import { createStyles } from '../styles/input.styles'
+import { Typography } from '../../core/theme/tokens';
 
 type InputType = 'text' | 'phone' | 'password' | 'username';
 
@@ -37,6 +38,7 @@ export default function Input({
 }: InputProps) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [localError, setLocalError] = useState<string | undefined>(undefined);
+  const [internalText, setInternalText] = useState(props.value || '');
 
   const handleTextChange = (text: string) => {
     let finalValidText = text;
@@ -44,6 +46,7 @@ export default function Input({
     if (type === 'phone') {
       finalValidText = text.replace(/[^0-9]/g, '');
     }
+    setInternalText(finalValidText);
     onChangeText?.(finalValidText);
     if (finalValidText.length === 0) {
       setLocalError(undefined);
@@ -70,7 +73,8 @@ export default function Input({
   const error = externalError || localError;
 
   const styles = createStyles();
-
+  const isInputEmpty = internalText.length === 0;
+  const dynamicTypography = isInputEmpty ? Typography.caption : Typography.body;
 
   return (
     //     <View style={styles.container}>
@@ -82,11 +86,17 @@ export default function Input({
         {renderLeftIcon && renderLeftIcon()}
 
         <TextInput
-          style={[styles.defaultInput, inputStyle]}
+          key={isInputEmpty ? 'empty_hint' : 'filled_body'}
+          style={[
+            styles.defaultInput,
+            dynamicTypography,
+            inputStyle
+          ]}
           onChangeText={handleTextChange}
           secureTextEntry={finalSecureTextEntry}
           keyboardType={finalKeyboardType}
           maxLength={finalMaxLength}
+          value={props.value !== undefined ? props.value : internalText}
           {...props}
         />
 
@@ -101,3 +111,5 @@ export default function Input({
     </View>
   );
 }
+
+// I moved the styles to shared/styles/input.styles.ts 🫶🏻
