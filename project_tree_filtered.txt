@@ -233,6 +233,7 @@ Vroom-Rider/
 │   │   │   │   ├── useSplashAnimation.ts
 │   │   │   │   └── useSplashLayout.ts
 │   │   │   ├── screens
+│   │   │   │   ├── ForgotPasswordScreen.tsx
 │   │   │   │   ├── LoginScreen.tsx
 │   │   │   │   ├── SignupScreen.tsx
 │   │   │   │   └── SplashScreen.tsx
@@ -240,12 +241,14 @@ Vroom-Rider/
 │   │   │   ├── store
 │   │   │   ├── styles
 │   │   │   │   ├── Splash.styles.ts
+│   │   │   │   ├── forgotPassword.styles.ts
 │   │   │   │   ├── login.styles.ts
 │   │   │   │   └── signup.styles.ts
 │   │   │   ├── types
 │   │   │   ├── utils
 │   │   │   │   └── SplashPathUtils.ts
 │   │   │   └── viewmodels
+│   │   │       ├── useForgotPasswordViewModel.ts
 │   │   │       ├── useLoginViewModel.ts
 │   │   │       ├── useSignupViewModel.ts
 │   │   │       └── useSplashViewModel.ts
@@ -354,14 +357,17 @@ Vroom-Rider/
 │   │   │       └── profileTypes.ts
 │   │   └── rootTypes.ts
 │   ├── shared
-│   │   └── components
-│   │       ├── Header.tsx
-│   │       ├── Input.tsx
-│   │       ├── LinearBg.tsx
-│   │       ├── SearchBar.tsx
-│   │       └── ride
-│   │           ├── BottomSheetCard.tsx
-│   │           └── Header.tsx
+│   │   ├── components
+│   │   │   ├── Header.tsx
+│   │   │   ├── Input.tsx
+│   │   │   ├── LinearBg.tsx
+│   │   │   ├── SearchBar.tsx
+│   │   │   ├── SubHeader.tsx
+│   │   │   └── ride
+│   │   │       └── BottomSheetCard.tsx
+│   │   └── styles
+│   │       ├── SubHeader.styles.ts
+│   │       └── input.styles.ts
 │   └── types
 │       └── svg.d.ts
 └── tsconfig.json
