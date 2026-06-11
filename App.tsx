@@ -5,7 +5,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeProvider } from './src/core/theme/ThemeProvider';
 import { useTheme } from './src/core/theme/useTheme';
 import { enableScreens, enableFreeze } from 'react-native-screens';
-import RootNavigator from './src/navigation/RootNavigator';
+// import RootNavigator from './src/navigation/RootNavigator';
+import ForgotPasswordScreen from './src/modules/auth/screens/ForgotPasswordScreen';
 
 enableScreens(true);
 enableFreeze(true);
@@ -22,7 +23,7 @@ function AppContent() {
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       <StatusBar hidden={true} animated={true} />
-      <RootNavigator/>
+      <ForgotPasswordScreen/>
     </View>
   );
 }

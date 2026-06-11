@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StatusBar } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
-import Header from '../../../shared/components/ride/Header';
+import Header from '../../../shared/components/SubHeader';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 import VehicleSelector from '../components/ExtraDetailsScreen/VehicleSelector';
 import { createStyles } from '../styles/shared.styles';
