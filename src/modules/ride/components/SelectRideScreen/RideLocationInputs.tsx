@@ -29,7 +29,7 @@ export default function RideLocationInputs({
 }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
-  const { t } = useTranslation(['ride.selectRide']);
+  const { t } = useTranslation(['selectRide']);
   
   return (
     <View style={styles.inputCard}>

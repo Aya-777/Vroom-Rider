@@ -24,7 +24,7 @@ export default function SelectRideScreen() {
   
   const { colors, mode } = useTheme();
   const styles = createStyles(colors);
-  const { t } = useTranslation(['ride.selectRide','common']);
+  const { t } = useTranslation(['selectRide','common']);
     
     const {
       isNowDropdownOpen,
@@ -46,6 +46,16 @@ export default function SelectRideScreen() {
       handleNextPress,
       handleBackPress
     } = useSelectRideViewModel(showAlert);
+
+    const personItems = [
+      { key: 'forMe', label: t('selectRide:forMe') },
+      { key: 'otherContact', label: t('selectRide:otherContact') },
+    ];
+
+    const timeItems = [
+    {key: 'now', label: t('common:now')},
+    {key: 'schedule', label: t('common:schedule')}
+    ];
 
     const onNextPress = () => {
       if (validate()) {
@@ -70,9 +80,9 @@ export default function SelectRideScreen() {
           <View style={styles.dropdownRow}>
             <RideDropdown
               icon={<ScheduleIcon fill={colors.primary} />}
-              value={t(selectedTime)}
+              value={t(`common:${selectedTime}`)}
               isOpen={isNowDropdownOpen}
-              items={[t('now'), t('schedule')]}
+              items={timeItems}
               onToggle={() =>
                 setIsNowDropdownOpen(!isNowDropdownOpen)
               }
@@ -84,9 +94,9 @@ export default function SelectRideScreen() {
 
             <RideDropdown
               icon={<ProfileIcon fill={colors.primary} />}
-              value={selectedPerson}
+              value={t(`selectRide:${selectedPerson}`)}
               isOpen={isForMeDropdownOpen}
-              items={['forMe', 'otherContact']}
+              items={personItems}
               onToggle={() =>
                 setIsForMeDropdownOpen(!isForMeDropdownOpen)
               }

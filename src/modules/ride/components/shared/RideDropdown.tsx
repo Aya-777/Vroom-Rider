@@ -10,7 +10,7 @@ type Props = {
   icon?: React.ReactNode;
   value: string;
   isOpen: boolean;
-  items: string[];
+  items: { key: string; label: string; }[];
   onToggle: () => void;
   onSelect: (item: string) => void;
 };
@@ -44,20 +44,20 @@ export default function RideDropdown({
         <View style={styles.dropdownMenu}>
           {items.map(item => (
             <TouchableOpacity
-              key={item}
+              key={item.key}
               style={styles.menuItem}
-              onPress={() => onSelect(item)}
+              onPress={() => onSelect(item.key)}
             >
               <Text
                 style={[
                   styles.menuItemText,
                   {
                     color:
-                      value === item ? colors.primary : colors.textSecondary,
+                      value === item.label ? colors.primary : colors.textSecondary,
                   },
                 ]}
               >
-                {item}
+                {item.label}
               </Text>
             </TouchableOpacity>
           ))}
