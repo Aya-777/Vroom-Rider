@@ -6,10 +6,12 @@ import SearchIcon from '../../assets/svg/common/search.svg';
 
 import { Typography, Spacing, Radius, Shadows } from '../../core/theme/tokens';
 import { useTheme } from '../../core/theme/useTheme';
+import { useTranslation } from 'react-i18next';
+
 
 function SearchBar() {
+  const { t } = useTranslation(['home','common']);
   const { colors } = useTheme();
-
   const styles = createStyles(colors);
 
   return (
@@ -17,7 +19,7 @@ function SearchBar() {
       <SearchIcon fill={colors.primary} />
 
       <TextInput
-        placeholder="Where to?"
+        placeholder={t('whereTo')}
         placeholderTextColor={colors.textMuted}
         style={styles.searchInput}
       />
@@ -26,7 +28,7 @@ function SearchBar() {
 
       <TouchableOpacity style={styles.timeButton}>
         <ScheduleIcon fill={colors.primary} />
-        <Text style={styles.timeText}>Now</Text>
+        <Text style={styles.timeText}>{t('common:now')}</Text>
       </TouchableOpacity>
     </View>
   );
