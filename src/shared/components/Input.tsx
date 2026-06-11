@@ -4,14 +4,12 @@ import {
   TextInputProps,
   Text,
   View,
-  StyleSheet,
   TouchableOpacity,
   StyleProp,
   ViewStyle,
   TextStyle,
 } from 'react-native';
-import { Radius } from '../../core/theme/tokens/radius';
-import { Typography } from '../../core/theme/tokens/typography';
+import { createStyles } from '../styles/input.styles'
 
 type InputType = 'text' | 'phone' | 'password' | 'username';
 
@@ -71,6 +69,9 @@ export default function Input({
   const finalKeyboardType = type === 'phone' ? 'numeric' : keyboardType;
   const error = externalError || localError;
 
+  const styles = createStyles();
+
+
   return (
     //     <View style={styles.container}>
     //       <TextInput style={[error ? styles.inputError : null, style]} {...props} />
@@ -100,31 +101,3 @@ export default function Input({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  defaultContainer: {
-    marginBottom: 15,
-    width: '100%',
-  },
-  inputBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
-  },
-  defaultInput: {
-    flex: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-  },
-  container: {},
-  inputError: {
-    borderColor: 'red',
-    borderWidth: 0.5,
-    borderRadius: Radius.sm,
-  },
-  errorText: {
-    color: 'red',
-    marginTop: 4,
-    ...Typography.smallCaption,
-  },
-});
