@@ -13,11 +13,12 @@ import {
 import { Radius } from '../../core/theme/tokens/radius';
 import { Typography } from '../../core/theme/tokens/typography';
 
-type InputType = 'text' | 'phone' | 'password';
+type InputType = 'text' | 'phone' | 'password' | 'username';
 
 interface InputProps extends Omit<TextInputProps, 'style'> {
   type?: InputType;
   error?: string;
+  onErrorChange?: (error: string | undefined) => View; // Callback لتمرير الخطأ للفورم الأساسي إذا أحببت
   containerStyle?: StyleProp<ViewStyle>;
   inputStyle?: StyleProp<TextStyle>;
   renderLeftIcon?: () => React.ReactNode;
@@ -26,7 +27,7 @@ interface InputProps extends Omit<TextInputProps, 'style'> {
 
 export default function Input({
   type = 'text',
-  error,
+  error: externalError,
   containerStyle,
   inputStyle,
   onChangeText,
@@ -37,32 +38,46 @@ export default function Input({
   ...props
 }: InputProps) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [localError, setLocalError] = useState<string | undefined>(undefined);
 
   const handleTextChange = (text: string) => {
+    let finalValidText = text;
+
     if (type === 'phone') {
-      const cleaned = text.replace(/[^0-9]/g, '');
-      const limited = cleaned.slice(0, 10);
-      onChangeText?.(limited);
+      finalValidText = text.replace(/[^0-9]/g, '');
+    }
+    onChangeText?.(finalValidText);
+    if (finalValidText.length === 0) {
+      setLocalError(undefined);
+    } else if (type === 'password' && finalValidText.length < 8) {
+      setLocalError('Password must be at least 8 characters');
+    } else if (type === 'username' && finalValidText.length < 2) {
+      setLocalError('Username must be at least 2 characters');
     } else {
-      onChangeText?.(text);
+      setLocalError(undefined);
     }
   };
 
-  const finalMaxLength = type === 'phone' ? 10 : props.maxLength;
+  const getMaxLength = () => {
+    if (type === 'phone') return 10;
+    if (type === 'password') return 50;
+    if (type === 'username') return 20;
+    return props.maxLength;
+  };
 
+  const finalMaxLength = getMaxLength();
   const isPassword = type === 'password';
   const finalSecureTextEntry = isPassword ? !isPasswordVisible : secureTextEntry;
   const finalKeyboardType = type === 'phone' ? 'numeric' : keyboardType;
+  const error = externalError || localError;
 
   return (
     //     <View style={styles.container}>
     //       <TextInput style={[error ? styles.inputError : null, style]} {...props} />
     //       {error && <Text style={styles.errorText}>{error}</Text>}
-    //     </View>
+
     <View style={[styles.container, containerStyle]}>
-
       <View style={[styles.inputBox, error ? styles.inputError : null]}>
-
         {renderLeftIcon && renderLeftIcon()}
 
         <TextInput
@@ -87,7 +102,6 @@ export default function Input({
 }
 
 const styles = StyleSheet.create({
-
   defaultContainer: {
     marginBottom: 15,
     width: '100%',
@@ -102,11 +116,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 12,
   },
-  //   container: {},
-  //   inputError: { borderColor: 'red', borderWidth: 0.5, borderRadius: Radius.sm },
-  //   errorText: { color: 'red', ...Typography.smallCaption },
   container: {},
-
   inputError: {
     borderColor: 'red',
     borderWidth: 0.5,
