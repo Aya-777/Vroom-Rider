@@ -3,6 +3,7 @@ import i18n from '../index';
 import { SupportedLanguage } from '../types';
 import { STORAGE_KEY } from '../constants';
 import { DEFAULT_LANGUAGE } from '../constants';
+import * as RNLocalize from 'react-native-localize';
 
 
 export class LanguageService {
@@ -34,7 +35,7 @@ export class LanguageService {
         await this.getSavedLanguage();
 
       const language =
-        savedLanguage ?? DEFAULT_LANGUAGE;
+        savedLanguage ?? RNLocalize.getLocales()[0].languageCode ?? DEFAULT_LANGUAGE;;
 
       await i18n.changeLanguage(
         language,

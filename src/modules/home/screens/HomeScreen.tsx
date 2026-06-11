@@ -3,7 +3,6 @@ import {
   ScrollView,
   View,
 } from 'react-native';
-import { SafeAreaView} from 'react-native';
 
 import LinearBg from '../../../shared/components/LinearBg';
 import SearchBar from '../../../shared/components/SearchBar';
