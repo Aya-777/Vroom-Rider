@@ -7,6 +7,7 @@ import SearchIcon from '../../assets/svg/common/search.svg';
 import { Typography, Spacing, Radius, Shadows } from '../../core/theme/tokens';
 import { useTheme } from '../../core/theme/useTheme';
 import { useTranslation } from 'react-i18next';
+import { ThemeColors } from '../../core/theme/theme.types';
 
 
 function SearchBar() {
@@ -34,7 +35,7 @@ function SearchBar() {
   );
 }
 
-const createStyles = (colors: any) =>
+const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
     searchContainer: {
       flexDirection: 'row',
