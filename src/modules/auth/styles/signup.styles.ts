@@ -134,11 +134,11 @@ export const createStyles = (colors: ThemeColors) =>
         },
 
         halfInput: {
-            width: 143,
+            width: 142,
             height: 55,
             flexDirection: 'row',
             alignItems: 'center',
-            paddingHorizontal: 12,
+            paddingHorizontal: 10,
             borderRadius: 12,
             borderColor: colors.surface,
             borderWidth: 2,
@@ -147,7 +147,7 @@ export const createStyles = (colors: ThemeColors) =>
 
         halfInputText: {
             flex: 1,
-            marginLeft: 8,
+            marginLeft: 0,
             ...Typography.caption,
         },
 
@@ -162,6 +162,7 @@ export const createStyles = (colors: ThemeColors) =>
 
         footerLink: {
             ...Typography.boldCaption,
+            textDecorationLine: 'underline',
         },
 
         linksRow: {

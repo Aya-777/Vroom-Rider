@@ -6,10 +6,12 @@ import {
 } from 'react-native';
 import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/signup.styles';
+import { useTranslation } from 'react-i18next';
 
 const SignupFooter = () => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
+  const { t } = useTranslation(['auth']);
 
   return (
     <View style={styles.footerContainer}>
@@ -19,7 +21,7 @@ const SignupFooter = () => {
           { color: colors.textMuted },
         ]}
       >
-        By continuing, you agree to Vroom's
+        {t('byContinuing')}
       </Text>
 
       <View style={styles.linksRow}>
@@ -30,11 +32,11 @@ const SignupFooter = () => {
               { color: colors.primary },
             ]}
           >
-            Terms
+            {t('terms')}
           </Text>
         </TouchableOpacity>
 
-        <Text
+        {/* <Text
           style={[
             styles.footerText,
             { color: colors.textMuted },
@@ -52,7 +54,7 @@ const SignupFooter = () => {
           >
             Privacy Policy
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );

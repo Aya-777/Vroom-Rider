@@ -98,11 +98,13 @@ import Logo from '../shared/logo';
 import LinearBg from '../../../../shared/components/LinearBg';
 import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/login.styles';
-import Input from '../../../../shared/components/Input'; 
+import Input from '../../../../shared/components/Input';
+import { useTranslation } from 'react-i18next'; 
 
 const LoginForm = ({ vm }: any) => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
+  const { t } = useTranslation(['auth']);
 
   return (
     <View>
@@ -115,7 +117,7 @@ const LoginForm = ({ vm }: any) => {
         
         <Input
           type="phone"
-          placeholder="Phone Number"
+          placeholder= {t('phoneNumber')}
           placeholderTextColor={colors.textMuted}
           value={vm.phone}
           onChangeText={vm.setPhone}
@@ -129,7 +131,7 @@ const LoginForm = ({ vm }: any) => {
 
         <Input
           type="password"
-          placeholder="Password"
+          placeholder={t('password')}
           placeholderTextColor={colors.textMuted}
           value={vm.password}
           onChangeText={vm.setPassword}
@@ -155,7 +157,7 @@ const LoginForm = ({ vm }: any) => {
             style={styles.button}
             colors={[colors.textPrimary, colors.surface]}
           >
-            <Text style={[styles.btnText]}>Login</Text>
+            <Text style={[styles.btnText]}>{t('login')}</Text>
           </LinearBg>
         </TouchableOpacity>
       </View>

@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/login.styles';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   onSignupPress?: () => void;
@@ -12,6 +13,7 @@ const LoginFooter = ({ onSignupPress, onForgotPasswordPress }: Props) => {
 
   const { colors } = useTheme();
   const styles = createStyles(colors);
+  const { t } = useTranslation(['auth']);
 
   return (
     <View style={styles.container}>
@@ -20,13 +22,13 @@ const LoginFooter = ({ onSignupPress, onForgotPasswordPress }: Props) => {
           style={[
             styles.text,
           ]}>
-          Don't have an account?{' '}
+          {t('dontHaveAccount')}{' '}
           <TouchableOpacity onPress={onSignupPress}>
             <Text
               style={[
                 styles.link,
               ]}>
-              Signup
+              {t('signup')}
             </Text>
           </TouchableOpacity>
         </Text>
@@ -36,7 +38,7 @@ const LoginFooter = ({ onSignupPress, onForgotPasswordPress }: Props) => {
           style={[
             styles.link,
           ]}>
-          Forgot Password?
+          {t('forgotPassword?')}
         </Text>
       </TouchableOpacity>
     </View>
