@@ -5,22 +5,22 @@ import Header from '../../../shared/components/ride/Header';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 import VehicleSelector from '../components/ExtraDetailsScreen/VehicleSelector';
 import { createStyles } from '../styles/shared.styles';
-import RideNextButton from '../components/shared/RideNextButton';
+import ActionButton from '../components/shared/ActionButton';
 import TimePriceBox from '../components/ExtraDetailsScreen/TimePriceBox';
 import RideActionFilters from '../components/ExtraDetailsScreen/RideActionFilters';
-import {useRideDetailsViewModel} from '../viewmodels/useRideDetailsViewModel';
+import { useRideDetailsViewModel } from '../viewmodels/useRideDetailsViewModel';
 import { useTranslation } from 'react-i18next';
+import ArrowRight from '../../../assets/svg/arrows/arrow.svg'
 
 export default function ExtraDetailsScreen() {
-
   const { colors, mode } = useTheme();
   const styles = createStyles(colors);
-  const {t} = useTranslation(['rideDetails', 'common']);
+  const { t } = useTranslation(['rideDetails', 'common']);
 
   const paymentItems = [
-    {key: 'cash', label: t('rideDetails:payment.cash')},
-    {key: 'wallet', label: t('rideDetails:payment.wallet')}
-  ]
+    { key: 'cash', label: t('rideDetails:payment.cash') },
+    { key: 'wallet', label: t('rideDetails:payment.wallet') },
+  ];
 
   const {
     timeEstimate,
@@ -33,7 +33,7 @@ export default function ExtraDetailsScreen() {
     setIsDropdownOpen,
 
     handleNextPress,
-    handleBackPress
+    handleBackPress,
   } = useRideDetailsViewModel();
 
   const onNextPress = () => {
@@ -52,13 +52,13 @@ export default function ExtraDetailsScreen() {
 
       <BottomSheetCard>
         <TimePriceBox time={timeEstimate} price={priceEstimate} />
-        
+
         <RideActionFilters
           selectedValue={t(`rideDetails:payment.${selectedPayment}`)}
           isOpen={isDropdownOpen}
           styles={styles}
           onToggleDropdown={() => setIsDropdownOpen(!isDropdownOpen)}
-          onSelectPayment={(item) => {
+          onSelectPayment={item => {
             setSelectedPayment(item);
             setIsDropdownOpen(false);
           }}
@@ -70,7 +70,11 @@ export default function ExtraDetailsScreen() {
           onSelect={setSelectedVehicle}
         />
 
-        <RideNextButton onPress={onNextPress} />
+        <ActionButton 
+        onPress={onNextPress}
+        title={t('common:next')}
+        icon = {<ArrowRight fill={colors.background}/>}
+        />
       </BottomSheetCard>
     </View>
   );

@@ -4,13 +4,14 @@ import { useTheme } from '../../../core/theme/useTheme';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 import Header from '../../../shared/components/ride/Header';
 import InfoBox from '../components/RideConfirmationScreen/InfoBox';
-import FindDriverButton from '../components/RideConfirmationScreen/FindDriverButton';
+import ActionButton from '../components/shared/ActionButton';
 import { createStyles } from '../styles/confirmRide.styles';
 import { useConfirmRideViewModel } from '../viewmodels/useConfirmRideViewModel';
 import ClockIcon from '../../../assets/svg/common/schedule.svg';
 import EstimatedPriceIcon from '../../../assets/svg/payment/price.svg';
 import CashIcon from '../../../assets/svg/payment/cash.svg';
 import CarIcon from '../../../assets/svg/common/ride.svg';
+import SearchIcon from '../../../assets/svg/common/search.svg'
 import PhoneNumberIcon from '../../../assets/svg/contact/call.svg';
 import { useTranslation } from 'react-i18next';
 
@@ -83,10 +84,14 @@ export default function RideConfirmationScreen() {
             />
           </View>
         </View>
-
-        <FindDriverButton
-          onPress={() => vm.handleFindDriver()}
-        />
+        
+          <ActionButton
+            onPress={()=> vm.handleFindDriver()}
+            title={t('findaDriver')}
+            icon={<SearchIcon fill={colors.background} />}
+            textStyle={styles.buttonText}
+            style={styles.button}
+          />
       </BottomSheetCard>
     </View>
   );
