@@ -158,24 +158,49 @@ Vroom-Rider/
 │   │           └── filters.svg
 │   ├── core
 │   │   ├── i18n
+│   │   │   ├── constants.ts
 │   │   │   ├── index.ts
 │   │   │   ├── locales
-│   │   │   │   ├── ar
-│   │   │   │   │   ├── auth.json
-│   │   │   │   │   ├── common.json
-│   │   │   │   │   ├── home.json
-│   │   │   │   │   ├── profile.json
-│   │   │   │   │   └── ride.json
-│   │   │   │   └── en
-│   │   │   │       ├── auth.json
-│   │   │   │       ├── common.json
-│   │   │   │       ├── home.json
-│   │   │   │       ├── profile.json
-│   │   │   │       └── ride.json
+│   │   │   │   ├── auth
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
+│   │   │   │   ├── common
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
+│   │   │   │   ├── home
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── navigation
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
+│   │   │   │   ├── profile
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
+│   │   │   │   └── ride
+│   │   │   │       ├── confirmRide
+│   │   │   │       │   ├── ar.json
+│   │   │   │       │   └── en.json
+│   │   │   │       ├── driverFound
+│   │   │   │       │   ├── ar.json
+│   │   │   │       │   └── en.json
+│   │   │   │       ├── driverHere
+│   │   │   │       │   ├── ar.json
+│   │   │   │       │   └── en.json
+│   │   │   │       ├── review
+│   │   │   │       │   ├── ar.json
+│   │   │   │       │   └── en.json
+│   │   │   │       ├── rideDetails
+│   │   │   │       │   ├── ar.json
+│   │   │   │       │   └── en.json
+│   │   │   │       └── selectRide
+│   │   │   │           ├── ar.json
+│   │   │   │           └── en.json
 │   │   │   ├── resources.ts
+│   │   │   ├── services
+│   │   │   │   └── LanguageService.ts
 │   │   │   ├── types.ts
 │   │   │   └── utils
-│   │   │       ├── getCurrentLanguage.ts
 │   │   │       └── isRTL.ts
 │   │   ├── storage
 │   │   │   ├── asyncStorage.adapter.ts
@@ -208,12 +233,17 @@ Vroom-Rider/
 │   ├── modules
 │   │   ├── auth
 │   │   │   ├── components
+│   │   │   │   ├── LoginFooter.tsx
+│   │   │   │   ├── LoginForm.tsx
+│   │   │   │   ├── OTP
+│   │   │   │   │   └── OtpInputFields.tsx
 │   │   │   │   ├── login
 │   │   │   │   │   ├── LoginFooter.tsx
 │   │   │   │   │   ├── LoginForm.tsx
 │   │   │   │   │   ├── LoginPin.tsx
 │   │   │   │   │   └── PinShape.tsx
 │   │   │   │   ├── shared
+│   │   │   │   │   ├── Button.tsx
 │   │   │   │   │   └── logo.tsx
 │   │   │   │   ├── signup
 │   │   │   │   │   ├── HaveAccount.tsx
@@ -235,11 +265,13 @@ Vroom-Rider/
 │   │   │   ├── screens
 │   │   │   │   ├── ForgotPasswordScreen.tsx
 │   │   │   │   ├── LoginScreen.tsx
+│   │   │   │   ├── OtpScreen.tsx
 │   │   │   │   ├── SignupScreen.tsx
 │   │   │   │   └── SplashScreen.tsx
 │   │   │   ├── services
 │   │   │   ├── store
 │   │   │   ├── styles
+│   │   │   │   ├── OtpScreen.styles.ts
 │   │   │   │   ├── Splash.styles.ts
 │   │   │   │   ├── forgotPassword.styles.ts
 │   │   │   │   ├── login.styles.ts
@@ -250,6 +282,7 @@ Vroom-Rider/
 │   │   │   └── viewmodels
 │   │   │       ├── useForgotPasswordViewModel.ts
 │   │   │       ├── useLoginViewModel.ts
+│   │   │       ├── useOtpViewModel.ts
 │   │   │       ├── useSignupViewModel.ts
 │   │   │       └── useSplashViewModel.ts
 │   │   ├── home
@@ -304,14 +337,12 @@ Vroom-Rider/
 │   │       │   │   ├── TimePriceBox.tsx
 │   │       │   │   └── VehicleSelector.tsx
 │   │       │   ├── RideConfirmationScreen
-│   │       │   │   ├── FindDriverButton.tsx
 │   │       │   │   └── InfoBox.tsx
 │   │       │   ├── SelectRideScreen
-│   │       │   │   ├── RideActionButton.tsx
 │   │       │   │   └── RideLocationInputs.tsx
 │   │       │   └── shared
-│   │       │       ├── RideDropdown.tsx
-│   │       │       └── RideNextButton.tsx
+│   │       │       ├── ActionButton.tsx
+│   │       │       └── RideDropdown.tsx
 │   │       ├── constants
 │   │       │   ├── driverData.ts
 │   │       │   ├── vehicleData.ts
