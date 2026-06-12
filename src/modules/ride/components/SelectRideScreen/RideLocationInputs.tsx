@@ -43,7 +43,7 @@ export default function RideLocationInputs({
 
       <View style={styles.inputContainer}>
         <Input
-          style={styles.input}
+          inputStyle={styles.input}
           placeholder={t('from')}
           placeholderTextColor={colors.textMuted}
           value={fromLocation}
@@ -54,7 +54,7 @@ export default function RideLocationInputs({
         <View style={styles.divider} />
 
         <Input
-          style={styles.input}
+          inputStyle={styles.input}
           placeholder={t('to')}
           placeholderTextColor={colors.textMuted}
           value={toLocation}
