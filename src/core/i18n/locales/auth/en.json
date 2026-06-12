@@ -30,7 +30,7 @@
   "setNewPassword": "Set s new Password",
   "setNewPasswordDescription": "Create a new password. Ensure it differs from previous ones for security",
   "enterPassword": "Enter Password",
-  "enterYourPasswordPlaceholder": "Enter Your Password",
+  "enterYourPassword": "Enter Your Password",
   "updatePassword": "Update Password"
 
 }

@@ -24,18 +24,18 @@ export const useResetPasswordViewModel = (navigation: any) => {
     const handleUpdatePassword = async () => {
 
         if (!password || !confirmPassword) {
-            setError('pleaseFillAllFields'); 
+            setError('pleaseFillAllFields');
             return;
         }
 
-        
+
         if (password !== confirmPassword) {
-            setError('passwordsDoNotMatch'); 
+            setError('passwordsDoNotMatch');
             return;
         }
 
         if (password.length < 6) {
-            setError('passwordTooShort'); 
+            setError('passwordTooShort');
             return;
         }
 
@@ -46,6 +46,8 @@ export const useResetPasswordViewModel = (navigation: any) => {
             await new Promise<void>((resolve) => {
                 setTimeout(() => resolve(), 1500);
             });
+            navigation.navigate('HomeScreen');
+
         } catch (err: any) {
             setError(err?.message || 'somethingWentWrong');
         } finally {

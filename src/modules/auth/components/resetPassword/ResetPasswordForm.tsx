@@ -36,7 +36,7 @@ export default function ResetPasswordForm({
       <Text style={styles.label}>{t('enterPassword')}</Text>
       <Input
         type="password"
-        placeholder={t('enterYourPasswordPlaceholder')}
+        placeholder={t('enterYourPassword')}
         placeholderTextColor={colors.textMuted}
         value={passwordValue}
         onChangeText={onPasswordChange}
@@ -49,7 +49,7 @@ export default function ResetPasswordForm({
       <Text style={styles.label}>{t('confirmPassword')}</Text>
       <Input
         type="password"
-        placeholder={t('confirmPasswordPlaceholder')}
+        placeholder={t('confirmPassword')}
         placeholderTextColor={colors.textMuted}
         value={confirmPasswordValue}
         onChangeText={onConfirmPasswordChange}
