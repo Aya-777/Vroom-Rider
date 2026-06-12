@@ -42,10 +42,15 @@ export function useOtpViewModel(navigation: any, route: any) {
         const fullCode = code.join('');
         if (fullCode.length < 6) return;
 
-        setIsLoading(true);
         try {
-
+            setIsLoading(true);
             console.log("Verifying Code:", fullCode);
+
+            await new Promise<void>((resolve) => {
+                setTimeout(() => resolve(), 1000);
+            });
+
+            navigation.navigate('ResetPassword');
         } catch (err) {
             console.error(err);
         } finally {
@@ -54,7 +59,11 @@ export function useOtpViewModel(navigation: any, route: any) {
     };
 
     const handleResendCode = () => {
-        console.log("Resending code to:", rawPhoneNumber);
+        console.log("Resending OTP code to:", rawPhoneNumber);
+
+        setCode(['', '', '', '', '', '']);
+        inputRefs.current[0]?.focus();
+        setActiveCodeIndex(0);
     };
 
     const handleBack = () => {

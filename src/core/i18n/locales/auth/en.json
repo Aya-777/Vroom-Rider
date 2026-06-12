@@ -25,6 +25,12 @@
   "weSentLink" :"We sent a reset link to",
   "6Digits":"enter 6 digit code that mentioned in the Message",
   "haventGot" :"Haven't got the code yet?",
-  "resendCode" : "Resend Code"
+  "resendCode" : "Resend Code",
+
+  "setNewPassword": "Set s new Password",
+  "setNewPasswordDescription": "Create a new password. Ensure it differs from previous ones for security",
+  "enterPassword": "Enter Password",
+  "enterYourPassword": "Enter Your Password",
+  "updatePassword": "Update Password"
 
 }
