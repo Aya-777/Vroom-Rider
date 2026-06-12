@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import {
     Typography,
     Radius,
+    Spacing,
 } from '../../../core/theme/tokens';
 import { ThemeColors } from '../../../core/theme/theme.types';
 
@@ -14,14 +15,23 @@ export const createStyles = (colors: ThemeColors) =>
 
         text: {
             ...Typography.caption,
-            color: colors.textSecondary
+            color: colors.textSecondary,
+            alignItems: 'center',
+
+        },
+
+        content: {
+            flex: 1,
+            alignItems: 'center',
+            paddingTop: Spacing.xxl,
         },
 
         link: {
             marginTop: 20,
             ...Typography.boldCaption,
             color: colors.primary,
-            textAlign: 'center'
+            textAlign: 'center',
+            textDecorationLine: 'underline',
         },
         top: {
             alignItems: 'center',
@@ -44,7 +54,7 @@ export const createStyles = (colors: ThemeColors) =>
             borderRadius: 12,
             borderColor: colors.surface,
             borderWidth: 2,
-            backgroundColor: colors.backgroundSoft ,
+            backgroundColor: colors.backgroundSoft,
         },
 
         input: {
@@ -82,12 +92,6 @@ export const createStyles = (colors: ThemeColors) =>
         background: {
             ...StyleSheet.absoluteFill,
             backgroundColor: colors.backgroundSoft + '8C'
-        },
-
-        content: {
-            flex: 1,
-            paddingTop: 35,
-            paddingHorizontal: 24,
         },
 
         flex: {
