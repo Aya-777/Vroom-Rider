@@ -1,16 +1,18 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { Text, View } from 'react-native';
 import LinearBg from '../../../shared/components/LinearBg';
 import Header from '../../../shared/components/SubHeader';
 import Input from '../../../shared/components/Input';
 import { useTheme } from '../../../core/theme/useTheme';
 import { useForgotPasswordViewModel } from '../viewmodels/useForgotPasswordViewModel';
 import { createStyles } from '../styles/forgotPassword.styles';
+import { AuthStackScreenProps } from '../../../navigation/auth/authTypes';
+import Button from '../components/shared/Button';
 
-export default function ForgotPasswordScreen({ navigation }: any) {
+export default function ForgotPasswordScreen({ navigation }: AuthStackScreenProps<'ForgotPassword'>) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
-  
+
   const {
     phoneNumber,
     error,
@@ -22,12 +24,12 @@ export default function ForgotPasswordScreen({ navigation }: any) {
 
   return (
     <LinearBg style={styles.container}
-     colors={[colors.backgroundSoft , colors.background]}
-     >
+      colors={[colors.backgroundSoft, colors.background]}
+    >
 
-      <Header 
-        title="Forgot Password" 
-        onBackPress={handleBack} 
+      <Header
+        title="Forgot Password"
+        onBackPress={handleBack}
       />
 
       <View style={styles.content}>
@@ -37,11 +39,11 @@ export default function ForgotPasswordScreen({ navigation }: any) {
 
         <View style={styles.form}>
           <Text style={styles.label}>Your Phone Number</Text>
-         
+
           <Input
             type="phone"
             placeholder="Enter Your Phone Number"
-            placeholderTextColor={colors.textMuted} 
+            placeholderTextColor={colors.textMuted}
             value={phoneNumber}
             onChangeText={handlePhoneChange}
             error={error}
@@ -49,18 +51,12 @@ export default function ForgotPasswordScreen({ navigation }: any) {
             inputStyle={styles.inputText}
           />
 
-          <TouchableOpacity
-            style={[styles.button]} 
+          <Button
+            title="Reset Password"
             onPress={handleResetPassword}
-            activeOpacity={0.8}
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <ActivityIndicator color={colors.background } />
-            ) : (
-              <Text style={styles.buttonText}>Reset Password</Text>
-            )}
-          </TouchableOpacity>
+            isLoading={isLoading}
+            colors={colors}
+          />
         </View>
       </View>
     </LinearBg>

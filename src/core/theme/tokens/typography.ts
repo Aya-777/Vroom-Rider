@@ -35,17 +35,17 @@ export const Typography = {
   },
 
   caption: {
-    fontSize: 13,
+    fontSize: 14,
     fontFamily: 'Lora-Regular',
   },
   
   semiBoldCaption: {
-    fontSize: 13,
+    fontSize: 14,
     fontFamily: 'Lora-SemiBold',
   },
   
   boldCaption:{
-    fontSize: 13,
+    fontSize: 14,
     fontFamily: 'Lora-Bold',
   },
 

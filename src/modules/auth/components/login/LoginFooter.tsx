@@ -15,20 +15,22 @@ const LoginFooter = ({ onSignupPress, onForgotPasswordPress }: Props) => {
 
   return (
     <View style={styles.container}>
-      <Text
-        style={[
-          styles.text,
-        ]}>
-        Don't have an account?{' '}
-        <TouchableOpacity onPress={onSignupPress}>
-          <Text
-            style={[
-              styles.link,
-            ]}>
-            Signup
-          </Text>
-        </TouchableOpacity>
-      </Text>
+      <View style ={styles.content}>
+        <Text
+          style={[
+            styles.text,
+          ]}>
+          Don't have an account?{' '}
+          <TouchableOpacity onPress={onSignupPress}>
+            <Text
+              style={[
+                styles.link,
+              ]}>
+              Signup
+            </Text>
+          </TouchableOpacity>
+        </Text>
+      </View>
       <TouchableOpacity onPress={onForgotPasswordPress}>
         <Text
           style={[

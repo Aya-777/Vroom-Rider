@@ -8,7 +8,7 @@ export const useForgotPasswordViewModel = (navigation: any) => {
 
   const handlePhoneChange = (text: string) => {
     setPhoneNumber(text);
-    if (error) setError(undefined); 
+    if (error) setError(undefined);
   };
 
   const handleResetPassword = async () => {
@@ -19,7 +19,7 @@ export const useForgotPasswordViewModel = (navigation: any) => {
 
     setIsLoading(true);
     try {
-      console.log('Sending reset request for:', phoneNumber);
+      navigation.navigate('Otp', { phoneNumber: phoneNumber });
     } catch (err) {
       setError('Something went wrong. Please try again.');
     } finally {

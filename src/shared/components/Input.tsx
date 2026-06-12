@@ -17,7 +17,7 @@ type InputType = 'text' | 'phone' | 'password' | 'username';
 interface InputProps extends Omit<TextInputProps, 'style'> {
   type?: InputType;
   error?: string;
-  onErrorChange?: (error: string | undefined) => View; // Callback لتمرير الخطأ للفورم الأساسي إذا أحببت
+  onErrorChange?: (error: string | undefined) => void;
   containerStyle?: StyleProp<ViewStyle>;
   inputStyle?: StyleProp<TextStyle>;
   renderLeftIcon?: () => React.ReactNode;
@@ -50,6 +50,8 @@ export default function Input({
     onChangeText?.(finalValidText);
     if (finalValidText.length === 0) {
       setLocalError(undefined);
+    } else if (type === 'phone' && finalValidText.length >= 2 && !finalValidText.startsWith('09')) {
+      setLocalError('Phone number must start with 09');
     } else if (type === 'password' && finalValidText.length < 8) {
       setLocalError('Password must be at least 8 characters');
     } else if (type === 'username' && finalValidText.length < 2) {
