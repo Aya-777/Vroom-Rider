@@ -233,8 +233,6 @@ Vroom-Rider/
 │   ├── modules
 │   │   ├── auth
 │   │   │   ├── components
-│   │   │   │   ├── LoginFooter.tsx
-│   │   │   │   ├── LoginForm.tsx
 │   │   │   │   ├── OTP
 │   │   │   │   │   └── OtpInputFields.tsx
 │   │   │   │   ├── login
@@ -309,7 +307,6 @@ Vroom-Rider/
 │   │   │   │   ├── GridSection.tsx
 │   │   │   │   ├── ListItem.tsx
 │   │   │   │   ├── ListSection.tsx
-│   │   │   │   ├── LogoutButton.tsx
 │   │   │   │   ├── ProfileCard.tsx
 │   │   │   │   └── PromoBanner.tsx
 │   │   │   ├── constants
@@ -341,7 +338,6 @@ Vroom-Rider/
 │   │       │   ├── SelectRideScreen
 │   │       │   │   └── RideLocationInputs.tsx
 │   │       │   └── shared
-│   │       │       ├── ActionButton.tsx
 │   │       │       └── RideDropdown.tsx
 │   │       ├── constants
 │   │       │   ├── driverData.ts
@@ -389,6 +385,7 @@ Vroom-Rider/
 │   │   └── rootTypes.ts
 │   ├── shared
 │   │   ├── components
+│   │   │   ├── ActionButton.tsx
 │   │   │   ├── Header.tsx
 │   │   │   ├── Input.tsx
 │   │   │   ├── LinearBg.tsx
