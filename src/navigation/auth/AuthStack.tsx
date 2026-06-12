@@ -6,6 +6,7 @@ import LoginScreen from '../../modules/auth/screens/LoginScreen';
 import SignupScreen from '../../modules/auth/screens/SignupScreen';
 import ForgotPasswordScreen from '../../modules/auth/screens/ForgotPasswordScreen';
 import OtpScreen from '../../modules/auth/screens/OtpScreen';
+import ResetPasswordScreen from '../../modules/auth/screens/ResetPasswordScreen'
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 
@@ -30,6 +31,11 @@ export default function AuthStack() {
       <Stack.Screen
         name="Otp"
         component={OtpScreen}
+      />
+
+      <Stack.Screen
+        name="ResetPassword"
+        component={ResetPasswordScreen}
       />
 
     </Stack.Navigator>

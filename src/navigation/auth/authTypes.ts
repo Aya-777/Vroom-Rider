@@ -5,6 +5,7 @@ export type AuthStackParamList = {
   Signup: undefined;
   ForgotPassword: undefined;
   Otp : undefined;
+  ResetPassword : undefined;
 };
 
 export type AuthStackScreenProps<T extends keyof AuthStackParamList> = 
