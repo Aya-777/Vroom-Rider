@@ -5,14 +5,14 @@ import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 import Header from '../../../shared/components/SubHeader';
 import RideDropdown from '../components/shared/RideDropdown';
 import RideLocationInputs from '../components/SelectRideScreen/RideLocationInputs';
-import ActionButton from '../components/shared/ActionButton';
+import ActionButton from '../../../shared/components/ActionButton';
 import { useSelectRideViewModel } from '../viewmodels/useSelectRideViewModel';
 import { createStyles } from '../styles/selectRide.styles';
 import ProfileIcon from '../../../assets/svg/profile/profile.svg';
 import ScheduleIcon from '../../../assets/svg/common/schedule.svg';
 import PinIcon from '../../../assets/svg/common/pin.svg';
 import StarIcon from '../../../assets/svg/common/star.svg';
-import ArrowRight from '../../../assets/svg/arrows/arrow.svg'
+import ArrowRight from '../../../assets/svg/arrows/arrow.svg';
 import { useTranslation } from 'react-i18next';
 
 function showAlert(title: string, msg: string) {
@@ -108,15 +108,15 @@ export default function SelectRideScreen() {
 
         <View style={styles.actionRow}>
           <ActionButton
-            onPress={()=>{}}
+            onPress={() => {}}
             icon={<PinIcon fill={colors.textSecondary} />}
             title={t('setOnMap')}
             textStyle={{ color: colors.textSecondary }}
             style={styles.actionButton}
-            />
+          />
 
           <ActionButton
-            onPress={()=>{}}
+            onPress={() => {}}
             icon={<StarIcon fill={colors.textSecondary} />}
             title={t('common:savedPlaces')}
             textStyle={{ color: colors.textSecondary }}
@@ -124,10 +124,10 @@ export default function SelectRideScreen() {
           />
         </View>
 
-        <ActionButton 
+        <ActionButton
           onPress={onNextPress}
           title={t('common:next')}
-          icon = {<ArrowRight fill={colors.background}/>}
+          icon={<ArrowRight fill={colors.background} />}
         />
       </BottomSheetCard>
     </View>

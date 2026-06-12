@@ -1,7 +1,7 @@
 {
   "rideHistory": "Ride History",
   "notifications": "Notifications",
-  "favoriteDrivers": "Favorited Drivers",
+  "favoriteDrivers": "Favorite Drivers",
   "safety": "Safety",
 
   "becomeaDriver": "Become a Driver",
@@ -10,7 +10,7 @@
   
   "settings": "Settings",
   "privacyAndSecurity": "Privacy and Security",
-  "emergencyContacts": "Emergency Contacts",
+  "emergencyContact": "Emergency Contact",
   "help": "Help",
   "savedLocations": "Saved Locations",
   "aboutUs": "About Us",

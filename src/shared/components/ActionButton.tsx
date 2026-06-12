@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, ViewStyle, TextStyle } from 'react-native';
-import { useTheme } from '../../../../core/theme/useTheme';
-import { createStyles } from '../../styles/shared.styles'; // Ensure this is a shared style
+import { useTheme } from '../../core/theme/useTheme';
+import { createStyles } from '../../modules/ride/styles/shared.styles'; // Ensure this is a shared style
 
 type Props = {
   onPress: () => void;
@@ -22,13 +22,8 @@ export default function ActionButton({
   const styles = createStyles(colors);
 
   return (
-    <TouchableOpacity
-      style={[styles.actionButton, style]}
-      onPress={onPress}
-    >
-      <Text style={[styles.actionButtonText, textStyle]}>
-        {title}
-      </Text>
+    <TouchableOpacity style={[styles.actionButton, style]} onPress={onPress}>
+      <Text style={[styles.actionButtonText, textStyle]}>{title}</Text>
 
       {icon && icon}
     </TouchableOpacity>

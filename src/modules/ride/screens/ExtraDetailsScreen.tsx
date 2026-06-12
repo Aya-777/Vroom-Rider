@@ -5,12 +5,12 @@ import Header from '../../../shared/components/SubHeader';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 import VehicleSelector from '../components/ExtraDetailsScreen/VehicleSelector';
 import { createStyles } from '../styles/shared.styles';
-import ActionButton from '../components/shared/ActionButton';
+import ActionButton from '../../../shared/components/ActionButton';
 import TimePriceBox from '../components/ExtraDetailsScreen/TimePriceBox';
 import RideActionFilters from '../components/ExtraDetailsScreen/RideActionFilters';
 import { useRideDetailsViewModel } from '../viewmodels/useRideDetailsViewModel';
 import { useTranslation } from 'react-i18next';
-import ArrowRight from '../../../assets/svg/arrows/arrow.svg'
+import ArrowRight from '../../../assets/svg/arrows/arrow.svg';
 
 export default function ExtraDetailsScreen() {
   const { colors, mode } = useTheme();
@@ -70,10 +70,10 @@ export default function ExtraDetailsScreen() {
           onSelect={setSelectedVehicle}
         />
 
-        <ActionButton 
-        onPress={onNextPress}
-        title={t('common:next')}
-        icon = {<ArrowRight fill={colors.background}/>}
+        <ActionButton
+          onPress={onNextPress}
+          title={t('common:next')}
+          icon={<ArrowRight fill={colors.background} />}
         />
       </BottomSheetCard>
     </View>

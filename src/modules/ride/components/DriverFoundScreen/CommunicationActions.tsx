@@ -23,8 +23,12 @@ export default function CommunicationActions({ styles, colors }: CommunicationAc
         <MessageIcon fill={colors.textPrimary} />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.iconButton}>
-        <WhatsAppIcon fill={colors.primary} />
+      <TouchableOpacity style={[styles.iconButton, {
+          backgroundColor: colors.primary,
+          height:35,
+          width:35
+        }]}>
+        <WhatsAppIcon fill={colors.textPrimary} height={24} width={24}/>
       </TouchableOpacity>
     </View>
   );

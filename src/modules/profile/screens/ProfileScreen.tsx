@@ -11,8 +11,10 @@ import ProfileCard from '../components/ProfileCard';
 import GridSection from '../components/GridSection';
 import PromoBanner from '../components/PromoBanner';
 import ListSection from '../components/ListSection';
-import LogoutButton from '../components/LogoutButton';
+import LogoutIcon from '../../../assets/svg/profile/logout.svg'
 import LinearBg from '../../../shared/components/LinearBg';
+import { useTranslation } from 'react-i18next';
+import ActionButton from '../../../shared/components/ActionButton';
 
 
 export default function ProfileScreen() {
@@ -22,6 +24,7 @@ export default function ProfileScreen() {
   
   const { colors } = useTheme();
   const styles = createStyles(colors);
+  const {t} = useTranslation(['profile','common']);
 
   return (
     <LinearBg
@@ -43,7 +46,13 @@ export default function ProfileScreen() {
 
           <ListSection items={listItems} />
 
-          <LogoutButton onPress={logout} />
+          <ActionButton
+            onPress={logout}
+            title={t('logout')}
+            icon={<LogoutIcon fill={'red'}/>}
+            style={styles.logoutButton}
+            textStyle={styles.logoutText}
+          />
         </ScrollView>
       </View>
     </LinearBg>
