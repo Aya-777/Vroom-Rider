@@ -8,10 +8,13 @@ import { useForgotPasswordViewModel } from '../viewmodels/useForgotPasswordViewM
 import { createStyles } from '../styles/forgotPassword.styles';
 import { AuthStackScreenProps } from '../../../navigation/auth/authTypes';
 import Button from '../components/shared/Button';
+import { useTranslation } from 'react-i18next'
 
 export default function ForgotPasswordScreen({ navigation }: AuthStackScreenProps<'ForgotPassword'>) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
+
+  const { t } = useTranslation(['auth']);
 
   const {
     phoneNumber,
@@ -28,31 +31,31 @@ export default function ForgotPasswordScreen({ navigation }: AuthStackScreenProp
     >
 
       <Header
-        title="Forgot Password"
+        title={t('forgotPassword')}
         onBackPress={handleBack}
       />
 
       <View style={styles.content}>
         <Text style={styles.description}>
-          Please enter your phone number to reset {'\n'}the password
+          {t('pleaseEnterPhone')}
         </Text>
 
         <View style={styles.form}>
-          <Text style={styles.label}>Your Phone Number</Text>
+          <Text style={styles.label}>{t('phoneNumber')}</Text>
 
           <Input
             type="phone"
-            placeholder="Enter Your Phone Number"
+            placeholder={t('enterPhoneNumber')}
             placeholderTextColor={colors.textMuted}
             value={phoneNumber}
             onChangeText={handlePhoneChange}
-            error={error}
+            error={error ? t(error) : undefined}
             containerStyle={styles.inputContainer}
             inputStyle={styles.inputText}
           />
 
           <Button
-            title="Reset Password"
+            title={t('resetPassword')}
             onPress={handleResetPassword}
             isLoading={isLoading}
             colors={colors}

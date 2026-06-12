@@ -16,6 +16,7 @@ import LinearBg from '../../../shared/components/LinearBg';
 import { useAuthActions } from '../hooks/useAuthActions';
 import { AuthStackScreenProps } from '../../../navigation/auth/authTypes';
 
+
 const LoginScreen = ({ navigation }: AuthStackScreenProps<'Login'>) => {
 
   const { colors } = useTheme();

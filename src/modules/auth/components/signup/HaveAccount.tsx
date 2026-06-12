@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/signup.styles';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   onLoginPress?: () => void;
@@ -14,6 +15,7 @@ type Props = {
 const SignupLoginFooter = ({ onLoginPress }: Props) => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
+  const { t } = useTranslation(['auth']);
 
   return (
     <View style={styles.footerContainer}>
@@ -24,7 +26,7 @@ const SignupLoginFooter = ({ onLoginPress }: Props) => {
             { color: colors.textMuted },
           ]}
         >
-          Already have an account?{' '}
+          {t('alreadyHaveAccount')}{' '}
         </Text>
 
         <TouchableOpacity onPress={onLoginPress}>
@@ -34,7 +36,7 @@ const SignupLoginFooter = ({ onLoginPress }: Props) => {
               { color: colors.primary },
             ]}
           >
-            Login
+            {t('login')}
           </Text>
         </TouchableOpacity>
       </View>

@@ -8,10 +8,12 @@ import { useOtpViewModel } from '../viewmodels/useOtpViewModel';
 import { createStyles } from '../styles/OtpScreen.styles';
 import { AuthStackScreenProps } from '../../../navigation/auth/authTypes';
 import OtpInputFields from '../components/OTP/OtpInputFields';
+import { useTranslation } from 'react-i18next';
 
 export default function OtpScreen({ navigation, route }: AuthStackScreenProps<'Otp'>) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
+  const { t } = useTranslation(['auth']);
 
   const {
     code,
@@ -30,14 +32,14 @@ export default function OtpScreen({ navigation, route }: AuthStackScreenProps<'O
   return (
     <LinearBg style={styles.container} colors={[colors.backgroundSoft, colors.background]}>
 
-      <Header title="Verify Number" onBackPress={handleBack} />
+      <Header title={t('verifyNumber')} onBackPress={handleBack} />
 
       <View style={styles.content}>
-        <Text style={styles.title}>Check Your Messages</Text>
+        <Text style={styles.title}>{t('checkYourMessages')}</Text>
 
         <Text style={styles.description}>
-          We sent a reset link to <Text style={styles.phoneNumber}>{maskedPhoneNumber}
-          </Text> enter 6 digit code that mentioned in the Message
+          {t('weSentLink')} <Text style={styles.phoneNumber}>{maskedPhoneNumber}
+          </Text> {t('6Digits')}
         </Text>
 
         <OtpInputFields
@@ -58,9 +60,9 @@ export default function OtpScreen({ navigation, route }: AuthStackScreenProps<'O
         />
 
         <View style={styles.resendContainer}>
-          <Text style={styles.resendText}>Haven't got the code yet? </Text>
+          <Text style={styles.resendText}>{t('haventGot')} </Text>
           <TouchableOpacity onPress={handleResendCode} activeOpacity={0.7}>
-            <Text style={styles.resendLink}>Resend Code</Text>
+            <Text style={styles.resendLink}>{t('resendCode')}</Text>
           </TouchableOpacity>
         </View>
       </View>
