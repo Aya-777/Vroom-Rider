@@ -11,7 +11,6 @@ import ProfileCard from '../components/ProfileCard';
 import GridSection from '../components/GridSection';
 import PromoBanner from '../components/PromoBanner';
 import ListSection from '../components/ListSection';
-import LogoutButton from '../components/LogoutButton';
 import LogoutIcon from '../../../assets/svg/profile/logout.svg'
 import LinearBg from '../../../shared/components/LinearBg';
 import { useTranslation } from 'react-i18next';

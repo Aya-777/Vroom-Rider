@@ -40,7 +40,7 @@ export default function RideConfirmationScreen() {
           <InfoBox
             icon={<ClockIcon width={16} height={16} fill={colors.primary} />}
             title={t('time')}
-            value={vm.rideData.time || 'N/A'}
+            value={vm.rideData.timeEstimate || 'N/A'}
           />
 
           <InfoBox
