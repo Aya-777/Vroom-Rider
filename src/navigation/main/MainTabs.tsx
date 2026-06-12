@@ -18,8 +18,10 @@ import CarActive from '../../assets/svg/common/ride.svg';
 import CarInactive from '../../assets/svg/common/ride.svg';
 import ProfileActive from '../../assets/svg/profile/profile.svg';
 import ProfileInactive from '../../assets/svg/profile/profile.svg';
+import { useTranslation } from 'react-i18next';
 
 const Tab = createBottomTabNavigator<MainTabsParamList>();
+const {t} = useTranslation('navigation');
 
 const HIDE_TAB_ROUTES = [
   'SelectRide',
@@ -113,19 +115,19 @@ export default function MainTabs() {
       <Tab.Screen
         name="HomeTab"
         component={HomeStack}
-        options={{ tabBarLabel: 'Home' }}
+        options={{ tabBarLabel: t('home') }}
       />
 
       <Tab.Screen
         name="ActivityTab"
         component={HomeStack}
-        options={{ tabBarLabel: 'Activity' }}
+        options={{ tabBarLabel: t('activity') }}
       />
 
       <Tab.Screen
         name="ProfileTab"
         component={ProfileStack}
-        options={{ tabBarLabel: 'Profile' }}
+        options={{ tabBarLabel: t('profile') }}
       />
     </Tab.Navigator>
   );
