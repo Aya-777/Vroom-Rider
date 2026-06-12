@@ -9,9 +9,18 @@ import RideNextButton from '../components/shared/RideNextButton';
 import TimePriceBox from '../components/ExtraDetailsScreen/TimePriceBox';
 import RideActionFilters from '../components/ExtraDetailsScreen/RideActionFilters';
 import {useRideDetailsViewModel} from '../viewmodels/useRideDetailsViewModel';
+import { useTranslation } from 'react-i18next';
 
 export default function ExtraDetailsScreen() {
+
   const { colors, mode } = useTheme();
+  const styles = createStyles(colors);
+  const {t} = useTranslation(['rideDetails', 'common']);
+
+  const paymentItems = [
+    {key: 'cash', label: t('rideDetails:payment.cash')},
+    {key: 'wallet', label: t('rideDetails:payment.wallet')}
+  ]
 
   const {
     timeEstimate,
@@ -31,8 +40,6 @@ export default function ExtraDetailsScreen() {
     handleNextPress();
   };
 
-  const styles = createStyles(colors);
-
   return (
     <View style={styles.container}>
       <StatusBar
@@ -41,13 +48,13 @@ export default function ExtraDetailsScreen() {
         backgroundColor="transparent"
       />
 
-      <Header title="Ride" onBackPress={handleBackPress} />
+      <Header title={t('common:ride')} onBackPress={handleBackPress} />
 
       <BottomSheetCard>
         <TimePriceBox time={timeEstimate} price={priceEstimate} />
         
         <RideActionFilters
-          selectedValue={selectedPayment}
+          selectedValue={t(`rideDetails:payment.${selectedPayment}`)}
           isOpen={isDropdownOpen}
           styles={styles}
           onToggleDropdown={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -56,6 +63,7 @@ export default function ExtraDetailsScreen() {
             setIsDropdownOpen(false);
           }}
           onFiltersPress={() => console.log('Filters Pressed from Screen')}
+          paymentItems={paymentItems}
         />
         <VehicleSelector
           selected={selectedVehicle}
