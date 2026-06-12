@@ -4,6 +4,7 @@ import type { Driver } from '../../types/ride.types';
 import type { ThemeColors } from '../../../../core/theme/theme.types';
 import type { DriverFoundStyles } from '../../styles/DriverFound.styles';
 import CarIcon from '../../../../assets/svg/common/ride.svg';
+import { useTranslation } from 'react-i18next';
 
 type CarDetailsCardProps = {
   driver: Driver;
@@ -12,6 +13,7 @@ type CarDetailsCardProps = {
 };
 
 export default function CarDetailsCard({ driver, styles, colors }: CarDetailsCardProps) {
+  const {t} = useTranslation('driverFound');
   return (
     <View style={styles.carDetailsCard}>
       <View style={styles.carIconContainer}>
@@ -20,7 +22,7 @@ export default function CarDetailsCard({ driver, styles, colors }: CarDetailsCar
 
       <View style={styles.carInfoTextDetails}>
         <Text style={styles.carDetailsTitle}>
-          CAR DETAILS
+          {t('carDetails')}
         </Text>
 
         <Text style={styles.carModelText}>

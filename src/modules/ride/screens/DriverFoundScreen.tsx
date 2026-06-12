@@ -10,17 +10,19 @@ import DriverAvatar from '../components/DriverFoundScreen/DriverAvatar';
 import CommunicationActions from '../components/DriverFoundScreen/CommunicationActions';
 import CarDetailsCard from '../components/DriverFoundScreen/CarDetailsCard';
 import ProgressBar from '../components/DriverFoundScreen/ProgressBar';
+import { useTranslation } from 'react-i18next';
 
 export default function DriverFoundScreen() {
   const { colors } = useTheme();
   const styles = createStyles(colors);
+  const {t} = useTranslation(['driverFound', 'common']);
 
   const { driver, handleBackPress } = useDriverHereViewModel();
 
   return (
     <View style={styles.contentContainer}>
       <StatusBar translucent backgroundColor="transparent" />
-      <Header title="Track your trip" onBackPress={handleBackPress} />
+      <Header title={t('trackYourTrip')} onBackPress={handleBackPress} />
 
       <BottomSheetCard>
         <DriverStatus text={driver.statusMessage} styles={styles} />
