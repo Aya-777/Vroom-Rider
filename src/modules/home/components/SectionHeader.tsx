@@ -46,7 +46,7 @@ export default function SectionHeader({
 
       {actionText && (
         <TouchableOpacity onPress={onPress}>
-          <Text style={{ color: colors.primary }}>
+          <Text style={{ color: colors.primary }} adjustsFontSizeToFit={true}>
             {actionText}
           </Text>
         </TouchableOpacity>

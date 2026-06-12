@@ -16,12 +16,12 @@ export default function VehicleSelector({ selected, onSelect }: Props) {
   return (
     <View style={styles.vehicleRow}>
       {VEHICLE_DATA.map(v => {
-        const active = selected === v.type_name;
+        const active = selected === v.id;
 
         return (
           <TouchableOpacity
             key={v.id}
-            onPress={() => onSelect(v.type_name)}
+            onPress={() => onSelect(v.id)}
             style={[styles.vehicleCard, active && styles.activeVehicleCard]}
           >
             <Image source={v.image} style={styles.vehicleImage} />

@@ -107,4 +107,25 @@ export const createStyles = (colors: ThemeColors) =>
             fontSize: 14,
             fontWeight: '700',
         },
+        
+    actionButton: {
+      flexDirection: 'row',
+      width: '50%',
+      paddingVertical: 14,
+      borderRadius: 25,
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+      backgroundColor: colors.primary,
+      elevation: 3,
+    },
+
+    actionButtonText: {
+      fontSize: 16,
+      fontWeight: '600',
+      marginRight: 5,
+      marginBottom: 2,
+      color: colors.background,
+    },
+
     })

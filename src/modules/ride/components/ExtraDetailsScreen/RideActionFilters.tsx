@@ -6,6 +6,7 @@ import DropDownArrowIcon from '../../../../assets/svg/arrows/dropdownArrow.svg';
 import ArrowUp from '../../../../assets/svg/arrows/arrowUp.svg';
 import FilterIcon from '../../../../assets/svg/ride/filters.svg';
 import CashIcon from '../../../../assets/svg/payment/price.svg';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   selectedValue: string;
@@ -13,6 +14,7 @@ type Props = {
   onToggleDropdown: () => void;
   onSelectPayment: (item: string) => void;
   onFiltersPress?: () => void;
+  paymentItems: { key: string; label: string; }[];
   styles: any; 
 };
 
@@ -22,10 +24,12 @@ export default function RideActionFilters({
   onToggleDropdown,
   onSelectPayment,
   onFiltersPress,
+  paymentItems,
   styles,
 }: Props) {
   const { colors } = useTheme();
   const gradientColors = [colors.backgroundSoft, colors.surface];
+  const {t} = useTranslation(['rideDetails']);
 
   return (
     <View style={styles.actionCardsRow}>
@@ -39,7 +43,7 @@ export default function RideActionFilters({
           <View style={styles.iconWrapper}>
             <FilterIcon width={18} height={18} fill="#FFFFFF" />
           </View>
-          <Text style={styles.cardText}>Filters</Text>
+          <Text style={styles.cardText}>{t('filters')}</Text>
         </LinearBg>
       </TouchableOpacity>
 
@@ -64,24 +68,24 @@ export default function RideActionFilters({
 
         {isOpen && (
           <View style={styles.dropdownMenu}>
-            {['Cash', 'Wallet'].map((item) => (
+            {paymentItems.map((item) => (
               <TouchableOpacity
-                key={item}
+                key={item.key}
                 style={styles.menuItem}
-                onPress={() => onSelectPayment(item)}
+                onPress={() => onSelectPayment(item.key)}
               >
                 <Text
                   style={[
                     styles.menuItemText,
                     {
                       color:
-                        selectedValue === item
+                        selectedValue === item.label
                           ? colors.primary
                           : colors.textSecondary,
                     },
                   ]}
                 >
-                  {item}
+                  {item.label}
                 </Text>
               </TouchableOpacity>
             ))}

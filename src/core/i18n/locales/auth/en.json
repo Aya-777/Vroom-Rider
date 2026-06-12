@@ -1,0 +1,16 @@
+{
+  "login": "Login",
+  "register": "Register",
+
+  "phoneNumber": "Phone Number",
+  "password": "Password",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "confirmPassword": "Confirm Password",
+  
+  "forgotPassword": "Forgot Password?",
+  "dontHaveAccount": "Don't have an account? Register",
+  "alreadyHaveAccount": "Already have an account? Login",
+  "signup": "Sign Up",
+  "termsAndPrivacy": "By continuing, you agree to Vroom's Terms and Privacy Policy."
+}

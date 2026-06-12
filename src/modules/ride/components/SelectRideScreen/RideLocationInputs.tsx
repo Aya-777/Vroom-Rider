@@ -7,6 +7,7 @@ import Input from '../../../../shared/components/Input';
 import { useTheme } from '../../../../core/theme/useTheme';
 
 import { createStyles } from '../../styles/selectRide.styles';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   fromLocation: string;
@@ -28,7 +29,8 @@ export default function RideLocationInputs({
 }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
-
+  const { t } = useTranslation(['selectRide']);
+  
   return (
     <View style={styles.inputCard}>
       <View style={styles.inputTimeline}>
@@ -42,7 +44,7 @@ export default function RideLocationInputs({
       <View style={styles.inputContainer}>
         <Input
           style={styles.input}
-          placeholder="From"
+          placeholder={t('from')}
           placeholderTextColor={colors.textMuted}
           value={fromLocation}
           onChangeText={onChangeFrom}
@@ -53,7 +55,7 @@ export default function RideLocationInputs({
 
         <Input
           style={styles.input}
-          placeholder="To?"
+          placeholder={t('to')}
           placeholderTextColor={colors.textMuted}
           value={toLocation}
           onChangeText={onChangeTo}

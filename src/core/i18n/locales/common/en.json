@@ -1,0 +1,18 @@
+{
+  "save": "Save",
+  "cancel": "Cancel",
+  "continue": "Continue",
+  "back": "Back",
+  "confirm": "Confirm",
+  "next": "Next",
+  "submit" : "Submit",
+  "maybeLater": "Maybe later",
+
+  "now": "Now",
+  "later": "Later",
+  "schedule": "Schedule",
+
+  "savedPlaces": "Saved places",
+  
+  "ride": "Ride"
+}

@@ -18,16 +18,19 @@ import { useHomeViewModel } from '../viewmodels/useHomeViewModel';
 
 import HeaderTopAppBar from '../components/HomeHeader';
 import { useHomeActions } from '../hooks/useHomeActions';
+import { useTranslation } from 'react-i18next';
 
 export default function HomeScreen() {
 
   const { colors } = useTheme();
   const styles = createStyles(colors);
+  const { t } = useTranslation(['home']);
 
   const {
     services,
     recentDestinations,
   } = useHomeViewModel();
+
   const { 
     navigateToSelectRide
   } = useHomeActions();
@@ -52,9 +55,9 @@ export default function HomeScreen() {
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
-
           <SearchBar />
-          <SectionHeader title="For you"
+          <SectionHeader
+            title={t('forYou')}
             icon={<ForYouStar width={20} height={20} />}
           />
 
@@ -69,8 +72,8 @@ export default function HomeScreen() {
           </View>
 
           <SectionHeader
-            title="Recent destinations"
-            actionText="See all"
+            title={t('recentDestinations')}
+            actionText={t('seeAll')}
           />
 
           <View style={styles.destinationList}>
@@ -81,12 +84,13 @@ export default function HomeScreen() {
                 <DestinationCard
                   key={destination.id}
                   {...destination}
+                  title={destination.title}
+                  subtitle={destination.subtitle}
                   icon={<DestinationIcon />}
                 />
               );
             })}
           </View>
-
         </ScrollView>
 
       </View>

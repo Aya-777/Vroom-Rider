@@ -4,19 +4,22 @@ import { useTheme } from '../../../core/theme/useTheme';
 import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
 import Header from '../../../shared/components/SubHeader';
 import InfoBox from '../components/RideConfirmationScreen/InfoBox';
-import FindDriverButton from '../components/RideConfirmationScreen/FindDriverButton';
+import ActionButton from '../components/shared/ActionButton';
 import { createStyles } from '../styles/confirmRide.styles';
 import { useConfirmRideViewModel } from '../viewmodels/useConfirmRideViewModel';
 import ClockIcon from '../../../assets/svg/common/schedule.svg';
 import EstimatedPriceIcon from '../../../assets/svg/payment/price.svg';
 import CashIcon from '../../../assets/svg/payment/cash.svg';
 import CarIcon from '../../../assets/svg/common/ride.svg';
+import SearchIcon from '../../../assets/svg/common/search.svg'
 import PhoneNumberIcon from '../../../assets/svg/contact/call.svg';
+import { useTranslation } from 'react-i18next';
 
 export default function RideConfirmationScreen() {
 
   const { colors, mode } = useTheme();
   const styles = createStyles(colors);
+  const {t} = useTranslation(['confirmRide', 'common']);
   
   const vm = useConfirmRideViewModel();
   
@@ -29,7 +32,7 @@ export default function RideConfirmationScreen() {
       />
 
       <Header
-        title="Ride Confirmation"
+        title={t('confirmRide:confirmRide')}
         onBackPress={vm.handleBackPress}
       />
 
@@ -37,7 +40,7 @@ export default function RideConfirmationScreen() {
         <View style={styles.grid}>
           <InfoBox
             icon={<ClockIcon width={16} height={16} fill={colors.primary} />}
-            title="Time"
+            title={t('time')}
             value={vm.rideData.time || 'N/A'}
           />
 
@@ -49,20 +52,20 @@ export default function RideConfirmationScreen() {
                 fill={colors.primary}
               />
             }
-            title="Total Price"
+            title={t('totalPrice')}
             value={vm.rideData.price || 'N/A'}
           />
 
           <InfoBox
             icon={<CarIcon width={16} height={16} fill={colors.primary} />}
-            title="Selected Car"
-            value={vm.rideData.vehicleType || 'N/A'}
+            title={t('selectedCar')}
+            value={vm.rideData.vehicleType ? t(vm.rideData.vehicleType) : 'N/A'}
           />
 
           <InfoBox
             icon={<CashIcon width={16} height={16} fill={colors.primary} />}
-            title="Payment"
-            value={vm.rideData.payment || 'N/A'}
+            title={t("payment")}
+            value={vm.rideData.payment ? t(vm.rideData.payment) : 'N/A'}
           />
         </View>
 
@@ -76,15 +79,19 @@ export default function RideConfirmationScreen() {
 
             <TextInput
               style={styles.input}
-              placeholder="+963 935 916 399"
+              placeholder="+963 9** *** ***"
               placeholderTextColor={colors.textMuted}
             />
           </View>
         </View>
-
-        <FindDriverButton
-          onPress={() => vm.handleFindDriver()}
-        />
+        
+          <ActionButton
+            onPress={()=> vm.handleFindDriver()}
+            title={t('findaDriver')}
+            icon={<SearchIcon fill={colors.background} />}
+            textStyle={styles.buttonText}
+            style={styles.button}
+          />
       </BottomSheetCard>
     </View>
   );

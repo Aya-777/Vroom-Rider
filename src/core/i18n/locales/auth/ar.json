@@ -1,0 +1,16 @@
+{
+  "login": "تسجيل الدخول",
+  "register": "إنشاء حساب",
+
+  "phoneNumber": "رقم الهاتف",
+  "password": "كلمة المرور",
+  "firstName": "الاسم الأول",
+  "lastName": "اسم العائلة",
+  "confirmPassword": "تأكيد كلمة المرور",
+
+  "forgotPassword": "هل نسيت كلمة المرور؟",
+  "dontHaveAccount": "ليس لديك حساب؟ أنشئ حسابًا",
+  "alreadyHaveAccount": "لديك حساب بالفعل؟ سجّل الدخول",
+  "signup": "إنشاء حساب",
+  "termsAndPrivacy": "بالمتابعة، فإنك توافق على شروط وأحكام .Vroom وسياسة الخصوصية الخاصة ب"
+}

@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/shared.styles';
@@ -14,7 +10,7 @@ type Props = {
   icon?: React.ReactNode;
   value: string;
   isOpen: boolean;
-  items: string[];
+  items: { key: string; label: string; }[];
   onToggle: () => void;
   onSelect: (item: string) => void;
 };
@@ -32,15 +28,10 @@ export default function RideDropdown({
 
   return (
     <View style={styles.dropdownContainer}>
-      <TouchableOpacity
-        style={styles.dropdown}
-        onPress={onToggle}
-      >
+      <TouchableOpacity style={styles.dropdown} onPress={onToggle}>
         {icon && icon}
 
-        <Text style={styles.dropdownText}>
-          {value}
-        </Text>
+        <Text style={styles.dropdownText}>{value}</Text>
 
         {isOpen ? (
           <ArrowUp fill={colors.primary} />
@@ -53,22 +44,20 @@ export default function RideDropdown({
         <View style={styles.dropdownMenu}>
           {items.map(item => (
             <TouchableOpacity
-              key={item}
+              key={item.key}
               style={styles.menuItem}
-              onPress={() => onSelect(item)}
+              onPress={() => onSelect(item.key)}
             >
               <Text
                 style={[
                   styles.menuItemText,
                   {
                     color:
-                      value === item
-                        ? colors.primary
-                        : colors.textSecondary,
+                      value === item.label ? colors.primary : colors.textSecondary,
                   },
                 ]}
               >
-                {item}
+                {item.label}
               </Text>
             </TouchableOpacity>
           ))}
