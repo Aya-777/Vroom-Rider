@@ -15,11 +15,17 @@ import SignupCard from '../components/signup/SignupCard';
 import LinearBg from '../../../shared/components/LinearBg';
 import SignupLoginFooter from '../components/signup/HaveAccount';
 import { useAuthActions } from '../hooks/useAuthActions';
+import { useNavigation } from '@react-navigation/native';
 
 const SignupScreen = () => {
 
-  const vm = useSignupViewModel();
   const { navigateToLogin } = useAuthActions();
+  const navigation = useNavigation<any>();
+
+  const vm = useSignupViewModel((phone) => {
+    navigation.navigate('Otp', { phoneNumber: phone });
+  });
+
   const { colors } = useTheme();
   const styles = createStyles(colors);
 

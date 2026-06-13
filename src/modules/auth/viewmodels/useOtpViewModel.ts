@@ -1,69 +1,90 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { TextInput } from 'react-native';
+import { useAuthRepository } from '../repositories/authRepository';
+import { useAuthActions } from '../../../core/store/authStore';
+import { VerifyOtpResponseDTO } from '../services/dto/auth.dto';
 
-export function useOtpViewModel(navigation: any, route: any) {
-    const [code, setCode] = useState<string[]>(['', '', '', '', '', '']);
+export const useOtpViewModel = (navigation: any, route: any) => {
+
+    const phoneNumber = route.params?.phoneNumber || '';
+
+    const [code, setCode] = useState<string[]>(new Array(6).fill(''));
     const [activeCodeIndex, setActiveCodeIndex] = useState<number>(0);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [uiError, setUiError] = useState<string | null>(null);
 
     const inputRefs = useRef<TextInput[]>([]);
 
-    const rawPhoneNumber = (route?.params as any)?.phoneNumber || "09********";
+    const verifyOtpMutation = useAuthRepository.useVerifyOtp();
+    const resendOtpMutation = useAuthRepository.useResendOtp();
+    const { login } = useAuthActions();
 
-    const getMaskedPhoneNumber = (): string => {
-        if (!rawPhoneNumber || rawPhoneNumber.length < 5) return rawPhoneNumber;
-        const firstTwo = rawPhoneNumber.slice(0, 2);
-        const lastThree = rawPhoneNumber.slice(-3);
-        const maskedLength = rawPhoneNumber.length - 5;
-        const stars = '*'.repeat(maskedLength > 0 ? maskedLength : 5);
-        return `${firstTwo}${stars}${lastThree}`;
-    };
+    const maskedPhoneNumber = phoneNumber
+        ? phoneNumber.replace(/.(?=.{3})/g, '*')
+        : '';
+
+    useEffect(() => {
+        if (inputRefs.current[0]) {
+            inputRefs.current[0].focus();
+        }
+    }, []);
 
     const handleTextChange = (text: string, index: number) => {
         const newCode = [...code];
         newCode[index] = text.slice(-1);
         setCode(newCode);
 
-        if (text && index < 5) {
-            inputRefs.current[index + 1]?.focus();
-            setActiveCodeIndex(index + 1);
+        if (text) {
+            if (index < 5) {
+                inputRefs.current[index + 1]?.focus();
+                setActiveCodeIndex(index + 1);
+            }
         }
     };
 
     const handleKeyPress = (e: any, index: number) => {
-
         if (e.nativeEvent.key === 'Backspace' && !code[index] && index > 0) {
             inputRefs.current[index - 1]?.focus();
             setActiveCodeIndex(index - 1);
         }
     };
 
-    const handleVerifyCode = async () => {
+    const handleVerifyCode = () => {
+        setUiError(null);
         const fullCode = code.join('');
-        if (fullCode.length < 6) return;
 
-        try {
-            setIsLoading(true);
-            console.log("Verifying Code:", fullCode);
-
-            await new Promise<void>((resolve) => {
-                setTimeout(() => resolve(), 1000);
-            });
-
-            navigation.navigate('ResetPassword');
-        } catch (err) {
-            console.error(err);
-        } finally {
-            setIsLoading(false);
+        if (fullCode.length < 6) {
+            setUiError('Please enter the complete 6-digit verification code.');
+            return;
         }
+
+        verifyOtpMutation.mutate(
+            { phone_number: phoneNumber, otp: fullCode },
+            {
+                onSuccess: (response: VerifyOtpResponseDTO) => {
+                    login(response.data.access);
+                },
+                onError: (err: any) => {
+                    setUiError(err.response?.data?.message || 'Invalid OTP');
+                },
+            }
+        );
     };
 
     const handleResendCode = () => {
-        console.log("Resending OTP code to:", rawPhoneNumber);
-
-        setCode(['', '', '', '', '', '']);
-        inputRefs.current[0]?.focus();
-        setActiveCodeIndex(0);
+        setUiError(null);
+        resendOtpMutation.mutate(
+            { phone_number: phoneNumber },
+            {
+                onSuccess: () => {
+                    setCode(new Array(6).fill(''));
+                    setActiveCodeIndex(0);
+                    inputRefs.current[0]?.focus();
+                },
+                onError: (err: any) => {
+                    setUiError(err.response?.data?.message || 'Try Again Later');
+                },
+            }
+        );
     };
 
     const handleBack = () => {
@@ -73,9 +94,10 @@ export function useOtpViewModel(navigation: any, route: any) {
     return {
         code,
         activeCodeIndex,
-        isLoading,
+        isLoading: verifyOtpMutation.isPending || resendOtpMutation.isPending,
         inputRefs,
-        maskedPhoneNumber: getMaskedPhoneNumber(),
+        maskedPhoneNumber,
+        error: uiError,
         handleTextChange,
         handleKeyPress,
         handleVerifyCode,
@@ -83,4 +105,4 @@ export function useOtpViewModel(navigation: any, route: any) {
         handleBack,
         setActiveCodeIndex,
     };
-}
+};

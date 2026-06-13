@@ -202,6 +202,12 @@ Vroom-Rider/
 │   │   │   ├── types.ts
 │   │   │   └── utils
 │   │   │       └── isRTL.ts
+│   │   ├── network
+│   │   │   ├── apiClient.ts
+│   │   │   └── endpoints.ts
+│   │   ├── realtime
+│   │   │   ├── socketClient.ts
+│   │   │   └── socketManager.ts
 │   │   ├── storage
 │   │   │   ├── asyncStorage.adapter.ts
 │   │   │   ├── index.ts
@@ -240,6 +246,8 @@ Vroom-Rider/
 │   │   │   │   │   ├── LoginForm.tsx
 │   │   │   │   │   ├── LoginPin.tsx
 │   │   │   │   │   └── PinShape.tsx
+│   │   │   │   ├── resetPassword
+│   │   │   │   │   └── ResetPasswordForm.tsx
 │   │   │   │   ├── shared
 │   │   │   │   │   ├── Button.tsx
 │   │   │   │   │   └── logo.tsx
@@ -260,19 +268,26 @@ Vroom-Rider/
 │   │   │   │   ├── useAuthActions.ts
 │   │   │   │   ├── useSplashAnimation.ts
 │   │   │   │   └── useSplashLayout.ts
+│   │   │   ├── repositories
+│   │   │   │   └── authRepository.ts
 │   │   │   ├── screens
 │   │   │   │   ├── ForgotPasswordScreen.tsx
 │   │   │   │   ├── LoginScreen.tsx
 │   │   │   │   ├── OtpScreen.tsx
+│   │   │   │   ├── ResetPasswordScreen.tsx
 │   │   │   │   ├── SignupScreen.tsx
 │   │   │   │   └── SplashScreen.tsx
 │   │   │   ├── services
+│   │   │   │   ├── authApi.ts
+│   │   │   │   └── dto
+│   │   │   │       └── auth.dto.ts
 │   │   │   ├── store
 │   │   │   ├── styles
 │   │   │   │   ├── OtpScreen.styles.ts
 │   │   │   │   ├── Splash.styles.ts
 │   │   │   │   ├── forgotPassword.styles.ts
 │   │   │   │   ├── login.styles.ts
+│   │   │   │   ├── resetPassword.styles.ts
 │   │   │   │   └── signup.styles.ts
 │   │   │   ├── types
 │   │   │   ├── utils
@@ -281,6 +296,7 @@ Vroom-Rider/
 │   │   │       ├── useForgotPasswordViewModel.ts
 │   │   │       ├── useLoginViewModel.ts
 │   │   │       ├── useOtpViewModel.ts
+│   │   │       ├── useResetPasswordViewModel.ts
 │   │   │       ├── useSignupViewModel.ts
 │   │   │       └── useSplashViewModel.ts
 │   │   ├── home
