@@ -77,8 +77,8 @@ const SignupForm = ({ vm }: any) => {
                     type="phone"
                     placeholder={t('phoneNumber')}
                     placeholderTextColor={colors.textMuted}
-                    value={vm.phone}
-                    onChangeText={vm.setPhone}
+                    value={vm.phoneNumber}
+                    onChangeText={vm.setPhoneNumber}
                     containerStyle={styles.inputBox}
                     inputStyle={[{ color: colors.textPrimary }]}
                     renderLeftIcon={() => (
@@ -131,13 +131,13 @@ const SignupForm = ({ vm }: any) => {
             </View>
 
             <View style={styles.bottom}>
-                <TouchableOpacity onPress={vm.handleLogin}>
+                <TouchableOpacity onPress={vm.handleSignup} disabled={vm.isLoading}>
                     <LinearBg
                         style={styles.button}
                         colors={[colors.textPrimary, colors.surface]}
                     >
                         <Text style={[styles.btnText, { color: colors.backgroundSoft }]}>
-                            {t('signup')}
+                            {vm.isLoading ? '...' : t('signup')}
                         </Text>
                     </LinearBg>
                 </TouchableOpacity>

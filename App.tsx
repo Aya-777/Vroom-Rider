@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useState } from 'react';
 
 import { ThemeProvider } from './src/core/theme/ThemeProvider';
@@ -9,9 +10,19 @@ import './src/core/i18n';
 import { LanguageService } from './src/core/i18n/services/LanguageService';
 import { Platform, StatusBar, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 enableScreens(true);
 enableFreeze(true);
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 function AppContent() {
   const { colors } = useTheme();
@@ -21,11 +32,11 @@ function AppContent() {
       StatusBar.setHidden(true, 'fade');
     }
   }, []);
-  
+
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       <StatusBar hidden={true} animated={true} />
-      <RootNavigator/>
+      <RootNavigator />
     </View>
   );
 }
@@ -42,17 +53,19 @@ function App() {
 
     initialize();
   }, []);
-  
+
   if (!isReady) {
     return null;
   }
 
   return (
-    <ThemeProvider>
-      <SafeAreaProvider>
-        <AppContent />
-      </SafeAreaProvider>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <SafeAreaProvider>
+          <AppContent />
+        </SafeAreaProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 

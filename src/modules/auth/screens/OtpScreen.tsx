@@ -21,6 +21,7 @@ export default function OtpScreen({ navigation, route }: AuthStackScreenProps<'O
     isLoading,
     inputRefs,
     maskedPhoneNumber,
+    error,
     handleTextChange,
     handleKeyPress,
     handleVerifyCode,
@@ -31,15 +32,13 @@ export default function OtpScreen({ navigation, route }: AuthStackScreenProps<'O
 
   return (
     <LinearBg style={styles.container} colors={[colors.backgroundSoft, colors.background]}>
-
       <Header title={t('verifyNumber')} onBackPress={handleBack} />
 
       <View style={styles.content}>
         <Text style={styles.title}>{t('checkYourMessages')}</Text>
 
         <Text style={styles.description}>
-          {t('weSentLink')} <Text style={styles.phoneNumber}>{maskedPhoneNumber}
-          </Text> {t('6Digits')}
+          {t('weSentLink')} <Text style={styles.phoneNumber}>{maskedPhoneNumber}</Text> {t('6Digits')}
         </Text>
 
         <OtpInputFields
@@ -51,6 +50,12 @@ export default function OtpScreen({ navigation, route }: AuthStackScreenProps<'O
           setActiveCodeIndex={setActiveCodeIndex}
           styles={styles}
         />
+
+        {error && (
+          <Text style={styles.errorText}>
+            {error}
+          </Text>
+        )}
 
         <Button
           title="Verify Code"

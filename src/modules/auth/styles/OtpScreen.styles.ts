@@ -6,6 +6,14 @@ export const createStyles = (colors: any) =>
         container: {
             flex: 1,
         },
+
+        errorText: {
+            textAlign: 'center',
+            marginVertical: 8,
+            fontSize: 14,
+            color : 'red'
+        },
+
         content: {
             flex: 1,
             paddingHorizontal: Spacing.xl,
@@ -56,7 +64,7 @@ export const createStyles = (colors: any) =>
         resendContainer: {
             flexDirection: 'row',
             justifyContent: 'center',
-            alignItems : 'center',
+            alignItems: 'center',
             marginTop: Spacing.xl,
         },
         resendText: {
