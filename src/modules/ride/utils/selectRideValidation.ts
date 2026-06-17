@@ -1,18 +1,20 @@
+// utils/selectRideValidation.ts
 import { RideValidationErrors } from '../types/ride.types';
 
-export const validateRideInputs = (from: string, to: string): RideValidationErrors => {
-  const errors: RideValidationErrors = {};
-
+// Return keys that map to your translation files
+export const validateRideInputs = (from: string, to: string) => {
+  const errors: { [key: string]: string } = {}; // Use string keys
+  
   if (!from.trim()) {
-    errors.fromLocation = 'Pickup location is required';
+    errors.fromLocation = 'pickupRequired';
   }
   
   if (!to.trim()) {
-    errors.toLocation = 'Destination is required';
+    errors.toLocation = 'destinationRequired';
   }
 
   if (from.trim() && to.trim() && from.trim().toLowerCase() === to.trim().toLowerCase()) {
-    errors.toLocation = 'Destination cannot be the same as pickup';
+    errors.toLocation = 'sameInputs';
   }
 
   return errors;

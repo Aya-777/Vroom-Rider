@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { createStyles } from '../styles/input.styles'
 import { Typography } from '../../core/theme/tokens';
+import { useTranslation } from 'react-i18next';
 
 type InputType = 'text' | 'phone' | 'password' | 'username';
 
@@ -39,6 +40,7 @@ export default function Input({
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [localError, setLocalError] = useState<string | undefined>(undefined);
   const [internalText, setInternalText] = useState(props.value || '');
+  const {t} = useTranslation(['common']);
 
   const handleTextChange = (text: string) => {
     let finalValidText = text;
@@ -51,11 +53,14 @@ export default function Input({
     if (finalValidText.length === 0) {
       setLocalError(undefined);
     } else if (type === 'phone' && finalValidText.length >= 2 && !finalValidText.startsWith('09')) {
-      setLocalError('Phone number must start with 09');
+      // setLocalError('Phone number must start with 09');
+      setLocalError('phoneNumberStart');
     } else if (type === 'password' && finalValidText.length < 8) {
-      setLocalError('Password must be at least 8 characters');
+      // setLocalError('Password must be at least 8 characters');
+      setLocalError('passwordLength');
     } else if (type === 'username' && finalValidText.length < 2) {
-      setLocalError('Username must be at least 2 characters');
+      // setLocalError('Username must be at least 2 characters');
+      setLocalError('usernameLength');
     } else {
       setLocalError(undefined);
     }
@@ -109,7 +114,7 @@ export default function Input({
         )}
       </View>
 
-      {error && <Text style={styles.errorText}>{error}</Text>}
+      {error && <Text style={styles.errorText}>{t(`common:${error}`)}</Text>}
     </View>
   );
 }

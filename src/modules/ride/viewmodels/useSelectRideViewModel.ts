@@ -4,6 +4,7 @@ import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 import { RideValidationErrors } from '../types/ride.types';
 import { validateRideInputs } from '../utils/selectRideValidation';
 import { useRideStore } from '../store/useRideStore';
+import { useTranslation } from 'react-i18next';
 
 export function useSelectRideViewModel(showAlert: (title: string, msg: string) => void) {
   const navigation = useNavigation<HomeStackScreenProps<'SelectRide'>['navigation']>();
@@ -18,12 +19,19 @@ export function useSelectRideViewModel(showAlert: (title: string, msg: string) =
   const [toLocation, setToLocation] = useState('');
   const [contactPhone, setContactPhone] = useState('');
   const [errors, setErrors] = useState<RideValidationErrors>({});
+  const { t } = useTranslation('selectRide');
 
   // --- Logic ---
   const validate = (): boolean => {
-    const validationErrors = validateRideInputs(fromLocation, toLocation);
-    setErrors(validationErrors);
-    return Object.keys(validationErrors).length === 0;
+    const rawErrors = validateRideInputs(fromLocation, toLocation);
+
+    const translatedErrors: RideValidationErrors = {};
+    Object.keys(rawErrors).forEach((key) => {
+      translatedErrors[key as keyof RideValidationErrors] = t(rawErrors[key]);
+    });
+
+    setErrors(translatedErrors);
+    return Object.keys(rawErrors).length === 0;
   };
 
   // Actions

@@ -83,7 +83,7 @@ export const createStyles = (colors: ThemeColors) =>
       borderRadius: 10,
       justifyContent: 'center',
       alignItems: 'center',
-      marginRight: 16,
+      marginEnd: 16,
     },
 
     carInfoTextDetails: {
