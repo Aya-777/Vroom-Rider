@@ -40,7 +40,7 @@ export const createStyles = (colors: ThemeColors) =>
     },
 
     boxTitle: {
-      marginLeft: Spacing.xs,
+      marginStart: Spacing.xs,
       color: colors.textPrimary,
       ...Typography.boldCaption,
     },
@@ -97,7 +97,7 @@ export const createStyles = (colors: ThemeColors) =>
     buttonText: {
       color: colors.background,
       ...Typography.semiBoldBody,
-      marginRight: 6,
+      marginEnd: 6,
       marginBottom: 4,
     },
   });

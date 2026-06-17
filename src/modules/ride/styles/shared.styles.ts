@@ -33,8 +33,8 @@ export const createStyles = (colors: ThemeColors) =>
         dropdownText: {
             fontWeight: '600',
             fontSize: 14,
-            marginLeft: 6,
-            marginRight: 6,
+            marginStart: 6,
+            marginEnd: 6,
             color: colors.textPrimary,
         },
 
@@ -123,7 +123,7 @@ export const createStyles = (colors: ThemeColors) =>
     actionButtonText: {
       fontSize: 16,
       fontWeight: '600',
-      marginRight: 5,
+      marginEnd: 5,
       marginBottom: 2,
       color: colors.background,
     },

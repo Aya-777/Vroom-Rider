@@ -90,7 +90,7 @@ export const createStyles = (colors: ThemeColors) =>
       borderRadius: Radius.full,
       justifyContent: 'center',
       alignItems: 'center',
-      marginRight: Spacing.md,
+      marginEnd: Spacing.md,
     },
 
     destTextContainer: {

@@ -50,7 +50,7 @@ export const createStyles = (colors: ThemeColors) =>
 
     inputContainer: {
       flex: 1,
-      marginLeft: 10,
+      marginStart: 10,
     },
 
     input: {
@@ -90,7 +90,7 @@ export const createStyles = (colors: ThemeColors) =>
     actionButtonText: {
       fontWeight: '600',
       fontSize: 14,
-      marginLeft: 6,
+      marginStart: 6,
       color:'#5C4E75'
     },
 
@@ -109,7 +109,7 @@ export const createStyles = (colors: ThemeColors) =>
     nextButtonText: {
       fontSize: 16,
       fontWeight: '600',
-      marginRight: 5,
+      marginEnd: 5,
       marginBottom: 2,
       color: colors.background,
     },

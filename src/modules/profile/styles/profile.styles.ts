@@ -181,7 +181,7 @@ export const createStyles = (colors: ThemeColors) =>
             justifyContent: 'center',
             alignItems: 'center',
             opacity: 0.8,
-            marginRight: 10,
+            marginEnd: 10,
         },
 
         carBodyTop: {
@@ -233,7 +233,7 @@ export const createStyles = (colors: ThemeColors) =>
         },
 
         listItemTitle: {
-            marginLeft: 12,
+            marginStart: 12,
             color: colors.textPrimary,
             ...Typography.body,
         },

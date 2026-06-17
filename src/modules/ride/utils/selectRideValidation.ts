@@ -1,20 +1,20 @@
+// utils/selectRideValidation.ts
 import { RideValidationErrors } from '../types/ride.types';
-import { useTranslation } from 'react-i18next';
 
-export const validateRideInputs = (from: string, to: string): RideValidationErrors => {
-  const errors: RideValidationErrors = {};
-  const {t} = useTranslation('selectRide');
+// Return keys that map to your translation files
+export const validateRideInputs = (from: string, to: string) => {
+  const errors: { [key: string]: string } = {}; // Use string keys
   
   if (!from.trim()) {
-    errors.fromLocation = t('selectRide:pickupRequired');
+    errors.fromLocation = 'pickupRequired';
   }
   
   if (!to.trim()) {
-    errors.toLocation = t('selectRide:destinationRequired');
+    errors.toLocation = 'destinationRequired';
   }
 
   if (from.trim() && to.trim() && from.trim().toLowerCase() === to.trim().toLowerCase()) {
-    errors.toLocation = t('selectRide:sameInputs');
+    errors.toLocation = 'sameInputs';
   }
 
   return errors;

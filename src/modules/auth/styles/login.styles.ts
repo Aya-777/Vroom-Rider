@@ -59,7 +59,7 @@ export const createStyles = (colors: ThemeColors) =>
 
         input: {
             flex: 1,
-            marginLeft: 12,
+            marginStart: 12,
             ...Typography.body,
             color: colors.textPrimary
         },
