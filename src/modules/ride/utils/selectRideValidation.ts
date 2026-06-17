@@ -1,18 +1,20 @@
 import { RideValidationErrors } from '../types/ride.types';
+import { useTranslation } from 'react-i18next';
 
 export const validateRideInputs = (from: string, to: string): RideValidationErrors => {
   const errors: RideValidationErrors = {};
-
+  const {t} = useTranslation('selectRide');
+  
   if (!from.trim()) {
-    errors.fromLocation = 'Pickup location is required';
+    errors.fromLocation = t('selectRide:pickupRequired');
   }
   
   if (!to.trim()) {
-    errors.toLocation = 'Destination is required';
+    errors.toLocation = t('selectRide:destinationRequired');
   }
 
   if (from.trim() && to.trim() && from.trim().toLowerCase() === to.trim().toLowerCase()) {
-    errors.toLocation = 'Destination cannot be the same as pickup';
+    errors.toLocation = t('selectRide:sameInputs');
   }
 
   return errors;

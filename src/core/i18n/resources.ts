@@ -34,7 +34,7 @@
       driverHere: driverHereEn,
       driverFound: driverFoundEn,
       review: reviewEn,
-      nav: navEn,
+      navigation: navEn,
       profile: profileEn,
       common: commonEn
     },
@@ -48,7 +48,7 @@
       driverHere: driverHereAr,
       driverFound: driverFoundAr,
       review: reviewAr,
-      nav: navAr,
+      navigation: navAr,
       profile: profileAr,
       common: commonAr
     },

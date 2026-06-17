@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ViewStyle } from 'react-native';
+import { View, StyleSheet, ViewStyle, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
@@ -19,9 +19,9 @@ import CarInactive from '../../assets/svg/common/ride.svg';
 import ProfileActive from '../../assets/svg/profile/profile.svg';
 import ProfileInactive from '../../assets/svg/profile/profile.svg';
 import { useTranslation } from 'react-i18next';
+import i18n from '../../core/i18n';
 
 const Tab = createBottomTabNavigator<MainTabsParamList>();
-const {t} = useTranslation('navigation');
 
 const HIDE_TAB_ROUTES = [
   'SelectRide',
@@ -83,6 +83,7 @@ const tabBarIconRenderers: Record<
 
 export default function MainTabs() {
   const { colors } = useTheme();
+  const {t} = useTranslation(['navigation']);
 
   const tabBarStyle: ViewStyle = {
     height: 80,
@@ -92,42 +93,43 @@ export default function MainTabs() {
     ...Shadows.small,
   };
 
-  return (
-    <Tab.Navigator
-      screenOptions={({ route }) => {
-        const activeRouteName = getFocusedRouteNameFromRoute(route) ?? '';
-        const shouldHideTab = HIDE_TAB_ROUTES.includes(activeRouteName);
-
-        return {
-          headerShown: false,
-          tabBarActiveTintColor: colors.primary,
-          tabBarInactiveTintColor: colors.textMuted,
-          tabBarStyle: shouldHideTab ? styles.hiddenTabBar : tabBarStyle,
-          tabBarLabelStyle: {
-            ...Typography.caption,
-            textTransform: 'none',
-            marginBottom: 2,
-          },
-          tabBarIcon: tabBarIconRenderers[route.name],
-        };
-      }}
-    >
+return (
+  <Tab.Navigator
+  key={i18n.language}
+  screenOptions={({ route }) => {
+    const activeRouteName = getFocusedRouteNameFromRoute(route) ?? '';
+    const shouldHideTab = HIDE_TAB_ROUTES.includes(activeRouteName);
+    
+    return {
+      headerShown: false,
+      tabBarActiveTintColor: colors.primary,
+      tabBarInactiveTintColor: colors.textMuted,
+      tabBarStyle: shouldHideTab ? styles.hiddenTabBar : tabBarStyle,
+      tabBarLabelStyle: {
+        ...Typography.caption,
+        textTransform: 'none',
+        marginBottom: 2,
+      },
+      tabBarIcon: tabBarIconRenderers[route.name],
+    };
+  }}
+  >
       <Tab.Screen
         name="HomeTab"
         component={HomeStack}
-        options={{ tabBarLabel: t('home') }}
-      />
+        options={{ tabBarLabel: t('navigation:home') }}
+        />
 
       <Tab.Screen
         name="ActivityTab"
         component={HomeStack}
-        options={{ tabBarLabel: t('activity') }}
+        options={{ tabBarLabel: t('navigation:activity') }}
       />
 
       <Tab.Screen
         name="ProfileTab"
         component={ProfileStack}
-        options={{ tabBarLabel: t('profile') }}
+        options={{ tabBarLabel: t('navigation:profile') }}
       />
     </Tab.Navigator>
   );
