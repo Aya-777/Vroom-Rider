@@ -33,7 +33,7 @@ export default function Input({
   onChangeText,
   secureTextEntry,
   keyboardType,
-    value,
+  value,
   renderLeftIcon,
   renderRightIcon,
   ...props
@@ -41,7 +41,7 @@ export default function Input({
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [localError, setLocalError] = useState<string | undefined>(undefined);
   // const [internalText, setInternalText] = useState(props.value || '');
-  const {t} = useTranslation(['common']);
+  const { t } = useTranslation(['common']);
 
   const handleTextChange = (text: string) => {
     let finalValidText = text;
@@ -104,7 +104,7 @@ export default function Input({
           keyboardType={finalKeyboardType}
           maxLength={finalMaxLength}
           value={value ?? ''}
-        
+
           {...props}
         />
 
@@ -115,7 +115,15 @@ export default function Input({
         )}
       </View>
 
-      {error && <Text style={styles.errorText}>{t(`common:${error}`)}</Text>}
+      <View style={styles.errorContainer}>
+        {error ? (
+          <Text style={styles.errorText} numberOfLines={2}>
+            {t(`common:${error}`)}
+          </Text>
+        ) : (
+          <View style={styles.errorPlaceholder} />
+        )}
+      </View>
     </View>
   );
 }

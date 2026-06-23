@@ -11,6 +11,18 @@ export const createStyles = () =>
             flexDirection: 'row',
             alignItems: 'center',
             width: '100%',
+            borderRadius: Radius.sm,
+        },
+        errorContainer: {
+            width: '100%',
+            minHeight: Typography.smallCaption.fontSize + 6,
+            marginTop: 4,
+            justifyContent: 'center',
+            alignItems: 'flex-start'
+        },
+
+        errorPlaceholder: {
+            height: 18,
         },
         defaultInput: {
             flex: 1,
@@ -18,11 +30,15 @@ export const createStyles = () =>
             paddingHorizontal: 12,
             ...Typography.caption
         },
-        container: {},
+        container: {
+            width: '100%',
+            flexDirection: 'column',
+        },
         inputError: {
             borderColor: 'red',
-            borderWidth: 0.5,
-            borderRadius: Radius.sm,
+            borderWidth: 1,
+            textAlign: 'left',
+            ...Typography.caption,
         },
         errorText: {
             color: 'red',
