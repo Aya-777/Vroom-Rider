@@ -9,7 +9,7 @@ import LinearBg from '../../../../shared/components/LinearBg';
 import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/login.styles';
 import Input from '../../../../shared/components/Input';
-import { useTranslation } from 'react-i18next'; 
+import { useTranslation } from 'react-i18next';
 
 const LoginForm = ({ vm }: any) => {
   const { colors } = useTheme();
@@ -24,19 +24,19 @@ const LoginForm = ({ vm }: any) => {
       </View>
 
       <View style={styles.middle}>
-        
+
         <Input
           type="phone"
-          placeholder= {t('phoneNumber')}
+          placeholder={t('phoneNumber')}
           placeholderTextColor={colors.textMuted}
           value={vm.phone}
           onChangeText={vm.setPhone}
           containerStyle={styles.inputBox}
-          inputStyle={styles.input}       
+          inputStyle={styles.input}
           renderLeftIcon={() => (
             <PhoneNumberIcon width={20} height={20} fill={colors.primary} />
           )}
-          error={vm.phoneError} 
+          error={vm.phoneError}
         />
 
         <Input
@@ -60,6 +60,11 @@ const LoginForm = ({ vm }: any) => {
           error={vm.passwordError}
         />
       </View>
+      {vm.error && (
+        <Text style={styles.error}>
+          {vm.error}
+        </Text>
+      )}
 
       <View style={styles.bottom}>
         <TouchableOpacity onPress={vm.handleLogin}>

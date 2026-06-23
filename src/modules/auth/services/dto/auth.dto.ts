@@ -35,3 +35,27 @@ export interface VerifyOtpResponseDTO {
 export interface ResendOtpRequestDTO {
     phone_number: string;
 }
+
+export interface LoginRequestDTO {
+    phone_number: string;
+    password: string;
+    expected_role: 'rider';
+}
+
+export interface LoginResponseDTO {
+    status_code: number;
+    message: string;
+    data: {
+        refresh: string;
+        access: string;
+        user: {
+            id: number;
+            phone_number: string;
+            first_name: string;
+            last_name: string;
+            role: string;
+            profile_image: string | null;
+            account_status: string;
+        };
+    };
+}

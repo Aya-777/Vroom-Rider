@@ -5,7 +5,9 @@ import {
     SignupResponseDTO,
     VerifyOtpRequestDTO,
     VerifyOtpResponseDTO,
-    ResendOtpRequestDTO
+    ResendOtpRequestDTO,
+    LoginRequestDTO,
+    LoginResponseDTO,
 } from './dto/auth.dto';
 
 export const authApi = {
@@ -56,6 +58,24 @@ export const authApi = {
         const response = await apiClient.post<{ message: string }>(
             ENDPOINTS.AUTH.RESEND_OTP,
             data
+        );
+        return response.data;
+    },
+
+    login: async (data: LoginRequestDTO): Promise<LoginResponseDTO> => {
+        const formData = new FormData();
+        formData.append('phone_number', data.phone_number);
+        formData.append('password', data.password);
+        formData.append('expected_role', data.expected_role);
+
+        const response = await apiClient.post<LoginResponseDTO>(
+            ENDPOINTS.AUTH.LOGIN,
+            formData,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }
         );
         return response.data;
     },
