@@ -70,21 +70,29 @@ export const useOtpViewModel = (navigation: any, route: any) => {
         );
     };
 
-    const handleResendCode = () => {
+
+    const handleResendCode = async () => {
         setUiError(null);
-        resendOtpMutation.mutate(
-            { phone_number: phoneNumber },
-            {
-                onSuccess: () => {
-                    setCode(new Array(6).fill(''));
-                    setActiveCodeIndex(0);
-                    inputRefs.current[0]?.focus();
-                },
-                onError: (err: any) => {
-                    setUiError(err.response?.data?.message || 'Try Again Later');
-                },
-            }
-        );
+
+        try {
+            const response =
+                await resendOtpMutation.mutateAsync({
+                    phone_number: phoneNumber,
+                });
+
+            setCode(new Array(6).fill(''));
+            setActiveCodeIndex(0);
+            inputRefs.current[0]?.focus();
+
+            return response;
+        } catch (err: any) {
+            setUiError(
+                err.response?.data?.message ||
+                'Try Again'
+            );
+
+            throw err;
+        }
     };
 
     const handleBack = () => {

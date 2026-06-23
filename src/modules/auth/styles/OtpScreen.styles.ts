@@ -7,11 +7,24 @@ export const createStyles = (colors: any) =>
             flex: 1,
         },
 
+        timerText: {
+            marginTop: 5,
+            marginLeft : 5,
+            textAlign: 'center',
+            fontSize: 13,
+            color: colors.textSecondary,
+        },
+
+        resendLinkDisabled: {
+            marginLeft : 5,
+            opacity: 0.5,
+        },
+
         errorText: {
             textAlign: 'center',
             marginVertical: 8,
             fontSize: 14,
-            color : 'red'
+            color: 'red'
         },
 
         content: {

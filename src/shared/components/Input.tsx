@@ -10,7 +10,7 @@ import {
   TextStyle,
 } from 'react-native';
 import { createStyles } from '../styles/input.styles'
-import { Typography } from '../../core/theme/tokens';
+// import { Typography } from '../../core/theme/tokens';
 import { useTranslation } from 'react-i18next';
 
 type InputType = 'text' | 'phone' | 'password' | 'username';
@@ -33,14 +33,15 @@ export default function Input({
   onChangeText,
   secureTextEntry,
   keyboardType,
+  value,
   renderLeftIcon,
   renderRightIcon,
   ...props
 }: InputProps) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [localError, setLocalError] = useState<string | undefined>(undefined);
-  const [internalText, setInternalText] = useState(props.value || '');
-  const {t} = useTranslation(['common']);
+  // const [internalText, setInternalText] = useState(props.value || '');
+  const { t } = useTranslation(['common']);
 
   const handleTextChange = (text: string) => {
     let finalValidText = text;
@@ -48,7 +49,6 @@ export default function Input({
     if (type === 'phone') {
       finalValidText = text.replace(/[^0-9]/g, '');
     }
-    setInternalText(finalValidText);
     onChangeText?.(finalValidText);
     if (finalValidText.length === 0) {
       setLocalError(undefined);
@@ -80,8 +80,8 @@ export default function Input({
   const error = externalError || localError;
 
   const styles = createStyles();
-  const isInputEmpty = internalText.length === 0;
-  const dynamicTypography = isInputEmpty ? Typography.caption : Typography.body;
+  // const isInputEmpty = internalText.length === 0;
+  // const dynamicTypography = isInputEmpty ? Typography.caption : Typography.body;
 
   return (
     //     <View style={styles.container}>
@@ -93,17 +93,18 @@ export default function Input({
         {renderLeftIcon && renderLeftIcon()}
 
         <TextInput
-          key={isInputEmpty ? 'empty_hint' : 'filled_body'}
+          // key={isInputEmpty ? 'empty_hint' : 'filled_body'}
           style={[
             styles.defaultInput,
-            dynamicTypography,
+            // dynamicTypography,
             inputStyle
           ]}
           onChangeText={handleTextChange}
           secureTextEntry={finalSecureTextEntry}
           keyboardType={finalKeyboardType}
           maxLength={finalMaxLength}
-          value={props.value !== undefined ? props.value : internalText}
+          value={value ?? ''}
+
           {...props}
         />
 
@@ -114,7 +115,15 @@ export default function Input({
         )}
       </View>
 
-      {error && <Text style={styles.errorText}>{t(`common:${error}`)}</Text>}
+      <View style={styles.errorContainer}>
+        {error ? (
+          <Text style={styles.errorText} numberOfLines={2}>
+            {t(`common:${error}`)}
+          </Text>
+        ) : (
+          <View style={styles.errorPlaceholder} />
+        )}
+      </View>
     </View>
   );
 }

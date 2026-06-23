@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View } from 'react-native';
 import LinearBg from '../../../shared/components/LinearBg';
 import Header from '../../../shared/components/SubHeader';
 import Button from '../components/shared/Button';
@@ -9,6 +9,7 @@ import { createStyles } from '../styles/OtpScreen.styles';
 import { AuthStackScreenProps } from '../../../navigation/auth/authTypes';
 import OtpInputFields from '../components/OTP/OtpInputFields';
 import { useTranslation } from 'react-i18next';
+import ResendCode from '../components/OTP/ResendCode';
 
 export default function OtpScreen({ navigation, route }: AuthStackScreenProps<'Otp'>) {
   const { colors } = useTheme();
@@ -64,12 +65,18 @@ export default function OtpScreen({ navigation, route }: AuthStackScreenProps<'O
           colors={colors}
         />
 
-        <View style={styles.resendContainer}>
+        {/* <View style={styles.resendContainer}>
           <Text style={styles.resendText}>{t('haventGot')} </Text>
           <TouchableOpacity onPress={handleResendCode} activeOpacity={0.7}>
             <Text style={styles.resendLink}>{t('resendCode')}</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
+
+        <ResendCode
+          onResend={handleResendCode}
+          styles={styles}
+          t={t}
+        />
       </View>
     </LinearBg>
   );
