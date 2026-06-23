@@ -50,13 +50,6 @@ export const useSignupViewModel = (onSuccess: (phone: string) => void) => {
           setUiError(err.response?.data?.message || err.message);
 
         },
-        // onError: (err: any) => {
-        //   console.log('FULL ERROR:', JSON.stringify(err, null, 2));
-        //   console.log('CODE:', err.code);
-        //   console.log('MESSAGE:', err.message);
-        //   console.log('RESPONSE:', err.response);
-        //   setUiError(err.response?.data?.message || err.message);
-        // },
       }
     );
   };

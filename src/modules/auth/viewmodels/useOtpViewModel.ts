@@ -70,25 +70,6 @@ export const useOtpViewModel = (navigation: any, route: any) => {
         );
     };
 
-    // const handleResendCode = () => {
-    //     setUiError(null);
-    //     console.log('Resend clicked');
-    //     resendOtpMutation.mutate(
-    //         { phone_number: phoneNumber },
-    //         {
-    //             onSuccess: (response) => {
-    //                 setCode(new Array(6).fill(''));
-    //                 setActiveCodeIndex(0);
-    //                 inputRefs.current[0]?.focus();
-    //                 console.log('SUCCESS', response);
-    //             },
-    //             onError: (err: any) => {
-    //                 setUiError(err.response?.data?.message || 'Try Again');
-    //             },
-    //         }
-    //     );
-    // };
-
 
     const handleResendCode = async () => {
         setUiError(null);
