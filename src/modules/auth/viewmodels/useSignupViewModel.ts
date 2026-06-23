@@ -40,14 +40,13 @@ export const useSignupViewModel = (onSuccess: (phone: string) => void) => {
           onSuccess(phoneNumber);
         },
         onError: (err: any) => {
-          console.log('Signup Network Error Full:', err);
-          console.log('Signup Error Response Data:', err.response?.data);
+          console.log('--- SIGNUP ERROR DETAILED ---');
+          console.log('Status:', err.response?.status);
+          console.log('Data:', err.response?.data);
+          console.log('Message:', err.message);
 
-          setUiError(
-            err.response?.data?.message ||
-            err.response?.data?.error ||
-            err.message
-          );
+          setUiError(err.response?.data?.message || err.message);
+
         },
       }
     );
