@@ -1,15 +1,17 @@
 import { useMutation } from '@tanstack/react-query';
 import { authApi } from '../services/authApi';
-import { 
-  SignupRequestDTO, 
-  SignupResponseDTO, 
-  VerifyOtpRequestDTO, 
+import {
+  SignupRequestDTO,
+  SignupResponseDTO,
+  VerifyOtpRequestDTO,
   VerifyOtpResponseDTO,
-  ResendOtpRequestDTO
+  ResendOtpRequestDTO,
+  LoginRequestDTO,
+  LoginResponseDTO
 } from '../services/dto/auth.dto';
 
 export const useAuthRepository = {
-    useSignup: () => {
+  useSignup: () => {
     return useMutation<SignupResponseDTO, Error, SignupRequestDTO>({
       mutationFn: authApi.signup,
     });
@@ -24,6 +26,12 @@ export const useAuthRepository = {
   useResendOtp: () => {
     return useMutation<{ message: string }, Error, ResendOtpRequestDTO>({
       mutationFn: authApi.resendOtp,
+    });
+  },
+
+  useLogin: () => {
+    return useMutation<LoginResponseDTO, Error, LoginRequestDTO>({
+      mutationFn: authApi.login,
     });
   },
 };
