@@ -13,6 +13,9 @@ export const useSignupViewModel = (onSuccess: (phone: string) => void) => {
   const signupMutation = useAuthRepository.useSignup();
 
   const handleSignup = () => {
+
+    console.log('handleSignup called!');
+    console.log('Fields:', firstName, lastName, phoneNumber);
     setUiError(null);
 
     if (!firstName || !lastName || !phoneNumber || !password || !confirmPassword) {
@@ -36,7 +39,6 @@ export const useSignupViewModel = (onSuccess: (phone: string) => void) => {
       },
       {
         onSuccess: () => {
-
           onSuccess(phoneNumber);
         },
         onError: (err: any) => {
@@ -48,6 +50,13 @@ export const useSignupViewModel = (onSuccess: (phone: string) => void) => {
           setUiError(err.response?.data?.message || err.message);
 
         },
+        // onError: (err: any) => {
+        //   console.log('FULL ERROR:', JSON.stringify(err, null, 2));
+        //   console.log('CODE:', err.code);
+        //   console.log('MESSAGE:', err.message);
+        //   console.log('RESPONSE:', err.response);
+        //   setUiError(err.response?.data?.message || err.message);
+        // },
       }
     );
   };
