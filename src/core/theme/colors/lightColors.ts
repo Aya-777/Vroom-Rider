@@ -14,4 +14,6 @@ export const lightColors = {
   primary: '#0F1E52',
 
   border: '#DDD8F0',
+
+  error : 'rgb(180, 0, 0)',
 };

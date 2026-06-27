@@ -31,15 +31,8 @@ export const createStyles = (colors: any) =>
       fontWeight: '600',
     },
     inputContainer: {
-      backgroundColor: colors.backgroundSoft,
-      borderRadius: Radius.full,
-      borderWidth: 2,
-      borderColor: colors.surface,
-      height: 54,
-      justifyContent: 'center',
-      paddingHorizontal: Spacing.md,
-      marginBottom: Spacing.lg,
-      ...Shadows.medium,
+      width: '80%',
+      alignSelf: 'center',
     },
     inputText: {
       color: colors.primary,

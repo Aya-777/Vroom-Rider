@@ -10,8 +10,8 @@ import {
   TextStyle,
 } from 'react-native';
 import { createStyles } from '../styles/input.styles'
-// import { Typography } from '../../core/theme/tokens';
 import { useTranslation } from 'react-i18next';
+import { useTheme } from '../../core/theme/useTheme';
 
 type InputType = 'text' | 'phone' | 'password' | 'username';
 
@@ -42,6 +42,8 @@ export default function Input({
   const [localError, setLocalError] = useState<string | undefined>(undefined);
   // const [internalText, setInternalText] = useState(props.value || '');
   const { t } = useTranslation(['common']);
+    const { colors } = useTheme();
+  const styles = createStyles(colors);
 
   const handleTextChange = (text: string) => {
     let finalValidText = text;
@@ -79,7 +81,6 @@ export default function Input({
   const finalKeyboardType = type === 'phone' ? 'numeric' : keyboardType;
   const error = externalError || localError;
 
-  const styles = createStyles();
   // const isInputEmpty = internalText.length === 0;
   // const dynamicTypography = isInputEmpty ? Typography.caption : Typography.body;
 

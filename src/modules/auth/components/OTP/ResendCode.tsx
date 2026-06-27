@@ -10,7 +10,7 @@ import { useResendCode } from '../../hooks/useResendCode';
 interface Props {
     onResend: () => Promise<any>;
     styles: any;
-    t: any;
+    t: (key: string) => string;
 }
 
 export default function ResendCode({

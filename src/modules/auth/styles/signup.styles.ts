@@ -48,27 +48,11 @@ export const createStyles = (colors: ThemeColors) =>
         middle: {
             width: '100%',
             alignItems: 'center',
-            gap: 12,
+            gap: 3,
         },
 
         inputBox: {
-            width: 290,
-            height: 55,
-            flexDirection: 'column',
-            alignItems: 'stretch',
-            paddingHorizontal: 10,
-            marginBottom: 5,
-            borderRadius: 12,
-            borderColor: colors.surface,
-            borderWidth: 2,
-            backgroundColor: colors.backgroundSoft + '80',
-        },
-
-        inputContainer: {
-            width: 290,    
-            flexDirection: 'column', 
-            alignItems: 'stretch',
-            marginBottom: 5,
+            width: '80%',
         },
 
         input: {
@@ -106,12 +90,6 @@ export const createStyles = (colors: ThemeColors) =>
             ...StyleSheet.absoluteFill,
         },
 
-        content: {
-            flex: 1,
-            paddingTop: 35,
-            paddingHorizontal: 24,
-        },
-
         flex: {
             flex: 1,
         },
@@ -143,15 +121,6 @@ export const createStyles = (colors: ThemeColors) =>
 
         halfInput: {
             width: '49%',
-            height: 55,
-            flexDirection: 'row',
-            alignItems: 'center',
-            paddingHorizontal: 10,
-            marginBottom: 5,
-            borderRadius: 12,
-            borderColor: colors.surface,
-            borderWidth: 2,
-            backgroundColor: colors.backgroundSoft + '80',
         },
 
         halfInputText: {
