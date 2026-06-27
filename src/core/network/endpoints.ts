@@ -1,12 +1,12 @@
 export const ENDPOINTS = {
   AUTH: {
-    SIGNUP: '/auth/signup/',
-    VERIFY_OTP: '/auth/signup/verify-otp/',
-    RESEND_OTP: '/auth/signup/resend-otp/',
-    LOGIN: '/auth/login/',
-    FORGOT_PASSWORD: '/auth/forgot-password/',
-    FORGOT_PASSWORD_VERIFY_OTP: '/auth/forgot-password/verify-otp/',
-    FORGOT_PASSWORD_RESEND_OTP :'/auth/forgot-password/resend-otp/',
-    RESET_PASSWORD: '/auth/forgot-password/reset-password/',
+    SIGNUP: '/api/v1/auth/signup/',
+    VERIFY_OTP: '/api/v1/auth/signup/verify-otp/',
+    RESEND_OTP: '/api/v1/auth/signup/resend-otp/',
+    LOGIN: '/api/v1/auth/login/',
+    FORGOT_PASSWORD: '/api/v1/auth/forgot-password/',
+    FORGOT_PASSWORD_VERIFY_OTP: '/api/v1/auth/forgot-password/verify-otp/',
+    FORGOT_PASSWORD_RESEND_OTP :'/api/v1/auth/forgot-password/resend-otp/',
+    RESET_PASSWORD: '/api/v1/auth/forgot-password/reset-password/',
   },
 } as const;
