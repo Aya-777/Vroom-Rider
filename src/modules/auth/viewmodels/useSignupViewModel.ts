@@ -42,7 +42,6 @@ export const useSignupViewModel = (onSuccess: (phone: string) => void) => {
           onSuccess(phoneNumber);
         },
         onError: (err: any) => {
-          console.log('--- SIGNUP ERROR DETAILED ---');
           console.log('Status:', err.response?.status);
           console.log('Data:', err.response?.data);
           console.log('Message:', err.message);

@@ -8,6 +8,11 @@ import {
     ResendOtpRequestDTO,
     LoginRequestDTO,
     LoginResponseDTO,
+    ForgotPasswordRequestDTO,
+    ForgotPasswordRequestResponseDTO,
+    ForgotPasswordVerifyOtpRequestDTO,
+    ForgotPasswordVerifyOtpResponseDTO,
+    ResetPasswordRequestDTO,
 } from './dto/auth.dto';
 
 export const authApi = {
@@ -76,6 +81,48 @@ export const authApi = {
                     'Content-Type': 'multipart/form-data',
                 },
             }
+        );
+        return response.data;
+    },
+
+    forgotPasswordRequest: async (data: ForgotPasswordRequestDTO): Promise<ForgotPasswordRequestResponseDTO> => {
+        const formData = new FormData();
+        formData.append('phone_number', data.phone_number);
+        formData.append('expected_role', data.expected_role);
+
+        const response = await apiClient.post<ForgotPasswordRequestResponseDTO>(
+            ENDPOINTS.AUTH.FORGOT_PASSWORD, 
+            formData,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }
+        );
+        return response.data;
+    },
+
+    forgotPasswordVerifyOtp: async (data: ForgotPasswordVerifyOtpRequestDTO): Promise<ForgotPasswordVerifyOtpResponseDTO> => {
+        const response = await apiClient.post<ForgotPasswordVerifyOtpResponseDTO>(
+            ENDPOINTS.AUTH.FORGOT_PASSWORD_VERIFY_OTP, 
+            data
+        );
+        return response.data;
+    },
+
+    forgotPasswordResendOtp: async (data: ResendOtpRequestDTO): Promise<{ message: string }> => {
+    const response = await apiClient.post<{ message: string }>(
+        ENDPOINTS.AUTH.FORGOT_PASSWORD_RESEND_OTP, 
+        data
+    );
+    return response.data;
+},
+
+    resetPassword: async (data: ResetPasswordRequestDTO): Promise<{message: string}> => {
+        const response = await apiClient.post<{message: string}>(
+            ENDPOINTS.AUTH.RESET_PASSWORD, 
+            data
+
         );
         return response.data;
     },

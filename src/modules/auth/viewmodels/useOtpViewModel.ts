@@ -2,11 +2,11 @@ import { useState, useRef, useEffect } from 'react';
 import { TextInput } from 'react-native';
 import { useAuthRepository } from '../repositories/authRepository';
 import { useAuthActions } from '../../../core/store/authStore';
-import { VerifyOtpResponseDTO } from '../services/dto/auth.dto';
 
 export const useOtpViewModel = (navigation: any, route: any) => {
 
     const phoneNumber = route.params?.phoneNumber || '';
+    const flowType = route.params?.type || 'signup';
 
     const [code, setCode] = useState<string[]>(new Array(6).fill(''));
     const [activeCodeIndex, setActiveCodeIndex] = useState<number>(0);
@@ -14,8 +14,11 @@ export const useOtpViewModel = (navigation: any, route: any) => {
 
     const inputRefs = useRef<TextInput[]>([]);
 
-    const verifyOtpMutation = useAuthRepository.useVerifyOtp();
+    const signupVerifyMutation = useAuthRepository.useVerifyOtp();
+    const forgotVerifyMutation = useAuthRepository.useForgotPasswordVerifyOtp();
     const resendOtpMutation = useAuthRepository.useResendOtp();
+    const forgotResendOtpMutation = useAuthRepository.useForgotPasswordResendOtp();
+
     const { login } = useAuthActions();
 
     const maskedPhoneNumber = phoneNumber
@@ -57,17 +60,39 @@ export const useOtpViewModel = (navigation: any, route: any) => {
             return;
         }
 
-        verifyOtpMutation.mutate(
-            { phone_number: phoneNumber, otp: fullCode },
-            {
-                onSuccess: (response: VerifyOtpResponseDTO) => {
-                    login(response.data.access);
+        if (flowType === 'forgot_password') {
+            forgotVerifyMutation.mutate(
+                {
+                    phone_number: phoneNumber,
+                    otp: fullCode,
+                    expected_role: 'rider'
                 },
-                onError: (err: any) => {
-                    setUiError(err.response?.data?.message || 'Invalid OTP');
-                },
-            }
-        );
+                {
+                    onSuccess: (response) => {
+                        const resetToken = response.data?.reset_token;
+                        navigation.navigate('ResetPassword', {
+                            phoneNumber,
+                            resetToken
+                        });
+                    },
+                    onError: (err: any) => {
+                        setUiError(err.response?.data?.message || 'Invalid OTP');
+                    },
+                }
+            );
+        } else {
+            signupVerifyMutation.mutate(
+                { phone_number: phoneNumber, otp: fullCode },
+                {
+                    onSuccess: (response) => {
+                        login(response.data.access);
+                    },
+                    onError: (err: any) => {
+                        setUiError(err.response?.data?.message || 'Invalid OTP');
+                    },
+                }
+            );
+        }
     };
 
 
@@ -75,11 +100,17 @@ export const useOtpViewModel = (navigation: any, route: any) => {
         setUiError(null);
 
         try {
-            const response =
-                await resendOtpMutation.mutateAsync({
+            let response;
+
+            if (flowType === 'forgot_password') {
+                response = await forgotResendOtpMutation.mutateAsync({
                     phone_number: phoneNumber,
                 });
-
+            } else {
+                response = await resendOtpMutation.mutateAsync({
+                    phone_number: phoneNumber,
+                });
+            }
             setCode(new Array(6).fill(''));
             setActiveCodeIndex(0);
             inputRefs.current[0]?.focus();
@@ -90,7 +121,6 @@ export const useOtpViewModel = (navigation: any, route: any) => {
                 err.response?.data?.message ||
                 'Try Again'
             );
-
             throw err;
         }
     };
@@ -102,7 +132,7 @@ export const useOtpViewModel = (navigation: any, route: any) => {
     return {
         code,
         activeCodeIndex,
-        isLoading: verifyOtpMutation.isPending || resendOtpMutation.isPending,
+        isLoading: signupVerifyMutation.isPending || forgotVerifyMutation.isPending || resendOtpMutation.isPending,
         inputRefs,
         maskedPhoneNumber,
         error: uiError,

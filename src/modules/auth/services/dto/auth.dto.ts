@@ -59,3 +59,39 @@ export interface LoginResponseDTO {
         };
     };
 }
+
+export interface ForgotPasswordRequestDTO {
+    phone_number: string;
+    expected_role: 'rider';
+}
+
+export interface ForgotPasswordRequestResponseDTO {
+    status_code: number;
+    message: string;
+    data: null;
+}
+
+export interface ForgotPasswordVerifyOtpRequestDTO {
+    phone_number: string;
+    expected_role: 'rider';
+    otp: string;
+}
+
+export interface ForgotPasswordVerifyOtpResponseDTO {
+    status_code: number;
+    data: {
+        reset_token: string;
+    };
+}
+
+export interface ForgetPasswordResendOtpRequestDTO {
+    phone_number: string;
+}
+
+export interface ResetPasswordRequestDTO {
+    phone_number: string;
+    expected_role: 'rider';
+    reset_token: string;
+    new_password: string;
+    confirm_password: string;
+}
