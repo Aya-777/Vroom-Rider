@@ -56,7 +56,7 @@ export const useOtpViewModel = (navigation: any, route: any) => {
         const fullCode = code.join('');
 
         if (fullCode.length < 6) {
-            setUiError('Please enter the complete 6-digit verification code.');
+            setUiError('incompleteCode');
             return;
         }
 
@@ -76,7 +76,7 @@ export const useOtpViewModel = (navigation: any, route: any) => {
                         });
                     },
                     onError: (err: any) => {
-                        setUiError(err.response?.data?.message || 'Invalid OTP');
+                        setUiError(err.response?.data?.message || 'invalidOtp');
                     },
                 }
             );
@@ -95,36 +95,45 @@ export const useOtpViewModel = (navigation: any, route: any) => {
         }
     };
 
-
     const handleResendCode = async () => {
         setUiError(null);
 
         try {
             let response;
-
             if (flowType === 'forgot_password') {
-                response = await forgotResendOtpMutation.mutateAsync({
-                    phone_number: phoneNumber,
-                });
+                response = await forgotResendOtpMutation.mutateAsync({ phone_number: phoneNumber });
             } else {
-                response = await resendOtpMutation.mutateAsync({
-                    phone_number: phoneNumber,
-                });
+                response = await resendOtpMutation.mutateAsync({ phone_number: phoneNumber });
             }
             setCode(new Array(6).fill(''));
             setActiveCodeIndex(0);
             inputRefs.current[0]?.focus();
-
             return response;
+
         } catch (err: any) {
-            setUiError(
+            const message =
+                err.response?.data?.errors?.phone_number?.[0] ||
                 err.response?.data?.message ||
-                'Try Again'
-            );
-            throw err;
+                'tryAgain';
+
+            setUiError(message);
+
+            const secondsMatch = message.match(/(\d+)\s*seconds?/i);
+            const hoursMatch = message.match(/(\d+)h/i);
+            const minutesMatch = message.match(/(\d+)m/i);
+
+            let waitSeconds = 0;
+            if (secondsMatch) {
+                waitSeconds = parseInt(secondsMatch[1], 10);
+            } else if (hoursMatch || minutesMatch) {
+                const h = hoursMatch ? parseInt(hoursMatch[1], 10) : 0;
+                const m = minutesMatch ? parseInt(minutesMatch[1], 10) : 0;
+                waitSeconds = h * 3600 + m * 60;
+            }
+
+            throw { ...err, waitSeconds };
         }
     };
-
     const handleBack = () => {
         navigation.goBack();
     };

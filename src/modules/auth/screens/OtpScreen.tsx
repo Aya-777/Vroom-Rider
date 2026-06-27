@@ -52,12 +52,6 @@ export default function OtpScreen({ navigation, route }: AuthStackScreenProps<'O
           styles={styles}
         />
 
-        {error && (
-          <Text style={styles.errorText}>
-            {error}
-          </Text>
-        )}
-
         <Button
           title="Verify Code"
           onPress={handleVerifyCode}
@@ -65,18 +59,20 @@ export default function OtpScreen({ navigation, route }: AuthStackScreenProps<'O
           colors={colors}
         />
 
-        {/* <View style={styles.resendContainer}>
-          <Text style={styles.resendText}>{t('haventGot')} </Text>
-          <TouchableOpacity onPress={handleResendCode} activeOpacity={0.7}>
-            <Text style={styles.resendLink}>{t('resendCode')}</Text>
-          </TouchableOpacity>
-        </View> */}
-
         <ResendCode
           onResend={handleResendCode}
           styles={styles}
           t={t}
         />
+
+        {error && (
+          <Text style={styles.errorText}>
+            {error === 'tryAgain' || error === 'incompleteCode' || error === 'invalidOtp'
+              ? t(error)
+              : error}
+          </Text>
+        )}
+        
       </View>
     </LinearBg>
   );

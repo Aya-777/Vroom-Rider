@@ -73,15 +73,12 @@ export const useResendCode = (
     };
 
     const handleResend = async () => {
-        if (!canResend) {
-            return;
-        }
+        if (!canResend) return;
 
         try {
             await onResend();
 
             const newCount = resendCount + 1;
-
             setResendCount(newCount);
 
             if (newCount >= 3) {
@@ -89,9 +86,12 @@ export const useResendCode = (
                 return;
             }
 
-            startTimer(COOLDOWNS[newCount]);
-        } catch (e) {
-            console.log(e);
+            startTimer(COOLDOWNS[newCount] ?? COOLDOWNS[COOLDOWNS.length - 1]);
+
+        } catch (e: any) {
+            if (e?.waitSeconds && e.waitSeconds > 0) {
+                startTimer(e.waitSeconds);
+            }
         }
     };
 
