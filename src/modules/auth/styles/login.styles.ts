@@ -26,7 +26,7 @@ export const createStyles = (colors: ThemeColors) =>
             paddingTop: Spacing.xxl,
         },
 
-        error:{ color: 'red', textAlign: 'center', marginBottom: 10 },
+        error: { color: 'red', textAlign: 'center', marginBottom: 10 },
 
         link: {
             marginTop: 20,
@@ -48,15 +48,7 @@ export const createStyles = (colors: ThemeColors) =>
         },
 
         inputBox: {
-            width: 280,
-            height: 55,
-            flexDirection: 'column',
-            alignItems: 'center',
-            paddingHorizontal: 16,
-            borderRadius: 12,
-            borderColor: colors.surface,
-            borderWidth: 2,
-            backgroundColor: colors.backgroundSoft,
+            width: '80%',
         },
 
         input: {

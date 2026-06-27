@@ -30,21 +30,16 @@ export const createStyles = (colors: any) =>
             marginBottom: Spacing.sm,
             fontWeight: '600',
         },
-      
+
         inputContainer: {
-            backgroundColor: colors.backgroundSoft,
-            borderRadius: Radius.full,
-            borderWidth: 2,
-            borderColor: colors.surface,
-            height: 54,
-            justifyContent: 'center',
-            paddingHorizontal: Spacing.md,
-            marginBottom: Spacing.lg,
-            ...Shadows.medium
+            width: '90%',
+            alignSelf: 'center',
         },
+
         inputText: {
             color: colors.primary
         },
+
         button: {
             width: '70%',
             height: 48,
