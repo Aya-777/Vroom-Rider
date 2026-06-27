@@ -240,7 +240,8 @@ Vroom-Rider/
 │   │   ├── auth
 │   │   │   ├── components
 │   │   │   │   ├── OTP
-│   │   │   │   │   └── OtpInputFields.tsx
+│   │   │   │   │   ├── OtpInputFields.tsx
+│   │   │   │   │   └── ResendCode.tsx
 │   │   │   │   ├── login
 │   │   │   │   │   ├── LoginFooter.tsx
 │   │   │   │   │   ├── LoginForm.tsx
@@ -266,6 +267,7 @@ Vroom-Rider/
 │   │   │   ├── constants
 │   │   │   ├── hooks
 │   │   │   │   ├── useAuthActions.ts
+│   │   │   │   ├── useResendCode.ts
 │   │   │   │   ├── useSplashAnimation.ts
 │   │   │   │   └── useSplashLayout.ts
 │   │   │   ├── repositories
