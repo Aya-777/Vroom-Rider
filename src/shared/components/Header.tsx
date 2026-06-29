@@ -62,9 +62,7 @@ export default function Header({
 const createStyles = (colors: any) =>
   StyleSheet.create({
     container: {
-      paddingTop: Spacing.xl,
-      backgroundColor: colors.surface,
-      ...Shadows.small,
+      marginTop: Spacing.xl,
     },
 
     header: {
@@ -90,5 +88,6 @@ const createStyles = (colors: any) =>
       ...Typography.h2,
       color: colors.textSecondary,
       letterSpacing: 1,
+      paddingHorizontal: Spacing.lg,
     },
   });

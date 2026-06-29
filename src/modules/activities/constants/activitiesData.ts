@@ -16,7 +16,7 @@ export const ACTIVITIES: Activity[] = [
         dropoffLocation: 'Airport Terminal 2',
         date: 'Today • 4:30 PM',
         price: 245,
-        currency: 'NOK',
+        currency: 'SP',
         vehicleType: 'Economy',
     },
     {
@@ -26,7 +26,7 @@ export const ACTIVITIES: Activity[] = [
         dropoffLocation: 'Oslo City',
         date: 'Yesterday • 8:15 PM',
         price: 180,
-        currency: 'NOK',
+        currency: 'SP',
         vehicleType: 'Standard',
     },
 ];

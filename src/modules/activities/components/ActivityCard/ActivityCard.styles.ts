@@ -65,8 +65,19 @@ export const createStyles = (colors: ThemeColors) =>
             alignItems: 'center',
         },
 
+        footerLeft: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: Spacing.sm,
+        },
+
+        deleteButton: {
+            padding: Spacing.xs,
+        },
+
         date: {
             ...Typography.caption,
+            paddingHorizontal: Spacing.sm,
             color: colors.textMuted,
         },
 

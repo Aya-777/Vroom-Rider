@@ -9,7 +9,8 @@ import { ActivityCardProps, LocationRowProps } from './ActivityCard.types';
 import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from './ActivityCard.styles';
 import PickupIcon from '../../../../assets/svg/common/myLocation.svg';
-import DropoffIcon from '../../../../assets/svg/common/pin.svg'
+import DropoffIcon from '../../../../assets/svg/common/pin.svg';
+import TrashIcon from '../../../../assets/svg/common/pin.svg'
 
 const LocationRow = ({
     isDestination,
@@ -42,12 +43,14 @@ const ActivityCard = ({
     fare,
     distance,
     onPress,
+    onDelete,
 }: ActivityCardProps) => {
 
     const { colors } = useTheme();
     const styles = createStyles(colors);
 
     return (
+
         <TouchableOpacity
             style={styles.container}
             onPress={onPress}
@@ -77,13 +80,22 @@ const ActivityCard = ({
             </View>
 
             <View style={styles.footer}>
-                <Text style={styles.date}>{date}</Text>
+                <View style={styles.footerLeft}>
+                    <Text style={styles.date}>{date}</Text>
 
-                {distance && (
-                    <Text style={styles.distance}>{distance}</Text>
-                )}
+                    {distance && (
+                        <Text style={styles.distance}>{distance}</Text>
+                    )}
+                </View>
+
+                <TouchableOpacity
+                    onPress={onDelete}
+                    activeOpacity={0.7}
+                    style={styles.deleteButton}
+                >
+                    <TrashIcon fill={colors.error} />
+                </TouchableOpacity>
             </View>
-
 
         </TouchableOpacity>
     );

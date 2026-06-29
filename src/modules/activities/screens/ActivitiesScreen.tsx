@@ -8,6 +8,7 @@ import { createStyles } from '../styles/activities.styles';
 import { useActivitiesViewModel } from '../viewmodels/useActivitiesViewModel';
 import StatusTabs from '../components/StatusTabs';
 import { useTranslation } from 'react-i18next';
+import Header  from '../../../shared/components/Header';
 
 export default function ActivitiesScreen() {
     const { colors } = useTheme();
@@ -25,10 +26,11 @@ export default function ActivitiesScreen() {
     return (
         <LinearBg
             colors={[colors.backgroundSoft, colors.background]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 0, y: 1 }}
             style={styles.gradientContainer}
         >
+
+            <Header title={t('trackYourTrip')} />
+
             <View style={styles.container}>
                 <StatusTabs
                     statuses={statuses}
