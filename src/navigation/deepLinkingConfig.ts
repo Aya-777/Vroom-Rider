@@ -31,6 +31,9 @@ export const deepLinkingConfig: LinkingOptions<RootStackParamList> = {
               ProfileMain: 'profile',
             },
           },
+          ActivityTab: {
+            screens: 'activity',
+          },
         },
       },
     },

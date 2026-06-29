@@ -21,6 +21,8 @@ export interface ThemeColors {
   primary: string;
   border: string;
   neutral: string;
+
+  error: string;
 }
 
 export interface AppTheme {

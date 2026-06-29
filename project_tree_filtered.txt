@@ -161,6 +161,9 @@ Vroom-Rider/
 │   │   │   ├── constants.ts
 │   │   │   ├── index.ts
 │   │   │   ├── locales
+│   │   │   │   ├── activities
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
 │   │   │   │   ├── auth
 │   │   │   │   │   ├── ar.json
 │   │   │   │   │   └── en.json
@@ -237,6 +240,21 @@ Vroom-Rider/
 │   │       │   └── typography.ts
 │   │       └── useTheme.ts
 │   ├── modules
+│   │   ├── activities
+│   │   │   ├── components
+│   │   │   │   └── StatusTabs.tsx
+│   │   │   ├── constants
+│   │   │   │   └── activitiesData.ts
+│   │   │   ├── hooks
+│   │   │   │   └── useActivitiesActions.tsx
+│   │   │   ├── screens
+│   │   │   │   └── ActivitiesScreen.tsx
+│   │   │   ├── styles
+│   │   │   │   └── activities.styles.ts
+│   │   │   ├── types
+│   │   │   │   └── activities.types.ts
+│   │   │   └── viewmodels
+│   │   │       └── useActivitiesViewModel.ts
 │   │   ├── auth
 │   │   │   ├── components
 │   │   │   │   ├── OTP
@@ -301,6 +319,7 @@ Vroom-Rider/
 │   │   │       ├── useResetPasswordViewModel.ts
 │   │   │       ├── useSignupViewModel.ts
 │   │   │       └── useSplashViewModel.ts
+│   │   ├── constants
 │   │   ├── home
 │   │   │   ├── components
 │   │   │   │   ├── DestinationCard.tsx
@@ -393,6 +412,9 @@ Vroom-Rider/
 │   │   ├── deepLinkingConfig.ts
 │   │   ├── main
 │   │   │   ├── MainTabs.tsx
+│   │   │   ├── activity
+│   │   │   │   ├── ActivityStack.tsx
+│   │   │   │   └── activityTypes.ts
 │   │   │   ├── home
 │   │   │   │   ├── HomeStack.tsx
 │   │   │   │   └── homeTypes.ts

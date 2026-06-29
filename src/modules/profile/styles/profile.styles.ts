@@ -239,18 +239,19 @@ export const createStyles = (colors: ThemeColors) =>
         },
 
         logoutButton: {
-            backgroundColor: 'rgba(253, 0, 0, 0.35)',
+            backgroundColor: colors.error + '70',
             borderWidth: 1,
-            borderColor: 'red',
+            borderColor: colors.error,
             borderRadius: 12,
             paddingVertical: 14,
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'row',
+            width : "70%"
         },
 
         logoutText: {
-            color: 'red',
+            color: colors.error,
             ...Typography.boldBody,
         },
     });
