@@ -66,7 +66,7 @@ const createStyles = (colors: any) =>
     },
 
     header: {
-      height: 30,
+      height: 42,
       flexDirection: 'row',
       alignItems: 'stretch',
       paddingHorizontal: Spacing.lg,
@@ -84,7 +84,7 @@ const createStyles = (colors: any) =>
 
     title: {
       flex: 1,
-      textAlign: 'left',
+      textAlign: 'center',
       ...Typography.h2,
       color: colors.textSecondary,
       letterSpacing: 1,

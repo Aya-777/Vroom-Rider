@@ -13,7 +13,7 @@ export const lightColors = {
 
   primary: '#0F1E52',
 
-  border: '#DDD8F0',
+  border: '#ddd8f0',
 
-  error : 'rgb(180, 0, 0)',
+  error : '#b40000',
 };

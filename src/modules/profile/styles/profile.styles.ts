@@ -23,7 +23,7 @@ export const createStyles = (colors: ThemeColors) =>
         profileCard: {
             backgroundColor: colors.primary + '80',
             borderRadius: Radius.md,
-            borderWidth : 2,
+            borderWidth: 2,
             borderColor: colors.primary,
             padding: Spacing.mmd,
             paddingBottom: Spacing.lg,
@@ -239,7 +239,7 @@ export const createStyles = (colors: ThemeColors) =>
         },
 
         logoutButton: {
-            backgroundColor: colors.error + '70',
+            backgroundColor: colors.error + '90',
             borderWidth: 1,
             borderColor: colors.error,
             borderRadius: 12,
@@ -247,7 +247,7 @@ export const createStyles = (colors: ThemeColors) =>
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'row',
-            width : "70%"
+            width: "90%"
         },
 
         logoutText: {

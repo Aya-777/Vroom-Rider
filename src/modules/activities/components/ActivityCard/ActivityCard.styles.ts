@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 import { ThemeColors } from '../../../../core/theme/theme.types';
 import {
     Radius,
-    Shadows,
     Spacing,
     Typography,
 } from '../../../../core/theme/tokens';
@@ -11,15 +10,8 @@ import {
 export const createStyles = (colors: ThemeColors) =>
     StyleSheet.create({
         container: {
-            backgroundColor: colors.backgroundSoft,
-            borderWidth: 2,
-            borderColor: colors.surface,
-            borderRadius: Radius.lg,
             padding: Spacing.lg,
-            marginHorizontal: Spacing.md,
-            marginBottom: Spacing.xs,
-            marginTop: Spacing.md,
-            ...Shadows.large
+            borderRadius: Radius.lg,
         },
 
         header: {

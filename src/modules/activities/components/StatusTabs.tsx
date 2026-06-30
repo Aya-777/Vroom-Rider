@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { RideStatus } from '../types/activities.types';
 import { useTheme } from '../../../core/theme/useTheme';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     statuses: RideStatus[];
@@ -27,6 +28,8 @@ export default function StatusTabs({
     const indicatorX = useRef(new Animated.Value(0)).current;
     const indicatorWidth = useRef(new Animated.Value(0)).current;
     const tabLayouts = useRef<Record<string, { x: number; width: number }>>({});
+
+    const { t } = useTranslation(['activities']);
 
     const handleTabLayout = (status: RideStatus, e: LayoutChangeEvent) => {
         const { x, width } = e.nativeEvent.layout;
@@ -58,6 +61,7 @@ export default function StatusTabs({
     };
 
     return (
+
         <View >
             <ScrollView
                 horizontal
@@ -78,7 +82,7 @@ export default function StatusTabs({
                                 selectedStatus === status && styles.tabTextActive,
                             ]}
                         >
-                            {status}
+                            {t(`status.${status.toLowerCase()}`)}
                         </Text>
                     </TouchableOpacity>
                 ))}

@@ -4,14 +4,13 @@ import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from './src/core/theme/ThemeProvider';
 import { useTheme } from './src/core/theme/useTheme';
 import { enableScreens, enableFreeze } from 'react-native-screens';
-// import RootNavigator from './src/navigation/RootNavigator';
+import RootNavigator from './src/navigation/RootNavigator';
 
 import './src/core/i18n';
 import { LanguageService } from './src/core/i18n/services/LanguageService';
 import { Platform, StatusBar, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import ActivitiesScreen from './src/modules/activities/screens/ActivitiesScreen';
 
 enableScreens(true);
 enableFreeze(true);
@@ -37,7 +36,7 @@ function AppContent() {
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       <StatusBar hidden={true} animated={true} />
-      <ActivitiesScreen />
+      <RootNavigator />
     </View>
   );
 }

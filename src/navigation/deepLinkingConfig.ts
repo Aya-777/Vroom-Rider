@@ -32,7 +32,9 @@ export const deepLinkingConfig: LinkingOptions<RootStackParamList> = {
             },
           },
           ActivityTab: {
-            screens: 'activity',
+            screens: {
+              Activities: 'activity',
+            },
           },
         },
       },
