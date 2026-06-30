@@ -20,6 +20,8 @@ import reviewAr from './ride/review/ar.json'
 import reviewEn from './ride/review/en.json'
 import commonEn from './common/en.json'
 import commonAr from './common/ar.json'
+import activitiesEn from './activities/en.json';
+import activitiesAr from './activities/ar.json';
 
 export {
   authEn,
@@ -43,6 +45,8 @@ export {
   reviewEn,
   reviewAr,
   commonEn,
-  commonAr  
+  commonAr,
+  activitiesEn,
+  activitiesAr,
 }
 

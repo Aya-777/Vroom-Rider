@@ -52,7 +52,7 @@ export const createStyles = (colors: ThemeColors) =>
         },
 
         inputBox: {
-            width: '80%',
+            width: '85%',
         },
 
         input: {
@@ -115,12 +115,13 @@ export const createStyles = (colors: ThemeColors) =>
 
         row: {
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             width: 290,
+            gap : 3
         },
 
         halfInput: {
-            width: '49%',
+            width: '52%',
         },
 
         halfInputText: {

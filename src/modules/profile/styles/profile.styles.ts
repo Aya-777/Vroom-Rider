@@ -23,7 +23,7 @@ export const createStyles = (colors: ThemeColors) =>
         profileCard: {
             backgroundColor: colors.primary + '80',
             borderRadius: Radius.md,
-            borderWidth : 2,
+            borderWidth: 2,
             borderColor: colors.primary,
             padding: Spacing.mmd,
             paddingBottom: Spacing.lg,
@@ -239,18 +239,19 @@ export const createStyles = (colors: ThemeColors) =>
         },
 
         logoutButton: {
-            backgroundColor: 'rgba(253, 0, 0, 0.35)',
+            backgroundColor: colors.error + '90',
             borderWidth: 1,
-            borderColor: 'red',
+            borderColor: colors.error,
             borderRadius: 12,
             paddingVertical: 14,
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'row',
+            width: "90%"
         },
 
         logoutText: {
-            color: 'red',
+            color: colors.error,
             ...Typography.boldBody,
         },
     });
