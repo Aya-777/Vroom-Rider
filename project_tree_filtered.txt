@@ -118,6 +118,7 @@ Vroom-Rider/
 │   │       │   └── dropdownArrow.svg
 │   │       ├── common
 │   │       │   ├── camera.svg
+│   │       │   ├── check.svg
 │   │       │   ├── edit.svg
 │   │       │   ├── history.svg
 │   │       │   ├── home.svg
@@ -176,6 +177,9 @@ Vroom-Rider/
 │   │   │   │   │   └── en.json
 │   │   │   │   ├── index.ts
 │   │   │   │   ├── navigation
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
+│   │   │   │   ├── notifications
 │   │   │   │   │   ├── ar.json
 │   │   │   │   │   └── en.json
 │   │   │   │   ├── profile
@@ -248,6 +252,7 @@ Vroom-Rider/
 │   │   │   │   │   ├── ActivityCard.tsx
 │   │   │   │   │   ├── ActivityCard.types.ts
 │   │   │   │   │   └── index.ts
+│   │   │   │   ├── ActivityDetailsSheet.tsx
 │   │   │   │   └── StatusTabs.tsx
 │   │   │   ├── constants
 │   │   │   │   └── activitiesData.ts
@@ -256,7 +261,8 @@ Vroom-Rider/
 │   │   │   ├── screens
 │   │   │   │   └── ActivitiesScreen.tsx
 │   │   │   ├── styles
-│   │   │   │   └── activities.styles.ts
+│   │   │   │   ├── activities.styles.ts
+│   │   │   │   └── activityDetails.styles.ts
 │   │   │   ├── types
 │   │   │   │   └── activities.types.ts
 │   │   │   └── viewmodels
@@ -344,6 +350,27 @@ Vroom-Rider/
 │   │   │   │   └── home.types.ts
 │   │   │   └── viewmodels
 │   │   │       └── useHomeViewModel.ts
+│   │   ├── notifications
+│   │   │   ├── components
+│   │   │   │   └── NotificationCard.tsx
+│   │   │   ├── constants
+│   │   │   │   └── notificationsData.ts
+│   │   │   ├── repositories
+│   │   │   │   └── notificationRepository.ts
+│   │   │   ├── screens
+│   │   │   │   └── NotificationsScreen.tsx
+│   │   │   ├── services
+│   │   │   │   ├── dto
+│   │   │   │   │   └── notification.dto.ts
+│   │   │   │   └── notificationApi.ts
+│   │   │   ├── styles
+│   │   │   │   └── notifications.styles.ts
+│   │   │   ├── types
+│   │   │   │   └── notifications.types.ts
+│   │   │   ├── utils
+│   │   │   │   └── notificationIcon.tsx
+│   │   │   └── viewmodels
+│   │   │       └── useNotificationsViewModel.ts
 │   │   ├── profile
 │   │   │   ├── components
 │   │   │   │   ├── GridCard.tsx
