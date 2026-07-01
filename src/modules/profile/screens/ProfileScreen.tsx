@@ -15,7 +15,8 @@ import LogoutIcon from '../../../assets/svg/profile/logout.svg'
 import LinearBg from '../../../shared/components/LinearBg';
 import { useTranslation } from 'react-i18next';
 import ActionButton from '../../../shared/components/ActionButton';
-import Header  from '../../../shared/components/Header';
+import Header from '../../../shared/components/Header';
+import { navigate } from '../../../navigation/rootTypes';
 
 
 export default function ProfileScreen() {
@@ -34,7 +35,10 @@ export default function ProfileScreen() {
       end={{ x: 0, y: 1 }}
       style={styles.container}
     >
-      <Header title={t('welcome')} />
+      <Header title={t('welcome')}
+        onNotificationPress={() =>
+          navigate('Notifications')}
+      />
 
       <View style={styles.container}>
         <ScrollView

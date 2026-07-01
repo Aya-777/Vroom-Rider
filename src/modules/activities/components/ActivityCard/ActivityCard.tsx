@@ -61,9 +61,10 @@ const ActivityCard = ({
             <LinearBg
                 colors={[colors.background, colors.backgroundSoft]}
                 start={{ x: 0, y: 0 }}
-                end={{ x: 0, y: 1 }}
+                end={{ x: 1, y: 0 }}
                 style={styles.container}
-            >            <View style={styles.header}>
+            >
+                <View style={styles.header}>
                     <Text style={styles.rideType}>
                         {rideType}
                     </Text>

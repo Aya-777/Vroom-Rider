@@ -21,7 +21,7 @@ export const createStyles = (colors: ThemeColors) =>
         },
 
         profileCard: {
-            backgroundColor: colors.primary + '80',
+            backgroundColor: colors.primary + '70',
             borderRadius: Radius.md,
             borderWidth: 2,
             borderColor: colors.primary,
@@ -32,7 +32,7 @@ export const createStyles = (colors: ThemeColors) =>
             position: 'relative',
             margin: Spacing.mmd,
             ...Shadows.medium,
-            overflow: 'visible',
+            width:'90%'
         },
 
         editButton: {

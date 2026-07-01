@@ -51,7 +51,7 @@ export const createStyles = (colors: ThemeColors) =>
         },
 
         tabUnderline: {
-            height: 1,
+            height: 1.5,
             width: '100%',
             backgroundColor: colors.surface,
         },

@@ -23,7 +23,8 @@ import {
   commonAr,
   activitiesEn,
   activitiesAr,
-
+  notificationsEn,
+  notificationsAr,
 } from './locales/index'
 
 
@@ -41,6 +42,7 @@ export const resources = {
     profile: profileEn,
     common: commonEn,
     activities: activitiesEn,
+    notifications: notificationsEn,
   },
 
   ar: {
@@ -56,5 +58,6 @@ export const resources = {
     profile: profileAr,
     common: commonAr,
     activities: activitiesAr,
+    notifications: notificationsAr,
   },
 };
