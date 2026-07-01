@@ -9,6 +9,7 @@ import { useActivitiesViewModel } from '../viewmodels/useActivitiesViewModel';
 import StatusTabs from '../components/StatusTabs';
 import { useTranslation } from 'react-i18next';
 import Header from '../../../shared/components/Header';
+import { navigate } from '../../../navigation/rootTypes';
 
 export default function ActivitiesScreen() {
     const { colors } = useTheme();
@@ -31,7 +32,10 @@ export default function ActivitiesScreen() {
             style={styles.gradientContainer}
         >
 
-            <Header title={t('yourActivity')} />
+            <Header title={t('yourActivity')}
+                onNotificationPress={() =>
+                    navigate('Notifications')}
+            />
 
             <View style={styles.container}>
                 <StatusTabs

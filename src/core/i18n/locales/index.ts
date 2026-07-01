@@ -22,6 +22,8 @@ import commonEn from './common/en.json'
 import commonAr from './common/ar.json'
 import activitiesEn from './activities/en.json';
 import activitiesAr from './activities/ar.json';
+import notificationsEn from './notifications/en.json';
+import notificationsAr from './notifications/ar.json';
 
 export {
   authEn,
@@ -48,5 +50,7 @@ export {
   commonAr,
   activitiesEn,
   activitiesAr,
+  notificationsEn,
+  notificationsAr,
 }
 

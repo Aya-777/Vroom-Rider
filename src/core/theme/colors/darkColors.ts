@@ -16,4 +16,5 @@ export const darkColors= {
   border: '#1E2749',
 
   error : '#b40000',
+  success : '#4eb609',
 };

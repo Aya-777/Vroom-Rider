@@ -131,6 +131,7 @@ Vroom-Rider/
 │   │       │   ├── schedule.svg
 │   │       │   ├── search.svg
 │   │       │   ├── star.svg
+│   │       │   ├── trash.svg
 │   │       │   ├── visibilityOff.svg
 │   │       │   ├── visibilityOn.svg
 │   │       │   └── work.svg
@@ -242,6 +243,11 @@ Vroom-Rider/
 │   ├── modules
 │   │   ├── activities
 │   │   │   ├── components
+│   │   │   │   ├── ActivityCard
+│   │   │   │   │   ├── ActivityCard.styles.ts
+│   │   │   │   │   ├── ActivityCard.tsx
+│   │   │   │   │   ├── ActivityCard.types.ts
+│   │   │   │   │   └── index.ts
 │   │   │   │   └── StatusTabs.tsx
 │   │   │   ├── constants
 │   │   │   │   └── activitiesData.ts
