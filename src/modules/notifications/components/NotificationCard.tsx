@@ -15,7 +15,7 @@ const NotificationCard = ({
     const { colors } = useTheme();
     const styles = createStyles(colors);
 
-    const Icon = getNotificationIcon(notification.type);
+    const { Icon, color }  = getNotificationIcon(notification.type , colors);
 
     return (
         <TouchableOpacity
@@ -32,7 +32,7 @@ const NotificationCard = ({
                     <Icon
                         width={24}
                         height={24}
-                        fill={colors.primary}
+                        fill={color}
                     />
 
                     {!notification.isRead && (

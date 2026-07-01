@@ -1,20 +1,45 @@
 import RideIcon from '../../../assets/svg/common/ride.svg';
-import NotificationIcon from '../../../assets/svg/common/notifications.svg';
-import CreditCardIcon from '../../../assets/svg/payment/creditcard.svg';
+import PaymentIcon from '../../../assets/svg/payment/cash.svg';
+import SystemIcon from '../../../assets/svg/common/notifications.svg';
+import PromotionIcon from '../../../assets/svg/common/star.svg';
+import { NotificationType } from '../types/notifications.types';
+import { ThemeColors } from '../../../core/theme/theme.types';
 
-export const getNotificationIcon = (type: string) => {
+type NotificationAppearance = {
+    Icon: React.ElementType;
+    color: string;
+};
+
+export const getNotificationIcon = (
+    type: NotificationType,
+    colors: ThemeColors,
+): NotificationAppearance => {
+
     switch (type) {
-        case 'ride':
-            return RideIcon;
 
         case 'payment':
-            return CreditCardIcon;
-
-        case 'promotion':
-            return NotificationIcon;
+            return {
+                Icon: PaymentIcon,
+                color: colors.success,
+            };
 
         case 'system':
+            return {
+                Icon: SystemIcon,
+                color: '#D4AF37',
+            };
+
+        case 'ride':
+            return {
+                Icon: RideIcon,
+                color: colors.textSecondary,
+            };
+
+        case 'promotion':
         default:
-            return NotificationIcon;
+            return {
+                Icon: PromotionIcon,
+                color: colors.textSecondary,
+            };
     }
 };

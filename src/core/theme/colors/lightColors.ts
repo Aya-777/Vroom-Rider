@@ -16,4 +16,5 @@ export const lightColors = {
   border: '#ddd8f0',
 
   error : '#b40000',
+  success : '#4eb609',
 };
