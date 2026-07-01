@@ -20,6 +20,8 @@ export default function NotificationsScreen() {
         notifications,
         isLoading,
         handleBackPress,
+        markAsRead,
+        deleteNotification,
     } = useNotificationsViewModel();
 
     return (
@@ -44,6 +46,8 @@ export default function NotificationsScreen() {
                             onPress={(tripId) => {
                                 console.log('Trip Id:', tripId);
                             }}
+                            onMarkAsRead={() => markAsRead(item.id)}
+                            onDelete={() => deleteNotification(item.id)}
                         />
                     )}
                     ListEmptyComponent={

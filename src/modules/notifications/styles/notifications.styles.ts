@@ -13,14 +13,6 @@ export const createStyles = (colors: ThemeColors) =>
             flex: 1,
         },
 
-        // container: {
-        //     flex: 1,
-        //     // padding: Spacing.lg,
-        //     // borderRadius: Radius.lg,
-
-        // },
-
-
         scrollContent: {
             flexGrow: 1,
             paddingBottom: Spacing.xl,
@@ -48,14 +40,13 @@ export const createStyles = (colors: ThemeColors) =>
         },
 
         iconWrapper: {
-            width: 45,
-            height: 45,
-            borderRadius: Radius.lg,
-            backgroundColor: colors.primary + '15',
+            width: 42,
+            height: 42,
+            borderRadius: Radius.full,
             justifyContent: 'center',
             alignItems: 'center',
-            // marginBottom: 16,
-            alignSelf: 'flex-start',
+            marginRight: Spacing.md,
+            position: 'relative',
         },
 
         unreadDot: {
@@ -64,32 +55,80 @@ export const createStyles = (colors: ThemeColors) =>
             right: 0,
             width: 10,
             height: 10,
-            borderRadius: 5,
+            borderRadius: Radius.full,
             backgroundColor: colors.primary,
+            borderWidth: 2,
+            borderColor: colors.background,
         },
 
         title: {
-            fontSize: 16,
-            fontFamily: 'Lora-SemiBold',
-            color: colors.textPrimary,
-            marginBottom: 8,
+            flex: 1,
+            ...Typography.boldBody,
+            color: colors.primary,
+            marginRight: Spacing.sm,
+        },
+
+        titleRow: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
         },
 
         body: {
-            fontSize: 14,
-            fontFamily: 'Lora-Regular',
+            ...Typography.caption,
             color: colors.textSecondary,
             lineHeight: 22,
-        },
-
-        footer: {
-            marginTop: 18,
-            alignItems: 'flex-end',
+            marginTop: Spacing.sm,
         },
 
         time: {
-            fontSize: 12,
-            fontFamily: 'Lora-Regular',
-            color: colors.textPrimary,
+            ...Typography.smallCaption,
+            color: colors.textMuted,
         },
+
+        divider: {
+            height: 1.2,
+            backgroundColor: colors.surface,
+            marginTop: Spacing.lg,
+            marginBottom: Spacing.md,
+        },
+
+        actionsRow: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingVertical: Spacing.xs,
+
+        },
+
+        actionsRowRead: {
+            justifyContent: 'flex-end',
+        },
+
+        actionButton: {
+            flexDirection: 'row',
+            alignItems: 'center',
+        },
+
+        actionText: {
+            ...Typography.caption,
+            marginLeft: Spacing.xs,
+        },
+
+        markReadText: {
+            color: colors.success,
+        },
+
+        deleteText: {
+            color: colors.error,
+        },
+        header: {
+            flexDirection: 'row',
+            alignItems: 'flex-start',
+            marginBottom: Spacing.md,
+        },
+        headerContent: {
+            flex: 1,
+        },
+
     });

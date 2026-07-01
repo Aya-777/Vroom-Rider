@@ -18,4 +18,6 @@ export interface NotificationItem {
 export type NotificationCardProps = {
     notification: NotificationItem;
     onPress?: (tripId: string | null) => void;
+    onMarkAsRead?: () => void;
+    onDelete?: () => void;
 };

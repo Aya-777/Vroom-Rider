@@ -96,8 +96,6 @@ const ActivityCard = ({
                         )}
                     </View>
 
-
-
                     <TouchableOpacity
                         onPress={onDelete}
                         activeOpacity={0.7}
