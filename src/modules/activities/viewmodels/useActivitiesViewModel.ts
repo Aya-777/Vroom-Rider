@@ -5,7 +5,7 @@ import { ACTIVITIES, ACTIVITY_STATUSES } from '../constants/activitiesData';
 export const useActivitiesViewModel = () => {
     const [selectedStatus, setSelectedStatus] = useState<RideStatus>('Ongoing');
 
-    const activities =  ACTIVITIES;
+    const activities = ACTIVITIES;
     const isLoading = false;
     const error = null;
 
@@ -13,7 +13,7 @@ export const useActivitiesViewModel = () => {
         activity => activity.status === selectedStatus
     );
 
-    const activityCards = filteredActivities.map(activity => ({
+    filteredActivities.map(activity => ({
         id: activity.id,
         rideType: activity.vehicleType,
         pickup: activity.pickupLocation,
@@ -29,7 +29,7 @@ export const useActivitiesViewModel = () => {
         statuses: ACTIVITY_STATUSES,
         selectedStatus,
         setSelectedStatus,
-        activities: activityCards,
+        activities: filteredActivities,
         isLoading,
         error,
     };

@@ -26,3 +26,12 @@ export interface ActivitiesState {
     isLoading: boolean;
     error: string | null;
 }
+
+export interface ActivityDetailsSheetProps {
+    visible: boolean;
+    activity: Activity | null;
+
+    onClose: () => void;
+    onReview: () => void;
+    onReride: () => void;
+}

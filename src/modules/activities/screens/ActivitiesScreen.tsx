@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, FlatList, Text } from 'react-native';
 import ActivityCard from '../components/ActivityCard';
 
@@ -10,11 +10,19 @@ import StatusTabs from '../components/StatusTabs';
 import { useTranslation } from 'react-i18next';
 import Header from '../../../shared/components/Header';
 import { navigate } from '../../../navigation/rootTypes';
+import ActivityDetailsSheet from '../components/ActivityDetailsSheet';
+import { Activity } from '../types/activities.types';
 
 export default function ActivitiesScreen() {
     const { colors } = useTheme();
     const styles = createStyles(colors);
     const { t } = useTranslation(['activities']);
+
+    const [selectedActivity, setSelectedActivity] =
+        useState<Activity | null>(null);
+
+    const [detailsVisible, setDetailsVisible] =
+        useState(false);
 
     const {
         statuses,
@@ -52,13 +60,16 @@ export default function ActivitiesScreen() {
                     showsVerticalScrollIndicator={false}
                     renderItem={({ item }) => (
                         <ActivityCard
-                            rideType={item.rideType}
-                            pickup={item.pickup}
-                            destination={item.destination}
+                            rideType={item.vehicleType}
+                            pickup={item.pickupLocation}
+                            destination={item.dropoffLocation}
                             date={item.date}
-                            fare={item.fare}
-                            distance={item.distance}
-                            onPress={() => { }}
+                            fare={`${item.price} ${item.currency}`}
+                            distance={`${item.distance} km`}
+                            onPress={() => {
+                                setSelectedActivity(item);
+                                setDetailsVisible(true);
+                            }}
                         />
                     )}
                     ListEmptyComponent={
@@ -70,6 +81,13 @@ export default function ActivitiesScreen() {
                             </View>
                         ) : null
                     }
+                />
+                <ActivityDetailsSheet
+                    visible={detailsVisible}
+                    activity={selectedActivity}
+                    onClose={() => setDetailsVisible(false)}
+                    onReview={() => { }}
+                    onReride={() => { }}
                 />
             </View>
         </LinearBg>
