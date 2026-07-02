@@ -1,19 +1,10 @@
-import BottomSheet, {
-  BottomSheetBackgroundProps,
-  BottomSheetView,
-} from '@gorhom/bottom-sheet';
-import { useMemo } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-
-import LinearBg from '../../../shared/components/LinearBg';
+import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/activityDetails.styles';
-import { ActivityDetailsSheetProps } from '../types/activities.types';
+import { useCallback } from 'react';
+import ActivityDetailsList from './sheet/ActivityDetailsList';
+import ActivityFooterActions from './sheet/ActivityFooterActions';
+import SheetBackground from './sheet/SheetBackground';
 
 export default function ActivityDetailsSheet({
   visible,
@@ -21,20 +12,14 @@ export default function ActivityDetailsSheet({
   onClose,
   onReview,
   onReride,
-}: ActivityDetailsSheetProps) {
+}: any) {
 
   const { colors } = useTheme();
   const styles = createStyles(colors);
 
-  const snapPoints = useMemo(() => ['70%'], []);
-
-  const renderBackground = (props: BottomSheetBackgroundProps) => (
-    <LinearBg
-      colors={[colors.backgroundSoft, colors.background]}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-      style={[styles.sheetBackground, props.style]}
-    />
+  const renderBackground = useCallback(
+    () => <SheetBackground colors={colors} />,
+    [colors]
   );
 
   if (!activity) return null;
@@ -42,110 +27,27 @@ export default function ActivityDetailsSheet({
   return (
     <BottomSheet
       index={visible ? 0 : -1}
-      snapPoints={snapPoints}
+      snapPoints={['70%']}
       enablePanDownToClose
       onClose={onClose}
       handleIndicatorStyle={styles.handleIndicatorStyle}
       backgroundComponent={renderBackground}
-      backgroundStyle={styles.sheetBackground}
     >
-      <LinearBg
-        colors={[colors.backgroundSoft, colors.background]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.sheetContainer}
-      >
-        <BottomSheetView style={styles.sheetContent}>
 
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.scrollContent}
-          >
-            <Text style={styles.title}>
-              Trip Details
-            </Text>
-            <View style={styles.row}>
-              <Text style={styles.label}>Vehicle</Text>
-              <Text style={styles.value}>
-                {activity.vehicleType}
-              </Text>
-            </View>
+      <BottomSheetView style={styles.sheetClip}>
+        <ActivityDetailsList
+          activity={activity}
+          styles={styles}
+          colors={colors}
+        />
 
-            <View style={styles.row}>
-              <Text style={styles.label}>Status</Text>
-              <Text style={styles.value}>
-                {activity.status}
-              </Text>
-            </View>
+        <ActivityFooterActions
+          styles={styles}
+          onReview={onReview}
+          onReride={onReride}
+        />
+      </BottomSheetView>
 
-            <View style={styles.row}>
-              <Text style={styles.label}>Requested</Text>
-              <Text style={styles.value}>
-                {activity.date}
-              </Text>
-            </View>
-
-            <View style={styles.row}>
-              <Text style={styles.label}>Distance</Text>
-              <Text style={styles.value}>
-                {activity.distance} km
-              </Text>
-            </View>
-
-            <View style={styles.row}>
-              <Text style={styles.label}>Duration</Text>
-              <Text style={styles.value}>
-                {activity.duration}
-              </Text>
-            </View>
-
-            <View style={styles.row}>
-              <Text style={styles.label}>Price</Text>
-              <Text style={styles.value}>
-                {activity.price} $
-              </Text>
-            </View>
-
-            <Text style={styles.sectionTitle}>
-              Pickup
-            </Text>
-
-            <Text style={styles.location}>
-              {activity.pickupLocation}
-            </Text>
-
-            <Text style={styles.sectionTitle}>
-              Destination
-            </Text>
-
-            <Text style={styles.location}>
-              {activity.dropoffLocation}
-            </Text>
-
-            <View style={styles.buttonsRow}>
-
-              <TouchableOpacity
-                style={styles.reviewButton}
-                onPress={onReview}
-              >
-                <Text style={styles.reviewText}>
-                  Leave Review
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.rerideButton}
-                onPress={onReride}
-              >
-                <Text style={styles.rerideText}>
-                  Re-Ride
-                </Text>
-              </TouchableOpacity>
-
-            </View>
-          </ScrollView>
-        </BottomSheetView>
-      </LinearBg>
     </BottomSheet >
   );
 }

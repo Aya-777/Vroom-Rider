@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-
 import { ThemeColors } from '../../../core/theme/theme.types';
 import {
     Radius,
@@ -9,22 +8,16 @@ import {
 
 export const createStyles = (colors: ThemeColors) =>
     StyleSheet.create({
-        sheetContent: {
+
+        container: {
             flex: 1,
-            paddingHorizontal: Spacing.xl,
         },
 
-        scrollContent: {
-            paddingBottom: Spacing.xxl,
+        sheetContent: {
+            flex: 1,
+            paddingHorizontal: 20,
         },
-        sheetBackground: {
-            borderTopLeftRadius: 24,
-            borderTopRightRadius: 24,
-        },
-        handleIndicatorStyle: {
-            backgroundColor: colors.textMuted,
-            width: 50,
-        },
+
         title: {
             ...Typography.h2,
             color: colors.primary,
@@ -32,35 +25,8 @@ export const createStyles = (colors: ThemeColors) =>
             textAlign: 'center',
         },
 
-        sheetContainer: {
-            flex: 1,
-            width: '100%',
-            borderTopLeftRadius: 28,
-            borderTopRightRadius: 28,
-            overflow: 'hidden',
-        },
-
-        sheetTransparent: {
-            backgroundColor: 'transparent',
-        },
-
-        row: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingVertical: Spacing.sm,
-            borderBottomWidth: 1,
-            borderBottomColor: colors.surface,
-        },
-
-        label: {
-            ...Typography.body,
-            color: colors.textSecondary,
-        },
-
-        value: {
-            ...Typography.boldBody,
-            color: colors.primary,
+        scrollContent: {
+            paddingBottom: Spacing.xxl,
         },
 
         sectionTitle: {
@@ -77,10 +43,29 @@ export const createStyles = (colors: ThemeColors) =>
             lineHeight: 22,
         },
 
-        buttonsRow: {
+        row: {
             flexDirection: 'row',
-            gap: Spacing.md,
-            marginTop: Spacing.xxl,
+            justifyContent: 'space-between',
+            paddingVertical: Spacing.sm,
+            borderBottomWidth: 1,
+            borderBottomColor: colors.surface,
+        },
+
+        label: {
+            ...Typography.body,
+            color: colors.textSecondary,
+            opacity: 0.6,
+        },
+
+        value: {
+            ...Typography.boldBody,
+            color: colors.primary,
+        },
+
+        footer: {
+            flexDirection: 'row',
+            gap: 12,
+            paddingVertical: 16,
         },
 
         reviewButton: {
@@ -107,5 +92,28 @@ export const createStyles = (colors: ThemeColors) =>
         rerideText: {
             ...Typography.boldBody,
             color: colors.background,
+        },
+
+        handleIndicatorStyle: {
+            backgroundColor: colors.textMuted,
+            width: 50,
+        },
+
+        sheetBackground: {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            borderTopLeftRadius: 28,
+            borderTopRightRadius: 28,
+        },
+
+        sheetClip: {
+            flex: 1,
+            overflow: 'hidden',
+            borderTopLeftRadius: 28,
+            borderTopRightRadius: 28,
+            paddingHorizontal: 20,
         },
     });
