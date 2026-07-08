@@ -54,7 +54,6 @@ export const createStyles = (colors: ThemeColors) =>
         label: {
             ...Typography.body,
             color: colors.textSecondary,
-            opacity: 0.6,
         },
 
         value: {

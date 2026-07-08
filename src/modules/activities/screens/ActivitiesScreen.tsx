@@ -12,6 +12,7 @@ import Header from '../../../shared/components/Header';
 import { navigate } from '../../../navigation/rootTypes';
 import ActivityDetailsSheet from '../components/ActivityDetailsSheet';
 import { Activity } from '../types/activities.types';
+import ReviewModal from '../../review/components/ReviewModal'
 
 export default function ActivitiesScreen() {
     const { colors } = useTheme();
@@ -22,6 +23,9 @@ export default function ActivitiesScreen() {
         useState<Activity | null>(null);
 
     const [detailsVisible, setDetailsVisible] =
+        useState(false);
+
+    const [reviewVisible, setReviewVisible] =
         useState(false);
 
     const {
@@ -86,8 +90,21 @@ export default function ActivitiesScreen() {
                     visible={detailsVisible}
                     activity={selectedActivity}
                     onClose={() => setDetailsVisible(false)}
-                    onReview={() => { }}
+                    onReview={() => {
+                        setDetailsVisible(false);
+                        setReviewVisible(true);
+                    }}
                     onReride={() => { }}
+                />
+                <ReviewModal
+                    visible={reviewVisible}
+                    onClose={() => setReviewVisible(false)}
+                    onSubmit={(rating, review) => {
+                        console.log(rating);
+                        console.log(review);
+
+                        setReviewVisible(false);
+                    }}
                 />
             </View>
         </LinearBg>

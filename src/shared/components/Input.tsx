@@ -20,6 +20,7 @@ interface InputProps extends Omit<TextInputProps, 'style'> {
   error?: string;
   onErrorChange?: (error: string | undefined) => void;
   containerStyle?: StyleProp<ViewStyle>;
+  inputBoxStyle?: StyleProp<ViewStyle>;
   inputStyle?: StyleProp<TextStyle>;
   renderLeftIcon?: () => React.ReactNode;
   renderRightIcon?: (isPasswordVisible?: boolean) => React.ReactNode;
@@ -29,6 +30,7 @@ export default function Input({
   type = 'text',
   error: externalError,
   containerStyle,
+  inputBoxStyle,
   inputStyle,
   onChangeText,
   secureTextEntry,
@@ -42,7 +44,7 @@ export default function Input({
   const [localError, setLocalError] = useState<string | undefined>(undefined);
   // const [internalText, setInternalText] = useState(props.value || '');
   const { t } = useTranslation(['common']);
-    const { colors } = useTheme();
+  const { colors } = useTheme();
   const styles = createStyles(colors);
 
   const handleTextChange = (text: string) => {
@@ -55,13 +57,13 @@ export default function Input({
     if (finalValidText.length === 0) {
       setLocalError(undefined);
     } else if (type === 'phone' && finalValidText.length >= 2 && !finalValidText.startsWith('09')) {
-      // setLocalError('Phone number must start with 09');
+
       setLocalError('phoneNumberStart');
     } else if (type === 'password' && finalValidText.length < 8) {
-      // setLocalError('Password must be at least 8 characters');
+
       setLocalError('passwordLength');
     } else if (type === 'username' && finalValidText.length < 2) {
-      // setLocalError('Username must be at least 2 characters');
+
       setLocalError('usernameLength');
     } else {
       setLocalError(undefined);
@@ -81,23 +83,15 @@ export default function Input({
   const finalKeyboardType = type === 'phone' ? 'numeric' : keyboardType;
   const error = externalError || localError;
 
-  // const isInputEmpty = internalText.length === 0;
-  // const dynamicTypography = isInputEmpty ? Typography.caption : Typography.body;
-
   return (
-    //     <View style={styles.container}>
-    //       <TextInput style={[error ? styles.inputError : null, style]} {...props} />
-    //       {error && <Text style={styles.errorText}>{error}</Text>}
 
     <View style={[styles.container, containerStyle]}>
-      <View style={[styles.inputBox, error ? styles.inputError : null]}>
+      <View style={[styles.inputBox, inputBoxStyle, error ? styles.inputError : null]}>
         {renderLeftIcon && renderLeftIcon()}
 
         <TextInput
-          // key={isInputEmpty ? 'empty_hint' : 'filled_body'}
           style={[
             styles.defaultInput,
-            // dynamicTypography,
             inputStyle
           ]}
           onChangeText={handleTextChange}
@@ -129,4 +123,3 @@ export default function Input({
   );
 }
 
-// I moved the styles to shared/styles/input.styles.ts 🫶🏻
