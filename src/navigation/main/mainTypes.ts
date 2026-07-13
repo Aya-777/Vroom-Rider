@@ -10,5 +10,5 @@ export type MainTabsParamList = {
 };
 
 export type MainDrawerParamList = {
-  MainTabs: undefined;
+  MainTabs: NavigatorScreenParams<MainTabsParamList>;
 };

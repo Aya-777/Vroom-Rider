@@ -12,7 +12,7 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     id: 'trips',
     label: 'My Trips',
     icon: HistoryIcon,
-    route: 'ActivitiesMain',
+    route: 'ActivityTab',
   },
   {
     id: 'savedPlaces',

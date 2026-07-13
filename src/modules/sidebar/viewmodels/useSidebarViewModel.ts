@@ -20,6 +20,10 @@ export const useSidebarViewModel = (
       return;
     }
 
+    navigation.navigate('MainTabs', {
+      screen: item.route,
+    });
+
     // We will connect the actual routes here
     // once the destination screens are registered.
 
