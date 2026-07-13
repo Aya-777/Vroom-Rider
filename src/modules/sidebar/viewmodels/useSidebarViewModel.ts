@@ -1,8 +1,14 @@
+import {DrawerContentComponentProps} from '@react-navigation/drawer';
+
 import {SIDEBAR_ITEMS} from '../constants/sidebarItems';
 import {SidebarItem} from '../types/sidebar.types';
 
-export const useSidebarViewModel = () => {
-  // Later, get this from your authStore/user store.
+type Navigation =
+  DrawerContentComponentProps['navigation'];
+
+export const useSidebarViewModel = (
+  navigation: Navigation,
+) => {
   const user = {
     name: 'John Doe',
     rating: 4.9,
@@ -14,8 +20,10 @@ export const useSidebarViewModel = () => {
       return;
     }
 
-    // Navigation will be connected here.
-    console.log('Navigate to:', item.route);
+    // We will connect the actual routes here
+    // once the destination screens are registered.
+
+    navigation.closeDrawer();
   };
 
   return {

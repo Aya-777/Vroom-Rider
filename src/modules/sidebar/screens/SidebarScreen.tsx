@@ -16,18 +16,8 @@ const SidebarScreen = ({
     user,
     items,
     version,
-  } = useSidebarViewModel();
-
-  const handleItemPress = (route?: string) => {
-    if (!route) {
-      return;
-    }
-
-    // We'll configure individual routes next.
-    console.log('Navigate to:', route);
-
-    navigation.closeDrawer();
-  };
+    handleItemPress,
+  } = useSidebarViewModel(navigation);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -43,7 +33,7 @@ const SidebarScreen = ({
             <SidebarItem
               key={item.id}
               item={item}
-              onPress={() => handleItemPress(item.route)}
+              onPress={() => handleItemPress(item)}
             />
           ))}
         </View>

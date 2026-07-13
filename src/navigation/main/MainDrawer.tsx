@@ -1,5 +1,3 @@
-// src/navigation/main/MainDrawer.tsx
-
 import React from 'react';
 import {
   createDrawerNavigator,
@@ -9,21 +7,20 @@ import {
 import MainTabs from './MainTabs';
 import SidebarScreen from '../../modules/sidebar/screens/SidebarScreen';
 
-export type MainDrawerParamList = {
-  MainTabs: undefined;
-};
+import { MainDrawerParamList } from './mainTypes';
 
 const Drawer = createDrawerNavigator<MainDrawerParamList>();
 
 const MainDrawer = () => {
   return (
     <Drawer.Navigator
+      id="MainDrawer"
       drawerContent={(props: DrawerContentComponentProps) => (
         <SidebarScreen {...props} />
       )}
       screenOptions={{
         headerShown: false,
-        drawerType: 'front',
+        drawerType: 'front',  
         drawerStyle: {
           width: '75%',
         },
