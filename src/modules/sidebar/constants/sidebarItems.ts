@@ -10,37 +10,37 @@ import {SidebarItem} from '../types/sidebar.types';
 export const SIDEBAR_ITEMS: SidebarItem[] = [
   {
     id: 'trips',
-    label: 'My Trips',
+    label: 'myTrips',
     icon: HistoryIcon,
     route: 'ActivityTab',
   },
   {
     id: 'savedPlaces',
-    label: 'Saved Places',
+    label: 'savedPlaces',
     icon: SavedIcon,
     // route: 'SavedPlaces',
   },
   {
     id: 'wallet',
-    label: 'Wallet',
+    label: 'wallet',
     icon: WalletIcon,
     // route: 'Wallet',
   },
   {
     id: 'settings',
-    label: 'Settings',
+    label: 'settings',
     icon: SettingsIcon,
     // route: 'Settings',
   },
   {
     id: 'help',
-    label: 'Help',
+    label: 'help',
     icon: HelpIcon,
     // route: 'Help',
   },
   {
     id: 'about',
-    label: 'About',
+    label: 'about',
     icon: InfoIcon,
     // route: 'About',
   },

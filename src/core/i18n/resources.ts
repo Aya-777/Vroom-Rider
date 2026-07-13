@@ -25,6 +25,8 @@ import {
   activitiesAr,
   notificationsEn,
   notificationsAr,
+  sideBarEn,
+  sideBarAr,
 } from './locales/index'
 
 
@@ -43,6 +45,7 @@ export const resources = {
     common: commonEn,
     activities: activitiesEn,
     notifications: notificationsEn,
+    sidebar: sideBarEn,
   },
 
   ar: {
@@ -59,5 +62,6 @@ export const resources = {
     common: commonAr,
     activities: activitiesAr,
     notifications: notificationsAr,
+    sidebar: sideBarAr,
   },
 };

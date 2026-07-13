@@ -50,9 +50,7 @@ export class LanguageService {
       const savedLanguage =
         await this.getSavedLanguage();
 
-      const language =
-        (savedLanguage ?? RNLocalize.getLocales()[0]?.languageCode ?? DEFAULT_LANGUAGE) as SupportedLanguage;
-
+      const language ='ar'
       await i18n.changeLanguage(
         language,
       );
@@ -61,8 +59,6 @@ export class LanguageService {
       if (I18nManager.isRTL !== isRTL) {
         I18nManager.allowRTL(isRTL);
         I18nManager.forceRTL(isRTL);
-        // Note: If you call this before the app fully mounts, 
-        // you might not need a reload here.
       }
     } catch (error) {
       console.log(

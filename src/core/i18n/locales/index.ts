@@ -24,6 +24,8 @@ import activitiesEn from './activities/en.json';
 import activitiesAr from './activities/ar.json';
 import notificationsEn from './notifications/en.json';
 import notificationsAr from './notifications/ar.json';
+import sideBarEn from './sidebar/en.json';
+import sideBarAr from './sidebar/ar.json';
 
 export {
   authEn,
@@ -52,5 +54,7 @@ export {
   activitiesAr,
   notificationsEn,
   notificationsAr,
+  sideBarEn,
+  sideBarAr,
 }
 
