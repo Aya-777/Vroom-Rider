@@ -11,7 +11,6 @@ import { MainDrawerParamList } from './mainTypes';
 import {I18nManager} from 'react-native';
 
 const Drawer = createDrawerNavigator<MainDrawerParamList>();
-const isRTL = I18nManager.isRTL;
 
 const MainDrawer = () => {
   return (
@@ -22,8 +21,7 @@ const MainDrawer = () => {
       )}
       screenOptions={{
         headerShown: false,
-        drawerPosition: isRTL ? 'right' : 'left',
-        drawerType: 'front',  
+        drawerType: 'front',
         drawerStyle: {
           width: '75%',
         },

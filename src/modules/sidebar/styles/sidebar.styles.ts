@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { ThemeColors } from '../../../core/theme/theme.types';
-import { Typography } from '../../../core/theme/tokens';
+import { Typography, Spacing, Radius } from '../../../core/theme/tokens';
 
 export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
@@ -13,15 +13,15 @@ export const createStyles = (colors: ThemeColors) =>
     height: 120,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    gap: 14,
+    paddingHorizontal: Spacing.mmd,
+    gap: Spacing.smd,
     backgroundColor: colors.surface,
   },
 
   avatarContainer: {
     width: 54,
     height: 54,
-    borderRadius: 27,
+    borderRadius: Radius.xl,
     borderWidth: 1.5,
     borderColor: colors.border,
     overflow: 'hidden',
@@ -49,8 +49,8 @@ export const createStyles = (colors: ThemeColors) =>
   ratingRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 5,
-    marginTop: 4,
+    gap: Spacing.xs,
+    marginTop: Spacing.xs,
   },
   
   rating: {
@@ -63,17 +63,17 @@ export const createStyles = (colors: ThemeColors) =>
   },
 
   menu: {
-    paddingTop: 14,
-    paddingHorizontal: 20,
+    paddingTop: Spacing.smd,
+    paddingHorizontal: Spacing.mmd,
   },
 
   menuItem: {
     minHeight: 42,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 16,
-    borderRadius: 8,
-    paddingHorizontal: 2,
+    gap: Spacing.md,
+    borderRadius: Radius.sm,
+    paddingHorizontal: Spacing.xxs,
   },
 
   menuItemPressed: {
@@ -91,8 +91,8 @@ export const createStyles = (colors: ThemeColors) =>
 
   footer: {
     marginTop: 'auto',
-    paddingHorizontal: 20,
-    paddingBottom: 20,
+    paddingHorizontal: Spacing.mmd,
+    paddingBottom: Spacing.mmd,
   },
 
   version: {

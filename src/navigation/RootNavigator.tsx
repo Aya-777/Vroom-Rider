@@ -10,6 +10,7 @@ import AuthStack from './auth/AuthStack';
 import SplashScreen from '../modules/auth/screens/SplashScreen';
 import { deepLinkingConfig } from './deepLinkingConfig';
 import NotificationsScreen from '../modules/notifications/screens/NotificationsScreen';
+import { isRTL } from '../core/i18n/utils/isRTL';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -21,6 +22,7 @@ export default function RootNavigator() {
     <NavigationContainer
       linking={deepLinkingConfig}
       ref={navigationRef}
+      direction = {isRTL() ? 'rtl' : 'ltr'}
     >
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {!isSplashComplete ? (
