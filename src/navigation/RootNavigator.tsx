@@ -5,6 +5,7 @@ import { navigationRef, RootStackParamList } from './rootTypes';
 
 import { useAuthLoggedIn } from '../core/store/authStore';
 import MainTabs from './main/MainTabs';
+import MainDrawer from './main/MainDrawer';
 import AuthStack from './auth/AuthStack';
 import SplashScreen from '../modules/auth/screens/SplashScreen';
 import { deepLinkingConfig } from './deepLinkingConfig';
@@ -34,8 +35,8 @@ export default function RootNavigator() {
         ) : isLoggedIn ? (
           <Stack.Group>
             <Stack.Screen
-              name="MainTabs"
-              component={MainTabs}
+              name="Main"
+              component={MainDrawer}
             />
             <Stack.Screen
               name="Notifications"
