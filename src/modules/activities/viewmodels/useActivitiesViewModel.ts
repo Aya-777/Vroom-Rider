@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { RideStatus } from '../types/activities.types';
 import { ACTIVITIES, ACTIVITY_STATUSES } from '../constants/activitiesData';
+import { useMainDrawer } from '../../../navigation/hooks/useMainDrawer';
 
 export const useActivitiesViewModel = () => {
     const [selectedStatus, setSelectedStatus] = useState<RideStatus>('Ongoing');
@@ -12,6 +13,8 @@ export const useActivitiesViewModel = () => {
     const filteredActivities = activities.filter(
         activity => activity.status === selectedStatus
     );
+
+    const { openSidebar } = useMainDrawer();
 
     filteredActivities.map(activity => ({
         id: activity.id,
@@ -32,5 +35,6 @@ export const useActivitiesViewModel = () => {
         activities: filteredActivities,
         isLoading,
         error,
+        openSidebar,
     };
 };

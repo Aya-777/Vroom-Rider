@@ -21,7 +21,7 @@ import { navigate } from '../../../navigation/rootTypes';
 
 export default function ProfileScreen() {
 
-  const { gridItems, listItems } = useProfileViewModel();
+  const { gridItems, listItems, openSidebar } = useProfileViewModel();
   const { logout } = useProfileActions();
 
   const { colors } = useTheme();
@@ -38,6 +38,7 @@ export default function ProfileScreen() {
       <Header title={t('welcome')}
         onNotificationPress={() =>
           navigate('Notifications')}
+        onMenuPress={openSidebar}
       />
 
       <View style={styles.container}>

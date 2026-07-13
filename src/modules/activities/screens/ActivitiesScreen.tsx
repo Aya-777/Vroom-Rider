@@ -34,6 +34,7 @@ export default function ActivitiesScreen() {
         setSelectedStatus,
         activities,
         isLoading,
+        openSidebar
     } = useActivitiesViewModel();
 
     return (
@@ -47,6 +48,7 @@ export default function ActivitiesScreen() {
             <Header title={t('yourActivity')}
                 onNotificationPress={() =>
                     navigate('Notifications')}
+                    onMenuPress={openSidebar}
             />
 
             <View style={styles.container}>
