@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, View} from 'react-native';
+import {View} from 'react-native';
 import {DrawerContentComponentProps} from '@react-navigation/drawer';
 
 import SidebarHeader from '../components/SidebarHeader';
@@ -7,7 +7,9 @@ import SidebarItem from '../components/SidebarItem';
 import SidebarFooter from '../components/SidebarFooter';
 
 import {useSidebarViewModel} from '../viewmodels/useSidebarViewModel';
-import {styles} from '../styles/sidebar.styles';
+import {createStyles} from '../styles/sidebar.styles';
+import { useTheme } from '../../../core/theme/useTheme';
+import LinearBg from '../../../shared/components/LinearBg';
 
 const SidebarScreen = ({
   navigation,
@@ -19,15 +21,24 @@ const SidebarScreen = ({
     handleItemPress,
   } = useSidebarViewModel(navigation);
 
+  const { colors } = useTheme();
+  const styles = createStyles(colors);
+
   return (
-    <SafeAreaView style={styles.container}>
+    <View
+      style={styles.container}
+    >
       <SidebarHeader
         name={user.name}
         rating={user.rating}
         avatar={user.avatar}
       />
 
-      <View style={styles.content}>
+      <LinearBg 
+        colors={[colors.backgroundSoft, colors.background]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+        style={styles.content}>
         <View style={styles.menu}>
           {items.map(item => (
             <SidebarItem
@@ -39,8 +50,8 @@ const SidebarScreen = ({
         </View>
 
         <SidebarFooter version={version} />
-      </View>
-    </SafeAreaView>
+      </LinearBg>
+    </View>
   );
 };
 

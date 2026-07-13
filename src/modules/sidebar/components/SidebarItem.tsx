@@ -2,7 +2,8 @@ import React from 'react';
 import {Pressable, Text} from 'react-native';
 
 import {SidebarItem as SidebarItemType} from '../types/sidebar.types';
-import {styles} from '../styles/sidebar.styles';
+import {createStyles} from '../styles/sidebar.styles';
+import { useTheme } from '../../../core/theme/useTheme';
 
 type Props = {
   item: SidebarItemType;
@@ -11,6 +12,9 @@ type Props = {
 
 const SidebarItem = ({item, onPress}: Props) => {
   const Icon = item.icon;
+
+  const { colors } = useTheme();
+  const styles = createStyles(colors);    
 
   return (
     <Pressable

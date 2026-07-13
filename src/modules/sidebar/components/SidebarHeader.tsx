@@ -2,7 +2,8 @@ import React from 'react';
 import {Image, Text, View} from 'react-native';
 
 import StarIcon from '../../../assets/svg/common/star.svg';
-import {styles} from '../styles/sidebar.styles';
+import {createStyles} from '../styles/sidebar.styles';
+import { useTheme } from '../../../core/theme/useTheme';
 
 type Props = {
   name: string;
@@ -15,6 +16,10 @@ const SidebarHeader = ({
   rating,
   avatar,
 }: Props) => {
+
+  const { colors } = useTheme();
+  const styles = createStyles(colors);
+      
   return (
     <View style={styles.header}>
       <View style={styles.avatarContainer}>

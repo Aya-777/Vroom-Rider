@@ -1,10 +1,13 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
+import { ThemeColors } from '../../../core/theme/theme.types';
+import { Typography } from '../../../core/theme/tokens';
 
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#111F55',
-  },
+export const createStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: colors.background,
+    },
 
   header: {
     height: 120,
@@ -12,7 +15,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     gap: 14,
-    backgroundColor: '#111F55',
+    backgroundColor: colors.surface,
   },
 
   avatarContainer: {
@@ -20,7 +23,7 @@ export const styles = StyleSheet.create({
     height: 54,
     borderRadius: 27,
     borderWidth: 1.5,
-    borderColor: '#FFFFFF',
+    borderColor: colors.border,
     overflow: 'hidden',
   },
 
@@ -31,7 +34,7 @@ export const styles = StyleSheet.create({
 
   avatarPlaceholder: {
     flex: 1,
-    backgroundColor: '#D9D9D9',
+    backgroundColor: colors.primary,
   },
 
   userInfo: {
@@ -39,9 +42,8 @@ export const styles = StyleSheet.create({
   },
 
   userName: {
-    fontFamily: 'Lora-SemiBold',
-    fontSize: 16,
-    color: '#FFFFFF',
+    ...Typography.h3,
+    color: colors.textPrimary,
   },
 
   ratingRow: {
@@ -50,16 +52,14 @@ export const styles = StyleSheet.create({
     gap: 5,
     marginTop: 4,
   },
-
+  
   rating: {
-    fontFamily: 'Lora-Regular',
-    fontSize: 12,
-    color: '#FFFFFF',
+    color: colors.textPrimary,
+    ...Typography.caption,
   },
 
   content: {
     flex: 1,
-    backgroundColor: '#F2EDFF',
   },
 
   menu: {
@@ -81,13 +81,12 @@ export const styles = StyleSheet.create({
   },
 
   menuIcon: {
-    color: '#93A1BF',
+    color: colors.textMuted,
   },
 
   menuLabel: {
-    fontFamily: 'Lora-Regular',
-    fontSize: 14,
-    color: '#1E2749',
+    ...Typography.caption,
+    color: colors.textSecondary,
   },
 
   footer: {
@@ -97,8 +96,7 @@ export const styles = StyleSheet.create({
   },
 
   version: {
-    fontFamily: 'Lora-Regular',
-    fontSize: 10,
-    color: '#9CA7C0',
+    ...Typography.smallCaption,
+    color: colors.textMuted,
   },
 });
