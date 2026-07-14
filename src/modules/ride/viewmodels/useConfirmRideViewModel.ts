@@ -21,7 +21,7 @@ export function useConfirmRideViewModel() {
     // } finally {
       // setIsLoading(false);
     // }
-    navigation.navigate('DriverArrived', {driverId: '1'});  
+    navigation.navigate('DriverFound', {driverId: '1'});  
   };
 
   const handleBackPress = () => {
