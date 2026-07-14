@@ -1,118 +1,93 @@
 import { StyleSheet } from 'react-native';
 import { ThemeColors } from '../../../core/theme/theme.types';
-import {
-    Radius,
-    Spacing,
-    Typography,
-} from '../../../core/theme/tokens';
+import { Radius, Spacing, Typography } from '../../../core/theme/tokens';
 
 export const createStyles = (colors: ThemeColors) =>
-    StyleSheet.create({
+  StyleSheet.create({
+    container: {
+      flex: 1,
+    },
 
-        container: {
-            flex: 1,
-        },
+    title: {
+      ...Typography.h2,
+      color: colors.primary,
+      marginBottom: Spacing.xl,
+      textAlign: 'center',
+    },
 
-        sheetContent: {
-            flex: 1,
-            paddingHorizontal: 20,
-        },
+    scrollContent: {
+      paddingBottom: Spacing.xxl,
+    },
 
-        title: {
-            ...Typography.h2,
-            color: colors.primary,
-            marginBottom: Spacing.xl,
-            textAlign: 'center',
-        },
+    sectionTitle: {
+      ...Typography.boldBody,
+      color: colors.primary,
+      marginTop: Spacing.xl,
+      marginBottom: Spacing.sm,
+    },
 
-        scrollContent: {
-            paddingBottom: Spacing.xxl,
-        },
+    location: {
+      ...Typography.body,
+      color: colors.textSecondary,
+      marginBottom: Spacing.md,
+      lineHeight: 22,
+    },
 
-        sectionTitle: {
-            ...Typography.boldBody,
-            color: colors.primary,
-            marginTop: Spacing.xl,
-            marginBottom: Spacing.sm,
-        },
+    row: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      paddingVertical: Spacing.sm,
+      borderBottomWidth: 1,
+      borderBottomColor: colors.surface,
+    },
 
-        location: {
-            ...Typography.body,
-            color: colors.textSecondary,
-            marginBottom: Spacing.md,
-            lineHeight: 22,
-        },
+    label: {
+      ...Typography.body,
+      color: colors.textSecondary,
+    },
 
-        row: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            paddingVertical: Spacing.sm,
-            borderBottomWidth: 1,
-            borderBottomColor: colors.surface,
-        },
+    value: {
+      ...Typography.boldBody,
+      color: colors.primary,
+    },
 
-        label: {
-            ...Typography.body,
-            color: colors.textSecondary,
-        },
+    footer: {
+      flexDirection: 'row',
+      gap: 12,
+      paddingVertical: 16,
+    },
 
-        value: {
-            ...Typography.boldBody,
-            color: colors.primary,
-        },
+    reviewButton: {
+      flex: 1,
+      backgroundColor: colors.surface,
+      borderRadius: Radius.lg,
+      paddingVertical: Spacing.md,
+      alignItems: 'center',
+    },
 
-        footer: {
-            flexDirection: 'row',
-            gap: 12,
-            paddingVertical: 16,
-        },
+    reviewText: {
+      ...Typography.boldBody,
+      color: colors.primary,
+    },
 
-        reviewButton: {
-            flex: 1,
-            backgroundColor: colors.surface,
-            borderRadius: Radius.lg,
-            paddingVertical: Spacing.md,
-            alignItems: 'center',
-        },
+    rerideButton: {
+      flex: 1,
+      backgroundColor: colors.primary,
+      borderRadius: Radius.lg,
+      paddingVertical: Spacing.md,
+      alignItems: 'center',
+    },
 
-        reviewText: {
-            ...Typography.boldBody,
-            color: colors.primary,
-        },
+    rerideText: {
+      ...Typography.boldBody,
+      color: colors.background,
+    },
 
-        rerideButton: {
-            flex: 1,
-            backgroundColor: colors.primary,
-            borderRadius: Radius.lg,
-            paddingVertical: Spacing.md,
-            alignItems: 'center',
-        },
-
-        rerideText: {
-            ...Typography.boldBody,
-            color: colors.background,
-        },
-
-        handleIndicatorStyle: {
-            backgroundColor: colors.textMuted,
-            width: 50,
-        },
-
-        sheetBackground: {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            borderTopLeftRadius: 28,
-            borderTopRightRadius: 28,
-        },
-
-        sheetClip: {
-            flex: 1,
-            overflow: 'hidden',
-            borderTopLeftRadius: 28,
-            borderTopRightRadius: 28,
-            paddingHorizontal: 20,
-        },
-    });
+    sheetClip: {
+      flex: 1,
+      overflow: 'hidden',
+      borderTopLeftRadius: 28,
+      borderTopRightRadius: 28,
+      paddingHorizontal: 20,
+    },
+  });

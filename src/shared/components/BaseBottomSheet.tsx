@@ -1,8 +1,12 @@
 import React, { useCallback, useMemo } from 'react';
-import BottomSheet, { BottomSheetView, BottomSheetProps } from '@gorhom/bottom-sheet';
+import BottomSheet, {
+  BottomSheetView,
+  BottomSheetProps,
+} from '@gorhom/bottom-sheet';
 import { useTheme } from '../../core/theme/useTheme';
 import { ViewStyle } from 'react-native';
 import SheetBackground from './SheetBackground';
+import { createStyles } from '../styles/sheet.styles';
 
 interface BaseBottomSheetProps extends Omit<BottomSheetProps, 'children'> {
   isVisible: boolean;
@@ -20,15 +24,12 @@ export const BaseBottomSheet: React.FC<BaseBottomSheetProps> = ({
   ...rest
 }) => {
   const { colors } = useTheme();
-
-  // Standardize the handle indicator color or style here if needed
-  const handleIndicatorStyle = useMemo(() => ({
-    backgroundColor: colors.textSecondary,
-  }), [colors]);
+  const styles = createStyles(colors);
 
   const renderBackground = useCallback(
     () => <SheetBackground colors={colors} />,
-    [colors]);
+    [colors],
+  );
 
   return (
     <BottomSheet
@@ -36,7 +37,7 @@ export const BaseBottomSheet: React.FC<BaseBottomSheetProps> = ({
       snapPoints={snapPoints}
       enablePanDownToClose
       onClose={onClose}
-      handleIndicatorStyle={handleIndicatorStyle}
+      handleIndicatorStyle={styles.handleIndicatorStyle}
       backgroundComponent={renderBackground}
       {...rest}
     >
