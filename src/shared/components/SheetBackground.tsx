@@ -1,7 +1,7 @@
 import React from 'react';
-import LinearBg from '../../../../shared/components/LinearBg';
-import { ThemeColors } from '../../../../core/theme/theme.types';
-import { createStyles } from '../../styles/activityDetails.styles';
+import LinearBg from './LinearBg';
+import { ThemeColors } from '../../core/theme/theme.types';
+import { createStyles } from '../../modules/activities/styles/activityDetails.styles';
 
 export default function SheetBackground({ colors }: { colors: ThemeColors }) {
 
