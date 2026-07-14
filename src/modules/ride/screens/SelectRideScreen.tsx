@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback } from 'react';
 import { View, StatusBar, Alert } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
 import {BaseBottomSheet} from '../../../shared/components/BaseBottomSheet';
@@ -15,15 +15,16 @@ import StarIcon from '../../../assets/svg/common/star.svg';
 import ArrowRight from '../../../assets/svg/arrows/arrow.svg';
 import { useTranslation } from 'react-i18next';
 
-function showAlert(title: string, msg: string) {
-  Alert.alert(title, msg);
-}
 
 export default function SelectRideScreen() {
   const { colors, mode } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['selectRide', 'common']);
-
+  
+  const showAlert = useCallback((title: string, msg: string) => {
+      Alert.alert(title, msg);
+    }, []);
+  
   const {
     isNowDropdownOpen,
     isForMeDropdownOpen,
@@ -44,9 +45,6 @@ export default function SelectRideScreen() {
     handleNextPress,
     handleBackPress,
   } = useSelectRideViewModel(showAlert);
-  
-    const [sheetVisible, setSheetVisible] =
-        useState(true);
 
   const personItems = [
     { key: 'forMe', label: t('selectRide:forMe') },
@@ -75,9 +73,7 @@ export default function SelectRideScreen() {
       <Header title={t('common:ride')} onBackPress={handleBackPress} />
 
       <BaseBottomSheet
-        isVisible={sheetVisible}
-        onClose={() => setSheetVisible(false)}>
-      <View>
+        isVisible={true}>
         <View style={styles.dropdownRow}>
           <RideDropdown
             icon={<ScheduleIcon fill={colors.primary} />}
@@ -135,7 +131,6 @@ export default function SelectRideScreen() {
           title={t('common:next')}
           icon={<ArrowRight fill={colors.background} />}
         />
-        </View>
       </BaseBottomSheet>
     </View>
   );

@@ -36,8 +36,6 @@ export default function ExtraDetailsScreen() {
     handleBackPress,
   } = useRideDetailsViewModel();
 
-  const [sheetVisible, setSheetVisible] = useState(true);
-
   const onNextPress = () => {
     handleNextPress();
   };
@@ -53,10 +51,9 @@ export default function ExtraDetailsScreen() {
       <Header title={t('common:ride')} onBackPress={handleBackPress} />
 
       <BaseBottomSheet
-        isVisible={sheetVisible}
-        onClose={() => setSheetVisible(false)}
+        isVisible={true}
+        onClose={() => {}}
       >
-        <>
           <TimePriceBox time={timeEstimate} price={priceEstimate} />
 
           <RideActionFilters
@@ -81,7 +78,6 @@ export default function ExtraDetailsScreen() {
             title={t('common:next')}
             icon={<ArrowRight fill={colors.background} />}
           />
-        </>
       </BaseBottomSheet>
     </View>
   );

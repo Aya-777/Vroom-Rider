@@ -22,8 +22,6 @@ export default function RideConfirmationScreen() {
 
   const vm = useConfirmRideViewModel();
 
-  const [sheetVisible, setSheetVisible] = useState(true);
-
   return (
     <View style={styles.container}>
       <StatusBar
@@ -38,10 +36,9 @@ export default function RideConfirmationScreen() {
       />
 
       <BaseBottomSheet
-        isVisible={sheetVisible}
-        onClose={() => setSheetVisible(false)}
+        isVisible={true}
+        onClose={() => {}}
       >
-        <>
           <View style={styles.grid}>
             <InfoBox
               icon={<ClockIcon width={16} height={16} fill={colors.primary} />}
@@ -99,7 +96,6 @@ export default function RideConfirmationScreen() {
             textStyle={styles.buttonText}
             style={styles.button}
           />
-        </>
       </BaseBottomSheet>
     </View>
   );

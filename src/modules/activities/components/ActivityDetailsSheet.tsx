@@ -22,6 +22,7 @@ export default function ActivityDetailsSheet({
       isVisible={visible}
       onClose={onClose}
       contentContainerStyle={styles.sheetClip}
+      enablePanDownToClose
     >
       <ActivityDetailsList
         activity={activity}

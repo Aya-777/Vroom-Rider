@@ -18,9 +18,6 @@ export default function DriverFoundScreen() {
   const {t} = useTranslation(['driverFound', 'common']);
 
   const { driver, handleBackPress } = useDriverHereViewModel();
-  
-    const [sheetVisible, setSheetVisible] =
-        useState(true);
 
   return (
     <View style={styles.contentContainer}>
@@ -28,8 +25,8 @@ export default function DriverFoundScreen() {
       <Header title={t('trackYourTrip')} onBackPress={handleBackPress} />
 
       <BaseBottomSheet
-        isVisible={sheetVisible}
-        onClose={() => setSheetVisible(false)}>
+        isVisible={true}
+        onClose={() => {}}>
         <DriverStatus text={driver.statusMessage} styles={styles} />
 
         <DriverAvatar uri={driver.avatar} styles={styles} />
