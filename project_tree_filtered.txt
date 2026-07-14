@@ -85,25 +85,28 @@ src/
 │   │   │   ├── profile
 │   │   │   │   ├── ar.json
 │   │   │   │   └── en.json
-│   │   │   └── ride
-│   │   │       ├── confirmRide
-│   │   │       │   ├── ar.json
-│   │   │       │   └── en.json
-│   │   │       ├── driverFound
-│   │   │       │   ├── ar.json
-│   │   │       │   └── en.json
-│   │   │       ├── driverHere
-│   │   │       │   ├── ar.json
-│   │   │       │   └── en.json
-│   │   │       ├── review
-│   │   │       │   ├── ar.json
-│   │   │       │   └── en.json
-│   │   │       ├── rideDetails
-│   │   │       │   ├── ar.json
-│   │   │       │   └── en.json
-│   │   │       └── selectRide
-│   │   │           ├── ar.json
-│   │   │           └── en.json
+│   │   │   ├── ride
+│   │   │   │   ├── confirmRide
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
+│   │   │   │   ├── driverFound
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
+│   │   │   │   ├── driverHere
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
+│   │   │   │   ├── review
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
+│   │   │   │   ├── rideDetails
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
+│   │   │   │   └── selectRide
+│   │   │   │       ├── ar.json
+│   │   │   │       └── en.json
+│   │   │   └── sidebar
+│   │   │       ├── ar.json
+│   │   │       └── en.json
 │   │   ├── resources.ts
 │   │   ├── services
 │   │   │   └── LanguageService.ts
@@ -157,8 +160,7 @@ src/
 │   │   │   └── sheet
 │   │   │       ├── ActivityDetailsList.tsx
 │   │   │       ├── ActivityFooterActions.tsx
-│   │   │       ├── DetailRow.tsx
-│   │   │       └── SheetBackground.tsx
+│   │   │       └── DetailRow.tsx
 │   │   ├── constants
 │   │   │   └── activitiesData.ts
 │   │   ├── hooks
@@ -199,7 +201,6 @@ src/
 │   │   │       ├── SplashLogo.tsx
 │   │   │       ├── SplashRoad.tsx
 │   │   │       └── SplashText.tsx
-│   │   ├── constants
 │   │   ├── hooks
 │   │   │   ├── useAuthActions.ts
 │   │   │   ├── useResendCode.ts
@@ -218,7 +219,6 @@ src/
 │   │   │   ├── authApi.ts
 │   │   │   └── dto
 │   │   │       └── auth.dto.ts
-│   │   ├── store
 │   │   ├── styles
 │   │   │   ├── OtpScreen.styles.ts
 │   │   │   ├── Splash.styles.ts
@@ -226,7 +226,6 @@ src/
 │   │   │   ├── login.styles.ts
 │   │   │   ├── resetPassword.styles.ts
 │   │   │   └── signup.styles.ts
-│   │   ├── types
 │   │   ├── utils
 │   │   │   └── SplashPathUtils.ts
 │   │   └── viewmodels
@@ -236,7 +235,6 @@ src/
 │   │       ├── useResetPasswordViewModel.ts
 │   │       ├── useSignupViewModel.ts
 │   │       └── useSplashViewModel.ts
-│   ├── constants
 │   ├── home
 │   │   ├── components
 │   │   │   ├── DestinationCard.tsx
@@ -312,59 +310,78 @@ src/
 │   │   │   └── review.styles.ts
 │   │   └── types
 │   │       └── review.types.ts
-│   └── ride
+│   ├── ride
+│   │   ├── components
+│   │   │   ├── DriverArrivedScreen
+│   │   │   ├── DriverFoundScreen
+│   │   │   │   ├── CarDetailsCard.tsx
+│   │   │   │   ├── CommunicationActions.tsx
+│   │   │   │   ├── DriverAvatar.tsx
+│   │   │   │   ├── DriverStatus.tsx
+│   │   │   │   └── ProgressBar.tsx
+│   │   │   ├── ExtraDetailsScreen
+│   │   │   │   ├── RideActionFilters.tsx
+│   │   │   │   ├── TimePriceBox.tsx
+│   │   │   │   └── VehicleSelector.tsx
+│   │   │   ├── RideConfirmationScreen
+│   │   │   │   └── InfoBox.tsx
+│   │   │   ├── SelectRideScreen
+│   │   │   │   └── RideLocationInputs.tsx
+│   │   │   └── shared
+│   │   │       └── RideDropdown.tsx
+│   │   ├── constants
+│   │   │   ├── driverData.ts
+│   │   │   ├── vehicleData.ts
+│   │   │   └── vehicleImages.ts
+│   │   ├── hooks
+│   │   │   └── useLocationPermission.ts
+│   │   ├── screens
+│   │   │   ├── DriverFoundScreen.tsx
+│   │   │   ├── ExtraDetailsScreen.tsx
+│   │   │   ├── RideConfirmationScreen.tsx
+│   │   │   └── SelectRideScreen.tsx
+│   │   ├── store
+│   │   │   └── useRideStore.ts
+│   │   ├── styles
+│   │   │   ├── DriverFound.styles.ts
+│   │   │   ├── confirmRide.styles.ts
+│   │   │   ├── extraDetails.styles.ts
+│   │   │   ├── selectRide.styles.ts
+│   │   │   └── shared.styles.ts
+│   │   ├── types
+│   │   │   └── ride.types.ts
+│   │   ├── utils
+│   │   │   └── selectRideValidation.ts
+│   │   └── viewmodels
+│   │       ├── useConfirmRideViewModel.ts
+│   │       ├── useDriverHereViewModel.ts
+│   │       ├── useRideDetailsViewModel.ts
+│   │       └── useSelectRideViewModel.ts
+│   └── sidebar
 │       ├── components
-│       │   ├── DriverFoundScreen
-│       │   │   ├── CarDetailsCard.tsx
-│       │   │   ├── CommunicationActions.tsx
-│       │   │   ├── DriverAvatar.tsx
-│       │   │   ├── DriverStatus.tsx
-│       │   │   └── ProgressBar.tsx
-│       │   ├── ExtraDetailsScreen
-│       │   │   ├── RideActionFilters.tsx
-│       │   │   ├── TimePriceBox.tsx
-│       │   │   └── VehicleSelector.tsx
-│       │   ├── RideConfirmationScreen
-│       │   │   └── InfoBox.tsx
-│       │   ├── SelectRideScreen
-│       │   │   └── RideLocationInputs.tsx
-│       │   └── shared
-│       │       └── RideDropdown.tsx
+│       │   ├── SidebarFooter.tsx
+│       │   ├── SidebarHeader.tsx
+│       │   └── SidebarItem.tsx
 │       ├── constants
-│       │   ├── driverData.ts
-│       │   ├── vehicleData.ts
-│       │   └── vehicleImages.ts
-│       ├── hooks
-│       │   └── useLocationPermission.ts
+│       │   └── sidebarItems.ts
 │       ├── screens
-│       │   ├── DriverFoundScreen.tsx
-│       │   ├── ExtraDetailsScreen.tsx
-│       │   ├── RideConfirmationScreen.tsx
-│       │   └── SelectRideScreen.tsx
-│       ├── store
-│       │   └── useRideStore.ts
+│       │   └── SidebarScreen.tsx
 │       ├── styles
-│       │   ├── DriverFound.styles.ts
-│       │   ├── confirmRide.styles.ts
-│       │   ├── extraDetails.styles.ts
-│       │   ├── selectRide.styles.ts
-│       │   └── shared.styles.ts
+│       │   └── sidebar.styles.ts
 │       ├── types
-│       │   └── ride.types.ts
-│       ├── utils
-│       │   └── selectRideValidation.ts
+│       │   └── sidebar.types.ts
 │       └── viewmodels
-│           ├── useConfirmRideViewModel.ts
-│           ├── useDriverHereViewModel.ts
-│           ├── useRideDetailsViewModel.ts
-│           └── useSelectRideViewModel.ts
+│           └── useSidebarViewModel.ts
 ├── navigation
 │   ├── RootNavigator.tsx
 │   ├── auth
 │   │   ├── AuthStack.tsx
 │   │   └── authTypes.ts
 │   ├── deepLinkingConfig.ts
+│   ├── hooks
+│   │   └── useMainDrawer.ts
 │   ├── main
+│   │   ├── MainDrawer.tsx
 │   │   ├── MainTabs.tsx
 │   │   ├── activity
 │   │   │   ├── ActivityStack.tsx
@@ -380,15 +397,16 @@ src/
 ├── shared
 │   ├── components
 │   │   ├── ActionButton.tsx
+│   │   ├── BaseBottomSheet.tsx
 │   │   ├── Header.tsx
 │   │   ├── Input.tsx
 │   │   ├── LinearBg.tsx
 │   │   ├── SearchBar.tsx
-│   │   ├── SubHeader.tsx
-│   │   └── ride
-│   │       └── BottomSheetCard.tsx
+│   │   ├── SheetBackground.tsx
+│   │   └── SubHeader.tsx
 │   └── styles
 │       ├── SubHeader.styles.ts
-│       └── input.styles.ts
+│       ├── input.styles.ts
+│       └── sheet.styles.ts
 └── types
     └── svg.d.ts

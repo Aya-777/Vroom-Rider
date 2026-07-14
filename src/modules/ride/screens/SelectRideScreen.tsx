@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StatusBar, Alert } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
-import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
+import {BaseBottomSheet} from '../../../shared/components/BaseBottomSheet';
 import Header from '../../../shared/components/SubHeader';
 import RideDropdown from '../components/shared/RideDropdown';
 import RideLocationInputs from '../components/SelectRideScreen/RideLocationInputs';
@@ -44,6 +44,9 @@ export default function SelectRideScreen() {
     handleNextPress,
     handleBackPress,
   } = useSelectRideViewModel(showAlert);
+  
+    const [sheetVisible, setSheetVisible] =
+        useState(true);
 
   const personItems = [
     { key: 'forMe', label: t('selectRide:forMe') },
@@ -71,7 +74,10 @@ export default function SelectRideScreen() {
 
       <Header title={t('common:ride')} onBackPress={handleBackPress} />
 
-      <BottomSheetCard>
+      <BaseBottomSheet
+        isVisible={sheetVisible}
+        onClose={() => setSheetVisible(false)}>
+      <View>
         <View style={styles.dropdownRow}>
           <RideDropdown
             icon={<ScheduleIcon fill={colors.primary} />}
@@ -129,7 +135,8 @@ export default function SelectRideScreen() {
           title={t('common:next')}
           icon={<ArrowRight fill={colors.background} />}
         />
-      </BottomSheetCard>
+        </View>
+      </BaseBottomSheet>
     </View>
   );
 }

@@ -141,7 +141,7 @@ selection - Ride-related global state
 -   Header
 -   SearchBar
 -   Linear Background
--   BottomSheetCard
+-   BaseBottomSheet
 -   Ride UI components
 
 ------------------------------------------------------------------------

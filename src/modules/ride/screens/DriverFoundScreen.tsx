@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StatusBar } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
-import BottomSheetCard from '../../../shared/components/ride/BottomSheetCard';
+import {BaseBottomSheet} from '../../../shared/components/BaseBottomSheet';
 import Header from '../../../shared/components/SubHeader';
 import { useDriverHereViewModel } from '../viewmodels/useDriverHereViewModel';
 import { createStyles } from '../styles/DriverFound.styles';
@@ -18,13 +18,18 @@ export default function DriverFoundScreen() {
   const {t} = useTranslation(['driverFound', 'common']);
 
   const { driver, handleBackPress } = useDriverHereViewModel();
+  
+    const [sheetVisible, setSheetVisible] =
+        useState(true);
 
   return (
     <View style={styles.contentContainer}>
       <StatusBar translucent backgroundColor="transparent" />
       <Header title={t('trackYourTrip')} onBackPress={handleBackPress} />
 
-      <BottomSheetCard>
+      <BaseBottomSheet
+        isVisible={sheetVisible}
+        onClose={() => setSheetVisible(false)}>
         <DriverStatus text={driver.statusMessage} styles={styles} />
 
         <DriverAvatar uri={driver.avatar} styles={styles} />
@@ -36,7 +41,7 @@ export default function DriverFoundScreen() {
         <ProgressBar styles={styles} colors={colors} />
 
         <CarDetailsCard driver={driver} styles={styles} colors={colors} />
-      </BottomSheetCard>
+      </BaseBottomSheet>
     </View>
   );
 }
