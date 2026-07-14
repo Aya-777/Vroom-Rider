@@ -13,6 +13,7 @@ export const createStyles = (colors: ThemeColors) =>
       color: colors.textPrimary,
       ...Typography.h3,
       marginBottom: 8,
+      marginTop: 10,
       marginStart: 10,
     },
     pinContainer: {
@@ -33,7 +34,7 @@ export const createStyles = (colors: ThemeColors) =>
     },
     pinDigit: {
       marginHorizontal: 8,
-      ...Typography.body,
+      ...Typography.semiBoldBody,
       color: colors.textSecondary,
     },
     contentContainer: {
@@ -44,7 +45,7 @@ export const createStyles = (colors: ThemeColors) =>
     statusText: {
       ...Typography.semiBoldBody,
       textAlign: 'center',
-      marginBottom: Spacing.lg,
+      marginBottom: Spacing.md,
       color: colors.textPrimary,
     },
 

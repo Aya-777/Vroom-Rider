@@ -14,8 +14,8 @@ import confirmRideAr from './ride/confirmRide/ar.json'
 import confirmRideEn from './ride/confirmRide/en.json'
 import driverFoundAr from './ride/driverFound/ar.json'
 import driverFoundEn from './ride/driverFound/en.json'
-import driverHereAr from './ride/driverHere/ar.json'
-import driverHereEn from './ride/driverHere/en.json'
+import driverArrivedAr from './ride/driverArrived/ar.json'
+import driverArrivedEn from './ride/driverArrived/en.json'
 import reviewAr from './ride/review/ar.json'
 import reviewEn from './ride/review/en.json'
 import commonEn from './common/en.json'
@@ -44,8 +44,8 @@ export {
   confirmRideAr,
   driverFoundEn,
   driverFoundAr,
-  driverHereEn,
-  driverHereAr,
+  driverArrivedEn,
+  driverArrivedAr,
   reviewEn,
   reviewAr,
   commonEn,

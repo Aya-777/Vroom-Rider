@@ -3,7 +3,7 @@ import { View, StatusBar, Text } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
 import {BaseBottomSheet} from '../../../shared/components/BaseBottomSheet';
 import Header from '../../../shared/components/SubHeader';
-import { useDriverHereViewModel } from '../viewmodels/useDriverHereViewModel';
+import { useDriverArrivedViewModel } from '../viewmodels/useDriverArrivedViewModel';
 import { createStyles } from '../styles/driver.styles';
 import DriverStatus from '../components/DriverFoundScreen/DriverStatus';
 import DriverAvatar from '../components/DriverFoundScreen/DriverAvatar';
@@ -16,8 +16,8 @@ import { DriverPinEntry } from '../components/DriverArrivedScreen/DriverPinEntry
 export default function DriverArrivedScreen() {
   const { colors } = useTheme();
   const styles = createStyles(colors);
-  const { t } = useTranslation(['driverFound', 'common']);
-  const { driver, handleBackPress } = useDriverHereViewModel();
+  const { t } = useTranslation(['driverArrived', 'common']);
+  const { driver, handleBackPress } = useDriverArrivedViewModel();
 
   return (
     <View style={styles.contentContainer}>
@@ -27,10 +27,10 @@ export default function DriverArrivedScreen() {
       {/* Placeholder for Map - Ensure this exists behind the BottomSheet */}
       {/* <View style={styles.mapContainer} />  */}
 
-      <BaseBottomSheet isVisible={true} onClose={() => {}}>
-        <DriverStatus text={driver.statusMessage} styles={styles} />
+      <BaseBottomSheet isVisible={true}>
+        <DriverStatus text={driver.arrivedMessage} styles={styles} />
         {/* 1. PIN Section */}
-        <DriverPinEntry pin="1234" styles={styles} />
+        <DriverPinEntry pin="1234" styles={styles} pinMessage={driver.pinMessage} />
 
         {/* 2. Driver Info Row */}
         <View style={styles.driverInfoRow}>

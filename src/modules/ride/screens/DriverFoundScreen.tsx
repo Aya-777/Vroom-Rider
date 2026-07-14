@@ -27,7 +27,7 @@ export default function DriverFoundScreen() {
       <BaseBottomSheet
         isVisible={true}
         onClose={() => {}}>
-        <DriverStatus text={driver.statusMessage} styles={styles} />
+        <DriverStatus text={driver.onTheWayMessage} styles={styles} />
 
         <DriverAvatar uri={driver.avatar} styles={styles} />
 
