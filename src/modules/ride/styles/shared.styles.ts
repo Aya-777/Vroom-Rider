@@ -127,8 +127,5 @@ export const createStyles = (colors: ThemeColors) =>
       marginBottom: 2,
       color: colors.background,
     },
-    contentContainer:{
-      
-    }
 
     })
