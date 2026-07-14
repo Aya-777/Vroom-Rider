@@ -8,6 +8,7 @@ export type HomeStackParamList = {
   ConfirmRide: undefined;
   
   DriverFound: { driverId: string };
+  TripStarted: { driverId: string };
   DriverArrived: { driverId: string };
 };
 

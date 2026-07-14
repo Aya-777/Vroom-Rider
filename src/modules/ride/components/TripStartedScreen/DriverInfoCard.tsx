@@ -1,8 +1,8 @@
 // src/shared/components/DriverInfoCard.tsx
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import ProfileIcon from '../../assets/svg/profile/profile.svg';
-import PhoneIcon from '../../assets/svg/phone/phone.svg';
+import ProfileIcon from '../../../../assets/svg/profile/profile.svg';
+import PhoneIcon from '../../../../assets/svg/contact/call.svg';
 
 export const DriverInfoCard = ({ name, rating, car, plate, styles, colors }: any) => (
   <View style={styles.driverCard}>

@@ -5,7 +5,7 @@ import {BaseBottomSheet} from '../../../shared/components/BaseBottomSheet';
 import Header from '../../../shared/components/SubHeader';
 import { createStyles } from '../styles/trip.styles';
 import { useTranslation } from 'react-i18next';
-import { TripSummaryGrid } from '../components/TripStartedScreen/tripSummaryGrid';
+import { TripSummaryGrid } from '../components/TripStartedScreen/TripSummaryGrid';
 import {DriverInfoCard} from '../components/TripStartedScreen/DriverInfoCard';
 
 export default function TripStartedScreen() {
@@ -17,7 +17,8 @@ export default function TripStartedScreen() {
     <View style={styles.container}>
       <Header title={t('trackYourTrip')} onBackPress={() => {}} />
 
-      <BaseBottomSheet isVisible={true} onClose={() => {}}>
+      <BaseBottomSheet isVisible={true}>
+        <Text style={styles.tripStartedMessage}>Your trip has started!</Text>
         {/* Driver Card */}
         <DriverInfoCard 
           name="David" 
@@ -29,7 +30,7 @@ export default function TripStartedScreen() {
 
         {/* Title */}
         <Text style={styles.summaryTitle}>Pre-trip Summary</Text>
-
+        <Text style={styles.disclaimerText}>Date: {new Date().toLocaleDateString()}</Text>
         {/* Summary Grid */}
         <TripSummaryGrid styles={styles} />
 
@@ -42,6 +43,9 @@ export default function TripStartedScreen() {
           <View style={styles.paymentMethod}>
             <Text>**** 4242</Text>
           </View>
+        </View>
+        <View style={styles.disclaimerContainer}>
+          <Text style={styles.disclaimerText}>Final price may vary based on actual route and traffic conditions.</Text>
         </View>
       </BaseBottomSheet>
     </View>

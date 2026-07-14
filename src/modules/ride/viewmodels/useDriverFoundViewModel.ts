@@ -13,7 +13,7 @@ export function useDriverFoundViewModel() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-    navigation.navigate('DriverArrived', { driverId: 'some-id-value' });    
+    navigation.navigate('TripStarted', { driverId: 'some-id-value' });    
   }, 3000);
     // IMPORTANT: Clear the timer if the component unmounts 
     // to prevent memory leaks or navigation errors

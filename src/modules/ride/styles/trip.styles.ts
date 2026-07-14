@@ -1,9 +1,17 @@
 import { StyleSheet } from 'react-native';
+import { Typography } from '../../../core/theme/tokens';
 
 export const createStyles = (colors: any) => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+  },
+  tripStartedMessage:{
+    fontSize: 18,
+    fontWeight: '600',
+    color: colors.textPrimary,
+    textAlign: 'center',
+    marginBottom: 20,
   },
   // DriverInfoCard Styles
   driverCard: {
@@ -85,7 +93,7 @@ export const createStyles = (colors: any) => StyleSheet.create({
     marginBottom: 8,
   },
   tipInput: {
-    backgroundColor: colors.surfaceVariant,
+    backgroundColor: colors.surface,
     padding: 15,
     borderRadius: 12,
     marginBottom: 15,
@@ -102,7 +110,7 @@ export const createStyles = (colors: any) => StyleSheet.create({
     marginBottom: 5,
   },
   delayBox: {
-    backgroundColor: colors.surfaceVariant,
+    backgroundColor: colors.surface,
     padding: 12,
     borderRadius: 12,
   },
@@ -135,5 +143,17 @@ export const createStyles = (colors: any) => StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 8,
-  }
+  },
+  disclaimerContainer:{
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center',
+    marginTop:10,
+  },
+  disclaimerText: {
+    textAlign: 'center',
+    color: colors.textMuted,
+    ...Typography.smallCaption,
+    marginBottom: 10,
+  },
 });
