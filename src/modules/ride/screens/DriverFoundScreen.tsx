@@ -4,7 +4,7 @@ import { useTheme } from '../../../core/theme/useTheme';
 import {BaseBottomSheet} from '../../../shared/components/BaseBottomSheet';
 import Header from '../../../shared/components/SubHeader';
 import { useDriverHereViewModel } from '../viewmodels/useDriverHereViewModel';
-import { createStyles } from '../styles/DriverFound.styles';
+import { createStyles } from '../styles/driver.styles';
 import DriverStatus from '../components/DriverFoundScreen/DriverStatus';
 import DriverAvatar from '../components/DriverFoundScreen/DriverAvatar';
 import CommunicationActions from '../components/DriverFoundScreen/CommunicationActions';
