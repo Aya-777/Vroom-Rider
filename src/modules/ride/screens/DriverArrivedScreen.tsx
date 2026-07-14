@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StatusBar, Text } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
 import {BaseBottomSheet} from '../../../shared/components/BaseBottomSheet';
@@ -12,12 +12,24 @@ import CarDetailsCard from '../components/DriverFoundScreen/CarDetailsCard';
 import ProgressBar from '../components/DriverFoundScreen/ProgressBar';
 import { useTranslation } from 'react-i18next';
 import { DriverPinEntry } from '../components/DriverArrivedScreen/DriverPinEntry';
+import ReviewModal from '../../review/components/ReviewModal';
 
 export default function DriverArrivedScreen() {
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['driverArrived', 'common']);
-  const { driver, handleBackPress } = useDriverArrivedViewModel();
+  const { driver, handleBackPress, handleSubmit, handleCloseReviewModal } = useDriverArrivedViewModel();
+  const [isReviewVisible, setIsReviewVisible] = useState(false);
+
+  useEffect(() => {
+    // Start the 3-second timer when this screen mounts
+    const timer = setTimeout(() => {
+      setIsReviewVisible(true);
+    }, 3000);
+
+    // Cleanup to prevent memory leaks if the user leaves before 3 seconds
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <View style={styles.contentContainer}>
@@ -47,6 +59,19 @@ export default function DriverArrivedScreen() {
         {/* 4. Car Details */}
         <CarDetailsCard driver={driver} styles={styles} colors={colors} />
       </BaseBottomSheet>
+
+      <ReviewModal 
+        visible={isReviewVisible} 
+        onClose={() => {
+          setIsReviewVisible(false)
+          handleCloseReviewModal();
+        }} 
+        onSubmit={(rating, review) => {
+          console.log(rating, review);
+          setIsReviewVisible(false);
+          handleSubmit();
+        }}
+      />
     </View>
   );
 }

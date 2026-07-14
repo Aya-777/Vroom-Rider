@@ -9,8 +9,18 @@ export function useDriverArrivedViewModel() {
     navigation.goBack();
   }
 
+  const handleSubmit = () => {
+    navigation.navigate('HomeScreen');
+  }
+
+  const handleCloseReviewModal = () => {
+    navigation.navigate('HomeScreen');
+  }
+
   return {
     driver: driverMock,
-    handleBackPress
+    handleBackPress,
+    handleSubmit,
+    handleCloseReviewModal,
   };
 }

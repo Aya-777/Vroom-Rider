@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 import { useEffect } from 'react';
 
-export function useDriverHereViewModel() {
+export function useDriverFoundViewModel() {
   // لاحقاً هون ممكن تجيب data من API / socket
   const navigation = useNavigation<HomeStackScreenProps<'DriverFound'>['navigation']>();
 

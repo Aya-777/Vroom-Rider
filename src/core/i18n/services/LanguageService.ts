@@ -44,9 +44,7 @@ export class LanguageService {
       const savedLanguage =
         await this.getSavedLanguage();
 
-      const language =
-        (savedLanguage ?? RNLocalize.getLocales()[0]?.languageCode ?? DEFAULT_LANGUAGE) as SupportedLanguage;
-
+      const language ='ar'
       await i18n.changeLanguage(
         language,
       );

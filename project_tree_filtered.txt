@@ -354,7 +354,7 @@ src/
 │   │   │   └── selectRideValidation.ts
 │   │   └── viewmodels
 │   │       ├── useConfirmRideViewModel.ts
-│   │       ├── useDriverHereViewModel.ts
+│   │       ├── useDriverFoundViewModel.ts
 │   │       ├── useRideDetailsViewModel.ts
 │   │       └── useSelectRideViewModel.ts
 │   └── sidebar

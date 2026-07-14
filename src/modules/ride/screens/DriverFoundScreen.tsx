@@ -3,7 +3,7 @@ import { View, StatusBar } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
 import {BaseBottomSheet} from '../../../shared/components/BaseBottomSheet';
 import Header from '../../../shared/components/SubHeader';
-import { useDriverHereViewModel } from '../viewmodels/useDriverHereViewModel';
+import { useDriverFoundViewModel } from '../viewmodels/useDriverFoundViewModel';
 import { createStyles } from '../styles/driver.styles';
 import DriverStatus from '../components/DriverFoundScreen/DriverStatus';
 import DriverAvatar from '../components/DriverFoundScreen/DriverAvatar';
@@ -17,7 +17,7 @@ export default function DriverFoundScreen() {
   const styles = createStyles(colors);
   const {t} = useTranslation(['driverFound', 'common']);
 
-  const { driver, handleBackPress } = useDriverHereViewModel();
+  const { driver, handleBackPress } = useDriverFoundViewModel();
 
   return (
     <View style={styles.contentContainer}>
