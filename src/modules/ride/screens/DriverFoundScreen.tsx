@@ -27,11 +27,11 @@ export default function DriverFoundScreen() {
       <BaseBottomSheet
         isVisible={true}
         onClose={() => {}}>
-        <DriverStatus text={driver.onTheWayMessage} styles={styles} />
+        <DriverStatus text={t(driver.onTheWayMessage)} styles={styles} />
 
         <DriverAvatar uri={driver.avatar} styles={styles} />
 
-        <DriverStatus text={driver.name} styles={styles} />
+        <DriverStatus text={t(driver.name)} styles={styles} />
 
         <CommunicationActions styles={styles} colors={colors} />
 

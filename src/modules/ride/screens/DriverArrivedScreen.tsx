@@ -28,15 +28,15 @@ export default function DriverArrivedScreen() {
       {/* <View style={styles.mapContainer} />  */}
 
       <BaseBottomSheet isVisible={true}>
-        <DriverStatus text={driver.arrivedMessage} styles={styles} />
+        <DriverStatus text={t(driver.arrivedMessage)} styles={styles} />
         {/* 1. PIN Section */}
-        <DriverPinEntry pin="1234" styles={styles} pinMessage={driver.pinMessage} />
+        <DriverPinEntry pin="1234" styles={styles} pinMessage={t(driver.pinMessage)} />
 
         {/* 2. Driver Info Row */}
         <View style={styles.driverInfoRow}>
           <DriverAvatar uri={driver.avatar} styles={styles} />
           <View>
-            <Text style={styles.driverName}>{driver.name}</Text>
+            <Text style={styles.driverName}>{t(driver.name)}</Text>
             <CommunicationActions styles={styles} colors={colors} />
           </View>
         </View>
