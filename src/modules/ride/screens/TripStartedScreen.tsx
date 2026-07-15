@@ -7,17 +7,20 @@ import { createStyles } from '../styles/trip.styles';
 import { useTranslation } from 'react-i18next';
 import { TripSummaryGrid } from '../components/TripStartedScreen/TripSummaryGrid';
 import {DriverInfoCard} from '../components/TripStartedScreen/DriverInfoCard';
+import { useTripStartedViewModel } from '../viewmodels/useTripStartedViewModel'; 
 
 export default function TripStartedScreen() {
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['trip', 'common']);
 
+  const vm = useTripStartedViewModel();
+
   const snapPoints = useMemo(() => ['30%', '70%'], []);  
 
   return (
     <View style={styles.container}>
-      <Header title={t('trackYourTrip')} onBackPress={() => {}} />
+      <Header title={t('trackYourTrip')} onBackPress={vm.handleBackPress} />
 
       <BaseBottomSheet 
         isVisible={true}

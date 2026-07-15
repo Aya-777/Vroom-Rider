@@ -13,10 +13,6 @@ export function useTripStartedViewModel() {
   // const { t } = useTranslation('selectRide');
 
   // Actions
-  const handleNextPress = () => {
-
-  };
-
   const handleBackPress = () => {
     navigation.goBack();
   };
@@ -31,7 +27,6 @@ export function useTripStartedViewModel() {
     setErrors,
 
     // Actions
-    handleNextPress,
     handleBackPress,
   };
 }
