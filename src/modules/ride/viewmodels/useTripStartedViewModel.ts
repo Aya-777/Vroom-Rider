@@ -11,7 +11,8 @@ export function useTripStartedViewModel() {
 
   const [tip, setTip] = useState('');
   const [errors, setErrors] = useState({});
-  // const { t } = useTranslation('selectRide');
+  const [isReviewVisible, setIsReviewVisible] = useState(false);
+  const [isBillVisible, setIsBillVisible] = useState(false);
 
   // Actions
   const handleBackPress = () => {
@@ -31,10 +32,14 @@ export function useTripStartedViewModel() {
     // State
     tip,
     errors,
+    isReviewVisible,
+    isBillVisible,
 
     // Setters
     setTip,
     setErrors,
+    setIsBillVisible,
+    setIsReviewVisible,
 
     // Actions
     handleBackPress,

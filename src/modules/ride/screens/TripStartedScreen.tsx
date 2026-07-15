@@ -9,6 +9,7 @@ import { TripSummaryGrid } from '../components/TripStartedScreen/TripSummaryGrid
 import {DriverInfoCard} from '../components/TripStartedScreen/DriverInfoCard';
 import { useTripStartedViewModel } from '../viewmodels/useTripStartedViewModel'; 
 import ReviewModal from '../../review/components/ReviewModal';
+import TripEndedModal from '../components/TripEndedModal/TripEndedModal';
 
 export default function TripStartedScreen() {
   const { colors } = useTheme();
@@ -17,21 +18,17 @@ export default function TripStartedScreen() {
 
   const vm = useTripStartedViewModel();
 
-  const snapPoints = useMemo(() => ['30%', '70%'], []);  
-
-  const [isReviewVisible, setIsReviewVisible] = useState(false);
-
+  
   useEffect(() => {
-    // Start the 3-second timer when this screen mounts
     const timer = setTimeout(() => {
-      setIsReviewVisible(true);
+      vm.setIsBillVisible(true);
     }, 3000);
-
+    
     // Cleanup to prevent memory leaks if the user leaves before 3 seconds
     return () => clearTimeout(timer);
   }, []);
-
-
+  
+  const snapPoints = useMemo(() => ['30%', '70%'], []);  
 
   return (
     <View style={styles.container}>
@@ -74,16 +71,23 @@ export default function TripStartedScreen() {
         </View>
       </BaseBottomSheet>
 
+      <TripEndedModal
+        visible={vm.isBillVisible}
+        onConfirmPayment={() => {
+            vm.setIsReviewVisible(true);
+            vm.setIsBillVisible(false);
+          }}
+      />
 
       <ReviewModal 
-        visible={isReviewVisible} 
+        visible={vm.isReviewVisible} 
         onClose={() => {
-          setIsReviewVisible(false)
+          vm.setIsReviewVisible(false)
           vm.handleCloseReviewModal();
         }} 
         onSubmit={(rating, review) => {
           console.log(rating, review);
-          setIsReviewVisible(false);
+          vm.setIsReviewVisible(false);
           vm.handleSubmit();
         }}
       />
