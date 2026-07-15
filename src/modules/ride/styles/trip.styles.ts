@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Typography } from '../../../core/theme/tokens';
+import { Spacing, Typography } from '../../../core/theme/tokens';
 
 export const createStyles = (colors: any) => StyleSheet.create({
   container: {
@@ -36,7 +36,7 @@ export const createStyles = (colors: any) => StyleSheet.create({
   driverName: {
     fontSize: 16,
     fontWeight: '700',
-    color: colors.text,
+    color: colors.textPrimary,
   },
   driverDetails: {
     fontSize: 13,
@@ -57,7 +57,7 @@ export const createStyles = (colors: any) => StyleSheet.create({
   summaryTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: colors.text,
+    color: colors.textPrimary,
     textAlign: 'center',
     marginBottom: 15,
   },
@@ -85,7 +85,7 @@ export const createStyles = (colors: any) => StyleSheet.create({
   metricValue: {
     fontSize: 14,
     fontWeight: '600',
-    color: colors.text,
+    color: colors.textPrimary,
   },
   tipLabel: {
     fontSize: 12,
@@ -102,7 +102,7 @@ export const createStyles = (colors: any) => StyleSheet.create({
   tipValue: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: colors.primary,
+    color: colors.textPrimary,
   },
   delayLabel: {
     fontSize: 12,
@@ -115,9 +115,15 @@ export const createStyles = (colors: any) => StyleSheet.create({
     borderRadius: 12,
   },
   delayValue: {
-    color: '#FFB800', // Use a specific warning/alert color from your theme
+    color: colors.note,
     fontWeight: 'bold',
   },
+
+verticalDivider: {
+  width: 1,
+  backgroundColor: colors.border,
+  marginHorizontal: Spacing.md,
+},
 
   // Footer Styles
   footerRow: {
@@ -136,7 +142,7 @@ export const createStyles = (colors: any) => StyleSheet.create({
   subtotalValue: {
     fontSize: 22,
     fontWeight: '800',
-    color: colors.text,
+    color: colors.textPrimary,
   },
   paymentMethod: {
     backgroundColor: colors.surfaceVariant,
