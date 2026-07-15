@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { View, StatusBar, TextInput } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
 import { BaseBottomSheet } from '../../../shared/components/BaseBottomSheet';
@@ -22,6 +22,8 @@ export default function RideConfirmationScreen() {
 
   const vm = useConfirmRideViewModel();
 
+  const snapPoints = useMemo(() => ['30%', '70%'], []);
+
   return (
     <View style={styles.container}>
       <StatusBar
@@ -37,7 +39,8 @@ export default function RideConfirmationScreen() {
 
       <BaseBottomSheet
         isVisible={true}
-        onClose={() => {}}
+        snapPoints={snapPoints}
+        index={1}
       >
           <View style={styles.grid}>
             <InfoBox

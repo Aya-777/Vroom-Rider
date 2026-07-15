@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View, StatusBar, Text } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
 import {BaseBottomSheet} from '../../../shared/components/BaseBottomSheet';
@@ -31,6 +31,8 @@ export default function DriverArrivedScreen() {
     return () => clearTimeout(timer);
   }, []);
 
+  const snapPoints = useMemo(() => ['30%', '70%'], []);
+
   return (
     <View style={styles.contentContainer}>
       <StatusBar translucent backgroundColor="transparent" />
@@ -39,7 +41,11 @@ export default function DriverArrivedScreen() {
       {/* Placeholder for Map - Ensure this exists behind the BottomSheet */}
       {/* <View style={styles.mapContainer} />  */}
 
-      <BaseBottomSheet isVisible={true}>
+      <BaseBottomSheet 
+        isVisible={true}
+        snapPoints={snapPoints}
+        index={1}
+      >
         <DriverStatus text={t(driver.arrivedMessage)} styles={styles} />
         {/* 1. PIN Section */}
         <DriverPinEntry pin="1234" styles={styles} pinMessage={t(driver.pinMessage)} />

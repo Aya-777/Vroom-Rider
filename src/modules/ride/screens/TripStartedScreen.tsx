@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View, StatusBar, Text } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
 import {BaseBottomSheet} from '../../../shared/components/BaseBottomSheet';
@@ -13,11 +13,18 @@ export default function TripStartedScreen() {
   const styles = createStyles(colors);
   const { t } = useTranslation(['trip', 'common']);
 
+  const snapPoints = useMemo(() => ['30%', '70%'], []);  
+
   return (
     <View style={styles.container}>
       <Header title={t('trackYourTrip')} onBackPress={() => {}} />
 
-      <BaseBottomSheet isVisible={true}>
+      <BaseBottomSheet 
+        isVisible={true}
+        snapPoints={snapPoints}
+        index={1}
+      >
+        <StatusBar translucent backgroundColor="transparent" />
         <Text style={styles.tripStartedMessage}>Your trip has started!</Text>
         {/* Driver Card */}
         <DriverInfoCard 

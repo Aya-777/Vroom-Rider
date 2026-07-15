@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { View, StatusBar, Alert } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
 import {BaseBottomSheet} from '../../../shared/components/BaseBottomSheet';
@@ -62,6 +62,8 @@ export default function SelectRideScreen() {
     }
   };
 
+  const snapPoints = useMemo(() => ['30%', '70%'], []);
+
   return (
     <View style={styles.container}>
       <StatusBar
@@ -73,7 +75,9 @@ export default function SelectRideScreen() {
       <Header title={t('common:ride')} onBackPress={handleBackPress} />
 
       <BaseBottomSheet
-        isVisible={true}>
+        isVisible={true}
+        index={1}
+        snapPoints={snapPoints}>
         <View style={styles.dropdownRow}>
           <RideDropdown
             icon={<ScheduleIcon fill={colors.primary} />}

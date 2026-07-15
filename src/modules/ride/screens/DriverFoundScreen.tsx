@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, StatusBar } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
 import {BaseBottomSheet} from '../../../shared/components/BaseBottomSheet';
@@ -19,6 +19,8 @@ export default function DriverFoundScreen() {
 
   const { driver, handleBackPress } = useDriverFoundViewModel();
 
+  const snapPoints = useMemo(() => ['30%', '70%'], []);
+
   return (
     <View style={styles.contentContainer}>
       <StatusBar translucent backgroundColor="transparent" />
@@ -26,7 +28,9 @@ export default function DriverFoundScreen() {
 
       <BaseBottomSheet
         isVisible={true}
-        onClose={() => {}}>
+        snapPoints={snapPoints}
+        index={1}
+      >
         <DriverStatus text={t(driver.onTheWayMessage)} styles={styles} />
 
         <DriverAvatar uri={driver.avatar} styles={styles} />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { View, StatusBar } from 'react-native';
 import { useTheme } from '../../../core/theme/useTheme';
 import Header from '../../../shared/components/SubHeader';
@@ -40,6 +40,8 @@ export default function ExtraDetailsScreen() {
     handleNextPress();
   };
 
+  const snapPoints = useMemo(() => ['30%', '70%'], []);
+
   return (
     <View style={styles.container}>
       <StatusBar
@@ -52,7 +54,8 @@ export default function ExtraDetailsScreen() {
 
       <BaseBottomSheet
         isVisible={true}
-        onClose={() => {}}
+        snapPoints={snapPoints}
+        index={1}
       >
           <TimePriceBox time={timeEstimate} price={priceEstimate} />
 

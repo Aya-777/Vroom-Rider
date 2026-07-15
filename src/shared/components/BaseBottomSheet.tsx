@@ -18,7 +18,7 @@ interface BaseBottomSheetProps extends Omit<BottomSheetProps, 'children'> {
 export const BaseBottomSheet: React.FC<BaseBottomSheetProps> = ({
   isVisible,
   onClose,
-  snapPoints = ['70%'],
+  snapPoints = ['30%', '70%'],
   children,
   contentContainerStyle,
   ...rest
