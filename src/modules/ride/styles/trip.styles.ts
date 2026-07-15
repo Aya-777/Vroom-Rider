@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Spacing, Typography } from '../../../core/theme/tokens';
+import { Radius, Spacing, Typography } from '../../../core/theme/tokens';
 
 export const createStyles = (colors: any) => StyleSheet.create({
   container: {
@@ -7,116 +7,111 @@ export const createStyles = (colors: any) => StyleSheet.create({
     backgroundColor: colors.background,
   },
   tripStartedMessage:{
-    fontSize: 18,
-    fontWeight: '600',
+    ...Typography.h3,
     color: colors.textPrimary,
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: Spacing.mmd,
   },
   // DriverInfoCard Styles
   driverCard: {
     backgroundColor: colors.surface,
-    padding: 16,
-    borderRadius: 16,
+    padding: Spacing.md,
+    borderRadius: Radius.md,
     borderWidth: 1,
     borderColor: colors.border,
-    marginBottom: 20,
+    marginBottom: Spacing.mmd,
   },
   driverInfoContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   avatar: {
-    borderRadius: 25,
+    borderRadius: Radius.lg,
   },
   driverTextContainer: {
     flex: 1,
-    marginLeft: 12,
+    marginLeft: Spacing.smm,
   },
   driverName: {
-    fontSize: 16,
-    fontWeight: '700',
+    ...Typography.boldBody,
     color: colors.textPrimary,
   },
   driverDetails: {
-    fontSize: 13,
+    ...Typography.caption,
     color: colors.textSecondary,
   },
   driverCar: {
-    fontSize: 13,
+    ...Typography.caption,
     color: colors.textSecondary,
-    marginTop: 2,
+    marginTop: Spacing.xxs,
   },
   callButton: {
-    padding: 12,
+    padding: Spacing.smm,
     backgroundColor: colors.surfaceVariant,
-    borderRadius: 25,
+    borderRadius: Radius.lg,
   },
 
   // TripSummaryGrid Styles
   summaryTitle: {
-    fontSize: 18,
-    fontWeight: '600',
+    ...Typography.h3,
     color: colors.textPrimary,
     textAlign: 'center',
-    marginBottom: 15,
+    marginBottom: Spacing.smd,
   },
   gridContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 20,
+    marginBottom: Spacing.mmd,
   },
   column: {
     width: '48%',
   },
   metricCard: {
     backgroundColor: colors.surface,
-    padding: 12,
-    borderRadius: 12,
-    marginBottom: 10,
+    padding: Spacing.smm,
+    borderRadius: Radius.md,
+    marginBottom: Spacing.smm,
     borderWidth: 1,
     borderColor: colors.border,
   },
   metricLabel: {
-    fontSize: 11,
+    ...Typography.smallCaption,
     color: colors.textSecondary,
-    marginBottom: 4,
+    marginBottom: Spacing.xs,
   },
   metricValue: {
-    fontSize: 14,
-    fontWeight: '600',
+    ...Typography.caption,
     color: colors.textPrimary,
   },
   tipLabel: {
-    fontSize: 12,
+    ...Typography.mediumCaption,
     color: colors.textSecondary,
-    marginBottom: 8,
+    marginBottom: Spacing.sm,
   },
   tipInput: {
     backgroundColor: colors.surface,
-    padding: 15,
-    borderRadius: 12,
-    marginBottom: 15,
+    padding: Spacing.smd,
+    borderRadius: Radius.md,
+    marginBottom: Spacing.smd,
     alignItems: 'center',
   },
   tipValue: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    ...Typography.boldBody,
     color: colors.textPrimary,
   },
   delayLabel: {
-    fontSize: 12,
+    ...Typography.mediumCaption,
     color: colors.textSecondary,
-    marginBottom: 5,
+    marginBottom: Spacing.xs,
   },
   delayBox: {
     backgroundColor: colors.surface,
-    padding: 12,
-    borderRadius: 12,
+    padding: Spacing.smm,
+    borderRadius: Radius.md,
   },
   delayValue: {
+    ...Typography.boldCaption,
     color: colors.note,
-    fontWeight: 'bold',
   },
 
 verticalDivider: {
@@ -130,36 +125,35 @@ verticalDivider: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: Spacing.smm,
     borderTopWidth: 1,
     borderTopColor: colors.border,
-    paddingTop: 15,
+    paddingTop: Spacing.smd,
   },
   subtotalLabel: {
-    fontSize: 14,
+    ...Typography.caption,
     color: colors.textSecondary,
   },
   subtotalValue: {
-    fontSize: 22,
-    fontWeight: '800',
+    ...Typography.h2,
     color: colors.textPrimary,
   },
   paymentMethod: {
-    backgroundColor: colors.surfaceVariant,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderRadius: 8,
+    backgroundColor: colors.surface,
+    paddingHorizontal: Spacing.smd,
+    paddingVertical: Spacing.smm,
+    borderRadius: Radius.sm,
   },
   disclaimerContainer:{
     flex:1,
     justifyContent:'center',
     alignItems:'center',
-    marginTop:10,
+    marginTop: Spacing.smm,
   },
   disclaimerText: {
     textAlign: 'center',
     color: colors.textMuted,
     ...Typography.smallCaption,
-    marginBottom: 10,
+    marginBottom: Spacing.smm,
   },
 });

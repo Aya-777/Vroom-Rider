@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import type { ThemeColors } from '../../../../core/theme/theme.types';
+import { Spacing } from '../../../../core/theme/tokens';
 
 type VerticalDividerProps = {
   colors: ThemeColors;
@@ -21,6 +22,6 @@ const styles = StyleSheet.create({
   divider: {
     width: 1,
     alignSelf: 'stretch',
-    marginHorizontal: 16,
+    marginHorizontal: Spacing.md,
   },
 });
