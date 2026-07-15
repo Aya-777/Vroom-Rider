@@ -6,6 +6,7 @@ import ActionButton from '../../../../shared/components/ActionButton';
 import { createStyles } from '../../styles/tripEndedModal.styles';
 import { useTheme } from '../../../../core/theme/useTheme';
 import LinearBg from '../../../../shared/components/LinearBg';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   visible: boolean;
@@ -15,6 +16,8 @@ type Props = {
 export default function TripEndedModal({ visible, onConfirmPayment }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
+  const { t } = useTranslation(['tripEnded', 'common']);
+  
   return (
     <Modal
       visible={visible}
@@ -29,8 +32,8 @@ export default function TripEndedModal({ visible, onConfirmPayment }: Props) {
           end={{ x: 1, y: 0.8 }}
           style={styles.modalContainer}
         >
-          <Text style={styles.title}>Your trip has ended!</Text>
-          <Text style={styles.subtitle}>Thank you for riding with us</Text>
+          <Text style={styles.title}>{t('tripEnded.title')}</Text>
+          <Text style={styles.subtitle}>{t('tripEnded.subtitle')}</Text>
 
           <View style={styles.divider} />
 
@@ -48,7 +51,7 @@ export default function TripEndedModal({ visible, onConfirmPayment }: Props) {
 
           <View style={styles.divider} />
 
-          <ActionButton title="Confirm Payment" onPress={onConfirmPayment} />
+          <ActionButton title={t('tripEnded.confirmPayment')} onPress={onConfirmPayment} />
         </LinearBg>
       </View>
     </Modal>

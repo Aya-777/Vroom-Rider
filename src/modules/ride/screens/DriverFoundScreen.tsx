@@ -24,7 +24,7 @@ export default function DriverFoundScreen() {
   return (
     <View style={styles.contentContainer}>
       <StatusBar translucent backgroundColor="transparent" />
-      <Header title={t('trackYourTrip')} onBackPress={handleBackPress} />
+      <Header title={t('common:trackYourTrip')} onBackPress={handleBackPress} />
 
       <BaseBottomSheet
         isVisible={true}

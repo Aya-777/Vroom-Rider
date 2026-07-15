@@ -16,6 +16,8 @@ import driverFoundAr from './ride/driverFound/ar.json'
 import driverFoundEn from './ride/driverFound/en.json'
 import driverArrivedAr from './ride/driverArrived/ar.json'
 import driverArrivedEn from './ride/driverArrived/en.json'
+import tripEndedAr from './ride/TripEnded/ar.json'
+import tripEndedEn from './ride/TripEnded/en.json'
 import reviewAr from './ride/review/ar.json'
 import reviewEn from './ride/review/en.json'
 import commonEn from './common/en.json'
@@ -48,6 +50,8 @@ export {
   driverFoundAr,
   driverArrivedEn,
   driverArrivedAr,
+  tripEndedEn,
+  tripEndedAr,
   reviewEn,
   reviewAr,
   commonEn,

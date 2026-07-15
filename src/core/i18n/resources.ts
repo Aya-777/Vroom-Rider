@@ -19,6 +19,8 @@ import {
   rideStartedEn,
   driverArrivedEn,
   driverArrivedAr,
+  tripEndedEn,
+  tripEndedAr,
   reviewEn,
   reviewAr,
   commonEn,
@@ -42,6 +44,7 @@ export const resources = {
     driverFound: driverFoundEn,
     rideStarted: rideStartedEn,
     driverArrived: driverArrivedEn,
+    tripEnded: tripEndedEn,
     review: reviewEn,
     navigation: navEn,
     profile: profileEn,
@@ -50,7 +53,7 @@ export const resources = {
     notifications: notificationsEn,
     sidebar: sideBarEn,
   },
-
+  
   ar: {
     auth: authAr,
     home: homeAr,
@@ -60,6 +63,7 @@ export const resources = {
     driverFound: driverFoundAr,
     rideStarted: rideStartedAr,
     driverArrived: driverArrivedAr,
+    tripEnded: tripEndedAr,
     review: reviewAr,
     navigation: navAr,
     profile: profileAr,

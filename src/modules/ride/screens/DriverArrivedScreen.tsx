@@ -25,7 +25,7 @@ export default function DriverArrivedScreen() {
   return (
     <View style={styles.contentContainer}>
       <StatusBar translucent backgroundColor="transparent" />
-      <Header title={t('trackYourTrip')} onBackPress={handleBackPress} />
+      <Header title={t('common:trackYourTrip')} onBackPress={handleBackPress} />
 
       {/* Placeholder for Map - Ensure this exists behind the BottomSheet */}
       {/* <View style={styles.mapContainer} />  */}

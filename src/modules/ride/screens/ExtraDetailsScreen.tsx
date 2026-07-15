@@ -18,8 +18,8 @@ export default function ExtraDetailsScreen() {
   const { t } = useTranslation(['rideDetails', 'common']);
 
   const paymentItems = [
-    { key: 'cash', label: t('rideDetails:payment.cash') },
-    { key: 'wallet', label: t('rideDetails:payment.wallet') },
+    { key: 'cash', label: t('common:payment.cash') },
+    { key: 'wallet', label: t('common:payment.wallet') },
   ];
 
   const {
@@ -60,7 +60,7 @@ export default function ExtraDetailsScreen() {
           <TimePriceBox time={timeEstimate} price={priceEstimate} />
 
           <RideActionFilters
-            selectedValue={t(`rideDetails:payment.${selectedPayment}`)}
+            selectedValue={t(`common:payment.${selectedPayment}`)}
             isOpen={isDropdownOpen}
             styles={styles}
             onToggleDropdown={() => setIsDropdownOpen(!isDropdownOpen)}

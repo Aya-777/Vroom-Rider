@@ -32,7 +32,7 @@ export default function TripStartedScreen() {
 
   return (
     <View style={styles.container}>
-      <Header title={t('trackYourTrip')} onBackPress={vm.handleBackPress} />
+      <Header title={t('common:trackYourTrip')} onBackPress={vm.handleBackPress} />
 
       <BaseBottomSheet 
         isVisible={true}
@@ -63,7 +63,7 @@ export default function TripStartedScreen() {
             <Text style={styles.subtotalValue}>$24.50</Text>
           </View>
           <View style={styles.paymentMethod}>
-            <Text style={styles.paymentText}>{t('common:cash')}</Text>
+            <Text style={styles.paymentText}>{t('common:payment.cash')}</Text>
           </View>
         </View>
         <View style={styles.disclaimerContainer}>

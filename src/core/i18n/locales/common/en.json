@@ -15,7 +15,28 @@
 
   "savedPlaces": "Saved places",
   
+  "trackYourTrip": "Track your trip",
   "ride": "Ride",
+
+  "filters":{
+    "acceptAnimals": "Accept animals", 
+    "bigLuggage": "Big luggage",
+    "childSeat": "Child seat",
+    "airConditioner": "Air conditioner",
+    "noSmoking": "No smoking"
+  },
+
+  "carType":{
+    "economy": "Economy",
+    "comfort": "Comfort",
+    "luxury": "Luxury",
+    "xl": "XL"
+  },
+  
+  "payment":{
+    "cash": "Cash",
+    "wallet": "Wallet"
+  },
 
   "pickupRequired" : "Pickup location is required",
   "destinationRequired" : "Destination location is required",
@@ -23,8 +44,6 @@
 
   "phoneNumberStart": "Phone number must start with 09",
   "passwordLength": "Password must be at least 8 characters",
-  "usernameLength": "Username must be at least 2 characters",
+  "usernameLength": "Username must be at least 2 characters"
 
-  "cash": "Cash",
-  "wallet": "Wallet"
 }

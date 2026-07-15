@@ -4,18 +4,20 @@ import Input from '../../../../shared/components/Input';
 import { createStyles } from '../../styles/tripEndedModal.styles';
 import { useTheme } from '../../../../core/theme/useTheme';
 import { useTripStartedViewModel } from '../../viewmodels/useTripStartedViewModel';
+import { useTranslation } from 'react-i18next';
 
 export default function PaymentSummary() {
   const vm = useTripStartedViewModel();
-
+  
   const { colors } = useTheme();
   const styles = createStyles(colors);
-
+  const { t } = useTranslation(['tripEnded', 'common']);
+  
   return (
     <View style={styles.paymentColumn}>
       <View style={styles.metricRow}>
         <Text style={styles.label} adjustsFontSizeToFit={true}>
-          Add a tip?
+          {t('tripEnded.payment.addTip')}
         </Text>
         <View>
           <Input
@@ -30,7 +32,7 @@ export default function PaymentSummary() {
 
       <View style={styles.metricRow}>
         <Text style={styles.label} adjustsFontSizeToFit={true}>
-          Delay:
+          {t('tripEnded.payment.delay')}
         </Text>
         <Text style={styles.valueText} adjustsFontSizeToFit={true}>
           $2.50
