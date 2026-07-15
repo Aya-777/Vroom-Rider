@@ -4,6 +4,7 @@ import Input from '../../../../shared/components/Input';
 import {useTripStartedViewModel} from '../../viewmodels/useTripStartedViewModel'
 import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/trip.styles';
+import { useTranslation } from 'react-i18next';
 
 export const TripSummaryGrid = () => {
 
@@ -11,11 +12,13 @@ export const TripSummaryGrid = () => {
   const styles = createStyles(colors);
   const vm = useTripStartedViewModel();
 
+  const { t } = useTranslation(['rideStarted', 'common']);
+
   return(
   <View style={styles.gridContainer}>
     {/* Left Column */}
     <View style={styles.column}>
-      {['Estimated', 'Base Fare', 'Distance'].map((label) => (
+      {[t('estimated'), t('baseFare'), t('distance')].map((label) => (
         <View key={label} style={styles.metricCard}>
           <Text style={styles.metricLabel}>{label}</Text>
           <Text style={styles.metricValue}>...</Text>
@@ -28,7 +31,7 @@ export const TripSummaryGrid = () => {
 
     {/* Right Column */}
     <View style={styles.column}>
-      <Text style={styles.tipLabel}>Add a tip?</Text>
+      <Text style={styles.tipLabel}>{t('addTip')}</Text>
 
       <Input
       value={vm.tip}
@@ -39,7 +42,7 @@ export const TripSummaryGrid = () => {
       
     />
 
-      <Text style={styles.delayLabel}>Potential Delay :</Text>
+      <Text style={styles.delayLabel}>{t('potentialDelay')}</Text>
 
       <View style={styles.delayBox}>
         <Text style={styles.delayValue}>+$2.50</Text>

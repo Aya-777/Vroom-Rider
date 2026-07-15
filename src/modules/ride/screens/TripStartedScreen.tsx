@@ -12,7 +12,7 @@ import { useTripStartedViewModel } from '../viewmodels/useTripStartedViewModel';
 export default function TripStartedScreen() {
   const { colors } = useTheme();
   const styles = createStyles(colors);
-  const { t } = useTranslation(['trip', 'common']);
+  const { t } = useTranslation(['rideStarted', 'common']);
 
   const vm = useTripStartedViewModel();
 
@@ -28,7 +28,7 @@ export default function TripStartedScreen() {
         index={1}
       >
         <StatusBar translucent backgroundColor="transparent" />
-        <Text style={styles.tripStartedMessage}>Your trip has started!</Text>
+        <Text style={styles.tripStartedMessage}>{t('tripStarted')}</Text>
         {/* Driver Card */}
         <DriverInfoCard 
           name="David" 
@@ -39,23 +39,23 @@ export default function TripStartedScreen() {
         />
 
         {/* Title */}
-        <Text style={styles.summaryTitle}>Pre-trip Summary</Text>
-        <Text style={styles.disclaimerText}>Date: {new Date().toLocaleDateString()}</Text>
+        <Text style={styles.summaryTitle}>{t('preTripSummary')}</Text>
+        <Text style={styles.disclaimerText}>{t('common:date')}: {new Date().toLocaleDateString()}</Text>
         {/* Summary Grid */}
         <TripSummaryGrid />
 
         {/* Subtotal & Payment */}
         <View style={styles.footerRow}>
           <View>
-            <Text style={styles.subtotalLabel}>Subtotal</Text>
+            <Text style={styles.subtotalLabel}>{t('subtotal')}</Text>
             <Text style={styles.subtotalValue}>$24.50</Text>
           </View>
           <View style={styles.paymentMethod}>
-            <Text style={styles.paymentText}>Cash</Text>
+            <Text style={styles.paymentText}>{t('common:cash')}</Text>
           </View>
         </View>
         <View style={styles.disclaimerContainer}>
-          <Text style={styles.disclaimerText}>Final price may vary based on actual route and traffic conditions.</Text>
+          <Text style={styles.disclaimerText}>{t('finalPriceDisclaimer')}</Text>
         </View>
       </BaseBottomSheet>
     </View>

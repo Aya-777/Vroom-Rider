@@ -26,6 +26,8 @@ import notificationsEn from './notifications/en.json';
 import notificationsAr from './notifications/ar.json';
 import sideBarEn from './sidebar/en.json';
 import sideBarAr from './sidebar/ar.json';
+import rideStartedAr from './ride/rideStarted/ar.json';
+import rideStartedEn from './ride/rideStarted/en.json';
 
 export {
   authEn,
@@ -56,5 +58,7 @@ export {
   notificationsAr,
   sideBarEn,
   sideBarAr,
+  rideStartedAr,
+  rideStartedEn
 }
 

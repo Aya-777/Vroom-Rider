@@ -11,6 +11,7 @@
   "now": "Now",
   "later": "Later",
   "schedule": "Schedule",
+  "date": "Date",
 
   "savedPlaces": "Saved places",
   
@@ -22,5 +23,8 @@
 
   "phoneNumberStart": "Phone number must start with 09",
   "passwordLength": "Password must be at least 8 characters",
-  "usernameLength": "Username must be at least 2 characters"
+  "usernameLength": "Username must be at least 2 characters",
+
+  "cash": "Cash",
+  "wallet": "Wallet"
 }
