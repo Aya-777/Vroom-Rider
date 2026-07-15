@@ -11,18 +11,18 @@ export default function TripMetrics() {
   const { t } = useTranslation(['tripEnded', 'common']);
   
   const metrics = [
-    { label: 'Estimated Price', value: '0' },
-    { label: 'Accept animals', value: '0' },
-    { label: 'No smoking', value: '0' },
-    { label: 'Air conditioner', value: '0' },
+    { label: 'common:payment.estimatedPrice', value: '0' },
+    { label: 'common:filters.acceptAnimals', value: '0' },
+    { label: 'common:filters.noSmoking', value: '0' },
+    { label: 'common:filters.airConditioner', value: '0' },
   ];
-  
+
   return (
     <View style={styles.metricsColumn}>
       {metrics.map((item, index) => (
         <View key={index} style={styles.metricRow}>
           <Text style={styles.metricLabel} adjustsFontSizeToFit={true}>
-            {item.label}:
+            {t(item.label)}:
           </Text>
 
           <Text style={styles.valueText}>{item.value}</Text>

@@ -18,7 +18,7 @@ export const TripSummaryGrid = () => {
   <View style={styles.gridContainer}>
     {/* Left Column */}
     <View style={styles.column}>
-      {[t('estimated'), t('baseFare'), t('distance')].map((label) => (
+      {[t('common:estimated'), t('baseFare'), t('distance')].map((label) => (
         <View key={label} style={styles.metricCard}>
           <Text style={styles.metricLabel}>{label}</Text>
           <Text style={styles.metricValue}>...</Text>
