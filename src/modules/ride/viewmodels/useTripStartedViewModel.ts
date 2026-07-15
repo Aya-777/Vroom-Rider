@@ -9,7 +9,7 @@ export function useTripStartedViewModel() {
 
   // --- UI State ---
 
-  const [tip, setTip] = useState('');
+  const [tip, setTip] = useState('0');
   const [errors, setErrors] = useState({});
   const [isReviewVisible, setIsReviewVisible] = useState(false);
   const [isBillVisible, setIsBillVisible] = useState(false);
