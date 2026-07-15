@@ -89,16 +89,19 @@ src/
 │   │   │   │   ├── confirmRide
 │   │   │   │   │   ├── ar.json
 │   │   │   │   │   └── en.json
-│   │   │   │   ├── driverFound
+│   │   │   │   ├── driverArrived
 │   │   │   │   │   ├── ar.json
 │   │   │   │   │   └── en.json
-│   │   │   │   ├── driverHere
+│   │   │   │   ├── driverFound
 │   │   │   │   │   ├── ar.json
 │   │   │   │   │   └── en.json
 │   │   │   │   ├── review
 │   │   │   │   │   ├── ar.json
 │   │   │   │   │   └── en.json
 │   │   │   │   ├── rideDetails
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
+│   │   │   │   ├── rideStarted
 │   │   │   │   │   ├── ar.json
 │   │   │   │   │   └── en.json
 │   │   │   │   └── selectRide
@@ -313,6 +316,7 @@ src/
 │   ├── ride
 │   │   ├── components
 │   │   │   ├── DriverArrivedScreen
+│   │   │   │   └── DriverPinEntry.tsx
 │   │   │   ├── DriverFoundScreen
 │   │   │   │   ├── CarDetailsCard.tsx
 │   │   │   │   ├── CommunicationActions.tsx
@@ -327,6 +331,10 @@ src/
 │   │   │   │   └── InfoBox.tsx
 │   │   │   ├── SelectRideScreen
 │   │   │   │   └── RideLocationInputs.tsx
+│   │   │   ├── TripStartedScreen
+│   │   │   │   ├── DriverInfoCard.tsx
+│   │   │   │   ├── TripSummaryGrid.tsx
+│   │   │   │   └── VerticalDivider.tsx
 │   │   │   └── shared
 │   │   │       └── RideDropdown.tsx
 │   │   ├── constants
@@ -336,27 +344,32 @@ src/
 │   │   ├── hooks
 │   │   │   └── useLocationPermission.ts
 │   │   ├── screens
+│   │   │   ├── DriverArrivedScreen.tsx
 │   │   │   ├── DriverFoundScreen.tsx
 │   │   │   ├── ExtraDetailsScreen.tsx
 │   │   │   ├── RideConfirmationScreen.tsx
-│   │   │   └── SelectRideScreen.tsx
+│   │   │   ├── SelectRideScreen.tsx
+│   │   │   └── TripStartedScreen.tsx
 │   │   ├── store
 │   │   │   └── useRideStore.ts
 │   │   ├── styles
-│   │   │   ├── DriverFound.styles.ts
 │   │   │   ├── confirmRide.styles.ts
+│   │   │   ├── driver.styles.ts
 │   │   │   ├── extraDetails.styles.ts
 │   │   │   ├── selectRide.styles.ts
-│   │   │   └── shared.styles.ts
+│   │   │   ├── shared.styles.ts
+│   │   │   └── trip.styles.ts
 │   │   ├── types
 │   │   │   └── ride.types.ts
 │   │   ├── utils
 │   │   │   └── selectRideValidation.ts
 │   │   └── viewmodels
 │   │       ├── useConfirmRideViewModel.ts
+│   │       ├── useDriverArrivedViewModel.ts
 │   │       ├── useDriverFoundViewModel.ts
 │   │       ├── useRideDetailsViewModel.ts
-│   │       └── useSelectRideViewModel.ts
+│   │       ├── useSelectRideViewModel.ts
+│   │       └── useTripStartedViewModel.ts
 │   └── sidebar
 │       ├── components
 │       │   ├── SidebarFooter.tsx

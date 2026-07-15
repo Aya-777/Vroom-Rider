@@ -5,23 +5,24 @@ import { useEffect } from 'react';
 
 export function useDriverFoundViewModel() {
   // لاحقاً هون ممكن تجيب data من API / socket
-  const navigation = useNavigation<HomeStackScreenProps<'DriverFound'>['navigation']>();
+  const navigation =
+    useNavigation<HomeStackScreenProps<'DriverFound'>['navigation']>();
 
   const handleBackPress = () => {
     navigation.goBack();
-  }
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
-    navigation.navigate('TripStarted', { driverId: 'some-id-value' });    
-  }, 3000);
-    // IMPORTANT: Clear the timer if the component unmounts 
+      navigation.navigate('DriverArrived', { driverId: 'some-id-value' });
+    }, 3000);
+    // IMPORTANT: Clear the timer if the component unmounts
     // to prevent memory leaks or navigation errors
     return () => clearTimeout(timer);
   }, [navigation]);
 
   return {
     driver: driverMock,
-    handleBackPress
+    handleBackPress,
   };
 }

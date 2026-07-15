@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { TripSummaryGrid } from '../components/TripStartedScreen/TripSummaryGrid';
 import {DriverInfoCard} from '../components/TripStartedScreen/DriverInfoCard';
 import { useTripStartedViewModel } from '../viewmodels/useTripStartedViewModel'; 
+import ReviewModal from '../../review/components/ReviewModal';
 
 export default function TripStartedScreen() {
   const { colors } = useTheme();
@@ -17,6 +18,20 @@ export default function TripStartedScreen() {
   const vm = useTripStartedViewModel();
 
   const snapPoints = useMemo(() => ['30%', '70%'], []);  
+
+  const [isReviewVisible, setIsReviewVisible] = useState(false);
+
+  useEffect(() => {
+    // Start the 3-second timer when this screen mounts
+    const timer = setTimeout(() => {
+      setIsReviewVisible(true);
+    }, 3000);
+
+    // Cleanup to prevent memory leaks if the user leaves before 3 seconds
+    return () => clearTimeout(timer);
+  }, []);
+
+
 
   return (
     <View style={styles.container}>
@@ -58,6 +73,21 @@ export default function TripStartedScreen() {
           <Text style={styles.disclaimerText}>{t('finalPriceDisclaimer')}</Text>
         </View>
       </BaseBottomSheet>
+
+
+      <ReviewModal 
+        visible={isReviewVisible} 
+        onClose={() => {
+          setIsReviewVisible(false)
+          vm.handleCloseReviewModal();
+        }} 
+        onSubmit={(rating, review) => {
+          console.log(rating, review);
+          setIsReviewVisible(false);
+          vm.handleSubmit();
+        }}
+      />
+
     </View>
   );
 }
