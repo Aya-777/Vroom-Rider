@@ -4,7 +4,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { navigationRef, RootStackParamList } from './rootTypes';
 
 import { useAuthLoggedIn } from '../core/store/authStore';
-import MainTabs from './main/MainTabs';
 import MainDrawer from './main/MainDrawer';
 import AuthStack from './auth/AuthStack';
 import SplashScreen from '../modules/auth/screens/SplashScreen';
