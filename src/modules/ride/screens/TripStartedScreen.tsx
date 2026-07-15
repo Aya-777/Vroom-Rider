@@ -39,7 +39,7 @@ export default function TripStartedScreen() {
         <Text style={styles.summaryTitle}>Pre-trip Summary</Text>
         <Text style={styles.disclaimerText}>Date: {new Date().toLocaleDateString()}</Text>
         {/* Summary Grid */}
-        <TripSummaryGrid styles={styles} />
+        <TripSummaryGrid />
 
         {/* Subtotal & Payment */}
         <View style={styles.footerRow}>
@@ -48,7 +48,7 @@ export default function TripStartedScreen() {
             <Text style={styles.subtotalValue}>$24.50</Text>
           </View>
           <View style={styles.paymentMethod}>
-            <Text>**** 4242</Text>
+            <Text style={styles.paymentText}>Cash</Text>
           </View>
         </View>
         <View style={styles.disclaimerContainer}>

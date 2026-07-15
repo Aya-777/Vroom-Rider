@@ -1,0 +1,37 @@
+import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
+import { useTranslation } from 'react-i18next';
+
+export function useTripStartedViewModel() {
+  const navigation = useNavigation<HomeStackScreenProps<'SelectRide'>['navigation']>();
+
+  // --- UI State ---
+
+  const [tip, setTip] = useState('');
+  const [errors, setErrors] = useState({});
+  // const { t } = useTranslation('selectRide');
+
+  // Actions
+  const handleNextPress = () => {
+
+  };
+
+  const handleBackPress = () => {
+    navigation.goBack();
+  };
+
+  return {
+    // State
+    tip,
+    errors,
+    
+    // Setters
+    setTip,
+    setErrors,
+
+    // Actions
+    handleNextPress,
+    handleBackPress,
+  };
+}

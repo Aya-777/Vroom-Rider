@@ -37,17 +37,17 @@ export const createStyles = (colors: any) => StyleSheet.create({
     color: colors.textPrimary,
   },
   driverDetails: {
-    ...Typography.caption,
+    ...Typography.mediumCaption,
     color: colors.textSecondary,
   },
   driverCar: {
-    ...Typography.caption,
+    ...Typography.mediumCaption,
     color: colors.textSecondary,
     marginTop: Spacing.xxs,
   },
   callButton: {
     padding: Spacing.smm,
-    backgroundColor: colors.surfaceVariant,
+    backgroundColor: colors.surface,
     borderRadius: Radius.lg,
   },
 
@@ -56,12 +56,12 @@ export const createStyles = (colors: any) => StyleSheet.create({
     ...Typography.h3,
     color: colors.textPrimary,
     textAlign: 'center',
-    marginBottom: Spacing.smd,
+    marginBottom: Spacing.sm,
   },
   gridContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: Spacing.mmd,
+    marginBottom: Spacing.md,
   },
   column: {
     width: '48%',
@@ -70,14 +70,18 @@ export const createStyles = (colors: any) => StyleSheet.create({
     backgroundColor: colors.surface,
     padding: Spacing.smm,
     borderRadius: Radius.md,
-    marginBottom: Spacing.smm,
+    marginBottom: Spacing.sm,
     borderWidth: 1,
     borderColor: colors.border,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   metricLabel: {
-    ...Typography.smallCaption,
+    ...Typography.mediumCaption,
     color: colors.textSecondary,
     marginBottom: Spacing.xs,
+
   },
   metricValue: {
     ...Typography.caption,
@@ -86,17 +90,16 @@ export const createStyles = (colors: any) => StyleSheet.create({
   tipLabel: {
     ...Typography.mediumCaption,
     color: colors.textSecondary,
-    marginBottom: Spacing.sm,
+    marginBottom: Spacing.xs,
   },
   tipInput: {
     backgroundColor: colors.surface,
-    padding: Spacing.smd,
     borderRadius: Radius.md,
-    marginBottom: Spacing.smd,
     alignItems: 'center',
+    height: 45,
   },
   tipValue: {
-    ...Typography.boldBody,
+    ...Typography.semiBoldCaption,
     color: colors.textPrimary,
   },
   delayLabel: {
@@ -110,7 +113,7 @@ export const createStyles = (colors: any) => StyleSheet.create({
     borderRadius: Radius.md,
   },
   delayValue: {
-    ...Typography.boldCaption,
+    ...Typography.semiBoldCaption,
     color: colors.note,
   },
 
@@ -131,11 +134,11 @@ verticalDivider: {
     paddingTop: Spacing.smd,
   },
   subtotalLabel: {
-    ...Typography.caption,
+    ...Typography.semiBoldBody,
     color: colors.textSecondary,
   },
   subtotalValue: {
-    ...Typography.h2,
+    ...Typography.h1,
     color: colors.textPrimary,
   },
   paymentMethod: {
@@ -144,11 +147,15 @@ verticalDivider: {
     paddingVertical: Spacing.smm,
     borderRadius: Radius.sm,
   },
+  paymentText:{
+    color: colors.textPrimary,
+    ...Typography.caption
+  },
   disclaimerContainer:{
     flex:1,
     justifyContent:'center',
     alignItems:'center',
-    marginTop: Spacing.smm,
+    marginTop: Spacing.md,
   },
   disclaimerText: {
     textAlign: 'center',
