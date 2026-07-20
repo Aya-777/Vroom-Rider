@@ -18,14 +18,13 @@ class MainActivity : ReactActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     
-    // إخفاء شريط التنقل السفلي وشريط الحالة العلوي تماماً
     window.decorView.systemUiVisibility = (
         View.SYSTEM_UI_FLAG_LAYOUT_STABLE
         or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
         or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // إخفاء الشريط السفلي دائمًا
-        or View.SYSTEM_UI_FLAG_FULLSCREEN // إخفاء الشريط العلوي دائمًا
-        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY // يختفي تلقائيًا بعد السحب
+        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION 
+        or View.SYSTEM_UI_FLAG_FULLSCREEN 
+        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY 
     )
   }
 
