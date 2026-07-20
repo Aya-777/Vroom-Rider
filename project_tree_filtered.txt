@@ -86,6 +86,9 @@ src/
 │   │   │   │   ├── ar.json
 │   │   │   │   └── en.json
 │   │   │   ├── ride
+│   │   │   │   ├── TripEnded
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
 │   │   │   │   ├── confirmRide
 │   │   │   │   │   ├── ar.json
 │   │   │   │   │   └── en.json
@@ -122,6 +125,10 @@ src/
 │   ├── realtime
 │   │   ├── socketClient.ts
 │   │   └── socketManager.ts
+│   ├── services
+│   │   └── location
+│   │       ├── LocationService.ts
+│   │       └── PermissionService.ts
 │   ├── storage
 │   │   ├── asyncStorage.adapter.ts
 │   │   ├── index.ts
@@ -331,11 +338,16 @@ src/
 │   │   │   │   └── InfoBox.tsx
 │   │   │   ├── SelectRideScreen
 │   │   │   │   └── RideLocationInputs.tsx
+│   │   │   ├── TripEndedModal
+│   │   │   │   ├── PaymentSummary.tsx
+│   │   │   │   ├── TripEndedModal.tsx
+│   │   │   │   └── TripMetrics.tsx
 │   │   │   ├── TripStartedScreen
 │   │   │   │   ├── DriverInfoCard.tsx
 │   │   │   │   ├── TripSummaryGrid.tsx
 │   │   │   │   └── VerticalDivider.tsx
 │   │   │   └── shared
+│   │   │       ├── MapContainer.tsx
 │   │   │       └── RideDropdown.tsx
 │   │   ├── constants
 │   │   │   ├── driverData.ts
@@ -358,7 +370,8 @@ src/
 │   │   │   ├── extraDetails.styles.ts
 │   │   │   ├── selectRide.styles.ts
 │   │   │   ├── shared.styles.ts
-│   │   │   └── trip.styles.ts
+│   │   │   ├── trip.styles.ts
+│   │   │   └── tripEndedModal.styles.ts
 │   │   ├── types
 │   │   │   └── ride.types.ts
 │   │   ├── utils
@@ -367,6 +380,7 @@ src/
 │   │       ├── useConfirmRideViewModel.ts
 │   │       ├── useDriverArrivedViewModel.ts
 │   │       ├── useDriverFoundViewModel.ts
+│   │       ├── useMapViewModel.ts
 │   │       ├── useRideDetailsViewModel.ts
 │   │       ├── useSelectRideViewModel.ts
 │   │       └── useTripStartedViewModel.ts

@@ -3,33 +3,47 @@ import { useEffect, useState } from 'react';
 import PermissionService from '../../../core/services/location/PermissionService';
 import LocationService from '../../../core/services/location/LocationService';
 
+  // permission
+  // getCurrentLocation()
+  // watchLocation()
+  // stopWatching()
+
 export default function useMapViewModel() {
   const [location, setLocation] = useState<[number, number] | null>(null);
 
   useEffect(() => {
-    loadLocation();
-  }, []);
+    let watchId: number;
 
-  const loadLocation = async () => {
-    const granted = await PermissionService.requestLocationPermission();
+    const initialize = async () => {
+      const granted = await PermissionService.requestLocationPermission();
 
-    if (!granted) {
-      return;
-    }
+      if (!granted) return;
 
-    try {
+      // Get an initial location immediately
       const currentLocation = await LocationService.getCurrentLocation();
 
       setLocation([
         currentLocation.longitude,
         currentLocation.latitude,
       ]);
-      console.log(currentLocation);
-      
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
+      // Then start listening for updates
+      watchId = LocationService.watchLocation(newLocation => {
+        setLocation([
+          newLocation.longitude,
+          newLocation.latitude,
+        ]);
+      });
+    };
+
+    initialize();
+
+    return () => {
+      if (watchId !== undefined) {
+        LocationService.stopWatching(watchId);
+      }
+    };
+  }, []);
 
   return {
     location,

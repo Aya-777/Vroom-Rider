@@ -22,7 +22,6 @@ class PermissionService {
       }
     }
 
-    // iOS permission is requested automatically when using Geolocation
     return true;
   }
 }

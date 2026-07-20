@@ -6,6 +6,7 @@ export type Location = {
 };
 
 class LocationService {
+
   getCurrentLocation(): Promise<Location> {
     return new Promise((resolve, reject) => {
       Geolocation.getCurrentPosition(
@@ -37,14 +38,15 @@ class LocationService {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         });
+        console.log(position);
       },
       error => {
         onError?.(error);
       },
       {
         enableHighAccuracy: true,
-        distanceFilter: 5,
-        interval: 3000,
+        distanceFilter: 0,
+        interval: 2000,
         fastestInterval: 2000,
       },
     );

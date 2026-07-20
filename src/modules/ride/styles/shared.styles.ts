@@ -129,6 +129,9 @@ export const createStyles = (colors: ThemeColors) =>
     },
     mapContainer: {
       flex: 1,
+      zIndex: 0, 
     },
-    map: { flex: 1 },
+    map: { flex: 1,
+      zIndex: 0, 
+    },
   });
