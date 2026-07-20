@@ -2,7 +2,6 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from '../../../modules/home/screens/HomeScreen';
-import RideDetailsScreen from '../../../modules/ride/screens/ExtraDetailsScreen';
 import RideConfirmationScreen from '../../../modules/ride/screens/RideConfirmationScreen';
 import DriverFoundScreen from '../../../modules/ride/screens/DriverFoundScreen';
 import { HomeStackParamList } from './homeTypes';
@@ -23,12 +22,6 @@ export default function HomeStack() {
       <Stack.Screen
         name="Ride"
         component={RideScreen}
-      />
-
-
-      <Stack.Screen
-        name="RideDetails"
-        component={RideDetailsScreen}
       />
 
       <Stack.Screen

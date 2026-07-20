@@ -1,16 +1,16 @@
 import React, { useMemo, useState } from 'react';
 import { View, StatusBar } from 'react-native';
-import { useTheme } from '../../../core/theme/useTheme';
-import Header from '../../../shared/components/SubHeader';
-import { BaseBottomSheet } from '../../../shared/components/BaseBottomSheet';
-import VehicleSelector from '../components/ExtraDetailsScreen/VehicleSelector';
-import { createStyles } from '../styles/shared.styles';
-import ActionButton from '../../../shared/components/ActionButton';
-import TimePriceBox from '../components/ExtraDetailsScreen/TimePriceBox';
-import RideActionFilters from '../components/ExtraDetailsScreen/RideActionFilters';
-import { useRideDetailsViewModel } from '../viewmodels/useRideDetailsViewModel';
+import { useTheme } from '../../../../core/theme/useTheme';
+import Header from '../../../../shared/components/SubHeader';
+import { BaseBottomSheet } from '../../../../shared/components/BaseBottomSheet';
+import VehicleSelector from '../../components/ExtraDetailsScreen/VehicleSelector';
+import { createStyles } from '../../styles/shared.styles';
+import ActionButton from '../../../../shared/components/ActionButton';
+import TimePriceBox from '../../components/ExtraDetailsScreen/TimePriceBox';
+import RideActionFilters from '../../components/ExtraDetailsScreen/RideActionFilters';
+import { useRideDetailsViewModel } from '../../viewmodels/useRideDetailsViewModel';
 import { useTranslation } from 'react-i18next';
-import ArrowRight from '../../../assets/svg/arrows/arrow.svg';
+import ArrowRight from '../../../../assets/svg/arrows/arrow.svg';
 
 export default function ExtraDetailsScreen() {
   const { colors, mode } = useTheme();
@@ -32,25 +32,18 @@ export default function ExtraDetailsScreen() {
     setSelectedPayment,
     setIsDropdownOpen,
 
-    handleNextPress,
+    saveRideDetails,
     handleBackPress,
   } = useRideDetailsViewModel();
 
   const onNextPress = () => {
-    handleNextPress();
+    saveRideDetails();
+    
   };
 
   const snapPoints = useMemo(() => ['30%', '70%'], []);
 
   return (
-    <View style={styles.container}>
-      <StatusBar
-        translucent
-        barStyle={mode === 'dark' ? 'light-content' : 'dark-content'}
-        backgroundColor="transparent"
-      />
-
-      <Header title={t('common:ride')} onBackPress={handleBackPress} />
 
       <BaseBottomSheet
         isVisible={true}
@@ -82,6 +75,4 @@ export default function ExtraDetailsScreen() {
             icon={<ArrowRight fill={colors.background} />}
           />
       </BaseBottomSheet>
-    </View>
-  );
-}
+  )};

@@ -1,6 +1,6 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { Dispatch, SetStateAction, useCallback, useMemo } from 'react';
 import { useSelectRideViewModel } from '../../viewmodels/useSelectRideViewModel';
-import {BaseBottomSheet} from '../../../../shared/components/BaseBottomSheet';
+import { BaseBottomSheet } from '../../../../shared/components/BaseBottomSheet';
 import RideDropdown from '../../components/shared/RideDropdown';
 import RideLocationInputs from '../../components/SelectRideScreen/RideLocationInputs';
 import ActionButton from '../../../../shared/components/ActionButton';
@@ -13,120 +13,122 @@ import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/selectRide.styles';
 import { useTranslation } from 'react-i18next';
 import { Alert, View } from 'react-native';
+import { RideState } from '../../types/RideState';
 
-  export default function SelectRideSheet() {
+type Props = {
+  onNextPress: () => void;
+};
 
-    const { colors, mode } = useTheme();
-    const styles = createStyles(colors);
-    const { t } = useTranslation(['selectRide', 'common']);
-  
+export default function SelectRideSheet({ onNextPress }: Props) {
+  const { colors, mode } = useTheme();
+  const styles = createStyles(colors);
+  const { t } = useTranslation(['selectRide', 'common']);
 
-      
-      const showAlert = useCallback((title: string, msg: string) => {
-          Alert.alert(title, msg);
-        }, []);
-      
-      const {
-        isNowDropdownOpen,
-        isForMeDropdownOpen,
-        selectedPerson,
-        selectedTime,
-        fromLocation,
-        toLocation,
-        errors,
-    
-        setIsNowDropdownOpen,
-        setIsForMeDropdownOpen,
-        setSelectedPerson,
-        setSelectedTime,
-        setFromLocation,
-        setToLocation,
-    
-        validate,
-        handleNextPress,
-        handleBackPress,
-      } = useSelectRideViewModel(showAlert);
-    
-      const personItems = [
-        { key: 'forMe', label: t('selectRide:forMe') },
-        { key: 'otherContact', label: t('selectRide:otherContact') },
-      ];
-    
-      const timeItems = [
-        { key: 'now', label: t('common:now') },
-        { key: 'schedule', label: t('common:schedule') },
-      ];
-    
-      const onNextPress = () => {
-        if (validate()) {
-          handleNextPress();
-        }
-      };
-    
-      const snapPoints = useMemo(() => ['30%', '70%'], []);
-    
+  const showAlert = useCallback((title: string, msg: string) => {
+    Alert.alert(title, msg);
+  }, []);
 
-      return(
-      <BaseBottomSheet
-        isVisible={true}
-        index={1}
-        snapPoints={snapPoints}>
-        <View style={styles.dropdownRow}>
-          <RideDropdown
-            icon={<ScheduleIcon fill={colors.primary} />}
-            value={t(`common:${selectedTime}`)}
-            isOpen={isNowDropdownOpen}
-            items={timeItems}
-            onToggle={() => setIsNowDropdownOpen(!isNowDropdownOpen)}
-            onSelect={item => {
-              setSelectedTime(item);
-              setIsNowDropdownOpen(false);
-            }}
-          />
+  const {
+    isNowDropdownOpen,
+    isForMeDropdownOpen,
+    selectedPerson,
+    selectedTime,
+    fromLocation,
+    toLocation,
+    errors,
 
-          <RideDropdown
-            icon={<ProfileIcon fill={colors.primary} />}
-            value={t(`selectRide:${selectedPerson}`)}
-            isOpen={isForMeDropdownOpen}
-            items={personItems}
-            onToggle={() => setIsForMeDropdownOpen(!isForMeDropdownOpen)}
-            onSelect={item => {
-              setSelectedPerson(item);
-              setIsForMeDropdownOpen(false);
-            }}
-          />
-        </View>
+    setIsNowDropdownOpen,
+    setIsForMeDropdownOpen,
+    setSelectedPerson,
+    setSelectedTime,
+    setFromLocation,
+    setToLocation,
 
-        <RideLocationInputs
-          fromLocation={fromLocation}
-          toLocation={toLocation}
-          onChangeFrom={setFromLocation}
-          onChangeTo={setToLocation}
-          errors={errors}
+    validate,
+    saveRideDetails,
+    handleBackPress,
+  } = useSelectRideViewModel(showAlert);
+
+  const personItems = [
+    { key: 'forMe', label: t('selectRide:forMe') },
+    { key: 'otherContact', label: t('selectRide:otherContact') },
+  ];
+
+  const timeItems = [
+    { key: 'now', label: t('common:now') },
+    { key: 'schedule', label: t('common:schedule') },
+  ];
+
+  const handleNextPress = () => {
+    if (!validate()) {
+      return;
+    }
+
+    saveRideDetails();
+
+    onNextPress();
+  };
+  const snapPoints = useMemo(() => ['30%', '70%'], []);
+
+  return (
+    <BaseBottomSheet isVisible={true} index={1} snapPoints={snapPoints}>
+      <View style={styles.dropdownRow}>
+        <RideDropdown
+          icon={<ScheduleIcon fill={colors.primary} />}
+          value={t(`common:${selectedTime}`)}
+          isOpen={isNowDropdownOpen}
+          items={timeItems}
+          onToggle={() => setIsNowDropdownOpen(!isNowDropdownOpen)}
+          onSelect={item => {
+            setSelectedTime(item);
+            setIsNowDropdownOpen(false);
+          }}
         />
 
-        <View style={styles.actionRow}>
-          <ActionButton
-            onPress={() => {}}
-            icon={<PinIcon fill={colors.textSecondary} />}
-            title={t('setOnMap')}
-            textStyle={{ color: colors.textSecondary }}
-            style={styles.actionButton}
-          />
+        <RideDropdown
+          icon={<ProfileIcon fill={colors.primary} />}
+          value={t(`selectRide:${selectedPerson}`)}
+          isOpen={isForMeDropdownOpen}
+          items={personItems}
+          onToggle={() => setIsForMeDropdownOpen(!isForMeDropdownOpen)}
+          onSelect={item => {
+            setSelectedPerson(item);
+            setIsForMeDropdownOpen(false);
+          }}
+        />
+      </View>
 
-          <ActionButton
-            onPress={() => {}}
-            icon={<StarIcon fill={colors.textSecondary} />}
-            title={t('common:savedPlaces')}
-            textStyle={{ color: colors.textSecondary }}
-            style={styles.actionButton}
-          />
-        </View>
+      <RideLocationInputs
+        fromLocation={fromLocation}
+        toLocation={toLocation}
+        onChangeFrom={setFromLocation}
+        onChangeTo={setToLocation}
+        errors={errors}
+      />
+
+      <View style={styles.actionRow}>
+        <ActionButton
+          onPress={() => {}}
+          icon={<PinIcon fill={colors.textSecondary} />}
+          title={t('setOnMap')}
+          textStyle={{ color: colors.textSecondary }}
+          style={styles.actionButton}
+        />
 
         <ActionButton
-          onPress={onNextPress}
-          title={t('common:next')}
-          icon={<ArrowRight fill={colors.background} />}
+          onPress={() => {}}
+          icon={<StarIcon fill={colors.textSecondary} />}
+          title={t('common:savedPlaces')}
+          textStyle={{ color: colors.textSecondary }}
+          style={styles.actionButton}
         />
-      </BaseBottomSheet>
-      )};
+      </View>
+
+      <ActionButton
+        onPress={handleNextPress}
+        title={t('common:next')}
+        icon={<ArrowRight fill={colors.background} />}
+      />
+    </BaseBottomSheet>
+  );
+}

@@ -26,12 +26,6 @@ const Tab = createBottomTabNavigator<MainTabsParamList>();
 
 const HIDE_TAB_ROUTES = [
   'Ride',
-  'SelectRide',
-  'RideDetails',
-  'ConfirmRide',
-  'DriverFound',
-  'TripStarted',
-  'DriverArrived',
 ];
 
 const getTabIconComponent = (
