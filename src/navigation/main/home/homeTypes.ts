@@ -1,7 +1,9 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 export type HomeStackParamList = {
-  HomeScreen: undefined;       
+  HomeScreen: undefined;
+
+  Ride: undefined;
   
   SelectRide: undefined;
   RideDetails: undefined;

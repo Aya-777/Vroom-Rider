@@ -25,6 +25,7 @@ import i18n from '../../core/i18n';
 const Tab = createBottomTabNavigator<MainTabsParamList>();
 
 const HIDE_TAB_ROUTES = [
+  'Ride',
   'SelectRide',
   'RideDetails',
   'ConfirmRide',

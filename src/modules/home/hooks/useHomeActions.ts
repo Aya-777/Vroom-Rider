@@ -10,5 +10,9 @@ export const useHomeActions = () => {
     navigation.navigate('SelectRide');
   };
   
-  return { navigateToSelectRide };
+  const navigateToRide = () => {
+    navigation.navigate('Ride');
+  };
+  
+  return { navigateToSelectRide, navigateToRide };
 };

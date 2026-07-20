@@ -9,6 +9,7 @@ import DriverFoundScreen from '../../../modules/ride/screens/DriverFoundScreen';
 import { HomeStackParamList } from './homeTypes';
 import DriverArrivedScreen from '../../../modules/ride/screens/DriverArrivedScreen';
 import TripStartedScreen from '../../../modules/ride/screens/TripStartedScreen';
+import RideScreen from '../../../modules/ride/screens/RideScreen';
 
 const Stack = createNativeStackNavigator<HomeStackParamList>();
 
@@ -18,6 +19,11 @@ export default function HomeStack() {
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
+      />
+
+      <Stack.Screen
+        name="Ride"
+        component={RideScreen}
       />
 
       <Stack.Screen
