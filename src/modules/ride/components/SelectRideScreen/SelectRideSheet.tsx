@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useCallback, useMemo } from 'react';
+import React, {useCallback, useMemo } from 'react';
 import { useSelectRideViewModel } from '../../viewmodels/useSelectRideViewModel';
 import { BaseBottomSheet } from '../../../../shared/components/BaseBottomSheet';
 import RideDropdown from '../../components/shared/RideDropdown';
@@ -13,7 +13,6 @@ import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/selectRide.styles';
 import { useTranslation } from 'react-i18next';
 import { Alert, View } from 'react-native';
-import { RideState } from '../../types/RideState';
 
 type Props = {
   onNextPress: () => void;
