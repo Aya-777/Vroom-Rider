@@ -5,7 +5,6 @@ export type HomeStackParamList = {
 
   Ride: undefined;
   
-  SelectRide: undefined;
   RideDetails: undefined;
   ConfirmRide: undefined;
   

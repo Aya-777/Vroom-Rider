@@ -6,13 +6,10 @@ export const useHomeActions = () => {
   
   const navigation = useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
   
-  const navigateToSelectRide = () => {
-    navigation.navigate('SelectRide');
-  };
   
   const navigateToRide = () => {
     navigation.navigate('Ride');
   };
   
-  return { navigateToSelectRide, navigateToRide };
+  return {  navigateToRide };
 };

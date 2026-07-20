@@ -34,7 +34,6 @@ export default function HomeScreen() {
   } = useHomeViewModel();
 
   const {
-    navigateToSelectRide,
     navigateToRide
   } = useHomeActions();
 
