@@ -14,7 +14,7 @@ import PinIcon from '../../../assets/svg/common/pin.svg';
 import StarIcon from '../../../assets/svg/common/star.svg';
 import ArrowRight from '../../../assets/svg/arrows/arrow.svg';
 import { useTranslation } from 'react-i18next';
-
+import { MapContainer } from '../components/shared/MapContainer';
 
 export default function SelectRideScreen() {
   const { colors, mode } = useTheme();
@@ -73,6 +73,8 @@ export default function SelectRideScreen() {
       />
 
       <Header title={t('common:ride')} onBackPress={handleBackPress} />
+
+      <MapContainer />
 
       <BaseBottomSheet
         isVisible={true}
