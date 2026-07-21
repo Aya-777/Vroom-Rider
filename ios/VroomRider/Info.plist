@@ -60,5 +60,7 @@
 		<string>Lora-Regular.ttf</string>
 		<string>Lora-SemiBold.ttf</string>
 	</array>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>We use your location to find nearby drivers.</string>
 </dict>
 </plist>

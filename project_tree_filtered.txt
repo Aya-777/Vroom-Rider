@@ -86,6 +86,9 @@ src/
 │   │   │   │   ├── ar.json
 │   │   │   │   └── en.json
 │   │   │   ├── ride
+│   │   │   │   ├── TripEnded
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
 │   │   │   │   ├── confirmRide
 │   │   │   │   │   ├── ar.json
 │   │   │   │   │   └── en.json
@@ -122,6 +125,10 @@ src/
 │   ├── realtime
 │   │   ├── socketClient.ts
 │   │   └── socketManager.ts
+│   ├── services
+│   │   └── location
+│   │       ├── LocationService.ts
+│   │       └── PermissionService.ts
 │   ├── storage
 │   │   ├── asyncStorage.adapter.ts
 │   │   ├── index.ts
@@ -316,26 +323,39 @@ src/
 │   ├── ride
 │   │   ├── components
 │   │   │   ├── DriverArrivedScreen
+│   │   │   │   ├── DriverArrivedSheet.tsx
 │   │   │   │   └── DriverPinEntry.tsx
 │   │   │   ├── DriverFoundScreen
 │   │   │   │   ├── CarDetailsCard.tsx
 │   │   │   │   ├── CommunicationActions.tsx
 │   │   │   │   ├── DriverAvatar.tsx
+│   │   │   │   ├── DriverFoundSheet.tsx
 │   │   │   │   ├── DriverStatus.tsx
 │   │   │   │   └── ProgressBar.tsx
 │   │   │   ├── ExtraDetailsScreen
+│   │   │   │   ├── ExtraDetailsSheet.tsx
 │   │   │   │   ├── RideActionFilters.tsx
 │   │   │   │   ├── TimePriceBox.tsx
 │   │   │   │   └── VehicleSelector.tsx
 │   │   │   ├── RideConfirmationScreen
-│   │   │   │   └── InfoBox.tsx
+│   │   │   │   ├── InfoBox.tsx
+│   │   │   │   └── RideConfirmationSheet.tsx
+│   │   │   ├── RideScreen
+│   │   │   │   └── RideBottomSheet.tsx
 │   │   │   ├── SelectRideScreen
-│   │   │   │   └── RideLocationInputs.tsx
+│   │   │   │   ├── RideLocationInputs.tsx
+│   │   │   │   └── SelectRideSheet.tsx
+│   │   │   ├── TripEndedModal
+│   │   │   │   ├── PaymentSummary.tsx
+│   │   │   │   ├── TripEndedModal.tsx
+│   │   │   │   └── TripMetrics.tsx
 │   │   │   ├── TripStartedScreen
 │   │   │   │   ├── DriverInfoCard.tsx
+│   │   │   │   ├── TripStartedSheet.tsx
 │   │   │   │   ├── TripSummaryGrid.tsx
 │   │   │   │   └── VerticalDivider.tsx
 │   │   │   └── shared
+│   │   │       ├── MapContainer.tsx
 │   │   │       └── RideDropdown.tsx
 │   │   ├── constants
 │   │   │   ├── driverData.ts
@@ -344,12 +364,7 @@ src/
 │   │   ├── hooks
 │   │   │   └── useLocationPermission.ts
 │   │   ├── screens
-│   │   │   ├── DriverArrivedScreen.tsx
-│   │   │   ├── DriverFoundScreen.tsx
-│   │   │   ├── ExtraDetailsScreen.tsx
-│   │   │   ├── RideConfirmationScreen.tsx
-│   │   │   ├── SelectRideScreen.tsx
-│   │   │   └── TripStartedScreen.tsx
+│   │   │   └── RideScreen.tsx
 │   │   ├── store
 │   │   │   └── useRideStore.ts
 │   │   ├── styles
@@ -358,8 +373,10 @@ src/
 │   │   │   ├── extraDetails.styles.ts
 │   │   │   ├── selectRide.styles.ts
 │   │   │   ├── shared.styles.ts
-│   │   │   └── trip.styles.ts
+│   │   │   ├── trip.styles.ts
+│   │   │   └── tripEndedModal.styles.ts
 │   │   ├── types
+│   │   │   ├── RideState.ts
 │   │   │   └── ride.types.ts
 │   │   ├── utils
 │   │   │   └── selectRideValidation.ts
@@ -367,7 +384,9 @@ src/
 │   │       ├── useConfirmRideViewModel.ts
 │   │       ├── useDriverArrivedViewModel.ts
 │   │       ├── useDriverFoundViewModel.ts
+│   │       ├── useMapViewModel.ts
 │   │       ├── useRideDetailsViewModel.ts
+│   │       ├── useRideViewModel.ts
 │   │       ├── useSelectRideViewModel.ts
 │   │       └── useTripStartedViewModel.ts
 │   └── sidebar
