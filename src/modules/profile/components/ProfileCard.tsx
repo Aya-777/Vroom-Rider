@@ -1,32 +1,53 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/profile.styles';
 
 import EditIcon from '../../../assets/svg/common/edit.svg';
 import CallIcon from '../../../assets/svg/contact/call.svg';
-import MailIcon from '../../../assets/svg/contact/mail.svg';
-import PinIcon from '../../../assets/svg/common/pin.svg';
 
-export default function ProfileCard() {
+type Props = {
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  profileImage?: string | null;
+  isLoading?: boolean;
+  onEditPress?: () => void;
+};
+
+export default function ProfileCard({
+  firstName,
+  lastName,
+  phone,
+  profileImage,
+  isLoading,
+  onEditPress,
+}: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
 
+  const fullName = isLoading
+    ? '...'
+    : [firstName, lastName].filter(Boolean).join(' ') || '—';
+
   return (
     <View style={styles.profileCard}>
-
       {/* Edit */}
-      <TouchableOpacity style={styles.editButton}>
+      <TouchableOpacity style={styles.editButton} onPress={onEditPress} disabled={!onEditPress}>
         <EditIcon fill={colors.background} />
       </TouchableOpacity>
 
       {/* Avatar */}
       <View style={styles.avatarContainer}>
-        <View style={styles.avatarPlaceholder}>
-          <View style={styles.avatarHead} />
-          <View style={styles.avatarBody} />
-        </View>
+        {profileImage ? (
+          <Image source={{ uri: profileImage }} style={styles.avatarPlaceholder} />
+        ) : (
+          <View style={styles.avatarPlaceholder}>
+            <View style={styles.avatarHead} />
+            <View style={styles.avatarBody} />
+          </View>
+        )}
       </View>
 
       {/* Divider */}
@@ -36,49 +57,13 @@ export default function ProfileCard() {
 
       {/* Profile Info */}
       <View style={styles.profileInfo}>
-
-        <Text style={styles.userName}>
-          Alex Driver
-        </Text>
+        <Text style={styles.userName}>{fullName}</Text>
 
         <View style={styles.iconText}>
-          <CallIcon
-            width={18}
-            height={18}
-            fill={colors.background}
-          />
-
-          <Text style={styles.infoText}>
-            +1 (555) 012-3456
-          </Text>
+          <CallIcon width={18} height={18} fill={colors.background} />
+          <Text style={styles.infoText}>{isLoading ? '...' : phone || '—'}</Text>
         </View>
-
-        <View style={styles.iconText}>
-          <MailIcon
-            width={18}
-            height={18}
-            fill={colors.background}
-          />
-
-          <Text style={styles.infoText}>
-            alex.driver@vroom.io
-          </Text>
-        </View>
-
-        <View style={styles.iconText}>
-          <PinIcon
-            width={18}
-            height={18}
-            fill={colors.background}
-          />
-
-          <Text style={styles.infoText}>
-            Damascus, Jaramana
-          </Text>
-        </View>
-
       </View>
-
     </View>
   );
 }

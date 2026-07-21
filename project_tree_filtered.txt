@@ -211,6 +211,7 @@ src/
 │   │   │       ├── SplashLogo.tsx
 │   │   │       ├── SplashRoad.tsx
 │   │   │       └── SplashText.tsx
+│   │   ├── constants
 │   │   ├── hooks
 │   │   │   ├── useAuthActions.ts
 │   │   │   ├── useResendCode.ts
@@ -229,6 +230,7 @@ src/
 │   │   │   ├── authApi.ts
 │   │   │   └── dto
 │   │   │       └── auth.dto.ts
+│   │   ├── store
 │   │   ├── styles
 │   │   │   ├── OtpScreen.styles.ts
 │   │   │   ├── Splash.styles.ts
@@ -236,6 +238,7 @@ src/
 │   │   │   ├── login.styles.ts
 │   │   │   ├── resetPassword.styles.ts
 │   │   │   └── signup.styles.ts
+│   │   ├── types
 │   │   ├── utils
 │   │   │   └── SplashPathUtils.ts
 │   │   └── viewmodels
@@ -245,6 +248,7 @@ src/
 │   │       ├── useResetPasswordViewModel.ts
 │   │       ├── useSignupViewModel.ts
 │   │       └── useSplashViewModel.ts
+│   ├── constants
 │   ├── home
 │   │   ├── components
 │   │   │   ├── DestinationCard.tsx
@@ -343,6 +347,7 @@ src/
 │   │   │   ├── RideScreen
 │   │   │   │   └── RideBottomSheet.tsx
 │   │   │   ├── SelectRideScreen
+│   │   │   │   └── RideLocationInputs.tsx
 │   │   │   │   ├── RideLocationInputs.tsx
 │   │   │   │   └── SelectRideSheet.tsx
 │   │   │   ├── TripEndedModal

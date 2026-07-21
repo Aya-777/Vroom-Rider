@@ -20,8 +20,7 @@ import { navigate } from '../../../navigation/rootTypes';
 
 
 export default function ProfileScreen() {
-
-  const { gridItems, listItems, openSidebar } = useProfileViewModel();
+  const { gridItems, listItems, openSidebar, profile, isLoading } = useProfileViewModel();
   const { logout } = useProfileActions();
 
   const { colors } = useTheme();
@@ -35,23 +34,20 @@ export default function ProfileScreen() {
       end={{ x: 0, y: 1 }}
       style={styles.container}
     >
-      <Header title={t('welcome')}
-        onNotificationPress={() =>
-          navigate('Notifications')}
-        onMenuPress={openSidebar}
-      />
+      <Header title={t('welcome')} onNotificationPress={() => navigate('Notifications')} onMenuPress={openSidebar} />
 
       <View style={styles.container}>
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
-        >
-          <ProfileCard />
+        <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+          <ProfileCard
+            firstName={profile?.firstName}
+            lastName={profile?.lastName}
+            phone={profile?.phone}
+            profileImage={profile?.profileImage}
+            isLoading={isLoading}
+          />
 
           <GridSection items={gridItems} />
-
           <PromoBanner />
-
           <ListSection items={listItems} />
 
           <ActionButton
