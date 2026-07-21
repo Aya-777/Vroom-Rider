@@ -86,6 +86,9 @@ src/
 │   │   │   │   ├── ar.json
 │   │   │   │   └── en.json
 │   │   │   ├── ride
+│   │   │   │   ├── TripEnded
+│   │   │   │   │   ├── ar.json
+│   │   │   │   │   └── en.json
 │   │   │   │   ├── confirmRide
 │   │   │   │   │   ├── ar.json
 │   │   │   │   │   └── en.json
@@ -204,6 +207,7 @@ src/
 │   │   │       ├── SplashLogo.tsx
 │   │   │       ├── SplashRoad.tsx
 │   │   │       └── SplashText.tsx
+│   │   ├── constants
 │   │   ├── hooks
 │   │   │   ├── useAuthActions.ts
 │   │   │   ├── useResendCode.ts
@@ -222,6 +226,7 @@ src/
 │   │   │   ├── authApi.ts
 │   │   │   └── dto
 │   │   │       └── auth.dto.ts
+│   │   ├── store
 │   │   ├── styles
 │   │   │   ├── OtpScreen.styles.ts
 │   │   │   ├── Splash.styles.ts
@@ -229,6 +234,7 @@ src/
 │   │   │   ├── login.styles.ts
 │   │   │   ├── resetPassword.styles.ts
 │   │   │   └── signup.styles.ts
+│   │   ├── types
 │   │   ├── utils
 │   │   │   └── SplashPathUtils.ts
 │   │   └── viewmodels
@@ -238,6 +244,7 @@ src/
 │   │       ├── useResetPasswordViewModel.ts
 │   │       ├── useSignupViewModel.ts
 │   │       └── useSplashViewModel.ts
+│   ├── constants
 │   ├── home
 │   │   ├── components
 │   │   │   ├── DestinationCard.tsx
@@ -331,6 +338,10 @@ src/
 │   │   │   │   └── InfoBox.tsx
 │   │   │   ├── SelectRideScreen
 │   │   │   │   └── RideLocationInputs.tsx
+│   │   │   ├── TripEndedModal
+│   │   │   │   ├── PaymentSummary.tsx
+│   │   │   │   ├── TripEndedModal.tsx
+│   │   │   │   └── TripMetrics.tsx
 │   │   │   ├── TripStartedScreen
 │   │   │   │   ├── DriverInfoCard.tsx
 │   │   │   │   ├── TripSummaryGrid.tsx
@@ -358,7 +369,8 @@ src/
 │   │   │   ├── extraDetails.styles.ts
 │   │   │   ├── selectRide.styles.ts
 │   │   │   ├── shared.styles.ts
-│   │   │   └── trip.styles.ts
+│   │   │   ├── trip.styles.ts
+│   │   │   └── tripEndedModal.styles.ts
 │   │   ├── types
 │   │   │   └── ride.types.ts
 │   │   ├── utils
