@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import { RideState } from '../types/RideState';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
 
 export function useRideViewModel() {
   const [rideState, setRideState] = useState(RideState.SELECT_RIDE);
+  const navigation = useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
 
   const goToExtraDetails = () =>
     setRideState(RideState.EXTRA_DETAILS);
@@ -23,7 +27,7 @@ export function useRideViewModel() {
     setRideState(RideState.SELECT_RIDE);
   
   const handleBackPress = () => {
-    // navigation.goBack();
+    navigation.goBack();
   };
   
   return {
