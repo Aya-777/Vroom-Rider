@@ -3,7 +3,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from '../../../modules/home/screens/HomeScreen';
 import { HomeStackParamList } from './homeTypes';
-import DriverArrivedScreen from '../../../modules/ride/screens/DriverArrivedScreen';
 import TripStartedScreen from '../../../modules/ride/screens/TripStartedScreen';
 import RideScreen from '../../../modules/ride/screens/RideScreen';
 
@@ -18,7 +17,6 @@ export default function HomeStack() {
 
       <Stack.Screen name="TripStarted" component={TripStartedScreen} />
 
-      <Stack.Screen name="DriverArrived" component={DriverArrivedScreen} />
     </Stack.Navigator>
   );
 }

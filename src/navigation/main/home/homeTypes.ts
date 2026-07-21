@@ -6,7 +6,6 @@ export type HomeStackParamList = {
   Ride: undefined;
     
   TripStarted: { driverId: string };
-  DriverArrived: { driverId: string };
 };
 
 export type HomeStackScreenProps<T extends keyof HomeStackParamList> = 
