@@ -3,6 +3,7 @@ import { RideState } from '../../types/RideState';
 import ExtraDetailsSheet from '../ExtraDetailsScreen/ExtraDetailsSheet';
 import SelectRideSheet from '../SelectRideScreen/SelectRideSheet';
 import RideConfirmationSheet from '../RideConfirmationScreen/RideConfirmationSheet';
+import DriverFoundSheet from '../DriverFoundScreen/DriverFoundSheet';
 
 type Props = {
   rideState: RideState;
@@ -35,7 +36,7 @@ export default function RideBottomSheet({ rideState, setRideState }: Props) {
         );
 
       case RideState.DRIVER_FOUND:
-      // return <DriverFoundSheet />;
+      return <DriverFoundSheet onDriverFound={() => setRideState(RideState.DRIVER_ARRIVED)}/>;
 
       case RideState.DRIVER_ARRIVED:
       // return <DriverArrivedSheet />;
