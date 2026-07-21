@@ -1,17 +1,20 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { View, StatusBar, Text } from 'react-native';
-import { useTheme } from '../../../core/theme/useTheme';
-import {BaseBottomSheet} from '../../../shared/components/BaseBottomSheet';
-import Header from '../../../shared/components/SubHeader';
-import { createStyles } from '../styles/trip.styles';
+import { useTheme } from '../../../../core/theme/useTheme';
+import {BaseBottomSheet} from '../../../../shared/components/BaseBottomSheet';
+import { createStyles } from '../../styles/trip.styles';
 import { useTranslation } from 'react-i18next';
-import { TripSummaryGrid } from '../components/TripStartedScreen/TripSummaryGrid';
-import {DriverInfoCard} from '../components/TripStartedScreen/DriverInfoCard';
-import { useTripStartedViewModel } from '../viewmodels/useTripStartedViewModel'; 
-import ReviewModal from '../../review/components/ReviewModal';
-import TripEndedModal from '../components/TripEndedModal/TripEndedModal';
+import { TripSummaryGrid } from '../../components/TripStartedScreen/TripSummaryGrid';
+import {DriverInfoCard} from '../../components/TripStartedScreen/DriverInfoCard';
+import { useTripStartedViewModel } from '../../viewmodels/useTripStartedViewModel'; 
+import ReviewModal from '../../../review/components/ReviewModal';
+import TripEndedModal from '../TripEndedModal/TripEndedModal';
 
-export default function TripStartedScreen() {
+type Props = {
+  onTripEnded: () => void;
+};
+
+export default function TripStartedScreen({ onTripEnded }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['rideStarted', 'common']);
@@ -24,16 +27,13 @@ export default function TripStartedScreen() {
       vm.setIsBillVisible(true);
     }, 3000);
     
-    // Cleanup to prevent memory leaks if the user leaves before 3 seconds
     return () => clearTimeout(timer);
   }, []);
   
   const snapPoints = useMemo(() => ['30%', '70%'], []);  
 
   return (
-    <View style={styles.container}>
-      <Header title={t('common:trackYourTrip')} onBackPress={vm.handleBackPress} />
-
+    <>
       <BaseBottomSheet 
         isVisible={true}
         snapPoints={snapPoints}
@@ -83,15 +83,15 @@ export default function TripStartedScreen() {
         visible={vm.isReviewVisible} 
         onClose={() => {
           vm.setIsReviewVisible(false)
-          vm.handleCloseReviewModal();
+          onTripEnded();
         }} 
         onSubmit={(rating, review) => {
           console.log(rating, review);
           vm.setIsReviewVisible(false);
           vm.handleSubmit();
+          onTripEnded();
         }}
       />
-
-    </View>
+    </>
   );
 }

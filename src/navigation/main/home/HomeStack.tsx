@@ -3,7 +3,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from '../../../modules/home/screens/HomeScreen';
 import { HomeStackParamList } from './homeTypes';
-import TripStartedScreen from '../../../modules/ride/screens/TripStartedScreen';
 import RideScreen from '../../../modules/ride/screens/RideScreen';
 
 const Stack = createNativeStackNavigator<HomeStackParamList>();
@@ -14,8 +13,6 @@ export default function HomeStack() {
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
 
       <Stack.Screen name="Ride" component={RideScreen} />
-
-      <Stack.Screen name="TripStarted" component={TripStartedScreen} />
 
     </Stack.Navigator>
   );
