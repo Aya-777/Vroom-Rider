@@ -9,4 +9,11 @@ export const ENDPOINTS = {
     FORGOT_PASSWORD_RESEND_OTP :'/api/v1/auth/forgot-password/resend-otp/',
     RESET_PASSWORD: '/api/v1/auth/forgot-password/reset-password/',
   },
+
+  TRIPS: {
+    REQUEST: 'trips/request/',
+    PRICE_ESTIMATE: 'trips/price-estimate/',
+    STATUS_CHOICES: 'trips/status-choices/',
+}
+
 } as const;

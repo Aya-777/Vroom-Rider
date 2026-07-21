@@ -23,9 +23,6 @@ export function useRideDetailsViewModel() {
 
   }
 
-  const handleBackPress= () => {
-  }
-  
   return {
     timeEstimate,
     priceEstimate,
@@ -40,6 +37,5 @@ export function useRideDetailsViewModel() {
     setIsDropdownOpen,
 
     saveRideDetails,
-    handleBackPress,
   };
 }

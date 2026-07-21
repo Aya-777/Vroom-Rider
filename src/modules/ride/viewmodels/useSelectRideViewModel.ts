@@ -49,9 +49,6 @@ export function useSelectRideViewModel(showAlert: (title: string, msg: string) =
 
   };
 
-  const handleBackPress = () => {
-  };
-
   return {
     // State
     isNowDropdownOpen,
@@ -75,6 +72,5 @@ export function useSelectRideViewModel(showAlert: (title: string, msg: string) =
     // Actions
     validate,
     saveRideDetails,
-    handleBackPress,
   };
 }

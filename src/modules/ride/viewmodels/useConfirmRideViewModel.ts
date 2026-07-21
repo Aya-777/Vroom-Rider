@@ -19,7 +19,5 @@ export function useConfirmRideViewModel() {
     // }
   };
 
-  const handleBackPress = () => {};
-
-  return { handleFindDriver, isLoading, handleBackPress, rideData };
+  return { handleFindDriver, isLoading, rideData };
 }

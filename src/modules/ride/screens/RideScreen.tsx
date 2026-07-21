@@ -6,7 +6,6 @@ import { createStyles } from '../styles/selectRide.styles';
 import { useTranslation } from 'react-i18next';
 import { MapContainer } from '../components/shared/MapContainer';
 import {useRideViewModel} from '../viewmodels/useRideViewModel'
-import SelectRideSheet from '../components/SelectRideScreen/SelectRideSheet';
 import RideBottomSheet from '../components/RideScreen/RideBottomSheet';
 import { useNavigation } from '@react-navigation/native';
 import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
