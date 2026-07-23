@@ -98,7 +98,7 @@ export default function SelectRideSheet({ onNextPress, currentLocation }: Props)
       </View>
 
       <RideLocationInputs
-        fromLocation={currentLocation}
+        fromLocation={fromLocation}
         toLocation={toLocation}
         onChangeFrom={setFromLocation}
         onChangeTo={setToLocation}
