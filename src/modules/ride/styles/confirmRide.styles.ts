@@ -23,7 +23,7 @@ export const createStyles = (colors: ThemeColors) =>
     },
 
     box: {
-      width: '45%',
+      width: '48%',
       borderRadius: 12,
       paddingTop: 12,
       paddingHorizontal: 14,

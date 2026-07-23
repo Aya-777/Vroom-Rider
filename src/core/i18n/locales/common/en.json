@@ -32,6 +32,7 @@
     "luxury": "Luxury",
     "xl": "XL"
   },
+  "estimated": "Estimated",
   
   "payment":{
     "estimatedPrice": "Estimated price",

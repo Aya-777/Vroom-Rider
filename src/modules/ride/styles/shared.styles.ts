@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { ThemeColors } from '../../../core/theme/theme.types';
+import { Typography } from '../../../core/theme/tokens';
 
 export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
@@ -31,8 +32,7 @@ export const createStyles = (colors: ThemeColors) =>
     },
 
     dropdownText: {
-      fontWeight: '600',
-      fontSize: 14,
+      ...Typography.semiBoldCaption,
       marginStart: 6,
       marginEnd: 6,
       color: colors.textPrimary,
@@ -67,8 +67,7 @@ export const createStyles = (colors: ThemeColors) =>
     },
 
     cardText: {
-      fontSize: 14,
-      fontWeight: '700',
+      ...Typography.boldCaption,
       color: colors.primary,
     },
 
@@ -105,13 +104,12 @@ export const createStyles = (colors: ThemeColors) =>
     },
 
     menuItemText: {
-      fontSize: 14,
-      fontWeight: '700',
+      ...Typography.boldCaption,
     },
 
     actionButton: {
       flexDirection: 'row',
-      width: '45%',
+      width: '55%',
       paddingVertical: 10,
       borderRadius: 25,
       justifyContent: 'center',
@@ -122,8 +120,7 @@ export const createStyles = (colors: ThemeColors) =>
     },
 
     actionButtonText: {
-      fontSize: 16,
-      fontWeight: '600',
+      ...Typography.semiBoldBody,
       marginEnd: 5,
       marginBottom: 2,
       color: colors.background,

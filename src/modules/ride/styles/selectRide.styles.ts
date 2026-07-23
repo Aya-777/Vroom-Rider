@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { ThemeColors } from '../../../core/theme/theme.types';
+import { Typography } from '../../../core/theme/tokens';
 
 export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
@@ -56,7 +57,7 @@ export const createStyles = (colors: ThemeColors) =>
 
     input: {
       height: 35,
-      fontSize: 15,
+      ...Typography.caption,
       color: colors.textPrimary,
       paddingTop: 0,
       paddingBottom: 0,
@@ -90,8 +91,7 @@ export const createStyles = (colors: ThemeColors) =>
     },
 
     actionButtonText: {
-      fontWeight: '600',
-      fontSize: 14,
+      ...Typography.caption,
       marginStart: 6,
       color:'#5C4E75'
     },
@@ -109,8 +109,7 @@ export const createStyles = (colors: ThemeColors) =>
     },
 
     nextButtonText: {
-      fontSize: 16,
-      fontWeight: '600',
+      ...Typography.body,
       marginEnd: 5,
       marginBottom: 2,
       color: colors.background,

@@ -35,7 +35,6 @@ export default function ExtraDetailsScreen({onNextPress} : Props) {
     setIsDropdownOpen,
 
     saveRideDetails,
-    handleBackPress,
   } = useRideDetailsViewModel();
 
   const handleNextPress = () => {

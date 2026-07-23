@@ -29,64 +29,68 @@ export default function RideConfirmationSheet({ onNextPress }: Props) {
 
   const snapPoints = useMemo(() => ['30%', '70%'], []);
 
-    const handleFindPress = () => {
-      vm.handleFindDriver();
-      onNextPress();
-    }
+  const handleFindPress = () => {
+    vm.handleFindDriver();
+    onNextPress();
+  };
 
   return (
-      <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1}>
-        <View style={styles.grid}>
-          <InfoBox
-            icon={<ClockIcon width={16} height={16} fill={colors.primary} />}
-            title={t('time')}
-            value={vm.rideData.timeEstimate || 'N/A'}
-          />
-
-          <InfoBox
-            icon={
-              <EstimatedPriceIcon
-                width={16}
-                height={16}
-                fill={colors.primary}
-              />
-            }
-            title={t('totalPrice')}
-            value={vm.rideData.price || 'N/A'}
-          />
-
-          <InfoBox
-            icon={<CarIcon width={16} height={16} fill={colors.primary} />}
-            title={t('selectedCar')}
-            value={vm.rideData.vehicleType ? t(vm.rideData.vehicleType) : 'N/A'}
-          />
-
-          <InfoBox
-            icon={<CashIcon width={16} height={16} fill={colors.primary} />}
-            title={t('payment')}
-            value={vm.rideData.payment ? t(vm.rideData.payment) : 'N/A'}
-          />
-        </View>
-
-        <View style={styles.contactSection}>
-          <View style={styles.contactHeader}>
-            <PhoneNumberIcon width={18} height={18} fill={colors.textPrimary} />
-
-            <TextInput
-              style={styles.input}
-              placeholder="+963 9** *** ***"
-              placeholderTextColor={colors.textMuted}
-            />
-          </View>
-        </View>
-
-        <ActionButton
-          onPress={handleFindPress}
-          title={t('findaDriver')}
-          icon={<SearchIcon fill={colors.background} />}
-          textStyle={styles.buttonText}
-          style={styles.button}
+    <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1}>
+      <View style={styles.grid}>
+        <InfoBox
+          icon={<ClockIcon width={16} height={16} fill={colors.primary} />}
+          title={t('time')}
+          value={vm.rideData.timeEstimate || 'N/A'}
         />
-      </BaseBottomSheet>
+
+        <InfoBox
+          icon={
+            <EstimatedPriceIcon width={16} height={16} fill={colors.primary} />
+          }
+          title={t('totalPrice')}
+          value={vm.rideData.price || 'N/A'}
+        />
+
+        <InfoBox
+          icon={<CarIcon width={16} height={16} fill={colors.primary} />}
+          title={t('selectedCar')}
+          value={
+            vm.rideData.vehicleType
+              ? t(`common:carType.${vm.rideData.vehicleType}`)
+              : 'N/A'
+          }
+        />
+
+        <InfoBox
+          icon={<CashIcon width={16} height={16} fill={colors.primary} />}
+          title={t('payment')}
+          value={
+            vm.rideData.payment
+              ? t(`common:payment.${vm.rideData.payment}`)
+              : 'N/A'
+          }
+        />
+      </View>
+
+      <View style={styles.contactSection}>
+        <View style={styles.contactHeader}>
+          <PhoneNumberIcon width={18} height={18} fill={colors.textPrimary} />
+
+          <TextInput
+            style={styles.input}
+            placeholder="+963 9** *** ***"
+            placeholderTextColor={colors.textMuted}
+          />
+        </View>
+      </View>
+
+      <ActionButton
+        onPress={handleFindPress}
+        title={t('findaDriver')}
+        icon={<SearchIcon fill={colors.background} />}
+        textStyle={styles.buttonText}
+        style={styles.button}
+      />
+    </BaseBottomSheet>
   );
 }

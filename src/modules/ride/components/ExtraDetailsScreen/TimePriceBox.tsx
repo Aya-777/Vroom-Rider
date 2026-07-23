@@ -16,28 +16,23 @@ type Props = {
 export default function TimePriceBox({ time, price }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
-  const {t} = useTranslation(['rideDetails', 'common']);
+  const { t } = useTranslation(['rideDetails', 'common']);
 
   return (
     <View style={styles.timePriceRow}>
+      <InfoBox
+        icon={<ClockIcon width={16} height={16} fill={colors.primary} />}
+        title={t('time')}
+        value={time || 'N/A'}
+      />
 
       <InfoBox
-                icon={<ClockIcon width={16} height={16} fill={colors.primary} />}
-                title={t('time')}
-                value={time || 'N/A'}
-              />
-      
-              <InfoBox
-                icon={
-                  <EstimatedPriceIcon
-                    width={16}
-                    height={16}
-                    fill={colors.primary}
-                  />
-                }
-                title={t('estimated')}
-                value={price || 'N/A'}
-              />
+        icon={
+          <EstimatedPriceIcon width={16} height={16} fill={colors.primary} />
+        }
+        title={t('estimated')}
+        value={price || 'N/A'}
+      />
     </View>
   );
 }
