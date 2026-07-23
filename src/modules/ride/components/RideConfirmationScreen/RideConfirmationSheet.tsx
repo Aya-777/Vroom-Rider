@@ -33,6 +33,7 @@ export default function RideConfirmationSheet({ onNextPress }: Props) {
     vm.handleFindDriver();
     onNextPress();
   };
+  console.log(vm.rideData);
 
   return (
     <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1}>
@@ -48,7 +49,7 @@ export default function RideConfirmationSheet({ onNextPress }: Props) {
             <EstimatedPriceIcon width={16} height={16} fill={colors.primary} />
           }
           title={t('totalPrice')}
-          value={vm.estimate.price || 'N/A'}
+          value={`${vm.estimate.price}$` || 'N/A'}
         />
 
         <InfoBox
