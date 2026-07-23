@@ -116,7 +116,7 @@ export default function Input({
             {t(`common:${error}`)}
           </Text>
         ) : (
-          <View style={styles.errorPlaceholder} />
+          <></>
         )}
       </View>
     </View>

@@ -19,8 +19,8 @@ export const createStyles = (colors: ThemeColors) =>
 
     dropdown: {
       flexDirection: 'row',
-      paddingVertical: 8,
-      paddingHorizontal: 14,
+      paddingVertical: 4,
+      paddingHorizontal: 5,
       borderRadius: 20,
       alignItems: 'center',
       marginHorizontal: 6,
@@ -96,6 +96,7 @@ export const createStyles = (colors: ThemeColors) =>
       shadowOpacity: 0.15,
       shadowRadius: 6,
       paddingVertical: 4,
+      backgroundColor: colors.backgroundSoft,
     },
 
     menuItem: {
@@ -110,8 +111,8 @@ export const createStyles = (colors: ThemeColors) =>
 
     actionButton: {
       flexDirection: 'row',
-      width: '50%',
-      paddingVertical: 14,
+      width: '45%',
+      paddingVertical: 10,
       borderRadius: 25,
       justifyContent: 'center',
       alignItems: 'center',

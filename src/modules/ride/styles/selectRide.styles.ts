@@ -18,6 +18,7 @@ export const createStyles = (colors: ThemeColors) =>
       width: '100%',
       borderRadius: 16,
       padding: 16,
+      paddingBottom: 0,
       flexDirection: 'row',
       elevation: 2,
       shadowColor: '#000',
@@ -57,13 +58,14 @@ export const createStyles = (colors: ThemeColors) =>
       height: 35,
       fontSize: 15,
       color: colors.textPrimary,
-      paddingTop: 5,
-      paddingBottom: 5,
+      paddingTop: 0,
+      paddingBottom: 0,
       paddingLeft: 10,
     },
 
     divider: {
       height: 1,
+      marginTop: -10,
       marginVertical: 8,
       backgroundColor: colors.primary,
     },
@@ -79,7 +81,7 @@ export const createStyles = (colors: ThemeColors) =>
     actionButton: {
       flexDirection: 'row',
       width: '48%',
-      paddingVertical: 12,
+      paddingVertical: 8,
       borderRadius: 12,
       justifyContent: 'center',
       alignItems: 'center',
