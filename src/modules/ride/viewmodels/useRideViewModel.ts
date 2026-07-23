@@ -3,11 +3,23 @@ import { RideState } from '../types/RideState';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
-import LocationService, { Location } from '../../../core/services/location/LocationService';
+import LocationService, {
+  Location,
+} from '../../../core/services/location/LocationService';
+import { useRideStore } from '../store/useRideStore';
+
+const previousState: Partial<Record<RideState, RideState>> = {
+  [RideState.EXTRA_DETAILS]: RideState.SELECT_RIDE,
+  [RideState.CONFIRM_RIDE]: RideState.EXTRA_DETAILS,
+  [RideState.DRIVER_FOUND]: RideState.CONFIRM_RIDE,
+  [RideState.DRIVER_ARRIVED]: RideState.DRIVER_FOUND,
+  [RideState.TRIP_STARTED]: RideState.DRIVER_ARRIVED,
+};
 
 export function useRideViewModel() {
   const [rideState, setRideState] = useState(RideState.SELECT_RIDE);
   const [currentLocation, setCurrentLocation] = useState<Location>();
+  const { rideData, estimate, setEstimate } = useRideStore();
 
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
@@ -28,32 +40,53 @@ export function useRideViewModel() {
     loadLocation();
   }, []);
 
+  const goToExtraDetails = async () => {
+    /*
+    call your estimate API here
 
-  const goToExtraDetails = () =>
+    example response:
+    {
+      price: 24.5,
+      time: "15 min",
+      distance: 8
+    }
+  */
+
+    const response = {
+      price: '24.5',
+      time: '15 min',
+      distance: 8,
+    };
+
+    setEstimate(response);
+
     setRideState(RideState.EXTRA_DETAILS);
+  };
 
-  const goToRideConfirmation = () =>
-    setRideState(RideState.CONFIRM_RIDE);
+  const goToRideConfirmation = () => setRideState(RideState.CONFIRM_RIDE);
 
-  const goToDriverFound = () =>
-    setRideState(RideState.DRIVER_FOUND);
+  const goToDriverFound = () => setRideState(RideState.DRIVER_FOUND);
 
-  const goToDriverArrived = () =>
-    setRideState(RideState.DRIVER_ARRIVED);
+  const goToDriverArrived = () => setRideState(RideState.DRIVER_ARRIVED);
 
-  const goToTripStarted = () =>
-    setRideState(RideState.TRIP_STARTED);
+  const goToTripStarted = () => setRideState(RideState.TRIP_STARTED);
 
-  const resetRide = () =>
-    setRideState(RideState.SELECT_RIDE);
+  const resetRide = () => setRideState(RideState.SELECT_RIDE);
 
   const handleBackPress = () => {
-    navigation.goBack();
+    const previous = previousState[rideState];
+
+    if (previous) {
+      setRideState(previous);
+    } else {
+      navigation.goBack();
+    }
   };
 
   return {
     rideState,
     currentLocation,
+    estimate,
 
     handleBackPress,
     goToExtraDetails,

@@ -31,7 +31,7 @@ export default function TimePriceBox({ time, price }: Props) {
           <EstimatedPriceIcon width={16} height={16} fill={colors.primary} />
         }
         title={t('estimated')}
-        value={price || 'N/A'}
+        value={`${price}$` || 'N/A'}
       />
     </View>
   );

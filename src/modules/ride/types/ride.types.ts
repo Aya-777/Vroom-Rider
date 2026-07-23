@@ -1,3 +1,5 @@
+import { Double } from "react-native/Libraries/Types/CodegenTypes";
+
 export type Car = {
   model: string;
   color: string;
@@ -16,14 +18,24 @@ export interface RideValidationErrors {
   toLocation?: string;
 }
 
+export interface Prefrences{
+  name: string,
+  code: string,
+  price: Double,
+}
+
 export interface RideParams {
   pickupLocation: string;
   dropoffLocation: string;
   selectedPerson: string;
-  timeEstimate: string; 
   time: string;
   payment: string;
   vehicleType: string;
-  price: string;
+  prefrences: Array<Prefrences>,
   contactPhone: string;
+}
+
+export interface RideEstimate {
+  price: string;
+  time: string;
 }

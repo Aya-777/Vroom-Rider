@@ -40,7 +40,7 @@ export default function RideConfirmationSheet({ onNextPress }: Props) {
         <InfoBox
           icon={<ClockIcon width={16} height={16} fill={colors.primary} />}
           title={t('time')}
-          value={vm.rideData.timeEstimate || 'N/A'}
+          value={vm.estimate.time || 'N/A'}
         />
 
         <InfoBox
@@ -48,7 +48,7 @@ export default function RideConfirmationSheet({ onNextPress }: Props) {
             <EstimatedPriceIcon width={16} height={16} fill={colors.primary} />
           }
           title={t('totalPrice')}
-          value={vm.rideData.price || 'N/A'}
+          value={vm.estimate.price || 'N/A'}
         />
 
         <InfoBox

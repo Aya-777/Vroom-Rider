@@ -10,7 +10,11 @@ import TripStartedSheet from '../TripStartedScreen/TripStartedSheet';
 type Props = {
   rideState: RideState;
   currentLocation: string;
-
+  estimate: {
+    price?: string;
+    time?: string;
+    distance?: number;
+  };
   onSelectRideNext: () => void;
   onExtraDetailsNext: () => void;
   onRideConfirmed: () => void;
@@ -27,15 +31,21 @@ export default function RideBottomSheet({
   onDriverFound,
   onTripStarted,
   onTripEnded,
-  currentLocation
+  currentLocation,
+  estimate,
 }: Props) {
   const renderSheet = () => {
     switch (rideState) {
       case RideState.SELECT_RIDE:
-        return <SelectRideSheet onNextPress={onSelectRideNext} currentLocation={currentLocation} />;
+        return (
+          <SelectRideSheet
+            onNextPress={onSelectRideNext}
+            currentLocation={currentLocation}
+          />
+        );
 
       case RideState.EXTRA_DETAILS:
-        return <ExtraDetailsSheet onNextPress={onExtraDetailsNext} />;
+        return <ExtraDetailsSheet onNextPress={onExtraDetailsNext} estimate={estimate}/>;
 
       case RideState.CONFIRM_RIDE:
         return <RideConfirmationSheet onNextPress={onRideConfirmed} />;

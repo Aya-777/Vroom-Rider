@@ -2,40 +2,39 @@ import { useState } from 'react';
 import { useRideStore } from '../store/useRideStore';
 
 export function useRideDetailsViewModel() {
-  
-  const setRideDetails = useRideStore((state) => state.setRideDetails)
+  const { rideData, setRideDetails } = useRideStore();
 
-  const [timeEstimate, setTimeEstimate] = useState('30:00 m');
-  const [priceEstimate, setPriceEstimate] = useState('$24.50');
-  const [selectedVehicle, setSelectedVehicle] = useState('economy');
-  const [selectedPayment, setSelectedPayment] = useState('cash');
+  // UI State only
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-
-  const saveRideDetails = () => {
-
+  // Ride data setters
+  const setSelectedVehicle = (vehicle: string) => {
     setRideDetails({
-      payment: selectedPayment,
-      vehicleType: selectedVehicle,
-      price: priceEstimate,
-      timeEstimate: timeEstimate,
-    })
+      vehicleType: vehicle,
+    });
+  };
 
-  }
+  const setSelectedPayment = (payment: string) => {
+    setRideDetails({
+      payment,
+    });
+  };
+
+  const updateRideDetails = () => {};
 
   return {
-    timeEstimate,
-    priceEstimate,
-    selectedVehicle,
-    selectedPayment,
+    // ride Data
+    selectedVehicle: rideData.vehicleType ?? 'economy',
+    selectedPayment: rideData.payment ?? 'cash',
+
+    // UI
     isDropdownOpen,
 
-    setTimeEstimate,
-    setPriceEstimate,
+    // Setters,
     setSelectedVehicle,
     setSelectedPayment,
     setIsDropdownOpen,
 
-    saveRideDetails,
+    updateRideDetails,
   };
 }

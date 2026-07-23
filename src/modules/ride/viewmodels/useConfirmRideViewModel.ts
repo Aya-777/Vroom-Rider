@@ -3,7 +3,7 @@ import { useRideStore } from '../store/useRideStore';
 
 export function useConfirmRideViewModel() {
   const [isLoading, setIsLoading] = useState(false);
-  const rideData = useRideStore(state => state.activeRide);
+  const { rideData, estimate } = useRideStore();
 
   const handleFindDriver = async () => {
     // setIsLoading(true);
@@ -19,5 +19,5 @@ export function useConfirmRideViewModel() {
     // }
   };
 
-  return { handleFindDriver, isLoading, rideData };
+  return { handleFindDriver, isLoading, rideData, estimate };
 }

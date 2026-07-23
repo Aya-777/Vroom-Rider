@@ -12,9 +12,14 @@ import ArrowRight from '../../../../assets/svg/arrows/arrow.svg';
 
 type Props = {
   onNextPress: () => void;
+   estimate: {
+    price?: string;
+    time?: string;
+    distance?: number;
+  };
 };
 
-export default function ExtraDetailsScreen({onNextPress} : Props) {
+export default function ExtraDetailsScreen({onNextPress, estimate} : Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['rideDetails', 'common']);
@@ -25,8 +30,6 @@ export default function ExtraDetailsScreen({onNextPress} : Props) {
   ];
 
   const {
-    timeEstimate,
-    priceEstimate,
     selectedVehicle,
     selectedPayment,
     isDropdownOpen,
@@ -34,11 +37,11 @@ export default function ExtraDetailsScreen({onNextPress} : Props) {
     setSelectedPayment,
     setIsDropdownOpen,
 
-    saveRideDetails,
+    updateRideDetails,
   } = useRideDetailsViewModel();
 
   const handleNextPress = () => {
-    saveRideDetails();
+    updateRideDetails();
     onNextPress();
   };
 
@@ -46,7 +49,7 @@ export default function ExtraDetailsScreen({onNextPress} : Props) {
 
   return (
     <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1}>
-      <TimePriceBox time={timeEstimate} price={priceEstimate} />
+      <TimePriceBox time={estimate.time ?? ''} price={estimate.price ?? ''} />
 
       <RideActionFilters
         selectedValue={t(`common:payment.${selectedPayment}`)}

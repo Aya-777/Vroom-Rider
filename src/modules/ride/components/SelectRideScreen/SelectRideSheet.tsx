@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useSelectRideViewModel } from '../../viewmodels/useSelectRideViewModel';
 import { BaseBottomSheet } from '../../../../shared/components/BaseBottomSheet';
 import RideDropdown from '../../components/shared/RideDropdown';
@@ -19,7 +19,10 @@ type Props = {
   currentLocation: string;
 };
 
-export default function SelectRideSheet({ onNextPress, currentLocation }: Props) {
+export default function SelectRideSheet({
+  onNextPress,
+  currentLocation,
+}: Props) {
   const { colors, mode } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['selectRide', 'common']);
@@ -45,7 +48,7 @@ export default function SelectRideSheet({ onNextPress, currentLocation }: Props)
     setToLocation,
 
     validate,
-    saveRideDetails,
+    updateRideDetails,
   } = useSelectRideViewModel(showAlert, currentLocation);
 
   const personItems = [
@@ -63,7 +66,7 @@ export default function SelectRideSheet({ onNextPress, currentLocation }: Props)
       return;
     }
 
-    saveRideDetails();
+    updateRideDetails();
 
     onNextPress();
   };

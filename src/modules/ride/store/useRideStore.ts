@@ -1,15 +1,45 @@
 import { create } from 'zustand';
 import { RideParams } from '../types/ride.types';
 
+interface RideEstimate {
+  price?: string;
+  time?: string;
+  distance?: number;
+}
+
 interface RideState {
-  activeRide: Partial<RideParams>;
+  rideData: Partial<RideParams>;
+
+  estimate: RideEstimate;
+
   setRideDetails: (details: Partial<RideParams>) => void;
+
+  setEstimate: (estimate: RideEstimate) => void;
+
   clearRide: () => void;
 }
 
 export const useRideStore = create<RideState>((set) => ({
-  activeRide: {},
-  setRideDetails: (details) => 
-    set((state) => ({ activeRide: { ...state.activeRide, ...details } })),
-  clearRide: () => set({ activeRide: {} }),
+  rideData: {},
+
+  estimate: {},
+
+  setRideDetails: (details) =>
+    set((state) => ({
+      rideData: {
+        ...state.rideData,
+        ...details,
+      },
+    })),
+
+  setEstimate: (estimate) =>
+    set({
+      estimate,
+    }),
+
+  clearRide: () =>
+    set({
+      rideData: {},
+      estimate: {},
+    }),
 }));

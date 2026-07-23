@@ -1,82 +1,122 @@
 import { useEffect, useState } from 'react';
-import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 import { RideValidationErrors } from '../types/ride.types';
 import { validateRideInputs } from '../utils/selectRideValidation';
 import { useRideStore } from '../store/useRideStore';
 import { useTranslation } from 'react-i18next';
 
-export function useSelectRideViewModel(showAlert: (title: string, msg: string) => void,  currentLocation: string) {
-  const { setRideDetails } = useRideStore();
-  
+export function useSelectRideViewModel(
+  showAlert: (title: string, msg: string) => void,
+  currentLocation: string,
+) {
+  const { setRideDetails, rideData } = useRideStore();
+
   // --- UI State ---
   const [isNowDropdownOpen, setIsNowDropdownOpen] = useState(false);
   const [isForMeDropdownOpen, setIsForMeDropdownOpen] = useState(false);
-  const [selectedPerson, setSelectedPerson] = useState('forMe');
-  const [selectedTime, setSelectedTime] = useState('now');
-  const [fromLocation, setFromLocation] = useState(currentLocation);
-  const [toLocation, setToLocation] = useState('');
-  const [contactPhone, setContactPhone] = useState('');
   const [errors, setErrors] = useState<RideValidationErrors>({});
+
   const { t } = useTranslation('selectRide');
-  
+
+  // --- Set current location as pickup initially ---
   useEffect(() => {
-    if (currentLocation) {
-      setFromLocation(currentLocation);
+    if (currentLocation && !rideData.pickupLocation) {
+      setRideDetails({
+        pickupLocation: currentLocation,
+      });
     }
   }, [currentLocation]);
 
+  // --- Ride Data Handlers ---
+
+  const setFromLocation = (value: string) => {
+    setRideDetails({
+      pickupLocation: value,
+    });
+  };
+
+  const setToLocation = (value: string) => {
+    setRideDetails({
+      dropoffLocation: value,
+    });
+  };
+
+  const setSelectedPerson = (value: string) => {
+    setRideDetails({
+      selectedPerson: value,
+    });
+  };
+
+  const setSelectedTime = (value: string) => {
+    setRideDetails({
+      time: value,
+    });
+  };
+
+  const setContactPhone = (value: string) => {
+    setRideDetails({
+      contactPhone: value,
+    });
+  };
+
   // --- Logic ---
   const validate = (): boolean => {
-    const rawErrors = validateRideInputs(fromLocation, toLocation);
+    const rawErrors = validateRideInputs(
+      rideData.pickupLocation ?? '',
+      rideData.dropoffLocation ?? '',
+    );
 
     const translatedErrors: RideValidationErrors = {};
-    Object.keys(rawErrors).forEach((key) => {
+
+    Object.keys(rawErrors).forEach(key => {
       translatedErrors[key as keyof RideValidationErrors] = t(rawErrors[key]);
     });
 
     setErrors(translatedErrors);
+
     return Object.keys(rawErrors).length === 0;
   };
 
-  // Actions
-  const saveRideDetails = () => {
+  // --- Actions ---
+  const updateRideDetails = () => {
     if (!validate()) {
-      showAlert('Missing Information', 'Please fill in both pickup and destination locations.');
+      showAlert(
+        'Missing Information',
+        'Please fill in both pickup and destination locations.',
+      );
+
       return;
     }
 
-    setRideDetails({
-      pickupLocation: fromLocation,
-      dropoffLocation: toLocation,
-      selectedPerson: selectedPerson,
-      time: selectedTime,
-      contactPhone: contactPhone
-    });
-
+    // No need to save here anymore.
+    // Data is already stored in Zustand while typing.
   };
 
   return {
-    // State
+    // UI State
     isNowDropdownOpen,
     isForMeDropdownOpen,
-    selectedPerson,
-    selectedTime,
-    fromLocation,
-    toLocation,
-    contactPhone,
     errors,
-    
-    // Setters
+
+    // Ride Data
+    fromLocation: rideData.pickupLocation ?? '',
+    toLocation: rideData.dropoffLocation ?? '',
+    selectedPerson: rideData.selectedPerson ?? 'forMe',
+    selectedTime: rideData.time ?? 'now',
+    contactPhone: rideData.contactPhone ?? '',
+
+    // UI Setters
     setIsNowDropdownOpen,
     setIsForMeDropdownOpen,
-    setSelectedPerson,
-    setSelectedTime,
+
+    // Ride Setters
     setFromLocation,
     setToLocation,
+    setSelectedPerson,
+    setSelectedTime,
     setContactPhone,
-    
+
     // Actions
     validate,
-    saveRideDetails,
+    updateRideDetails,
   };
 }
