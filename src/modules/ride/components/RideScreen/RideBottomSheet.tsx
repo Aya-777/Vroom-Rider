@@ -56,7 +56,7 @@ export default function RideBottomSheet({
         return <DriverFoundSheet onDriverFound={onDriverFound} onCancelPress={onCancelPress} />;
 
       case RideState.DRIVER_ARRIVED:
-        return <DriverArrivedSheet onTripStarted={onTripStarted} />;
+        return <DriverArrivedSheet onTripStarted={onTripStarted} onCancelPress={onCancelPress}/>;
 
       case RideState.TRIP_STARTED:
         return <TripStartedSheet onTripEnded={onTripEnded} />;
