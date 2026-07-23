@@ -42,6 +42,7 @@ export default function RideScreen() {
 
       <RideBottomSheet
         rideState={vm.rideState}
+        currentLocation={vm.currentLocation?.address || ''}
         onSelectRideNext={vm.goToExtraDetails}
         onExtraDetailsNext={vm.goToRideConfirmation}
         onRideConfirmed={vm.goToDriverFound}

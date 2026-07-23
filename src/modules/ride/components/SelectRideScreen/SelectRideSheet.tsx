@@ -16,9 +16,10 @@ import { Alert, View } from 'react-native';
 
 type Props = {
   onNextPress: () => void;
+  currentLocation: string;
 };
 
-export default function SelectRideSheet({ onNextPress }: Props) {
+export default function SelectRideSheet({ onNextPress, currentLocation }: Props) {
   const { colors, mode } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['selectRide', 'common']);
@@ -45,8 +46,7 @@ export default function SelectRideSheet({ onNextPress }: Props) {
 
     validate,
     saveRideDetails,
-    handleBackPress,
-  } = useSelectRideViewModel(showAlert);
+  } = useSelectRideViewModel(showAlert, currentLocation);
 
   const personItems = [
     { key: 'forMe', label: t('selectRide:forMe') },
@@ -98,7 +98,7 @@ export default function SelectRideSheet({ onNextPress }: Props) {
       </View>
 
       <RideLocationInputs
-        fromLocation={fromLocation}
+        fromLocation={currentLocation}
         toLocation={toLocation}
         onChangeFrom={setFromLocation}
         onChangeTo={setToLocation}

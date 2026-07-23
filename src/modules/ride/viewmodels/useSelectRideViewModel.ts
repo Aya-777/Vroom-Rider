@@ -5,7 +5,7 @@ import { validateRideInputs } from '../utils/selectRideValidation';
 import { useRideStore } from '../store/useRideStore';
 import { useTranslation } from 'react-i18next';
 
-export function useSelectRideViewModel(showAlert: (title: string, msg: string) => void) {
+export function useSelectRideViewModel(showAlert: (title: string, msg: string) => void,  currentLocation: string) {
   const { setRideDetails } = useRideStore();
 
   // --- UI State ---
@@ -13,7 +13,7 @@ export function useSelectRideViewModel(showAlert: (title: string, msg: string) =
   const [isForMeDropdownOpen, setIsForMeDropdownOpen] = useState(false);
   const [selectedPerson, setSelectedPerson] = useState('forMe');
   const [selectedTime, setSelectedTime] = useState('now');
-  const [fromLocation, setFromLocation] = useState('');
+  const [fromLocation, setFromLocation] = useState(currentLocation? currentLocation : '');
   const [toLocation, setToLocation] = useState('');
   const [contactPhone, setContactPhone] = useState('');
   const [errors, setErrors] = useState<RideValidationErrors>({});
