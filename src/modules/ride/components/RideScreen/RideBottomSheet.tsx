@@ -21,6 +21,7 @@ type Props = {
   onDriverFound: () => void;
   onTripStarted: () => void;
   onTripEnded: () => void;
+  onCancelPress: () => void
 };
 
 export default function RideBottomSheet({
@@ -33,6 +34,7 @@ export default function RideBottomSheet({
   onTripEnded,
   currentLocation,
   estimate,
+  onCancelPress
 }: Props) {
   const renderSheet = () => {
     switch (rideState) {
@@ -51,7 +53,7 @@ export default function RideBottomSheet({
         return <RideConfirmationSheet onNextPress={onRideConfirmed} />;
 
       case RideState.DRIVER_FOUND:
-        return <DriverFoundSheet onDriverFound={onDriverFound} />;
+        return <DriverFoundSheet onDriverFound={onDriverFound} onCancelPress={onCancelPress} />;
 
       case RideState.DRIVER_ARRIVED:
         return <DriverArrivedSheet onTripStarted={onTripStarted} />;

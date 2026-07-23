@@ -146,4 +146,8 @@ export const createStyles = (colors: ThemeColors) =>
       opacity: 0.8,
       color: colors.surface,
     },
+    canelButton:{
+      backgroundColor: colors.error,
+      marginTop: 10,
+    }
   });

@@ -7,36 +7,33 @@ import LocationService, {
   Location,
 } from '../../../core/services/location/LocationService';
 import { useRideStore } from '../store/useRideStore';
+import rideService from '../services/rideService';
 
 const previousState: Partial<Record<RideState, RideState>> = {
   [RideState.EXTRA_DETAILS]: RideState.SELECT_RIDE,
   [RideState.CONFIRM_RIDE]: RideState.EXTRA_DETAILS,
-  [RideState.DRIVER_FOUND]: RideState.CONFIRM_RIDE,
-  [RideState.DRIVER_ARRIVED]: RideState.DRIVER_FOUND,
-  [RideState.TRIP_STARTED]: RideState.DRIVER_ARRIVED,
 };
 
 export function useRideViewModel() {
   const [rideState, setRideState] = useState(RideState.SELECT_RIDE);
   const [currentLocation, setCurrentLocation] = useState<Location>();
-  const { rideData, estimate, setEstimate } = useRideStore();
+  const { rideData, estimate, setEstimate, clearRide } = useRideStore();
 
   const navigation =
-    useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
-
+  useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
+  
   useEffect(() => {
     const loadLocation = async () => {
       try {
         const location = await LocationService.getCurrentLocation();
-
+        
         setCurrentLocation(location);
-
+        
         console.log('Address:', location.address);
       } catch (error) {
         console.error('Failed to get location:', error);
       }
     };
-
     loadLocation();
   }, []);
 
@@ -75,13 +72,33 @@ export function useRideViewModel() {
 
   const handleBackPress = () => {
     const previous = previousState[rideState];
-
-    if (previous) {
+    if(rideState === RideState.SELECT_RIDE){
+      navigation.goBack()
+    }else if (previous) {
       setRideState(previous);
-    } else {
-      navigation.goBack();
     }
   };
+
+  const cancelCurrentRide = async () => {
+  try {
+
+    if (!rideData.id) {
+      console.log('No active ride');
+      return;
+    }
+    await rideService.cancelRide(rideData.id);
+    clearRide();
+    setRideState(RideState.SELECT_RIDE);
+
+  } catch (error) {
+
+    console.error(
+      'Failed to cancel ride:',
+      error
+    );
+
+  }
+};
 
   return {
     rideState,
@@ -95,5 +112,6 @@ export function useRideViewModel() {
     goToDriverArrived,
     goToTripStarted,
     resetRide,
+    cancelCurrentRide
   };
 }

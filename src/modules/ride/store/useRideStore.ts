@@ -21,6 +21,7 @@ interface RideState {
 
 export const useRideStore = create<RideState>((set) => ({
   rideData: {
+    id: '1',
     vehicleType: 'economy',
     payment: 'cash',
     selectedPerson: 'forMe',

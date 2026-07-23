@@ -25,6 +25,7 @@ export interface Prefrences{
 }
 
 export interface RideParams {
+  id: string;
   pickupLocation: string;
   dropoffLocation: string;
   selectedPerson: string;

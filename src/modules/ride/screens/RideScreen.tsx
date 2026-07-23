@@ -48,6 +48,7 @@ export default function RideScreen() {
         onDriverFound={vm.goToDriverArrived}
         onTripStarted={vm.goToTripStarted}
         onTripEnded={handleTripEnded}
+        onCancelPress={vm.cancelCurrentRide}
       />
     </View>
   );
