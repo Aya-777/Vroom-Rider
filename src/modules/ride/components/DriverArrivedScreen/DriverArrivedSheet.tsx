@@ -78,6 +78,7 @@ export default function DriverArrivedSheet({
         title={t('common:cancel')}
         onPress={handleCancelPress}
         style={styles.canelButton}
+        textStyle={styles.cancelButtonText}
       />
     </BaseBottomSheet>
   );

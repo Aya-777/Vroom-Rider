@@ -149,5 +149,10 @@ export const createStyles = (colors: ThemeColors) =>
     canelButton:{
       backgroundColor: colors.error,
       marginTop: 10,
+    },
+    cancelButtonText: {
+      ...Typography.caption,
+      marginStart: 6,
+      color: colors.textSecondary,
     }
   });
