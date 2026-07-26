@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, RefreshControl } from 'react-native';
 
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/profile.styles';
@@ -20,7 +20,7 @@ import { navigate } from '../../../navigation/rootTypes';
 
 
 export default function ProfileScreen() {
-  const { gridItems, listItems, openSidebar, profile, isLoading } = useProfileViewModel();
+  const { gridItems, listItems, openSidebar, profile, isLoading, isRefreshing, onRefresh } = useProfileViewModel();
   const { logout } = useProfileActions();
 
   const { colors } = useTheme();
@@ -37,7 +37,18 @@ export default function ProfileScreen() {
       <Header title={t('welcome')} onNotificationPress={() => navigate('Notifications')} onMenuPress={openSidebar} />
 
       <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefreshing}
+              onRefresh={onRefresh}
+              tintColor={colors.primary}
+              colors={[colors.primary]}
+            />
+          }
+        >
           <ProfileCard
             firstName={profile?.firstName}
             lastName={profile?.lastName}

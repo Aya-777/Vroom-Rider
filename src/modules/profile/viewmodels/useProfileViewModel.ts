@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useProfileMenuItems } from '../constants/profileData';
 import { useMainDrawer } from '../../../navigation/hooks/useMainDrawer';
 import { profileRepository } from '../repositories/profileRepository';
@@ -10,39 +10,49 @@ export const useProfileViewModel = () => {
 
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    let isMounted = true;
+  const isMounted = useRef(true);
 
-    const fetchProfile = async () => {
-      try {
-        setIsLoading(true);
-        setError(null);
-        const data = await profileRepository.getMyProfile();
-        if (isMounted) setProfile(data);
+  const fetchProfile = async (mode: 'initial' | 'refresh') => {
+    try {
+      if (mode === 'initial') setIsLoading(true);
+      else setIsRefreshing(true);
+      setError(null);
 
-      } catch (err) {
-        if (isMounted) {
-          const message = err instanceof Error ? err.message : 'FETCH_PROFILE_FAILED';
-          setError(message);
-        }
-      } finally {
-        if (isMounted) setIsLoading(false);
+      const data = await profileRepository.getMyProfile();
+      if (isMounted.current) setProfile(data);
+    } catch (err) {
+      if (isMounted.current) {
+        const message = err instanceof Error ? err.message : 'FETCH_PROFILE_FAILED';
+        setError(message);
       }
-    };
+    } finally {
+      if (isMounted.current) {
+        if (mode === 'initial') setIsLoading(false);
+        else setIsRefreshing(false);
+      }
+    }
+  };
 
-    fetchProfile();
+  useEffect(() => {
+    isMounted.current = true;
+    fetchProfile('initial');
     return () => {
-      isMounted = false;
+      isMounted.current = false;
     };
   }, []);
+
+  const onRefresh = () => fetchProfile('refresh');
 
   return {
     openSidebar,
     profile,
     isLoading,
+    isRefreshing,
     error,
+    onRefresh,
     gridItems,
     listItems,
   };
