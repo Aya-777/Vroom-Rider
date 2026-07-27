@@ -73,18 +73,6 @@ export default function RideConfirmationSheet({ onNextPress }: Props) {
         />
       </View>
 
-      <View style={styles.contactSection}>
-        <View style={styles.contactHeader}>
-          <PhoneNumberIcon width={18} height={18} fill={colors.textPrimary} />
-
-          <TextInput
-            style={styles.input}
-            placeholder="+963 9** *** ***"
-            placeholderTextColor={colors.textMuted}
-          />
-        </View>
-      </View>
-
       <ActionButton
         onPress={handleFindPress}
         title={t('findaDriver')}

@@ -9,10 +9,11 @@ import ScheduleIcon from '../../../../assets/svg/common/schedule.svg';
 import PinIcon from '../../../../assets/svg/common/pin.svg';
 import StarIcon from '../../../../assets/svg/common/star.svg';
 import ArrowRight from '../../../../assets/svg/arrows/arrow.svg';
+import PhoneNumberIcon from '../../../../assets/svg/contact/call.svg';
 import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/selectRide.styles';
 import { useTranslation } from 'react-i18next';
-import { Alert, View } from 'react-native';
+import { Alert, Text, TextInput, View } from 'react-native';
 import {SavedPlacesModal} from '../SavedPlaces/SavedPlacesModal';
 
 type Props = {
@@ -137,6 +138,18 @@ export default function SelectRideSheet({
         onSelectPlace={()=>{}}
         // onAddPlace={()=>{}}
       />
+
+      
+      <View style={styles.contactSection}>
+        <View style={styles.contactHeader}>
+          <PhoneNumberIcon width={18} height={18} fill={colors.textPrimary} />
+          <TextInput
+            style={styles.numberInput}
+            placeholder="+963 9** *** ***"
+            placeholderTextColor={colors.textMuted}
+          />
+        </View>
+      </View>
 
       <ActionButton
         onPress={handleNextPress}

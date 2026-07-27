@@ -59,29 +59,6 @@ export const createStyles = (colors: ThemeColors) =>
       backgroundColor: colors.border,
     },
 
-    contactSection: {
-      marginBottom: Spacing.lg,
-    },
-
-    contactHeader: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginBottom: Spacing.sm,
-      gap: Spacing.sm,
-    },
-
-    input: {
-      height: 35,
-      width: 300,
-      fontSize: 15,
-      borderRadius: Radius.lg,
-      paddingBottom: Spacing.sm,
-      marginTop: Spacing.sm,
-      backgroundColor: colors.background,
-      color: colors.textPrimary,
-      ...Shadows.small,
-    },
-
     button: {
       flexDirection: 'row',
       width: '70%',

@@ -1,6 +1,11 @@
 import { StyleSheet } from 'react-native';
 import { ThemeColors } from '../../../core/theme/theme.types';
-import { Typography } from '../../../core/theme/tokens';
+import {
+  Radius,
+  Shadows,
+  Spacing,
+  Typography,
+} from '../../../core/theme/tokens';
 
 export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
@@ -34,7 +39,7 @@ export const createStyles = (colors: ThemeColors) =>
       alignItems: 'center',
       justifyContent: 'space-between',
       paddingVertical: 10,
-      marginVertical: 4
+      marginVertical: 4,
     },
 
     timelineDot: {
@@ -90,10 +95,35 @@ export const createStyles = (colors: ThemeColors) =>
       backgroundColor: colors.surface,
     },
 
+    contactSection: {
+      alignItems: 'center',
+      // justifyContent: 'center',
+      marginBottom: Spacing.lg,
+    },
+
+    contactHeader: {  
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: Spacing.sm,
+      gap: Spacing.sm,
+    },
+
+    numberInput: {
+      height: 35,
+      width: 300,
+      fontSize: 15,
+      borderRadius: Radius.lg,
+      paddingBottom: Spacing.sm,
+      marginTop: Spacing.sm,
+      backgroundColor: colors.background,
+      color: colors.textPrimary,
+      ...Shadows.small,
+    },
+
     actionButtonText: {
       ...Typography.caption,
       marginStart: 6,
-      color:'#5C4E75'
+      color: '#5C4E75',
     },
 
     nextButton: {
