@@ -6,9 +6,10 @@ import { SavedPlace } from '../../types/savedPlaces.types';
 interface SavedPlaceItemProps {
   place: SavedPlace;
   onPress: () => void;
+  styles: any;
 }
 
-export const SavedPlaceItem: React.FC<SavedPlaceItemProps> = ({ place, onPress }) => {
+export const SavedPlaceItem: React.FC<SavedPlaceItemProps> = ({ place, onPress, styles }) => {
   return (
     <TouchableOpacity style={styles.container} activeOpacity={0.8} onPress={onPress}>
       <View style={styles.iconContainer}>
@@ -26,38 +27,5 @@ export const SavedPlaceItem: React.FC<SavedPlaceItemProps> = ({ place, onPress }
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#161D31',
-    borderRadius: 16,
-    padding: 14,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: '#202A44',
-  },
-  iconContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 12,
-    backgroundColor: '#1E2842',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 12,
-  },
-  textContainer: {
-    flex: 1,
-    marginRight: 8,
-  },
-  title: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: '#FFFFFF',
-    marginBottom: 2,
-  },
-  address: {
-    fontSize: 12,
-    color: '#8A9BB8',
-    lineHeight: 16,
-  },
+  
 });

@@ -1,10 +1,20 @@
 import React from 'react';
-import { View, Text, Modal, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import {
+  View,
+  Text,
+  Modal,
+  TouchableOpacity,
+  StyleSheet,
+  FlatList,
+} from 'react-native';
 // import Icon from 'react-native-vector-icons/Feather';
 import { SavedPlaceItem } from './SavedPlacesItem';
 import { SavedPlacesModalProps } from '../../types/savedPlaces.types';
 import CloseIcon from '../../../../assets/svg/common/close.svg';
 import AddIcon from '../../../../assets/svg/common/add.svg';
+import { createStyles } from '../../styles/savedPlaces.styles';
+import { useTheme } from '../../../../core/theme/useTheme';
+import { useTranslation } from 'react-i18next';
 
 export const SavedPlacesModal: React.FC<SavedPlacesModalProps> = ({
   visible,
@@ -13,6 +23,10 @@ export const SavedPlacesModal: React.FC<SavedPlacesModalProps> = ({
   onSelectPlace,
   // onAddPlace,
 }) => {
+  const { colors, mode } = useTheme();
+  const styles = createStyles(colors);
+  const { t } = useTranslation(['selectRide', 'common']);
+
   return (
     <Modal
       visible={visible}
@@ -42,8 +56,12 @@ export const SavedPlacesModal: React.FC<SavedPlacesModalProps> = ({
           /> */}
 
           {/* Add New Place Button */}
-          <TouchableOpacity style={styles.addButton} activeOpacity={0.85} onPress={()=>{}}>
-            <AddIcon width={18} height={18} fill="#5875F0"/>
+          <TouchableOpacity
+            style={styles.addButton}
+            activeOpacity={0.85}
+            onPress={() => {}}
+          >
+            <AddIcon width={18} height={18} fill="#5875F0" />
             <Text style={styles.addButtonText}>Add New Place</Text>
           </TouchableOpacity>
         </View>
@@ -51,66 +69,3 @@ export const SavedPlacesModal: React.FC<SavedPlacesModalProps> = ({
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  overlay: {
-    flex: 1,
-    backgroundColor: 'rgba(5, 8, 15, 0.75)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  modalContainer: {
-    width: '100%',
-    maxWidth: 380,
-    backgroundColor: '#0F1523',
-    borderRadius: 24,
-    borderWidth: 1,
-    borderColor: '#1D2840',
-    padding: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.5,
-    shadowRadius: 20,
-    elevation: 10,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#FFFFFF',
-  },
-  closeButton: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: '#161D31',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  listContainer: {
-    paddingBottom: 8,
-  },
-  addButton: {
-    flexDirection: 'row',
-    height: 52,
-    backgroundColor: '#D6E2FF',
-    borderRadius: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 8,
-  },
-  addIcon: {
-    marginRight: 8,
-  },
-  addButtonText: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: '#2648CE',
-  },
-});
