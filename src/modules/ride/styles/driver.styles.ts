@@ -147,12 +147,18 @@ export const createStyles = (colors: ThemeColors) =>
       color: colors.surface,
     },
     canelButton:{
-      backgroundColor: colors.error,
-      marginTop: 10,
+      backgroundColor: colors.error + '90',
+      borderWidth: 1,
+      borderColor: colors.error,
+      borderRadius: 12,
+      paddingVertical: 14,
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'row',
+      width: '90%',
     },
     cancelButtonText: {
-      ...Typography.caption,
-      marginStart: 6,
-      color: colors.textSecondary,
+      color: colors.error,
+      ...Typography.boldBody,
     }
   });
