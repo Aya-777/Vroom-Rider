@@ -25,11 +25,7 @@ export default function AddNewPlaceScreen() {
   const vm = useAddNewPlaceViewModel();
 
   const handleSave = () => {
-    vm.onSave(
-      vm.name as unknown as 'string',
-      vm.address as unknown as 'string',
-      vm.selectedIcon,
-    );
+    vm.onSave();
   };
 
   return (
@@ -40,6 +36,8 @@ export default function AddNewPlaceScreen() {
           <ScrollView
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
+            // Optional: prevent outer scroll when interacting with search results
+            scrollEnabled={vm.searchResults.length === 0}
           >
             {/* Name of Place Input */}
             <View style={styles.inputGroup}>
@@ -54,17 +52,43 @@ export default function AddNewPlaceScreen() {
             </View>
 
             {/* Address Input */}
-            <View style={styles.inputGroup}>
+            <View style={styles.addressGroup}>
               <Text style={styles.label}>Address</Text>
-              <View style={styles.addressInputContainer}>
-                <PinIcon width={18} height={20} fill="#7C8DB0" />
-                <TextInput
-                  style={styles.addressTextInput}
-                  placeholder="Search for address..."
-                  placeholderTextColor="#536280"
-                  value={vm.address}
-                  onChangeText={vm.setAddress}
-                />
+              <View style={styles.addressWrapper}>
+                <View style={styles.addressInputContainer}>
+                  <PinIcon width={18} height={20} fill="#7C8DB0" />
+
+                  <TextInput
+                    style={styles.addressTextInput}
+                    placeholder="Search for address..."
+                    placeholderTextColor="#536280"
+                    value={vm.address}
+                    onChangeText={vm.setAddress}
+                  />
+                </View>
+                {vm.searchResults.length > 0 && (
+                  <View style={styles.searchResultsContainer}>
+                    <ScrollView
+                      style={styles.searchScroll}
+                      contentContainerStyle={{ paddingVertical: 4 }}
+                      nestedScrollEnabled={true}
+                      keyboardShouldPersistTaps="always"
+                      showsVerticalScrollIndicator={true}
+                    >
+                      {vm.searchResults.map(place => (
+                        <TouchableOpacity
+                          style={styles.searchResultItem}
+                          onPress={() => vm.selectAddress(place)}
+                          key={`${place.latitude}-${place.longitude}`}
+                        >
+                          <Text style={styles.searchResultText}>
+                            {place.address}
+                          </Text>
+                        </TouchableOpacity>
+                      ))}
+                    </ScrollView>
+                  </View>
+                )}
               </View>
             </View>
 
