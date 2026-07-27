@@ -7,37 +7,36 @@ import { useRideRepository } from '../repositories/rideRepositories';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
-import { loadData } from '@shopify/react-native-skia';
-
+import { useLocationSearch } from '../hooks/useLocationSearch';
+import { GeocodeResult } from '../../../core/services/location/GeoCodingService';
 
 export function useSelectRideViewModel(
   showAlert: (title: string, msg: string) => void,
   currentLocation: string,
 ) {
   const navigation =
-  useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
+    useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
 
-const {
-  setRideDetails,
-  rideData,
-  savedPlaces,
-  setSavedPlaces,
-} = useRideStore();
+  const { setRideDetails, rideData, savedPlaces, setSavedPlaces } =
+    useRideStore();
 
   // --- UI State ---
   const [isNowDropdownOpen, setIsNowDropdownOpen] = useState(false);
   const [isForMeDropdownOpen, setIsForMeDropdownOpen] = useState(false);
   const [errors, setErrors] = useState<RideValidationErrors>({});
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const pickupSearch = useLocationSearch(rideData.pickupLocation ?? '');
+
+  const destinationSearch = useLocationSearch(rideData.dropoffLocation ?? '');
 
   const { t } = useTranslation('selectRide');
 
   const {
-  data: savedPlacesData,
-  isLoading: savedPlacesLoading,
-  error: savedPlacesError,
-  refetch: fetchSavedPlaces,
-} = useRideRepository.useSavedPlaces(isModalVisible);
+    data: savedPlacesData,
+    isLoading: savedPlacesLoading,
+    error: savedPlacesError,
+    refetch: fetchSavedPlaces,
+  } = useRideRepository.useSavedPlaces(isModalVisible);
 
   // --- Set current location as pickup initially ---
   useEffect(() => {
@@ -48,12 +47,12 @@ const {
     }
   }, [currentLocation]);
 
-  // store the saved places api response in zustand 
+  // store the saved places api response in zustand
   useEffect(() => {
-  if (savedPlacesData) {
-    setSavedPlaces(savedPlacesData);
-  }
-}, [savedPlacesData, setSavedPlaces]);
+    if (savedPlacesData) {
+      setSavedPlaces(savedPlacesData);
+    }
+  }, [savedPlacesData, setSavedPlaces]);
 
   // --- Ride Data Handlers ---
 
@@ -69,7 +68,27 @@ const {
     });
   };
 
-  const setSelectedPerson = (value: string) => {
+// const onSelectPickup = (place: GeocodeResult) => {
+//   pickupSearch.clearResults();
+
+//   setRideDetails({
+//     pickupLocation: place.address,
+//     pickupLatitude: place.latitude,
+//     pickupLongitude: place.longitude,
+//   });
+// };
+
+// const onSelectDestination = (place: GeocodeResult) => {
+//   destinationSearch.clearResults();
+
+//   setRideDetails({
+//     dropoffLocation: place.address,
+//     dropoffLatitude: place.latitude,
+//     dropoffLongitude: place.longitude,
+//   });
+// };
+
+const setSelectedPerson = (value: string) => {
     setRideDetails({
       selectedPerson: value,
     });
@@ -119,7 +138,7 @@ const {
 
   const onAddPlacePress = () => {
     navigation.navigate('AddNewPlace');
-  }
+  };
 
   const handleFlipModal = () => {
     if (!isModalVisible) {
@@ -164,5 +183,11 @@ const {
     handleFlipModal,
     onAddPlacePress,
 
+    pickupResults: pickupSearch.results,
+    destinationResults: destinationSearch.results,
+    pickupSearching: pickupSearch.isSearching,
+    destinationSearching: destinationSearch.isSearching,
+    // onSelectPickup,
+    // onSelectDestination,
   };
 }

@@ -1,13 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
 import { useRideRepository } from '../repositories/rideRepositories';
-import {
-  GeocodeResult,
-  searchAddress,
-} from '../../../core/services/location/GeoCodingService';
-import { useDebounce } from '../hooks/useDebounce';
+import { GeocodeResult } from '../../../core/services/location/GeoCodingService';
+import { useLocationSearch } from '../hooks/useLocationSearch';
 
 export function useAddNewPlaceViewModel() {
   const navigation =
@@ -16,58 +13,30 @@ export function useAddNewPlaceViewModel() {
   const { mutate: createSavedPlace, isPending } =
     useRideRepository.useCreateSavedPlace();
 
-  //setters
   const [name, setName] = useState('');
-  const [lng, setlng] = useState(0);
-  const [lat, setlat] = useState(0);
-  const [address, setAddress] = useState('');
-  const [searchResults, setSearchResults] = useState<GeocodeResult[]>([]);
-  const [isSearching, setIsSearching] = useState(false);
+  const [lng, setLng] = useState(0);
+  const [lat, setLat] = useState(0);
   const [selectedIcon, setSelectedIcon] = useState('home');
+  const [address, setAddress] = useState('');
 
-  const debouncedAddress = useDebounce(address, 500);
-  useEffect(() => {
-  if (debouncedAddress.length < 3) {
-    setSearchResults([]);
-    return;
-  }
-
-  searchAddress(debouncedAddress)
-    .then(results => {
-      setSearchResults(results);
-    });
-
-}, [debouncedAddress]);
-
-  const setCoordinates = (latitude: number, longitude: number) => {
-    setlat(latitude);
-    setlng(longitude);
-  };
-
-  const handleAddressSearch = async (text: string) => {
-    setAddress(text);
-
-    if (text.length < 3) {
-      setSearchResults([]);
-      return;
-    }
-
-    setIsSearching(true);
-
-    const results = await searchAddress(text);
-
-    setSearchResults(results);
-
-    setIsSearching(false);
-  };
+  const {
+    results: searchResults,
+    isSearching,
+    clearResults,
+} = useLocationSearch(address);
 
   const selectAddress = (place: GeocodeResult) => {
     setAddress(place.address);
 
-    setlat(place.latitude);
-    setlng(place.longitude);
+    setLat(place.latitude);
+    setLng(place.longitude);
 
-    setSearchResults([]);
+    clearResults();
+};
+
+  const setCoordinates = (latitude: number, longitude: number) => {
+    setLat(latitude);
+    setLng(longitude);
   };
 
   const onBack = () => {
@@ -79,13 +48,12 @@ export function useAddNewPlaceViewModel() {
       return;
     }
 
-    createSavedPlace(
-      {
-        label: name,
-        category: selectedIcon.toUpperCase(),
-        address,
-        latitude: lat,
-        longitude: lng,
+    createSavedPlace({
+      label: name,
+      category: selectedIcon.toUpperCase(),
+      address,
+      latitude: lat,
+      longitude: lng,
       },
       {
         onSuccess: () => {
@@ -98,11 +66,11 @@ export function useAddNewPlaceViewModel() {
   return {
     name,
     address,
-    selectedIcon,
-    lng,
     lat,
+    lng,
+    selectedIcon,
+
     searchResults,
-    selectAddress,
     isSearching,
 
     setName,
@@ -110,7 +78,11 @@ export function useAddNewPlaceViewModel() {
     setSelectedIcon,
     setCoordinates,
 
+    selectAddress,
+
     onBack,
     onSave,
+
+    isPending,
   };
 }

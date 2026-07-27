@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../../../modules/home/screens/HomeScreen';
 import { HomeStackParamList } from './homeTypes';
 import RideScreen from '../../../modules/ride/screens/RideScreen';
-import AddNewPlaceScreen  from '../../../modules/ride/components/SavedPlaces/AddNewPlaceScreen';
+import AddNewPlaceScreen from '../../../modules/ride/screens/AddNewPlaceScreen';
 
 const Stack = createNativeStackNavigator<HomeStackParamList>();
 
