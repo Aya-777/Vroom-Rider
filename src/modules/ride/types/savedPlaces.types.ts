@@ -1,19 +1,17 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { HomeStackParamList } from '../../../navigation/main/home/homeTypes'; 
-
-export interface SavedPlace {
-  id: string;
-  title: string;
+ export interface SavedPlace {
+  id: number;
+  label: string;
+  category: string;
   address: string;
-  icon: string;
+  latitude: number;
+  longitude: number;
 }
 
 export interface SavedPlacesModalProps {
   visible: boolean;
   onClose: () => void;
-  // places: SavedPlace[];
   onSelectPlace: (place: SavedPlace) => void;
-  // onAddPlace: () => void;
+  onAddPress: () => void;
 }
 
 export interface AddPlaceFormValues {

@@ -1,32 +1,24 @@
-import { useState } from "react";
+import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
 
-export function useSavedPlacesViewModel() { 
-
+export function useAddNewPlaceViewModel() {
   const navigation =
-  useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
-  
+    useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
 
   //setters
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [selectedIcon, setSelectedIcon] = useState('home');
 
-  const onSave = (name: "string" ,address: "string", icon: any) => {
-
-  }
+  const onSave = (name: 'string', address: 'string', icon: any) => {};
 
   const onBack = () => {
     navigation.goBack();
-  }
+  };
 
-  const navigateToAddNewPlace = () => {
-    navigation.navigate('AddNewPlace');
-  }
-
-  return{
+  return {
     name,
     address,
     selectedIcon,
@@ -37,6 +29,5 @@ export function useSavedPlacesViewModel() {
 
     onBack,
     onSave,
-    navigateToAddNewPlace
-  }
+  };
 }

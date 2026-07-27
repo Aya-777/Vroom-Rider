@@ -3,12 +3,25 @@ import { RideValidationErrors } from '../types/ride.types';
 import { validateRideInputs } from '../utils/selectRideValidation';
 import { useRideStore } from '../store/useRideStore';
 import { useTranslation } from 'react-i18next';
+import { useRideRepository } from '../repositories/rideRepositories';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
+
 
 export function useSelectRideViewModel(
   showAlert: (title: string, msg: string) => void,
   currentLocation: string,
 ) {
-  const { setRideDetails, rideData } = useRideStore();
+  const navigation =
+  useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
+
+const {
+  setRideDetails,
+  rideData,
+  savedPlaces,
+  setSavedPlaces,
+} = useRideStore();
 
   // --- UI State ---
   const [isNowDropdownOpen, setIsNowDropdownOpen] = useState(false);
@@ -18,6 +31,13 @@ export function useSelectRideViewModel(
 
   const { t } = useTranslation('selectRide');
 
+  const {
+  data: savedPlacesData,
+  isLoading: savedPlacesLoading,
+  error: savedPlacesError,
+  refetch: fetchSavedPlaces,
+} = useRideRepository.useSavedPlaces(isModalVisible);
+
   // --- Set current location as pickup initially ---
   useEffect(() => {
     if (currentLocation && !rideData.pickupLocation) {
@@ -26,6 +46,13 @@ export function useSelectRideViewModel(
       });
     }
   }, [currentLocation]);
+
+  // store the saved places api response in zustand 
+  useEffect(() => {
+  if (savedPlacesData) {
+    setSavedPlaces(savedPlacesData);
+  }
+}, [savedPlacesData, setSavedPlaces]);
 
   // --- Ride Data Handlers ---
 
@@ -87,16 +114,19 @@ export function useSelectRideViewModel(
 
       return;
     }
-
-    // No need to save here anymore.
-    // Data is already stored in Zustand while typing.
   };
 
-  const showSavedPlaces= () => {
-
+  const onAddPlacePress = () => {
+    navigation.navigate('AddNewPlace');
   }
 
-  const handleFlipModal = () => setIsModalVisible(!isModalVisible);
+  const handleFlipModal = () => {
+    if (!isModalVisible) {
+      fetchSavedPlaces();
+    }
+
+    setIsModalVisible(!isModalVisible);
+  };
 
   return {
     // UI State
@@ -111,6 +141,9 @@ export function useSelectRideViewModel(
     selectedPerson: rideData.selectedPerson ?? 'forMe',
     selectedTime: rideData.time ?? 'now',
     contactPhone: rideData.contactPhone ?? '',
+    savedPlaces,
+    savedPlacesLoading,
+    savedPlacesError,
 
     // UI Setters
     setIsNowDropdownOpen,
@@ -128,6 +161,7 @@ export function useSelectRideViewModel(
     validate,
     updateRideDetails,
     handleFlipModal,
+    onAddPlacePress,
 
   };
 }

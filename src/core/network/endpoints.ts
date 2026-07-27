@@ -11,9 +11,11 @@ export const ENDPOINTS = {
   },
 
   TRIPS: {
-    REQUEST: 'trips/request/',
-    PRICE_ESTIMATE: 'trips/price-estimate/',
-    STATUS_CHOICES: 'trips/status-choices/',
-}
+  INITIAL_ESTIMATE: '/api/v1/trips/trips/estimate/initial/',
+  REFINED_ESTIMATE: '/api/v1/trips/trips/estimate/refined/',
+  SAVED_LOCATIONS: '/api/v1/trips/saved-locations/',
+  PREFERENCES: '/api/v1/trips/preferences/',
+  CONFIRM: '/api/v1/trips/confirm/',
+},
 
 } as const;

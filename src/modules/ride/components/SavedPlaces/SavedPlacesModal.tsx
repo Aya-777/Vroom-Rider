@@ -15,20 +15,18 @@ import AddIcon from '../../../../assets/svg/common/add.svg';
 import { createStyles } from '../../styles/savedPlaces.styles';
 import { useTheme } from '../../../../core/theme/useTheme';
 import { useTranslation } from 'react-i18next';
-import { useSavedPlacesViewModel } from '../../viewmodels/useSavedPlacesViewModel';
 
 export const SavedPlacesModal: React.FC<SavedPlacesModalProps> = ({
   visible,
   onClose,
   // places,
   onSelectPlace,
-  // onAddPlace,
+  onAddPress,
 }) => {
   const { colors, mode } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['selectRide', 'common']);
 
-  const vm = useSavedPlacesViewModel();
 
   return (
     <Modal
@@ -62,7 +60,7 @@ export const SavedPlacesModal: React.FC<SavedPlacesModalProps> = ({
           <TouchableOpacity
             style={styles.addButton}
             activeOpacity={0.85}
-            onPress={vm.navigateToAddNewPlace}
+            onPress={onAddPress}
           >
             <AddIcon width={18} height={18} fill={colors.backgroundSoft} />
             <Text style={styles.addButtonText}>Add New Place</Text>

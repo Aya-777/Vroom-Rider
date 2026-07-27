@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { RideParams } from '../types/ride.types';
+import { SavedPlace } from '../types/savedPlaces.types';
 
 interface RideEstimate {
   price?: string;
@@ -12,14 +13,20 @@ interface RideState {
 
   estimate: RideEstimate;
 
+  savedPlaces: SavedPlace[];
+
   setRideDetails: (details: Partial<RideParams>) => void;
 
   setEstimate: (estimate: RideEstimate) => void;
 
+  setSavedPlaces: (places: SavedPlace[]) => void;
+
+  clearSavedPlaces: () => void;
+
   clearRide: () => void;
 }
 
-export const useRideStore = create<RideState>((set) => ({
+export const useRideStore = create<RideState>(set => ({
   rideData: {
     id: '1',
     vehicleType: 'economy',
@@ -30,16 +37,26 @@ export const useRideStore = create<RideState>((set) => ({
   },
 
   estimate: {},
+  savedPlaces: [],
 
-  setRideDetails: (details) =>
-    set((state) => ({
+  setSavedPlaces: places =>
+    set({
+      savedPlaces: places,
+    }),
+
+  clearSavedPlaces: () =>
+    set({
+      savedPlaces: [],
+    }),
+  setRideDetails: details =>
+    set(state => ({
       rideData: {
         ...state.rideData,
         ...details,
       },
     })),
 
-  setEstimate: (estimate) =>
+  setEstimate: estimate =>
     set({
       estimate,
     }),
@@ -48,5 +65,6 @@ export const useRideStore = create<RideState>((set) => ({
     set({
       rideData: {},
       estimate: {},
+      savedPlaces: [],
     }),
 }));

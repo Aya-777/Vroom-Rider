@@ -49,11 +49,11 @@ export default function SelectRideSheet({
     setSelectedTime,
     setFromLocation,
     setToLocation,
-    setIsModalVisible,
 
     validate,
     updateRideDetails,
     handleFlipModal,
+    onAddPlacePress
   } = useSelectRideViewModel(showAlert, currentLocation);
 
   const personItems = [
@@ -134,9 +134,9 @@ export default function SelectRideSheet({
       <SavedPlacesModal
         visible={isModalVisible}
         onClose={handleFlipModal}
-        // places={{}}
-        onSelectPlace={()=>{}}
-        // onAddPlace={()=>{}}
+        onSelectPlace={() => {}}
+        onAddPress={onAddPlacePress}
+        
       />
 
       

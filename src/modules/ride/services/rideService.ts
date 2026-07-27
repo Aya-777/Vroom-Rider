@@ -11,6 +11,14 @@ class RideService {
     return response.data;
   }
 
+  async getSavedPlaces() {
+    const response = await apiClient.get(
+        '/trips/saved-locations/'
+    );
+
+    return response.data;
+}
+
 }
 
 export default new RideService();

@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { rideApi } from '../services/rideApi';
 
@@ -7,16 +7,14 @@ import {
   PriceEstimateResponseDTO,
   RequestRideRequestDTO,
   RequestRideResponseDTO,
+  SavedPlaceDTO
 } from '../services/dto/ride.dto';
 
 export const useRideRepository = {
-  useEstimatePrice: () =>
-    useMutation<PriceEstimateResponseDTO, Error, PriceEstimateRequestDTO>({
-      mutationFn: rideApi.estimatePrice,
-    }),
-
-  useRequestRide: () =>
-    useMutation<RequestRideResponseDTO, Error, RequestRideRequestDTO>({
-      mutationFn: rideApi.requestRide,
+ useSavedPlaces: (enabled = true) =>
+    useQuery<SavedPlaceDTO[], Error>({
+      queryKey: ['savedPlaces'],
+      queryFn: rideApi.getSavedPlaces,
+      enabled,
     }),
 };

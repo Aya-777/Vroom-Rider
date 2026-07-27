@@ -7,7 +7,7 @@ import {
   ScrollView,
   SafeAreaView,
 } from 'react-native';
-import { useSavedPlacesViewModel } from '../../viewmodels/useSavedPlacesViewModel';
+import { useAddNewPlaceViewModel } from '../../viewmodels/useAddNewPlaceViewModel';
 
 import PinIcon from '../../../../assets/svg/common/pin.svg';
 import SaveIcon from '../../../../assets/svg/common/save.svg';
@@ -22,7 +22,7 @@ export default function AddNewPlaceScreen() {
   const styles = createStyles(colors);
   const { t } = useTranslation(['selectRide', 'common']);
 
-  const vm = useSavedPlacesViewModel();
+  const vm = useAddNewPlaceViewModel();
 
   const handleSave = () => {
     vm.onSave(

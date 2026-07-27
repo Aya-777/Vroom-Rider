@@ -2,38 +2,20 @@ import { apiClient } from '../../../core/network/apiClient';
 import { ENDPOINTS } from '../../../core/network/endpoints';
 
 import {
-    PriceEstimateRequestDTO,
-    PriceEstimateResponseDTO,
-    RequestRideRequestDTO,
-    RequestRideResponseDTO,
+  PriceEstimateRequestDTO,
+  PriceEstimateResponseDTO,
+  RequestRideRequestDTO,
+  RequestRideResponseDTO,
+  SavedPlaceDTO,
 } from './dto/ride.dto';
 
 export const rideApi = {
+  // Saved Places
+  getSavedPlaces: async (): Promise<SavedPlaceDTO[]> => {
+    const response = await apiClient.get<SavedPlaceDTO[]>(
+      ENDPOINTS.TRIPS.SAVED_LOCATIONS,
+    );
 
-    estimatePrice: async (
-        data: PriceEstimateRequestDTO
-    ): Promise<PriceEstimateResponseDTO> => {
-
-        const response =
-            await apiClient.post<PriceEstimateResponseDTO>(
-                ENDPOINTS.TRIPS.PRICE_ESTIMATE,
-                data,
-            );
-
-        return response.data;
-    },
-
-    requestRide: async (
-        data: RequestRideRequestDTO
-    ): Promise<RequestRideResponseDTO> => {
-
-        const response =
-            await apiClient.post<RequestRideResponseDTO>(
-                ENDPOINTS.TRIPS.REQUEST,
-                data,
-            );
-
-        return response.data;
-    },
-
+    return response.data;
+  },
 };
