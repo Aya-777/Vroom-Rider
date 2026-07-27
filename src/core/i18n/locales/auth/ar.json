@@ -28,5 +28,8 @@
   "enterYourPassword": "أدخل كلمة مرورك",
   "updatePassword": "تحديث كلمة المرور",
   "camera": "كاميرا",
-  "gallery": "معرض"
+  "gallery": "معرض",
+  "tooShort": "لازم يكون حرفين ع الأقل",
+  "passwordMismatch": "كلمتا المرور غير متطابقتين",
+  "invalidCredentials": "بيانات الدخول غير صحيحة"
 }

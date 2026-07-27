@@ -28,5 +28,8 @@
   "enterYourPassword": "Enter Your Password",
   "updatePassword": "Update Password",
   "camera": "Camera",
-  "gallery": "Gallery"
+  "gallery": "Gallery",
+  "tooShort": "Must be at least 2 characters",
+  "passwordMismatch": "Passwords don't match",
+  "invalidCredentials": "Invalid credentials"
 }
