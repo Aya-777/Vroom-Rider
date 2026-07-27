@@ -1,7 +1,8 @@
-import { Platform, StatusBar, StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { Radius, Shadows, Spacing, Typography } from "../../core/theme/tokens";
+import { ThemeColors } from '../../core/theme/theme.types';
 
-export const createStyles = (colors: any) =>
+export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
     container: {
       paddingTop: Platform.OS === 'ios' ? Spacing.xs : Spacing.md,

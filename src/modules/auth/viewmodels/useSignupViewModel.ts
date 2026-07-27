@@ -12,10 +12,18 @@ export const useSignupViewModel = (onSuccess: (phone: string) => void) => {
 
   const signupMutation = useAuthRepository.useSignup();
 
-  const handleSignup = () => {
+  const firstNameError =
+    firstName.length > 0 && firstName.length < 2 ? 'tooShort' : undefined;
 
-    console.log('handleSignup called!');
-    console.log('Fields:', firstName, lastName, phoneNumber);
+  const lastNameError =
+    lastName.length > 0 && lastName.length < 2 ? 'tooShort' : undefined;
+
+  const confirmPasswordError =
+    confirmPassword.length > 0 && confirmPassword !== password
+      ? 'passwordMismatch'
+      : undefined;
+
+  const handleSignup = () => {
     setUiError(null);
 
     if (!firstName || !lastName || !phoneNumber || !password || !confirmPassword) {
@@ -23,8 +31,7 @@ export const useSignupViewModel = (onSuccess: (phone: string) => void) => {
       return;
     }
 
-    if (password !== confirmPassword) {
-      setUiError('The passwords do not match.');
+    if (firstNameError || lastNameError || confirmPasswordError) {
       return;
     }
 
@@ -47,7 +54,6 @@ export const useSignupViewModel = (onSuccess: (phone: string) => void) => {
           console.log('Message:', err.message);
 
           setUiError(err.response?.data?.message || err.message);
-
         },
       }
     );
@@ -61,6 +67,9 @@ export const useSignupViewModel = (onSuccess: (phone: string) => void) => {
     confirmPassword, setConfirmPassword,
     profileImage, setProfileImage,
     error: uiError,
+    firstNameError,
+    lastNameError,
+    confirmPasswordError,
     isLoading: signupMutation.isPending,
     handleSignup,
   };
