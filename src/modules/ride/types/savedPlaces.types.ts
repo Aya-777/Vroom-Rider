@@ -9,11 +9,14 @@
 
 export interface SavedPlacesModalProps {
   visible: boolean;
-  onClose: () => void;
-  onSelectPlace: (place: SavedPlace) => void;
-  onAddPress: () => void;
-}
+  loading: boolean;
 
+  places: SavedPlace[];
+
+  onClose: () => void;
+  onAddPress: () => void;
+  onSelectPlace: (place: SavedPlace) => void;
+}
 export interface AddPlaceFormValues {
   name: string;
   address: string;

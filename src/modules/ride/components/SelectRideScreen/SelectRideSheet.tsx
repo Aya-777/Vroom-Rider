@@ -41,6 +41,9 @@ export default function SelectRideSheet({
     fromLocation,
     toLocation,
     errors,
+    savedPlaces,
+    savedPlacesLoading,
+    
     isModalVisible,
 
     setIsNowDropdownOpen,
@@ -134,10 +137,11 @@ export default function SelectRideSheet({
       <SavedPlacesModal
         visible={isModalVisible}
         onClose={handleFlipModal}
-        onSelectPlace={() => {}}
+        places={savedPlaces}
+        loading={savedPlacesLoading}
+        onSelectPlace={()=>{}}
         onAddPress={onAddPlacePress}
-        
-      />
+    />
 
       
       <View style={styles.contactSection}>
