@@ -26,6 +26,7 @@ const Tab = createBottomTabNavigator<MainTabsParamList>();
 
 const HIDE_TAB_ROUTES = [
   'Ride',
+  'AddNewPlace'
 ];
 
 const getTabIconComponent = (

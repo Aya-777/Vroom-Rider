@@ -13,7 +13,7 @@ import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/selectRide.styles';
 import { useTranslation } from 'react-i18next';
 import { Alert, View } from 'react-native';
-import {SavedPlacesModal} from '../shared/SavedPlacesModal';
+import {SavedPlacesModal} from '../SavedPlaces/SavedPlacesModal';
 
 type Props = {
   onNextPress: () => void;
