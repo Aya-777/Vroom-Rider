@@ -43,7 +43,7 @@ export const SavedPlacesModal: React.FC<SavedPlacesModalProps> = ({
           <View style={styles.header}>
             <Text style={styles.headerTitle}>Saved Places</Text>
             <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-              <CloseIcon width={20} height={20} fill="#A0AEC0" />
+              <CloseIcon width={20} height={20} fill={colors.backgroundSoft} />
             </TouchableOpacity>
           </View>
 

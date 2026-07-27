@@ -20,11 +20,7 @@ export const createStyles = (colors: ThemeColors) =>
     borderWidth: 1,
     borderColor: '#1D2840',
     padding: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.5,
-    shadowRadius: 20,
-    elevation: 10,
+    ...Shadows.medium,
   },
   header: {
     flexDirection: 'row',
@@ -51,7 +47,7 @@ export const createStyles = (colors: ThemeColors) =>
   addButton: {
     flexDirection: 'row',
     height: 52,
-    backgroundColor: '#D6E2FF',
+    backgroundColor: colors.primary,
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
@@ -63,7 +59,7 @@ export const createStyles = (colors: ThemeColors) =>
   addButtonText: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#2648CE',
+    color: colors.backgroundSoft,
   },
 
   // saved places item
@@ -172,17 +168,17 @@ export const createStyles = (colors: ThemeColors) =>
   },
   iconCard: {
     width: '22%',
-    aspectRatio: 1,
-    backgroundColor: '#12192B',
+    backgroundColor: colors.background,
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: '#1D2840',
+    borderColor: colors.background,
     justifyContent: 'center',
     alignItems: 'center',
+    height: 50,
   },
   selectedIconCard: {
-    backgroundColor: '#1C2744',
-    borderColor: '#5875F0',
+    backgroundColor: colors.surface,
+    borderColor: colors.border,
   },
   footer: {
     paddingVertical: 16,
@@ -190,7 +186,7 @@ export const createStyles = (colors: ThemeColors) =>
   saveButton: {
     flexDirection: 'row',
     height: 54,
-    backgroundColor: '#D6E2FF',
+    backgroundColor: colors.primary,
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
@@ -201,7 +197,8 @@ export const createStyles = (colors: ThemeColors) =>
   saveButtonText: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#2648CE',
+    color: colors.backgroundSoft,
+    marginEnd: 5,
   },
 
 });
