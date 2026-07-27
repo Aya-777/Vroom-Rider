@@ -13,6 +13,7 @@ import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/selectRide.styles';
 import { useTranslation } from 'react-i18next';
 import { Alert, View } from 'react-native';
+import {SavedPlacesModal} from '../shared/SavedPlacesModal';
 
 type Props = {
   onNextPress: () => void;
@@ -39,6 +40,7 @@ export default function SelectRideSheet({
     fromLocation,
     toLocation,
     errors,
+    isModalVisible,
 
     setIsNowDropdownOpen,
     setIsForMeDropdownOpen,
@@ -46,9 +48,11 @@ export default function SelectRideSheet({
     setSelectedTime,
     setFromLocation,
     setToLocation,
+    setIsModalVisible,
 
     validate,
     updateRideDetails,
+    handleFlipModal,
   } = useSelectRideViewModel(showAlert, currentLocation);
 
   const personItems = [
@@ -118,13 +122,21 @@ export default function SelectRideSheet({
         />
 
         <ActionButton
-          onPress={() => {}}
+          onPress={handleFlipModal}
           icon={<StarIcon fill={colors.textSecondary} />}
           title={t('common:savedPlaces')}
           textStyle={{ color: colors.textSecondary }}
           style={styles.actionButton}
         />
       </View>
+      
+      <SavedPlacesModal
+        visible={isModalVisible}
+        onClose={handleFlipModal}
+        // places={{}}
+        onSelectPlace={()=>{}}
+        // onAddPlace={()=>{}}
+      />
 
       <ActionButton
         onPress={handleNextPress}

@@ -14,6 +14,7 @@ export function useSelectRideViewModel(
   const [isNowDropdownOpen, setIsNowDropdownOpen] = useState(false);
   const [isForMeDropdownOpen, setIsForMeDropdownOpen] = useState(false);
   const [errors, setErrors] = useState<RideValidationErrors>({});
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const { t } = useTranslation('selectRide');
 
@@ -91,11 +92,18 @@ export function useSelectRideViewModel(
     // Data is already stored in Zustand while typing.
   };
 
+  const showSavedPlaces= () => {
+
+  }
+
+  const handleFlipModal = () => setIsModalVisible(!isModalVisible);
+
   return {
     // UI State
     isNowDropdownOpen,
     isForMeDropdownOpen,
     errors,
+    isModalVisible,
 
     // Ride Data
     fromLocation: rideData.pickupLocation ?? '',
@@ -107,6 +115,7 @@ export function useSelectRideViewModel(
     // UI Setters
     setIsNowDropdownOpen,
     setIsForMeDropdownOpen,
+    setIsModalVisible,
 
     // Ride Setters
     setFromLocation,
@@ -118,5 +127,7 @@ export function useSelectRideViewModel(
     // Actions
     validate,
     updateRideDetails,
+    handleFlipModal,
+
   };
 }
