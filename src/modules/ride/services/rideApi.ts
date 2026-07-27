@@ -2,6 +2,8 @@ import { apiClient } from '../../../core/network/apiClient';
 import { ENDPOINTS } from '../../../core/network/endpoints';
 
 import {
+  CreateSavedPlaceRequestDTO,
+  CreateSavedPlaceResponseDTO,
   PriceEstimateRequestDTO,
   PriceEstimateResponseDTO,
   RequestRideRequestDTO,
@@ -18,4 +20,17 @@ export const rideApi = {
 
     return response.data;
   },
+  
+  createSavedPlace: async (
+  data: CreateSavedPlaceRequestDTO
+): Promise<CreateSavedPlaceResponseDTO> => {
+
+  const response =
+    await apiClient.post<CreateSavedPlaceResponseDTO>(
+      ENDPOINTS.TRIPS.SAVED_LOCATIONS,
+      data,
+    );
+
+  return response.data;
+},
 };
