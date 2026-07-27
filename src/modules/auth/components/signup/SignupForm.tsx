@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     View,
     TouchableOpacity,
     Text,
+    Image,
 } from 'react-native';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import Logo from '../shared/logo';
 import LinearBg from '../../../../shared/components/LinearBg';
 import Profile from '../../../../assets/svg/profile/profile.svg';
@@ -16,20 +18,48 @@ import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/signup.styles';
 import Input from '../../../../shared/components/Input';
 import { useTranslation } from 'react-i18next';
+import PhotoPickerSheet from '../../../../shared/components/PhotoPickerSheet';
 
 const SignupForm = ({ vm }: any) => {
     const { colors } = useTheme();
     const styles = createStyles(colors);
     const { t } = useTranslation(['auth']);
+    const [isPickerVisible, setIsPickerVisible] = useState(false);
+
+    const handlePickCamera = () => {
+        launchCamera({ mediaType: 'photo', quality: 0.8 }, (response) => {
+            if (response.didCancel || response.errorCode) return;
+            const uri = response.assets?.[0]?.uri;
+            if (uri) vm.setProfileImage(uri);
+        });
+    };
+
+    const handlePickGallery = () => {
+        launchImageLibrary({ mediaType: 'photo', quality: 0.8 }, (response) => {
+            if (response.didCancel || response.errorCode) return;
+            const uri = response.assets?.[0]?.uri;
+            if (uri) vm.setProfileImage(uri);
+        });
+    };
 
     return (
         <View>
 
             <View style={styles.top}>
                 <View style={styles.logoWrapper}>
-                    <Logo type="signup" />
+                    {vm.profileImage ? (
+                        <Image
+                            source={{ uri: vm.profileImage }}
+                            style={styles.avatarImage}
+                        />
+                    ) : (
+                        <Logo type="signup" />
+                    )}
 
-                    <TouchableOpacity style={styles.cameraButton}>
+                    <TouchableOpacity
+                        style={styles.cameraButton}
+                        onPress={() => setIsPickerVisible(true)}
+                    >
                         <View style={styles.cameraCircle}>
                             <CameraIcon
                                 width={16}
@@ -142,6 +172,13 @@ const SignupForm = ({ vm }: any) => {
                     </LinearBg>
                 </TouchableOpacity>
             </View>
+
+            <PhotoPickerSheet
+                visible={isPickerVisible}
+                onClose={() => setIsPickerVisible(false)}
+                onPickCamera={handlePickCamera}
+                onPickGallery={handlePickGallery}
+            />
         </View>
     );
 };

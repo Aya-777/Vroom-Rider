@@ -1,7 +1,8 @@
 import { StyleSheet } from "react-native";
 import { Radius, Typography } from "../../core/theme/tokens";
+import { ThemeColors } from '../../core/theme/theme.types';
 
-export const createStyles = (colors: any) =>
+export const createStyles = (colors: ThemeColors) =>
     StyleSheet.create({
         defaultContainer: {
             marginBottom: 15,
