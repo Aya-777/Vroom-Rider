@@ -43,7 +43,7 @@ export const SavedPlacesModal: React.FC<SavedPlacesModalProps> = ({
           <View style={styles.header}>
             <Text style={styles.headerTitle}>Saved Places</Text>
             <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-              <CloseIcon width={20} height={20} fill={colors.backgroundSoft} />
+              <CloseIcon width={20} height={20} fill={colors.textMuted} />
             </TouchableOpacity>
           </View>
 
@@ -64,7 +64,7 @@ export const SavedPlacesModal: React.FC<SavedPlacesModalProps> = ({
             activeOpacity={0.85}
             onPress={vm.navigateToAddNewPlace}
           >
-            <AddIcon width={18} height={18} fill="#5875F0" />
+            <AddIcon width={18} height={18} fill={colors.backgroundSoft} />
             <Text style={styles.addButtonText}>Add New Place</Text>
           </TouchableOpacity>
         </View>
