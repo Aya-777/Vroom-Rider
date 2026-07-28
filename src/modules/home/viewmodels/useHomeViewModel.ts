@@ -4,17 +4,15 @@ import { useTranslation } from 'react-i18next';
 import { recentDestinations } from '../constants/homeData';
 import { useMainDrawer } from '../../../navigation/hooks/useMainDrawer';
 import { useLocationTracking } from '../../../core/services/location/useLocationTracking';
-import { useLocationStore } from '../../../core/store/useLocationStore';
+import { useLocationStore } from '../../../core/store/locationStore';
 
 export const useHomeViewModel = () => {
   const { t } = useTranslation(['common', 'home']);
   const { openSidebar } = useMainDrawer();
 
-    useLocationTracking();
+  useLocationTracking();
 
-    const currentLocation = useLocationStore(
-      state => state.currentLocation
-    );
+  const currentLocation = useLocationStore(state => state.currentLocation);
 
   const services = [
     {

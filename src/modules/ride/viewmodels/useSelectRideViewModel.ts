@@ -10,7 +10,7 @@ import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
 import { useLocationSearch } from '../hooks/useLocationSearch';
 import { GeocodeResult } from '../../../core/services/location/GeoCodingService';
 import LocationService from '../../../core/services/location/LocationService';
-import { useLocationStore } from '../../../core/store/useLocationStore';
+import { useLocationStore } from '../../../core/store/locationStore';
 
 export function useSelectRideViewModel() {
   const navigation =
@@ -67,28 +67,28 @@ export function useSelectRideViewModel() {
 
   // --- Set current location as pickup initially ---
   useEffect(() => {
-  const setInitialPickup = async () => {
-  if (!currentLocation || hasInitializedPickup) {
-    return;
-  }
+    const setInitialPickup = async () => {
+      if (!currentLocation || hasInitializedPickup) {
+        return;
+      }
 
-  const address = await LocationService.reverseGeocode(
-    currentLocation.latitude,
-    currentLocation.longitude,
-  );
+      const address = await LocationService.reverseGeocode(
+        currentLocation.latitude,
+        currentLocation.longitude,
+      );
 
-    setFromText(address);
+      setFromText(address);
 
-    setPickupCoordinates({
-      latitude: currentLocation.latitude,
-      longitude: currentLocation.longitude,
-    });
+      setPickupCoordinates({
+        latitude: currentLocation.latitude,
+        longitude: currentLocation.longitude,
+      });
 
-    setHasInitializedPickup(true);
-  };
+      setHasInitializedPickup(true);
+    };
 
-  setInitialPickup();
-}, [currentLocation, hasInitializedPickup]);
+    setInitialPickup();
+  }, [currentLocation, hasInitializedPickup]);
 
   // store the saved places api response in zustand
   useEffect(() => {
@@ -121,7 +121,6 @@ export function useSelectRideViewModel() {
   const onPickupFocus = () => {
     setActiveInput('pickup');
   };
-
 
   const onDestinationFocus = () => {
     setActiveInput('destination');

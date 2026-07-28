@@ -137,7 +137,8 @@ export const createStyles = (colors: ThemeColors) =>
       maxHeight: 180,
       backgroundColor: colors.surface,
       borderRadius: 12,
-      marginBottom: 15,
+      borderWidth: 1,
+      borderColor: colors.border,
       zIndex: 20,
       elevation: 10, // For Android touch priority
     },

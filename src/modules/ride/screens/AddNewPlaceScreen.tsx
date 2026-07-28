@@ -63,10 +63,7 @@ export default function AddNewPlaceScreen() {
                     onChangeText={vm.setAddress}
                   />
               </View>
-                  {vm.searchResults.length > 0 && (
-                    <SearchResults results={vm.searchResults} onSelectItem={vm.selectAddress} />
-                  )}
-              
+
               {/* Icon Selection */}
               <View style={styles.inputGroup}>
                 <View style={styles.iconSelectionHeader}>
@@ -104,6 +101,13 @@ export default function AddNewPlaceScreen() {
           </ScrollView>
 
         </View>
+
+              <View style={styles.absoluteContainer}>
+
+                {vm.searchResults.length > 0 && (
+                  <SearchResults results={vm.searchResults} onSelectItem={vm.selectAddress} />
+                )}
+              </View>
 
         {/* Save Button Footer */}
         <View style={styles.footer}>

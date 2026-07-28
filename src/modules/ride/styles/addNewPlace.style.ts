@@ -121,4 +121,11 @@ export const createStyles = (colors: ThemeColors) =>
       position: 'relative',
       zIndex: 10,
     },
+
+    absoluteContainer: {
+      position: 'absolute',
+      top: 220,
+      left: 0,
+      right: 0,
+    },
   });
