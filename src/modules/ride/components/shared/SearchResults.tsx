@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { useTheme } from '../../../../core/theme/useTheme';
-import { createStyles } from '../../styles/selectRide.styles';
+import { createStyles } from '../../styles/shared.styles';
 import { GeocodeResult } from '../../../../core/services/location/GeoCodingService';
 
 type Props = {

@@ -5,7 +5,6 @@ import { recentDestinations } from '../constants/homeData';
 import { useMainDrawer } from '../../../navigation/hooks/useMainDrawer';
 import { useLocationTracking } from '../../../core/services/location/useLocationTracking';
 import { useLocationStore } from '../../../core/store/useLocationStore';
-import { reverseGeocode } from '../../../core/services/location/GeoCodingService';
 
 export const useHomeViewModel = () => {
   const { t } = useTranslation(['common', 'home']);

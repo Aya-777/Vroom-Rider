@@ -121,34 +121,4 @@ export const createStyles = (colors: ThemeColors) =>
       position: 'relative',
       zIndex: 10,
     },
-    searchResultsContainer: {
-      position: 'absolute',
-      top: 200,
-      left: 0,
-      right: 0,
-      maxHeight: 180,
-      backgroundColor: '#12192B',
-      borderRadius: 16,
-      borderWidth: 1,
-      borderColor: '#1D2840',
-      zIndex: 20,
-      elevation: 10, // For Android touch priority
-    },
-
-    searchScroll: {
-      maxHeight: 180,
-    },
-
-    searchResultItem: {
-      paddingHorizontal: 16,
-      paddingVertical: 12,
-      borderBottomWidth: 1,
-      borderBottomColor: '#1D2840',
-    },
-
-    searchResultText: {
-      color: '#FFFFFF',
-      fontSize: 13,
-      lineHeight: 18,
-    },
   });

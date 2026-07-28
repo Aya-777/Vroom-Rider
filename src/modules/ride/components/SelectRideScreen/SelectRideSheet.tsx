@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useSelectRideViewModel } from '../../viewmodels/useSelectRideViewModel';
 import { BaseBottomSheet } from '../../../../shared/components/BaseBottomSheet';
 import RideDropdown from '../../components/shared/RideDropdown';
@@ -14,16 +14,10 @@ import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/selectRide.styles';
 import { useTranslation } from 'react-i18next';
 import {
-  Alert,
-  ScrollView,
-  Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import { SavedPlacesModal } from '../SavedPlaces/SavedPlacesModal';
-import { Location } from '../../../../core/services/location/LocationService';
-import { GeocodeResult } from '../../../../core/services/location/GeoCodingService';
 
 type Props = {
   onNextPress: () => void;
