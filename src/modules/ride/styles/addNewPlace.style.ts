@@ -21,7 +21,7 @@ export const createStyles = (colors: ThemeColors) =>
       paddingBottom: 24,
     },
     inputGroup: {
-      marginBottom:20,
+      marginBottom: 20,
       // zIndex:10,
     },
     addressGroup: {
@@ -54,6 +54,7 @@ export const createStyles = (colors: ThemeColors) =>
       borderWidth: 1,
       borderColor: '#1D2840',
       paddingHorizontal: 16,
+      marginBottom: 20,
     },
     inputIcon: {
       marginRight: 12,
@@ -95,6 +96,7 @@ export const createStyles = (colors: ThemeColors) =>
     },
     footer: {
       paddingVertical: 16,
+      alignItems: 'center',
     },
     saveButton: {
       flexDirection: 'row',
@@ -103,6 +105,7 @@ export const createStyles = (colors: ThemeColors) =>
       borderRadius: 16,
       justifyContent: 'center',
       alignItems: 'center',
+      width: '70%',
     },
     saveIcon: {
       marginLeft: 8,
@@ -118,17 +121,17 @@ export const createStyles = (colors: ThemeColors) =>
       position: 'relative',
       zIndex: 10,
     },
-searchResultsContainer: {
+    searchResultsContainer: {
       position: 'absolute',
       top: 200,
       left: 0,
       right: 0,
-      maxHeight: 180, 
+      maxHeight: 180,
       backgroundColor: '#12192B',
       borderRadius: 16,
       borderWidth: 1,
       borderColor: '#1D2840',
-      zIndex: 20, 
+      zIndex: 20,
       elevation: 10, // For Android touch priority
     },
 
@@ -141,7 +144,7 @@ searchResultsContainer: {
       paddingVertical: 12,
       borderBottomWidth: 1,
       borderBottomColor: '#1D2840',
-    },  
+    },
 
     searchResultText: {
       color: '#FFFFFF',

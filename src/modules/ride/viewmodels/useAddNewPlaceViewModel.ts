@@ -44,24 +44,28 @@ export function useAddNewPlaceViewModel() {
   };
 
   const onSave = () => {
-    if (lat === 0 || lng === 0) {
-      return;
-    }
+  if (lat === 0 || lng === 0) {
+    return;
+  }
 
-    createSavedPlace({
-      label: name,
+  createSavedPlace(
+    {
+      label: name.trim(),
       category: selectedIcon.toUpperCase(),
-      address,
+      address: address.trim(),
       latitude: lat,
       longitude: lng,
+    },
+    {
+      onSuccess: () => {
+        navigation.goBack();
       },
-      {
-        onSuccess: () => {
-          navigation.goBack();
-        },
+      onError: (error) => {
+        console.error('Failed to create saved place:', error);
       },
-    );
-  };
+    },
+  );
+};
 
   return {
     name,

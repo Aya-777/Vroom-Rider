@@ -20,17 +20,27 @@ export const rideApi = {
 
     return response.data;
   },
-  
-  createSavedPlace: async (
-  data: CreateSavedPlaceRequestDTO
-): Promise<CreateSavedPlaceResponseDTO> => {
 
-  const response =
-    await apiClient.post<CreateSavedPlaceResponseDTO>(
+  createSavedPlace: async (
+    data: CreateSavedPlaceRequestDTO,
+  ): Promise<CreateSavedPlaceResponseDTO> => {
+    const formData = new FormData();
+    formData.append('label', data.label);
+    formData.append('password', data.category);
+    formData.append('address', data.address);
+    formData.append('latitude', data.latitude);
+    formData.append('longitude', data.longitude);
+
+    const response = await apiClient.post<CreateSavedPlaceResponseDTO>(
       ENDPOINTS.TRIPS.SAVED_LOCATIONS,
-      data,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
     );
 
-  return response.data;
-},
+    return response.data;
+  },
 };
