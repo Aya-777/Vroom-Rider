@@ -7,6 +7,7 @@ import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/selectRide.styles';
 import { useTranslation } from 'react-i18next';
 import { GeocodeResult } from '../../../../core/services/location/GeoCodingService';
+import SearchResults from '../shared/SearchResults';
 
 type ActiveInput = 'pickup' | 'destination' | null;
 
@@ -69,25 +70,7 @@ export default function RideLocationInputs({
         />
 
         {activeInput === 'pickup' && pickupResults.length > 0 && (
-          <View style={styles.searchResultsContainer}>
-            <ScrollView
-              style={styles.searchScroll}
-              contentContainerStyle={{ paddingVertical: 4 }}
-              nestedScrollEnabled={true}
-              keyboardShouldPersistTaps="always"
-              showsVerticalScrollIndicator={true}
-            >
-              {pickupResults.map(place => (
-                <TouchableOpacity
-                  key={`${place.latitude}-${place.longitude}`}
-                  onPress={() => onSelectPickup(place)}
-                  style={styles.searchResultItem}
-                >
-                  <Text style={styles.searchResultText}>{place.address}</Text>
-                </TouchableOpacity>
-              ))}
-            </ScrollView>
-          </View>
+          <SearchResults results={pickupResults} onSelectItem={onSelectPickup}/>
         )}
 
         <View style={styles.divider} />
@@ -103,25 +86,7 @@ export default function RideLocationInputs({
         />
 
         {activeInput === 'destination' && destinationResults.length > 0 && (
-          <View style={styles.searchResultsContainer}>
-            <ScrollView
-              style={styles.searchScroll}
-              contentContainerStyle={{ paddingVertical: 4 }}
-              nestedScrollEnabled={true}
-              keyboardShouldPersistTaps="always"
-              showsVerticalScrollIndicator={true}
-            >
-              {destinationResults.map(place => (
-                <TouchableOpacity
-                  key={`${place.latitude}-${place.longitude}`}
-                  onPress={() => onSelectDestination(place)}
-                  style={styles.searchResultItem}
-                >
-                  <Text style={styles.searchResultText}>{place.address}</Text>
-                </TouchableOpacity>
-              ))}
-            </ScrollView>
-          </View>
+          <SearchResults results={destinationResults} onSelectItem={onSelectDestination} />
         )}
       </View>
     </View>

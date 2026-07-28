@@ -16,6 +16,7 @@ import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/addNewPlace.style';
 import { useTranslation } from 'react-i18next';
 import { AVAILABLE_ICONS, ICON_MAP } from '../../ride/utils/iconMap';
+import SearchResults from '../components/shared/SearchResults';
 
 export default function AddNewPlaceScreen() {
   const { colors, mode } = useTheme();
@@ -62,6 +63,9 @@ export default function AddNewPlaceScreen() {
                     onChangeText={vm.setAddress}
                   />
               </View>
+                  {vm.searchResults.length > 0 && (
+                    <SearchResults results={vm.searchResults} onSelectItem={vm.selectAddress} />
+                  )}
               
               {/* Icon Selection */}
               <View style={styles.inputGroup}>
@@ -99,27 +103,6 @@ export default function AddNewPlaceScreen() {
             </View>
           </ScrollView>
 
-          {vm.searchResults.length > 0 && (
-            <View style={styles.searchResultsContainer}>
-              <ScrollView
-                style={styles.searchScroll}
-                contentContainerStyle={{ paddingVertical: 4 }}
-                nestedScrollEnabled={true}
-                keyboardShouldPersistTaps="always"
-                showsVerticalScrollIndicator={true}
-              >
-                {vm.searchResults.map(place => (
-                  <TouchableOpacity
-                    style={styles.searchResultItem}
-                    onPress={() => vm.selectAddress(place)}
-                    key={`${place.latitude}-${place.longitude}`}
-                  >
-                    <Text style={styles.searchResultText}>{place.address}</Text>
-                  </TouchableOpacity>
-                ))}
-              </ScrollView>
-            </View>
-          )}
         </View>
 
         {/* Save Button Footer */}
