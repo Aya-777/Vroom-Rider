@@ -12,9 +12,7 @@ import { GeocodeResult } from '../../../core/services/location/GeoCodingService'
 import LocationService from '../../../core/services/location/LocationService';
 import { useLocationStore } from '../../../core/store/useLocationStore';
 
-export function useSelectRideViewModel(
-  showAlert: (title: string, msg: string) => void,
-) {
+export function useSelectRideViewModel() {
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
 

@@ -34,10 +34,6 @@ export default function SelectRideSheet({ onNextPress }: Props) {
   const styles = createStyles(colors);
   const { t } = useTranslation(['selectRide', 'common']);
 
-  const showAlert = useCallback((title: string, msg: string) => {
-    Alert.alert(title, msg);
-  }, []);
-
   const {
     isNowDropdownOpen,
     isForMeDropdownOpen,
@@ -70,7 +66,7 @@ export default function SelectRideSheet({ onNextPress }: Props) {
     handleFlipModal,
     onAddPlacePress,
     onNextPressVM,
-  } = useSelectRideViewModel(showAlert);
+  } = useSelectRideViewModel();
 
   const personItems = [
     { key: 'forMe', label: t('selectRide:forMe'), value: true },
