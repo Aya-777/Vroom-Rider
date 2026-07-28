@@ -19,17 +19,8 @@ export function useSelectRideViewModel(
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
 
   const currentLocation = useLocationStore(state => state.currentLocation);
-
-  const {
-    setRideDetails,
-    rideData,
-    savedPlaces,
-    setSavedPlaces,
-    updateStop,
-    addStop,
-    removeStop,
-    setStops,
-  } = useRideStore();
+  const { setRideDetails, rideData, savedPlaces, setSavedPlaces } =
+    useRideStore();
 
   const pickupStop = rideData.stops?.find(stop => stop.stopType === 'PICKUP');
 
@@ -42,9 +33,27 @@ export function useSelectRideViewModel(
   const [isForMeDropdownOpen, setIsForMeDropdownOpen] = useState(false);
   const [errors, setErrors] = useState<RideValidationErrors>({});
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const pickupSearch = useLocationSearch(pickupStop?.address ?? '');
-
-  const destinationSearch = useLocationSearch(destinationStop?.address ?? '');
+  const [fromText, setFromText] = useState(pickupStop?.address ?? '');
+  const [toText, setToText] = useState(destinationStop?.address ?? '');
+  const [pickupCoordinates, setPickupCoordinates] = useState({
+    latitude: pickupStop?.latitude ?? 0,
+    longitude: pickupStop?.longitude ?? 0,
+  });
+  const [destinationCoordinates, setDestinationCoordinates] = useState({
+    latitude: destinationStop?.latitude ?? 0,
+    longitude: destinationStop?.longitude ?? 0,
+  });
+  const [selectedPerson, setSelectedPerson] = useState(
+    rideData.isForSomeoneElse ? 'otherContact' : 'forMe',
+  );
+  const [selectedTime, setSelectedTime] = useState(
+    rideData.scheduledAt ?? 'now',
+  );
+  const [contactPhone, setContactPhone] = useState(
+    rideData.passengerContactPhone ?? '',
+  );
+  const pickupSearch = useLocationSearch(fromText);
+  const destinationSearch = useLocationSearch(toText);
 
   const { t } = useTranslation('selectRide');
 
@@ -57,8 +66,8 @@ export function useSelectRideViewModel(
 
   // --- Set current location as pickup initially ---
   useEffect(() => {
-    const setPickupFromCurrentLocation = async () => {
-      if (!currentLocation || pickupStop) {
+    const setInitialPickup = async () => {
+      if (!currentLocation || fromText || pickupStop) {
         return;
       }
 
@@ -67,21 +76,16 @@ export function useSelectRideViewModel(
         currentLocation.longitude,
       );
 
-      setRideDetails({
-        stops: [
-          {
-            address,
-            latitude: currentLocation.latitude,
-            longitude: currentLocation.longitude,
-            order: 0,
-            stopType: 'PICKUP',
-          },
-        ],
+      setFromText(address);
+
+      setPickupCoordinates({
+        latitude: currentLocation.latitude,
+        longitude: currentLocation.longitude,
       });
     };
 
-    setPickupFromCurrentLocation();
-  }, [currentLocation, pickupStop]);
+    setInitialPickup();
+  }, [currentLocation, fromText, pickupStop]);
 
   // store the saved places api response in zustand
   useEffect(() => {
@@ -91,120 +95,36 @@ export function useSelectRideViewModel(
   }, [savedPlacesData, setSavedPlaces]);
 
   // --- Ride Data Handlers ---
-  const setFromLocation = (value: string) => {
-    updateStop(0, {
-      address: value,
-      latitude: pickupStop?.latitude ?? 0,
-      longitude: pickupStop?.longitude ?? 0,
-      order: 0,
-      stopType: 'PICKUP',
-    });
-  };
-
-  const setToLocation = (value: string) => {
-    updateStop(1, {
-      address: value,
-      latitude: destinationStop?.latitude ?? 0,
-      longitude: destinationStop?.longitude ?? 0,
-      order: 1,
-      stopType: 'DROP_OFF',
-    });
-  };
-
   const onSelectPickup = (place: GeocodeResult) => {
     pickupSearch.clearResults();
-
-    updateStop(0, {
-      address: place.address,
+    setFromText(place.address);
+    setPickupCoordinates({
       latitude: place.latitude,
       longitude: place.longitude,
-      order: 0,
-      stopType: 'PICKUP',
     });
   };
+
   const onSelectDestination = (place: GeocodeResult) => {
     destinationSearch.clearResults();
-
-    updateStop(1, {
-      address: place.address,
+    setToText(place.address);
+    setDestinationCoordinates({
       latitude: place.latitude,
       longitude: place.longitude,
-      order: 1,
-      stopType: 'DROP_OFF',
-    });
-  };
-
-  const addaStop = (place: GeocodeResult) => {
-    const index = rideData.stops ? rideData.stops.length - 2 : 1;
-    addStop(
-      {
-        address: place.address,
-        latitude: place.latitude,
-        longitude: place.longitude,
-        order: index,
-        stopType: 'STOP',
-      },
-      index,
-    );
-  };
-
-  const removeaStop = (order: number) => {
-    removeStop(order);
-  };
-
-  const setSelectedPerson = (value: string) => {
-    let boolValue;
-    if (value === 'forMe') {
-      boolValue = false;
-    } else {
-      boolValue = true;
-    }
-    setRideDetails({
-      isForSomeoneElse: boolValue,
-    });
-  };
-
-  const setSelectedTime = (value: string) => {
-    setRideDetails({
-      scheduledAt: value,
-    });
-  };
-
-  const setContactPhone = (value: string) => {
-    setRideDetails({
-      passengerContactPhone: value,
     });
   };
 
   // --- Logic ---
   const validate = (): boolean => {
-    const rawErrors = validateRideInputs(
-      pickupStop?.address ?? '',
-      destinationStop?.address ?? '',
-    );
-
+    const rawErrors = validateRideInputs(fromText, toText);
     const translatedErrors: RideValidationErrors = {};
-
     Object.keys(rawErrors).forEach(key => {
       translatedErrors[key as keyof RideValidationErrors] = t(rawErrors[key]);
     });
-
     setErrors(translatedErrors);
-
     return Object.keys(rawErrors).length === 0;
   };
 
   // --- Actions ---
-  const updateRideDetails = () => {
-    if (!validate()) {
-      showAlert(
-        'Missing Information',
-        'Please fill in both pickup and destination locations.',
-      );
-
-      return;
-    }
-  };
 
   const onAddPlacePress = () => {
     navigation.navigate('AddNewPlace');
@@ -218,22 +138,49 @@ export function useSelectRideViewModel(
     setIsModalVisible(!isModalVisible);
   };
 
+  const onNextPress = () => {
+    if (!validate()) {
+      return;
+    }
+    setRideDetails({
+      stops: [
+        {
+          address: fromText,
+          latitude: pickupCoordinates.latitude,
+          longitude: pickupCoordinates.longitude,
+          order: 0,
+          stopType: 'PICKUP',
+        },
+        {
+          address: toText,
+          latitude: destinationCoordinates.latitude,
+          longitude: destinationCoordinates.longitude,
+          order: 1,
+          stopType: 'DROP_OFF',
+        },
+      ],
+      isForSomeoneElse: selectedPerson === 'otherContact',
+      scheduledAt: selectedTime,
+      passengerContactPhone: contactPhone,
+    });
+  };
+
   return {
     // UI State
     isNowDropdownOpen,
     isForMeDropdownOpen,
     errors,
     isModalVisible,
-
-    // Ride Data
-    fromLocation: pickupStop?.address ?? '',
-    toLocation: destinationStop?.address ?? '',
-    selectedPerson: rideData.isForSomeoneElse ? 'otherContact' : 'forMe',
-    selectedTime: rideData.scheduledAt ?? 'now',
-    contactPhone: rideData.passengerContactPhone ?? '',
-    savedPlaces,
     savedPlacesLoading,
     savedPlacesError,
+
+    // Ride Data
+    fromText,
+    toText,
+    selectedPerson,
+    selectedTime,
+    contactPhone,
+    savedPlaces,
 
     // UI Setters
     setIsNowDropdownOpen,
@@ -241,17 +188,17 @@ export function useSelectRideViewModel(
     setIsModalVisible,
 
     // Ride Setters
-    setFromLocation,
-    setToLocation,
+    setFromText,
+    setToText,
     setSelectedPerson,
     setSelectedTime,
     setContactPhone,
 
     // Actions
     validate,
-    updateRideDetails,
     handleFlipModal,
     onAddPlacePress,
+    onNextPressVM: onNextPress,
 
     pickupResults: pickupSearch.results,
     destinationResults: destinationSearch.results,
@@ -259,7 +206,5 @@ export function useSelectRideViewModel(
     destinationSearching: destinationSearch.isSearching,
     onSelectPickup,
     onSelectDestination,
-    addaStop,
-    removeaStop,
   };
 }

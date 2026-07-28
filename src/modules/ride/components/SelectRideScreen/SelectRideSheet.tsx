@@ -39,8 +39,8 @@ export default function SelectRideSheet({
     isForMeDropdownOpen,
     selectedPerson,
     selectedTime,
-    fromLocation,
-    toLocation,
+    fromText,
+    toText,
     errors,
     savedPlaces,
     savedPlacesLoading,
@@ -51,13 +51,13 @@ export default function SelectRideSheet({
     setIsForMeDropdownOpen,
     setSelectedPerson,
     setSelectedTime,
-    setFromLocation,
-    setToLocation,
+    setFromText,
+    setToText,
 
     validate,
-    updateRideDetails,
     handleFlipModal,
-    onAddPlacePress
+    onAddPlacePress,
+    onNextPressVM
   } = useSelectRideViewModel(showAlert);
 
   const personItems = [
@@ -71,12 +71,7 @@ export default function SelectRideSheet({
   ];
 
   const handleNextPress = () => {
-    if (!validate()) {
-      return;
-    }
-
-    updateRideDetails();
-
+    onNextPressVM();
     onNextPress();
   };
   const snapPoints = useMemo(() => ['30%', '70%'], []);
@@ -110,10 +105,10 @@ export default function SelectRideSheet({
       </View>
 
       <RideLocationInputs
-        fromLocation={fromLocation}
-        toLocation={toLocation}
-        onChangeFrom={setFromLocation}
-        onChangeTo={setToLocation}
+        fromLocation={fromText}
+        toLocation={toText}
+        onChangeFrom={setFromText}
+        onChangeTo={setToText}
         errors={errors}
       />
 
