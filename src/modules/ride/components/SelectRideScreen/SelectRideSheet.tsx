@@ -58,7 +58,7 @@ export default function SelectRideSheet({
     updateRideDetails,
     handleFlipModal,
     onAddPlacePress
-  } = useSelectRideViewModel(showAlert, currentLocation);
+  } = useSelectRideViewModel(showAlert);
 
   const personItems = [
     { key: 'forMe', label: t('selectRide:forMe'), value: true },

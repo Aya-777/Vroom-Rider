@@ -3,11 +3,11 @@ import Geolocation from 'react-native-geolocation-service';
 export type Location = {
   latitude: number;
   longitude: number;
-  address: string;
+  address?: string;
 };
 
 class LocationService {
-  private async reverseGeocode(
+  async reverseGeocode(
     latitude: number,
     longitude: number,
   ): Promise<string> {
@@ -80,12 +80,11 @@ class LocationService {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 
-        const address = await this.reverseGeocode(latitude,longitude);
+        // const address = await this.reverseGeocode(latitude,longitude);
 
         onLocationChanged({
           latitude,
           longitude,
-          address,
         });
       },
       error => {

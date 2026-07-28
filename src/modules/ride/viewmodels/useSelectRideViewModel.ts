@@ -9,14 +9,16 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
 import { useLocationSearch } from '../hooks/useLocationSearch';
 import { GeocodeResult } from '../../../core/services/location/GeoCodingService';
-import { Location } from '../../../core/services/location/LocationService';
+import LocationService from '../../../core/services/location/LocationService';
+import { useLocationStore } from '../../../core/store/useLocationStore';
 
 export function useSelectRideViewModel(
   showAlert: (title: string, msg: string) => void,
-  currentLocation: Location,
 ) {
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
+
+  const currentLocation = useLocationStore(state => state.currentLocation);
 
   const {
     setRideDetails,
@@ -55,12 +57,20 @@ export function useSelectRideViewModel(
 
   // --- Set current location as pickup initially ---
   useEffect(() => {
-    if (currentLocation && !pickupStop) {
-      console.log(currentLocation.address + "weeee");
+    const setPickupFromCurrentLocation = async () => {
+      if (!currentLocation || pickupStop) {
+        return;
+      }
+
+      const address = await LocationService.reverseGeocode(
+        currentLocation.latitude,
+        currentLocation.longitude,
+      );
+
       setRideDetails({
         stops: [
           {
-            address: currentLocation.address,
+            address,
             latitude: currentLocation.latitude,
             longitude: currentLocation.longitude,
             order: 0,
@@ -68,8 +78,10 @@ export function useSelectRideViewModel(
           },
         ],
       });
-    }
-  }, [currentLocation]);
+    };
+
+    setPickupFromCurrentLocation();
+  }, [currentLocation, pickupStop]);
 
   // store the saved places api response in zustand
   useEffect(() => {
@@ -81,22 +93,22 @@ export function useSelectRideViewModel(
   // --- Ride Data Handlers ---
   const setFromLocation = (value: string) => {
     updateStop(0, {
-          address: value,
-          latitude: destinationStop?.latitude ?? 0,
-          longitude: destinationStop?.longitude ?? 0,
-          order: 1,
-          stopType: 'PICKUP',
-    })
+      address: value,
+      latitude: pickupStop?.latitude ?? 0,
+      longitude: pickupStop?.longitude ?? 0,
+      order: 0,
+      stopType: 'PICKUP',
+    });
   };
-  
+
   const setToLocation = (value: string) => {
     updateStop(1, {
-          address: value,
-          latitude: destinationStop?.latitude ?? 0,
-          longitude: destinationStop?.longitude ?? 0,
-          order: 1,
-          stopType: 'DROP_OFF',
-    })
+      address: value,
+      latitude: destinationStop?.latitude ?? 0,
+      longitude: destinationStop?.longitude ?? 0,
+      order: 1,
+      stopType: 'DROP_OFF',
+    });
   };
 
   const onSelectPickup = (place: GeocodeResult) => {
@@ -123,7 +135,7 @@ export function useSelectRideViewModel(
   };
 
   const addaStop = (place: GeocodeResult) => {
-    const index  = rideData.stops? rideData.stops.length-2 : 1;
+    const index = rideData.stops ? rideData.stops.length - 2 : 1;
     addStop(
       {
         address: place.address,
@@ -134,11 +146,11 @@ export function useSelectRideViewModel(
       },
       index,
     );
-  }
+  };
 
-  const removeaStop = (order : number) => {
+  const removeaStop = (order: number) => {
     removeStop(order);
-  }
+  };
 
   const setSelectedPerson = (value: string) => {
     let boolValue;

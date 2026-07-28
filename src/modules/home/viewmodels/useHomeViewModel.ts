@@ -3,10 +3,19 @@ import ReserveIcon from '../../../assets/svg/home/reserve.svg';
 import { useTranslation } from 'react-i18next';
 import { recentDestinations } from '../constants/homeData';
 import { useMainDrawer } from '../../../navigation/hooks/useMainDrawer';
+import { useLocationTracking } from '../../../core/services/location/useLocationTracking';
+import { useLocationStore } from '../../../core/store/useLocationStore';
+import { reverseGeocode } from '../../../core/services/location/GeoCodingService';
 
 export const useHomeViewModel = () => {
   const { t } = useTranslation(['common', 'home']);
   const { openSidebar } = useMainDrawer();
+
+    useLocationTracking();
+
+    const currentLocation = useLocationStore(
+      state => state.currentLocation
+    );
 
   const services = [
     {
@@ -28,5 +37,6 @@ export const useHomeViewModel = () => {
     services,
     recentDestinations,
     openSidebar,
+    currentLocation,
   };
 };

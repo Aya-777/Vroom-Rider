@@ -24,8 +24,6 @@ export default function RideScreen() {
     navigation.navigate('HomeScreen');
   };
 
-  console.log(vm.rideState);
-
   return (
     <View style={styles.container}>
       <StatusBar
