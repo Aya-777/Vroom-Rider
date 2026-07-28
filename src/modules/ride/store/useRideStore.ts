@@ -28,12 +28,13 @@ interface RideState {
 
 export const useRideStore = create<RideState>(set => ({
   rideData: {
-    id: '1',
-    vehicleType: 'economy',
-    payment: 'cash',
-    selectedPerson: 'forMe',
-    time: 'now',
-    prefrences: [],
+    vehicleTypeId: 1,
+    paymentMethod: 'CASH',
+    isForSomeoneElse: false,
+    passengerContactPhone: '09********',
+    stops: [],
+    preferenceIds: [],
+    scheduledAt: 'NOW',
   },
 
   estimate: {},
@@ -48,6 +49,7 @@ export const useRideStore = create<RideState>(set => ({
     set({
       savedPlaces: [],
     }),
+    
   setRideDetails: details =>
     set(state => ({
       rideData: {

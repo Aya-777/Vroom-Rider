@@ -60,8 +60,8 @@ export default function SelectRideSheet({
   } = useSelectRideViewModel(showAlert, currentLocation);
 
   const personItems = [
-    { key: 'forMe', label: t('selectRide:forMe') },
-    { key: 'otherContact', label: t('selectRide:otherContact') },
+    { key: 'forMe', label: t('selectRide:forMe'), value: true },
+    { key: 'otherContact', label: t('selectRide:otherContact'), value: false },
   ];
 
   const timeItems = [

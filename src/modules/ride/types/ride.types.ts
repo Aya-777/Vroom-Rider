@@ -24,16 +24,23 @@ export interface Prefrences{
   price: Double,
 }
 
+export interface RideStop {
+  address: string;
+  latitude: number;
+  longitude: number;
+  order: number;
+  stopType: 'PICKUP' | 'DROP_OFF' | 'STOP';
+}
 export interface RideParams {
-  id: string;
-  pickupLocation: string;
-  dropoffLocation: string;
-  selectedPerson: string;
-  time: string;
-  payment: string;
-  vehicleType: string;
-  prefrences: Array<Prefrences>,
-  contactPhone: string;
+
+  vehicleTypeId?: number;
+  paymentMethod: 'CASH' | 'CARD';
+  isForSomeoneElse: boolean;
+  passengerContactPhone?: string;
+  stops: RideStop[];
+  preferenceIds: number[];
+  scheduledAt?: string;
+
 }
 
 export interface RideEstimate {

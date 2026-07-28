@@ -20,14 +20,20 @@ export function useSelectRideViewModel(
   const { setRideDetails, rideData, savedPlaces, setSavedPlaces } =
     useRideStore();
 
+  const pickupStop = rideData.stops?.find(stop => stop.stopType === 'PICKUP');
+
+  const destinationStop = rideData.stops?.find(
+    stop => stop.stopType === 'DROP_OFF',
+  );
+
   // --- UI State ---
   const [isNowDropdownOpen, setIsNowDropdownOpen] = useState(false);
   const [isForMeDropdownOpen, setIsForMeDropdownOpen] = useState(false);
   const [errors, setErrors] = useState<RideValidationErrors>({});
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const pickupSearch = useLocationSearch(rideData.pickupLocation ?? '');
+  const pickupSearch = useLocationSearch(pickupStop?.address ?? '');
 
-  const destinationSearch = useLocationSearch(rideData.dropoffLocation ?? '');
+  const destinationSearch = useLocationSearch(destinationStop?.address ?? '');
 
   const { t } = useTranslation('selectRide');
 
@@ -40,9 +46,17 @@ export function useSelectRideViewModel(
 
   // --- Set current location as pickup initially ---
   useEffect(() => {
-    if (currentLocation && !rideData.pickupLocation) {
+    if (currentLocation && !pickupStop) {
       setRideDetails({
-        pickupLocation: currentLocation,
+        stops: [
+          {
+            address: currentLocation,
+            latitude: 0,
+            longitude: 0,
+            order: 0,
+            stopType: 'PICKUP',
+          },
+        ],
       });
     }
   }, [currentLocation]);
@@ -55,62 +69,110 @@ export function useSelectRideViewModel(
   }, [savedPlacesData, setSavedPlaces]);
 
   // --- Ride Data Handlers ---
-
   const setFromLocation = (value: string) => {
+    const otherStops =
+      rideData.stops?.filter(stop => stop.stopType !== 'PICKUP') ?? [];
+
     setRideDetails({
-      pickupLocation: value,
+      stops: [
+        {
+          address: value,
+          latitude: pickupStop?.latitude ?? 0,
+          longitude: pickupStop?.longitude ?? 0,
+          order: 0,
+          stopType: 'PICKUP',
+        },
+        ...otherStops,
+      ],
     });
   };
 
   const setToLocation = (value: string) => {
+    const otherStops =
+      rideData.stops?.filter(stop => stop.stopType !== 'DROP_OFF') ?? [];
+
     setRideDetails({
-      dropoffLocation: value,
+      stops: [
+        ...otherStops,
+        {
+          address: value,
+          latitude: destinationStop?.latitude ?? 0,
+          longitude: destinationStop?.longitude ?? 0,
+          order: 1,
+          stopType: 'DROP_OFF',
+        },
+      ],
     });
   };
 
-// const onSelectPickup = (place: GeocodeResult) => {
-//   pickupSearch.clearResults();
+  const onSelectPickup = (place: GeocodeResult) => {
+    pickupSearch.clearResults();
 
-//   setRideDetails({
-//     pickupLocation: place.address,
-//     pickupLatitude: place.latitude,
-//     pickupLongitude: place.longitude,
-//   });
-// };
+    const otherStops =
+      rideData.stops?.filter(stop => stop.stopType !== 'PICKUP') ?? [];
 
-// const onSelectDestination = (place: GeocodeResult) => {
-//   destinationSearch.clearResults();
-
-//   setRideDetails({
-//     dropoffLocation: place.address,
-//     dropoffLatitude: place.latitude,
-//     dropoffLongitude: place.longitude,
-//   });
-// };
-
-const setSelectedPerson = (value: string) => {
     setRideDetails({
-      selectedPerson: value,
+      stops: [
+        {
+          address: place.address,
+          latitude: place.latitude,
+          longitude: place.longitude,
+          order: 0,
+          stopType: 'PICKUP',
+        },
+        ...otherStops,
+      ],
+    });
+  };
+  const onSelectDestination = (place: GeocodeResult) => {
+    pickupSearch.clearResults();
+
+    const otherStops =
+      rideData.stops?.filter(stop => stop.stopType !== 'PICKUP') ?? [];
+
+    setRideDetails({
+      stops: [
+        {
+          address: place.address,
+          latitude: place.latitude,
+          longitude: place.longitude,
+          order: 0,
+          stopType: 'DROP_OFF',
+        },
+        ...otherStops,
+      ],
+    });
+  };
+
+  const setSelectedPerson = (value: string) => {
+    let boolValue;
+    if(value === 'forMe'){
+      boolValue = false;
+    }else{
+      boolValue = true;
+    }
+    setRideDetails({
+      isForSomeoneElse: boolValue,
     });
   };
 
   const setSelectedTime = (value: string) => {
     setRideDetails({
-      time: value,
+      scheduledAt: value,
     });
   };
 
   const setContactPhone = (value: string) => {
     setRideDetails({
-      contactPhone: value,
+      passengerContactPhone: value,
     });
   };
 
   // --- Logic ---
   const validate = (): boolean => {
     const rawErrors = validateRideInputs(
-      rideData.pickupLocation ?? '',
-      rideData.dropoffLocation ?? '',
+      pickupStop?.address ?? '',
+      destinationStop?.address ?? '',
     );
 
     const translatedErrors: RideValidationErrors = {};
@@ -156,11 +218,11 @@ const setSelectedPerson = (value: string) => {
     isModalVisible,
 
     // Ride Data
-    fromLocation: rideData.pickupLocation ?? '',
-    toLocation: rideData.dropoffLocation ?? '',
-    selectedPerson: rideData.selectedPerson ?? 'forMe',
-    selectedTime: rideData.time ?? 'now',
-    contactPhone: rideData.contactPhone ?? '',
+    fromLocation: pickupStop?.address ?? '',
+    toLocation: destinationStop?.address ?? '',
+    selectedPerson: rideData.isForSomeoneElse ? 'otherContact' : 'forMe',
+    selectedTime: rideData.scheduledAt ?? 'now',
+    contactPhone: rideData.passengerContactPhone ?? '',
     savedPlaces,
     savedPlacesLoading,
     savedPlacesError,
@@ -187,7 +249,7 @@ const setSelectedPerson = (value: string) => {
     destinationResults: destinationSearch.results,
     pickupSearching: pickupSearch.isSearching,
     destinationSearching: destinationSearch.isSearching,
-    // onSelectPickup,
-    // onSelectDestination,
+    onSelectPickup,
+    onSelectDestination,
   };
 }
