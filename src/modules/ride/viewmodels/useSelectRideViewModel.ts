@@ -9,10 +9,11 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
 import { useLocationSearch } from '../hooks/useLocationSearch';
 import { GeocodeResult } from '../../../core/services/location/GeoCodingService';
+import { Location } from '../../../core/services/location/LocationService';
 
 export function useSelectRideViewModel(
   showAlert: (title: string, msg: string) => void,
-  currentLocation: string,
+  currentLocation: Location,
 ) {
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
@@ -55,12 +56,13 @@ export function useSelectRideViewModel(
   // --- Set current location as pickup initially ---
   useEffect(() => {
     if (currentLocation && !pickupStop) {
+      console.log(currentLocation.address + "weeee");
       setRideDetails({
         stops: [
           {
-            address: currentLocation,
-            latitude: 0,
-            longitude: 0,
+            address: currentLocation.address,
+            latitude: currentLocation.latitude,
+            longitude: currentLocation.longitude,
             order: 0,
             stopType: 'PICKUP',
           },
@@ -79,22 +81,22 @@ export function useSelectRideViewModel(
   // --- Ride Data Handlers ---
   const setFromLocation = (value: string) => {
     updateStop(0, {
-      address: value,
-      latitude: pickupStop?.latitude ?? 0,
-      longitude: pickupStop?.longitude ?? 0,
-      order: 0,
-      stopType: 'PICKUP',
-    });
+          address: value,
+          latitude: destinationStop?.latitude ?? 0,
+          longitude: destinationStop?.longitude ?? 0,
+          order: 1,
+          stopType: 'PICKUP',
+    })
   };
   
   const setToLocation = (value: string) => {
-    updateStop(rideData.stops ? rideData.stops.length - 1 : 1, {
-      address: value,
-      latitude: destinationStop?.latitude ?? 0,
-      longitude: destinationStop?.longitude ?? 0,
-      order: 1,
-      stopType: 'DROP_OFF',
-    });
+    updateStop(1, {
+          address: value,
+          latitude: destinationStop?.latitude ?? 0,
+          longitude: destinationStop?.longitude ?? 0,
+          order: 1,
+          stopType: 'DROP_OFF',
+    })
   };
 
   const onSelectPickup = (place: GeocodeResult) => {
@@ -111,7 +113,7 @@ export function useSelectRideViewModel(
   const onSelectDestination = (place: GeocodeResult) => {
     destinationSearch.clearResults();
 
-    updateStop(rideData.stops ? rideData.stops.length - 1 : 1, {
+    updateStop(1, {
       address: place.address,
       latitude: place.latitude,
       longitude: place.longitude,

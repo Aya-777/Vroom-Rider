@@ -16,7 +16,7 @@ const previousState: Partial<Record<RideState, RideState>> = {
 
 export function useRideViewModel() {
   const [rideState, setRideState] = useState(RideState.SELECT_RIDE);
-  const [currentLocation, setCurrentLocation] = useState<Location>();
+  const [currentLocation, setCurrentLocation] = useState<Location>({address: "", latitude: 0, longitude: 0});
   const { rideData, estimate, setEstimate, clearRide } = useRideStore();
 
   const navigation =

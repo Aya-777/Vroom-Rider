@@ -6,10 +6,11 @@ import RideConfirmationSheet from '../RideConfirmationScreen/RideConfirmationShe
 import DriverFoundSheet from '../DriverFoundScreen/DriverFoundSheet';
 import DriverArrivedSheet from '../DriverArrivedScreen/DriverArrivedSheet';
 import TripStartedSheet from '../TripStartedScreen/TripStartedSheet';
+import { Location } from '../../../../core/services/location/LocationService';
 
 type Props = {
   rideState: RideState;
-  currentLocation: string;
+  currentLocation: Location;
   estimate: {
     price?: string;
     time?: string;

@@ -65,6 +65,7 @@ export const useRideStore = create<RideState>(set => ({
     set({
       savedPlaces: places,
     }),
+    
 updateStop: (order, updatedStop) =>
   set(state => {
     const stops = [...(state.rideData.stops ?? [])];
@@ -72,10 +73,10 @@ updateStop: (order, updatedStop) =>
     const index = stops.findIndex(s => s.order === order);
 
     if (index === -1) {
-      return state;
+      stops.push(updatedStop);
+    } else {
+      stops[index] = updatedStop;
     }
-
-    stops[index] = updatedStop;
 
     return {
       rideData: {

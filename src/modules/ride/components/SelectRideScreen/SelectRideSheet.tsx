@@ -15,10 +15,11 @@ import { createStyles } from '../../styles/selectRide.styles';
 import { useTranslation } from 'react-i18next';
 import { Alert, Text, TextInput, View } from 'react-native';
 import {SavedPlacesModal} from '../SavedPlaces/SavedPlacesModal';
+import { Location } from '../../../../core/services/location/LocationService';
 
 type Props = {
   onNextPress: () => void;
-  currentLocation: string;
+  currentLocation: Location;
 };
 
 export default function SelectRideSheet({
