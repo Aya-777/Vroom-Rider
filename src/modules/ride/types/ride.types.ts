@@ -33,6 +33,7 @@ export interface RideStop {
 }
 export interface RideParams {
 
+  id: number,
   vehicleTypeId?: number;
   paymentMethod: 'CASH' | 'CARD';
   isForSomeoneElse: boolean;

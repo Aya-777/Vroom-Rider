@@ -86,7 +86,7 @@ export function useRideViewModel() {
       console.log('No active ride');
       return;
     }
-    await rideService.cancelRide(rideData.id);
+    await rideService.cancelRide(rideData.id.toString());
     clearRide();
     setRideState(RideState.SELECT_RIDE);
 

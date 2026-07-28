@@ -17,8 +17,16 @@ export function useSelectRideViewModel(
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
 
-  const { setRideDetails, rideData, savedPlaces, setSavedPlaces } =
-    useRideStore();
+  const {
+    setRideDetails,
+    rideData,
+    savedPlaces,
+    setSavedPlaces,
+    updateStop,
+    addStop,
+    removeStop,
+    setStops,
+  } = useRideStore();
 
   const pickupStop = rideData.stops?.find(stop => stop.stopType === 'PICKUP');
 
@@ -70,85 +78,71 @@ export function useSelectRideViewModel(
 
   // --- Ride Data Handlers ---
   const setFromLocation = (value: string) => {
-    const otherStops =
-      rideData.stops?.filter(stop => stop.stopType !== 'PICKUP') ?? [];
-
-    setRideDetails({
-      stops: [
-        {
-          address: value,
-          latitude: pickupStop?.latitude ?? 0,
-          longitude: pickupStop?.longitude ?? 0,
-          order: 0,
-          stopType: 'PICKUP',
-        },
-        ...otherStops,
-      ],
+    updateStop(0, {
+      address: value,
+      latitude: pickupStop?.latitude ?? 0,
+      longitude: pickupStop?.longitude ?? 0,
+      order: 0,
+      stopType: 'PICKUP',
     });
   };
-
+  
   const setToLocation = (value: string) => {
-    const otherStops =
-      rideData.stops?.filter(stop => stop.stopType !== 'DROP_OFF') ?? [];
-
-    setRideDetails({
-      stops: [
-        ...otherStops,
-        {
-          address: value,
-          latitude: destinationStop?.latitude ?? 0,
-          longitude: destinationStop?.longitude ?? 0,
-          order: 1,
-          stopType: 'DROP_OFF',
-        },
-      ],
+    updateStop(rideData.stops ? rideData.stops.length - 1 : 1, {
+      address: value,
+      latitude: destinationStop?.latitude ?? 0,
+      longitude: destinationStop?.longitude ?? 0,
+      order: 1,
+      stopType: 'DROP_OFF',
     });
   };
 
   const onSelectPickup = (place: GeocodeResult) => {
     pickupSearch.clearResults();
 
-    const otherStops =
-      rideData.stops?.filter(stop => stop.stopType !== 'PICKUP') ?? [];
-
-    setRideDetails({
-      stops: [
-        {
-          address: place.address,
-          latitude: place.latitude,
-          longitude: place.longitude,
-          order: 0,
-          stopType: 'PICKUP',
-        },
-        ...otherStops,
-      ],
+    updateStop(0, {
+      address: place.address,
+      latitude: place.latitude,
+      longitude: place.longitude,
+      order: 0,
+      stopType: 'PICKUP',
     });
   };
   const onSelectDestination = (place: GeocodeResult) => {
-    pickupSearch.clearResults();
+    destinationSearch.clearResults();
 
-    const otherStops =
-      rideData.stops?.filter(stop => stop.stopType !== 'PICKUP') ?? [];
-
-    setRideDetails({
-      stops: [
-        {
-          address: place.address,
-          latitude: place.latitude,
-          longitude: place.longitude,
-          order: 0,
-          stopType: 'DROP_OFF',
-        },
-        ...otherStops,
-      ],
+    updateStop(rideData.stops ? rideData.stops.length - 1 : 1, {
+      address: place.address,
+      latitude: place.latitude,
+      longitude: place.longitude,
+      order: 1,
+      stopType: 'DROP_OFF',
     });
   };
 
+  const addaStop = (place: GeocodeResult) => {
+    const index  = rideData.stops? rideData.stops.length-2 : 1;
+    addStop(
+      {
+        address: place.address,
+        latitude: place.latitude,
+        longitude: place.longitude,
+        order: index,
+        stopType: 'STOP',
+      },
+      index,
+    );
+  }
+
+  const removeaStop = (order : number) => {
+    removeStop(order);
+  }
+
   const setSelectedPerson = (value: string) => {
     let boolValue;
-    if(value === 'forMe'){
+    if (value === 'forMe') {
       boolValue = false;
-    }else{
+    } else {
       boolValue = true;
     }
     setRideDetails({
@@ -251,5 +245,7 @@ export function useSelectRideViewModel(
     destinationSearching: destinationSearch.isSearching,
     onSelectPickup,
     onSelectDestination,
+    addaStop,
+    removeaStop,
   };
 }
