@@ -2,16 +2,21 @@ import { apiClient } from '../../../core/network/apiClient';
 import { ENDPOINTS } from '../../../core/network/endpoints';
 
 import {
-  CreateSavedPlaceRequestDTO,
-  CreateSavedPlaceResponseDTO,
-  EstimateInitialRequestDTO,
-  EstimateInitialResponseDTO,
   PriceEstimateRequestDTO,
   PriceEstimateResponseDTO,
   RequestRideRequestDTO,
   RequestRideResponseDTO,
-  SavedPlaceDTO,
 } from './dto/ride.dto';
+
+import { SavedPlaceDTO,
+  CreateSavedPlaceRequestDTO,
+  CreateSavedPlaceResponseDTO
+  } from './dto/savedPlaces.dto';
+
+  import { 
+    EstimateInitialRequestDTO,
+    EstimateInitialResponseDTO
+   } from './dto/estimate.dto';
 
 export const rideApi = {
   // Saved Places

@@ -3,14 +3,16 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { rideApi } from '../services/rideApi';
 
 import {
-  CreateSavedPlaceRequestDTO,
-  CreateSavedPlaceResponseDTO,
   PriceEstimateRequestDTO,
   PriceEstimateResponseDTO,
   RequestRideRequestDTO,
   RequestRideResponseDTO,
-  SavedPlaceDTO,
 } from '../services/dto/ride.dto';
+
+import { SavedPlaceDTO,
+  CreateSavedPlaceRequestDTO,
+  CreateSavedPlaceResponseDTO
+ } from '../services/dto/savedPlaces.dto';
 
 export const useRideRepository = {
   useSavedPlaces: (enabled = true) =>
