@@ -10,7 +10,6 @@ import { Location } from '../../../../core/services/location/LocationService';
 
 type Props = {
   rideState: RideState;
-  currentLocation: Location;
   estimate: {
     price?: string;
     time?: string;
@@ -33,7 +32,6 @@ export default function RideBottomSheet({
   onDriverFound,
   onTripStarted,
   onTripEnded,
-  currentLocation,
   estimate,
   onCancelPress
 }: Props) {
@@ -43,7 +41,6 @@ export default function RideBottomSheet({
         return (
           <SelectRideSheet
             onNextPress={onSelectRideNext}
-            currentLocation={currentLocation}
           />
         );
 

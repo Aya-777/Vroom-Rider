@@ -52,8 +52,11 @@ export function useSelectRideViewModel(
   const [contactPhone, setContactPhone] = useState(
     rideData.passengerContactPhone ?? '',
   );
+  type ActiveInput = 'pickup' | 'destination' | null;
+  const [activeInput, setActiveInput] = useState<ActiveInput>(null);
   const pickupSearch = useLocationSearch(fromText);
   const destinationSearch = useLocationSearch(toText);
+  const [hasInitializedPickup, setHasInitializedPickup] = useState(false);
 
   const { t } = useTranslation('selectRide');
 
@@ -66,26 +69,28 @@ export function useSelectRideViewModel(
 
   // --- Set current location as pickup initially ---
   useEffect(() => {
-    const setInitialPickup = async () => {
-      if (!currentLocation || fromText || pickupStop) {
-        return;
-      }
+  const setInitialPickup = async () => {
+  if (!currentLocation || hasInitializedPickup) {
+    return;
+  }
 
-      const address = await LocationService.reverseGeocode(
-        currentLocation.latitude,
-        currentLocation.longitude,
-      );
+  const address = await LocationService.reverseGeocode(
+    currentLocation.latitude,
+    currentLocation.longitude,
+  );
 
-      setFromText(address);
+    setFromText(address);
 
-      setPickupCoordinates({
-        latitude: currentLocation.latitude,
-        longitude: currentLocation.longitude,
-      });
-    };
+    setPickupCoordinates({
+      latitude: currentLocation.latitude,
+      longitude: currentLocation.longitude,
+    });
 
-    setInitialPickup();
-  }, [currentLocation, fromText, pickupStop]);
+    setHasInitializedPickup(true);
+  };
+
+  setInitialPickup();
+}, [currentLocation, hasInitializedPickup]);
 
   // store the saved places api response in zustand
   useEffect(() => {
@@ -102,6 +107,7 @@ export function useSelectRideViewModel(
       latitude: place.latitude,
       longitude: place.longitude,
     });
+    setActiveInput(null);
   };
 
   const onSelectDestination = (place: GeocodeResult) => {
@@ -111,6 +117,16 @@ export function useSelectRideViewModel(
       latitude: place.latitude,
       longitude: place.longitude,
     });
+    setActiveInput(null);
+  };
+
+  const onPickupFocus = () => {
+    setActiveInput('pickup');
+  };
+
+
+  const onDestinationFocus = () => {
+    setActiveInput('destination');
   };
 
   // --- Logic ---
@@ -186,6 +202,9 @@ export function useSelectRideViewModel(
     setIsNowDropdownOpen,
     setIsForMeDropdownOpen,
     setIsModalVisible,
+    activeInput,
+    onPickupFocus,
+    onDestinationFocus,
 
     // Ride Setters
     setFromText,

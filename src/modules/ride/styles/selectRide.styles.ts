@@ -145,4 +145,31 @@ export const createStyles = (colors: ThemeColors) =>
       marginBottom: 2,
       color: colors.background,
     },
+    
+    searchResultsContainer: {
+      maxHeight: 180,
+      backgroundColor: colors.surface,
+      borderRadius: 12,
+      marginTop: 4,
+      marginBottom: 15,
+      zIndex: 20,
+      elevation: 10, // For Android touch priority
+    },
+
+    searchScroll: {
+      maxHeight: 180,
+    },
+
+    searchResultItem: {
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      borderBottomWidth: 1,
+      borderBottomColor: '#1D2840',
+    },
+
+    searchResultText: {
+      color: '#FFFFFF',
+      fontSize: 13,
+      lineHeight: 18,
+    },
   });
