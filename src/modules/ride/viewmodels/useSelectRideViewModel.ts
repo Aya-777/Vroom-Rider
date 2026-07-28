@@ -11,13 +11,14 @@ import { useLocationSearch } from '../hooks/useLocationSearch';
 import { GeocodeResult } from '../../../core/services/location/GeoCodingService';
 import LocationService from '../../../core/services/location/LocationService';
 import { useLocationStore } from '../../../core/store/locationStore';
+import { rideApi } from '../services/rideApi';
 
 export function useSelectRideViewModel() {
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
 
   const currentLocation = useLocationStore(state => state.currentLocation);
-  const { setRideDetails, rideData, savedPlaces, setSavedPlaces } =
+  const { setRideDetails, rideData, savedPlaces, setSavedPlaces, setEstimate } =
     useRideStore();
 
   const pickupStop = rideData.stops?.find(stop => stop.stopType === 'PICKUP');
@@ -151,31 +152,58 @@ export function useSelectRideViewModel() {
     setIsModalVisible(!isModalVisible);
   };
 
-  const onNextPress = () => {
+  const onNextPress = async () => {
     if (!validate()) {
       return;
     }
-    setRideDetails({
-      stops: [
-        {
-          address: fromText,
-          latitude: pickupCoordinates.latitude,
-          longitude: pickupCoordinates.longitude,
-          order: 0,
-          stopType: 'PICKUP',
-        },
-        {
-          address: toText,
-          latitude: destinationCoordinates.latitude,
-          longitude: destinationCoordinates.longitude,
-          order: 1,
-          stopType: 'DROP_OFF',
-        },
-      ],
-      isForSomeoneElse: selectedPerson === 'otherContact',
-      scheduledAt: selectedTime,
-      passengerContactPhone: contactPhone,
-    });
+    const stops = [
+      {
+        address: fromText,
+        latitude: pickupCoordinates.latitude,
+        longitude: pickupCoordinates.longitude,
+        order: 0,
+        stop_type: 'PICKUP' as const,
+      },
+      {
+        address: toText,
+        latitude: destinationCoordinates.latitude,
+        longitude: destinationCoordinates.longitude,
+        order: 1,
+        stop_type: 'DROP_OFF' as const,
+      },
+    ];
+    try {
+      const estimate = await rideApi.estimateInitial({
+        stops,
+      });
+
+      console.log('estimte : ', estimate);
+      setEstimate(estimate);
+
+      setRideDetails({
+        stops: [
+          {
+            address: fromText,
+            latitude: pickupCoordinates.latitude,
+            longitude: pickupCoordinates.longitude,
+            order: 0,
+            stopType: 'PICKUP',
+          },
+          {
+            address: toText,
+            latitude: destinationCoordinates.latitude,
+            longitude: destinationCoordinates.longitude,
+            order: 1,
+            stopType: 'DROP_OFF',
+          },
+        ],
+        isForSomeoneElse: selectedPerson === 'otherContact',
+        scheduledAt: selectedTime,
+        passengerContactPhone: contactPhone,
+      });
+    } catch (error) {
+      console.error('Failed to estimate ride:', error);
+    }
   };
 
   return {

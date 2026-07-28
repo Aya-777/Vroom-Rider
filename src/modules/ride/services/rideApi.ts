@@ -4,6 +4,8 @@ import { ENDPOINTS } from '../../../core/network/endpoints';
 import {
   CreateSavedPlaceRequestDTO,
   CreateSavedPlaceResponseDTO,
+  EstimateInitialRequestDTO,
+  EstimateInitialResponseDTO,
   PriceEstimateRequestDTO,
   PriceEstimateResponseDTO,
   RequestRideRequestDTO,
@@ -43,4 +45,25 @@ export const rideApi = {
 
     return response.data;
   },
+  
+  estimateInitial: async (
+    data: EstimateInitialRequestDTO,
+  ): Promise<EstimateInitialResponseDTO> => {
+    const response = await apiClient.post<EstimateInitialResponseDTO>(
+      ENDPOINTS.TRIPS.INITIAL_ESTIMATE,
+      data,
+    );
+
+    return response.data;
+  },
+  
+  cancelRide: async (rideId: string) => {
+    const response = await apiClient.post(
+      `/api/v1/rides/${rideId}/cancel/`,
+    );
+
+    return response.data;
+  }
+
+
 };

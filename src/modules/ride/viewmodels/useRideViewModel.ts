@@ -7,7 +7,7 @@ import LocationService, {
   Location,
 } from '../../../core/services/location/LocationService';
 import { useRideStore } from '../store/useRideStore';
-import rideService from '../services/rideService';
+import { rideApi } from '../services/rideApi';
 
 const previousState: Partial<Record<RideState, RideState>> = {
   [RideState.EXTRA_DETAILS]: RideState.SELECT_RIDE,
@@ -86,7 +86,7 @@ export function useRideViewModel() {
       console.log('No active ride');
       return;
     }
-    await rideService.cancelRide(rideData.id.toString());
+    await rideApi.cancelRide(rideData.id.toString());
     clearRide();
     setRideState(RideState.SELECT_RIDE);
 
