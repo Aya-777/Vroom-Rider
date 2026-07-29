@@ -57,6 +57,8 @@ export function useSelectRideViewModel() {
   const pickupSearch = useLocationSearch(fromText);
   const destinationSearch = useLocationSearch(toText);
   const [hasInitializedPickup, setHasInitializedPickup] = useState(false);
+  const [isSheetVisible, setIsSheetVisible] = useState(true);
+  const [isSelectingOnMap, setIsSelectingOnMap] = useState(false);
 
   const { t } = useTranslation('selectRide');
 
@@ -163,6 +165,18 @@ export function useSelectRideViewModel() {
     setIsModalVisible(!isModalVisible);
   };
 
+  
+  const handleBottomSheet = (visible: boolean) => {
+    setIsSheetVisible(visible);
+  };
+  
+  const onSetOnMap = () => {
+    setIsSelectingOnMap(true);
+    handleBottomSheet(false);
+  };
+
+
+
   const onNextPress = async () => {
     const stops = [
       {
@@ -239,6 +253,7 @@ export function useSelectRideViewModel() {
     activeInput,
     onPickupFocus,
     onDestinationFocus,
+    isSheetVisible,
 
     // Ride Setters
     setFromText,
@@ -260,5 +275,6 @@ export function useSelectRideViewModel() {
     onSelectPickup,
     onSelectDestination,
     onDeleteSavedPlace,
+    onSetOnMap,
   };
 }

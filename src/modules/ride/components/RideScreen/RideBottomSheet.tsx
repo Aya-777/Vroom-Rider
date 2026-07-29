@@ -7,14 +7,10 @@ import DriverFoundSheet from '../DriverFoundScreen/DriverFoundSheet';
 import DriverArrivedSheet from '../DriverArrivedScreen/DriverArrivedSheet';
 import TripStartedSheet from '../TripStartedScreen/TripStartedSheet';
 import { Location } from '../../../../core/services/location/LocationService';
+import { EstimateInitialResponseDTO } from '../../services/dto/estimate.dto';
 
 type Props = {
   rideState: RideState;
-  estimate: {
-    price?: string;
-    time?: string;
-    distance?: number;
-  };
   onSelectRideNext: () => void;
   onExtraDetailsNext: () => void;
   onRideConfirmed: () => void;
@@ -32,7 +28,6 @@ export default function RideBottomSheet({
   onDriverFound,
   onTripStarted,
   onTripEnded,
-  estimate,
   onCancelPress
 }: Props) {
   const renderSheet = () => {
@@ -45,7 +40,7 @@ export default function RideBottomSheet({
         );
 
       case RideState.EXTRA_DETAILS:
-        return <ExtraDetailsSheet onNextPress={onExtraDetailsNext} estimate={estimate}/>;
+        return <ExtraDetailsSheet onNextPress={onExtraDetailsNext}/>;
 
       case RideState.CONFIRM_RIDE:
         return <RideConfirmationSheet onNextPress={onRideConfirmed} />;

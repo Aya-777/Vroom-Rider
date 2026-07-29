@@ -61,6 +61,8 @@ export default function SelectRideSheet({ onNextPress }: Props) {
     onAddPlacePress,
     onNextPressVM,
     onDeleteSavedPlace,
+    onSetOnMap,
+    isSheetVisible
   } = useSelectRideViewModel();
 
   const personItems = [
@@ -83,7 +85,7 @@ export default function SelectRideSheet({ onNextPress }: Props) {
 
   return (
     <>
-      <BaseBottomSheet isVisible={true} index={1} snapPoints={snapPoints}>
+      <BaseBottomSheet isVisible={isSheetVisible} index={1} snapPoints={snapPoints}>
         <View style={styles.dropdownRow}>
           <RideDropdown
             icon={<ScheduleIcon fill={colors.primary} />}
@@ -132,7 +134,7 @@ export default function SelectRideSheet({ onNextPress }: Props) {
 
         <View style={styles.actionRow}>
           <ActionButton
-            onPress={() => {}}
+            onPress={onSetOnMap}
             icon={<PinIcon fill={colors.textSecondary} />}
             title={t('setOnMap')}
             textStyle={{ color: colors.textSecondary }}

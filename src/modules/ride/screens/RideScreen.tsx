@@ -38,7 +38,6 @@ export default function RideScreen() {
 
       <RideBottomSheet
         rideState={vm.rideState}
-        estimate={vm.estimate}
         onSelectRideNext={vm.goToExtraDetails}
         onExtraDetailsNext={vm.goToRideConfirmation}
         onRideConfirmed={vm.goToDriverFound}

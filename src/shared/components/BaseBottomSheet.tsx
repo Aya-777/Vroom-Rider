@@ -1,6 +1,6 @@
 import { useTheme } from '../../core/theme/useTheme';
 import { createStyles } from '../styles/sheet.styles';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import BottomSheet, {
   BottomSheetView,
   BottomSheetProps,
@@ -40,9 +40,20 @@ export const BaseBottomSheet: React.FC<BaseBottomSheetProps> = ({
     [contentContainerStyle],
   );
 
+  const bottomSheetRef = useRef<BottomSheet>(null);
+
+useEffect(() => {
+  if (isVisible) {
+    bottomSheetRef.current?.snapToIndex(0);
+  } else {
+    bottomSheetRef.current?.close();
+  }
+}, [isVisible]);
+
   return (
     <BottomSheet
-      index={isVisible ? 0 : -1}
+      ref={bottomSheetRef}
+      index={-1}
       snapPoints={snapPoints}
       onClose={onClose}
       handleIndicatorStyle={styles.handleIndicatorStyle}

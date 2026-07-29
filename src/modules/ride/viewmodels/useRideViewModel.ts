@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { RideState } from '../types/RideState';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -8,6 +8,7 @@ import LocationService, {
 } from '../../../core/services/location/LocationService';
 import { useRideStore } from '../store/useRideStore';
 import { rideApi } from '../services/rideApi';
+import BottomSheet from '@gorhom/bottom-sheet';
 
 const previousState: Partial<Record<RideState, RideState>> = {
   [RideState.EXTRA_DETAILS]: RideState.SELECT_RIDE,
