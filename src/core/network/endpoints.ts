@@ -14,6 +14,7 @@ export const ENDPOINTS = {
   INITIAL_ESTIMATE: '/trips/trips/estimate/initial/',
   REFINED_ESTIMATE: '/trips/trips/estimate/refined/',
   SAVED_LOCATIONS: '/trips/saved-locations/',
+  SAVED_LOCATION: (id: number) => `/trips/saved-locations/${id}/`,
   PREFERENCES: '/trips/preferences/',
   CONFIRM: '/trips/confirm/',
 },

@@ -66,6 +66,8 @@ export function useSelectRideViewModel() {
     error: savedPlacesError,
     refetch: fetchSavedPlaces,
   } = useRideRepository.useSavedPlaces(isModalVisible);
+  const { mutate: deleteSavedPlace } =
+  useRideRepository.useDeleteSavedPlace();
 
   // --- Set current location as pickup initially ---
   useEffect(() => {
@@ -144,6 +146,14 @@ export function useSelectRideViewModel() {
   const onAddPlacePress = () => {
     navigation.navigate('AddNewPlace');
   };
+
+  const onDeleteSavedPlace = (id: number) => {
+  deleteSavedPlace(id, {
+    onError: error => {
+      console.error('Failed to delete saved place', error);
+    },
+  });
+};
 
   const handleFlipModal = () => {
     if (!isModalVisible) {
@@ -252,5 +262,6 @@ export function useSelectRideViewModel() {
     destinationSearching: destinationSearch.isSearching,
     onSelectPickup,
     onSelectDestination,
+    onDeleteSavedPlace,
   };
 }

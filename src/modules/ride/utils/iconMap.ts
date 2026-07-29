@@ -25,6 +25,7 @@ import VisibilityOffIcon from '../../../assets/svg/common/visibilityOff.svg';
 import VisibilityOnIcon from '../../../assets/svg/common/visibilityOn.svg';
 import WorkIcon from '../../../assets/svg/common/work.svg';
 import SaveIcon from '../../../assets/svg/common/save.svg'
+import DeleteIcon from '../../../assets/svg/common/delete.svg';
 
 // Contact
 import CallIcon from '../../../assets/svg/contact/call.svg';
@@ -81,6 +82,7 @@ export const ICON_MAP = {
   visibilityOn: VisibilityOnIcon,
   work: WorkIcon,
   save: SaveIcon,
+  delete: DeleteIcon,
 
   // Contact
   call: CallIcon,

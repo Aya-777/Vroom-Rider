@@ -25,6 +25,7 @@ export const SavedPlacesModal: React.FC<SavedPlacesModalProps> = ({
   onClose,
   onAddPress,
   onSelectPlace,
+  onDeletePlace
 }) => {
   const { colors, mode } = useTheme();
   const styles = createStyles(colors);
@@ -60,6 +61,7 @@ export const SavedPlacesModal: React.FC<SavedPlacesModalProps> = ({
                   place={item}
                   onPress={() => onSelectPlace(item)}
                   styles={styles}
+                  onDelete={onDeletePlace}
                 />
               )}
               contentContainerStyle={styles.listContainer}

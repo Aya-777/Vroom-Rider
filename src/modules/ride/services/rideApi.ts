@@ -23,8 +23,6 @@ export const rideApi = {
     const response = await apiClient.get<SavedPlaceDTO[]>(
       ENDPOINTS.TRIPS.SAVED_LOCATIONS,
     );
-    console.log("placessssssssssssssssssssss  ", response.data);
-
     return response.data;
   },
 
@@ -49,6 +47,10 @@ export const rideApi = {
     );
 
     return response.data;
+  },
+
+  deleteSavedPlace: async (id: number): Promise<void> => {
+    await apiClient.delete(ENDPOINTS.TRIPS.SAVED_LOCATION(id));
   },
 
   estimateInitial: async (

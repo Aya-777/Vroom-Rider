@@ -37,4 +37,18 @@ export const useRideRepository = {
       },
     });
   },
+
+  useDeleteSavedPlace: () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<void, Error, number>({
+    mutationFn: rideApi.deleteSavedPlace,
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['savedPlaces'],
+      });
+    },
+  });
+},
 };

@@ -60,6 +60,7 @@ export default function SelectRideSheet({ onNextPress }: Props) {
     handleFlipModal,
     onAddPlacePress,
     onNextPressVM,
+    onDeleteSavedPlace,
   } = useSelectRideViewModel();
 
   const personItems = [
@@ -152,6 +153,7 @@ export default function SelectRideSheet({ onNextPress }: Props) {
           loading={savedPlacesLoading}
           onSelectPlace={() => {}}
           onAddPress={onAddPlacePress}
+          onDeletePlace={onDeleteSavedPlace}
         />
 
         <View style={styles.contactSection}>

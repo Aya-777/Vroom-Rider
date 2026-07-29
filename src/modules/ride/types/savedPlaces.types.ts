@@ -16,6 +16,7 @@ export interface SavedPlacesModalProps {
   onClose: () => void;
   onAddPress: () => void;
   onSelectPlace: (place: SavedPlace) => void;
+  onDeletePlace: (id: number) => void;
 }
 export interface AddPlaceFormValues {
   name: string;
