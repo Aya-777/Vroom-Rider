@@ -11,11 +11,11 @@ export const ENDPOINTS = {
   },
 
   TRIPS: {
-  INITIAL_ESTIMATE: '/api/v1/trips/trips/estimate/initial/',
-  REFINED_ESTIMATE: '/api/v1/trips/trips/estimate/refined/',
-  SAVED_LOCATIONS: '/api/v1/trips/saved-locations/',
-  PREFERENCES: '/api/v1/trips/preferences/',
-  CONFIRM: '/api/v1/trips/confirm/',
+  INITIAL_ESTIMATE: '/trips/trips/estimate/initial/',
+  REFINED_ESTIMATE: '/trips/trips/estimate/refined/',
+  SAVED_LOCATIONS: '/trips/saved-locations/',
+  PREFERENCES: '/trips/preferences/',
+  CONFIRM: '/trips/confirm/',
 },
 
 } as const;

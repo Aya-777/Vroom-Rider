@@ -205,13 +205,6 @@ export function useSelectRideViewModel() {
       });
     } catch (error) {
       console.log('Estimate Error:', error);
-
-      if (axios.isAxiosError(error)) {
-        console.log('message:', error.message);
-        console.log('config:', error.config);
-        console.log('response:', error.response);
-        console.log('request:', error.request);
-      }
     }
   };
 
