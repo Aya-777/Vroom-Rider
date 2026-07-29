@@ -15,6 +15,7 @@ import AddIcon from '../../../../assets/svg/common/add.svg';
 import { createStyles } from '../../styles/savedPlaces.styles';
 import { useTheme } from '../../../../core/theme/useTheme';
 import { useTranslation } from 'react-i18next';
+import LinearBg from '../../../../shared/components/LinearBg';
 
 export const SavedPlacesModal: React.FC<SavedPlacesModalProps> = ({
   visible,
@@ -25,7 +26,7 @@ export const SavedPlacesModal: React.FC<SavedPlacesModalProps> = ({
   onClose,
   onAddPress,
   onSelectPlace,
-  onDeletePlace
+  onDeletePlace,
 }) => {
   const { colors, mode } = useTheme();
   const styles = createStyles(colors);
@@ -39,7 +40,13 @@ export const SavedPlacesModal: React.FC<SavedPlacesModalProps> = ({
       onRequestClose={onClose}
     >
       <View style={styles.overlay}>
-        <View style={styles.modalContainer}>
+        <LinearBg
+          style={styles.modalContainer}
+          colors={[colors.backgroundSoft, colors.background]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+        >
+          {/* <View style={styles.modalContainer}> */}
           {/* Header */}
           <View style={styles.header}>
             <Text style={styles.headerTitle}>Saved Places</Text>
@@ -78,7 +85,8 @@ export const SavedPlacesModal: React.FC<SavedPlacesModalProps> = ({
             <AddIcon width={18} height={18} fill={colors.backgroundSoft} />
             <Text style={styles.addButtonText}>Add New Place</Text>
           </TouchableOpacity>
-        </View>
+          {/* </View> */}
+        </LinearBg>
       </View>
     </Modal>
   );

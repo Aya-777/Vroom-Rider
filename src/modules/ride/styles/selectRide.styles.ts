@@ -124,7 +124,7 @@ export const createStyles = (colors: ThemeColors) =>
     actionButtonText: {
       ...Typography.caption,
       marginStart: 6,
-      color: '#5C4E75',
+      color: colors.primary,
     },
 
     nextButton: {

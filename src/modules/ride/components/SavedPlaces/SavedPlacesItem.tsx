@@ -14,28 +14,24 @@ export const SavedPlaceItem: React.FC<SavedPlaceItemProps> = ({
   place,
   onPress,
   styles,
-  onDelete
+  onDelete,
 }) => {
   const PlaceIcon = ICON_MAP[place.icon as IconId] ?? ICON_MAP.pin;
   const DeleteIcon = ICON_MAP['delete'];
 
   const onDeletePress = () => {
-    Alert.alert(
-      'Delete saved place?',
-      'This action cannot be undone.',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: () => onDelete(place.id),
-        },
-      ],
-    );
-  }
+    Alert.alert('Delete saved place?', 'This action cannot be undone.', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: () => onDelete(place.id),
+      },
+    ]);
+  };
 
   return (
     <>
