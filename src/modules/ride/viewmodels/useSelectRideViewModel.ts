@@ -175,7 +175,10 @@ export function useSelectRideViewModel() {
     handleBottomSheet(false);
   };
 
-
+  const onConfirmLocation = () => {
+    setIsSelectingOnMap(false);
+    handleBottomSheet(true);
+  }
 
   const onNextPress = async () => {
     const stops = [
@@ -276,5 +279,6 @@ export function useSelectRideViewModel() {
     onSelectDestination,
     onDeleteSavedPlace,
     onSetOnMap,
+    onConfirmLocation,
   };
 }

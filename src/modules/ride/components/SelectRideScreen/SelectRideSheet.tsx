@@ -15,9 +15,11 @@ import { createStyles } from '../../styles/selectRide.styles';
 import { useTranslation } from 'react-i18next';
 import {
   TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import { SavedPlacesModal } from '../SavedPlaces/SavedPlacesModal';
+import { Text } from 'react-native-gesture-handler';
 
 type Props = {
   onNextPress: () => void;
@@ -62,7 +64,8 @@ export default function SelectRideSheet({ onNextPress }: Props) {
     onNextPressVM,
     onDeleteSavedPlace,
     onSetOnMap,
-    isSheetVisible
+    isSheetVisible,
+    onConfirmLocation
   } = useSelectRideViewModel();
 
   const personItems = [
@@ -177,6 +180,12 @@ export default function SelectRideSheet({ onNextPress }: Props) {
           icon={<ArrowRight fill={colors.background} />}
         />
       </BaseBottomSheet>
+
+        {!isSheetVisible && 
+          <TouchableOpacity style={styles.confirmButton} onPress={onConfirmLocation}>
+            <Text style={styles.confirmButtonText} numberOfLines={1}>Confirm</Text>
+          </TouchableOpacity>
+        }
 
     </>
   );

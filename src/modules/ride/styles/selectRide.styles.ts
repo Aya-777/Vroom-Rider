@@ -138,11 +138,30 @@ export const createStyles = (colors: ThemeColors) =>
       backgroundColor: colors.primary,
       elevation: 3,
     },
-
+    
     nextButtonText: {
       ...Typography.body,
       marginEnd: 5,
       marginBottom: 2,
       color: colors.background,
     },
+    
+    confirmButtonText: {
+      ...Typography.body,
+      marginEnd: 5,
+      marginBottom: 2,
+      color: colors.primary,
+    },
+    
+    confirmButton: {
+      flexDirection: 'row',
+      width: '50%',
+      paddingVertical: 14,
+      borderRadius: 25,
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+      backgroundColor: colors.backgroundSoft,
+      // elevation: 3,
+    }
   });
