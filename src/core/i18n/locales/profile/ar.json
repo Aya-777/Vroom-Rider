@@ -3,11 +3,9 @@
   "notifications": "الإشعارات",
   "favoriteDrivers": "السائقون المفضلون",
   "safety": "الأمان",
-
   "becomeaDriver": "كن سائقًا",
   "earnOnYourOwnSchedule": "اكسب وفقاً لجدولك الخاص",
   "learnMore": "تعرف على المزيد",
-  
   "settings": "الإعدادات",
   "privacyAndSecurity": "الخصوصية والأمان",
   "emergencyContact": "جهات الاتصال الطارئة",
@@ -16,6 +14,8 @@
   "aboutUs": "معلومات عنا",
   "contactUs": "تواصل معنا",
   "logout": "تسجيل الخروج",
-    "welcome": "مرحبا  "
-
+  "welcome": "مرحبا  ",
+  "editProfile": "تعديل الملف الشخصي",
+  "firstName": "الاسم الأول",
+  "lastName": "اسم العائلة"
 }

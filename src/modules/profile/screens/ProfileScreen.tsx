@@ -6,7 +6,9 @@ import { createStyles } from '../styles/profile.styles';
 
 import { useProfileViewModel } from '../viewmodels/useProfileViewModel';
 import { useProfileActions } from '../hooks/useProfileActions';
-
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { ProfileStackParamList } from '../../../navigation/main/profile/profileTypes';
 import ProfileCard from '../components/ProfileCard';
 import GridSection from '../components/GridSection';
 import PromoBanner from '../components/PromoBanner';
@@ -18,8 +20,10 @@ import ActionButton from '../../../shared/components/ActionButton';
 import Header from '../../../shared/components/Header';
 import { navigate } from '../../../navigation/rootTypes';
 
+type ProfileNavProp = NativeStackNavigationProp<ProfileStackParamList, 'ProfileHome'>;
 
 export default function ProfileScreen() {
+  const navigation = useNavigation<ProfileNavProp>();
   const { gridItems, listItems, openSidebar, profile, isLoading, isRefreshing, onRefresh } = useProfileViewModel();
   const { logout } = useProfileActions();
 
@@ -55,6 +59,13 @@ export default function ProfileScreen() {
             phone={profile?.phone}
             profileImage={profile?.profileImage}
             isLoading={isLoading}
+            onEditPress={() =>
+              navigation.navigate('EditProfile', {
+                firstName: profile?.firstName,
+                lastName: profile?.lastName,
+                profileImage: profile?.profileImage,
+              })
+            }
           />
 
           <GridSection items={gridItems} />

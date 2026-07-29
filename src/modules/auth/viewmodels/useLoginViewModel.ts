@@ -28,8 +28,8 @@ export function useLoginViewModel() {
         expected_role: 'rider',
       });
 
-      const token = response.data.access;
-      login(token);
+      const { access, refresh } = response.data;
+      login(access, refresh);
     } catch (error: any) {
       console.error('Login failed', error);
 

@@ -20,6 +20,7 @@ src/
 │       │   ├── camera.svg
 │       │   ├── check.svg
 │       │   ├── edit.svg
+│       │   ├── gallery.svg
 │       │   ├── history.svg
 │       │   ├── home.svg
 │       │   ├── info.svg
@@ -443,10 +444,12 @@ src/
 │   │   ├── Header.tsx
 │   │   ├── Input.tsx
 │   │   ├── LinearBg.tsx
+│   │   ├── PhotoPickerSheet.tsx
 │   │   ├── SearchBar.tsx
 │   │   ├── SheetBackground.tsx
 │   │   └── SubHeader.tsx
 │   └── styles
+│       ├── PhotoPickerSheet.styles.ts
 │       ├── SubHeader.styles.ts
 │       ├── input.styles.ts
 │       └── sheet.styles.ts
