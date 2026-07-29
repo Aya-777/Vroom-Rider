@@ -2,21 +2,20 @@ import { apiClient } from '../../../core/network/apiClient';
 import { ENDPOINTS } from '../../../core/network/endpoints';
 
 import {
-  PriceEstimateRequestDTO,
-  PriceEstimateResponseDTO,
   RequestRideRequestDTO,
   RequestRideResponseDTO,
 } from './dto/ride.dto';
 
-import { SavedPlaceDTO,
+import {
+  SavedPlaceDTO,
   CreateSavedPlaceRequestDTO,
-  CreateSavedPlaceResponseDTO
-  } from './dto/savedPlaces.dto';
+  CreateSavedPlaceResponseDTO,
+} from './dto/savedPlaces.dto';
 
-  import { 
-    EstimateInitialRequestDTO,
-    EstimateInitialResponseDTO
-   } from './dto/estimate.dto';
+import {
+  EstimateInitialRequestDTO,
+  EstimateInitialResponseDTO,
+} from './dto/estimate.dto';
 
 export const rideApi = {
   // Saved Places
@@ -49,7 +48,7 @@ export const rideApi = {
 
     return response.data;
   },
-  
+
   estimateInitial: async (
     data: EstimateInitialRequestDTO,
   ): Promise<EstimateInitialResponseDTO> => {
@@ -60,14 +59,10 @@ export const rideApi = {
 
     return response.data;
   },
-  
+
   cancelRide: async (rideId: string) => {
-    const response = await apiClient.post(
-      `/api/v1/rides/${rideId}/cancel/`,
-    );
+    const response = await apiClient.post(`/api/v1/rides/${rideId}/cancel/`);
 
     return response.data;
-  }
-
-
+  },
 };

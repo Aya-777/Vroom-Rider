@@ -3,8 +3,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { rideApi } from '../services/rideApi';
 
 import {
-  PriceEstimateRequestDTO,
-  PriceEstimateResponseDTO,
   RequestRideRequestDTO,
   RequestRideResponseDTO,
 } from '../services/dto/ride.dto';

@@ -19,8 +19,6 @@ export interface CreateSavedPlaceRequestDTO {
 export interface CreateSavedPlaceResponseDTO {
   label: string;
   address: string;
-  latitude: number;
-  longitude: number;
   icon: string;
 }
 
