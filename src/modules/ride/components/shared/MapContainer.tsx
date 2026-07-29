@@ -29,7 +29,7 @@ export const MapContainer = () => {
       >
         <Camera
           ref={cameraRef}
-          center={vm.location ?? [31.2357, 30.0444]}
+          center={vm.cameraCenter}
           zoom ={15}
         />
 
