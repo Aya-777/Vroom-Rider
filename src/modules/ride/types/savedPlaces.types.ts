@@ -1,10 +1,10 @@
  export interface SavedPlace {
   id: number;
   label: string;
-  category: string;
   address: string;
   latitude: number;
   longitude: number;
+  icon: string
 }
 
 export interface SavedPlacesModalProps {

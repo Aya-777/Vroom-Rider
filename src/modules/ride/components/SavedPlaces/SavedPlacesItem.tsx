@@ -16,7 +16,7 @@ export const SavedPlaceItem: React.FC<SavedPlaceItemProps> = ({ place, onPress, 
         <Icon name={place.icon} size={20} color="#9BA8D0" />
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.title}>{place.title}</Text>
+        <Text style={styles.title}>{place.label}</Text>
         <Text style={styles.address} numberOfLines={2}>
           {place.address}
         </Text>
