@@ -1,3 +1,6 @@
+import { Double } from "react-native/Libraries/Types/CodegenTypes";
+import { Tiers } from "../../types/ride.types";
+
 export interface RideStopRequestDTO {
   address: string;
   order: number;
@@ -11,5 +14,7 @@ export interface EstimateInitialRequestDTO {
 }
 
 export interface EstimateInitialResponseDTO {
-  // Fill this according to the backend response
+  estimated_distance_km : Double;
+  estimated_duration_minutes: Double;
+  pricing_tiers:  Tiers[];
 }

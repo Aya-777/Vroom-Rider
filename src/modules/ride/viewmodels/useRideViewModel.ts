@@ -49,13 +49,13 @@ export function useRideViewModel() {
     }
   */
 
-    const response = {
-      price: '24.5',
-      time: '15 min',
-      distance: 8,
-    };
+    // const response = {
+    //   price: '24.5',
+    //   time: '15 min',
+    //   distance: 8,
+    // };
 
-    setEstimate(response);
+    // setEstimate(response);
 
     setRideState(RideState.EXTRA_DETAILS);
   };

@@ -6,6 +6,13 @@ export type Car = {
   plate: string;
 };
 
+export type Tiers = {
+  tier_id : number;
+  tier_name : string;
+  estimated_price : Double;
+  image: string;
+}
+
 export type Driver = {
   name: string;
   onTheWayMessage: string;
@@ -42,9 +49,4 @@ export interface RideParams {
   preferenceIds: number[];
   scheduledAt?: string;
 
-}
-
-export interface RideEstimate {
-  price: string;
-  time: string;
 }

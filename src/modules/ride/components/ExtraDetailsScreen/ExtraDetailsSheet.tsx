@@ -12,14 +12,9 @@ import ArrowRight from '../../../../assets/svg/arrows/arrow.svg';
 
 type Props = {
   onNextPress: () => void;
-   estimate: {
-    price?: string;
-    time?: string;
-    distance?: number;
-  };
 };
 
-export default function ExtraDetailsScreen({onNextPress, estimate} : Props) {
+export default function ExtraDetailsScreen({ onNextPress }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['rideDetails', 'common']);
@@ -30,14 +25,15 @@ export default function ExtraDetailsScreen({onNextPress, estimate} : Props) {
   ];
 
   const {
-    selectedVehicle,
+    selectedVehicleId,
     selectedPayment,
     isDropdownOpen,
-    setSelectedVehicle,
+    setSelectedVehicleId,
     setSelectedPayment,
     setIsDropdownOpen,
 
     updateRideDetails,
+    estimate,
   } = useRideDetailsViewModel();
 
   const handleNextPress = () => {
@@ -49,7 +45,18 @@ export default function ExtraDetailsScreen({onNextPress, estimate} : Props) {
 
   return (
     <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1}>
-      <TimePriceBox time={estimate.time ?? ''} price={estimate.price ?? ''} />
+      <TimePriceBox
+        time={
+          estimate.estimated_duration_minutes > 0
+            ? `${estimate.estimated_duration_minutes}`
+            : '...'
+        }
+        price={
+          estimate.pricing_tiers?.length > 0
+            ? `${estimate.pricing_tiers[0].estimated_price}`
+            : '...'
+        }
+      />
 
       <RideActionFilters
         selectedValue={t(`common:payment.${selectedPayment}`)}
@@ -64,8 +71,9 @@ export default function ExtraDetailsScreen({onNextPress, estimate} : Props) {
         paymentItems={paymentItems}
       />
       <VehicleSelector
-        selected={selectedVehicle}
-        onSelect={setSelectedVehicle}
+        selected={selectedVehicleId}
+        onSelect={setSelectedVehicleId}
+        vehicles={estimate.pricing_tiers}
       />
 
       <ActionButton

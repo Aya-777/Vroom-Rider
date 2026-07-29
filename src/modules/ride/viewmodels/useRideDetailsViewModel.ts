@@ -1,37 +1,33 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRideStore } from '../store/useRideStore';
 
 export function useRideDetailsViewModel() {
-  const { rideData, setRideDetails } = useRideStore();
+  const { rideData, setRideDetails} = useRideStore();
+  const estimate = useRideStore(state => state.estimate);
 
   // UI State only
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  // Ride data setters
-  const setSelectedVehicle = (vehicle: string) => {
-    setRideDetails({
-      vehicleType: vehicle,
-    });
-  };
-
-  const setSelectedPayment = (payment: string) => {
-    setRideDetails({
-      payment,
-    });
-  };
+  const [selectedVehicleId, setSelectedVehicleId] = useState(1);
+  const [selectedPayment, setSelectedPayment] = useState('cash');
 
   const updateRideDetails = () => {};
 
+  useEffect(() => {
+  console.log("estimate updated:", estimate);
+}, [estimate]);
+
   return {
     // ride Data
-    selectedVehicle: rideData.vehicleType ?? 'economy',
-    selectedPayment: rideData.payment ?? 'cash',
+    selectedVehicleId,
+    selectedPayment,
+    estimate,
+    rideData,
 
     // UI
     isDropdownOpen,
 
     // Setters,
-    setSelectedVehicle,
+    setSelectedVehicleId,
     setSelectedPayment,
     setIsDropdownOpen,
 

@@ -1,23 +1,18 @@
 import { create } from 'zustand';
-import { RideParams, RideStop } from '../types/ride.types';
+import { RideParams, RideStop, Tiers } from '../types/ride.types';
 import { SavedPlace } from '../types/savedPlaces.types';
-
-interface RideEstimate {
-  price?: string;
-  time?: string;
-  distance?: number;
-}
+import { EstimateInitialResponseDTO } from '../services/dto/estimate.dto';
 
 interface RideState {
   rideData: Partial<RideParams>;
 
-  estimate: RideEstimate;
+  estimate: EstimateInitialResponseDTO;
 
   savedPlaces: SavedPlace[];
 
   setRideDetails: (details: Partial<RideParams>) => void;
 
-  setEstimate: (estimate: RideEstimate) => void;
+  setEstimate: (estimate: EstimateInitialResponseDTO) => void;
 
   setSavedPlaces: (places: SavedPlace[]) => void;
 
@@ -58,7 +53,11 @@ export const useRideStore = create<RideState>(set => ({
     scheduledAt: 'NOW',
   },
 
-  estimate: {},
+  estimate: {
+    estimated_distance_km: 0,
+    estimated_duration_minutes:0,
+    pricing_tiers: []
+  },
   savedPlaces: [],
 
   setSavedPlaces: places =>
@@ -144,7 +143,11 @@ updateStop: (order, updatedStop) =>
   clearRide: () =>
     set({
       rideData: {},
-      estimate: {},
+      estimate: {
+        estimated_distance_km: 0,
+        estimated_duration_minutes:0,
+        pricing_tiers: []
+      },
       savedPlaces: [],
     }),
 }));
