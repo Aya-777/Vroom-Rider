@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather'; // Assuming vector-icons is used
+import { View, Text, TouchableOpacity} from 'react-native';
 import { SavedPlace } from '../../types/savedPlaces.types';
+import { ICON_MAP, IconId } from '../../utils/iconMap';
 
 interface SavedPlaceItemProps {
   place: SavedPlace;
@@ -10,10 +10,11 @@ interface SavedPlaceItemProps {
 }
 
 export const SavedPlaceItem: React.FC<SavedPlaceItemProps> = ({ place, onPress, styles }) => {
+  const PlaceIcon = ICON_MAP[place.icon as IconId] ?? ICON_MAP.pin;
   return (
     <TouchableOpacity style={styles.container} activeOpacity={0.8} onPress={onPress}>
       <View style={styles.iconContainer}>
-        <Icon name={place.icon} size={20} color="#9BA8D0" />
+        <PlaceIcon width={20} height={20} fill="#9BA8D0" />
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.title}>{place.label}</Text>
@@ -21,11 +22,6 @@ export const SavedPlaceItem: React.FC<SavedPlaceItemProps> = ({ place, onPress, 
           {place.address}
         </Text>
       </View>
-      <Icon name="chevron-right" size={18} color="#6B7A99" />
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  
-});

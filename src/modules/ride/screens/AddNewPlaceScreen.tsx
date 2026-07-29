@@ -53,15 +53,15 @@ export default function AddNewPlaceScreen() {
             {/* Address Input */}
             <View style={styles.addressGroup}>
               <Text style={styles.label}>Address</Text>
-                <View style={styles.addressInputContainer}>
-                  <PinIcon width={18} height={20} fill="#7C8DB0" />
-                  <TextInput
-                    style={styles.addressTextInput}
-                    placeholder="Search for address..."
-                    placeholderTextColor="#536280"
-                    value={vm.address}
-                    onChangeText={vm.setAddress}
-                  />
+              <View style={styles.addressInputContainer}>
+                <PinIcon width={18} height={20} fill="#7C8DB0" />
+                <TextInput
+                  style={styles.addressTextInput}
+                  placeholder="Search for address..."
+                  placeholderTextColor="#536280"
+                  value={vm.address}
+                  onChangeText={vm.setAddress}
+                />
               </View>
 
               {/* Icon Selection */}
@@ -99,15 +99,16 @@ export default function AddNewPlaceScreen() {
               </View>
             </View>
           </ScrollView>
-
         </View>
 
-              <View style={styles.absoluteContainer}>
-
-                {vm.searchResults.length > 0 && (
-                  <SearchResults results={vm.searchResults} onSelectItem={vm.selectAddress} />
-                )}
-              </View>
+        <View style={styles.absoluteContainer}>
+          {vm.searchResults.length > 0 && (
+            <SearchResults
+              results={vm.searchResults}
+              onSelectItem={vm.selectAddress}
+            />
+          )}
+        </View>
 
         {/* Save Button Footer */}
         <View style={styles.footer}>

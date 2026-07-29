@@ -23,6 +23,7 @@ export const rideApi = {
     const response = await apiClient.get<SavedPlaceDTO[]>(
       ENDPOINTS.TRIPS.SAVED_LOCATIONS,
     );
+    console.log("placessssssssssssssssssssss  ", response.data);
 
     return response.data;
   },
@@ -33,6 +34,7 @@ export const rideApi = {
     const formData = new FormData();
     formData.append('label', data.label);
     formData.append('address', data.address);
+    formData.append('icon', data.icon);
     formData.append('latitude', data.latitude);
     formData.append('longitude', data.longitude);
 

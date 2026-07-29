@@ -7,7 +7,8 @@ import {
   RequestRideResponseDTO,
 } from '../services/dto/ride.dto';
 
-import { SavedPlaceDTO,
+import { 
+  SavedPlaceDTO,
   CreateSavedPlaceRequestDTO,
   CreateSavedPlaceResponseDTO
  } from '../services/dto/savedPlaces.dto';

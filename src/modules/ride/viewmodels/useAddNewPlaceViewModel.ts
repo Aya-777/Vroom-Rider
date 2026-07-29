@@ -51,10 +51,10 @@ export function useAddNewPlaceViewModel() {
   createSavedPlace(
     {
       label: name.trim(),
-      category: selectedIcon.toUpperCase(),
       address: address.trim(),
       latitude: lat,
       longitude: lng,
+      icon: selectedIcon,
     },
     {
       onSuccess: () => {
