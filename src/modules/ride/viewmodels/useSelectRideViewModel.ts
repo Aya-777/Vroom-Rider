@@ -12,6 +12,7 @@ import { GeocodeResult } from '../../../core/services/location/GeoCodingService'
 import LocationService from '../../../core/services/location/LocationService';
 import { useLocationStore } from '../../../core/store/locationStore';
 import { rideApi } from '../services/rideApi';
+import axios from 'axios';
 
 export function useSelectRideViewModel() {
   const navigation =
@@ -172,6 +173,7 @@ export function useSelectRideViewModel() {
         stop_type: 'DROP_OFF' as const,
       },
     ];
+    console.log("stops ", stops)
     try {
       const estimate = await rideApi.estimateInitial({
         stops,
@@ -202,7 +204,14 @@ export function useSelectRideViewModel() {
         passengerContactPhone: contactPhone,
       });
     } catch (error) {
-      console.error('Failed to estimate ride:', error);
+      console.log('Estimate Error:', error);
+
+      if (axios.isAxiosError(error)) {
+        console.log('message:', error.message);
+        console.log('config:', error.config);
+        console.log('response:', error.response);
+        console.log('request:', error.request);
+      }
     }
   };
 
