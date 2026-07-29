@@ -74,8 +74,10 @@ export default function SelectRideSheet({ onNextPress }: Props) {
   ];
 
   const handleNextPress = () => {
-    onNextPressVM();
-    onNextPress();
+    if(validate()){
+      onNextPressVM();
+      onNextPress();
+    }
   };
   const snapPoints = useMemo(() => ['30%', '70%'], []);
 

@@ -164,9 +164,6 @@ export function useSelectRideViewModel() {
   };
 
   const onNextPress = async () => {
-    if (!validate()) {
-      return;
-    }
     const stops = [
       {
         address: fromText,
