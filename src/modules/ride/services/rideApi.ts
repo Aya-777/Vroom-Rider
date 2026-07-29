@@ -33,7 +33,6 @@ export const rideApi = {
   ): Promise<CreateSavedPlaceResponseDTO> => {
     const formData = new FormData();
     formData.append('label', data.label);
-    formData.append('password', data.category);
     formData.append('address', data.address);
     formData.append('latitude', data.latitude);
     formData.append('longitude', data.longitude);
