@@ -1,22 +1,11 @@
-import { useEffect, useState } from 'react';
 import { RideValidationErrors } from '../types/ride.types';
 import { validateRideInputs } from '../utils/selectRideValidation';
 import { useRideStore } from '../store/useRideStore';
 import { useTranslation } from 'react-i18next';
-import { useRideRepository } from '../repositories/rideRepositories';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
-import { useLocationSearch } from '../hooks/useLocationSearch';
-import {
-  GeocodeResult,
-  reverseGeocode,
-} from '../../../core/services/location/GeoCodingService';
-import LocationService from '../../../core/services/location/LocationService';
-import { useLocationStore } from '../../../core/store/locationStore';
 import { rideApi } from '../services/rideApi';
-import { SavedPlace } from '../types/savedPlaces.types';
-import { buildRideStops } from '../utils/rideMapper';
 import { useSelectRideState } from '../hooks/useSelectRideState';
 import { useSavedPlaces } from '../hooks/useSavedPlaces';
 import { useRideMapLocation } from '../hooks/useRideMapLocations';
@@ -26,7 +15,6 @@ export function useSelectRideViewModel() {
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
 
   const { t } = useTranslation('selectRide');
-
 
   const {
     rideData,
@@ -46,14 +34,19 @@ export function useSelectRideViewModel() {
     state.setFromText,
     state.setToText,
     state.setPickupCoordinates,
-    state.setDestinationCoordinates
+    state.setDestinationCoordinates,
   );
-    
+
   const handleBottomSheet = (visible: boolean) => {
     state.setIsSheetVisible(visible);
   };
 
-  const {onSetOnMap , onConfirmLocation} = useRideMapLocation(state.activeInput, state.setFromText, state.setToText, handleBottomSheet);
+  const { onSetOnMap, onConfirmLocation } = useRideMapLocation(
+    state.activeInput,
+    state.setFromText,
+    state.setToText,
+    handleBottomSheet,
+  );
 
   const validate = (): boolean => {
     const rawErrors = validateRideInputs(state.fromText, state.toText);
@@ -68,54 +61,53 @@ export function useSelectRideViewModel() {
   const onAddPlacePress = () => {
     navigation.navigate('AddNewPlace');
   };
-  
-const onNextPress = async () => {
-  const stops = [
-    {
-      address: state.fromText,
-      latitude: state.pickupCoordinates.latitude,
-      longitude: state.pickupCoordinates.longitude,
-      order: 0,
-      stop_type: 'PICKUP' as const,
-    },
-    {
-      address: state.toText,
-      latitude: state.destinationCoordinates.latitude,
-      longitude: state.destinationCoordinates.longitude,
-      order: 1,
-      stop_type: 'DROP_OFF' as const,
-    },
-  ];
-  try {
-    const estimate = await rideApi.estimateInitial({
-      stops,
-    });
 
-    setEstimate(estimate);
+  const onNextPress = async () => {
+    const stops = [
+      {
+        address: state.fromText,
+        latitude: state.pickupCoordinates.latitude,
+        longitude: state.pickupCoordinates.longitude,
+        order: 0,
+        stop_type: 'PICKUP' as const,
+      },
+      {
+        address: state.toText,
+        latitude: state.destinationCoordinates.latitude,
+        longitude: state.destinationCoordinates.longitude,
+        order: 1,
+        stop_type: 'DROP_OFF' as const,
+      },
+    ];
+    try {
+      const estimate = await rideApi.estimateInitial({
+        stops,
+      });
 
-    setRideDetails({
-      stops: [
-        {
-          address: state.fromText,
-          latitude: state.pickupCoordinates.latitude,
-          longitude: state.pickupCoordinates.longitude,
-          order: 0,
-          stopType: 'PICKUP',
-        },
-        {
-          address: state.toText,
-          latitude: state.destinationCoordinates.latitude,
-          longitude: state.destinationCoordinates.longitude,
-          order: 1,
-          stopType: 'DROP_OFF',
-        },
-      ],
-    });
-  } catch (error) {
-    console.log('Estimate Error:', error);
-  }
-};
+      setEstimate(estimate);
 
+      setRideDetails({
+        stops: [
+          {
+            address: state.fromText,
+            latitude: state.pickupCoordinates.latitude,
+            longitude: state.pickupCoordinates.longitude,
+            order: 0,
+            stopType: 'PICKUP',
+          },
+          {
+            address: state.toText,
+            latitude: state.destinationCoordinates.latitude,
+            longitude: state.destinationCoordinates.longitude,
+            order: 1,
+            stopType: 'DROP_OFF',
+          },
+        ],
+      });
+    } catch (error) {
+      console.log('Estimate Error:', error);
+    }
+  };
 
   const handleFlipModal = () => {
     if (!state.isModalVisible) {
@@ -124,7 +116,6 @@ const onNextPress = async () => {
 
     state.setIsModalVisible(!state.isModalVisible);
   };
-
 
   return {
     ...state,

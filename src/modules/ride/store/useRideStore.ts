@@ -8,7 +8,6 @@ type MapLocation = {
   longitude: number;
 };
 
-
 interface RideState {
   rideData: Partial<RideParams>;
 
@@ -38,11 +37,9 @@ interface RideState {
 
   setPickingLocation: (value: boolean) => void;
 
-   selectedMapLocation: MapLocation | null;
+  selectedMapLocation: MapLocation | null;
 
-  setSelectedMapLocation: (
-    location: MapLocation | null
-  ) => void;
+  setSelectedMapLocation: (location: MapLocation | null) => void;
 }
 
 const normalizeStops = (stops: RideStop[]): RideStop[] => {
@@ -50,11 +47,7 @@ const normalizeStops = (stops: RideStop[]): RideStop[] => {
     ...stop,
     order: index,
     stopType:
-      index === 0
-        ? 'PICKUP'
-        : index === array.length - 1
-        ? 'DROP_OFF'
-        : 'STOP',
+      index === 0 ? 'PICKUP' : index === array.length - 1 ? 'DROP_OFF' : 'STOP',
   }));
 };
 
@@ -71,8 +64,8 @@ export const useRideStore = create<RideState>(set => ({
 
   estimate: {
     estimated_distance_km: 0,
-    estimated_duration_minutes:0,
-    pricing_tiers: []
+    estimated_duration_minutes: 0,
+    pricing_tiers: [],
   },
   savedPlaces: [],
 
@@ -80,55 +73,52 @@ export const useRideStore = create<RideState>(set => ({
     set({
       savedPlaces: places,
     }),
-    
-updateStop: (order, updatedStop) =>
-  set(state => {
-    const stops = [...(state.rideData.stops ?? [])];
 
-    const index = stops.findIndex(s => s.order === order);
+  updateStop: (order, updatedStop) =>
+    set(state => {
+      const stops = [...(state.rideData.stops ?? [])];
 
-    if (index === -1) {
-      stops.push(updatedStop);
-    } else {
-      stops[index] = updatedStop;
-    }
+      const index = stops.findIndex(s => s.order === order);
 
-    return {
-      rideData: {
-        ...state.rideData,
-        stops: normalizeStops(stops),
-      },
-    };
-  }),
-  
+      if (index === -1) {
+        stops.push(updatedStop);
+      } else {
+        stops[index] = updatedStop;
+      }
+
+      return {
+        rideData: {
+          ...state.rideData,
+          stops: normalizeStops(stops),
+        },
+      };
+    }),
+
   addStop: (stop, index) =>
-  set(state => {
-    const stops = [...(state.rideData.stops ?? [])];
+    set(state => {
+      const stops = [...(state.rideData.stops ?? [])];
 
-    const insertIndex =
-      index === undefined ? stops.length : index;
+      const insertIndex = index === undefined ? stops.length : index;
 
-    stops.splice(insertIndex, 0, stop);
+      stops.splice(insertIndex, 0, stop);
 
-    return {
+      return {
+        rideData: {
+          ...state.rideData,
+          stops: normalizeStops(stops),
+        },
+      };
+    }),
+
+  removeStop: order =>
+    set(state => ({
       rideData: {
         ...state.rideData,
-        stops: normalizeStops(stops),
-      },
-    };
-  }),
-  
-  removeStop: order =>
-  set(state => ({
-    rideData: {
-      ...state.rideData,
-      stops: normalizeStops(
-        (state.rideData.stops ?? []).filter(
-          stop => stop.order !== order,
+        stops: normalizeStops(
+          (state.rideData.stops ?? []).filter(stop => stop.order !== order),
         ),
-      ),
-    },
-  })),
+      },
+    })),
 
   setStops: stops =>
     set(state => ({
@@ -161,21 +151,20 @@ updateStop: (order, updatedStop) =>
       rideData: {},
       estimate: {
         estimated_distance_km: 0,
-        estimated_duration_minutes:0,
-        pricing_tiers: []
+        estimated_duration_minutes: 0,
+        pricing_tiers: [],
       },
       savedPlaces: [],
     }),
 
   isPickingLocation: false,
 
-  setPickingLocation: (value) =>
+  setPickingLocation: value =>
     set({
       isPickingLocation: value,
     }),
 
-    selectedMapLocation: null,
+  selectedMapLocation: null,
 
-  setSelectedMapLocation: location =>
-    set({ selectedMapLocation: location }),
+  setSelectedMapLocation: location => set({ selectedMapLocation: location }),
 }));

@@ -10,18 +10,15 @@ import { useLocationStore } from '../../../core/store/locationStore';
 export type ActiveInput = 'pickup' | 'destination' | null;
 
 export function useSelectRideState(rideData: Partial<RideParams>) {
-
-  const currentLocation = useLocationStore(
-    state => state.currentLocation,
-  );
+  const currentLocation = useLocationStore(state => state.currentLocation);
   const pickup = useInitialPickup(currentLocation);
 
   const pickupStop = rideData.stops?.find(
-    (    stop: { stopType: string; }) => stop.stopType === 'PICKUP',
+    (stop: { stopType: string }) => stop.stopType === 'PICKUP',
   );
 
   const destinationStop = rideData.stops?.find(
-    (    stop: { stopType: string; }) => stop.stopType === 'DROP_OFF',
+    (stop: { stopType: string }) => stop.stopType === 'DROP_OFF',
   );
 
   const [isNowDropdownOpen, setIsNowDropdownOpen] = useState(false);
@@ -29,13 +26,9 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
   const [errors, setErrors] = useState<RideValidationErrors>({});
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const [fromText, setFromText] = useState(
-    pickupStop?.address ?? '',
-  );
+  const [fromText, setFromText] = useState(pickupStop?.address ?? '');
 
-  const [toText, setToText] = useState(
-    destinationStop?.address ?? '',
-  );
+  const [toText, setToText] = useState(destinationStop?.address ?? '');
 
   const [pickupCoordinates, setPickupCoordinates] = useState({
     latitude: pickupStop?.latitude ?? 0,
@@ -62,12 +55,11 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
     rideData.passengerContactPhone ?? '',
   );
 
-  const [activeInput, setActiveInput] =
-    useState<ActiveInput>('pickup');
+  const [activeInput, setActiveInput] = useState<ActiveInput>('pickup');
 
   const [isSheetVisible, setIsSheetVisible] = useState(true);
 
-    const onPickupFocus = () => {
+  const onPickupFocus = () => {
     setActiveInput('pickup');
   };
 
@@ -75,7 +67,6 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
     setActiveInput('destination');
   };
 
-  
   const onSelectPickup = (place: GeocodeResult) => {
     pickupSearch.clearResults();
     setFromText(place.address);
@@ -96,8 +87,7 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
     setActiveInput(null);
   };
 
-  
- useEffect(() => {
+  useEffect(() => {
     // so that it doesn't overwrite an existing pickup from rideData
     if (!pickup || pickupStop) {
       return;
@@ -110,8 +100,6 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
       longitude: pickup.longitude,
     });
   }, [pickup, pickupStop]);
-
-
 
   return {
     isNowDropdownOpen,
@@ -160,6 +148,6 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
     onDestinationFocus,
 
     onSelectPickup,
-    onSelectDestination
+    onSelectDestination,
   };
 }
