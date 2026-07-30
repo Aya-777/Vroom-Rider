@@ -1,20 +1,17 @@
-import React, { useMemo, useState } from 'react';
-import { View, StatusBar, TextInput } from 'react-native';
+import React, { useMemo } from 'react';
+import { View } from 'react-native';
 import { BaseBottomSheet } from '../../../../shared/components/BaseBottomSheet';
 import InfoBox from './InfoBox';
 import ActionButton from '../../../../shared/components/ActionButton';
 import { useConfirmRideViewModel } from '../../viewmodels/useConfirmRideViewModel';
-
-import ClockIcon from '../../../../assets/svg/common/schedule.svg';
-import EstimatedPriceIcon from '../../../../assets/svg/payment/price.svg';
 import CashIcon from '../../../../assets/svg/payment/cash.svg';
 import CarIcon from '../../../../assets/svg/common/ride.svg';
 import SearchIcon from '../../../../assets/svg/common/search.svg';
-import PhoneNumberIcon from '../../../../assets/svg/contact/call.svg';
 
 import { createStyles } from '../../styles/confirmRide.styles';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../../core/theme/useTheme';
+import TimePriceBox from '../ExtraDetailsScreen/TimePriceBox';
 
 type Props = {
   onNextPress: () => void;
@@ -33,31 +30,30 @@ export default function RideConfirmationSheet({ onNextPress }: Props) {
     vm.handleFindDriver();
     onNextPress();
   };
-  console.log(vm.rideData);
+
+  const selectedVehicle = vm.estimate?.pricing_tiers?.find(
+    tier => tier.tier_id === vm.rideData.vehicleTypeId,
+  );
 
   return (
     <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1}>
       <View style={styles.grid}>
-        <InfoBox
-          icon={<ClockIcon width={16} height={16} fill={colors.primary} />}
-          title={t('time')}
-          value={vm.estimate.time || 'N/A'}
-        />
-
-        <InfoBox
-          icon={
-            <EstimatedPriceIcon width={16} height={16} fill={colors.primary} />
+        <TimePriceBox
+          time={`${vm.estimate.estimated_duration_minutes}`}
+          price={
+            selectedVehicle
+              ? `$${selectedVehicle.estimated_price.toFixed(2)}`
+              : '...'
           }
-          title={t('totalPrice')}
-          value={`${vm.estimate.price}$` || 'N/A'}
         />
 
         <InfoBox
           icon={<CarIcon width={16} height={16} fill={colors.primary} />}
           title={t('selectedCar')}
           value={
-            vm.rideData.vehicleType
-              ? t(`common:carType.${vm.rideData.vehicleType}`)
+            vm.rideData.vehicleTypeId
+              ? vm.estimate.pricing_tiers[vm.rideData.vehicleTypeId - 1]
+                  .tier_name
               : 'N/A'
           }
         />
@@ -65,11 +61,7 @@ export default function RideConfirmationSheet({ onNextPress }: Props) {
         <InfoBox
           icon={<CashIcon width={16} height={16} fill={colors.primary} />}
           title={t('payment')}
-          value={
-            vm.rideData.payment
-              ? t(`common:payment.${vm.rideData.payment}`)
-              : 'N/A'
-          }
+          value={vm.rideData.paymentMethod ? vm.rideData.paymentMethod : 'N/A'}
         />
       </View>
 

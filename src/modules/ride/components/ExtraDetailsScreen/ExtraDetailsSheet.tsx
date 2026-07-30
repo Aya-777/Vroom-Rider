@@ -38,9 +38,9 @@ export default function ExtraDetailsScreen({ onNextPress }: Props) {
   } = useRideDetailsViewModel();
 
   const handleNextPress = () => {
-    updateRideDetails();
-    onNextPress();
-  };
+  updateRideDetails();
+  onNextPress();
+};
 
   const snapPoints = useMemo(() => ['30%', '70%'], []);
 
