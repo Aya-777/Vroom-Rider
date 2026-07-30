@@ -44,4 +44,16 @@ export const profileApi = {
         await apiClient.post(ENDPOINTS.USERS.CHANGE_PHONE_VERIFY, { otp });
     },
 
+    changePassword: async (input: {
+        oldPassword: string;
+        newPassword: string;
+        confirmPassword: string;
+    }): Promise<void> => {
+        await apiClient.patch(ENDPOINTS.USERS.CHANGE_PASSWORD, {
+            old_password: input.oldPassword,
+            new_password: input.newPassword,
+            confirm_password: input.confirmPassword,
+        });
+    },
+
 };

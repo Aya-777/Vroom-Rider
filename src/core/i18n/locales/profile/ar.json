@@ -26,5 +26,14 @@
   "enterPhoneNumber": "أدخل رقم الهاتف",
   "verifyNewNumber": "تأكيد الرقم الجديد",
   "checkYourMessages": "تحقق من رسائلك",
-  "haventGot": "لم يصلك الرمز؟"
+  "haventGot": "لم يصلك الرمز؟",
+  "changePassword": "تغيير كلمة السر",
+  "changePasswordDescription": "أدخل كلمة السر الحالية واختر كلمة سر جديدة.",
+  "oldPassword": "كلمة السر الحالية",
+  "enterOldPassword": "أدخل كلمة السر الحالية",
+  "newPassword": "كلمة السر الجديدة",
+  "enterNewPassword": "أدخل كلمة السر الجديدة",
+  "confirmPassword": "تأكيد كلمة السر",
+  "confirmNewPassword": "أكد كلمة السر الجديدة",
+  "updatePassword": "تحديث كلمة السر"
 }

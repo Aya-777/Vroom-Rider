@@ -37,16 +37,6 @@ export default function EditProfileScreen() {
 
                 <View style={styles.top}>
                     <View style={styles.avatarWrapper}>
-                        
-                        {/* <PinFrame width={110} backgroundColor={colors.primary + '20'}>
-                            {vm.previewImageUri ? (
-                                <Image source={{ uri: vm.previewImageUri }} style={styles.avatarImage} resizeMode="cover" />
-                            ) : (
-                                <View style={styles.avatarPlaceholderInPin}>
-                                    <UserIcon width={44} height={44} fill={colors.primary} />
-                                </View>
-                            )}
-                        </PinFrame> */}
 
                         <PinFrame width={110} backgroundColor={colors.primary + '20'}>
                             <View style={styles.avatarCircleInside}>
@@ -99,6 +89,15 @@ export default function EditProfileScreen() {
                     >
                         <Input
                             value={route.params?.phone ?? ''}
+                            editable={false}
+                            containerStyle={styles.inputBox}
+                            inputStyle={styles.input}
+                        />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate('ChangePassword')}>
+                        <Input
+                            value="********"
                             editable={false}
                             containerStyle={styles.inputBox}
                             inputStyle={styles.input}
