@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-
+import { apiClient } from '../../../core/network/apiClient';
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/profile.styles';
 
@@ -16,6 +16,7 @@ type Props = {
   onEditPress?: () => void;
 };
 
+
 export default function ProfileCard({
   firstName,
   lastName,
@@ -26,7 +27,7 @@ export default function ProfileCard({
 }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
-
+  const IMAGE_BASE_URL = `${apiClient.defaults.baseURL}media/`;
   const fullName = isLoading
     ? '...'
     : [firstName, lastName].filter(Boolean).join(' ') || '—';
@@ -41,8 +42,13 @@ export default function ProfileCard({
       {/* Avatar */}
       <View style={styles.avatarContainer}>
         {profileImage ? (
-          <Image source={{ uri: profileImage }} style={styles.avatarPlaceholder} />
-        ) : (
+          <Image
+            source={{
+              uri: `${IMAGE_BASE_URL}${profileImage}`,
+            }}
+            style={styles.avatarPlaceholder}
+            onError={(e) => console.log('IMAGE ERROR', e.nativeEvent)}
+          />) : (
           <View style={styles.avatarPlaceholder}>
             <View style={styles.avatarHead} />
             <View style={styles.avatarBody} />

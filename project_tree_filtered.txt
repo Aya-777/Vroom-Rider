@@ -20,6 +20,7 @@ src/
 │       │   ├── camera.svg
 │       │   ├── check.svg
 │       │   ├── edit.svg
+│       │   ├── gallery.svg
 │       │   ├── history.svg
 │       │   ├── home.svg
 │       │   ├── info.svg
@@ -303,16 +304,22 @@ src/
 │   │   ├── repositories
 │   │   │   └── profileRepository.ts
 │   │   ├── screens
+│   │   │   ├── ChangePhoneOtpScreen.tsx
+│   │   │   ├── ChangePhoneScreen.tsx
+│   │   │   ├── EditProfileScreen.tsx
 │   │   │   └── ProfileScreen.tsx
 │   │   ├── services
 │   │   │   ├── dto
 │   │   │   │   └── profile.dto.ts
 │   │   │   └── profileApi.ts
 │   │   ├── styles
+│   │   │   ├── editProfile.styles.ts
 │   │   │   └── profile.styles.ts
 │   │   ├── types
 │   │   │   └── profile.types.ts
 │   │   └── viewmodels
+│   │       ├── useChangePhoneViewModel.ts
+│   │       ├── useEditProfileViewModel.ts
 │   │       └── useProfileViewModel.ts
 │   ├── review
 │   │   ├── components
@@ -374,6 +381,7 @@ src/
 │   │   ├── hooks
 │   │   │   └── useLocationPermission.ts
 │   │   ├── screens
+│   │   │   ├── ChangeRidePhoneScreen.tsx
 │   │   │   └── RideScreen.tsx
 │   │   ├── store
 │   │   │   └── useRideStore.ts
@@ -440,15 +448,27 @@ src/
 │   ├── components
 │   │   ├── ActionButton.tsx
 │   │   ├── BaseBottomSheet.tsx
+│   │   ├── ChangePhoneForm.tsx
 │   │   ├── Header.tsx
 │   │   ├── Input.tsx
 │   │   ├── LinearBg.tsx
+│   │   ├── OtpBoxes.tsx
+│   │   ├── OtpVerifyForm.tsx
+│   │   ├── PhotoPickerSheet.tsx
+│   │   ├── PinFrame.tsx
+│   │   ├── PinShape.tsx
 │   │   ├── SearchBar.tsx
 │   │   ├── SheetBackground.tsx
 │   │   └── SubHeader.tsx
+│   ├── hooks
+│   │   ├── useChangePhoneRequestViewModel.ts
+│   │   └── useOtpVerifyViewModel.ts
 │   └── styles
+│       ├── PhotoPickerSheet.styles.ts
 │       ├── SubHeader.styles.ts
+│       ├── changePhoneForm.styles.ts
 │       ├── input.styles.ts
+│       ├── otpVerifyForm.styles.ts
 │       └── sheet.styles.ts
 └── types
     └── svg.d.ts

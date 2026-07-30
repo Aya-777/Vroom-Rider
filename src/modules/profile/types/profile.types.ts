@@ -25,3 +25,15 @@ export type UserProfile = {
   ratingAvg: number;
   isActive: boolean;
 };
+
+export type UpdateProfileImageInput = {
+  uri: string;
+  fileName?: string;
+  type?: string;
+};
+
+export type UpdateProfileInput = {
+  firstName: string;
+  lastName: string;
+  profileImage?: UpdateProfileImageInput | null;
+};

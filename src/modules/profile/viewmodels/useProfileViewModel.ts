@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { useProfileMenuItems } from '../constants/profileData';
 import { useMainDrawer } from '../../../navigation/hooks/useMainDrawer';
 import { profileRepository } from '../repositories/profileRepository';
@@ -14,6 +15,7 @@ export const useProfileViewModel = () => {
   const [error, setError] = useState<string | null>(null);
 
   const isMounted = useRef(true);
+  const hasLoadedOnce = useRef(false);
 
   const fetchProfile = async (mode: 'initial' | 'refresh') => {
     try {
@@ -36,16 +38,20 @@ export const useProfileViewModel = () => {
     }
   };
 
-  useEffect(() => {
-    isMounted.current = true;
-    fetchProfile('initial');
-    return () => {
-      isMounted.current = false;
-    };
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      isMounted.current = true;
+      fetchProfile(hasLoadedOnce.current ? 'refresh' : 'initial');
+      hasLoadedOnce.current = true;
+
+      return () => {
+        isMounted.current = false;
+      };
+    }, [])
+  );
 
   const onRefresh = () => fetchProfile('refresh');
-
+  
   return {
     openSidebar,
     profile,

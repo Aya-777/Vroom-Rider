@@ -4,6 +4,7 @@ export const ENDPOINTS = {
     VERIFY_OTP: '/api/v1/auth/signup/verify-otp/',
     RESEND_OTP: '/api/v1/auth/signup/resend-otp/',
     LOGIN: '/api/v1/auth/login/',
+    REFRESH_TOKEN: '/api/v1/auth/token/refresh/',
     FORGOT_PASSWORD: '/api/v1/auth/forgot-password/',
     FORGOT_PASSWORD_VERIFY_OTP: '/api/v1/auth/forgot-password/verify-otp/',
     FORGOT_PASSWORD_RESEND_OTP: '/api/v1/auth/forgot-password/resend-otp/',
@@ -11,5 +12,9 @@ export const ENDPOINTS = {
   },
   USERS: {
     ME: '/api/v1/users/me/',
+    EDIT_PROFILE: '/api/v1/users/me/profile/',
+    CHANGE_PHONE_REQUEST: '/api/v1/users/me/change-phone/',
+    CHANGE_PHONE_RESEND: '/api/v1/users/me/change-phone/resend-otp/',
+    CHANGE_PHONE_VERIFY: '/api/v1/users/me/change-phone/verify-otp/',
   },
 } as const;

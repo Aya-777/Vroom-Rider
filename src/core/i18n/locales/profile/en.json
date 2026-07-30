@@ -14,5 +14,17 @@
   "aboutUs": "About Us",
   "contactUs": "Contact Us",
   "logout": "Logout",
-  "welcome": "Wlcome "
+  "welcome": "Wlcome ",
+  "editProfile": "Edit Profile",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "otpSentTo": "We sent a verification code to",
+  "phoneNumber": "Phone Number",
+  "changePhoneNumber": "Change Phone Number",
+  "enterNewPhoneDescription": "Enter your new phone number. We'll send a verification code to confirm it.",
+  "newPhoneNumber": "New Phone Number",
+  "enterPhoneNumber": "Enter phone number",
+  "verifyNewNumber": "Verify New Number",
+  "checkYourMessages": "Check your messages",
+  "haventGot": "Didn't get the code?"
 }
