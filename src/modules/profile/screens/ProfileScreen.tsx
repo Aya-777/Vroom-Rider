@@ -63,6 +63,7 @@ export default function ProfileScreen() {
               navigation.navigate('EditProfile', {
                 firstName: profile?.firstName,
                 lastName: profile?.lastName,
+                phone: profile?.phone, 
                 profileImage: profile?.profileImage,
               })
             }

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Typography, Radius, Shadows } from '../../../core/theme/tokens';
+import { Typography, Radius } from '../../../core/theme/tokens';
 import { ThemeColors } from '../../../core/theme/theme.types';
 
 export const createStyles = (colors: ThemeColors) =>
@@ -45,19 +45,27 @@ export const createStyles = (colors: ThemeColors) =>
             height: '100%',
         },
 
-        cameraBadge: {
-            position: 'absolute',
-            bottom: 4,
-            right: 4,
-            width: 34,
-            height: 34,
-            borderRadius: Radius.full,
-            backgroundColor: colors.primary,
+        cameraCircle: {
+            width: 32,
+            height: 32,
+            borderRadius: 16,
             justifyContent: 'center',
             alignItems: 'center',
             borderWidth: 2,
-            borderColor: colors.backgroundSoft,
-            ...Shadows.small,
+            borderColor: colors.primary,
+            backgroundColor: colors.surface,
+        },
+        avatarPlaceholderInPin: {
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            paddingTop: 26,
+        },
+
+        cameraBadge: {
+            position: 'absolute',
+            right: -1,
+            bottom: 10,
         },
 
         middle: {
@@ -93,5 +101,29 @@ export const createStyles = (colors: ThemeColors) =>
         btnText: {
             ...Typography.h3,
             color: colors.backgroundSoft,
+        },
+        phoneRow: {
+            width: '80%',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingVertical: 14,
+            paddingHorizontal: 16,
+            borderRadius: Radius.md,
+            backgroundColor: colors.surface,
+        },
+        phoneLeft: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: 10,
+        },
+        phoneLabel: {
+            ...Typography.caption,
+            color: colors.textMuted,
+            marginBottom: 2,
+        },
+        phoneValue: {
+            ...Typography.boldBody,
+            color: colors.textPrimary,
         },
     });

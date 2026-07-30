@@ -8,12 +8,13 @@ import ChangePhoneForm from '../../../shared/components/ChangePhoneForm';
 import { useTheme } from '../../../core/theme/useTheme';
 import { useChangePhoneRequestViewModel } from '../../../shared/hooks/useChangePhoneRequestViewModel';
 import { profileRepository } from '../repositories/profileRepository';
-import { createStyles } from '../styles/editProfile.styles';
+import { createStyles } from '../styles/profile.styles';
 
 export default function ChangePhoneScreen() {
     const navigation = useNavigation<any>();
     const { colors } = useTheme();
     const styles = createStyles(colors);
+
     const { t } = useTranslation(['profile', 'common']);
 
     const vm = useChangePhoneRequestViewModel({
@@ -27,7 +28,8 @@ export default function ChangePhoneScreen() {
             start={{ x: 0, y: 0 }}
             end={{ x: 0, y: 1 }}
             style={styles.container}
-        >            <SubHeader title={t('changePhoneNumber')} onBackPress={() => navigation.goBack()} />
+        >
+            <SubHeader title={t('changePhoneNumber')} onBackPress={() => navigation.goBack()} />
             <ChangePhoneForm
                 descriptionLabel={t('enterNewPhoneDescription')}
                 fieldLabel={t('newPhoneNumber')}

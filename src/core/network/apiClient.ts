@@ -4,7 +4,7 @@ import { getAuthToken, getRefreshToken, setAuthToken, logoutAuth } from '../stor
 import { ENDPOINTS } from './endpoints';
 
 export const apiClient = axios.create({
-  baseURL: 'http://10.116.185.227:8000/',
+  baseURL: 'http://192.168.1.103:8000/',
   timeout: 10000,
   headers: { 'Content-Type': 'application/json' },
 });
@@ -62,7 +62,7 @@ apiClient.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return apiClient(originalRequest);
       } catch (refreshError) {
-        logoutAuth(); 
+        logoutAuth();
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;

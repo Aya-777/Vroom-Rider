@@ -39,4 +39,12 @@ export const profileRepository = {
     requestPhoneChange: async (newPhoneNumber: string): Promise<void> => {
         await profileApi.requestPhoneChange(newPhoneNumber);
     },
+
+    resendPhoneChange: async (): Promise<void> => {
+        await profileApi.resendPhoneChange();
+    },
+
+    verifyPhoneChange: async (otp: string): Promise<void> => {
+        await profileApi.verifyPhoneChange(otp);
+    },
 };

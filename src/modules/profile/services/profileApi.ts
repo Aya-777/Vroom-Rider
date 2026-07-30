@@ -36,4 +36,12 @@ export const profileApi = {
         });
     },
 
+    resendPhoneChange: async (): Promise<void> => {
+        await apiClient.post(ENDPOINTS.USERS.CHANGE_PHONE_RESEND);
+    },
+
+    verifyPhoneChange: async (otp: string): Promise<void> => {
+        await apiClient.post(ENDPOINTS.USERS.CHANGE_PHONE_VERIFY, { otp });
+    },
+
 };

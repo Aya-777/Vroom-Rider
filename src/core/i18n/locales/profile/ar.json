@@ -17,5 +17,14 @@
   "welcome": "مرحبا  ",
   "editProfile": "تعديل الملف الشخصي",
   "firstName": "الاسم الأول",
-  "lastName": "اسم العائلة"
+  "lastName": "اسم العائلة",
+  "otpSentTo": "أرسلنا رمز التحقق إلى",
+  "phoneNumber": "رقم الهاتف",
+  "changePhoneNumber": "تغيير رقم الهاتف",
+  "enterNewPhoneDescription": "أدخل رقم هاتفك الجديد. رح نرسلّك رمز تحقق لتأكيده.",
+  "newPhoneNumber": "رقم الهاتف الجديد",
+  "enterPhoneNumber": "أدخل رقم الهاتف",
+  "verifyNewNumber": "تأكيد الرقم الجديد",
+  "checkYourMessages": "تحقق من رسائلك",
+  "haventGot": "لم يصلك الرمز؟"
 }

@@ -47,7 +47,6 @@ export default function ProfileCard({
               uri: `${IMAGE_BASE_URL}${profileImage}`,
             }}
             style={styles.avatarPlaceholder}
-            onLoad={() => console.log('IMAGE LOADED')}
             onError={(e) => console.log('IMAGE ERROR', e.nativeEvent)}
           />) : (
           <View style={styles.avatarPlaceholder}>

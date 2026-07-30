@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useAuthActions } from '../../../core/store/authStore';
 import { useAuthRepository } from '../repositories/authRepository';
 
 export function useLoginViewModel() {
   const { login } = useAuthActions();
-  const { t } = useTranslation(['common']);
 
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
@@ -32,12 +30,7 @@ export function useLoginViewModel() {
       login(access, refresh);
     } catch (error: any) {
       console.error('Login failed', error);
-
-      if (error.response?.status === 400) {
-        setUiError(t('auth:invalidCredentials'));
-      } else {
-        setUiError(error.response?.data?.message || error.message);
-      }
+      setUiError(error.response?.data?.message || error.message);
     }
   };
 

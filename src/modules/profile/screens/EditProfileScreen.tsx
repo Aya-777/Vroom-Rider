@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
-
+import PinFrame from '../../../shared/components/PinFrame';
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/editProfile.styles';
 import LinearBg from '../../../shared/components/LinearBg';
@@ -11,12 +11,11 @@ import Input from '../../../shared/components/Input';
 import PhotoPickerSheet from '../../../shared/components/PhotoPickerSheet';
 import { ProfileStackParamList } from '../../../navigation/main/profile/profileTypes';
 import { useEditProfileViewModel } from '../viewmodels/useEditProfileViewModel';
-
 import CameraIcon from '../../../assets/svg/common/camera.svg';
 import UserIcon from '../../../assets/svg/profile/profile.svg';
 
 export default function EditProfileScreen() {
-    const navigation = useNavigation();
+    const navigation = useNavigation<any>();
     const route = useRoute<RouteProp<ProfileStackParamList, 'EditProfile'>>();
 
     const { colors } = useTheme();
@@ -35,18 +34,23 @@ export default function EditProfileScreen() {
             <SubHeader title={t('editProfile')} onBackPress={() => navigation.goBack()} />
 
             <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+
                 <View style={styles.top}>
                     <View style={styles.avatarWrapper}>
-                        <View style={styles.avatarCircle}>
+                        <PinFrame width={110} backgroundColor={colors.primary + '20'}>
                             {vm.previewImageUri ? (
                                 <Image source={{ uri: vm.previewImageUri }} style={styles.avatarImage} resizeMode="cover" />
                             ) : (
-                                <UserIcon width={44} height={44} fill={colors.primary} />
+                                <View style={styles.avatarPlaceholderInPin}>
+                                    <UserIcon width={44} height={44} fill={colors.primary} />
+                                </View>
                             )}
-                        </View>
+                        </PinFrame>
 
                         <TouchableOpacity style={styles.cameraBadge} activeOpacity={0.85} onPress={vm.openPhotoPicker}>
-                            <CameraIcon width={16} height={16} fill={colors.backgroundSoft} />
+                            <View style={styles.cameraCircle}>
+                                <CameraIcon width={16} height={16} fill={colors.backgroundSoft} />
+                            </View>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -67,6 +71,18 @@ export default function EditProfileScreen() {
                         containerStyle={styles.inputBox}
                         inputStyle={styles.input}
                     />
+
+                    <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={() => navigation.navigate('ChangePhone')}
+                    >
+                        <Input
+                            value={route.params?.phone ?? ''}
+                            editable={false}
+                            containerStyle={styles.inputBox}
+                            inputStyle={styles.input}
+                        />
+                    </TouchableOpacity>
 
                     {vm.error && <Text style={styles.error}>{vm.error}</Text>}
                 </View>
