@@ -30,43 +30,7 @@ export default function SelectRideSheet({ onNextPress }: Props) {
   const styles = createStyles(colors);
   const { t } = useTranslation(['selectRide', 'common']);
 
-  const {
-    isNowDropdownOpen,
-    isForMeDropdownOpen,
-    selectedPerson,
-    selectedTime,
-    fromText,
-    toText,
-    errors,
-    savedPlaces,
-    savedPlacesLoading,
-
-    isModalVisible,
-
-    setIsNowDropdownOpen,
-    setIsForMeDropdownOpen,
-    setSelectedPerson,
-    setSelectedTime,
-    setFromText,
-    setToText,
-
-    pickupResults,
-    destinationResults,
-    onSelectPickup,
-    onSelectDestination,
-    activeInput,
-    onPickupFocus,
-    onDestinationFocus,
-
-    validate,
-    handleFlipModal,
-    onAddPlacePress,
-    onNextPressVM,
-    onDeleteSavedPlace,
-    onSetOnMap,
-    isSheetVisible,
-    onConfirmLocation
-  } = useSelectRideViewModel();
+  const vm = useSelectRideViewModel();
 
   const personItems = [
     { key: 'forMe', label: t('selectRide:forMe'), value: true },
@@ -79,8 +43,8 @@ export default function SelectRideSheet({ onNextPress }: Props) {
   ];
 
   const handleNextPress = () => {
-    if(validate()){
-      onNextPressVM();
+    if(vm.validate()){
+      vm.onNextPressVM();
       onNextPress();
     }
   };
@@ -88,56 +52,56 @@ export default function SelectRideSheet({ onNextPress }: Props) {
 
   return (
     <>
-      <BaseBottomSheet isVisible={isSheetVisible} index={1} snapPoints={snapPoints}>
+      <BaseBottomSheet isVisible={vm.isSheetVisible} index={1} snapPoints={snapPoints}>
         <View style={styles.dropdownRow}>
           <RideDropdown
             icon={<ScheduleIcon fill={colors.primary} />}
-            value={t(`common:${selectedTime}`)}
-            isOpen={isNowDropdownOpen}
+            value={t(`common:${vm.selectedTime}`)}
+            isOpen={vm.isNowDropdownOpen}
             items={timeItems}
-            onToggle={() => setIsNowDropdownOpen(!isNowDropdownOpen)}
+            onToggle={() => vm.setIsNowDropdownOpen(!vm.isNowDropdownOpen)}
             onSelect={item => {
-              setSelectedTime(item);
-              setIsNowDropdownOpen(false);
+              vm.setSelectedTime(item);
+              vm.setIsNowDropdownOpen(false);
             }}
           />
 
           <RideDropdown
             icon={<ProfileIcon fill={colors.primary} />}
-            value={t(`selectRide:${selectedPerson}`)}
-            isOpen={isForMeDropdownOpen}
+            value={t(`selectRide:${vm.selectedPerson}`)}
+            isOpen={vm.isForMeDropdownOpen}
             items={personItems}
-            onToggle={() => setIsForMeDropdownOpen(!isForMeDropdownOpen)}
+            onToggle={() => vm.setIsForMeDropdownOpen(!vm.isForMeDropdownOpen)}
             onSelect={item => {
-              setSelectedPerson(item);
-              setIsForMeDropdownOpen(false);
+              vm.setSelectedPerson(item);
+              vm.setIsForMeDropdownOpen(false);
             }}
           />
         </View>
 
         <RideLocationInputs
-          fromLocation={fromText}
-          toLocation={toText}
-          onChangeFrom={setFromText}
-          onChangeTo={setToText}
+          fromLocation={vm.fromText}
+          toLocation={vm.toText}
+          onChangeFrom={vm.setFromText}
+          onChangeTo={vm.setToText}
 
-          pickupResults={pickupResults}
-          destinationResults={destinationResults}
+          pickupResults={vm.pickupResults}
+          destinationResults={vm.destinationResults}
 
-          activeInput={activeInput}
+          activeInput={vm.activeInput}
 
-          onSelectPickup={onSelectPickup}
-          onSelectDestination={onSelectDestination}
+          onSelectPickup={vm.onSelectPickup}
+          onSelectDestination={vm.onSelectDestination}
 
-          onPickupFocus={onPickupFocus}
-          onDestinationFocus={onDestinationFocus}
+          onPickupFocus={vm.onPickupFocus}
+          onDestinationFocus={vm.onDestinationFocus}
 
-          errors={errors}
+          errors={vm.errors}
       />
 
         <View style={styles.actionRow}>
           <ActionButton
-            onPress={onSetOnMap}
+            onPress={vm.onSetOnMap}
             icon={<PinIcon fill={colors.textSecondary} />}
             title={t('setOnMap')}
             textStyle={{ color: colors.textSecondary }}
@@ -145,7 +109,7 @@ export default function SelectRideSheet({ onNextPress }: Props) {
           />
 
           <ActionButton
-            onPress={handleFlipModal}
+            onPress={vm.handleFlipModal}
             icon={<StarIcon fill={colors.textSecondary} />}
             title={t('common:savedPlaces')}
             textStyle={{ color: colors.textSecondary }}
@@ -154,13 +118,13 @@ export default function SelectRideSheet({ onNextPress }: Props) {
         </View>
 
         <SavedPlacesModal
-          visible={isModalVisible}
-          onClose={handleFlipModal}
-          places={savedPlaces}
-          loading={savedPlacesLoading}
-          onSelectPlace={() => {}}
-          onAddPress={onAddPlacePress}
-          onDeletePlace={onDeleteSavedPlace}
+          visible={vm.isModalVisible}
+          onClose={vm.handleFlipModal}
+          places={vm.savedPlaces}
+          loading={vm.savedPlacesLoading}
+          onSelectPlace={vm.onSelectPlace}
+          onAddPress={vm.onAddPlacePress}
+          onDeletePlace={vm.onDeleteSavedPlace}
         />
 
         <View style={styles.contactSection}>
@@ -181,8 +145,8 @@ export default function SelectRideSheet({ onNextPress }: Props) {
         />
       </BaseBottomSheet>
 
-        {!isSheetVisible && 
-          <TouchableOpacity style={styles.confirmButton} onPress={onConfirmLocation}>
+        {!vm.isSheetVisible && 
+          <TouchableOpacity style={styles.confirmButton} onPress={vm.onConfirmLocation}>
             <Text style={styles.confirmButtonText} numberOfLines={1}>Confirm</Text>
           </TouchableOpacity>
         }

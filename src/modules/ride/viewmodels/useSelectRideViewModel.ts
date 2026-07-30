@@ -8,18 +8,30 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
 import { useLocationSearch } from '../hooks/useLocationSearch';
-import { GeocodeResult, reverseGeocode } from '../../../core/services/location/GeoCodingService';
+import {
+  GeocodeResult,
+  reverseGeocode,
+} from '../../../core/services/location/GeoCodingService';
 import LocationService from '../../../core/services/location/LocationService';
 import { useLocationStore } from '../../../core/store/locationStore';
 import { rideApi } from '../services/rideApi';
+import { SavedPlace } from '../types/savedPlaces.types';
 
 export function useSelectRideViewModel() {
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
 
   const currentLocation = useLocationStore(state => state.currentLocation);
-  const { setRideDetails, rideData, savedPlaces, setSavedPlaces, setEstimate, setPickingLocation, selectedMapLocation,setSelectedMapLocation } =
-    useRideStore();
+  const {
+    setRideDetails,
+    rideData,
+    savedPlaces,
+    setSavedPlaces,
+    setEstimate,
+    setPickingLocation,
+    selectedMapLocation,
+    setSelectedMapLocation,
+  } = useRideStore();
 
   const pickupStop = rideData.stops?.find(stop => stop.stopType === 'PICKUP');
 
@@ -66,8 +78,7 @@ export function useSelectRideViewModel() {
     error: savedPlacesError,
     refetch: fetchSavedPlaces,
   } = useRideRepository.useSavedPlaces(isModalVisible);
-  const { mutate: deleteSavedPlace } =
-  useRideRepository.useDeleteSavedPlace();
+  const { mutate: deleteSavedPlace } = useRideRepository.useDeleteSavedPlace();
 
   // --- Set current location as pickup initially ---
   useEffect(() => {
@@ -148,12 +159,12 @@ export function useSelectRideViewModel() {
   };
 
   const onDeleteSavedPlace = (id: number) => {
-  deleteSavedPlace(id, {
-    onError: error => {
-      console.error('Failed to delete saved place', error);
-    },
-  });
-};
+    deleteSavedPlace(id, {
+      onError: error => {
+        console.error('Failed to delete saved place', error);
+      },
+    });
+  };
 
   const handleFlipModal = () => {
     if (!isModalVisible) {
@@ -163,23 +174,21 @@ export function useSelectRideViewModel() {
     setIsModalVisible(!isModalVisible);
   };
 
-  
   const handleBottomSheet = (visible: boolean) => {
     setIsSheetVisible(visible);
   };
 
-  const setActiveInputText = (value : string) => {
-    if(activeInput === 'pickup'){
+  const setActiveInputText = (value: string) => {
+    if (activeInput === 'pickup') {
       setFromText(value);
-    }else{
+    } else {
       setToText(value);
     }
-  }
-  
+  };
+
   const onSetOnMap = () => {
     handleBottomSheet(false);
     setPickingLocation(true);
-    console.log("currentLocation " , currentLocation);
   };
 
   const onConfirmLocation = async () => {
@@ -189,16 +198,24 @@ export function useSelectRideViewModel() {
 
     const { latitude, longitude } = selectedMapLocation;
 
-    const address = await reverseGeocode(
-      latitude,
-      longitude,
-    );
+    const address = await reverseGeocode(latitude, longitude);
 
     setActiveInputText(address || '');
 
     setPickingLocation(false);
     handleBottomSheet(true);
   };
+
+  const onSelectPlace = (place: SavedPlace) => {
+    if(activeInput === 'pickup'){
+      setFromText(place.address);
+      setPickupCoordinates(place);
+    }else{
+      setToText(place.address);
+      setDestinationCoordinates(place);
+    }
+    setIsModalVisible(false);
+  }
 
   const onNextPress = async () => {
     const stops = [
@@ -217,13 +234,11 @@ export function useSelectRideViewModel() {
         stop_type: 'DROP_OFF' as const,
       },
     ];
-    console.log("stops ", stops)
     try {
       const estimate = await rideApi.estimateInitial({
         stops,
       });
 
-      console.log('estimte : ', estimate);
       setEstimate(estimate);
 
       setRideDetails({
@@ -297,6 +312,7 @@ export function useSelectRideViewModel() {
     destinationSearching: destinationSearch.isSearching,
     onSelectPickup,
     onSelectDestination,
+    onSelectPlace,
     onDeleteSavedPlace,
     onSetOnMap,
     onConfirmLocation,
