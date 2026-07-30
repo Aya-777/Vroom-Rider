@@ -44,7 +44,7 @@ export default function SelectRideSheet({ onNextPress }: Props) {
 
   const handleNextPress = () => {
     if(vm.validate()){
-      vm.onNextPressVM();
+      vm.onNextPress();
       onNextPress();
     }
   };

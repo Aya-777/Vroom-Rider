@@ -46,8 +46,6 @@ export default function useMapViewModel() {
           newLocation.latitude,
         ];
 
-        console.log('WATCH LOCATION:', coords);
-
         setDeviceLocation(coords);
       });
     };
