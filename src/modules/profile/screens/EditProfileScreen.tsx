@@ -37,7 +37,8 @@ export default function EditProfileScreen() {
 
                 <View style={styles.top}>
                     <View style={styles.avatarWrapper}>
-                        <PinFrame width={110} backgroundColor={colors.primary + '20'}>
+                        
+                        {/* <PinFrame width={110} backgroundColor={colors.primary + '20'}>
                             {vm.previewImageUri ? (
                                 <Image source={{ uri: vm.previewImageUri }} style={styles.avatarImage} resizeMode="cover" />
                             ) : (
@@ -45,6 +46,26 @@ export default function EditProfileScreen() {
                                     <UserIcon width={44} height={44} fill={colors.primary} />
                                 </View>
                             )}
+                        </PinFrame> */}
+
+                        <PinFrame width={110} backgroundColor={colors.primary + '20'}>
+                            <View style={styles.avatarCircleInside}>
+                                {vm.previewImageUri ? (
+                                    <Image
+                                        source={{ uri: vm.previewImageUri }}
+                                        style={styles.avatarImage}
+                                        resizeMode="cover"
+                                    />
+                                ) : (
+                                    <View style={styles.avatarPlaceholder}>
+                                        <UserIcon
+                                            width={40}
+                                            height={40}
+                                            fill={colors.primary}
+                                        />
+                                    </View>
+                                )}
+                            </View>
                         </PinFrame>
 
                         <TouchableOpacity style={styles.cameraBadge} activeOpacity={0.85} onPress={vm.openPhotoPicker}>

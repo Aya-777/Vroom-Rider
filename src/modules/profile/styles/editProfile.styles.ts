@@ -126,4 +126,19 @@ export const createStyles = (colors: ThemeColors) =>
             ...Typography.boldBody,
             color: colors.textPrimary,
         },
+        avatarCircleInside: {
+            width: 74,
+            height: 74,
+            borderRadius: 37,
+            overflow: 'hidden',
+            alignSelf: 'center',
+            marginTop: 10,
+            backgroundColor: colors.backgroundSoft,
+        },
+
+        avatarPlaceholder: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
     });
