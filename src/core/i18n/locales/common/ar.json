@@ -36,7 +36,7 @@
   "payment": {
     "estimated" : "السعر المقدر",
     "cash": "نقداً",
-    "card": "المحفظة"
+    "wallet": "المحفظة"
   },
 
   "pickupRequired": "موقع الانطلاق مطلوب",

@@ -21,7 +21,7 @@ export default function ExtraDetailsScreen({ onNextPress }: Props) {
 
   const paymentItems = [
     { key: 'cash', label: t('common:payment.cash') },
-    { key: 'card', label: t('common:payment.card') },
+    { key: 'wallet', label: t('common:payment.wallet') },
   ];
 
   const {

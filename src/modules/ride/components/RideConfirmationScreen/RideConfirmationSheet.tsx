@@ -26,9 +26,11 @@ export default function RideConfirmationSheet({ onNextPress }: Props) {
 
   const snapPoints = useMemo(() => ['30%', '70%'], []);
 
-  const handleFindPress = () => {
-    vm.handleFindDriver();
-    onNextPress();
+  const handleFindPress = async () => {
+    const response = await vm.handleFindDriver();
+    if(response){
+      onNextPress();
+    }
   };
 
   const selectedVehicle = vm.estimate?.pricing_tiers?.find(
@@ -50,12 +52,7 @@ export default function RideConfirmationSheet({ onNextPress }: Props) {
         <InfoBox
           icon={<CarIcon width={16} height={16} fill={colors.primary} />}
           title={t('selectedCar')}
-          value={
-            vm.rideData.vehicle_type_id
-              ? vm.estimate.pricing_tiers[vm.rideData.vehicle_type_id - 1]
-                  .tier_name
-              : 'N/A'
-          }
+          value={selectedVehicle?.tier_name ?? 'N/A'}
         />
 
         <InfoBox

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { RideParams, RideStop, Tiers } from '../types/ride.types';
+import { CurrentRide, RideParams, RideStop, Tiers } from '../types/ride.types';
 import { SavedPlace } from '../types/savedPlaces.types';
 import { EstimateInitialResponseDTO } from '../services/dto/estimate.dto';
 
@@ -11,11 +11,15 @@ type MapLocation = {
 interface RideState {
   rideData: Partial<RideParams>;
 
+  currentRide: CurrentRide | null;
+
   estimate: EstimateInitialResponseDTO;
 
   savedPlaces: SavedPlace[];
 
   setRideDetails: (details: Partial<RideParams>) => void;
+
+  setCurrentRide: (ride: CurrentRide | null) => void;
 
   setEstimate: (estimate: EstimateInitialResponseDTO) => void;
 
@@ -43,11 +47,13 @@ interface RideState {
 }
 
 const normalizeStops = (stops: RideStop[]): RideStop[] => {
-  return stops.map((stop, index, array): RideStop => ({
-    ...stop,
-    order: index,
-    stop_type: index === 0 ? 'PICKUP' : 'DROP_OFF',
-  }));
+  return stops.map(
+    (stop, index, array): RideStop => ({
+      ...stop,
+      order: index,
+      stop_type: index === 0 ? 'PICKUP' : 'DROP_OFF',
+    }),
+  );
 };
 
 export const useRideStore = create<RideState>(set => ({
@@ -59,6 +65,40 @@ export const useRideStore = create<RideState>(set => ({
     stops: [],
     preferenceIds: [],
     scheduled_at: 'NOW',
+  },
+
+  currentRide: {
+    id: 1,
+    rider: 1,
+    driver: null,
+    vehicle: null,
+    vehicle_type: 'ECONOMY',
+    status: 'PENDING',
+
+    stops: [],
+    preferences: [],
+
+    estimated_distance: 0,
+    estimated_duration: 0,
+    estimated_price: '0',
+
+    actual_distance: null,
+    actual_duration: null,
+    actual_price: null,
+
+    cancellation_reason: null,
+    cancelled_at: null,
+
+    idempotency_key: '',
+
+    requested_at: '',
+    accepted_at: null,
+    started_at: null,
+    ended_at: null,
+
+    is_for_someone_else: false,
+    passenger_contact_phone: null,
+    payment_method: 'CASH',
   },
 
   estimate: {
@@ -139,6 +179,11 @@ export const useRideStore = create<RideState>(set => ({
         ...details,
       },
     })),
+
+  setCurrentRide: ride =>
+    set({
+      currentRide: ride,
+    }),
 
   setEstimate: estimate =>
     set({

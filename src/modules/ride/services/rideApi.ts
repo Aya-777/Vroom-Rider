@@ -17,6 +17,7 @@ import {
   EstimateInitialRequestDTO,
   EstimateInitialResponseDTO,
 } from './dto/estimate.dto';
+import { RideParams } from '../types/ride.types';
 
 export const rideApi = {
   // Saved Places
@@ -66,8 +67,8 @@ export const rideApi = {
     return response.data;
   },
 
-  cancelRide: async (rideId: string) => {
-    const response = await apiClient.post(ENDPOINTS.TRIPS.CANCEL);
+  cancelRide: async (rideId: number) => {
+    const response = await apiClient.post(ENDPOINTS.TRIPS.CANCEL(rideId));
 
     return response.data;
   },
@@ -83,7 +84,7 @@ export const rideApi = {
     data,
     {
       headers: {
-        'Idempotency-Key': idempotencyKey,
+        'ْْْX-Idempotency-Key': idempotencyKey,
       },
     },
   );

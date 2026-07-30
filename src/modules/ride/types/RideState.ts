@@ -8,3 +8,11 @@ export enum RideState {
   RIDE_ENDED = 'RIDE_ENDED',
   CANCELLED = 'CANCELLED',
 }
+
+export enum TripStatus {
+  PENDING = 'PENDING',
+  ACCEPTED = 'ACCEPTED',
+  ONGOING = 'ONGOING', 
+  COMPLETED = 'COMPLETED',
+  CANCELLED = 'CANCELLED',
+}

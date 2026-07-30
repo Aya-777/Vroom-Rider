@@ -17,7 +17,7 @@ export const ENDPOINTS = {
   SAVED_LOCATION: (id: number) => `/trips/saved-locations/${id}/`,
   PREFERENCES: '/trips/preferences/',
   CONFIRM: '/trips/confirm/',
-  CANCEL: '/trips/trips/{id}/cancel/',
+  CANCEL: (id: number) => `/trips/trips/${id}/cancel/`,
 },
 
 } as const;

@@ -18,7 +18,7 @@ export function useRideDetailsViewModel() {
   const updateRideDetails = () => {
     setRideDetails({
       vehicle_type_id: selectedVehicleId,
-      payment_method: selectedPayment === 'cash' ? 'CASH' : 'CARD',
+      payment_method: selectedPayment === 'cash' ? 'CASH' : 'WALLET',
     });
   };
 

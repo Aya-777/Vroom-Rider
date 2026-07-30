@@ -1,4 +1,5 @@
 import { Double } from "react-native/Libraries/Types/CodegenTypes";
+import { RidePreferenceDTO } from "../services/dto/ride.dto";
 
 export type Car = {
   model: string;
@@ -41,10 +42,45 @@ export interface RideStop {
 export interface RideParams {
   id: number;
   vehicle_type_id: number;
-  payment_method: 'CASH' | 'CARD';
+  payment_method: 'CASH' | 'WALLET';
   is_for_someone_else: boolean;
   passenger_contact_phone?: string;
   stops: RideStop[];
   preference_ids: number[];
   scheduled_at?: string;
+}
+
+
+export interface CurrentRide {
+  id: number;
+  rider: number;
+  driver: number | null;
+  vehicle: number | null;
+  vehicle_type: string;
+  status: string;
+
+  stops: RideStop[];
+  preferences: RidePreferenceDTO[];
+
+  estimated_distance: number;
+  estimated_duration: number;
+  estimated_price: string;
+
+  actual_distance: number | null;
+  actual_duration: number | null;
+  actual_price: string | null;
+
+  cancellation_reason: string | null;
+  cancelled_at: string | null;
+
+  idempotency_key: string;
+
+  requested_at: string;
+  accepted_at: string | null;
+  started_at: string | null;
+  ended_at: string | null;
+
+  is_for_someone_else: boolean;
+  passenger_contact_phone: string | null;
+  payment_method: 'CASH' | 'CARD';
 }

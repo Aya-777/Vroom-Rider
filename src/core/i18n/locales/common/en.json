@@ -37,7 +37,7 @@
   "payment":{
     "estimatedPrice": "Estimated price",
     "cash": "Cash",
-    "card": "Card"
+    "wallet": "Wallet"
   },
 
   "pickupRequired" : "Pickup location is required",

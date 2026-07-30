@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { RideState } from '../types/RideState';
+import { RideState, TripStatus } from '../types/RideState';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
@@ -17,19 +17,24 @@ const previousState: Partial<Record<RideState, RideState>> = {
 
 export function useRideViewModel() {
   const [rideState, setRideState] = useState(RideState.SELECT_RIDE);
-  const [currentLocation, setCurrentLocation] = useState<Location>({address: "", latitude: 0, longitude: 0});
-  const { rideData, estimate, setEstimate, clearRide } = useRideStore();
+  const [currentLocation, setCurrentLocation] = useState<Location>({
+    address: '',
+    latitude: 0,
+    longitude: 0,
+  });
+  const { rideData, estimate, setEstimate, clearRide, currentRide, setCurrentRide } =
+    useRideStore();
 
   const navigation =
-  useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
-  
+    useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
+
   useEffect(() => {
     const loadLocation = async () => {
       try {
         const location = await LocationService.getCurrentLocation();
-        
+
         setCurrentLocation(location);
-        
+
         console.log('Address:', location.address);
       } catch (error) {
         console.error('Failed to get location:', error);
@@ -39,25 +44,6 @@ export function useRideViewModel() {
   }, []);
 
   const goToExtraDetails = async () => {
-    /*
-    call your estimate API here
-
-    example response:
-    {
-      price: 24.5,
-      time: "15 min",
-      distance: 8
-    }
-  */
-
-    // const response = {
-    //   price: '24.5',
-    //   time: '15 min',
-    //   distance: 8,
-    // };
-
-    // setEstimate(response);
-
     setRideState(RideState.EXTRA_DETAILS);
   };
 
@@ -73,33 +59,28 @@ export function useRideViewModel() {
 
   const handleBackPress = () => {
     const previous = previousState[rideState];
-    if(rideState === RideState.SELECT_RIDE){
-      navigation.goBack()
-    }else if (previous) {
+    if (rideState === RideState.SELECT_RIDE) {
+      navigation.goBack();
+    } else if (previous) {
       setRideState(previous);
     }
   };
 
   const cancelCurrentRide = async () => {
-  try {
-
-    if (!rideData.id) {
-      console.log('No active ride');
-      return;
+    try {
+      if (!currentRide?.id) {
+        console.log('No active ride');
+        return;
+      }
+      await rideApi.cancelRide(currentRide.id);
+      currentRide.status = TripStatus.CANCELLED;
+      setCurrentRide(currentRide);
+      clearRide();
+      setRideState(RideState.SELECT_RIDE);
+    } catch (error) {
+      console.error('Failed to cancel ride:', error);
     }
-    await rideApi.cancelRide(rideData.id.toString());
-    clearRide();
-    setRideState(RideState.SELECT_RIDE);
-
-  } catch (error) {
-
-    console.error(
-      'Failed to cancel ride:',
-      error
-    );
-
-  }
-};
+  };
 
   return {
     rideState,
@@ -113,6 +94,6 @@ export function useRideViewModel() {
     goToDriverArrived,
     goToTripStarted,
     resetRide,
-    cancelCurrentRide
+    cancelCurrentRide,
   };
 }
