@@ -20,6 +20,13 @@ export const createStyles = (colors: ThemeColors) =>
             paddingBottom: 120,
         },
 
+        fieldLabel: {
+            ...Typography.body,
+            color: colors.primary,
+            alignSelf: 'center',
+            width: '80%',
+        },
+
         top: {
             alignItems: 'center',
             marginTop: 40,
@@ -82,7 +89,7 @@ export const createStyles = (colors: ThemeColors) =>
             flex: 1,
             marginStart: 12,
             ...Typography.body,
-            color: colors.textPrimary,
+            color: colors.textSecondary,
         },
 
         bottom: {

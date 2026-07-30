@@ -43,5 +43,7 @@
   "resendIn": "إعادة الإرسال بعد {{seconds}} ثانية",
   "incompleteCode": "الرجاء إدخال الرمز كاملاً",
   "invalidOtp": "رمز غير صحيح، حاول مرة ثانية",
-  "tryAgain": "صار في خطأ، حاول مرة ثانية"
+  "tryAgain": "صار في خطأ، حاول مرة ثانية",
+  "pleaseFillAllFields": "الرجاء تعبئة جميع الحقول",
+  "passwordsDoNotMatch": "كلمتا السر غير متطابقتين"
 }

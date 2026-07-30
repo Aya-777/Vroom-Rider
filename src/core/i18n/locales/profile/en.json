@@ -26,5 +26,14 @@
   "enterPhoneNumber": "Enter phone number",
   "verifyNewNumber": "Verify New Number",
   "checkYourMessages": "Check your messages",
-  "haventGot": "Didn't get the code?"
+  "haventGot": "Didn't get the code?",
+  "changePassword": "Change Password",
+  "changePasswordDescription": "Enter your current password and choose a new one.",
+  "oldPassword": "Current Password",
+  "enterOldPassword": "Enter current password",
+  "newPassword": "New Password",
+  "enterNewPassword": "Enter new password",
+  "confirmPassword": "Confirm Password",
+  "confirmNewPassword": "Confirm new password",
+  "updatePassword": "Update Password"
 }

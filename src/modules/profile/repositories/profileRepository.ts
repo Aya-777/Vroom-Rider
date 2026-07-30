@@ -47,4 +47,8 @@ export const profileRepository = {
     verifyPhoneChange: async (otp: string): Promise<void> => {
         await profileApi.verifyPhoneChange(otp);
     },
+
+    changePassword: (input: { oldPassword: string; newPassword: string; confirmPassword: string }) =>
+        profileApi.changePassword(input),
+    
 };

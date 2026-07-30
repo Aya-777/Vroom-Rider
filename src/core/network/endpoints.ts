@@ -16,5 +16,6 @@ export const ENDPOINTS = {
     CHANGE_PHONE_REQUEST: '/api/v1/users/me/change-phone/',
     CHANGE_PHONE_RESEND: '/api/v1/users/me/change-phone/resend-otp/',
     CHANGE_PHONE_VERIFY: '/api/v1/users/me/change-phone/verify-otp/',
+    CHANGE_PASSWORD: '/api/v1/users/me/change-password/',
   },
 } as const;

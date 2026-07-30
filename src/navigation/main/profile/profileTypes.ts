@@ -7,6 +7,7 @@ export type ProfileStackParamList = {
   | undefined;
   ChangePhone: undefined;
   ChangePhoneOtp: { newPhone: string };
+  ChangePassword: undefined;
   PaymentMethods: undefined;
 };
 

@@ -43,5 +43,7 @@
   "resendIn": "Resend in {{seconds}}s",
   "incompleteCode": "Please enter the complete code",
   "invalidOtp": "Invalid code, please try again",
-  "tryAgain": "Something went wrong, please try again"
+  "tryAgain": "Something went wrong, please try again",
+  "pleaseFillAllFields": "Please fill in all fields",
+  "passwordsDoNotMatch": "Passwords do not match"
 }
