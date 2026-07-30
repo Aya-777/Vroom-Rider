@@ -17,8 +17,11 @@ src/
 │       │   ├── arrowUp.svg
 │       │   └── dropdownArrow.svg
 │       ├── common
+│       │   ├── add.svg
 │       │   ├── camera.svg
 │       │   ├── check.svg
+│       │   ├── close.svg
+│       │   ├── delete.svg
 │       │   ├── edit.svg
 │       │   ├── history.svg
 │       │   ├── home.svg
@@ -29,6 +32,7 @@ src/
 │       │   ├── password.svg
 │       │   ├── pin.svg
 │       │   ├── ride.svg
+│       │   ├── save.svg
 │       │   ├── schedule.svg
 │       │   ├── search.svg
 │       │   ├── star.svg
@@ -127,8 +131,10 @@ src/
 │   │   └── socketManager.ts
 │   ├── services
 │   │   └── location
+│   │       ├── GeoCodingService.ts
 │   │       ├── LocationService.ts
-│   │       └── PermissionService.ts
+│   │       ├── PermissionService.ts
+│   │       └── useLocationTracking.ts
 │   ├── storage
 │   │   ├── asyncStorage.adapter.ts
 │   │   ├── index.ts
@@ -141,6 +147,7 @@ src/
 │   ├── store
 │   │   ├── authStore.ts
 │   │   ├── languageStore.ts
+│   │   ├── locationStore.ts
 │   │   └── themeStore.ts
 │   └── theme
 │       ├── ThemeProvider.tsx
@@ -342,6 +349,9 @@ src/
 │   │   │   │   └── RideConfirmationSheet.tsx
 │   │   │   ├── RideScreen
 │   │   │   │   └── RideBottomSheet.tsx
+│   │   │   ├── SavedPlaces
+│   │   │   │   ├── SavedPlacesItem.tsx
+│   │   │   │   └── SavedPlacesModal.tsx
 │   │   │   ├── SelectRideScreen
 │   │   │   │   ├── RideLocationInputs.tsx
 │   │   │   │   └── SelectRideSheet.tsx
@@ -356,31 +366,48 @@ src/
 │   │   │   │   └── VerticalDivider.tsx
 │   │   │   └── shared
 │   │   │       ├── MapContainer.tsx
-│   │   │       └── RideDropdown.tsx
+│   │   │       ├── RideDropdown.tsx
+│   │   │       └── SearchResults.tsx
 │   │   ├── constants
 │   │   │   ├── driverData.ts
 │   │   │   ├── vehicleData.ts
 │   │   │   └── vehicleImages.ts
 │   │   ├── hooks
-│   │   │   └── useLocationPermission.ts
+│   │   │   ├── useDebounce.ts
+│   │   │   ├── useLocationPermission.ts
+│   │   │   └── useLocationSearch.ts
+│   │   ├── repositories
+│   │   │   └── rideRepositories.ts
 │   │   ├── screens
+│   │   │   ├── AddNewPlaceScreen.tsx
 │   │   │   └── RideScreen.tsx
+│   │   ├── services
+│   │   │   ├── dto
+│   │   │   │   ├── estimate.dto.ts
+│   │   │   │   ├── ride.dto.ts
+│   │   │   │   └── savedPlaces.dto.ts
+│   │   │   └── rideApi.ts
 │   │   ├── store
 │   │   │   └── useRideStore.ts
 │   │   ├── styles
+│   │   │   ├── addNewPlace.style.ts
 │   │   │   ├── confirmRide.styles.ts
 │   │   │   ├── driver.styles.ts
 │   │   │   ├── extraDetails.styles.ts
+│   │   │   ├── savedPlaces.styles.ts
 │   │   │   ├── selectRide.styles.ts
 │   │   │   ├── shared.styles.ts
 │   │   │   ├── trip.styles.ts
 │   │   │   └── tripEndedModal.styles.ts
 │   │   ├── types
 │   │   │   ├── RideState.ts
-│   │   │   └── ride.types.ts
+│   │   │   ├── ride.types.ts
+│   │   │   └── savedPlaces.types.ts
 │   │   ├── utils
+│   │   │   ├── iconMap.ts
 │   │   │   └── selectRideValidation.ts
 │   │   └── viewmodels
+│   │       ├── useAddNewPlaceViewModel.ts
 │   │       ├── useConfirmRideViewModel.ts
 │   │       ├── useDriverArrivedViewModel.ts
 │   │       ├── useDriverFoundViewModel.ts

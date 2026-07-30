@@ -3,6 +3,12 @@ import { RideParams, RideStop, Tiers } from '../types/ride.types';
 import { SavedPlace } from '../types/savedPlaces.types';
 import { EstimateInitialResponseDTO } from '../services/dto/estimate.dto';
 
+type MapLocation = {
+  latitude: number;
+  longitude: number;
+};
+
+
 interface RideState {
   rideData: Partial<RideParams>;
 
@@ -27,6 +33,16 @@ interface RideState {
   clearSavedPlaces: () => void;
 
   clearRide: () => void;
+
+  isPickingLocation: boolean;
+
+  setPickingLocation: (value: boolean) => void;
+
+   selectedMapLocation: MapLocation | null;
+
+  setSelectedMapLocation: (
+    location: MapLocation | null
+  ) => void;
 }
 
 const normalizeStops = (stops: RideStop[]): RideStop[] => {
@@ -150,4 +166,16 @@ updateStop: (order, updatedStop) =>
       },
       savedPlaces: [],
     }),
+
+  isPickingLocation: false,
+
+  setPickingLocation: (value) =>
+    set({
+      isPickingLocation: value,
+    }),
+
+    selectedMapLocation: null,
+
+  setSelectedMapLocation: location =>
+    set({ selectedMapLocation: location }),
 }));

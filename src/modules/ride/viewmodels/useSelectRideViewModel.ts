@@ -8,18 +8,17 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
 import { useLocationSearch } from '../hooks/useLocationSearch';
-import { GeocodeResult } from '../../../core/services/location/GeoCodingService';
+import { GeocodeResult, reverseGeocode } from '../../../core/services/location/GeoCodingService';
 import LocationService from '../../../core/services/location/LocationService';
 import { useLocationStore } from '../../../core/store/locationStore';
 import { rideApi } from '../services/rideApi';
-import axios from 'axios';
 
 export function useSelectRideViewModel() {
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
 
   const currentLocation = useLocationStore(state => state.currentLocation);
-  const { setRideDetails, rideData, savedPlaces, setSavedPlaces, setEstimate } =
+  const { setRideDetails, rideData, savedPlaces, setSavedPlaces, setEstimate, setPickingLocation, selectedMapLocation,setSelectedMapLocation } =
     useRideStore();
 
   const pickupStop = rideData.stops?.find(stop => stop.stopType === 'PICKUP');
@@ -58,7 +57,6 @@ export function useSelectRideViewModel() {
   const destinationSearch = useLocationSearch(toText);
   const [hasInitializedPickup, setHasInitializedPickup] = useState(false);
   const [isSheetVisible, setIsSheetVisible] = useState(true);
-  const [isSelectingOnMap, setIsSelectingOnMap] = useState(false);
 
   const { t } = useTranslation('selectRide');
 
@@ -169,16 +167,38 @@ export function useSelectRideViewModel() {
   const handleBottomSheet = (visible: boolean) => {
     setIsSheetVisible(visible);
   };
+
+  const setActiveInputText = (value : string) => {
+    if(activeInput === 'pickup'){
+      setFromText(value);
+    }else{
+      setToText(value);
+    }
+  }
   
   const onSetOnMap = () => {
-    setIsSelectingOnMap(true);
     handleBottomSheet(false);
+    setPickingLocation(true);
+    console.log("currentLocation " , currentLocation);
   };
 
-  const onConfirmLocation = () => {
-    setIsSelectingOnMap(false);
+  const onConfirmLocation = async () => {
+    if (!selectedMapLocation) {
+      return;
+    }
+
+    const { latitude, longitude } = selectedMapLocation;
+
+    const address = await reverseGeocode(
+      latitude,
+      longitude,
+    );
+
+    setActiveInputText(address || '');
+
+    setPickingLocation(false);
     handleBottomSheet(true);
-  }
+  };
 
   const onNextPress = async () => {
     const stops = [

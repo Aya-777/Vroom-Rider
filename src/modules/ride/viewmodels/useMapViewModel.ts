@@ -2,51 +2,53 @@ import { useEffect, useRef, useState } from 'react';
 import PermissionService from '../../../core/services/location/PermissionService';
 import LocationService from '../../../core/services/location/LocationService';
 import { useLocationStore } from '../../../core/store/locationStore';
-import {
-  MapRef,
-} from '@maplibre/maplibre-react-native';
-
+import { CameraRef, MapRef } from '@maplibre/maplibre-react-native';
+import { useRideStore } from '../store/useRideStore';
 
 export default function useMapViewModel() {
-  const [location, setLocation] = useState<[number, number] | null>(null);
+  const [deviceLocation, setDeviceLocation] = useState<[number, number] | null>(null);
+
   const mapRef = useRef<MapRef>(null);
-  const currentLocation = useLocationStore(state => state.currentLocation);
-  const [cameraCenter, setCameraCenter] = useState<[number, number]>(
-    currentLocation
-      ? [currentLocation.longitude, currentLocation.latitude]
-      : [31.2357, 30.0444],
-  );
+  const cameraRef = useRef<CameraRef>(null);
+
+  const { isPickingLocation, setSelectedMapLocation } = useRideStore();
 
   const hasCentered = useRef(false);
 
   useEffect(() => {
-    if (location && !hasCentered.current) {
-      setCameraCenter(location);
-      hasCentered.current = true;
-    }
-  }, [location]);
-
-  const [selectedLocation, setSelectedLocation] = useState({
-    latitude: currentLocation?.latitude,
-    longitude: currentLocation?.longitude,
-  });
-
-  useEffect(() => {
-    let watchId: number;
+    let watchId: number | undefined;
 
     const initialize = async () => {
       const granted = await PermissionService.requestLocationPermission();
 
-      if (!granted) return;
+      if (!granted) {
+        return;
+      }
 
-      // Get an initial location immediately
-      const currentLocation = await LocationService.getCurrentLocation();
+      try {
+        const currentLocation = await LocationService.getCurrentLocation();
 
-      setLocation([currentLocation.longitude, currentLocation.latitude]);
+        const coords: [number, number] = [
+          currentLocation.longitude,
+          currentLocation.latitude,
+        ];
 
-      // Then start listening for updates
+        console.log('GPS LOCATION:', coords);
+
+        setDeviceLocation(coords);
+      } catch (error) {
+        console.error('Failed to get current location:', error);
+      }
+
       watchId = LocationService.watchLocation(newLocation => {
-        setLocation([newLocation.longitude, newLocation.latitude]);
+        const coords: [number, number] = [
+          newLocation.longitude,
+          newLocation.latitude,
+        ];
+
+        console.log('WATCH LOCATION:', coords);
+
+        setDeviceLocation(coords);
       });
     };
 
@@ -59,8 +61,41 @@ export default function useMapViewModel() {
     };
   }, []);
 
+  // Center the camera exactly once
+  // when we receive the first real GPS location.
+  useEffect(() => {
+    if (!deviceLocation || hasCentered.current) {
+      return;
+    }
+
+    console.log('CENTERING CAMERA ON:', deviceLocation);
+
+    cameraRef.current?.easeTo({
+      center: deviceLocation,
+      duration: 1000,
+    });
+
+    hasCentered.current = true;
+  }, [deviceLocation]);
+
+  const handleRegionDidChange = (event: any) => {
+    if (!isPickingLocation) {
+      return;
+    }
+
+    const [longitude, latitude] = event.nativeEvent.center;
+
+    setSelectedMapLocation({
+      latitude,
+      longitude,
+    });
+  };
+
   return {
-    location,
-    cameraCenter,
+    deviceLocation,
+    mapRef,
+    cameraRef,
+    handleRegionDidChange,
+    isPickingLocation,
   };
 }
