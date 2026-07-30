@@ -33,20 +33,18 @@ export interface Prefrences{
 
 export interface RideStop {
   address: string;
+  order: number;
   latitude: number;
   longitude: number;
-  order: number;
-  stopType: 'PICKUP' | 'DROP_OFF' | 'STOP';
+  stop_type: 'PICKUP' | 'DROP_OFF';
 }
 export interface RideParams {
-
-  id: number,
-  vehicleTypeId?: number;
-  paymentMethod: 'CASH' | 'CARD';
-  isForSomeoneElse: boolean;
-  passengerContactPhone?: string;
+  id: number;
+  vehicle_type_id: number;
+  payment_method: 'CASH' | 'CARD';
+  is_for_someone_else: boolean;
+  passenger_contact_phone?: string;
   stops: RideStop[];
-  preferenceIds: number[];
-  scheduledAt?: string;
-
+  preference_ids: number[];
+  scheduled_at?: string;
 }

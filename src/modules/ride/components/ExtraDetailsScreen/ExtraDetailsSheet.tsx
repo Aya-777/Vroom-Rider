@@ -21,7 +21,7 @@ export default function ExtraDetailsScreen({ onNextPress }: Props) {
 
   const paymentItems = [
     { key: 'cash', label: t('common:payment.cash') },
-    { key: 'wallet', label: t('common:payment.wallet') },
+    { key: 'card', label: t('common:payment.card') },
   ];
 
   const {
@@ -38,9 +38,9 @@ export default function ExtraDetailsScreen({ onNextPress }: Props) {
   } = useRideDetailsViewModel();
 
   const handleNextPress = () => {
-  updateRideDetails();
-  onNextPress();
-};
+    updateRideDetails();
+    onNextPress();
+  };
 
   const snapPoints = useMemo(() => ['30%', '70%'], []);
 

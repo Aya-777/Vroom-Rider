@@ -32,7 +32,7 @@ export default function RideConfirmationSheet({ onNextPress }: Props) {
   };
 
   const selectedVehicle = vm.estimate?.pricing_tiers?.find(
-    tier => tier.tier_id === vm.rideData.vehicleTypeId,
+    tier => tier.tier_id === vm.rideData.vehicle_type_id,
   );
 
   return (
@@ -51,8 +51,8 @@ export default function RideConfirmationSheet({ onNextPress }: Props) {
           icon={<CarIcon width={16} height={16} fill={colors.primary} />}
           title={t('selectedCar')}
           value={
-            vm.rideData.vehicleTypeId
-              ? vm.estimate.pricing_tiers[vm.rideData.vehicleTypeId - 1]
+            vm.rideData.vehicle_type_id
+              ? vm.estimate.pricing_tiers[vm.rideData.vehicle_type_id - 1]
                   .tier_name
               : 'N/A'
           }
@@ -61,7 +61,9 @@ export default function RideConfirmationSheet({ onNextPress }: Props) {
         <InfoBox
           icon={<CashIcon width={16} height={16} fill={colors.primary} />}
           title={t('payment')}
-          value={vm.rideData.paymentMethod ? vm.rideData.paymentMethod : 'N/A'}
+          value={
+            vm.rideData.payment_method ? vm.rideData.payment_method : 'N/A'
+          }
         />
       </View>
 

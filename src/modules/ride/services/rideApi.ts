@@ -1,5 +1,6 @@
 import { apiClient } from '../../../core/network/apiClient';
 import { ENDPOINTS } from '../../../core/network/endpoints';
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   RequestRideRequestDTO,
@@ -53,6 +54,7 @@ export const rideApi = {
     await apiClient.delete(ENDPOINTS.TRIPS.SAVED_LOCATION(id));
   },
 
+  // Ride
   estimateInitial: async (
     data: EstimateInitialRequestDTO,
   ): Promise<EstimateInitialResponseDTO> => {
@@ -65,8 +67,27 @@ export const rideApi = {
   },
 
   cancelRide: async (rideId: string) => {
-    const response = await apiClient.post(`/api/v1/rides/${rideId}/cancel/`);
+    const response = await apiClient.post(ENDPOINTS.TRIPS.CANCEL);
 
     return response.data;
   },
+
+
+  confirmRide: async (
+  data: RequestRideRequestDTO,
+): Promise<RequestRideResponseDTO> => {
+  const idempotencyKey = uuidv4();
+
+  const response = await apiClient.post<RequestRideResponseDTO>(
+    ENDPOINTS.TRIPS.CONFIRM,
+    data,
+    {
+      headers: {
+        'Idempotency-Key': idempotencyKey,
+      },
+    },
+  );
+
+  return response.data;
+},
 };

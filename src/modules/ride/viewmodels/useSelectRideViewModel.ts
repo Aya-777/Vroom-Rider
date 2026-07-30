@@ -93,14 +93,14 @@ export function useSelectRideViewModel() {
             latitude: state.pickupCoordinates.latitude,
             longitude: state.pickupCoordinates.longitude,
             order: 0,
-            stopType: 'PICKUP',
+            stop_type: 'PICKUP',
           },
           {
             address: state.toText,
             latitude: state.destinationCoordinates.latitude,
             longitude: state.destinationCoordinates.longitude,
             order: 1,
-            stopType: 'DROP_OFF',
+            stop_type: 'DROP_OFF',
           },
         ],
       });

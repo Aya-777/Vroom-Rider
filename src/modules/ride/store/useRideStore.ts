@@ -43,23 +43,22 @@ interface RideState {
 }
 
 const normalizeStops = (stops: RideStop[]): RideStop[] => {
-  return stops.map((stop, index, array) => ({
+  return stops.map((stop, index, array): RideStop => ({
     ...stop,
     order: index,
-    stopType:
-      index === 0 ? 'PICKUP' : index === array.length - 1 ? 'DROP_OFF' : 'STOP',
+    stop_type: index === 0 ? 'PICKUP' : 'DROP_OFF',
   }));
 };
 
 export const useRideStore = create<RideState>(set => ({
   rideData: {
-    vehicleTypeId: 1,
-    paymentMethod: 'CASH',
-    isForSomeoneElse: false,
-    passengerContactPhone: '09********',
+    vehicle_type_id: 1,
+    payment_method: 'CASH',
+    is_for_someone_else: false,
+    passenger_contact_phone: '09********',
     stops: [],
     preferenceIds: [],
-    scheduledAt: 'NOW',
+    scheduled_at: 'NOW',
   },
 
   estimate: {

@@ -13,12 +13,10 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
   const currentLocation = useLocationStore(state => state.currentLocation);
   const pickup = useInitialPickup(currentLocation);
 
-  const pickupStop = rideData.stops?.find(
-    (stop: { stopType: string }) => stop.stopType === 'PICKUP',
-  );
+  const pickupStop = rideData.stops?.find(stop => stop.stop_type === 'PICKUP');
 
   const destinationStop = rideData.stops?.find(
-    (stop: { stopType: string }) => stop.stopType === 'DROP_OFF',
+    stop => stop.stop_type === 'DROP_OFF',
   );
 
   const [isNowDropdownOpen, setIsNowDropdownOpen] = useState(false);
@@ -44,15 +42,15 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
   const destinationSearch = useLocationSearch(toText);
 
   const [selectedPerson, setSelectedPerson] = useState(
-    rideData.isForSomeoneElse ? 'otherContact' : 'forMe',
+    rideData.is_for_someone_else ? 'otherContact' : 'forMe',
   );
 
   const [selectedTime, setSelectedTime] = useState(
-    rideData.scheduledAt ?? 'now',
+    rideData.scheduled_at ?? 'now',
   );
 
   const [contactPhone, setContactPhone] = useState(
-    rideData.passengerContactPhone ?? '',
+    rideData.passenger_contact_phone ?? '',
   );
 
   const [activeInput, setActiveInput] = useState<ActiveInput>('pickup');

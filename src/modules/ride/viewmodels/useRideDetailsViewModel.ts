@@ -3,7 +3,7 @@ import { useRideStore } from '../store/useRideStore';
 
 export function useRideDetailsViewModel() {
   const { rideData, setRideDetails } = useRideStore();
-  const {estimate ,setEstimate} = useRideStore();
+  const { estimate, setEstimate } = useRideStore();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedVehicleId, setSelectedVehicleId] = useState(1);
@@ -16,12 +16,11 @@ export function useRideDetailsViewModel() {
   }, [estimate, selectedVehicleId]);
 
   const updateRideDetails = () => {
-  setRideDetails({
-    vehicleTypeId: selectedVehicleId,
-    paymentMethod: selectedPayment === 'cash' ? 'CASH' : 'CARD',
-  });
-
-};
+    setRideDetails({
+      vehicle_type_id: selectedVehicleId,
+      payment_method: selectedPayment === 'cash' ? 'CASH' : 'CARD',
+    });
+  };
 
   const onSelectVehicle = (vehicleId: number) => {
     setSelectedVehicleId(vehicleId);
