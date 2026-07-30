@@ -1,36 +1,49 @@
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useRideStore } from '../store/useRideStore';
 
 export function useRideDetailsViewModel() {
-  const { rideData, setRideDetails} = useRideStore();
+  const { rideData, setRideDetails } = useRideStore();
   const estimate = useRideStore(state => state.estimate);
 
-  // UI State only
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedVehicleId, setSelectedVehicleId] = useState(1);
   const [selectedPayment, setSelectedPayment] = useState('cash');
 
-  const updateRideDetails = () => {};
+  const selectedVehicle = useMemo(() => {
+    return estimate?.pricing_tiers?.find(
+      tier => tier.tier_id === selectedVehicleId,
+    );
+  }, [estimate, selectedVehicleId]);
 
-  useEffect(() => {
-  console.log("estimate updated:", estimate);
-}, [estimate]);
+  const updateRideDetails = () => {
+    if (!selectedVehicle) return;
+
+    // setRideDetails({
+    //   vehicleId: selectedVehicleId,
+    //   paymentMethod: 'CARD',
+    //   price: selectedVehicle.estimated_price,
+    // });
+  };
+
+  const onSelectVehicle = (vehicleId: number) => {
+    setSelectedVehicleId(vehicleId);
+  };
 
   return {
-    // ride Data
-    selectedVehicleId,
-    selectedPayment,
-    estimate,
     rideData,
+    estimate,
 
-    // UI
+    selectedVehicleId,
+    selectedVehicle,
+    selectedPayment,
+
     isDropdownOpen,
 
-    // Setters,
     setSelectedVehicleId,
     setSelectedPayment,
     setIsDropdownOpen,
 
+    onSelectVehicle,
     updateRideDetails,
   };
 }

@@ -28,9 +28,10 @@ export default function ExtraDetailsScreen({ onNextPress }: Props) {
     selectedVehicleId,
     selectedPayment,
     isDropdownOpen,
-    setSelectedVehicleId,
     setSelectedPayment,
     setIsDropdownOpen,
+    selectedVehicle,
+    onSelectVehicle,
 
     updateRideDetails,
     estimate,
@@ -52,8 +53,8 @@ export default function ExtraDetailsScreen({ onNextPress }: Props) {
             : '...'
         }
         price={
-          estimate.pricing_tiers?.length > 0
-            ? `${estimate.pricing_tiers[0].estimated_price}`
+          selectedVehicle
+            ? `$${selectedVehicle.estimated_price.toFixed(2)}`
             : '...'
         }
       />
@@ -72,7 +73,7 @@ export default function ExtraDetailsScreen({ onNextPress }: Props) {
       />
       <VehicleSelector
         selected={selectedVehicleId}
-        onSelect={setSelectedVehicleId}
+        onSelect={onSelectVehicle}
         vehicles={estimate.pricing_tiers}
       />
 
