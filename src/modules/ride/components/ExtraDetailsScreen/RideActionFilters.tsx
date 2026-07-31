@@ -2,13 +2,12 @@ import React, { Dispatch, SetStateAction, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useTheme } from '../../../../core/theme/useTheme';
 import LinearBg from '../../../../shared/components/LinearBg';
-import DropDownArrowIcon from '../../../../assets/svg/arrows/dropdownArrow.svg';
-import ArrowUp from '../../../../assets/svg/arrows/arrowUp.svg';
 import FilterIcon from '../../../../assets/svg/ride/filters.svg';
 import CashIcon from '../../../../assets/svg/payment/price.svg';
 import { useTranslation } from 'react-i18next';
 import { DropdownFilter } from './DropDownFilter';
 import { RideFilter } from '../../types/ride.types';
+import { ICON_MAP } from '../../utils/iconMap';
 
 type Props = {
   selectedValue: string;
@@ -40,7 +39,9 @@ export default function RideActionFilters({
   const { colors } = useTheme();
   const gradientColors = [colors.backgroundSoft, colors.surface];
   const { t } = useTranslation(['rideDetails']);
-
+  const ArrowUp = ICON_MAP['arrowUp'];
+  const ArrowDown = ICON_MAP['arrow'];
+  
   return (
     <View style={styles.actionsContainer}>
       <View style={styles.actionCardsRow}>
@@ -54,8 +55,16 @@ export default function RideActionFilters({
               <FilterIcon width={18} height={18} fill="#FFFFFF" />
             </View>
             <Text style={styles.cardText}>{t('filters')}</Text>
+            <View style={styles.iconWrapper}>
+              {filtersVisible ?
+                <ArrowUp width={16} height={16} fill="#FFFFFF" />
+                :
+                <ArrowDown width={16} height={16} fill={colors.textSecondary}/>
+            }
+            </View>
           </LinearBg>
         </TouchableOpacity>
+
 
         <View style={styles.dropdownWrapper}>
           <TouchableOpacity
@@ -69,9 +78,9 @@ export default function RideActionFilters({
               </View>
               <Text style={styles.cardText}>{selectedValue}</Text>
               {isOpen ? (
-                <ArrowUp width={12} height={12} fill="#FFFFFF" />
+                <ArrowUp width={16} height={16} fill="#FFFFFF" />
               ) : (
-                <DropDownArrowIcon width={12} height={12} fill="#FFFFFF" />
+                <ArrowDown width={16} height={16} fill="#FFFFFF" />
               )}
             </LinearBg>
           </TouchableOpacity>
