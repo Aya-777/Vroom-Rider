@@ -91,7 +91,7 @@ export const authApi = {
         formData.append('expected_role', data.expected_role);
 
         const response = await apiClient.post<ForgotPasswordRequestResponseDTO>(
-            ENDPOINTS.AUTH.FORGOT_PASSWORD, 
+            ENDPOINTS.AUTH.FORGOT_PASSWORD,
             formData,
             {
                 headers: {
@@ -104,26 +104,34 @@ export const authApi = {
 
     forgotPasswordVerifyOtp: async (data: ForgotPasswordVerifyOtpRequestDTO): Promise<ForgotPasswordVerifyOtpResponseDTO> => {
         const response = await apiClient.post<ForgotPasswordVerifyOtpResponseDTO>(
-            ENDPOINTS.AUTH.FORGOT_PASSWORD_VERIFY_OTP, 
+            ENDPOINTS.AUTH.FORGOT_PASSWORD_VERIFY_OTP,
             data
         );
         return response.data;
     },
 
     forgotPasswordResendOtp: async (data: ResendOtpRequestDTO): Promise<{ message: string }> => {
-    const response = await apiClient.post<{ message: string }>(
-        ENDPOINTS.AUTH.FORGOT_PASSWORD_RESEND_OTP, 
-        data
-    );
-    return response.data;
-},
+        const response = await apiClient.post<{ message: string }>(
+            ENDPOINTS.AUTH.FORGOT_PASSWORD_RESEND_OTP,
+            data
+        );
+        return response.data;
+    },
 
-    resetPassword: async (data: ResetPasswordRequestDTO): Promise<{message: string}> => {
-        const response = await apiClient.post<{message: string}>(
-            ENDPOINTS.AUTH.RESET_PASSWORD, 
+    resetPassword: async (data: ResetPasswordRequestDTO): Promise<{ message: string }> => {
+        const response = await apiClient.post<{ message: string }>(
+            ENDPOINTS.AUTH.RESET_PASSWORD,
             data
 
         );
+        return response.data;
+    },
+
+    logout: async (): Promise<{ message: string }> => {
+        const response = await apiClient.post<{ message: string }>(
+            ENDPOINTS.AUTH.LOGOUT
+        );
+
         return response.data;
     },
 };

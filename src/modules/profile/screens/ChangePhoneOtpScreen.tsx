@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import LinearBg from '../../../shared/components/LinearBg';
 import SubHeader from '../../../shared/components/SubHeader';
 import OtpVerifyForm from '../../../shared/components/OtpVerifyForm';
-import { useTheme } from '../../../core/theme/useTheme';
+import { useTheme } from '../../../core/theme/useTheme'; 
 import { createStyles } from '../../../shared/styles/otpVerifyForm.styles';
-import { useOtpVerifyViewModel } from '../../../shared/hooks/useOtpVerifyViewModel';
+import { useOtpFlow } from '../../../shared/hooks/useOtpFlow';
 import { profileRepository } from '../repositories/profileRepository';
 import { ProfileStackParamList } from '../../../navigation/main/profile/profileTypes';
 
@@ -19,7 +19,7 @@ export default function ChangePhoneOtpScreen() {
 
     const { newPhone } = route.params;
 
-    const vm = useOtpVerifyViewModel({
+    const vm = useOtpFlow({
         verifyOtp: profileRepository.verifyPhoneChange,
         onSuccess: () => navigation.navigate('ProfileHome'),
     });

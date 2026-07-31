@@ -10,6 +10,7 @@ type Props = {
     titleLabel: string;
     descriptionLabel: string;
     targetLabel: string;
+    descriptionSuffixLabel?: string; 
     verifyLabel: string;
     loadingLabel: string;
     haventGotLabel: string;
@@ -30,6 +31,8 @@ export default function OtpVerifyForm({
     titleLabel,
     descriptionLabel,
     targetLabel,
+    descriptionSuffixLabel,
+    loadingLabel, 
     verifyLabel,
     haventGotLabel,
     resendCodeLabel,
@@ -53,6 +56,7 @@ export default function OtpVerifyForm({
 
             <Text style={styles.description}>
                 {descriptionLabel} <Text style={styles.target}>{targetLabel}</Text>
+                {descriptionSuffixLabel ? ` ${descriptionSuffixLabel}` : ''}
             </Text>
 
             <OtpInputFields
