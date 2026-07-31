@@ -48,4 +48,9 @@ export const createStyles = (colors: ThemeColors) =>
       color: colors.primary,
     },
 
+    actionsContainer:{
+      flex:1,
+      flexDirection: 'row',
+    }
+
   });

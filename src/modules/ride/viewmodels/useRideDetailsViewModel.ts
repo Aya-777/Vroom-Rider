@@ -8,6 +8,8 @@ export function useRideDetailsViewModel() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedVehicleId, setSelectedVehicleId] = useState(1);
   const [selectedPayment, setSelectedPayment] = useState('cash');
+  const [selectedFilterIds, setSelectedFilterIds] = useState<string[]>([]);
+  const [filtersVisible, setFiltersVisible] = useState(false);
 
   const selectedVehicle = useMemo(() => {
     return estimate?.pricing_tiers?.find(
@@ -33,9 +35,13 @@ export function useRideDetailsViewModel() {
     selectedVehicleId,
     selectedVehicle,
     selectedPayment,
+    selectedFilterIds,
+    filtersVisible,
 
     isDropdownOpen,
 
+    setSelectedFilterIds,
+    setFiltersVisible,
     setSelectedVehicleId,
     setSelectedPayment,
     setIsDropdownOpen,

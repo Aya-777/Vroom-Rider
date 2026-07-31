@@ -24,21 +24,10 @@ export default function ExtraDetailsScreen({ onNextPress }: Props) {
     { key: 'wallet', label: t('common:payment.wallet') },
   ];
 
-  const {
-    selectedVehicleId,
-    selectedPayment,
-    isDropdownOpen,
-    setSelectedPayment,
-    setIsDropdownOpen,
-    selectedVehicle,
-    onSelectVehicle,
-
-    updateRideDetails,
-    estimate,
-  } = useRideDetailsViewModel();
+  const vm = useRideDetailsViewModel();
 
   const handleNextPress = () => {
-    updateRideDetails();
+    vm.updateRideDetails();
     onNextPress();
   };
 
@@ -48,33 +37,36 @@ export default function ExtraDetailsScreen({ onNextPress }: Props) {
     <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1}>
       <TimePriceBox
         time={
-          estimate.estimated_duration_minutes > 0
-            ? `${estimate.estimated_duration_minutes}`
+          vm.estimate.estimated_duration_minutes > 0
+            ? `${vm.estimate.estimated_duration_minutes}`
             : '...'
         }
         price={
-          selectedVehicle
-            ? `$${selectedVehicle.estimated_price.toFixed(2)}`
+          vm.selectedVehicle
+            ? `$${vm.selectedVehicle.estimated_price.toFixed(2)}`
             : '...'
         }
       />
 
       <RideActionFilters
-        selectedValue={t(`common:payment.${selectedPayment}`)}
-        isOpen={isDropdownOpen}
+        selectedValue={t(`common:payment.${vm.selectedPayment}`)}
+        isOpen={vm.isDropdownOpen}
         styles={styles}
-        onToggleDropdown={() => setIsDropdownOpen(!isDropdownOpen)}
+        onToggleDropdown={() => vm.setIsDropdownOpen(!vm.isDropdownOpen)}
         onSelectPayment={item => {
-          setSelectedPayment(item);
-          setIsDropdownOpen(false);
+          vm.setSelectedPayment(item);
+          vm.setIsDropdownOpen(false);
         }}
-        onFiltersPress={() => console.log('Filters Pressed from Screen')}
         paymentItems={paymentItems}
+        filtersVisible = {vm.filtersVisible}
+        setFiltersVisible={vm.setFiltersVisible}
+        selectedFiltersIds={vm.selectedFilterIds}
+        setSelectedFiltersIds={vm.setSelectedFilterIds}
       />
       <VehicleSelector
-        selected={selectedVehicleId}
-        onSelect={onSelectVehicle}
-        vehicles={estimate.pricing_tiers}
+        selected={vm.selectedVehicleId}
+        onSelect={vm.onSelectVehicle}
+        vehicles={vm.estimate.pricing_tiers}
       />
 
       <ActionButton
