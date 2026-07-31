@@ -7,9 +7,9 @@ import { useTheme } from '../../../core/theme/useTheme';
 import { useOtpViewModel } from '../viewmodels/useOtpViewModel';
 import { createStyles } from '../styles/OtpScreen.styles';
 import { AuthStackScreenProps } from '../../../navigation/auth/authTypes';
-import OtpInputFields from '../components/OTP/OtpInputFields';
+import OtpInputFields from '../../../shared/components/OtpInputFields';
 import { useTranslation } from 'react-i18next';
-import ResendCode from '../components/OTP/ResendCode';
+import ResendCode from '../../../shared/components/ResendCode';
 
 export default function OtpScreen({ navigation, route }: AuthStackScreenProps<'Otp'>) {
   const { colors } = useTheme();
@@ -62,7 +62,8 @@ export default function OtpScreen({ navigation, route }: AuthStackScreenProps<'O
         <ResendCode
           onResend={handleResendCode}
           styles={styles}
-          t={t}
+          haventGotLabel={t('haventGot')}
+          resendCodeLabel={t('resendCode')}
         />
 
         {error && (
@@ -72,7 +73,7 @@ export default function OtpScreen({ navigation, route }: AuthStackScreenProps<'O
               : error}
           </Text>
         )}
-        
+
       </View>
     </LinearBg>
   );

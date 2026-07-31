@@ -187,9 +187,6 @@ src/
 │   │       └── useActivitiesViewModel.ts
 │   ├── auth
 │   │   ├── components
-│   │   │   ├── OTP
-│   │   │   │   ├── OtpInputFields.tsx
-│   │   │   │   └── ResendCode.tsx
 │   │   │   ├── login
 │   │   │   │   ├── LoginFooter.tsx
 │   │   │   │   ├── LoginForm.tsx
@@ -215,7 +212,6 @@ src/
 │   │   ├── constants
 │   │   ├── hooks
 │   │   │   ├── useAuthActions.ts
-│   │   │   ├── useResendCode.ts
 │   │   │   ├── useSplashAnimation.ts
 │   │   │   └── useSplashLayout.ts
 │   │   ├── repositories
@@ -304,6 +300,7 @@ src/
 │   │   ├── repositories
 │   │   │   └── profileRepository.ts
 │   │   ├── screens
+│   │   │   ├── ChangePasswordScreen.tsx
 │   │   │   ├── ChangePhoneOtpScreen.tsx
 │   │   │   ├── ChangePhoneScreen.tsx
 │   │   │   ├── EditProfileScreen.tsx
@@ -448,24 +445,29 @@ src/
 │   ├── components
 │   │   ├── ActionButton.tsx
 │   │   ├── BaseBottomSheet.tsx
+│   │   ├── ChangePasswordForm.tsx
 │   │   ├── ChangePhoneForm.tsx
 │   │   ├── Header.tsx
 │   │   ├── Input.tsx
 │   │   ├── LinearBg.tsx
-│   │   ├── OtpBoxes.tsx
+│   │   ├── OtpInputFields.tsx
 │   │   ├── OtpVerifyForm.tsx
 │   │   ├── PhotoPickerSheet.tsx
 │   │   ├── PinFrame.tsx
 │   │   ├── PinShape.tsx
+│   │   ├── ResendCode.tsx
 │   │   ├── SearchBar.tsx
 │   │   ├── SheetBackground.tsx
 │   │   └── SubHeader.tsx
 │   ├── hooks
+│   │   ├── useChangePasswordViewModel.ts
 │   │   ├── useChangePhoneRequestViewModel.ts
-│   │   └── useOtpVerifyViewModel.ts
+│   │   ├── useOtpVerifyViewModel.ts
+│   │   └── useResendCode.ts
 │   └── styles
 │       ├── PhotoPickerSheet.styles.ts
 │       ├── SubHeader.styles.ts
+│       ├── changePasswordForm.styles.ts
 │       ├── changePhoneForm.styles.ts
 │       ├── input.styles.ts
 │       ├── otpVerifyForm.styles.ts
