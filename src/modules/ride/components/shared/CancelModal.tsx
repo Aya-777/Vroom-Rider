@@ -19,10 +19,6 @@ export const CancelModal = ({ cancelCurrentRide, isCancelling, keepRide }: Props
   const { t } = useTranslation(['selectRide', 'common']);
   const [cancellationReason, setCancellationReason] = useState('');
 
-  const setIsCancelling = (value: boolean) => {
-    isCancelling = value;
-  };
-
   return (
     <Modal visible={isCancelling} transparent={true} animationType="fade">
       <View style={styles.overlay}>
@@ -33,7 +29,6 @@ export const CancelModal = ({ cancelCurrentRide, isCancelling, keepRide }: Props
           style={styles.modal}
       >
           {/* Header */}
-          {/* <View style={styles.header}> */}
           <Text style={styles.title}>Cancel Ride?</Text>
             <View style={styles.Divider} />
     
@@ -69,7 +64,6 @@ export const CancelModal = ({ cancelCurrentRide, isCancelling, keepRide }: Props
               textStyle={styles.actionButtonText}
             />
           </View>
-          {/* </View> */}
         </LinearBg>
       </View>
     </Modal>
