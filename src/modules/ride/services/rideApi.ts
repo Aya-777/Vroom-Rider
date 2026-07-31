@@ -10,6 +10,8 @@ import {
   CreateSavedPlaceResponseDTO,
 } from './dto/savedPlaces.dto';
 
+import { RideFilter } from '../types/ride.types';
+
 import {
   EstimateInitialRequestDTO,
   EstimateInitialResponseDTO,
@@ -50,6 +52,14 @@ export const rideApi = {
 
   deleteSavedPlace: async (id: number): Promise<void> => {
     await apiClient.delete(ENDPOINTS.TRIPS.SAVED_LOCATION(id));
+  },
+
+  // Filters
+  getFilters : async (): Promise<RideFilter[]> => {
+    const response = await apiClient.get<RideFilter[]>(
+      ENDPOINTS.TRIPS.PREFERENCES,
+    );
+    return response.data;
   },
 
   // Ride

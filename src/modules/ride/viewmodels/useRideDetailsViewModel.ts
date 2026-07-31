@@ -1,5 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRideStore } from '../store/useRideStore';
+import { RideFilter } from '../types/ride.types';
+import { rideApi } from '../services/rideApi';
 
 export function useRideDetailsViewModel() {
   const { rideData, setRideDetails } = useRideStore();
@@ -9,6 +11,8 @@ export function useRideDetailsViewModel() {
   const [selectedVehicleId, setSelectedVehicleId] = useState(1);
   const [selectedPayment, setSelectedPayment] = useState('cash');
   const [selectedFilterIds, setSelectedFilterIds] = useState<string[]>([]);
+  const [filters, setFilters] = useState<RideFilter[]>([]);
+  const [isLoadingFilters, setIsLoadingFilters] = useState(false);
   const [filtersVisible, setFiltersVisible] = useState(false);
 
   const selectedVehicle = useMemo(() => {
@@ -28,9 +32,37 @@ export function useRideDetailsViewModel() {
     setSelectedVehicleId(vehicleId);
   };
 
+  const loadFilters = useCallback(async () => {
+    try {
+      setIsLoadingFilters(true);
+
+      const response = await rideApi.getFilters();
+
+      const mappedFilters: RideFilter[] = response.map((filter: RideFilter) => ({
+        id: String(filter.id),
+        code: filter.code,
+        title: filter.title,
+        extra_fee: `+$${Number(filter.extra_fee).toFixed(2)}`,
+        iconName: filter.iconName ?? 'filter-outline',
+      }));
+
+      setFilters(mappedFilters);
+    } catch (error) {
+      console.error('Failed to load ride filters:', error);
+    } finally {
+      setIsLoadingFilters(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    loadFilters();
+  }, [loadFilters]);
+
+
   return {
     rideData,
     estimate,
+    filters,
 
     selectedVehicleId,
     selectedVehicle,

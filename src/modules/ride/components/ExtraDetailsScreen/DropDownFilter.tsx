@@ -5,16 +5,10 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { createStyles } from '../../styles/dropDownFilter.styles';
 import { useTheme } from '../../../../core/theme/useTheme';
 import { useTranslation } from 'react-i18next';
-
-export interface FilterOption {
-  id: string;
-  label: string;
-  price?: string;
-  iconName: string;
-}
+import { RideFilter } from '../../types/ride.types';
 
 interface DropdownFilterProps {
-  options: FilterOption[];
+  options: RideFilter[];
   selectedIds: string[]; // Changed from single selectedOption to array of IDs
   onSelect: (selectedIds: string[]) => void;
   placeholder?: string;
@@ -33,7 +27,7 @@ export const DropdownFilter: React.FC<DropdownFilterProps> = ({
     let updatedSelection: string[];
     if (selectedIds.includes(id)) {
       // Remove if already selected
-      updatedSelection = selectedIds.filter((itemKey) => itemKey !== id);
+      updatedSelection = selectedIds.filter(itemKey => itemKey !== id);
     } else {
       // Add if not selected
       updatedSelection = [...selectedIds, id];
@@ -69,11 +63,11 @@ export const DropdownFilter: React.FC<DropdownFilterProps> = ({
                   numberOfLines={1}
                   adjustsFontSizeToFit
                 >
-                  {item.label}
+                  {item.title}
                 </Text>
               </View>
-              {item.price && (
-                <Text style={styles.optionPrice}>{item.price}</Text>
+              {item.extra_fee && (
+                <Text style={styles.optionPrice}>{item.extra_fee}</Text>
               )}
             </TouchableOpacity>
           );

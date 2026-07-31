@@ -32,6 +32,15 @@ export interface Prefrences{
   price: Double,
 }
 
+export interface RideFilter {
+  id: string;
+  code: string;
+  title: string;
+  extra_fee: string;
+  iconName?: string;
+}
+
+
 export interface RideStop {
   address: string;
   order: number;

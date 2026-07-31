@@ -7,7 +7,8 @@ import ArrowUp from '../../../../assets/svg/arrows/arrowUp.svg';
 import FilterIcon from '../../../../assets/svg/ride/filters.svg';
 import CashIcon from '../../../../assets/svg/payment/price.svg';
 import { useTranslation } from 'react-i18next';
-import { DropdownFilter, FilterOption } from './DropDownFilter';
+import { DropdownFilter } from './DropDownFilter';
+import { RideFilter } from '../../types/ride.types';
 
 type Props = {
   selectedValue: string;
@@ -15,11 +16,12 @@ type Props = {
   onToggleDropdown: () => void;
   onSelectPayment: (item: string) => void;
   paymentItems: { key: string; label: string }[];
+  filters: RideFilter[];
   styles: any;
-  selectedFiltersIds: string[],
-  setSelectedFiltersIds: Dispatch<SetStateAction<string[]>>,
-  filtersVisible: boolean,
-  setFiltersVisible: (value:boolean) => void
+  selectedFiltersIds: string[];
+  setSelectedFiltersIds: Dispatch<SetStateAction<string[]>>;
+  filtersVisible: boolean;
+  setFiltersVisible: (value: boolean) => void;
 };
 
 export default function RideActionFilters({
@@ -28,31 +30,16 @@ export default function RideActionFilters({
   onToggleDropdown,
   onSelectPayment,
   paymentItems,
+  filters,
   styles,
   selectedFiltersIds,
   setSelectedFiltersIds,
   filtersVisible,
-  setFiltersVisible
+  setFiltersVisible,
 }: Props) {
   const { colors } = useTheme();
   const gradientColors = [colors.backgroundSoft, colors.surface];
   const { t } = useTranslation(['rideDetails']);
-
-  const filterOptions: FilterOption[] = [
-    {
-      id: '1',
-      label: 'Child Seat',
-      price: '+$5.00',
-      iconName: 'emoticon-happy-outline',
-    },
-    { id: '2', label: 'Pet Friendly', price: '+$2.00', iconName: 'paw' },
-    {
-      id: '3',
-      label: 'Accessible',
-      price: '+$0.00',
-      iconName: 'wheelchair-accessibility',
-    },
-  ];
 
   return (
     <View style={styles.actionsContainer}>
@@ -119,7 +106,7 @@ export default function RideActionFilters({
 
       {filtersVisible && (
         <DropdownFilter
-          options={filterOptions}
+          options={filters}
           selectedIds={selectedFiltersIds}
           onSelect={newSelectedIds => setSelectedFiltersIds(newSelectedIds)}
         />

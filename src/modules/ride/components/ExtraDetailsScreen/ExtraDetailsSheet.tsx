@@ -58,6 +58,7 @@ export default function ExtraDetailsScreen({ onNextPress }: Props) {
           vm.setIsDropdownOpen(false);
         }}
         paymentItems={paymentItems}
+        filters={vm.filters}
         filtersVisible = {vm.filtersVisible}
         setFiltersVisible={vm.setFiltersVisible}
         selectedFiltersIds={vm.selectedFilterIds}
