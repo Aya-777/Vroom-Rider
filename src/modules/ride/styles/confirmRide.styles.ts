@@ -44,6 +44,21 @@ export const createStyles = (colors: ThemeColors) =>
       color: colors.textPrimary,
       ...Typography.boldCaption,
     },
+    
+    
+    timePriceRow: {
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      justifyContent: 'space-between',
+    },
+    
+    boxTitle2: {
+      marginTop: 5,
+      marginStart: Spacing.xs,
+      color: colors.textPrimary,
+      ...Typography.caption,
+    },
+
 
     boxValue: {
       color: colors.textPrimary,

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRideStore } from '../store/useRideStore';
 import { RideFilter } from '../types/ride.types';
 import { rideApi } from '../services/rideApi';
+import { Double } from 'react-native/Libraries/Types/CodegenTypes';
 
 export function useRideDetailsViewModel() {
   const { rideData, setRideDetails } = useRideStore();
@@ -21,12 +22,31 @@ export function useRideDetailsViewModel() {
     );
   }, [estimate, selectedVehicleId]);
 
-  const updateRideDetails = () => {
-    setRideDetails({
-      vehicle_type_id: selectedVehicleId,
-      payment_method: selectedPayment === 'cash' ? 'CASH' : 'WALLET',
-    });
-  };
+  const updateRideDetails = (totalPrice: Double) => {
+  setRideDetails({
+    vehicle_type_id: selectedVehicleId,
+    payment_method: selectedPayment === 'cash' ? 'CASH' : 'WALLET',
+  });
+
+  if (!estimate || totalPrice === null) {
+    return;
+  }
+
+  const updatedPricingTiers = estimate.pricing_tiers.map(tier =>
+    tier.tier_id === selectedVehicleId
+      ? {
+          ...tier,
+          estimated_price: totalPrice,
+        }
+      : tier,
+  );
+
+  setEstimate({
+    ...estimate,
+    pricing_tiers: updatedPricingTiers,
+  });
+};
+  
 
   const onSelectVehicle = (vehicleId: number) => {
     setSelectedVehicleId(vehicleId);
@@ -42,7 +62,7 @@ export function useRideDetailsViewModel() {
         id: String(filter.id),
         code: filter.code,
         title: filter.title,
-        extra_fee: `+$${Number(filter.extra_fee).toFixed(2)}`,
+        extra_fee: Number(filter.extra_fee).toFixed(2),
         iconName: filter.iconName ?? 'filter-outline',
       }));
 

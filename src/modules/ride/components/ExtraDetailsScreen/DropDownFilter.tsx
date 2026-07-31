@@ -67,7 +67,7 @@ export const DropdownFilter: React.FC<DropdownFilterProps> = ({
                 </Text>
               </View>
               {item.extra_fee && (
-                <Text style={styles.optionPrice}>{item.extra_fee}</Text>
+                <Text style={styles.optionPrice}>{"+$"}{item.extra_fee}</Text>
               )}
             </TouchableOpacity>
           );

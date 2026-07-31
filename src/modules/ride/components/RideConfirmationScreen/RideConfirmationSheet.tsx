@@ -42,7 +42,7 @@ export default function RideConfirmationSheet({ onNextPress }: Props) {
       <View style={styles.grid}>
         <TimePriceBox
           time={`${vm.estimate.estimated_duration_minutes}`}
-          price={
+          estimatedPrice={
             selectedVehicle
               ? `$${selectedVehicle.estimated_price.toFixed(2)}`
               : '...'

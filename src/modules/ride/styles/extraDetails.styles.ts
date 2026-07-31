@@ -1,14 +1,29 @@
 import { StyleSheet } from 'react-native';
-import { Shadows, Typography } from '../../../core/theme/tokens';
+import { Shadows, Spacing, Typography } from '../../../core/theme/tokens';
 import { ThemeColors } from '../../../core/theme/theme.types';
 
 export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
-    timePriceRow: {
-      flexDirection: 'row',
-      marginBottom: 12,
-      gap : 15,
-    },
+    // timePriceRow: {
+    //   flexDirection: 'row',
+    //   marginBottom: 12,
+    //   gap : 15,
+    // },
+    
+        
+        timePriceRow: {
+          flexDirection: 'row',
+          alignItems: 'flex-start',
+          justifyContent: 'space-between',
+        },
+        boxTitle2: {
+          marginTop: 5,
+          marginStart: Spacing.xs,
+          color: colors.textPrimary,
+          ...Typography.caption,
+        },
+    
+    
 
     vehicleRow: {
       flexDirection: 'row',
