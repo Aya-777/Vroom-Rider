@@ -229,7 +229,6 @@ src/
 │   │   │       └── auth.dto.ts
 │   │   ├── store
 │   │   ├── styles
-│   │   │   ├── OtpScreen.styles.ts
 │   │   │   ├── Splash.styles.ts
 │   │   │   ├── forgotPassword.styles.ts
 │   │   │   ├── login.styles.ts
@@ -239,10 +238,11 @@ src/
 │   │   ├── utils
 │   │   │   └── SplashPathUtils.ts
 │   │   └── viewmodels
+│   │       ├── useForgotPasswordOtpViewModel.ts
 │   │       ├── useForgotPasswordViewModel.ts
 │   │       ├── useLoginViewModel.ts
-│   │       ├── useOtpViewModel.ts
 │   │       ├── useResetPasswordViewModel.ts
+│   │       ├── useSignupOtpViewModel.ts
 │   │       ├── useSignupViewModel.ts
 │   │       └── useSplashViewModel.ts
 │   ├── constants
@@ -462,15 +462,17 @@ src/
 │   ├── hooks
 │   │   ├── useChangePasswordViewModel.ts
 │   │   ├── useChangePhoneRequestViewModel.ts
-│   │   ├── useOtpVerifyViewModel.ts
+│   │   ├── useOtpFlow.ts
 │   │   └── useResendCode.ts
-│   └── styles
-│       ├── PhotoPickerSheet.styles.ts
-│       ├── SubHeader.styles.ts
-│       ├── changePasswordForm.styles.ts
-│       ├── changePhoneForm.styles.ts
-│       ├── input.styles.ts
-│       ├── otpVerifyForm.styles.ts
-│       └── sheet.styles.ts
+│   ├── styles
+│   │   ├── PhotoPickerSheet.styles.ts
+│   │   ├── SubHeader.styles.ts
+│   │   ├── changePasswordForm.styles.ts
+│   │   ├── changePhoneForm.styles.ts
+│   │   ├── input.styles.ts
+│   │   ├── otpVerifyForm.styles.ts
+│   │   └── sheet.styles.ts
+│   └── utils
+│       └── parseWaitSecondsError.ts
 └── types
     └── svg.d.ts

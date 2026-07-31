@@ -7,7 +7,7 @@ type Params = {
     onSuccess: () => void;
 };
 
-export const useOtpVerifyViewModel = ({ length = 6, verifyOtp, onSuccess }: Params) => {
+export const useOtpFlow = ({ length = 6, verifyOtp, onSuccess }: Params) => {
     const [code, setCode] = useState<string[]>(new Array(length).fill(''));
     const [activeCodeIndex, setActiveCodeIndex] = useState(0);
     const [isVerifying, setIsVerifying] = useState(false);
@@ -69,6 +69,7 @@ export const useOtpVerifyViewModel = ({ length = 6, verifyOtp, onSuccess }: Para
         isVerifying,
         inputRefs,
         error,
+        setError,
         handleTextChange,
         handleKeyPress,
         handleVerifyCode,
