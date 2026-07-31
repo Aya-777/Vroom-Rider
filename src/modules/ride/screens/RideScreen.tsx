@@ -38,6 +38,8 @@ export default function RideScreen() {
 
       <RideBottomSheet
         rideState={vm.rideState}
+        isCancelling={vm.isCancelling}
+        setIsCancelling={vm.setIsCancelling}
         onSelectRideNext={vm.goToExtraDetails}
         onExtraDetailsNext={vm.goToRideConfirmation}
         onRideConfirmed={vm.goToDriverFound}

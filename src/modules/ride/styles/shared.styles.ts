@@ -159,4 +159,69 @@ export const createStyles = (colors: ThemeColors) =>
       fontSize: 13,
       lineHeight: 18,
     },
+    overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.55)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+  },
+
+  modal: {
+    width: '100%',
+    maxWidth: 420,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 24,
+    padding: 24,
+    elevation: 8,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 12,
+    shadowColor: '#000000',
+  },
+
+  title: {
+    ...Typography.h2,
+    textAlign: 'center',
+    marginBottom: 10,
+    color: colors.textSecondary
+  },
+
+  message: {
+    ...Typography.semiBoldBody,
+    lineHeight: 22,
+    textAlign: 'center',
+    marginBottom: 20,
+    color: colors.textPrimary
+  },
+
+  input: {
+    minHeight: 110,
+    borderWidth: 1,
+    borderColor: colors.textMuted,
+    borderRadius: 14,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    fontSize: 15,
+    textAlignVertical: 'top',
+    marginBottom: 20,
+  },
+
+  actions: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 12,
+  },
+
+  cancelButton: {
+    flex: 1,
+  },
+
+  confirmButton: {
+    flex: 1,
+  },
   });

@@ -22,8 +22,15 @@ export function useRideViewModel() {
     latitude: 0,
     longitude: 0,
   });
-  const { rideData, estimate, setEstimate, clearRide, currentRide, setCurrentRide } =
-    useRideStore();
+  const [isCancelling, setIsCancelling] = useState(false);
+  const {
+    rideData,
+    estimate,
+    setEstimate,
+    clearRide,
+    currentRide,
+    setCurrentRide,
+  } = useRideStore();
 
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
@@ -66,15 +73,17 @@ export function useRideViewModel() {
     }
   };
 
-  const cancelCurrentRide = async () => {
+  const cancelCurrentRide = async (reason: string) => {
     try {
       if (!currentRide?.id) {
         console.log('No active ride');
         return;
       }
-      await rideApi.cancelRide(currentRide.id);
+      setIsCancelling(true);
+
+      await rideApi.cancelRide(currentRide.id, reason);
       currentRide.status = TripStatus.CANCELLED;
-      setCurrentRide(currentRide);
+      setCurrentRide({ ...currentRide, status: TripStatus.CANCELLED });
       clearRide();
       setRideState(RideState.SELECT_RIDE);
     } catch (error) {
@@ -86,6 +95,8 @@ export function useRideViewModel() {
     rideState,
     currentLocation,
     estimate,
+    isCancelling,
+    setIsCancelling,
 
     handleBackPress,
     goToExtraDetails,

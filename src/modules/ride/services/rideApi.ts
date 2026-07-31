@@ -2,10 +2,7 @@ import { apiClient } from '../../../core/network/apiClient';
 import { ENDPOINTS } from '../../../core/network/endpoints';
 import { v4 as uuidv4 } from 'uuid';
 
-import {
-  RequestRideRequestDTO,
-  RequestRideResponseDTO,
-} from './dto/ride.dto';
+import { RequestRideRequestDTO, RequestRideResponseDTO } from './dto/ride.dto';
 
 import {
   SavedPlaceDTO,
@@ -67,28 +64,29 @@ export const rideApi = {
     return response.data;
   },
 
-  cancelRide: async (rideId: number) => {
-    const response = await apiClient.post(ENDPOINTS.TRIPS.CANCEL(rideId));
+  cancelRide: async (rideId: number, reason: string) => {
+    const response = await apiClient.post(ENDPOINTS.TRIPS.CANCEL(rideId), {
+      cancellation_reason: reason,
+    });
 
     return response.data;
   },
 
-
   confirmRide: async (
-  data: RequestRideRequestDTO,
-): Promise<RequestRideResponseDTO> => {
-  const idempotencyKey = uuidv4();
+    data: RequestRideRequestDTO,
+  ): Promise<RequestRideResponseDTO> => {
+    const idempotencyKey = uuidv4();
 
-  const response = await apiClient.post<RequestRideResponseDTO>(
-    ENDPOINTS.TRIPS.CONFIRM,
-    data,
-    {
-      headers: {
-        'ْْْX-Idempotency-Key': idempotencyKey,
+    const response = await apiClient.post<RequestRideResponseDTO>(
+      ENDPOINTS.TRIPS.CONFIRM,
+      data,
+      {
+        headers: {
+          'ْْْX-Idempotency-Key': idempotencyKey,
+        },
       },
-    },
-  );
+    );
 
-  return response.data;
-},
+    return response.data;
+  },
 };

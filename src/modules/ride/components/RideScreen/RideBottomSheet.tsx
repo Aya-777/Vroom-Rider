@@ -11,45 +11,59 @@ import { EstimateInitialResponseDTO } from '../../services/dto/estimate.dto';
 
 type Props = {
   rideState: RideState;
+  isCancelling: boolean;
+  setIsCancelling: (value: boolean) => void;
   onSelectRideNext: () => void;
   onExtraDetailsNext: () => void;
   onRideConfirmed: () => void;
   onDriverFound: () => void;
   onTripStarted: () => void;
   onTripEnded: () => void;
-  onCancelPress: () => void
+  onCancelPress: (reason: string) => void;
 };
 
 export default function RideBottomSheet({
   rideState,
+  isCancelling,
+  setIsCancelling,
   onSelectRideNext,
   onExtraDetailsNext,
   onRideConfirmed,
   onDriverFound,
   onTripStarted,
   onTripEnded,
-  onCancelPress
+  onCancelPress,
 }: Props) {
   const renderSheet = () => {
     switch (rideState) {
       case RideState.SELECT_RIDE:
-        return (
-          <SelectRideSheet
-            onNextPress={onSelectRideNext}
-          />
-        );
+        return <SelectRideSheet onNextPress={onSelectRideNext} />;
 
       case RideState.EXTRA_DETAILS:
-        return <ExtraDetailsSheet onNextPress={onExtraDetailsNext}/>;
+        return <ExtraDetailsSheet onNextPress={onExtraDetailsNext} />;
 
       case RideState.CONFIRM_RIDE:
         return <RideConfirmationSheet onNextPress={onRideConfirmed} />;
 
       case RideState.DRIVER_FOUND:
-        return <DriverFoundSheet onDriverFound={onDriverFound} onCancelPress={onCancelPress} />;
+        return (
+          <DriverFoundSheet
+            onDriverFound={onDriverFound}
+            onCancelPress={onCancelPress}
+            isCancelling={isCancelling}
+            setIsCancelling={setIsCancelling}
+          />
+        );
 
       case RideState.DRIVER_ARRIVED:
-        return <DriverArrivedSheet onTripStarted={onTripStarted} onCancelPress={onCancelPress}/>;
+        return (
+          <DriverArrivedSheet
+            onTripStarted={onTripStarted}
+            onCancelPress={onCancelPress}
+            isCancelling={isCancelling}
+            setIsCancelling={setIsCancelling}
+          />
+        );
 
       case RideState.TRIP_STARTED:
         return <TripStartedSheet onTripEnded={onTripEnded} />;
