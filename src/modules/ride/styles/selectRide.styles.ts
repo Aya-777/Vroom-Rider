@@ -1,5 +1,11 @@
 import { StyleSheet } from 'react-native';
 import { ThemeColors } from '../../../core/theme/theme.types';
+import {
+  Radius,
+  Shadows,
+  Spacing,
+  Typography,
+} from '../../../core/theme/tokens';
 
 export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
@@ -18,6 +24,7 @@ export const createStyles = (colors: ThemeColors) =>
       width: '100%',
       borderRadius: 16,
       padding: 16,
+      paddingBottom: 0,
       flexDirection: 'row',
       elevation: 2,
       shadowColor: '#000',
@@ -32,7 +39,7 @@ export const createStyles = (colors: ThemeColors) =>
       alignItems: 'center',
       justifyContent: 'space-between',
       paddingVertical: 10,
-      marginVertical: 4
+      marginVertical: 4,
     },
 
     timelineDot: {
@@ -55,15 +62,16 @@ export const createStyles = (colors: ThemeColors) =>
 
     input: {
       height: 35,
-      fontSize: 15,
+      ...Typography.caption,
       color: colors.textPrimary,
-      paddingTop: 5,
-      paddingBottom: 5,
+      paddingTop: 0,
+      paddingBottom: 0,
       paddingLeft: 10,
     },
 
     divider: {
       height: 1,
+      marginTop: -10,
       marginVertical: 8,
       backgroundColor: colors.primary,
     },
@@ -79,7 +87,7 @@ export const createStyles = (colors: ThemeColors) =>
     actionButton: {
       flexDirection: 'row',
       width: '48%',
-      paddingVertical: 12,
+      paddingVertical: 8,
       borderRadius: 12,
       justifyContent: 'center',
       alignItems: 'center',
@@ -87,11 +95,36 @@ export const createStyles = (colors: ThemeColors) =>
       backgroundColor: colors.surface,
     },
 
+    contactSection: {
+      alignItems: 'center',
+      // justifyContent: 'center',
+      marginBottom: Spacing.lg,
+    },
+
+    contactHeader: {  
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: Spacing.sm,
+      gap: Spacing.sm,
+    },
+
+    numberInput: {
+      height: 35,
+      width: 300,
+      fontSize: 15,
+      borderRadius: Radius.lg,
+      paddingBottom: Spacing.sm,
+      paddingStart: 10,
+      marginTop: Spacing.sm,
+      backgroundColor: colors.backgroundSoft,
+      color: colors.textPrimary,
+      ...Shadows.small,
+    },
+
     actionButtonText: {
-      fontWeight: '600',
-      fontSize: 14,
+      ...Typography.caption,
       marginStart: 6,
-      color:'#5C4E75'
+      color: colors.primary,
     },
 
     nextButton: {
@@ -105,12 +138,30 @@ export const createStyles = (colors: ThemeColors) =>
       backgroundColor: colors.primary,
       elevation: 3,
     },
-
+    
     nextButtonText: {
-      fontSize: 16,
-      fontWeight: '600',
+      ...Typography.body,
       marginEnd: 5,
       marginBottom: 2,
       color: colors.background,
     },
+    
+    confirmButtonText: {
+      ...Typography.body,
+      marginEnd: 5,
+      marginBottom: 2,
+      color: colors.primary,
+    },
+    
+    confirmButton: {
+      flexDirection: 'row',
+      width: '50%',
+      paddingVertical: 14,
+      borderRadius: 25,
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+      backgroundColor: colors.backgroundSoft,
+      // elevation: 3,
+    }
   });

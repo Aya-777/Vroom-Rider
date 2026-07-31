@@ -23,7 +23,7 @@ export const createStyles = (colors: ThemeColors) =>
     },
 
     box: {
-      width: '45%',
+      width: '48%',
       borderRadius: 12,
       paddingTop: 12,
       paddingHorizontal: 14,
@@ -44,6 +44,21 @@ export const createStyles = (colors: ThemeColors) =>
       color: colors.textPrimary,
       ...Typography.boldCaption,
     },
+    
+    
+    timePriceRow: {
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      justifyContent: 'space-between',
+    },
+    
+    boxTitle2: {
+      marginTop: 5,
+      marginStart: Spacing.xs,
+      color: colors.textPrimary,
+      ...Typography.caption,
+    },
+
 
     boxValue: {
       color: colors.textPrimary,
@@ -57,29 +72,6 @@ export const createStyles = (colors: ThemeColors) =>
       width: '100%',
       marginTop: -4,
       backgroundColor: colors.border,
-    },
-
-    contactSection: {
-      marginBottom: Spacing.lg,
-    },
-
-    contactHeader: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginBottom: Spacing.sm,
-      gap: Spacing.sm,
-    },
-
-    input: {
-      height: 35,
-      width: 300,
-      fontSize: 15,
-      borderRadius: Radius.lg,
-      paddingBottom: Spacing.sm,
-      marginTop: Spacing.sm,
-      backgroundColor: colors.background,
-      color: colors.textPrimary,
-      ...Shadows.small,
     },
 
     button: {

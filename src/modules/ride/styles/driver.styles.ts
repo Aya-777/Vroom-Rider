@@ -146,4 +146,20 @@ export const createStyles = (colors: ThemeColors) =>
       opacity: 0.8,
       color: colors.surface,
     },
+    canelButton:{
+      backgroundColor: colors.error + '90',
+      borderWidth: 1,
+      borderColor: colors.error,
+      borderRadius: 40,
+      paddingVertical: 14,
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'row',
+      width: '60%',
+      marginTop: 10,
+    },
+    cancelButtonText: {
+      color: colors.error,
+      ...Typography.boldBody,
+    }
   });

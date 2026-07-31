@@ -1,8 +1,18 @@
+import { Double } from "react-native/Libraries/Types/CodegenTypes";
+import { RidePreferenceDTO } from "../services/dto/ride.dto";
+
 export type Car = {
   model: string;
   color: string;
   plate: string;
 };
+
+export type Tiers = {
+  tier_id : number;
+  tier_name : string;
+  estimated_price : Double;
+  image: string;
+}
 
 export type Driver = {
   name: string;
@@ -16,14 +26,70 @@ export interface RideValidationErrors {
   toLocation?: string;
 }
 
+export interface Prefrences{
+  name: string,
+  code: string,
+  price: Double,
+}
+
+export interface RideFilter {
+  id: string;
+  code: string;
+  title: string;
+  extra_fee: string;
+  iconName?: string;
+}
+
+
+export interface RideStop {
+  address: string;
+  order: number;
+  latitude: number;
+  longitude: number;
+  stop_type: 'PICKUP' | 'DROP_OFF';
+}
 export interface RideParams {
-  pickupLocation: string;
-  dropoffLocation: string;
-  selectedPerson: string;
-  timeEstimate: string; 
-  time: string;
-  payment: string;
-  vehicleType: string;
-  price: string;
-  contactPhone: string;
+  id: number;
+  vehicle_type_id: number;
+  payment_method: 'CASH' | 'WALLET';
+  is_for_someone_else: boolean;
+  passenger_contact_phone?: string;
+  stops: RideStop[];
+  preference_ids: number[];
+  scheduled_at?: string;
+}
+
+
+export interface CurrentRide {
+  id: number;
+  rider: number;
+  driver: number | null;
+  vehicle: number | null;
+  vehicle_type: string;
+  status: string;
+
+  stops: RideStop[];
+  preferences: RidePreferenceDTO[];
+
+  estimated_distance: number;
+  estimated_duration: number;
+  estimated_price: string;
+
+  actual_distance: number | null;
+  actual_duration: number | null;
+  actual_price: string | null;
+
+  cancellation_reason: string | null;
+  cancelled_at: string | null;
+
+  idempotency_key: string;
+
+  requested_at: string;
+  accepted_at: string | null;
+  started_at: string | null;
+  ended_at: string | null;
+
+  is_for_someone_else: boolean;
+  passenger_contact_phone: string | null;
+  payment_method: 'CASH' | 'CARD';
 }

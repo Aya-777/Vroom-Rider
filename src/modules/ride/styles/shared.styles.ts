@@ -1,5 +1,11 @@
 import { StyleSheet } from 'react-native';
 import { ThemeColors } from '../../../core/theme/theme.types';
+import {
+  Radius,
+  Shadows,
+  Spacing,
+  Typography,
+} from '../../../core/theme/tokens';
 
 export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
@@ -19,8 +25,8 @@ export const createStyles = (colors: ThemeColors) =>
 
     dropdown: {
       flexDirection: 'row',
-      paddingVertical: 8,
-      paddingHorizontal: 14,
+      paddingVertical: 4,
+      paddingHorizontal: 5,
       borderRadius: 20,
       alignItems: 'center',
       marginHorizontal: 6,
@@ -31,8 +37,7 @@ export const createStyles = (colors: ThemeColors) =>
     },
 
     dropdownText: {
-      fontWeight: '600',
-      fontSize: 14,
+      ...Typography.semiBoldCaption,
       marginStart: 6,
       marginEnd: 6,
       color: colors.textPrimary,
@@ -67,8 +72,7 @@ export const createStyles = (colors: ThemeColors) =>
     },
 
     cardText: {
-      fontSize: 14,
-      fontWeight: '700',
+      ...Typography.boldCaption,
       color: colors.primary,
     },
 
@@ -96,6 +100,7 @@ export const createStyles = (colors: ThemeColors) =>
       shadowOpacity: 0.15,
       shadowRadius: 6,
       paddingVertical: 4,
+      backgroundColor: colors.backgroundSoft,
     },
 
     menuItem: {
@@ -104,14 +109,13 @@ export const createStyles = (colors: ThemeColors) =>
     },
 
     menuItemText: {
-      fontSize: 14,
-      fontWeight: '700',
+      ...Typography.boldCaption,
     },
 
     actionButton: {
       flexDirection: 'row',
-      width: '50%',
-      paddingVertical: 14,
+      width: '55%',
+      paddingVertical: 10,
       borderRadius: 25,
       justifyContent: 'center',
       alignItems: 'center',
@@ -121,17 +125,116 @@ export const createStyles = (colors: ThemeColors) =>
     },
 
     actionButtonText: {
-      fontSize: 16,
-      fontWeight: '600',
+      ...Typography.semiBoldBody,
       marginEnd: 5,
       marginBottom: 2,
       color: colors.background,
     },
     mapContainer: {
       flex: 1,
-      zIndex: 0, 
+      zIndex: 0,
     },
-    map: { flex: 1,
-      zIndex: 0, 
+    map: { flex: 1, zIndex: 0 },
+
+    searchResultsContainer: {
+      maxHeight: 180,
+      backgroundColor: colors.surface,
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor: colors.border,
+      zIndex: 20,
+      elevation: 10, // For Android touch priority
+    },
+
+    searchScroll: {
+      maxHeight: 180,
+    },
+
+    searchResultItem: {
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      borderBottomWidth: 1,
+      borderBottomColor: '#1D2840',
+    },
+
+    searchResultText: {
+      color: '#FFFFFF',
+      fontSize: 13,
+      lineHeight: 18,
+    },
+    overlay: {
+      flex: 1,
+      backgroundColor: 'rgba(0,0,0,0.45)',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: Spacing.xl,
+    },
+
+    modal: {
+      width: '100%',
+      borderRadius: Radius.xl,
+      paddingHorizontal: 33,
+      paddingVertical: 20,
+      overflow: 'hidden',
+    },
+
+    title: {
+      ...Typography.h2,
+      textAlign: 'center',
+      color: colors.primary,
+      marginBottom: Spacing.md,
+    },
+
+    message: {
+      ...Typography.semiBoldBody,
+      lineHeight: 22,
+      textAlign: 'center',
+      marginBottom: 20,
+      color: colors.textPrimary,
+    },
+
+    Divider: {
+      height: 2,
+      backgroundColor: colors.border,
+      marginBottom: Spacing.lg,
+      marginTop: Spacing.md,
+    },
+
+    cancelInputContainer: {
+      marginTop: 12,
+      marginBottom: Spacing.xl,
+    },
+
+    cancelInputBox: {
+      height: undefined,
+      minHeight: 90,
+      alignItems: 'flex-start',
+      paddingVertical: 10,
+      borderWidth: 0,
+      backgroundColor: colors.surface,
+      borderRadius: Radius.md,
+    },
+
+    cancelInput: {
+      minHeight: 110,
+      textAlignVertical: 'top',
+      ...Typography.caption,
+      color: colors.textPrimary,
+      alignItems: 'flex-start',
+    },
+
+    actions: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 12,
+    },
+
+    cancelButton: {
+      flex: 1,
+    },
+
+    confirmButton: {
+      flex: 1,
     },
   });

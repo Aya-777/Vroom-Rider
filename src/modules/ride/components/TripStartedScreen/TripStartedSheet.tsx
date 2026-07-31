@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo } from 'react';
 import { View, StatusBar, Text } from 'react-native';
 import { useTheme } from '../../../../core/theme/useTheme';
-import {BaseBottomSheet} from '../../../../shared/components/BaseBottomSheet';
+import { BaseBottomSheet } from '../../../../shared/components/BaseBottomSheet';
 import { createStyles } from '../../styles/trip.styles';
 import { useTranslation } from 'react-i18next';
 import { TripSummaryGrid } from '../../components/TripStartedScreen/TripSummaryGrid';
-import {DriverInfoCard} from '../../components/TripStartedScreen/DriverInfoCard';
-import { useTripStartedViewModel } from '../../viewmodels/useTripStartedViewModel'; 
+import { DriverInfoCard } from '../../components/TripStartedScreen/DriverInfoCard';
+import { useTripStartedViewModel } from '../../viewmodels/useTripStartedViewModel';
 import ReviewModal from '../../../review/components/ReviewModal';
 import TripEndedModal from '../TripEndedModal/TripEndedModal';
 
@@ -21,38 +21,35 @@ export default function TripStartedScreen({ onTripEnded }: Props) {
 
   const vm = useTripStartedViewModel();
 
-  
   useEffect(() => {
     const timer = setTimeout(() => {
       vm.setIsBillVisible(true);
     }, 3000);
-    
+
     return () => clearTimeout(timer);
   }, []);
-  
-  const snapPoints = useMemo(() => ['30%', '70%'], []);  
+
+  const snapPoints = useMemo(() => ['30%', '70%'], []);
 
   return (
     <>
-      <BaseBottomSheet 
-        isVisible={true}
-        snapPoints={snapPoints}
-        index={1}
-      >
+      <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1}>
         <StatusBar translucent backgroundColor="transparent" />
         <Text style={styles.tripStartedMessage}>{t('tripStarted')}</Text>
         {/* Driver Card */}
-        <DriverInfoCard 
-          name="David" 
-          rating="4.9" 
-          car="Black Toyota Camry" 
-          plate="ABC-1234" 
-          styles={styles} 
+        <DriverInfoCard
+          name="David"
+          rating="4.9"
+          car="Black Toyota Camry"
+          plate="ABC-1234"
+          styles={styles}
         />
 
         {/* Title */}
         <Text style={styles.summaryTitle}>{t('preTripSummary')}</Text>
-        <Text style={styles.disclaimerText}>{t('common:date')}: {new Date().toLocaleDateString()}</Text>
+        <Text style={styles.disclaimerText}>
+          {t('common:date')}: {new Date().toLocaleDateString()}
+        </Text>
         {/* Summary Grid */}
         <TripSummaryGrid />
 
@@ -62,7 +59,7 @@ export default function TripStartedScreen({ onTripEnded }: Props) {
             <Text style={styles.subtotalLabel}>{t('subtotal')}</Text>
             <Text style={styles.subtotalValue}>$24.50</Text>
           </View>
-          <View style={styles.paymentMethod}>
+          <View style={styles.payment_method}>
             <Text style={styles.paymentText}>{t('common:payment.cash')}</Text>
           </View>
         </View>
@@ -74,17 +71,17 @@ export default function TripStartedScreen({ onTripEnded }: Props) {
       <TripEndedModal
         visible={vm.isBillVisible}
         onConfirmPayment={() => {
-            vm.setIsReviewVisible(true);
-            vm.setIsBillVisible(false);
-          }}
+          vm.setIsReviewVisible(true);
+          vm.setIsBillVisible(false);
+        }}
       />
 
-      <ReviewModal 
-        visible={vm.isReviewVisible} 
+      <ReviewModal
+        visible={vm.isReviewVisible}
         onClose={() => {
-          vm.setIsReviewVisible(false)
+          vm.setIsReviewVisible(false);
           onTripEnded();
-        }} 
+        }}
         onSubmit={(rating, review) => {
           console.log(rating, review);
           vm.setIsReviewVisible(false);

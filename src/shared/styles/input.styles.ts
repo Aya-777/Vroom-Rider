@@ -45,10 +45,12 @@ export const createStyles = (colors: ThemeColors) =>
             borderWidth: 1,
             textAlign: 'left',
             ...Typography.caption,
+            marginBottom: -4,
         },
         errorText: {
             color: colors.error,
             marginTop: 4,
+            marginBottom: 12,
             ...Typography.smallCaption,
         },
     });

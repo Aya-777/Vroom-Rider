@@ -1,5 +1,10 @@
 import axios from 'axios';
 import i18n from 'i18next';
+import { storageService } from '../storage/storage.service';
+import { getAuthToken } from '../store/authStore';
+
+export const apiClient = axios.create({
+  baseURL: 'http://192.168.1.6:8000/',
 import { getAuthToken, getRefreshToken, setAuthToken, logoutAuth } from '../store/authStore';
 import { ENDPOINTS } from './endpoints';
 

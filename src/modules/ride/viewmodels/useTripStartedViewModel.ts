@@ -10,9 +10,6 @@ export function useTripStartedViewModel() {
   const [isBillVisible, setIsBillVisible] = useState(false);
 
   // Actions
-  const handleBackPress = () => {
-  };
-
   const handleSubmit = () => {
     // navigation.navigate('HomeScreen');
   };
@@ -36,7 +33,6 @@ export function useTripStartedViewModel() {
     setIsReviewVisible,
 
     // Actions
-    handleBackPress,
     handleSubmit,
     handleCloseReviewModal
   };

@@ -10,34 +10,33 @@ import { useTranslation } from 'react-i18next';
 
 type Props = {
   time: string;
-  price: string;
+  estimatedPrice: string;
+  totalPrice?: string;
 };
 
-export default function TimePriceBox({ time, price }: Props) {
+export default function TimePriceBox({ time, estimatedPrice, totalPrice }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
-  const {t} = useTranslation(['rideDetails', 'common']);
+  const { t } = useTranslation(['rideDetails', 'common']);
 
   return (
     <View style={styles.timePriceRow}>
+      <InfoBox
+        icon={<ClockIcon width={16} height={16} fill={colors.primary} />}
+        title={t('common:time')}
+        value={`${time} min`}
+      />
 
       <InfoBox
-                icon={<ClockIcon width={16} height={16} fill={colors.primary} />}
-                title={t('time')}
-                value={time || 'N/A'}
-              />
-      
-              <InfoBox
-                icon={
-                  <EstimatedPriceIcon
-                    width={16}
-                    height={16}
-                    fill={colors.primary}
-                  />
-                }
-                title={t('estimated')}
-                value={price || 'N/A'}
-              />
+        icon={
+          <EstimatedPriceIcon width={16} height={16} fill={colors.primary} />
+        }
+        title={t('common:payment.estimatedPrice')}
+        value={`${estimatedPrice}$`}
+        title2={t('common:totalPrice')}
+        value2={`${totalPrice}$`}
+        icon2={<EstimatedPriceIcon width={16} height={16} fill={colors.primary}/>}
+      />
     </View>
   );
 }

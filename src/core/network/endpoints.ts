@@ -19,4 +19,15 @@ export const ENDPOINTS = {
     CHANGE_PHONE_VERIFY: '/api/v1/users/me/change-phone/verify-otp/',
     CHANGE_PASSWORD: '/api/v1/users/me/change-password/',
   },
+
+  TRIPS: {
+  INITIAL_ESTIMATE: '/trips/trips/estimate/initial/',
+  REFINED_ESTIMATE: '/trips/trips/estimate/refined/',
+  SAVED_LOCATIONS: '/trips/saved-locations/',
+  SAVED_LOCATION: (id: number) => `/trips/saved-locations/${id}/`,
+  PREFERENCES: '/trips/preferences/',
+  CONFIRM: '/trips/confirm/',
+  CANCEL: (id: number) => `/trips/trips/${id}/cancel/`,
+},
+
 } as const;

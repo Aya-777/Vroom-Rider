@@ -1,45 +1,104 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRideStore } from '../store/useRideStore';
+import { RideFilter } from '../types/ride.types';
+import { rideApi } from '../services/rideApi';
+import { Double } from 'react-native/Libraries/Types/CodegenTypes';
 
 export function useRideDetailsViewModel() {
-  
-  const setRideDetails = useRideStore((state) => state.setRideDetails)
+  const { rideData, setRideDetails } = useRideStore();
+  const { estimate, setEstimate } = useRideStore();
 
-  const [timeEstimate, setTimeEstimate] = useState('30:00 m');
-  const [priceEstimate, setPriceEstimate] = useState('$24.50');
-  const [selectedVehicle, setSelectedVehicle] = useState('economy');
-  const [selectedPayment, setSelectedPayment] = useState('cash');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedVehicleId, setSelectedVehicleId] = useState(1);
+  const [selectedPayment, setSelectedPayment] = useState('cash');
+  const [selectedFilterIds, setSelectedFilterIds] = useState<string[]>([]);
+  const [filters, setFilters] = useState<RideFilter[]>([]);
+  const [isLoadingFilters, setIsLoadingFilters] = useState(false);
+  const [filtersVisible, setFiltersVisible] = useState(false);
 
+  const selectedVehicle = useMemo(() => {
+    return estimate?.pricing_tiers?.find(
+      tier => tier.tier_id === selectedVehicleId,
+    );
+  }, [estimate, selectedVehicleId]);
 
-  const saveRideDetails = () => {
+  const updateRideDetails = (totalPrice: Double) => {
+  setRideDetails({
+    vehicle_type_id: selectedVehicleId,
+    payment_method: selectedPayment === 'cash' ? 'CASH' : 'WALLET',
+  });
 
-    setRideDetails({
-      payment: selectedPayment,
-      vehicleType: selectedVehicle,
-      price: priceEstimate,
-      timeEstimate: timeEstimate,
-    })
-
+  if (!estimate || totalPrice === null) {
+    return;
   }
 
-  const handleBackPress= () => {
-  }
+  const updatedPricingTiers = estimate.pricing_tiers.map(tier =>
+    tier.tier_id === selectedVehicleId
+      ? {
+          ...tier,
+          estimated_price: totalPrice,
+        }
+      : tier,
+  );
+
+  setEstimate({
+    ...estimate,
+    pricing_tiers: updatedPricingTiers,
+  });
+};
   
+
+  const onSelectVehicle = (vehicleId: number) => {
+    setSelectedVehicleId(vehicleId);
+  };
+
+  const loadFilters = useCallback(async () => {
+    try {
+      setIsLoadingFilters(true);
+
+      const response = await rideApi.getFilters();
+
+      const mappedFilters: RideFilter[] = response.map((filter: RideFilter) => ({
+        id: String(filter.id),
+        code: filter.code,
+        title: filter.title,
+        extra_fee: Number(filter.extra_fee).toFixed(2),
+        iconName: filter.iconName ?? 'filter-outline',
+      }));
+
+      setFilters(mappedFilters);
+    } catch (error) {
+      console.error('Failed to load ride filters:', error);
+    } finally {
+      setIsLoadingFilters(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    loadFilters();
+  }, [loadFilters]);
+
+
   return {
-    timeEstimate,
-    priceEstimate,
+    rideData,
+    estimate,
+    filters,
+
+    selectedVehicleId,
     selectedVehicle,
     selectedPayment,
+    selectedFilterIds,
+    filtersVisible,
+
     isDropdownOpen,
 
-    setTimeEstimate,
-    setPriceEstimate,
-    setSelectedVehicle,
+    setSelectedFilterIds,
+    setFiltersVisible,
+    setSelectedVehicleId,
     setSelectedPayment,
     setIsDropdownOpen,
 
-    saveRideDetails,
-    handleBackPress,
+    onSelectVehicle,
+    updateRideDetails,
   };
 }
