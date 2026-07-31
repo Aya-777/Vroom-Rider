@@ -20,6 +20,7 @@ type Props = {
   onTripStarted: () => void;
   onTripEnded: () => void;
   onCancelPress: (reason: string) => void;
+  onKeepRide: () => void;
 };
 
 export default function RideBottomSheet({
@@ -33,6 +34,7 @@ export default function RideBottomSheet({
   onTripStarted,
   onTripEnded,
   onCancelPress,
+  onKeepRide,
 }: Props) {
   const renderSheet = () => {
     switch (rideState) {
@@ -50,6 +52,7 @@ export default function RideBottomSheet({
           <DriverFoundSheet
             onDriverFound={onDriverFound}
             onCancelPress={onCancelPress}
+            onKeepRide={onKeepRide}
             isCancelling={isCancelling}
             setIsCancelling={setIsCancelling}
           />
@@ -60,6 +63,7 @@ export default function RideBottomSheet({
           <DriverArrivedSheet
             onTripStarted={onTripStarted}
             onCancelPress={onCancelPress}
+            onKeepRide={onKeepRide}
             isCancelling={isCancelling}
             setIsCancelling={setIsCancelling}
           />

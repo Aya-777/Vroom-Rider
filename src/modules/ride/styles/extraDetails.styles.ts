@@ -4,26 +4,18 @@ import { ThemeColors } from '../../../core/theme/theme.types';
 
 export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
-    // timePriceRow: {
-    //   flexDirection: 'row',
-    //   marginBottom: 12,
-    //   gap : 15,
-    // },
-    
-        
-        timePriceRow: {
-          flexDirection: 'row',
-          alignItems: 'flex-start',
-          justifyContent: 'space-between',
-        },
-        boxTitle2: {
-          marginTop: 5,
-          marginStart: Spacing.xs,
-          color: colors.textPrimary,
-          ...Typography.caption,
-        },
-    
-    
+
+    timePriceRow: {
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      justifyContent: 'space-between',
+    },
+    boxTitle2: {
+      marginTop: 5,
+      marginStart: Spacing.xs,
+      color: colors.textPrimary,
+      ...Typography.caption,
+    },
 
     vehicleRow: {
       flexDirection: 'row',
@@ -45,7 +37,7 @@ export const createStyles = (colors: ThemeColors) =>
     activeVehicleCard: {
       borderWidth: 2,
       borderColor: colors.primary,
-      backgroundColor : colors.primary + '80'
+      backgroundColor: colors.primary + '80',
     },
 
     vehicleImage: {
@@ -63,9 +55,8 @@ export const createStyles = (colors: ThemeColors) =>
       color: colors.primary,
     },
 
-    actionsContainer:{
-      flex:1,
+    actionsContainer: {
+      flex: 1,
       flexDirection: 'row',
-    }
-
+    },
   });

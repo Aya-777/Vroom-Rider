@@ -62,18 +62,16 @@ export const createStyles = (colors: ThemeColors) =>
     justifyContent: 'space-between',
     paddingVertical: 14,
     paddingHorizontal: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
-  },
-  optionItemLast: {
-    borderBottomWidth: 0,
+    borderWidth: 1,
+    borderRadius: 16,
+    borderColor: colors.border,
   },
   optionSelected: {
     backgroundColor: colors.surface,
   },
   optionText: {
     color: colors.textMuted,
-    fontSize: 16,
+    ...Typography.body,
   },
   optionTextSelected: {
     color: colors.textPrimary,
@@ -81,6 +79,15 @@ export const createStyles = (colors: ThemeColors) =>
   },
   optionPrice: {
     color: colors.textMuted,
-    fontSize: 14,
+    ...Typography.caption,
+  },
+  activeFilter: {
+    borderWidth: 2,
+    borderColor: colors.primary,
+    backgroundColor: colors.primary + '80',
+    marginBottom: 2,
+  },
+  activeFilterText: {
+    color: colors.primary,
   },
 });

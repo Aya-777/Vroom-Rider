@@ -91,6 +91,10 @@ export function useRideViewModel() {
     }
   };
 
+  const keepRidePress = ()=>{
+    setIsCancelling(false);
+  }
+
   return {
     rideState,
     currentLocation,
@@ -106,5 +110,6 @@ export function useRideViewModel() {
     goToTripStarted,
     resetRide,
     cancelCurrentRide,
+    keepRidePress,
   };
 }

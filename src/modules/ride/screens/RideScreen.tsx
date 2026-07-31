@@ -47,6 +47,7 @@ export default function RideScreen() {
         onTripStarted={vm.goToTripStarted}
         onTripEnded={handleTripEnded}
         onCancelPress={vm.cancelCurrentRide}
+        onKeepRide={vm.keepRidePress}
       />
     </View>
   );

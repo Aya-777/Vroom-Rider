@@ -1,6 +1,11 @@
 import { StyleSheet } from 'react-native';
 import { ThemeColors } from '../../../core/theme/theme.types';
-import { Typography } from '../../../core/theme/tokens';
+import {
+  Radius,
+  Shadows,
+  Spacing,
+  Typography,
+} from '../../../core/theme/tokens';
 
 export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
@@ -127,12 +132,10 @@ export const createStyles = (colors: ThemeColors) =>
     },
     mapContainer: {
       flex: 1,
-      zIndex: 0, 
+      zIndex: 0,
     },
-    map: { flex: 1,
-      zIndex: 0, 
-    },
-    
+    map: { flex: 1, zIndex: 0 },
+
     searchResultsContainer: {
       maxHeight: 180,
       backgroundColor: colors.surface,
@@ -160,68 +163,78 @@ export const createStyles = (colors: ThemeColors) =>
       lineHeight: 18,
     },
     overlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.55)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 24,
-  },
-
-  modal: {
-    width: '100%',
-    maxWidth: 420,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 24,
-    padding: 24,
-    elevation: 8,
-    shadowOffset: {
-      width: 0,
-      height: 4,
+      flex: 1,
+      backgroundColor: 'rgba(0,0,0,0.45)',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: Spacing.xl,
     },
-    shadowOpacity: 0.2,
-    shadowRadius: 12,
-    shadowColor: '#000000',
-  },
 
-  title: {
-    ...Typography.h2,
-    textAlign: 'center',
-    marginBottom: 10,
-    color: colors.textSecondary
-  },
+    modal: {
+      width: '100%',
+      borderRadius: Radius.xl,
+      paddingHorizontal: 33,
+      paddingVertical: 20,
+      overflow: 'hidden',
+    },
 
-  message: {
-    ...Typography.semiBoldBody,
-    lineHeight: 22,
-    textAlign: 'center',
-    marginBottom: 20,
-    color: colors.textPrimary
-  },
+    title: {
+      ...Typography.h2,
+      textAlign: 'center',
+      color: colors.primary,
+      marginBottom: Spacing.md,
+    },
 
-  input: {
-    minHeight: 110,
-    borderWidth: 1,
-    borderColor: colors.textMuted,
-    borderRadius: 14,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    fontSize: 15,
-    textAlignVertical: 'top',
-    marginBottom: 20,
-  },
+    message: {
+      ...Typography.semiBoldBody,
+      lineHeight: 22,
+      textAlign: 'center',
+      marginBottom: 20,
+      color: colors.textPrimary,
+    },
 
-  actions: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 12,
-  },
+    Divider: {
+      height: 2,
+      backgroundColor: colors.border,
+      marginBottom: Spacing.lg,
+      marginTop: Spacing.md,
+    },
 
-  cancelButton: {
-    flex: 1,
-  },
+    cancelInputContainer: {
+      marginTop: 12,
+      marginBottom: Spacing.xl,
+    },
 
-  confirmButton: {
-    flex: 1,
-  },
+    cancelInputBox: {
+      height: undefined,
+      minHeight: 90,
+      alignItems: 'flex-start',
+      paddingVertical: 10,
+      borderWidth: 0,
+      backgroundColor: colors.surface,
+      borderRadius: Radius.md,
+    },
+
+    cancelInput: {
+      minHeight: 110,
+      textAlignVertical: 'top',
+      ...Typography.caption,
+      color: colors.textPrimary,
+      alignItems: 'flex-start',
+    },
+
+    actions: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 12,
+    },
+
+    cancelButton: {
+      flex: 1,
+    },
+
+    confirmButton: {
+      flex: 1,
+    },
   });

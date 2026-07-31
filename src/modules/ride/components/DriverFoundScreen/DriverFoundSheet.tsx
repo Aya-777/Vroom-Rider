@@ -18,6 +18,7 @@ type Props = {
   onCancelPress: (reason: string) => void;
   isCancelling: boolean;
   setIsCancelling: (value: boolean) => void;
+  onKeepRide: () => void;
 };
 
 export default function DriverFoundSheet({
@@ -25,6 +26,7 @@ export default function DriverFoundSheet({
   onCancelPress,
   isCancelling,
   setIsCancelling,
+  onKeepRide,
 }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
@@ -67,6 +69,7 @@ export default function DriverFoundSheet({
       {isCancelling && (
         <CancelModal
           cancelCurrentRide={onCancelPress}
+          keepRide={onKeepRide}
           isCancelling={isCancelling}
         />
       )}

@@ -47,8 +47,7 @@ export const DropdownFilter: React.FC<DropdownFilterProps> = ({
               key={item.id}
               style={[
                 styles.optionItem,
-                isSelected && styles.optionSelected,
-                isLast && styles.optionItemLast,
+                isSelected && styles.activeFilter,
               ]}
               onPress={() => handleToggle(item.id)}
               activeOpacity={0.7}
@@ -58,7 +57,7 @@ export const DropdownFilter: React.FC<DropdownFilterProps> = ({
                 <Text
                   style={[
                     styles.optionText,
-                    isSelected && styles.optionTextSelected,
+                    isSelected && styles.activeFilterText,
                   ]}
                   numberOfLines={1}
                   adjustsFontSizeToFit
