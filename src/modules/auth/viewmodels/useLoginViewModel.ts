@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuthActions } from '../../../core/store/authStore';
 import { useAuthRepository } from '../repositories/authRepository';
 
 export function useLoginViewModel() {
   const { login } = useAuthActions();
-  
+  const { t } = useTranslation(['common']);
+
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [uiError, setUiError] = useState<string | null>(null);
@@ -19,30 +21,34 @@ export function useLoginViewModel() {
       return;
     }
 
+
     try {
       const response = await loginMutate({
-        phone_number: phone, 
-        password: password,     
+        phone_number: phone,
+        password: password,
         expected_role: 'rider',
       });
-      
-      const token = response.data.access;
-      login(token);
+
+      const { access, refresh } = response.data;
+      login(access, refresh);
     } catch (error: any) {
-      console.error("Login failed", error);
-      setUiError(error.response?.data?.message || error.message );
+      if (error.response?.status === 400) {
+        setUiError(t('auth:invalidCredentials'));
+      }
+      console.error('Login failed', error);
+      setUiError(error.response?.data?.message || error.message);
     }
   };
 
   return {
-    phone,        
-    setPhone,     
-    password,    
-    setPassword,  
+    phone,
+    setPhone,
+    password,
+    setPassword,
     handleLogin,
     isLoading,
     error: uiError,
-    phoneError: null, 
+    phoneError: null,
     passwordError: null,
   };
 }

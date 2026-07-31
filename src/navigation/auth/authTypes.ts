@@ -6,8 +6,14 @@ export type AuthStackParamList = {
   Login: undefined;
   Signup: undefined;
   ForgotPassword: undefined;
-  Otp: undefined;
-  ResetPassword: undefined;
+  Otp: {
+    phoneNumber: string;
+    type?: 'signup' | 'forgot_password';
+  };
+  ResetPassword: {
+    phoneNumber: string;
+    resetToken: string;
+  };
 };
 
 export type AuthStackScreenProps<T extends keyof AuthStackParamList> =

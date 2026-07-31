@@ -27,6 +27,9 @@ const Tab = createBottomTabNavigator<MainTabsParamList>();
 const HIDE_TAB_ROUTES = [
   'Ride',
   'AddNewPlace'
+  'EditProfile',
+  'ChangePhoneOtp',
+  'ChangePassword',
 ];
 
 const getTabIconComponent = (

@@ -60,10 +60,15 @@ export const useAuthRepository = {
   },
 
   useResetPassword: () => {
-    return useMutation<{message: string}, Error, ResetPasswordRequestDTO>({
+    return useMutation<{ message: string }, Error, ResetPasswordRequestDTO>({
       mutationFn: authApi.resetPassword,
     });
   },
-
   
+  useLogout: () => {
+    return useMutation<{ message: string }, Error>({
+      mutationFn: authApi.logout,
+    });
+  },
+
 };

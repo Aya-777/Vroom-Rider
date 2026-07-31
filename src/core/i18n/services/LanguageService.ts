@@ -4,7 +4,7 @@ import { SupportedLanguage } from '../types';
 import { STORAGE_KEY } from '../constants';
 import { DEFAULT_LANGUAGE } from '../constants';
 import * as RNLocalize from 'react-native-localize';
-import { I18nManager, NativeModules, Platform } from 'react-native';
+import { I18nManager, NativeModules } from 'react-native';
 
 
 export class LanguageService {

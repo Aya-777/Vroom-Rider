@@ -2,8 +2,13 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 export type ProfileStackParamList = {
   ProfileHome: undefined;
-  EditProfile: undefined;
-  payment_methods: undefined;
+  EditProfile:
+  | { firstName?: string; lastName?: string; phone?: string; profileImage?: string | null }
+  | undefined;
+  ChangePhone: undefined;
+  ChangePhoneOtp: { newPhone: string };
+  ChangePassword: undefined;
+  PaymentMethods: undefined;
 };
 
 export type ProfileStackScreenProps<T extends keyof ProfileStackParamList> =

@@ -3,12 +3,9 @@ import {
   createDrawerNavigator,
   DrawerContentComponentProps,
 } from '@react-navigation/drawer';
-
 import MainTabs from './MainTabs';
 import SidebarScreen from '../../modules/sidebar/screens/SidebarScreen';
-
 import { MainDrawerParamList } from './mainTypes';
-import {I18nManager} from 'react-native';
 
 const Drawer = createDrawerNavigator<MainDrawerParamList>();
 

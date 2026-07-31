@@ -1,12 +1,14 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, RefreshControl } from 'react-native';
 
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/profile.styles';
 
 import { useProfileViewModel } from '../viewmodels/useProfileViewModel';
 import { useProfileActions } from '../hooks/useProfileActions';
-
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { ProfileStackParamList } from '../../../navigation/main/profile/profileTypes';
 import ProfileCard from '../components/ProfileCard';
 import GridSection from '../components/GridSection';
 import PromoBanner from '../components/PromoBanner';
@@ -18,10 +20,11 @@ import ActionButton from '../../../shared/components/ActionButton';
 import Header from '../../../shared/components/Header';
 import { navigate } from '../../../navigation/rootTypes';
 
+type ProfileNavProp = NativeStackNavigationProp<ProfileStackParamList, 'ProfileHome'>;
 
 export default function ProfileScreen() {
-
-  const { gridItems, listItems, openSidebar } = useProfileViewModel();
+  const navigation = useNavigation<ProfileNavProp>();
+  const { gridItems, listItems, openSidebar, profile, isLoading, isRefreshing, onRefresh } = useProfileViewModel();
   const { logout } = useProfileActions();
 
   const { colors } = useTheme();
@@ -35,23 +38,39 @@ export default function ProfileScreen() {
       end={{ x: 0, y: 1 }}
       style={styles.container}
     >
-      <Header title={t('welcome')}
-        onNotificationPress={() =>
-          navigate('Notifications')}
-        onMenuPress={openSidebar}
-      />
+      <Header title={t('welcome')} onNotificationPress={() => navigate('Notifications')} onMenuPress={openSidebar} />
 
       <View style={styles.container}>
         <ScrollView
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefreshing}
+              onRefresh={onRefresh}
+              tintColor={colors.primary}
+              colors={[colors.primary]}
+            />
+          }
         >
-          <ProfileCard />
+          <ProfileCard
+            firstName={profile?.firstName}
+            lastName={profile?.lastName}
+            phone={profile?.phone}
+            profileImage={profile?.profileImage}
+            isLoading={isLoading}
+            onEditPress={() =>
+              navigation.navigate('EditProfile', {
+                firstName: profile?.firstName,
+                lastName: profile?.lastName,
+                phone: profile?.phone, 
+                profileImage: profile?.profileImage,
+              })
+            }
+          />
 
           <GridSection items={gridItems} />
-
           <PromoBanner />
-
           <ListSection items={listItems} />
 
           <ActionButton
