@@ -2,7 +2,8 @@ import {
   Camera,
   Map,
   UserLocation,
-  CameraRef,
+  GeoJSONSource,
+  Layer,
 } from '@maplibre/maplibre-react-native';
 import { createStyles } from '../../styles/shared.styles';
 import { useTheme } from '../../../../core/theme/useTheme';
@@ -44,6 +45,30 @@ export const MapContainer = ({ vm }: MapContainerProps) => {
         />
 
         <UserLocation />
+        {vm.routeCoordinates.length > 0 && (
+          <GeoJSONSource
+            id="route"
+            data={{
+              type: 'Feature',
+              geometry: {
+                type: 'LineString',
+                coordinates: vm.routeCoordinates,
+              },
+              properties: {},
+            }}
+          >
+            <Layer
+              id="route-line"
+              type="line"
+              style={{
+                lineColor: '#3B82F6',
+                lineWidth: 5,
+                lineCap: 'round',
+                lineJoin: 'round',
+              }}
+            />
+          </GeoJSONSource>
+        )}
       </Map>
 
       {vm.isPickingLocation && (
