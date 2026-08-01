@@ -1,7 +1,7 @@
 import { apiClient } from '../../../core/network/apiClient';
 import { ENDPOINTS } from '../../../core/network/endpoints';
 import { v4 as uuidv4 } from 'uuid';
-
+import { RecentTripDTO } from './dto/recentTrip.dto';
 import { RequestRideRequestDTO, RequestRideResponseDTO } from './dto/ride.dto';
 
 import {
@@ -16,7 +16,12 @@ import {
   EstimateInitialRequestDTO,
   EstimateInitialResponseDTO,
 } from './dto/estimate.dto';
-import { RideParams } from '../types/ride.types';
+
+interface ApiEnvelope<T> {
+  'status code': number;
+  message: string;
+  data: T;
+}
 
 export const rideApi = {
   // Saved Places
@@ -55,7 +60,7 @@ export const rideApi = {
   },
 
   // Filters
-  getFilters : async (): Promise<RideFilter[]> => {
+  getFilters: async (): Promise<RideFilter[]> => {
     const response = await apiClient.get<RideFilter[]>(
       ENDPOINTS.TRIPS.PREFERENCES,
     );
@@ -92,11 +97,19 @@ export const rideApi = {
       data,
       {
         headers: {
-          'ْْْX-Idempotency-Key': idempotencyKey,
+          'X-Idempotency-Key': idempotencyKey,
         },
       },
     );
 
     return response.data;
+  },
+
+
+  getRecentTrips: async (): Promise<RecentTripDTO[]> => {
+    const response = await apiClient.get<ApiEnvelope<RecentTripDTO[]>>(
+      ENDPOINTS.TRIPS.RECENT,
+    );
+    return response.data.data;
   },
 };

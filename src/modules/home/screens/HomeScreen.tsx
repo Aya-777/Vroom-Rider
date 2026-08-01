@@ -34,7 +34,8 @@ export default function HomeScreen() {
   } = useHomeViewModel();
 
   const {
-    navigateToRide
+    navigateToRide,
+    navigateToRideWithDestination,
   } = useHomeActions();
 
   const serviceActions: Record<string, () => void> = {
@@ -89,10 +90,17 @@ export default function HomeScreen() {
               return (
                 <DestinationCard
                   key={destination.id}
-                  {...destination}
                   title={destination.title}
                   subtitle={destination.subtitle}
                   icon={<DestinationIcon />}
+                  onPress={() =>
+                    navigateToRideWithDestination({
+                      address: destination.subtitle,
+                      latitude: destination.dropoffLatitude,
+                      longitude: destination.dropoffLongitude,
+                      vehicleTypeId: destination.vehicleTypeId,
+                    })
+                  }
                 />
               );
             })}

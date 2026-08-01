@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { BaseBottomSheet } from '../../../shared/components/BaseBottomSheet';
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/activityDetails.styles';
