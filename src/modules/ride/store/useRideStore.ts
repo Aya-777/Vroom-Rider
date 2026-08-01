@@ -195,7 +195,6 @@ export const useRideStore = create<RideState>(set => ({
         estimated_duration_minutes: 0,
         pricing_tiers: [],
       },
-      savedPlaces: [],
     }),
 
   isPickingLocation: false,
