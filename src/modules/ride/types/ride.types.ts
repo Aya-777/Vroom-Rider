@@ -65,11 +65,11 @@ export interface CurrentRide {
   rider: number;
   driver: number | null;
   vehicle: number | null;
-  vehicle_type: string;
+  vehicle_type_id: number;
   status: string;
 
   stops: RideStop[];
-  preferences: RidePreferenceDTO[];
+  preference_ids: number[];
 
   estimated_distance: number;
   estimated_duration: number;
@@ -78,9 +78,6 @@ export interface CurrentRide {
   actual_distance: number | null;
   actual_duration: number | null;
   actual_price: string | null;
-
-  cancellation_reason: string | null;
-  cancelled_at: string | null;
 
   idempotency_key: string;
 

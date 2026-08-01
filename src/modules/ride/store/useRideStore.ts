@@ -63,7 +63,7 @@ export const useRideStore = create<RideState>(set => ({
     is_for_someone_else: false,
     passenger_contact_phone: '09********',
     stops: [],
-    preferenceIds: [],
+    preference_ids: [],
     scheduled_at: 'now',
   },
 
@@ -72,11 +72,11 @@ export const useRideStore = create<RideState>(set => ({
     rider: 1,
     driver: null,
     vehicle: null,
-    vehicle_type: 'ECONOMY',
+    vehicle_type_id: 1,
     status: 'PENDING',
 
     stops: [],
-    preferences: [],
+    preference_ids: [],
 
     estimated_distance: 0,
     estimated_duration: 0,
@@ -85,9 +85,6 @@ export const useRideStore = create<RideState>(set => ({
     actual_distance: null,
     actual_duration: null,
     actual_price: null,
-
-    cancellation_reason: null,
-    cancelled_at: null,
 
     idempotency_key: '',
 
@@ -198,7 +195,6 @@ export const useRideStore = create<RideState>(set => ({
         estimated_duration_minutes: 0,
         pricing_tiers: [],
       },
-      savedPlaces: [],
     }),
 
   isPickingLocation: false,
