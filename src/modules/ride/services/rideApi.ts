@@ -105,7 +105,7 @@ export const rideApi = {
     return response.data;
   },
 
-
+  // Recent Trips
   getRecentTrips: async (): Promise<RecentTripDTO[]> => {
     const response = await apiClient.get<ApiEnvelope<RecentTripDTO[]>>(
       ENDPOINTS.TRIPS.RECENT,

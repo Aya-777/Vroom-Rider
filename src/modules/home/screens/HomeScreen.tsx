@@ -3,19 +3,15 @@ import {
   ScrollView,
   View,
 } from 'react-native';
-
 import LinearBg from '../../../shared/components/LinearBg';
 import SearchBar from '../../../shared/components/SearchBar';
 import ForYouStar from '../../../assets/svg/home/ForYouStar.svg';
-
 import ServiceCard from '../components/ServiceCard';
 import DestinationCard from '../components/DestinationCard';
 import SectionHeader from '../components/SectionHeader';
-
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/home.styles';
 import { useHomeViewModel } from '../viewmodels/useHomeViewModel';
-
 import HeaderTopAppBar from '../components/HomeHeader';
 import { useHomeActions } from '../hooks/useHomeActions';
 import { useTranslation } from 'react-i18next';
@@ -40,7 +36,6 @@ export default function HomeScreen() {
 
   const serviceActions: Record<string, () => void> = {
     '1': navigateToRide,
-    // '2': navigateToReserve,
   };
 
   return (
