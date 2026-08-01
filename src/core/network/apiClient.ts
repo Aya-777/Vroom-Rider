@@ -1,7 +1,7 @@
 import axios from 'axios';
 import i18n from 'i18next';
 import { storageService } from '../storage/storage.service';
-import { getAuthToken, getRefreshToken, logoutAuth, setAuthToken } from '../store/authStore';
+import { getAuthToken, getRefreshToken, setAuthToken, logoutAuth } from '../store/authStore';
 import { ENDPOINTS } from './endpoints';
 
 export const apiClient = axios.create({
