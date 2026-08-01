@@ -1,3 +1,4 @@
+import { useCallback, useMemo } from 'react';
 import { BaseBottomSheet } from '../../../shared/components/BaseBottomSheet';
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/activityDetails.styles';
@@ -16,8 +17,12 @@ export default function ActivityDetailsSheet({
 
   if (!activity) return null;
 
+  const snapPoints = useMemo(() => ['80%'], []);
+
   return (
     <BaseBottomSheet
+      index={1}
+      snapPoints={snapPoints}
       isVisible={visible}
       onClose={onClose}
       contentContainerStyle={styles.sheetClip}

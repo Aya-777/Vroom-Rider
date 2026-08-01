@@ -7,12 +7,17 @@ import BottomSheet, {
 } from '@gorhom/bottom-sheet';
 import { StyleSheet, ViewStyle } from 'react-native';
 import SheetBackground from './SheetBackground';
+import {
+  SharedValue,
+  useSharedValue,
+} from 'react-native-reanimated';
 
 interface BaseBottomSheetProps extends Omit<BottomSheetProps, 'children'> {
   isVisible: boolean;
   onClose?: () => void;
   children: React.ReactNode;
   contentContainerStyle?: ViewStyle;
+  animatedPosition?: SharedValue<number>;
 }
 
 export const BaseBottomSheet: React.FC<BaseBottomSheetProps> = ({
@@ -21,6 +26,7 @@ export const BaseBottomSheet: React.FC<BaseBottomSheetProps> = ({
   snapPoints = ['30%', '70%'],
   children,
   contentContainerStyle,
+  animatedPosition,
   ...rest
 }) => {
   const { colors } = useTheme();
@@ -42,25 +48,28 @@ export const BaseBottomSheet: React.FC<BaseBottomSheetProps> = ({
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
-useEffect(() => {
-  if (isVisible) {
-    bottomSheetRef.current?.snapToIndex(0);
-  } else {
-    bottomSheetRef.current?.close();
-  }
-}, [isVisible]);
+  useEffect(() => {
+    if (isVisible) {
+      bottomSheetRef.current?.snapToIndex(0);
+    } else {
+      bottomSheetRef.current?.close();
+    }
+  }, [isVisible]);
 
   return (
-    <BottomSheet
-      ref={bottomSheetRef}
-      index={-1}
-      snapPoints={snapPoints}
-      onClose={onClose}
-      handleIndicatorStyle={styles.handleIndicatorStyle}
-      backgroundComponent={renderBackground}
-      {...rest}
-    >
-      <BottomSheetView style={containerStyle}>{children}</BottomSheetView>
-    </BottomSheet>
+    <>
+      <BottomSheet
+        ref={bottomSheetRef}
+        index={-1}
+        snapPoints={snapPoints}
+        animatedPosition={animatedPosition}
+        onClose={onClose}
+        handleIndicatorStyle={styles.handleIndicatorStyle}
+        backgroundComponent={renderBackground}
+        {...rest}
+      >
+        <BottomSheetView style={containerStyle}>{children}</BottomSheetView>
+      </BottomSheet>
+    </>
   );
 };

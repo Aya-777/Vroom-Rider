@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { DriverPinEntry } from '../../components/DriverArrivedScreen/DriverPinEntry';
 import ActionButton from '../../../../shared/components/ActionButton';
 import { CancelModal } from '../shared/CancelModal';
+import { SharedValue } from 'react-native-reanimated';
 
 type Props = {
   onTripStarted: () => void;
@@ -20,6 +21,7 @@ type Props = {
   isCancelling: boolean;
   setIsCancelling: (value: boolean) => void;
   onKeepRide: () => void;
+  animatedPosition?: SharedValue<number>;
 };
 
 export default function DriverArrivedSheet({
@@ -27,7 +29,8 @@ export default function DriverArrivedSheet({
   onCancelPress,
   isCancelling,
   setIsCancelling,
-  onKeepRide
+  onKeepRide,
+  animatedPosition,
 }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
@@ -45,7 +48,7 @@ export default function DriverArrivedSheet({
 
   return (
     <>
-      <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1}>
+      <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1} animatedPosition={animatedPosition}>
         <DriverStatus text={t(driver.arrivedMessage)} styles={styles} />
         {/* 1. PIN Section */}
         <DriverPinEntry

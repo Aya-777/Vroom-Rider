@@ -95,6 +95,17 @@ export function useRideViewModel() {
     setIsCancelling(false);
   }
 
+  const onMyLocationPress = async () => {
+    try {
+      const location = await LocationService.getCurrentLocation();
+      setCurrentLocation(location);
+      return location;
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
+  };
+
   return {
     rideState,
     currentLocation,
@@ -111,5 +122,6 @@ export function useRideViewModel() {
     resetRide,
     cancelCurrentRide,
     keepRidePress,
+    onMyLocationPress,
   };
 }

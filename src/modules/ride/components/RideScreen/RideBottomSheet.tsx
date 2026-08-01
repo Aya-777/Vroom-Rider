@@ -8,6 +8,7 @@ import DriverArrivedSheet from '../DriverArrivedScreen/DriverArrivedSheet';
 import TripStartedSheet from '../TripStartedScreen/TripStartedSheet';
 import { Location } from '../../../../core/services/location/LocationService';
 import { EstimateInitialResponseDTO } from '../../services/dto/estimate.dto';
+import { SharedValue } from 'react-native-reanimated';
 
 type Props = {
   rideState: RideState;
@@ -21,6 +22,7 @@ type Props = {
   onTripEnded: () => void;
   onCancelPress: (reason: string) => void;
   onKeepRide: () => void;
+  animatedPosition?: SharedValue<number>;
 };
 
 export default function RideBottomSheet({
@@ -35,17 +37,24 @@ export default function RideBottomSheet({
   onTripEnded,
   onCancelPress,
   onKeepRide,
+  animatedPosition,
 }: Props) {
   const renderSheet = () => {
     switch (rideState) {
       case RideState.SELECT_RIDE:
-        return <SelectRideSheet onNextPress={onSelectRideNext} />;
+        return <SelectRideSheet onNextPress={onSelectRideNext} 
+        animatedPosition={animatedPosition}
+        />;
 
       case RideState.EXTRA_DETAILS:
-        return <ExtraDetailsSheet onNextPress={onExtraDetailsNext} />;
+        return <ExtraDetailsSheet onNextPress={onExtraDetailsNext} 
+        animatedPosition={animatedPosition}
+        />;
 
       case RideState.CONFIRM_RIDE:
-        return <RideConfirmationSheet onNextPress={onRideConfirmed} />;
+        return <RideConfirmationSheet onNextPress={onRideConfirmed} 
+        animatedPosition={animatedPosition}
+        />;
 
       case RideState.DRIVER_FOUND:
         return (
@@ -55,6 +64,7 @@ export default function RideBottomSheet({
             onKeepRide={onKeepRide}
             isCancelling={isCancelling}
             setIsCancelling={setIsCancelling}
+            animatedPosition={animatedPosition}
           />
         );
 
@@ -66,11 +76,14 @@ export default function RideBottomSheet({
             onKeepRide={onKeepRide}
             isCancelling={isCancelling}
             setIsCancelling={setIsCancelling}
+            animatedPosition={animatedPosition}
           />
         );
 
       case RideState.TRIP_STARTED:
-        return <TripStartedSheet onTripEnded={onTripEnded} />;
+        return <TripStartedSheet onTripEnded={onTripEnded} 
+        animatedPosition={animatedPosition}
+        />;
     }
   };
   return <>{renderSheet()}</>;

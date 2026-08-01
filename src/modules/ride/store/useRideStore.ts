@@ -64,7 +64,7 @@ export const useRideStore = create<RideState>(set => ({
     passenger_contact_phone: '09********',
     stops: [],
     preferenceIds: [],
-    scheduled_at: 'NOW',
+    scheduled_at: 'now',
   },
 
   currentRide: {

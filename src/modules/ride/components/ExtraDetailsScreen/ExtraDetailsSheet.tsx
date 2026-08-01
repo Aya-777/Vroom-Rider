@@ -10,12 +10,14 @@ import { useRideDetailsViewModel } from '../../viewmodels/useRideDetailsViewMode
 import { useTranslation } from 'react-i18next';
 import ArrowRight from '../../../../assets/svg/arrows/arrow.svg';
 import { Double } from 'react-native/Libraries/Types/CodegenTypes';
+import { SharedValue } from 'react-native-reanimated';
 
 type Props = {
   onNextPress: () => void;
+  animatedPosition?: SharedValue<number>;
 };
 
-export default function ExtraDetailsScreen({ onNextPress }: Props) {
+export default function ExtraDetailsScreen({ onNextPress, animatedPosition }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['rideDetails', 'common']);
@@ -57,7 +59,7 @@ export default function ExtraDetailsScreen({ onNextPress }: Props) {
   }, [vm.selectedVehicle, vm.filters, vm.selectedFilterIds]);
 
   return (
-    <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1}>
+    <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1} animatedPosition={animatedPosition}>
       <TimePriceBox
         time={
           vm.estimate.estimated_duration_minutes > 0

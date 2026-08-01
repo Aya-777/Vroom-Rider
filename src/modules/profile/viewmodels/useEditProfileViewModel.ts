@@ -3,7 +3,8 @@ import { useNavigation } from '@react-navigation/native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { profileRepository } from '../repositories/profileRepository';
 import { UpdateProfileImageInput } from '../types/profile.types';
-import { apiClient } from '../../../core/network/apiClient';
+import { updateCurrentUser } from '../../../core/store/userStore';
+import { getFullImageUrl } from '../../../shared/utils/getImageUrl';
 
 type EditProfileParams = {
     firstName?: string;
@@ -20,12 +21,10 @@ export const useEditProfileViewModel = (params: EditProfileParams) => {
     const [isPickerVisible, setIsPickerVisible] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const IMAGE_BASE_URL = `${apiClient.defaults.baseURL}media/`;
 
     const previewImageUri = pickedImage?.uri
-        ?? (params?.profileImage
-            ? `${IMAGE_BASE_URL}${params.profileImage}`
-            : null);
+        ?? getFullImageUrl(params?.profileImage)
+        ?? null;
 
     const openPhotoPicker = () => setIsPickerVisible(true);
     const closePhotoPicker = () => setIsPickerVisible(false);
@@ -51,10 +50,18 @@ export const useEditProfileViewModel = (params: EditProfileParams) => {
             setIsSaving(true);
             setError(null);
 
-            await profileRepository.updateProfile({
+            const updated = await profileRepository.updateProfile({
                 firstName,
                 lastName,
                 profileImage: pickedImage,
+            });
+
+            updateCurrentUser({
+                first_name: updated.firstName,
+                last_name: updated.lastName,
+                profile_image: updated.profileImage,
+                account_status: updated.accountStatus,
+                rating: updated.ratingAvg,
             });
 
             navigation.goBack();
