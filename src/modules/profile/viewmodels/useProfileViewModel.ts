@@ -4,10 +4,13 @@ import { useProfileMenuItems } from '../constants/profileData';
 import { useMainDrawer } from '../../../navigation/hooks/useMainDrawer';
 import { profileRepository } from '../repositories/profileRepository';
 import { UserProfile } from '../types/profile.types';
+import { useCurrentUser, updateCurrentUser } from '../../../core/store/userStore';
 
 export const useProfileViewModel = () => {
   const { openSidebar } = useMainDrawer();
   const { gridItems, listItems } = useProfileMenuItems();
+
+  const cachedUser = useCurrentUser();
 
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +27,18 @@ export const useProfileViewModel = () => {
       setError(null);
 
       const data = await profileRepository.getMyProfile();
-      if (isMounted.current) setProfile(data);
+      if (isMounted.current) {
+        setProfile(data);
+
+        updateCurrentUser({
+          first_name: data.firstName,
+          last_name: data.lastName,
+          phone_number: data.phone,
+          profile_image: data.profileImage,
+          account_status: data.accountStatus,
+          rating: data.ratingAvg,
+        });
+      }
     } catch (err) {
       if (isMounted.current) {
         const message = err instanceof Error ? err.message : 'FETCH_PROFILE_FAILED';
@@ -51,10 +65,24 @@ export const useProfileViewModel = () => {
   );
 
   const onRefresh = () => fetchProfile('refresh');
-  
+
+  const fallbackProfile: UserProfile | null = cachedUser
+    ? {
+      id: cachedUser.id,
+      firstName: cachedUser.first_name,
+      lastName: cachedUser.last_name,
+      phone: cachedUser.phone_number,
+      role: cachedUser.role,
+      accountStatus: cachedUser.account_status ?? '',
+      profileImage: cachedUser.profile_image,
+      ratingAvg: cachedUser.rating ?? 5.0,
+      isActive: true,
+    }
+    : null;
+
   return {
     openSidebar,
-    profile,
+    profile: profile ?? fallbackProfile,
     isLoading,
     isRefreshing,
     error,

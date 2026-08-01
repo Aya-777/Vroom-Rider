@@ -12,5 +12,8 @@ export interface DestinationItem {
   id: string;
   title: string;
   subtitle: string;
-  icon: ReactNode;
+  icon: React.ElementType;
+  dropoffLatitude: number;
+  dropoffLongitude: number;
+  vehicleTypeId: number | null;
 }

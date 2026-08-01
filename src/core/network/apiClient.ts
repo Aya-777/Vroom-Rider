@@ -1,11 +1,11 @@
 import axios from 'axios';
 import i18n from 'i18next';
-import { storageService } from '../storage/storage.service';
-import { getAuthToken, getRefreshToken, setAuthToken, logoutAuth } from '../store/authStore';
+import { getAuthToken, getRefreshToken, setAuthToken } from '../store/authStore';
+import { performLogout } from '../store/session';
 import { ENDPOINTS } from './endpoints';
 
 export const apiClient = axios.create({
-  baseURL: 'http://192.168.1.6:8000/',
+  baseURL: 'http://192.168.1.106:8000/',
   timeout: 10000,
   headers: { 'Content-Type': 'application/json' },
 });
@@ -34,7 +34,7 @@ apiClient.interceptors.response.use(
       const refreshToken = getRefreshToken();
 
       if (!refreshToken) {
-        logoutAuth();
+        performLogout();
         return Promise.reject(error);
       }
 
@@ -63,7 +63,7 @@ apiClient.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return apiClient(originalRequest);
       } catch (refreshError) {
-        logoutAuth();
+        performLogout();
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;

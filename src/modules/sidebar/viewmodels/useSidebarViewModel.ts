@@ -1,18 +1,23 @@
-import {DrawerContentComponentProps} from '@react-navigation/drawer';
+import { DrawerContentComponentProps } from '@react-navigation/drawer';
 
-import {SIDEBAR_ITEMS} from '../constants/sidebarItems';
-import {SidebarItem} from '../types/sidebar.types';
+import { SIDEBAR_ITEMS } from '../constants/sidebarItems';
+import { SidebarItem } from '../types/sidebar.types';
+import { useCurrentUser } from '../../../core/store/userStore';
+import { getFullImageUrl } from '../../../shared/utils/getImageUrl';
 
-type Navigation =
-  DrawerContentComponentProps['navigation'];
+type Navigation = DrawerContentComponentProps['navigation'];
 
 export const useSidebarViewModel = (
   navigation: Navigation,
 ) => {
+  const cachedUser = useCurrentUser();
+
   const user = {
-    name: 'John Doe',
-    rating: 4.9,
-    avatar: undefined,
+    name: cachedUser
+      ? `${cachedUser.first_name} ${cachedUser.last_name}`
+      : '',
+    rating: cachedUser?.rating ?? 5.0,
+    avatar: getFullImageUrl(cachedUser?.profile_image),
   };
 
   const handleItemPress = (item: SidebarItem) => {

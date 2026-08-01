@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import { apiClient } from '../../../core/network/apiClient';
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/profile.styles';
+import { getFullImageUrl } from '../../../shared/utils/getImageUrl';
 
 import EditIcon from '../../../assets/svg/common/edit.svg';
 import CallIcon from '../../../assets/svg/contact/call.svg';
@@ -16,7 +16,6 @@ type Props = {
   onEditPress?: () => void;
 };
 
-
 export default function ProfileCard({
   firstName,
   lastName,
@@ -27,25 +26,22 @@ export default function ProfileCard({
 }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
-  const IMAGE_BASE_URL = `${apiClient.defaults.baseURL}media/`;
   const fullName = isLoading
     ? '...'
     : [firstName, lastName].filter(Boolean).join(' ') || '—';
 
+  const imageUrl = getFullImageUrl(profileImage);
+
   return (
     <View style={styles.profileCard}>
-      {/* Edit */}
       <TouchableOpacity style={styles.editButton} onPress={onEditPress} disabled={!onEditPress}>
         <EditIcon fill={colors.background} />
       </TouchableOpacity>
 
-      {/* Avatar */}
       <View style={styles.avatarContainer}>
-        {profileImage ? (
+        {imageUrl ? (
           <Image
-            source={{
-              uri: `${IMAGE_BASE_URL}${profileImage}`,
-            }}
+            source={{ uri: imageUrl }}
             style={styles.avatarPlaceholder}
             onError={(e) => console.log('IMAGE ERROR', e.nativeEvent)}
           />) : (
@@ -56,12 +52,10 @@ export default function ProfileCard({
         )}
       </View>
 
-      {/* Divider */}
       <View style={styles.verticalDivider}>
         <View style={styles.dotIndicator} />
       </View>
 
-      {/* Profile Info */}
       <View style={styles.profileInfo}>
         <Text style={styles.userName}>{fullName}</Text>
 
