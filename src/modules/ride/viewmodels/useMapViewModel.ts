@@ -107,6 +107,23 @@ export default function useMapViewModel() {
       point.latitude,
     ]) ?? [];
     
+    const routeBounds =
+      routeCoordinates.length > 0
+        ? routeCoordinates.reduce(
+            (bounds, [lng, lat]) => ({
+              west: Math.min(bounds.west, lng),
+              south: Math.min(bounds.south, lat),
+              east: Math.max(bounds.east, lng),
+              north: Math.max(bounds.north, lat),
+            }),
+            {
+              west: routeCoordinates[0][0],
+              south: routeCoordinates[0][1],
+              east: routeCoordinates[0][0],
+              north: routeCoordinates[0][1],
+            },
+          )
+        : null;
 
   return {
     deviceLocation,
@@ -116,5 +133,6 @@ export default function useMapViewModel() {
     isPickingLocation,
     centerOnLocation,
     routeCoordinates,
+    routeBounds,
   };
 }
