@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 import ActionButton from '../../../../shared/components/ActionButton';
 import { Alert } from 'react-native';
 import { CancelModal } from '../shared/CancelModal';
+import { SharedValue } from 'react-native-reanimated';
 
 type Props = {
   onDriverFound: () => void;
@@ -19,6 +20,7 @@ type Props = {
   isCancelling: boolean;
   setIsCancelling: (value: boolean) => void;
   onKeepRide: () => void;
+  animatedPosition?: SharedValue<number>;
 };
 
 export default function DriverFoundSheet({
@@ -27,6 +29,7 @@ export default function DriverFoundSheet({
   isCancelling,
   setIsCancelling,
   onKeepRide,
+  animatedPosition,
 }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
@@ -45,7 +48,7 @@ export default function DriverFoundSheet({
 
   return (
     <>
-      <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1}>
+      <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1} animatedPosition={animatedPosition}>
         <DriverStatus text={t(driver.onTheWayMessage)} styles={styles} />
 
         <DriverAvatar uri={driver.avatar} styles={styles} />

@@ -7,18 +7,17 @@ import BottomSheet, {
 } from '@gorhom/bottom-sheet';
 import { StyleSheet, ViewStyle } from 'react-native';
 import SheetBackground from './SheetBackground';
-import Animated, {
-  useAnimatedStyle,
+import {
+  SharedValue,
   useSharedValue,
 } from 'react-native-reanimated';
-import { TouchableOpacity } from 'react-native';
-import MyLocationIcon from '../../assets/svg/common/myLocation.svg';
 
 interface BaseBottomSheetProps extends Omit<BottomSheetProps, 'children'> {
   isVisible: boolean;
   onClose?: () => void;
   children: React.ReactNode;
   contentContainerStyle?: ViewStyle;
+  animatedPosition?: SharedValue<number>;
 }
 
 export const BaseBottomSheet: React.FC<BaseBottomSheetProps> = ({
@@ -27,6 +26,7 @@ export const BaseBottomSheet: React.FC<BaseBottomSheetProps> = ({
   snapPoints = ['30%', '70%'],
   children,
   contentContainerStyle,
+  animatedPosition,
   ...rest
 }) => {
   const { colors } = useTheme();
@@ -47,54 +47,29 @@ export const BaseBottomSheet: React.FC<BaseBottomSheetProps> = ({
   );
 
   const bottomSheetRef = useRef<BottomSheet>(null);
-  const animatedPosition = useSharedValue(0);
 
-  const locationButtonStyle = useAnimatedStyle(() => ({
-  position: 'absolute',
-  right: 20,
-  top: animatedPosition.value - 68, // button height (52) + 16px margin
-  zIndex: 999,
-}));
-
-useEffect(() => {
-  if (isVisible) {
-    bottomSheetRef.current?.snapToIndex(0);
-  } else {
-    bottomSheetRef.current?.close();
-  }
-}, [isVisible]);
+  useEffect(() => {
+    if (isVisible) {
+      bottomSheetRef.current?.snapToIndex(0);
+    } else {
+      bottomSheetRef.current?.close();
+    }
+  }, [isVisible]);
 
   return (
     <>
-  <Animated.View style={locationButtonStyle}>
-    <TouchableOpacity
-      style={styles.myLocationButton}
-      onPress={() => {
-        // TODO
-      }}
-    >
-      <MyLocationIcon
-        width={24}
-        height={24}
-        fill={colors.primary}
-      />
-    </TouchableOpacity>
-  </Animated.View>
-
-  <BottomSheet
-    ref={bottomSheetRef}
-    index={-1}
-    snapPoints={snapPoints}
-    animatedPosition={animatedPosition}
-    onClose={onClose}
-    handleIndicatorStyle={styles.handleIndicatorStyle}
-    backgroundComponent={renderBackground}
-    {...rest}
-  >
-    <BottomSheetView style={containerStyle}>
-      {children}
-    </BottomSheetView>
-  </BottomSheet>
-</>
+      <BottomSheet
+        ref={bottomSheetRef}
+        index={-1}
+        snapPoints={snapPoints}
+        animatedPosition={animatedPosition}
+        onClose={onClose}
+        handleIndicatorStyle={styles.handleIndicatorStyle}
+        backgroundComponent={renderBackground}
+        {...rest}
+      >
+        <BottomSheetView style={containerStyle}>{children}</BottomSheetView>
+      </BottomSheet>
+    </>
   );
 };

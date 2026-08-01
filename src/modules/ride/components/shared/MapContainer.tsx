@@ -11,11 +11,14 @@ import { View } from 'react-native';
 import useMapViewModel from '../../viewmodels/useMapViewModel';
 import { useRef } from 'react';
 import { ICON_MAP } from '../../utils/iconMap';
-export const MapContainer = () => {
+
+type MapContainerProps = {
+  vm: ReturnType<typeof useMapViewModel>;
+};
+
+export const MapContainer = ({ vm }: MapContainerProps) => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
-
-  const vm = useMapViewModel();
 
   const MAPTILER_KEY = 'mfqv0iCS1dKFXcG8KrVN';
   const PinIcon = ICON_MAP['pin'];

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import PermissionService from '../../../core/services/location/PermissionService';
-import LocationService from '../../../core/services/location/LocationService';
+import LocationService, { Location } from '../../../core/services/location/LocationService';
 import { useLocationStore } from '../../../core/store/locationStore';
 import { CameraRef, MapRef } from '@maplibre/maplibre-react-native';
 import { useRideStore } from '../store/useRideStore';
@@ -89,11 +89,23 @@ export default function useMapViewModel() {
     });
   };
 
+  const centerOnLocation = (location: Location) => {
+    cameraRef.current?.easeTo({
+        center: [
+            location.longitude,
+            location.latitude,
+        ],
+        zoom: 16,
+        duration: 700,
+    });
+};
+
   return {
     deviceLocation,
     mapRef,
     cameraRef,
     handleRegionDidChange,
     isPickingLocation,
+    centerOnLocation,
   };
 }

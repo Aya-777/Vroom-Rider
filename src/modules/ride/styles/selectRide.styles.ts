@@ -163,5 +163,25 @@ export const createStyles = (colors: ThemeColors) =>
       alignSelf: 'center',
       backgroundColor: colors.backgroundSoft,
       // elevation: 3,
-    }
+    },
+    
+    myLocationButton: {
+    position: 'absolute',
+
+    right: 0,
+    bottom: -50, // adjust to be above your bottom sheet
+
+    width: 52,
+    height: 52,
+    borderRadius: 26,
+
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    backgroundColor: colors.surface,
+
+    zIndex: 20,
+
+    ...Shadows.medium,
+  },
   });
