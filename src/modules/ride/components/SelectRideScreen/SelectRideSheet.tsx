@@ -20,12 +20,14 @@ import {
 } from 'react-native';
 import { SavedPlacesModal } from '../SavedPlaces/SavedPlacesModal';
 import { Text } from 'react-native-gesture-handler';
+import { SharedValue } from 'react-native-reanimated';
 
 type Props = {
   onNextPress: () => void;
+  animatedPosition?: SharedValue<number>;
 };
 
-export default function SelectRideSheet({ onNextPress }: Props) {
+export default function SelectRideSheet({ onNextPress, animatedPosition }: Props) {
   const { colors, mode } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['selectRide', 'common']);
@@ -52,7 +54,7 @@ export default function SelectRideSheet({ onNextPress }: Props) {
 
   return (
     <>
-      <BaseBottomSheet isVisible={vm.isSheetVisible} index={1} snapPoints={snapPoints}>
+      <BaseBottomSheet isVisible={vm.isSheetVisible} index={1} snapPoints={snapPoints} animatedPosition={animatedPosition}>
         <View style={styles.dropdownRow}>
           <RideDropdown
             icon={<ScheduleIcon fill={colors.primary} />}

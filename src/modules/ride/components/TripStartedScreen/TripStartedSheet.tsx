@@ -9,12 +9,14 @@ import { DriverInfoCard } from '../../components/TripStartedScreen/DriverInfoCar
 import { useTripStartedViewModel } from '../../viewmodels/useTripStartedViewModel';
 import ReviewModal from '../../../review/components/ReviewModal';
 import TripEndedModal from '../TripEndedModal/TripEndedModal';
+import { SharedValue } from 'react-native-reanimated';
 
 type Props = {
   onTripEnded: () => void;
+  animatedPosition?: SharedValue<number>;
 };
 
-export default function TripStartedScreen({ onTripEnded }: Props) {
+export default function TripStartedScreen({ onTripEnded, animatedPosition }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['rideStarted', 'common']);
@@ -33,7 +35,7 @@ export default function TripStartedScreen({ onTripEnded }: Props) {
 
   return (
     <>
-      <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1}>
+      <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1} animatedPosition={animatedPosition}>
         <StatusBar translucent backgroundColor="transparent" />
         <Text style={styles.tripStartedMessage}>{t('tripStarted')}</Text>
         {/* Driver Card */}

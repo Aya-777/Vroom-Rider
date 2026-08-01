@@ -216,7 +216,6 @@ src/
 │   │   │       ├── SplashLogo.tsx
 │   │   │       ├── SplashRoad.tsx
 │   │   │       └── SplashText.tsx
-│   │   ├── constants
 │   │   ├── hooks
 │   │   │   ├── useAuthActions.ts
 │   │   │   ├── useSplashAnimation.ts
@@ -234,14 +233,12 @@ src/
 │   │   │   ├── authApi.ts
 │   │   │   └── dto
 │   │   │       └── auth.dto.ts
-│   │   ├── store
 │   │   ├── styles
 │   │   │   ├── Splash.styles.ts
 │   │   │   ├── forgotPassword.styles.ts
 │   │   │   ├── login.styles.ts
 │   │   │   ├── resetPassword.styles.ts
 │   │   │   └── signup.styles.ts
-│   │   ├── types
 │   │   ├── utils
 │   │   │   └── SplashPathUtils.ts
 │   │   └── viewmodels
@@ -252,7 +249,6 @@ src/
 │   │       ├── useSignupOtpViewModel.ts
 │   │       ├── useSignupViewModel.ts
 │   │       └── useSplashViewModel.ts
-│   ├── constants
 │   ├── home
 │   │   ├── components
 │   │   │   ├── DestinationCard.tsx
@@ -354,6 +350,7 @@ src/
 │   │   │   │   ├── DriverStatus.tsx
 │   │   │   │   └── ProgressBar.tsx
 │   │   │   ├── ExtraDetailsScreen
+│   │   │   │   ├── DropDownFilter.tsx
 │   │   │   │   ├── ExtraDetailsSheet.tsx
 │   │   │   │   ├── RideActionFilters.tsx
 │   │   │   │   ├── TimePriceBox.tsx
@@ -379,6 +376,7 @@ src/
 │   │   │   │   ├── TripSummaryGrid.tsx
 │   │   │   │   └── VerticalDivider.tsx
 │   │   │   └── shared
+│   │   │       ├── CancelModal.tsx
 │   │   │       ├── MapContainer.tsx
 │   │   │       ├── RideDropdown.tsx
 │   │   │       └── SearchResults.tsx
@@ -388,8 +386,12 @@ src/
 │   │   │   └── vehicleImages.ts
 │   │   ├── hooks
 │   │   │   ├── useDebounce.ts
+│   │   │   ├── useInitialPickup.ts
 │   │   │   ├── useLocationPermission.ts
-│   │   │   └── useLocationSearch.ts
+│   │   │   ├── useLocationSearch.ts
+│   │   │   ├── useRideMapLocations.ts
+│   │   │   ├── useSavedPlaces.ts
+│   │   │   └── useSelectRideState.ts
 │   │   ├── repositories
 │   │   │   └── rideRepositories.ts
 │   │   ├── screens
@@ -408,6 +410,7 @@ src/
 │   │   │   ├── addNewPlace.style.ts
 │   │   │   ├── confirmRide.styles.ts
 │   │   │   ├── driver.styles.ts
+│   │   │   ├── dropDownFilter.styles.ts
 │   │   │   ├── extraDetails.styles.ts
 │   │   │   ├── savedPlaces.styles.ts
 │   │   │   ├── selectRide.styles.ts

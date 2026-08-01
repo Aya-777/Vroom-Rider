@@ -12,12 +12,14 @@ import { createStyles } from '../../styles/confirmRide.styles';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../../core/theme/useTheme';
 import TimePriceBox from '../ExtraDetailsScreen/TimePriceBox';
+import { SharedValue } from 'react-native-reanimated';
 
 type Props = {
   onNextPress: () => void;
+  animatedPosition?: SharedValue<number>;
 };
 
-export default function RideConfirmationSheet({ onNextPress }: Props) {
+export default function RideConfirmationSheet({ onNextPress, animatedPosition }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['confirmRide', 'common']);
@@ -38,7 +40,7 @@ export default function RideConfirmationSheet({ onNextPress }: Props) {
   );
 
   return (
-    <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1}>
+    <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1} animatedPosition={animatedPosition}>
       <View style={styles.grid}>
         <TimePriceBox
           time={`${vm.estimate.estimated_duration_minutes}`}
