@@ -3,19 +3,18 @@ import { DrawerContentComponentProps } from '@react-navigation/drawer';
 import { SIDEBAR_ITEMS } from '../constants/sidebarItems';
 import { SidebarItem } from '../types/sidebar.types';
 import { useCurrentUser } from '../../../core/store/userStore';
+import { useThemeMode, useThemeActions } from '../../../core/store/themeStore';
 import { getFullImageUrl } from '../../../shared/utils/getImageUrl';
 
 type Navigation = DrawerContentComponentProps['navigation'];
 
-export const useSidebarViewModel = (
-  navigation: Navigation,
-) => {
+export const useSidebarViewModel = (navigation: Navigation) => {
   const cachedUser = useCurrentUser();
+  const mode = useThemeMode();
+  const { toggleMode } = useThemeActions();
 
   const user = {
-    name: cachedUser
-      ? `${cachedUser.first_name} ${cachedUser.last_name}`
-      : '',
+    name: cachedUser ? `${cachedUser.first_name} ${cachedUser.last_name}` : '',
     rating: cachedUser?.rating ?? 5.0,
     avatar: getFullImageUrl(cachedUser?.profile_image),
   };
@@ -40,5 +39,7 @@ export const useSidebarViewModel = (
     items: SIDEBAR_ITEMS,
     version: '2.4.0',
     handleItemPress,
+    mode,
+    toggleTheme: toggleMode,
   };
 };
