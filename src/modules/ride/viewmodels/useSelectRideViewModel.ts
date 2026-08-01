@@ -103,7 +103,11 @@ export function useSelectRideViewModel() {
             stop_type: 'DROP_OFF',
           },
         ],
-      });
+        scheduled_at: state.selectedTime,
+        is_for_someone_else: state.selectedPerson === 'forMe' ? false : true,
+        passenger_contact_phone: state.contactPhone ?? '09********', // replace it later with the logged in phone number
+      },
+    );
     } catch (error) {
       console.log('Estimate Error:', error);
     }

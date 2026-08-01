@@ -134,6 +134,9 @@ export default function SelectRideSheet({ onNextPress, animatedPosition }: Props
             <PhoneNumberIcon width={18} height={18} fill={colors.textPrimary} />
             <TextInput
               style={styles.numberInput}
+              value={vm.contactPhone}
+              onChangeText={vm.setContactPhone}
+              keyboardType="phone-pad"
               placeholder="+963 9** *** ***"
               placeholderTextColor={colors.textMuted}
             />

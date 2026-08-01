@@ -26,6 +26,8 @@ export function useRideDetailsViewModel() {
   setRideDetails({
     vehicle_type_id: selectedVehicleId,
     payment_method: selectedPayment === 'cash' ? 'CASH' : 'WALLET',
+    preference_ids: selectedFilterIds.map(id => Number(id)),
+    scheduled_at: rideData.scheduled_at,
   });
 
   if (!estimate || totalPrice === null) {
