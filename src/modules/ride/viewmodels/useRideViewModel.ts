@@ -91,7 +91,7 @@ export function useRideViewModel() {
       setIsCancelling(true);
 
       await rideApi.cancelRide(currentRide.id, reason);
-      setCurrentRide({ ...currentRide, status: TripStatus.CANCELLED });
+      setCurrentRide({ ...currentRide, status: TripStatus.CANCELLED_BY_RIDER });
       clearRide();
       setRideState(RideState.SELECT_RIDE);
     } catch (error) {
