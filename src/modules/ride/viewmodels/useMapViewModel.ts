@@ -4,9 +4,12 @@ import LocationService, { Location } from '../../../core/services/location/Locat
 import { useLocationStore } from '../../../core/store/locationStore';
 import { CameraRef, MapRef } from '@maplibre/maplibre-react-native';
 import { useRideStore } from '../store/useRideStore';
+import { TripStatus } from '../types/RideState';
 
 export default function useMapViewModel() {
   const [deviceLocation, setDeviceLocation] = useState<[number, number] | null>(null);
+  const {rideData} = useRideStore();
+  const isSearchingForDriver = rideData?.status === TripStatus.PENDING;
   const { estimate } = useRideStore();
 
   const mapRef = useRef<MapRef>(null);
@@ -134,5 +137,6 @@ export default function useMapViewModel() {
     centerOnLocation,
     routeCoordinates,
     routeBounds,
+    isSearchingForDriver
   };
 }

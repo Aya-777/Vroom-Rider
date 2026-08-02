@@ -9,6 +9,7 @@ import TripStartedSheet from '../TripStartedScreen/TripStartedSheet';
 import { Location } from '../../../../core/services/location/LocationService';
 import { EstimateInitialResponseDTO } from '../../services/dto/estimate.dto';
 import { SharedValue } from 'react-native-reanimated';
+import SearchingForaDriverSheet from '../SearchingForaDriver/SearchingForaDriverSheet';
 
 type Props = {
   rideState: RideState;
@@ -53,6 +54,15 @@ export default function RideBottomSheet({
 
       case RideState.CONFIRM_RIDE:
         return <RideConfirmationSheet onNextPress={onRideConfirmed} 
+        animatedPosition={animatedPosition}
+        />;
+
+      case RideState.SEARCHING_FOR_DRIVER:
+        return <SearchingForaDriverSheet 
+        onCancelPress={onCancelPress}
+        isCancelling={isCancelling}
+        setIsCancelling={setIsCancelling}
+        onKeepRide={onKeepRide}
         animatedPosition={animatedPosition}
         />;
 

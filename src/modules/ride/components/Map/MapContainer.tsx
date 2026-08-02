@@ -1,7 +1,6 @@
 import {
   Camera,
   Map,
-  UserLocation,
   GeoJSONSource,
   Layer,
 } from '@maplibre/maplibre-react-native';
@@ -10,8 +9,8 @@ import { useTheme } from '../../../../core/theme/useTheme';
 import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import useMapViewModel from '../../viewmodels/useMapViewModel';
-import { useRef } from 'react';
 import { ICON_MAP } from '../../utils/iconMap';
+import UserLocationMarker from './UserLocationMarker/UserLocationMarker';
 
 type MapContainerProps = {
   vm: ReturnType<typeof useMapViewModel>;
@@ -66,7 +65,11 @@ export const MapContainer = ({ vm }: MapContainerProps) => {
           }}
         />
 
-        <UserLocation />
+        <UserLocationMarker
+          coordinate={vm.deviceLocation}
+          searching={vm.isSearchingForDriver}
+        />
+
         {vm.routeCoordinates.length > 0 && (
           <GeoJSONSource
             id="route"
