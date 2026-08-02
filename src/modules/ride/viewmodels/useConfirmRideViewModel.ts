@@ -12,11 +12,9 @@ export function useConfirmRideViewModel() {
   const handleFindDriver = async () => {
     setIsLoading(true);
     try {
-      console.log('Confirming ride with data:', rideData);
       const response = await rideApi.confirmRide(
         rideData as RequestRideRequestDTO,
       );
-      console.log("Confirm ride done, searchign for a driver... ", response);
       setCurrentRide(response as CurrentRide);
 
       return response;
