@@ -75,7 +75,7 @@ export default function RideScreen() {
         setIsCancelling={vm.setIsCancelling}
         onSelectRideNext={vm.goToExtraDetails}
         onExtraDetailsNext={vm.goToRideConfirmation}
-        onRideConfirmed={vm.goToDriverFound}
+        onRideConfirmed={vm.goToSearchingForaDriver}
         onDriverFound={vm.goToDriverArrived}
         onTripStarted={vm.goToTripStarted}
         onTripEnded={handleTripEnded}

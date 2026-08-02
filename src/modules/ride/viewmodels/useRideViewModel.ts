@@ -56,6 +56,8 @@ export function useRideViewModel() {
 
   const goToRideConfirmation = () => setRideState(RideState.CONFIRM_RIDE);
 
+  const goToSearchingForaDriver = () => setRideState(RideState.SEARCHING_FOR_DRIVER);
+
   const goToDriverFound = () => setRideState(RideState.DRIVER_FOUND);
 
   const goToDriverArrived = () => setRideState(RideState.DRIVER_ARRIVED);
@@ -70,7 +72,7 @@ export function useRideViewModel() {
       navigation.goBack();
     } else if (previous) {
       setRideState(previous);
-      if(previous === RideState.SELECT_RIDE){
+      if (previous === RideState.SELECT_RIDE) {
         setEstimate({
           estimated_distance_km: 0,
           estimated_duration_minutes: 0,
@@ -96,14 +98,14 @@ export function useRideViewModel() {
       setRideState(RideState.SELECT_RIDE);
     } catch (error) {
       console.error('Failed to cancel ride:', error);
-    }finally{
+    } finally {
       setIsCancelling(false);
     }
   };
 
-  const keepRidePress = ()=>{
+  const keepRidePress = () => {
     setIsCancelling(false);
-  }
+  };
 
   const onMyLocationPress = async () => {
     try {
@@ -126,6 +128,7 @@ export function useRideViewModel() {
     handleBackPress,
     goToExtraDetails,
     goToRideConfirmation,
+    goToSearchingForaDriver,
     goToDriverFound,
     goToDriverArrived,
     goToTripStarted,
