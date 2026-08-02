@@ -37,10 +37,10 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>نحتاج اذن للوصول الى الموقع الحالي</string>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>Vroom Rider needs access to your location to show nearby drivers.</string>
   <key>NSContactsUsageDescription</key>
-  <string>نحتاج اذن للوصول الى جهات الاتصال</string>
+  <string>Vroom Rider needs access to your contacts so you can book a ride for someone else.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
