@@ -7,6 +7,7 @@ import { useRideStore } from '../store/useRideStore';
 
 export default function useMapViewModel() {
   const [deviceLocation, setDeviceLocation] = useState<[number, number] | null>(null);
+  const { estimate } = useRideStore();
 
   const mapRef = useRef<MapRef>(null);
   const cameraRef = useRef<CameraRef>(null);
@@ -100,6 +101,30 @@ export default function useMapViewModel() {
     });
 };
 
+  const routeCoordinates =
+    estimate?.route_geometry.map(point => [
+      point.longitude,
+      point.latitude,
+    ]) ?? [];
+    
+    const routeBounds =
+      routeCoordinates.length > 0
+        ? routeCoordinates.reduce(
+            (bounds, [lng, lat]) => ({
+              west: Math.min(bounds.west, lng),
+              south: Math.min(bounds.south, lat),
+              east: Math.max(bounds.east, lng),
+              north: Math.max(bounds.north, lat),
+            }),
+            {
+              west: routeCoordinates[0][0],
+              south: routeCoordinates[0][1],
+              east: routeCoordinates[0][0],
+              north: routeCoordinates[0][1],
+            },
+          )
+        : null;
+
   return {
     deviceLocation,
     mapRef,
@@ -107,5 +132,7 @@ export default function useMapViewModel() {
     handleRegionDidChange,
     isPickingLocation,
     centerOnLocation,
+    routeCoordinates,
+    routeBounds,
   };
 }

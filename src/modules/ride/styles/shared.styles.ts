@@ -52,6 +52,7 @@ export const createStyles = (colors: ThemeColors) =>
       height: 58,
       borderRadius: 12,
       overflow: 'hidden',
+      backgroundColor: colors.surface,
     },
 
     actionCardGradient: {
@@ -100,7 +101,7 @@ export const createStyles = (colors: ThemeColors) =>
       shadowOpacity: 0.15,
       shadowRadius: 6,
       paddingVertical: 4,
-      backgroundColor: colors.backgroundSoft,
+      backgroundColor: colors.surface,
     },
 
     menuItem: {
@@ -138,12 +139,13 @@ export const createStyles = (colors: ThemeColors) =>
 
     searchResultsContainer: {
       maxHeight: 180,
-      backgroundColor: colors.surface,
+      backgroundColor: colors.backgroundSoft,
       borderRadius: 12,
       borderWidth: 1,
       borderColor: colors.border,
       zIndex: 20,
       elevation: 10, // For Android touch priority
+      marginTop: -15,
     },
 
     searchScroll: {
@@ -154,11 +156,11 @@ export const createStyles = (colors: ThemeColors) =>
       paddingHorizontal: 16,
       paddingVertical: 12,
       borderBottomWidth: 1,
-      borderBottomColor: '#1D2840',
+      borderBottomColor: colors.border,
     },
 
     searchResultText: {
-      color: '#FFFFFF',
+      color: colors.textPrimary,
       fontSize: 13,
       lineHeight: 18,
     },

@@ -6,11 +6,13 @@ import { GeocodeResult } from '../../../core/services/location/GeoCodingService'
 import { useLocationSearch } from './useLocationSearch';
 import { useInitialPickup } from './useInitialPickup';
 import { useLocationStore } from '../../../core/store/locationStore';
+import { useCurrentUser } from '../../../core/store/userStore';
 
 export type ActiveInput = 'pickup' | 'destination' | null;
 
 export function useSelectRideState(rideData: Partial<RideParams>) {
   const currentLocation = useLocationStore(state => state.currentLocation);
+  const user = useCurrentUser();
   const pickup = useInitialPickup(currentLocation);
 
   const pickupStop = rideData.stops?.find(stop => stop.stop_type === 'PICKUP');
@@ -50,7 +52,7 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
   );
 
   const [contactPhone, setContactPhone] = useState(
-    rideData.passenger_contact_phone ?? '',
+    rideData.passenger_contact_phone ?? user?.phone_number,
   );
 
   const [activeInput, setActiveInput] = useState<ActiveInput>('pickup');

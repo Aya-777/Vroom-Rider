@@ -31,7 +31,7 @@ export const createStyles = (colors: ThemeColors) =>
       paddingVertical: 12,
       alignItems: 'center',
       backgroundColor: colors.surface,
-      ...Shadows.small,
+      // ...Shadows.small,
     },
 
     activeVehicleCard: {
@@ -47,13 +47,13 @@ export const createStyles = (colors: ThemeColors) =>
     },
 
     vehicleText: {
-      color: colors.textMuted,
+      color: colors.textPrimary,
       ...Typography.semiBoldCaption,
     },
 
-    activeVehicleText: {
-      color: colors.primary,
-    },
+    // activeVehicleText: {
+    //   color: colors.primary,
+    // },
 
     actionsContainer: {
       flex: 1,

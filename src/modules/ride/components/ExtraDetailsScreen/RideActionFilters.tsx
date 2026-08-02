@@ -43,21 +43,23 @@ export default function RideActionFilters({
   const ArrowDown = ICON_MAP['arrow'];
   
   return (
-    <View style={styles.actionsContainer}>
+    <View>
       <View style={styles.actionCardsRow}>
         <TouchableOpacity
           style={styles.cardWrapper}
           onPress={() => setFiltersVisible(!filtersVisible)}
           activeOpacity={0.8}
         >
-          <LinearBg colors={gradientColors} style={styles.actionCardGradient}>
+          <LinearBg 
+            colors={gradientColors}
+            style={styles.actionCardGradient}>
             <View style={styles.iconWrapper}>
-              <FilterIcon width={18} height={18} fill="#FFFFFF" />
+              <FilterIcon width={18} height={18} fill={colors.primary} />
             </View>
             <Text style={styles.cardText}>{t('filters')}</Text>
             <View style={styles.iconWrapper}>
               {filtersVisible ?
-                <ArrowUp width={16} height={16} fill="#FFFFFF" />
+                <ArrowUp width={16} height={16} fill={colors.primary} />
                 :
                 <ArrowDown width={16} height={16} fill={colors.textSecondary}/>
             }
@@ -74,13 +76,13 @@ export default function RideActionFilters({
           >
             <LinearBg colors={gradientColors} style={styles.actionCardGradient}>
               <View style={styles.iconWrapper}>
-                <CashIcon width={18} height={18} fill="#FFFFFF" />
+                <CashIcon width={18} height={18} fill={colors.primary} />
               </View>
               <Text style={styles.cardText}>{selectedValue}</Text>
               {isOpen ? (
-                <ArrowUp width={16} height={16} fill="#FFFFFF" />
+                <ArrowUp width={16} height={16} fill={colors.primary} />
               ) : (
-                <ArrowDown width={16} height={16} fill="#FFFFFF" />
+                <ArrowDown width={16} height={16} fill={colors.primary} />
               )}
             </LinearBg>
           </TouchableOpacity>

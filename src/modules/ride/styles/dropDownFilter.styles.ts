@@ -9,19 +9,8 @@ export const createStyles = (colors: ThemeColors) =>
     width: '100%',
     marginBottom: 20,
   },
-  dropdownButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: colors.backgroundSoft,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 16,
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-  },
   selectedButton: {
-    backgroundColor: colors.surface,
+    backgroundColor: colors.primary,
     borderColor: colors.primary,
   },
   leftContent: {
@@ -50,7 +39,7 @@ export const createStyles = (colors: ThemeColors) =>
     paddingHorizontal: 20,
   },
   dropdownList: {
-    backgroundColor: colors.backgroundSoft,
+    backgroundColor: colors.surface,
     borderRadius: 16,
     borderWidth: 1,
     borderColor: colors.border,
@@ -70,7 +59,7 @@ export const createStyles = (colors: ThemeColors) =>
     backgroundColor: colors.surface,
   },
   optionText: {
-    color: colors.textMuted,
+    color: colors.textPrimary,
     ...Typography.body,
   },
   optionTextSelected: {
@@ -78,7 +67,7 @@ export const createStyles = (colors: ThemeColors) =>
     fontWeight: '600',
   },
   optionPrice: {
-    color: colors.textMuted,
+    color: colors.success,
     ...Typography.caption,
   },
   activeFilter: {

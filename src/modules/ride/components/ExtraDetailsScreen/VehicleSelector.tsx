@@ -37,7 +37,7 @@ export default function VehicleSelector({
               style={styles.vehicleImage}
             />
             <Text
-              style={[styles.vehicleText, active && styles.activeVehicleText]}
+              style={[styles.vehicleText]}
             >
               {v.tier_name}
             </Text>

@@ -151,9 +151,16 @@ export default function SelectRideSheet({ onNextPress, animatedPosition }: Props
       </BaseBottomSheet>
 
         {!vm.isSheetVisible && 
-          <TouchableOpacity style={styles.confirmButton} onPress={vm.onConfirmLocation}>
-            <Text style={styles.confirmButtonText} numberOfLines={1}>Confirm</Text>
-          </TouchableOpacity>
+          <BaseBottomSheet 
+          isVisible={!vm.isSheetVisible}
+          index={1} 
+          snapPoints={['20%']} 
+          animatedPosition={animatedPosition}
+          >
+            <TouchableOpacity style={styles.confirmButton} onPress={vm.onConfirmLocation}>
+              <Text style={styles.confirmButtonText} numberOfLines={1}>Confirm</Text>
+            </TouchableOpacity>
+          </BaseBottomSheet>
         }
 
     </>

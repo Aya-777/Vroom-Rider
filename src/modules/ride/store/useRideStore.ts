@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { CurrentRide, RideParams, RideStop, Tiers } from '../types/ride.types';
 import { SavedPlace } from '../types/savedPlaces.types';
 import { EstimateInitialResponseDTO } from '../services/dto/estimate.dto';
+import { TripStatus } from '../types/RideState';
 
 type MapLocation = {
   latitude: number;
@@ -58,10 +59,10 @@ const normalizeStops = (stops: RideStop[]): RideStop[] => {
 
 export const useRideStore = create<RideState>(set => ({
   rideData: {
-    vehicle_type_id: 1,
+    vehicle_type_id: '1',
     payment_method: 'CASH',
     is_for_someone_else: false,
-    passenger_contact_phone: '09********',
+    passenger_contact_phone: undefined,
     stops: [],
     preference_ids: [],
     scheduled_at: 'now',
@@ -72,8 +73,8 @@ export const useRideStore = create<RideState>(set => ({
     rider: 1,
     driver: null,
     vehicle: null,
-    vehicle_type_id: 1,
-    status: 'PENDING',
+    vehicle_type_id: '1',
+    status: TripStatus.PENDING,
 
     stops: [],
     preference_ids: [],
@@ -102,6 +103,8 @@ export const useRideStore = create<RideState>(set => ({
     estimated_distance_km: 0,
     estimated_duration_minutes: 0,
     pricing_tiers: [],
+    stops: [],
+    route_geometry: [],
   },
   savedPlaces: [],
 
@@ -194,6 +197,8 @@ export const useRideStore = create<RideState>(set => ({
         estimated_distance_km: 0,
         estimated_duration_minutes: 0,
         pricing_tiers: [],
+        stops: [],
+        route_geometry: [],
       },
     }),
 
