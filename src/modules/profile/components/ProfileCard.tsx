@@ -6,12 +6,14 @@ import { getFullImageUrl } from '../../../shared/utils/getImageUrl';
 
 import EditIcon from '../../../assets/svg/common/edit.svg';
 import CallIcon from '../../../assets/svg/contact/call.svg';
+import StarIcon from '../../../assets/svg/common/star.svg';
 
 type Props = {
   firstName?: string;
   lastName?: string;
   phone?: string;
   profileImage?: string | null;
+  Rating?: number | null;
   isLoading?: boolean;
   onEditPress?: () => void;
 };
@@ -21,6 +23,7 @@ export default function ProfileCard({
   lastName,
   phone,
   profileImage,
+  Rating,
   isLoading,
   onEditPress,
 }: Props) {
@@ -63,7 +66,11 @@ export default function ProfileCard({
           <CallIcon width={18} height={18} fill={colors.background} />
           <Text style={styles.infoText}>{isLoading ? '...' : phone || '—'}</Text>
         </View>
-      </View>
+        <View style={styles.iconText}>
+          <StarIcon width={18} height={18} fill={colors.background} />
+          <Text style={styles.infoText}>{isLoading ? '...' : Rating?.toFixed(1) || '—'}</Text>
+        </View>
+      </View>        
     </View>
   );
 }
