@@ -1,5 +1,8 @@
 src/
 ├── assets
+│   ├── animations
+│   │   ├── Moon.json
+│   │   └── Sun.json
 │   ├── fonts
 │   │   ├── Lora-Bold.ttf
 │   │   ├── Lora-Regular.ttf
@@ -149,7 +152,9 @@ src/
 │   │   ├── authStore.ts
 │   │   ├── languageStore.ts
 │   │   ├── locationStore.ts
-│   │   └── themeStore.ts
+│   │   ├── session.ts
+│   │   ├── themeStore.ts
+│   │   └── userStore.ts
 │   └── theme
 │       ├── ThemeProvider.tsx
 │       ├── colors
@@ -216,6 +221,7 @@ src/
 │   │   │       ├── SplashLogo.tsx
 │   │   │       ├── SplashRoad.tsx
 │   │   │       └── SplashText.tsx
+│   │   ├── constants
 │   │   ├── hooks
 │   │   │   ├── useAuthActions.ts
 │   │   │   ├── useSplashAnimation.ts
@@ -233,12 +239,14 @@ src/
 │   │   │   ├── authApi.ts
 │   │   │   └── dto
 │   │   │       └── auth.dto.ts
+│   │   ├── store
 │   │   ├── styles
 │   │   │   ├── Splash.styles.ts
 │   │   │   ├── forgotPassword.styles.ts
 │   │   │   ├── login.styles.ts
 │   │   │   ├── resetPassword.styles.ts
 │   │   │   └── signup.styles.ts
+│   │   ├── types
 │   │   ├── utils
 │   │   │   └── SplashPathUtils.ts
 │   │   └── viewmodels
@@ -249,6 +257,7 @@ src/
 │   │       ├── useSignupOtpViewModel.ts
 │   │       ├── useSignupViewModel.ts
 │   │       └── useSplashViewModel.ts
+│   ├── constants
 │   ├── home
 │   │   ├── components
 │   │   │   ├── DestinationCard.tsx
@@ -401,8 +410,10 @@ src/
 │   │   ├── services
 │   │   │   ├── dto
 │   │   │   │   ├── estimate.dto.ts
+│   │   │   │   ├── recentTrip.dto.ts
 │   │   │   │   ├── ride.dto.ts
-│   │   │   │   └── savedPlaces.dto.ts
+│   │   │   │   ├── savedPlaces.dto.ts
+│   │   │   │   └── tripHistory.dto.ts
 │   │   │   └── rideApi.ts
 │   │   ├── store
 │   │   │   └── useRideStore.ts
@@ -419,6 +430,7 @@ src/
 │   │   │   └── tripEndedModal.styles.ts
 │   │   ├── types
 │   │   │   ├── RideState.ts
+│   │   │   ├── recentDestination.types.ts
 │   │   │   ├── ride.types.ts
 │   │   │   └── savedPlaces.types.ts
 │   │   ├── utils
@@ -438,7 +450,8 @@ src/
 │       ├── components
 │       │   ├── SidebarFooter.tsx
 │       │   ├── SidebarHeader.tsx
-│       │   └── SidebarItem.tsx
+│       │   ├── SidebarItem.tsx
+│       │   └── ThemeToggleButton.tsx
 │       ├── constants
 │       │   └── sidebarItems.ts
 │       ├── screens
@@ -503,6 +516,7 @@ src/
 │   │   ├── otpVerifyForm.styles.ts
 │   │   └── sheet.styles.ts
 │   └── utils
+│       ├── getImageUrl.ts
 │       └── parseWaitSecondsError.ts
 └── types
     └── svg.d.ts
