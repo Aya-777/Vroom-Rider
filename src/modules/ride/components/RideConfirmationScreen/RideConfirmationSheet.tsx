@@ -36,7 +36,7 @@ export default function RideConfirmationSheet({ onNextPress, animatedPosition }:
   };
 
   const selectedVehicle = vm.estimate?.pricing_tiers?.find(
-    tier => tier.tier_id === vm.rideData.vehicle_type_id,
+    tier => tier.tier_id === Number(vm.rideData.vehicle_type_id),
   );
 
   return (

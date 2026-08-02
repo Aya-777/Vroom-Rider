@@ -9,7 +9,7 @@ export interface RidePreferenceDTO {
 }
 
 export interface RequestRideRequestDTO {
-  vehicle_type_id: number;
+  vehicle_type_id: string;
   preference_ids: number[];
   payment_method: 'CASH' | 'WALLET';
   is_for_someone_else: boolean;

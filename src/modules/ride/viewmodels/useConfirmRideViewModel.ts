@@ -15,7 +15,6 @@ export function useConfirmRideViewModel() {
       const response = await rideApi.confirmRide(
         rideData as RequestRideRequestDTO,
       );
-      console.log(response);
       setCurrentRide(response as CurrentRide);
 
       return response;

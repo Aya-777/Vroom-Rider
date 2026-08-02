@@ -9,6 +9,7 @@ import { rideApi } from '../services/rideApi';
 import { useSelectRideState } from '../hooks/useSelectRideState';
 import { useSavedPlaces } from '../hooks/useSavedPlaces';
 import { useRideMapLocation } from '../hooks/useRideMapLocations';
+import { useCurrentUser } from '../../../core/store/userStore';
 
 export function useSelectRideViewModel() {
   const navigation =
@@ -26,6 +27,7 @@ export function useSelectRideViewModel() {
   } = useRideStore();
 
   const state = useSelectRideState(rideData);
+  const user = useCurrentUser();
 
   const savedPlacesVM = useSavedPlaces(
     state.isModalVisible,
@@ -105,7 +107,7 @@ export function useSelectRideViewModel() {
         ],
         scheduled_at: state.selectedTime,
         is_for_someone_else: state.selectedPerson === 'forMe' ? false : true,
-        passenger_contact_phone: state.contactPhone ?? '09********', // replace it later with the logged in phone number
+        passenger_contact_phone: state.contactPhone ?? user?.phone_number, // replace it later with the logged in phone number
       },
     );
     } catch (error) {
