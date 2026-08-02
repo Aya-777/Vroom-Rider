@@ -24,7 +24,7 @@ export function useRideDetailsViewModel() {
 
   const updateRideDetails = (totalPrice: Double) => {
   setRideDetails({
-    vehicle_type_id: selectedVehicleId,
+    vehicle_type_id: selectedVehicleId.toString(),
     payment_method: selectedPayment === 'cash' ? 'CASH' : 'WALLET',
     preference_ids: selectedFilterIds.map(id => Number(id)),
     scheduled_at: rideData.scheduled_at,

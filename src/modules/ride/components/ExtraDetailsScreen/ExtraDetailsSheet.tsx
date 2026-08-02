@@ -51,7 +51,6 @@ export default function ExtraDetailsScreen({ onNextPress, animatedPosition }: Pr
       .filter(filter => vm.selectedFilterIds.includes(String(filter.id)))
       .reduce((total, filter) => {
         const extraFee = Number(filter.extra_fee);
-        console.log('extra fee' + extraFee);
         return total + extraFee;
       }, 0);
 
