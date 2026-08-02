@@ -16,9 +16,11 @@ export function useConfirmRideViewModel() {
       const response = await rideApi.confirmRide(
         rideData as RequestRideRequestDTO,
       );
+      console.log("contact phoneeee ", rideData.passenger_contact_phone);
       setCurrentRide(response as CurrentRide);
       setRideDetails({
         ...rideData, status: TripStatus.PENDING });
+        console.log(rideData.passenger_contact_phone);
 
       return response;
     } catch (error) {
