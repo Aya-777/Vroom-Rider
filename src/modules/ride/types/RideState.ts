@@ -11,6 +11,7 @@ export enum RideState {
 
 
 export enum TripStatus {
+  NULL = 'NULL',
   PENDING = 'PENDING',
   ACCEPTED = 'ACCEPTED',
   PICKUP = 'PICKUP', 

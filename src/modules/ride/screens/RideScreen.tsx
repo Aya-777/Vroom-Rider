@@ -4,7 +4,7 @@ import Header from '../../../shared/components/SubHeader';
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/selectRide.styles';
 import { useTranslation } from 'react-i18next';
-import { MapContainer } from '../components/shared/MapContainer';
+import { MapContainer } from '../components/Map/MapContainer';
 import { useRideViewModel } from '../viewmodels/useRideViewModel';
 import RideBottomSheet from '../components/RideScreen/RideBottomSheet';
 import { useNavigation } from '@react-navigation/native';
