@@ -1,7 +1,5 @@
-// src/components/DropdownFilter/DropdownFilter.tsx
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-// import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createStyles } from '../../styles/dropDownFilter.styles';
 import { useTheme } from '../../../../core/theme/useTheme';
 import { useTranslation } from 'react-i18next';
@@ -40,7 +38,6 @@ export const DropdownFilter: React.FC<DropdownFilterProps> = ({
       <View style={styles.dropdownList}>
         {options.map((item, index) => {
           const isSelected = selectedIds.includes(item.id);
-          const isLast = index === options.length - 1;
 
           return (
             <TouchableOpacity

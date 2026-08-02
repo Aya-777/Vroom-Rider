@@ -50,7 +50,7 @@ export const createStyles = (colors: ThemeColors) =>
     paddingHorizontal: 20,
   },
   dropdownList: {
-    backgroundColor: colors.backgroundSoft,
+    backgroundColor: colors.background,
     borderRadius: 16,
     borderWidth: 1,
     borderColor: colors.border,
@@ -70,7 +70,7 @@ export const createStyles = (colors: ThemeColors) =>
     backgroundColor: colors.surface,
   },
   optionText: {
-    color: colors.textMuted,
+    color: colors.textPrimary,
     ...Typography.body,
   },
   optionTextSelected: {
@@ -78,7 +78,7 @@ export const createStyles = (colors: ThemeColors) =>
     fontWeight: '600',
   },
   optionPrice: {
-    color: colors.textMuted,
+    color: colors.success,
     ...Typography.caption,
   },
   activeFilter: {
