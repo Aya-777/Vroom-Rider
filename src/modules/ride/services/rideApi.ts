@@ -17,11 +17,11 @@ import {
   EstimateInitialResponseDTO,
 } from './dto/estimate.dto';
 
-interface ApiEnvelope<T> {
-  'status code': number;
-  message: string;
-  data: T;
-}
+import {
+  TripHistoryItemDTO,
+  PaginatedResult,
+  ApiEnvelope,
+} from './dto/tripHistory.dto';
 
 export const rideApi = {
   // Saved Places
@@ -112,4 +112,23 @@ export const rideApi = {
     );
     return response.data.data;
   },
+};
+
+// Trip History
+export const getTripHistory = async (params?: {
+  status?: string;
+}): Promise<PaginatedResult<TripHistoryItemDTO>> => {
+  const response = await apiClient.get<
+    ApiEnvelope<PaginatedResult<TripHistoryItemDTO>>
+  >('/trips/history/', { params });
+  return response.data.data;
+};
+
+export const getTripHistoryByUrl = async (
+  url: string,
+): Promise<PaginatedResult<TripHistoryItemDTO>> => {
+  const response = await apiClient.get<
+    ApiEnvelope<PaginatedResult<TripHistoryItemDTO>>
+  >(url);
+  return response.data.data;
 };
