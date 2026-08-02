@@ -102,6 +102,8 @@ export const useRideStore = create<RideState>(set => ({
     estimated_distance_km: 0,
     estimated_duration_minutes: 0,
     pricing_tiers: [],
+    stops: [],
+    route_geometry: [],
   },
   savedPlaces: [],
 
@@ -194,6 +196,8 @@ export const useRideStore = create<RideState>(set => ({
         estimated_distance_km: 0,
         estimated_duration_minutes: 0,
         pricing_tiers: [],
+        stops: [],
+        route_geometry: [],
       },
     }),
 

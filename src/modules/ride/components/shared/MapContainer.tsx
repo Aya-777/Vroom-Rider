@@ -2,11 +2,12 @@ import {
   Camera,
   Map,
   UserLocation,
-  CameraRef,
+  GeoJSONSource,
+  Layer,
 } from '@maplibre/maplibre-react-native';
 import { createStyles } from '../../styles/shared.styles';
 import { useTheme } from '../../../../core/theme/useTheme';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import useMapViewModel from '../../viewmodels/useMapViewModel';
 import { useRef } from 'react';
@@ -22,6 +23,28 @@ export const MapContainer = ({ vm }: MapContainerProps) => {
 
   const MAPTILER_KEY = 'mfqv0iCS1dKFXcG8KrVN';
   const PinIcon = ICON_MAP['pin'];
+
+  useEffect(() => {
+  if (!vm.routeBounds) return;
+
+  vm.cameraRef.current?.fitBounds(
+    [
+      vm.routeBounds.west,
+      vm.routeBounds.south,
+      vm.routeBounds.east,
+      vm.routeBounds.north,
+    ],
+    {
+      padding: {
+        top: 120,
+        right: 40,
+        bottom: 350, // leave room for the bottom sheet
+        left: 40,
+      },
+      duration: 1000,
+    },
+  );
+}, [vm.routeBounds]);
 
   return (
     <View style={styles.mapContainer}>
@@ -44,6 +67,30 @@ export const MapContainer = ({ vm }: MapContainerProps) => {
         />
 
         <UserLocation />
+        {vm.routeCoordinates.length > 0 && (
+          <GeoJSONSource
+            id="route"
+            data={{
+              type: 'Feature',
+              geometry: {
+                type: 'LineString',
+                coordinates: vm.routeCoordinates,
+              },
+              properties: {},
+            }}
+          >
+            <Layer
+              id="route-line"
+              type="line"
+              style={{
+                lineColor: '#3B82F6',
+                lineWidth: 5,
+                lineCap: 'round',
+                lineJoin: 'round',
+              }}
+            />
+          </GeoJSONSource>
+        )}
       </Map>
 
       {vm.isPickingLocation && (
