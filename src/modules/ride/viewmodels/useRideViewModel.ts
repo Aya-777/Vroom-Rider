@@ -70,6 +70,15 @@ export function useRideViewModel() {
       navigation.goBack();
     } else if (previous) {
       setRideState(previous);
+      if(previous === RideState.SELECT_RIDE){
+        setEstimate({
+          estimated_distance_km: 0,
+          estimated_duration_minutes: 0,
+          pricing_tiers: [],
+          stops: [],
+          route_geometry: [],
+        });
+      }
     }
   };
 
