@@ -65,7 +65,7 @@ export default function RideScreen() {
           style={styles.myLocationButton}
           onPress={handleMyLocationPress}
         >
-          <MyLocationIcon />
+          <MyLocationIcon fill={colors.primary} />
         </TouchableOpacity>
       </Animated.View>
 

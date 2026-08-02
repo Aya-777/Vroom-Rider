@@ -46,13 +46,13 @@ export const createStyles = (colors: ThemeColors) =>
       width: 8,
       height: 8,
       borderRadius: 4,
-      backgroundColor: colors.border,
+      backgroundColor: colors.primary,
     },
 
     timelineLine: {
       flex: 1,
       width: 2,
-      backgroundColor: colors.border,
+      backgroundColor: colors.primary,
     },
 
     inputContainer: {
@@ -147,22 +147,23 @@ export const createStyles = (colors: ThemeColors) =>
     },
     
     confirmButtonText: {
-      ...Typography.body,
+      ...Typography.h3,
       marginEnd: 5,
       marginBottom: 2,
-      color: colors.primary,
+      color: colors.background,
     },
     
     confirmButton: {
       flexDirection: 'row',
-      width: '50%',
+      width: '65%',
       paddingVertical: 14,
       borderRadius: 25,
       justifyContent: 'center',
       alignItems: 'center',
       alignSelf: 'center',
-      backgroundColor: colors.backgroundSoft,
+      backgroundColor: colors.primary,
       // elevation: 3,
+      margin: 20,
     },
     
     myLocationButton: {
