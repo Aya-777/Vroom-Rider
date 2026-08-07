@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import Input from '../../../../shared/components/Input';
 
 import { useTheme } from '../../../../core/theme/useTheme';
@@ -8,6 +8,7 @@ import { createStyles } from '../../styles/selectRide.styles';
 import { useTranslation } from 'react-i18next';
 import { GeocodeResult } from '../../../../core/services/location/GeoCodingService';
 import SearchResults from '../shared/SearchResults';
+import PlusIcon from '../../../../assets/svg/common/add.svg';
 
 type ActiveInput = 'pickup' | 'destination' | null;
 
@@ -74,17 +75,20 @@ export default function RideLocationInputs({
         )}
 
         <View style={styles.divider} />
-
-        <Input
-          inputStyle={styles.input}
-          placeholder={t('to')}
-          placeholderTextColor={colors.textMuted}
-          value={toLocation}
-          onChangeText={onChangeTo}
-          error={errors.toLocation}
-          onFocus={onDestinationFocus}
-        />
-
+        <View style={styles.addInputContainer}>  
+          <Input
+            inputStyle={[styles.input, {width:'50%'}]}
+            placeholder={t('to')}
+            placeholderTextColor={colors.textMuted}
+            value={toLocation}
+            onChangeText={onChangeTo}
+            error={errors.toLocation}
+            onFocus={onDestinationFocus}
+          />
+          <TouchableOpacity style={styles.addButton}>
+            <PlusIcon width={20} height={20} fill={colors.surface}/>
+          </TouchableOpacity>
+        </View>
         {activeInput === 'destination' && destinationResults.length > 0 && (
           <SearchResults results={destinationResults} onSelectItem={onSelectDestination} />
         )}
