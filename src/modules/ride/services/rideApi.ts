@@ -22,6 +22,7 @@ import {
   PaginatedResult,
   ApiEnvelope,
 } from './dto/tripHistory.dto';
+import { ResendOtpRequestDTO, VerifyOtpRequestDTO, VerifyOtpResponseDTO } from '../../auth/services/dto/auth.dto';
 
 export const rideApi = {
   // Saved Places
@@ -102,6 +103,23 @@ export const rideApi = {
       },
     );
 
+    return response.data;
+  },
+
+  
+  verifyRideOtp: async (data: VerifyOtpRequestDTO): Promise<VerifyOtpResponseDTO> => {
+    const response = await apiClient.post<VerifyOtpResponseDTO>(
+      ENDPOINTS.AUTH.VERIFY_RIDE_OTP,
+      data
+    );
+    return response.data;
+  },
+
+  resendRideOtp: async (data: ResendOtpRequestDTO): Promise<{ message: string }> => {
+    const response = await apiClient.post<{ message: string }>(
+      ENDPOINTS.AUTH.VERIFY_RIDE_RESEND,
+      data
+    );
     return response.data;
   },
 

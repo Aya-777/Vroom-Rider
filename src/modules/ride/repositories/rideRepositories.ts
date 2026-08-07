@@ -12,6 +12,7 @@ import {
   CreateSavedPlaceRequestDTO,
   CreateSavedPlaceResponseDTO
  } from '../services/dto/savedPlaces.dto';
+import { ResendOtpRequestDTO, VerifyOtpRequestDTO, VerifyOtpResponseDTO } from '../../auth/services/dto/auth.dto';
 
 export const useRideRepository = {
   useSavedPlaces: (enabled = true) =>
@@ -51,4 +52,16 @@ export const useRideRepository = {
     },
   });
 },
+
+  useVerifyRideOtp: () => {
+    return useMutation<VerifyOtpResponseDTO, Error, VerifyOtpRequestDTO>({
+      mutationFn: rideApi.verifyRideOtp,
+    })
+  },
+  
+  useResendRideOtp: () => {
+    return useMutation<{ message: string }, Error, ResendOtpRequestDTO>({
+      mutationFn: rideApi.resendRideOtp,
+    });
+  },
 };

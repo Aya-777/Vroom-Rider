@@ -4,6 +4,9 @@ import { RecentDestinationParams } from '../../../modules/ride/types/recentDesti
 export type HomeStackParamList = {
   HomeScreen: undefined;
   Ride: { prefillDestination?: RecentDestinationParams } | undefined;
+  RideOtp: {
+    phoneNumber: string;
+  }
   AddNewPlace: undefined;
 };
 

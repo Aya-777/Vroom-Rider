@@ -4,7 +4,6 @@ import { useRideStore } from '../store/useRideStore';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
 import { rideApi } from '../services/rideApi';
 import { useSelectRideState } from '../hooks/useSelectRideState';
 import { useSavedPlaces } from '../hooks/useSavedPlaces';
@@ -12,6 +11,7 @@ import { useRideMapLocation } from '../hooks/useRideMapLocations';
 import { useCurrentUser } from '../../../core/store/userStore';
 import ContactService from '../../../core/services/ContactService';
 import PermissionService from '../../../core/services/location/PermissionService';
+import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
 
 export function useSelectRideViewModel() {
   const navigation =
@@ -115,7 +115,12 @@ export function useSelectRideViewModel() {
     } catch (error) {
       console.log('Estimate Error:', error);
     }
-  };
+    
+    if(rideData.passenger_contact_phone){
+      navigation.navigate('RideOtp', {phoneNumber: rideData.passenger_contact_phone});
+    }
+  }
+
 
   const handleFlipModal = () => {
     if (!state.isModalVisible) {
