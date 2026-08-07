@@ -13,6 +13,7 @@ import LinearBg from '../../../shared/components/LinearBg';
 import ActionButton from '../../../shared/components/ActionButton';
 import LogoutIcon from '../../../assets/svg/profile/logout.svg';
 import { useProfileActions } from '../../profile/hooks/useProfileActions';
+import { useTranslation } from 'react-i18next';
 
 const SidebarScreen = ({
   navigation,
@@ -29,6 +30,7 @@ const SidebarScreen = ({
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const { logout } = useProfileActions();
+  const {t} = useTranslation('sidebar');
   
 
   return (
@@ -61,8 +63,8 @@ const SidebarScreen = ({
 
         <View style={styles.footerContainer}>
         <ActionButton
-            onPress={()=>{}}
-            title={'Logout'}
+            onPress={logout}
+            title={t('logout')}
             icon={<LogoutIcon fill={colors.error} />}
             style={styles.logoutButton}
             textStyle={styles.logoutText}
