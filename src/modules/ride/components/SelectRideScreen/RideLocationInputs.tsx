@@ -75,6 +75,7 @@ export default function RideLocationInputs({
         )}
 
         <View style={styles.divider} />
+        
         <View style={styles.addInputContainer}>  
           <Input
             inputStyle={[styles.input, {width:'50%'}]}

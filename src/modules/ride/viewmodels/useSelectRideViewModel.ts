@@ -22,11 +22,8 @@ export function useSelectRideViewModel() {
 
   const {
     rideData,
-    savedPlaces,
-    setSavedPlaces,
     setRideDetails,
     setEstimate,
-    setPickingLocation,
     rideOtpVerified,
     setRideOtpVerified
   } = useRideStore();

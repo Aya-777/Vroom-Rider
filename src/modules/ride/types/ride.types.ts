@@ -47,7 +47,7 @@ export interface RideStop {
   order: number;
   latitude: number;
   longitude: number;
-  stop_type: 'PICKUP' | 'DROP_OFF';
+  stop_type: 'PICKUP' | 'DROP_OFF' | 'STOP';
 }
 export interface RideParams {
   id: number;
