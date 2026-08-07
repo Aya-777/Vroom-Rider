@@ -1,13 +1,11 @@
 import { useOtpFlow } from '../../../shared/hooks/useOtpFlow';
-import { useAuthRepository } from '../../auth/repositories/authRepository';
-import { useAuthActions } from '../../../core/store/authStore';
-import { setCurrentUser } from '../../../core/store/userStore';
 import { parseWaitSecondsError } from '../../../shared/utils/parseWaitSecondsError';
 import { useRideRepository } from '../repositories/rideRepositories';
+import { useRideStore } from '../store/useRideStore';
 
 export const useRideNumberVerificationViewModel = (navigation: any, route: any) => {
     const phoneNumber = route.params?.phoneNumber || '';
-    const { login } = useAuthActions();
+    const {setRideOtpVerified} = useRideStore();
 
     const verifyMutation = useRideRepository.useVerifyRideOtp();
     const resendMutation = useRideRepository.useResendRideOtp();
@@ -16,11 +14,12 @@ export const useRideNumberVerificationViewModel = (navigation: any, route: any) 
 
     const otp = useOtpFlow({
         verifyOtp: async (code) => {
-            const response = await verifyMutation.mutateAsync({ phone_number: phoneNumber, otp: code });
-            login(response.data.access, response.data.refresh);
-            setCurrentUser(response.data.user);
+          const response = await verifyMutation.mutateAsync({ phone_number: phoneNumber, otp: code });
         },
-        onSuccess: () => { },
+        onSuccess: () => {
+          setRideOtpVerified(true);
+          navigation.goBack();
+         },
     });
 
     const handleResend = async () => {

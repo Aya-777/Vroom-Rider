@@ -1,12 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-
 import { rideApi } from '../services/rideApi';
-
 import {
   RequestRideRequestDTO,
   RequestRideResponseDTO,
 } from '../services/dto/ride.dto';
-
+import {
+  EnterRideNumberRequestDTO,
+  EnterRideNumberResponseDTO,
+} from '../services/dto/ride.dto';
 import { 
   SavedPlaceDTO,
   CreateSavedPlaceRequestDTO,
@@ -52,6 +53,16 @@ export const useRideRepository = {
     },
   });
 },
+
+  useEnterRideNumber: () => {
+    return useMutation<
+      EnterRideNumberResponseDTO,
+      Error,
+      EnterRideNumberRequestDTO
+    >({
+      mutationFn: rideApi.enterRideNumber,
+    });
+  },
 
   useVerifyRideOtp: () => {
     return useMutation<VerifyOtpResponseDTO, Error, VerifyOtpRequestDTO>({

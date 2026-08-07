@@ -45,6 +45,10 @@ interface RideState {
   selectedMapLocation: MapLocation | null;
 
   setSelectedMapLocation: (location: MapLocation | null) => void;
+
+  rideOtpVerified: boolean;
+
+  setRideOtpVerified: (value: boolean) => void;
 }
 
 const normalizeStops = (stops: RideStop[]): RideStop[] => {
@@ -213,4 +217,10 @@ export const useRideStore = create<RideState>(set => ({
   selectedMapLocation: null,
 
   setSelectedMapLocation: location => set({ selectedMapLocation: location }),
+
+  rideOtpVerified: false,
+  
+  setRideOtpVerified: (value: boolean) =>
+    set({ rideOtpVerified: value }),
+  
 }));

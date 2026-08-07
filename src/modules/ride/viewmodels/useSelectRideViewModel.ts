@@ -12,11 +12,12 @@ import { useCurrentUser } from '../../../core/store/userStore';
 import ContactService from '../../../core/services/ContactService';
 import PermissionService from '../../../core/services/location/PermissionService';
 import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
+import { useRideRepository } from '../repositories/rideRepositories';
 
 export function useSelectRideViewModel() {
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
-
+  const { mutateAsync: sendRideOtp } = useRideRepository.useEnterRideNumber();
   const { t } = useTranslation('selectRide');
 
   const {
@@ -26,6 +27,8 @@ export function useSelectRideViewModel() {
     setRideDetails,
     setEstimate,
     setPickingLocation,
+    rideOtpVerified,
+    setRideOtpVerified
   } = useRideStore();
 
   const state = useSelectRideState(rideData);
@@ -109,16 +112,24 @@ export function useSelectRideViewModel() {
         ],
         scheduled_at: state.selectedTime,
         is_for_someone_else: state.selectedPerson === 'forMe' ? false : true,
-        passenger_contact_phone: state.contactPhone ?? user?.phone_number, // replace it later with the logged in phone number
+        passenger_contact_phone: state.contactPhone ?? user?.phone_number,
       },
     );
     } catch (error) {
       console.log('Estimate Error:', error);
     }
     
-    if(rideData.passenger_contact_phone){
-      navigation.navigate('RideOtp', {phoneNumber: rideData.passenger_contact_phone});
-    }
+   const phoneNumber = (
+    state.contactPhone ?? user?.phone_number ?? ''
+    ).replace(/\D/g, '');
+
+    const localNumber = phoneNumber.startsWith('963')
+      ? phoneNumber.substring(3)
+      : phoneNumber;
+    const finalPhoneNumber = '0'+ localNumber
+
+    await sendRideOtp({phone_number: finalPhoneNumber}); 
+    navigation.navigate('RideOtp');
   }
 
 
@@ -185,6 +196,9 @@ export function useSelectRideViewModel() {
     onSelectDestination: state.onSelectDestination,
     onSetOnMap: onSetOnMap,
     onConfirmLocation: onConfirmLocation,
-    onRideForChanged
+    onRideForChanged,
+
+    rideOtpVerified,
+    setRideOtpVerified
   };
 }

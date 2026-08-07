@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useSelectRideViewModel } from '../../viewmodels/useSelectRideViewModel';
 import { BaseBottomSheet } from '../../../../shared/components/BaseBottomSheet';
 import RideDropdown from '../../components/shared/RideDropdown';
@@ -13,11 +13,7 @@ import PhoneNumberIcon from '../../../../assets/svg/contact/call.svg';
 import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/selectRide.styles';
 import { useTranslation } from 'react-i18next';
-import {
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { TextInput, TouchableOpacity, View } from 'react-native';
 import { SavedPlacesModal } from '../SavedPlaces/SavedPlacesModal';
 import { Text } from 'react-native-gesture-handler';
 import { SharedValue } from 'react-native-reanimated';
@@ -27,7 +23,10 @@ type Props = {
   animatedPosition?: SharedValue<number>;
 };
 
-export default function SelectRideSheet({ onNextPress, animatedPosition }: Props) {
+export default function SelectRideSheet({
+  onNextPress,
+  animatedPosition,
+}: Props) {
   const { colors, mode } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['selectRide', 'common']);
@@ -44,17 +43,28 @@ export default function SelectRideSheet({ onNextPress, animatedPosition }: Props
     { key: 'schedule', label: t('common:schedule') },
   ];
 
-  const handleNextPress = () => {
-    if(vm.validate()){
-      vm.onNextPress();
+  useEffect(() => {
+    if (vm.rideOtpVerified) {
       onNextPress();
+    }
+  }, [vm.rideOtpVerified]);
+
+  const handleNextPress = () => {
+    if (vm.validate()) {
+      vm.onNextPress();
+      // onNextPress();
     }
   };
   const snapPoints = useMemo(() => ['30%', '70%'], []);
 
   return (
     <>
-      <BaseBottomSheet isVisible={vm.isSheetVisible} index={1} snapPoints={snapPoints} animatedPosition={animatedPosition}>
+      <BaseBottomSheet
+        isVisible={vm.isSheetVisible}
+        index={1}
+        snapPoints={snapPoints}
+        animatedPosition={animatedPosition}
+      >
         <View style={styles.dropdownRow}>
           <RideDropdown
             icon={<ScheduleIcon fill={colors.primary} />}
@@ -86,20 +96,15 @@ export default function SelectRideSheet({ onNextPress, animatedPosition }: Props
           toLocation={vm.toText}
           onChangeFrom={vm.setFromText}
           onChangeTo={vm.setToText}
-
           pickupResults={vm.pickupResults}
           destinationResults={vm.destinationResults}
-
           activeInput={vm.activeInput}
-
           onSelectPickup={vm.onSelectPickup}
           onSelectDestination={vm.onSelectDestination}
-
           onPickupFocus={vm.onPickupFocus}
           onDestinationFocus={vm.onDestinationFocus}
-
           errors={vm.errors}
-      />
+        />
 
         <View style={styles.actionRow}>
           <ActionButton
@@ -150,19 +155,23 @@ export default function SelectRideSheet({ onNextPress, animatedPosition }: Props
         />
       </BaseBottomSheet>
 
-        {!vm.isSheetVisible && 
-          <BaseBottomSheet 
+      {!vm.isSheetVisible && (
+        <BaseBottomSheet
           isVisible={!vm.isSheetVisible}
-          index={1} 
-          snapPoints={['20%']} 
+          index={1}
+          snapPoints={['20%']}
           animatedPosition={animatedPosition}
+        >
+          <TouchableOpacity
+            style={styles.confirmButton}
+            onPress={vm.onConfirmLocation}
           >
-            <TouchableOpacity style={styles.confirmButton} onPress={vm.onConfirmLocation}>
-              <Text style={styles.confirmButtonText} numberOfLines={1}>Confirm</Text>
-            </TouchableOpacity>
-          </BaseBottomSheet>
-        }
-
+            <Text style={styles.confirmButtonText} numberOfLines={1}>
+              Confirm
+            </Text>
+          </TouchableOpacity>
+        </BaseBottomSheet>
+      )}
     </>
   );
 }
