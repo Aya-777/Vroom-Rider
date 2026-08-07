@@ -5,6 +5,8 @@ import { SidebarItem } from '../types/sidebar.types';
 import { useCurrentUser } from '../../../core/store/userStore';
 import { useThemeMode, useThemeActions } from '../../../core/store/themeStore';
 import { getFullImageUrl } from '../../../shared/utils/getImageUrl';
+import { useState } from 'react';
+import { useSavedPlaces } from '../../ride/hooks/useSavedPlaces';
 
 type Navigation = DrawerContentComponentProps['navigation'];
 
@@ -12,6 +14,12 @@ export const useSidebarViewModel = (navigation: Navigation) => {
   const cachedUser = useCurrentUser();
   const mode = useThemeMode();
   const { toggleMode } = useThemeActions();
+  const [isSavedPlacesOpen, setIsSavedPlacesOpen] = useState(false);
+
+  const savedPlacesVM = useSavedPlaces(
+    isSavedPlacesOpen,
+    setIsSavedPlacesOpen,
+  );
 
   const user = {
     name: cachedUser ? `${cachedUser.first_name} ${cachedUser.last_name}` : '',
@@ -23,16 +31,26 @@ export const useSidebarViewModel = (navigation: Navigation) => {
     if (!item.route) {
       return;
     }
+    if(item.route === 'SavedPlaces'){
+      setIsSavedPlacesOpen(true);
+    }
 
     navigation.navigate('MainTabs', {
       screen: item.route,
     });
 
-    // We will connect the actual routes here
-    // once the destination screens are registered.
-
     navigation.closeDrawer();
   };
+
+  const onAddPlace = () => {
+    navigation.navigate('MainTabs', {
+        screen: 'HomeTab',
+        params: {
+          screen: 'AddNewPlace',
+        },
+      });
+      setIsSavedPlacesOpen(false);
+    };
 
   return {
     user,
@@ -41,5 +59,10 @@ export const useSidebarViewModel = (navigation: Navigation) => {
     handleItemPress,
     mode,
     toggleTheme: toggleMode,
+    ...savedPlacesVM,
+
+    isSavedPlacesOpen,
+    setIsSavedPlacesOpen,
+    onAddPlace,
   };
 };

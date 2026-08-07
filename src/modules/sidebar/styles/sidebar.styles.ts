@@ -69,6 +69,7 @@ export const createStyles = (colors: ThemeColors) =>
 
     content: {
       flex: 1,
+      justifyContent: 'space-between',
     },
 
     menu: {
@@ -100,6 +101,7 @@ export const createStyles = (colors: ThemeColors) =>
 
     footer: {
       marginTop: 'auto',
+      marginStart: 15,
       paddingHorizontal: Spacing.mmd,
       paddingBottom: Spacing.mmd,
     },
@@ -108,4 +110,27 @@ export const createStyles = (colors: ThemeColors) =>
       ...Typography.smallCaption,
       color: colors.textMuted,
     },
+    
+    logoutButton: {
+      backgroundColor: colors.error + '90',
+      borderWidth: 1,
+      borderColor: colors.error,
+      borderRadius: 12,
+      paddingVertical: 14,
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'row',
+      width: '80%',
+      marginBottom: 10,
+    },
+
+    logoutText: {
+      color: colors.error,
+      ...Typography.boldBody,
+    },
+
+    footerContainer:{
+      alignItems: 'flex-start',
+      justifyContent: 'center',
+    }
   });
