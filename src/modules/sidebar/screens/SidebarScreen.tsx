@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { DrawerContentComponentProps } from '@react-navigation/drawer';
 
 import SidebarHeader from '../components/SidebarHeader';
@@ -10,6 +10,9 @@ import { useSidebarViewModel } from '../viewmodels/useSidebarViewModel';
 import { createStyles } from '../styles/sidebar.styles';
 import { useTheme } from '../../../core/theme/useTheme';
 import LinearBg from '../../../shared/components/LinearBg';
+import ActionButton from '../../../shared/components/ActionButton';
+import LogoutIcon from '../../../assets/svg/profile/logout.svg';
+import { useProfileActions } from '../../profile/hooks/useProfileActions';
 
 const SidebarScreen = ({
   navigation,
@@ -25,6 +28,8 @@ const SidebarScreen = ({
 
   const { colors } = useTheme();
   const styles = createStyles(colors);
+  const { logout } = useProfileActions();
+  
 
   return (
     <View
@@ -53,7 +58,18 @@ const SidebarScreen = ({
           ))}
         </View>
 
-        <SidebarFooter version={version} />
+
+        <View style={styles.footerContainer}>
+        <ActionButton
+            onPress={()=>{}}
+            title={'Logout'}
+            icon={<LogoutIcon fill={colors.error} />}
+            style={styles.logoutButton}
+            textStyle={styles.logoutText}
+          />
+          <SidebarFooter version={version} />
+        </View>
+
       </LinearBg>
     </View>
   );

@@ -9,12 +9,6 @@ import {SidebarItem} from '../types/sidebar.types';
 
 export const SIDEBAR_ITEMS: SidebarItem[] = [
   {
-    id: 'trips',
-    label: 'myTrips',
-    icon: HistoryIcon,
-    route: 'ActivityTab',
-  },
-  {
     id: 'savedPlaces',
     label: 'savedPlaces',
     icon: SavedIcon,
