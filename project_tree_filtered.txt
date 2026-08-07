@@ -2,7 +2,8 @@ src/
 ├── assets
 │   ├── animations
 │   │   ├── Moon.json
-│   │   └── Sun.json
+│   │   ├── Sun.json
+│   │   └── mapPulse.json
 │   ├── fonts
 │   │   ├── Lora-Bold.ttf
 │   │   ├── Lora-Regular.ttf
@@ -134,6 +135,7 @@ src/
 │   │   ├── socketClient.ts
 │   │   └── socketManager.ts
 │   ├── services
+│   │   ├── ContactService.ts
 │   │   └── location
 │   │       ├── GeoCodingService.ts
 │   │       ├── LocationService.ts
@@ -221,7 +223,6 @@ src/
 │   │   │       ├── SplashLogo.tsx
 │   │   │       ├── SplashRoad.tsx
 │   │   │       └── SplashText.tsx
-│   │   ├── constants
 │   │   ├── hooks
 │   │   │   ├── useAuthActions.ts
 │   │   │   ├── useSplashAnimation.ts
@@ -239,14 +240,12 @@ src/
 │   │   │   ├── authApi.ts
 │   │   │   └── dto
 │   │   │       └── auth.dto.ts
-│   │   ├── store
 │   │   ├── styles
 │   │   │   ├── Splash.styles.ts
 │   │   │   ├── forgotPassword.styles.ts
 │   │   │   ├── login.styles.ts
 │   │   │   ├── resetPassword.styles.ts
 │   │   │   └── signup.styles.ts
-│   │   ├── types
 │   │   ├── utils
 │   │   │   └── SplashPathUtils.ts
 │   │   └── viewmodels
@@ -257,7 +256,6 @@ src/
 │   │       ├── useSignupOtpViewModel.ts
 │   │       ├── useSignupViewModel.ts
 │   │       └── useSplashViewModel.ts
-│   ├── constants
 │   ├── home
 │   │   ├── components
 │   │   │   ├── DestinationCard.tsx
@@ -364,6 +362,11 @@ src/
 │   │   │   │   ├── RideActionFilters.tsx
 │   │   │   │   ├── TimePriceBox.tsx
 │   │   │   │   └── VehicleSelector.tsx
+│   │   │   ├── Map
+│   │   │   │   ├── MapContainer.tsx
+│   │   │   │   └── UserLocationMarker
+│   │   │   │       ├── BreathingDot.tsx
+│   │   │   │       └── UserLocationMarker.tsx
 │   │   │   ├── RideConfirmationScreen
 │   │   │   │   ├── InfoBox.tsx
 │   │   │   │   └── RideConfirmationSheet.tsx
@@ -372,6 +375,8 @@ src/
 │   │   │   ├── SavedPlaces
 │   │   │   │   ├── SavedPlacesItem.tsx
 │   │   │   │   └── SavedPlacesModal.tsx
+│   │   │   ├── SearchingForaDriver
+│   │   │   │   └── SearchingForaDriverSheet.tsx
 │   │   │   ├── SelectRideScreen
 │   │   │   │   ├── RideLocationInputs.tsx
 │   │   │   │   └── SelectRideSheet.tsx
@@ -386,7 +391,6 @@ src/
 │   │   │   │   └── VerticalDivider.tsx
 │   │   │   └── shared
 │   │   │       ├── CancelModal.tsx
-│   │   │       ├── MapContainer.tsx
 │   │   │       ├── RideDropdown.tsx
 │   │   │       └── SearchResults.tsx
 │   │   ├── constants
@@ -444,6 +448,7 @@ src/
 │   │       ├── useMapViewModel.ts
 │   │       ├── useRideDetailsViewModel.ts
 │   │       ├── useRideViewModel.ts
+│   │       ├── useSearchingForaDriverViewModel.ts
 │   │       ├── useSelectRideViewModel.ts
 │   │       └── useTripStartedViewModel.ts
 │   └── sidebar
