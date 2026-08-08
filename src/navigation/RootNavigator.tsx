@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { navigationRef, RootStackParamList } from './rootTypes';
-
 import { useAuthLoggedIn, useAuthHasHydrated } from '../core/store/authStore';
 import MainDrawer from './main/MainDrawer';
 import AuthStack from './auth/AuthStack';
@@ -10,8 +9,33 @@ import SplashScreen from '../modules/auth/screens/SplashScreen';
 import { deepLinkingConfig } from './deepLinkingConfig';
 import NotificationsScreen from '../modules/notifications/screens/NotificationsScreen';
 import { isRTL } from '../core/i18n/utils/isRTL';
+import { usePushNotifications } from '../modules/notifications/hooks/usePushNotifications';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+
+function PushNotificationsHandler({ isLoggedIn }: { isLoggedIn: boolean }) {
+  const navigation = useNavigation();
+
+  usePushNotifications(isLoggedIn, data => {
+    switch (data.type) {
+      // case 'NEW_TRIP': // Driver
+        // navigation.navigate('ExtraDetailsScreen' as never);
+        // break;
+      case 'DRIVER_ACCEPTED': // Rider
+        navigation.navigate('DriverFoundScreen' as never);
+        break;
+      case 'DRIVER_CANCELLED': // Rider
+      // case 'RIDER_CANCELLED': // Driver
+        navigation.navigate('RideScreen' as never);
+        break;
+      case 'NO_DRIVER_FOUND': // Rider
+        navigation.navigate('SelectRideScreen' as never);
+        break;
+    }
+  });
+
+  return null;
+}
 
 export default function RootNavigator() {
   const isLoggedIn = useAuthLoggedIn();
@@ -25,6 +49,7 @@ export default function RootNavigator() {
       ref={navigationRef}
       direction={isRTL() ? 'rtl' : 'ltr'}
     >
+      <PushNotificationsHandler isLoggedIn={isLoggedIn} />
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {!isAppReady ? (
           <Stack.Screen name="Splash">
