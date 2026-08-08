@@ -73,8 +73,7 @@ export const DriverCard: React.FC<DriverCardProps> = ({
       <View style={styles.headerRow}>
         <Image source={{ uri: driver.profile_image }} style={styles.avatar} />
         <View style={styles.headerInfo}>
-          <Text style={styles.name}>{driver.first_name}</Text>
-          <Text style={styles.name}>{" "}{driver.last_name}</Text>
+          <Text style={styles.name}>{driver.first_name} {driver.last_name}</Text>
           <View style={styles.ratingRow}>
             <StarIcon width={16} height={16} fill={'#eab308'} />
             <Text style={styles.ratingText}>
