@@ -71,9 +71,10 @@ export const DriverCard: React.FC<DriverCardProps> = ({
     <View style={styles.card}>
       {/* Top Header */}
       <View style={styles.headerRow}>
-        <Image source={{ uri: driver.avatarUrl }} style={styles.avatar} />
+        <Image source={{ uri: driver.profile_image }} style={styles.avatar} />
         <View style={styles.headerInfo}>
-          <Text style={styles.name}>{driver.name}</Text>
+          <Text style={styles.name}>{driver.first_name}</Text>
+          <Text style={styles.name}>{" "}{driver.last_name}</Text>
           <View style={styles.ratingRow}>
             <StarIcon width={16} height={16} fill={'#eab308'} />
             <Text style={styles.ratingText}>
@@ -96,7 +97,7 @@ export const DriverCard: React.FC<DriverCardProps> = ({
           </Text>
           <Text style={styles.detailValue}>{driver.phone}</Text>
         </View> */}
-
+{/* 
         <View style={styles.vehicleSection}>
           <Text style={styles.detailLabel}>
             {t('favoriteDrivers.details.vehicle')}
@@ -104,16 +105,16 @@ export const DriverCard: React.FC<DriverCardProps> = ({
           <View style={styles.vehicleRow}>
             <Text style={styles.vehicleName}>{driver.vehicleName}</Text>
           </View>
-        </View>
+        </View> */}
 
-        <View style={styles.detailColumn}>
+        {/* <View style={styles.detailColumn}>
           <Text style={styles.detailLabel}>
             {t('favoriteDrivers.details.plate')}
           </Text>
           <View style={styles.plateContainer}>
             <Text style={styles.plateText}>{driver.plate}</Text>
           </View>
-        </View>
+        </View> */}
       </View>
 
       {/* Action Footer (Call & Message Icons Only) */}

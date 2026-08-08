@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -7,21 +8,25 @@ export const useFavoriteDriversViewModel = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
 
-  const { drivers, searchQuery, setSearchQuery, setSelectedFilter, toggleFavorite } =
+  const { drivers, searchQuery, setSearchQuery, setSelectedFilter, toggleFavorite, fetchFavoriteDrivers } =
     useFavoriteDriversStore();
 
-  const filteredDrivers = drivers.filter(
-    driver =>
-      driver.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      driver.plate.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
+  // Fetch favorite drivers once when the screen mounts
+  useEffect(() => {
+    fetchFavoriteDrivers();
+  }, [fetchFavoriteDrivers]);
+
+  const filteredDrivers = drivers.filter(driver => {
+    const name = `${driver.first_name} ${driver.last_name}`;
+    return name.toLowerCase().includes(searchQuery.toLowerCase());
+  });
 
   const goBack = () => {
     navigation.goBack();
   };
 
   return {
-    filteredDrivers,
+    drivers: filteredDrivers, // Return filtered list for the FlatList
     searchQuery,
     setSearchQuery,
     goBack,

@@ -26,8 +26,8 @@ export const FavoriteDriversScreen: React.FC = () => {
         style={styles.container}
       >
         <FlatList
-          data={vm.filteredDrivers}
-          keyExtractor={item => item.id}
+          data={vm.drivers}
+          keyExtractor={item => item.driver_id.toString()}
           contentContainerStyle={styles.listContainer}
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={
@@ -43,7 +43,7 @@ export const FavoriteDriversScreen: React.FC = () => {
               driver={item}
               onMessagePress={() => {}}
               onCallPress={()=>{}}
-              onToggleFavorite={() => vm.toggleFavorite(item.id)}
+              onToggleFavorite={() => vm.toggleFavorite(item.driver_id)}
               isFavorite={true}
             />
           )}

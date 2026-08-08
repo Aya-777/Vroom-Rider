@@ -1,9 +1,27 @@
+export interface DriverDto {
+  driver_id: number;
+  first_name: string;
+  last_name: string;
+  phone_number: string;
+  profile_image: string | undefined;
+  rating: number;
+}
+
 export interface ToggleFavoriteDriverRequest {
-  driver_id: string | number;
+  driver_id: number;
 }
 
 export interface ToggleFavoriteDriverResponse {
-  success: boolean;
+  "status code": number;
   message: string;
-  is_favorite: boolean;
+  data: {
+    is_favorite: boolean;
+    driver: DriverDto;
+  };
+}
+
+export interface GetFavoriteDriversResponse {
+  "status code": number;
+  message: string;
+  data: DriverDto[];
 }

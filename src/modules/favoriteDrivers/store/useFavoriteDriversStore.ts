@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { Driver } from '../types/driver.type';
 import { favoriteDriverRepository } from '../repositories/favoriteDriverRepository';
+import { DriverDto } from '../services/dto/favoriteDriver.dto';
 
 interface FavoriteDriversState {
   searchQuery: string;
@@ -13,7 +14,7 @@ interface FavoriteDriversState {
   setSearchQuery: (query: string) => void;
   setSelectedFilter: (filter: string) => void;
   fetchFavoriteDrivers: () => Promise<void>;
-  toggleFavorite: (driverId: string | number) => Promise<void>;
+  toggleFavorite: (driverId: number) => Promise<void>;
 }
 
 export const useFavoriteDriversStore = create<FavoriteDriversState>(
@@ -25,39 +26,7 @@ export const useFavoriteDriversStore = create<FavoriteDriversState>(
 
     // Initial Mock / Placeholder Data matching your UI
     drivers: [
-      {
-        id: '1',
-        name: 'Alexander Wright',
-        rating: 4.9,
-        phone: '+1 (555) 012-4829',
-        plate: 'K-9283-LP',
-        vehicleName: 'Midnight Blue Tesla Model 3',
-        status: 'available',
-        avatarUrl:
-          'https://images.unsplash.com/photo-1534528741775-53994a69daeb',
-      },
-      {
-        id: '2',
-        name: 'Sarah Jenkins',
-        rating: 4.8,
-        phone: '+1 (555) 923-1104',
-        plate: 'A-4721-BC',
-        vehicleName: 'Silver Mercedes-Benz E-Class',
-        status: 'on_trip',
-        avatarUrl:
-          'https://images.unsplash.com/photo-1517841905240-472988babdf9',
-      },
-      {
-        id: '3',
-        name: 'Michael Chen',
-        rating: 4.7,
-        phone: '+1 (555) 443-8821',
-        plate: 'T-1884-FF',
-        vehicleName: 'Obsidian Black Audi A6',
-        status: 'offline',
-        avatarUrl:
-          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d',
-      },
+      
     ],
 
     setSearchQuery: (query: string) => set({ searchQuery: query }),
@@ -68,8 +37,8 @@ export const useFavoriteDriversStore = create<FavoriteDriversState>(
       set({ isLoading: true, error: null });
       try {
         // TODO: Replace with actual API call repository service when backend endpoint is ready
-        // const response = await favoriteDriverRepository.getFavoriteDrivers();
-        // set({ drivers: response, isLoading: false });
+        const response = await favoriteDriverRepository.getFavoriteDrivers();
+        set({ drivers: response.data , isLoading: false });
 
         setTimeout(() => {
           set({ isLoading: false });
@@ -88,7 +57,7 @@ export const useFavoriteDriversStore = create<FavoriteDriversState>(
         
         const response = await favoriteDriverRepository.toggleFavorite(driverId);
         const currentDrivers = get().drivers;
-        const updatedDrivers = currentDrivers.filter(driver => driver.id !== driverId);
+        const updatedDrivers = currentDrivers.filter(driver => driver.driver_id !== driverId);
 
         set({ 
           drivers: updatedDrivers, 

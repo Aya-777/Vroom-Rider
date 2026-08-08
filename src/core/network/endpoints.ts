@@ -34,5 +34,6 @@ export const ENDPOINTS = {
 
   FAVORITE_DRIVERS: {
     TOGGLE: '/api/v1/users/favorite-drivers/toggle/',
+    GET_FAVORITE_DRIVERS: '/api/v1/users/favorite-drivers/',
   },
 } as const;

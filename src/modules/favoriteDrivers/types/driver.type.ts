@@ -1,12 +1,11 @@
 export type DriverStatus = 'available' | 'on_trip' | 'offline';
 
 export interface Driver {
-  id: string;
-  name: string;
+  driver_id: number;
+  first_name: string;
+  last_name: string;
+  phone_number: string;
+  profile_image: string | undefined;
   rating: number;
-  phone: string;
-  plate: string;
-  vehicleName: string;
-  status: DriverStatus;
-  avatarUrl: string;
+  status? : DriverStatus
 }
