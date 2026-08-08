@@ -75,7 +75,7 @@ export default function SelectRideSheet({ onNextPress, animatedPosition }: Props
             items={personItems}
             onToggle={() => vm.setIsForMeDropdownOpen(!vm.isForMeDropdownOpen)}
             onSelect={item => {
-              vm.setSelectedPerson(item);
+              vm.onRideForChanged(item);
               vm.setIsForMeDropdownOpen(false);
             }}
           />

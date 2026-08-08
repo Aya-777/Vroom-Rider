@@ -10,6 +10,8 @@ import { useSelectRideState } from '../hooks/useSelectRideState';
 import { useSavedPlaces } from '../hooks/useSavedPlaces';
 import { useRideMapLocation } from '../hooks/useRideMapLocations';
 import { useCurrentUser } from '../../../core/store/userStore';
+import ContactService from '../../../core/services/ContactService';
+import PermissionService from '../../../core/services/location/PermissionService';
 
 export function useSelectRideViewModel() {
   const navigation =
@@ -123,6 +125,38 @@ export function useSelectRideViewModel() {
     state.setIsModalVisible(!state.isModalVisible);
   };
 
+  const onRideForChanged = async (option: string) => {
+  if (option === 'otherContact') {
+    const granted = await PermissionService.requestContactsPermission();
+
+    if (!granted) {
+      return;
+    }
+
+    const contact = await ContactService.pickContact();
+
+    if (!contact) {
+      return;
+    }
+
+    setRideDetails({
+      ...rideData,
+      is_for_someone_else: true,
+      passenger_contact_phone: contact.phone
+    });
+    state.setContactPhone(contact.phone);
+    state.setSelectedPerson(contact.name);
+    return;
+  }
+
+  setRideDetails({
+    ...rideData,
+    is_for_someone_else: false,
+    passenger_contact_phone: user?.phone_number
+  });
+
+};
+
   return {
     ...state,
     validate,
@@ -146,5 +180,6 @@ export function useSelectRideViewModel() {
     onSelectDestination: state.onSelectDestination,
     onSetOnMap: onSetOnMap,
     onConfirmLocation: onConfirmLocation,
+    onRideForChanged
   };
 }
