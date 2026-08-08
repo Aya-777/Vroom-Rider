@@ -1,14 +1,11 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RecentDestinationParams } from '../../../modules/ride/types/recentDestination.types';
 
 export type HomeStackParamList = {
-  HomeScreen: undefined;       
-  
-  SelectRide: undefined;
-  RideDetails: undefined;
-  ConfirmRide: undefined;
-  
-  DriverFound: { driverId: string };
+  HomeScreen: undefined;
+  Ride: { prefillDestination?: RecentDestinationParams } | undefined;
+  AddNewPlace: undefined;
 };
 
-export type HomeStackScreenProps<T extends keyof HomeStackParamList> = 
+export type HomeStackScreenProps<T extends keyof HomeStackParamList> =
   NativeStackScreenProps<HomeStackParamList, T>;

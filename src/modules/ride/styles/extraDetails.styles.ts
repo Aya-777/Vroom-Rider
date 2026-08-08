@@ -1,13 +1,20 @@
 import { StyleSheet } from 'react-native';
-import { Shadows, Typography } from '../../../core/theme/tokens';
+import { Shadows, Spacing, Typography } from '../../../core/theme/tokens';
 import { ThemeColors } from '../../../core/theme/theme.types';
 
 export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
+
     timePriceRow: {
       flexDirection: 'row',
-      marginBottom: 12,
-      gap : 15,
+      alignItems: 'flex-start',
+      justifyContent: 'space-between',
+    },
+    boxTitle2: {
+      marginTop: 5,
+      marginStart: Spacing.xs,
+      color: colors.textPrimary,
+      ...Typography.caption,
     },
 
     vehicleRow: {
@@ -24,13 +31,13 @@ export const createStyles = (colors: ThemeColors) =>
       paddingVertical: 12,
       alignItems: 'center',
       backgroundColor: colors.surface,
-      ...Shadows.small,
+      // ...Shadows.small,
     },
 
     activeVehicleCard: {
       borderWidth: 2,
       borderColor: colors.primary,
-      backgroundColor : colors.primary + '80'
+      backgroundColor: colors.primary + '80',
     },
 
     vehicleImage: {
@@ -40,12 +47,16 @@ export const createStyles = (colors: ThemeColors) =>
     },
 
     vehicleText: {
-      color: colors.textMuted,
+      color: colors.textPrimary,
       ...Typography.semiBoldCaption,
     },
 
-    activeVehicleText: {
-      color: colors.primary,
-    },
+    // activeVehicleText: {
+    //   color: colors.primary,
+    // },
 
+    actionsContainer: {
+      flex: 1,
+      flexDirection: 'row',
+    },
   });

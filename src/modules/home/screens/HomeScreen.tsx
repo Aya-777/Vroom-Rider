@@ -3,19 +3,15 @@ import {
   ScrollView,
   View,
 } from 'react-native';
-
 import LinearBg from '../../../shared/components/LinearBg';
 import SearchBar from '../../../shared/components/SearchBar';
 import ForYouStar from '../../../assets/svg/home/ForYouStar.svg';
-
 import ServiceCard from '../components/ServiceCard';
 import DestinationCard from '../components/DestinationCard';
 import SectionHeader from '../components/SectionHeader';
-
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/home.styles';
 import { useHomeViewModel } from '../viewmodels/useHomeViewModel';
-
 import HeaderTopAppBar from '../components/HomeHeader';
 import { useHomeActions } from '../hooks/useHomeActions';
 import { useTranslation } from 'react-i18next';
@@ -30,15 +26,16 @@ export default function HomeScreen() {
   const {
     services,
     recentDestinations,
+    openSidebar,
   } = useHomeViewModel();
 
   const {
-    navigateToSelectRide
+    navigateToRide,
+    navigateToRideWithDestination,
   } = useHomeActions();
 
   const serviceActions: Record<string, () => void> = {
-    '1': navigateToSelectRide,
-    // '2': navigateToReserve,
+    '1': navigateToRide,
   };
 
   return (
@@ -51,6 +48,7 @@ export default function HomeScreen() {
       <View style={styles.container}>
 
         <HeaderTopAppBar
+          onMenuPress={openSidebar}
           onNotificationPress={() =>
             navigate('Notifications')
           } />
@@ -87,10 +85,17 @@ export default function HomeScreen() {
               return (
                 <DestinationCard
                   key={destination.id}
-                  {...destination}
                   title={destination.title}
                   subtitle={destination.subtitle}
                   icon={<DestinationIcon />}
+                  onPress={() =>
+                    navigateToRideWithDestination({
+                      address: destination.subtitle,
+                      latitude: destination.dropoffLatitude,
+                      longitude: destination.dropoffLongitude,
+                      vehicleTypeId: destination.vehicleTypeId,
+                    })
+                  }
                 />
               );
             })}

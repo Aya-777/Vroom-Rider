@@ -1,10 +1,11 @@
-import { Platform, StatusBar, StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { Radius, Shadows, Spacing, Typography } from "../../core/theme/tokens";
+import { ThemeColors } from '../../core/theme/theme.types';
 
-export const createStyles = (colors: any) =>
+export const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
     container: {
-      paddingTop: Platform.OS === 'ios' ? Spacing.xl : (StatusBar.currentHeight || 0) + Spacing.xl,
+      paddingTop: Platform.OS === 'ios' ? Spacing.xs : Spacing.md,
       paddingBottom: Spacing.sm,
       backgroundColor: colors.backgroundSoft,
       ...Shadows.medium,

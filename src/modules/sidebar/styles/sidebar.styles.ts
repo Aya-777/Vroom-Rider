@@ -1,0 +1,136 @@
+import { StyleSheet } from 'react-native';
+import { ThemeColors } from '../../../core/theme/theme.types';
+import { Typography, Spacing, Radius } from '../../../core/theme/tokens';
+
+export const createStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: colors.backgroundSoft,
+    },
+
+    header: {
+      minHeight: 120,
+      justifyContent: 'center',
+      padding: Spacing.smd,
+      backgroundColor: colors.surface,
+      borderBottomEndRadius: Radius.lg,
+    },
+
+    topRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: Spacing.smd,
+    },
+
+    avatarContainer: {
+      width: 54,
+      height: 54,
+      borderRadius: Radius.xl,
+      borderWidth: 1.5,
+      borderColor: colors.border,
+      overflow: 'hidden',
+    },
+
+    avatar: {
+      width: '100%',
+      height: '100%',
+    },
+
+    avatarPlaceholder: {
+      flex: 1,
+      backgroundColor: colors.primary,
+    },
+
+    userInfo: {
+      justifyContent: 'center',
+    },
+
+    userName: {
+      ...Typography.h3,
+      color: colors.textPrimary,
+      marginTop: Spacing.smd,
+    },
+
+    ratingRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: Spacing.xs,
+    },
+
+    rating: {
+      color: colors.textPrimary,
+      ...Typography.caption,
+    },
+
+    spacer: {
+      flex: 1,
+    },
+
+    content: {
+      flex: 1,
+      justifyContent: 'space-between',
+    },
+
+    menu: {
+      paddingTop: Spacing.smd,
+      paddingHorizontal: Spacing.mmd,
+    },
+
+    menuItem: {
+      minHeight: 42,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: Spacing.md,
+      borderRadius: Radius.sm,
+      paddingHorizontal: Spacing.xxs,
+    },
+
+    menuItemPressed: {
+      opacity: 0.6,
+    },
+
+    menuIcon: {
+      color: colors.textMuted,
+    },
+
+    menuLabel: {
+      ...Typography.body,
+      color: colors.textSecondary,
+    },
+
+    footer: {
+      marginTop: 'auto',
+      marginStart: 15,
+      paddingHorizontal: Spacing.mmd,
+      paddingBottom: Spacing.mmd,
+    },
+
+    version: {
+      ...Typography.smallCaption,
+      color: colors.textMuted,
+    },
+    
+    logoutButton: {
+      backgroundColor: colors.error + '90',
+      borderWidth: 1,
+      borderColor: colors.error,
+      borderRadius: 12,
+      paddingVertical: 14,
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'row',
+      width: '80%',
+      marginBottom: 10,
+    },
+
+    logoutText: {
+      color: colors.error,
+      ...Typography.boldBody,
+    },
+
+    footerContainer:{
+      alignItems: 'flex-start',
+      justifyContent: 'center',
+    }
+  });

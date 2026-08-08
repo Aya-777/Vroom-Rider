@@ -1,5 +1,5 @@
 ﻿import os
-root = r'c:\Users\Massa\Project 1\Vroom-Rider'
+root = r'c:\Users\Massa\Project 1\Vroom-Rider\src'
 no_recurse = {'node_modules', '.git', 'android/.gradle', 'android/app/.cxx', 'android/app/build', 'android/build', 'ios/Pods', 'ios/build'}
 lines = []
 

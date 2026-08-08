@@ -15,8 +15,25 @@ export type ProfileListItem = {
 };
 
 export type UserProfile = {
-  name: string;
+  id: number;
+  firstName: string;
+  lastName: string;
   phone: string;
-  email: string;
-  location: string;
+  role: string;
+  accountStatus: string;
+  profileImage: string | null;
+  ratingAvg: number;
+  isActive: boolean;
+};
+
+export type UpdateProfileImageInput = {
+  uri: string;
+  fileName?: string;
+  type?: string;
+};
+
+export type UpdateProfileInput = {
+  firstName: string;
+  lastName: string;
+  profileImage?: UpdateProfileImageInput | null;
 };

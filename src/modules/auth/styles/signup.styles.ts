@@ -8,6 +8,16 @@ import { ThemeColors } from '../../../core/theme/theme.types';
 
 export const createStyles = (colors: ThemeColors) =>
     StyleSheet.create({
+
+        avatarImage: {
+            width: 90,
+            height: 90,
+            borderRadius: 45,
+            marginBottom: 10,
+            borderWidth: 4,
+            borderColor: colors.border,
+        },
+
         signupWrapper: {
             width: '100%',
             alignItems: 'center',
@@ -117,11 +127,11 @@ export const createStyles = (colors: ThemeColors) =>
             flexDirection: 'row',
             justifyContent: 'center',
             width: 290,
-            gap : 3
+            gap: 3
         },
 
         halfInput: {
-            width: '52%',
+            width: '55%',
         },
 
         halfInputText: {

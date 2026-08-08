@@ -13,12 +13,14 @@ interface Props {
   title: string;
   subtitle: string;
   icon: React.ReactNode;
+  onPress?: () => void;
 }
 
 export default function DestinationCard({
   title,
   subtitle,
   icon,
+  onPress,
 }: Props) {
 
   const { colors } = useTheme();
@@ -31,6 +33,7 @@ export default function DestinationCard({
         styles.destinationCard,
         { backgroundColor: colors.backgroundSoft },
       ]}
+      onPress={onPress}
     >
 
       <View

@@ -2,10 +2,7 @@ import { LinkingOptions } from '@react-navigation/native';
 import { RootStackParamList } from './rootTypes';
 
 export const deepLinkingConfig: LinkingOptions<RootStackParamList> = {
-  prefixes: [
-    'vroomrider://',
-    'https://vroomrider.com',
-  ],
+  prefixes: ['vroomrider://', 'https://vroomrider.com'],
 
   // 2. Map URL paths to your specific screens
   config: {
@@ -17,13 +14,14 @@ export const deepLinkingConfig: LinkingOptions<RootStackParamList> = {
         },
       },
       // Protected Routes layout
-      MainTabs: {
+      Main: {
         screens: {
           HomeTab: {
             screens: {
               HomeMain: 'home',
-              RideDetails: 'ride/:rideId',    // like: vroomrider://ride/123-abc
-              DriverFound: 'tracking/:rideId/:driverId',
+              Ride: {
+                path: 'ride/:rideId?',
+              },
             },
           },
           ProfileTab: {

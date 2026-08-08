@@ -1,7 +1,6 @@
-import React from 'react';
-import { View, FlatList, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, FlatList, Text, ActivityIndicator } from 'react-native';
 import ActivityCard from '../components/ActivityCard';
-
 import LinearBg from '../../../shared/components/LinearBg';
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/activities.styles';
@@ -10,11 +9,23 @@ import StatusTabs from '../components/StatusTabs';
 import { useTranslation } from 'react-i18next';
 import Header from '../../../shared/components/Header';
 import { navigate } from '../../../navigation/rootTypes';
+import ActivityDetailsSheet from '../components/ActivityDetailsSheet';
+import { Activity } from '../types/activities.types';
+import ReviewModal from '../../review/components/ReviewModal';
 
 export default function ActivitiesScreen() {
     const { colors } = useTheme();
     const styles = createStyles(colors);
     const { t } = useTranslation(['activities']);
+
+    const [selectedActivity, setSelectedActivity] =
+        useState<Activity | null>(null);
+
+    const [detailsVisible, setDetailsVisible] =
+        useState(false);
+
+    const [reviewVisible, setReviewVisible] =
+        useState(false);
 
     const {
         statuses,
@@ -22,19 +33,21 @@ export default function ActivitiesScreen() {
         setSelectedStatus,
         activities,
         isLoading,
+        isLoadingMore,
+        loadMore,
+        openSidebar,
     } = useActivitiesViewModel();
 
     return (
         <LinearBg
             colors={[colors.backgroundSoft, colors.background]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0.8 }}
             style={styles.gradientContainer}
         >
 
             <Header title={t('yourActivity')}
                 onNotificationPress={() =>
                     navigate('Notifications')}
+                onMenuPress={openSidebar}
             />
 
             <View style={styles.container}>
@@ -50,17 +63,30 @@ export default function ActivitiesScreen() {
                     keyExtractor={(item) => item.id}
                     contentContainerStyle={styles.scrollContent}
                     showsVerticalScrollIndicator={false}
+                    onEndReachedThreshold={0.4}
+                    onEndReached={loadMore}
                     renderItem={({ item }) => (
                         <ActivityCard
                             rideType={item.rideType}
-                            pickup={item.pickup}
-                            destination={item.destination}
+                            pickup={item.pickupLocation}
+                            destination={item.dropoffLocation}
                             date={item.date}
-                            fare={item.fare}
-                            distance={item.distance}
-                            onPress={() => { }}
+                            fare={item.price !== null ? `${item.price} ${item.currency}` : '-'}
+                            distance={item.distance !== null ? `${item.distance} km` : undefined}
+                            onPress={() => {
+                                setSelectedActivity(item);
+                                setDetailsVisible(true);
+                            }}
                         />
                     )}
+                    ListFooterComponent={
+                        isLoadingMore ? (
+                            <ActivityIndicator
+                                style={{ marginVertical: 16 }}
+                                color={colors.primary}
+                            />
+                        ) : null
+                    }
                     ListEmptyComponent={
                         !isLoading ? (
                             <View style={styles.emptyContainer}>
@@ -68,8 +94,33 @@ export default function ActivitiesScreen() {
                                     {t('noActivities')}
                                 </Text>
                             </View>
-                        ) : null
+                        ) : (
+                            <ActivityIndicator
+                                style={{ marginTop: 40 }}
+                                color={colors.primary}
+                            />
+                        )
                     }
+                />
+                <ActivityDetailsSheet
+                    visible={detailsVisible}
+                    activity={selectedActivity}
+                    onClose={() => setDetailsVisible(false)}
+                    onReview={() => {
+                        setDetailsVisible(false);
+                        setReviewVisible(true);
+                    }}
+                    onReride={() => { }}
+                />
+                <ReviewModal
+                    visible={reviewVisible}
+                    onClose={() => setReviewVisible(false)}
+                    onSubmit={(rating, review) => {
+                        console.log(rating);
+                        console.log(review);
+
+                        setReviewVisible(false);
+                    }}
                 />
             </View>
         </LinearBg>

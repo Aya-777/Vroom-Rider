@@ -8,12 +8,20 @@ import { Typography, Spacing, Radius, Shadows } from '../../core/theme/tokens';
 import { useTheme } from '../../core/theme/useTheme';
 import { useTranslation } from 'react-i18next';
 import { ThemeColors } from '../../core/theme/theme.types';
+import { HomeStackParamList } from '../../navigation/main/home/homeTypes';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 
 
 function SearchBar() {
   const { t } = useTranslation(['home','common']);
   const { colors } = useTheme();
   const styles = createStyles(colors);
+  const navigation = useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
+
+  const onInputPress = () => {
+    navigation.navigate('Ride');
+  }
 
   return (
     <View style={styles.searchContainer}>
@@ -21,6 +29,7 @@ function SearchBar() {
 
       <TextInput
         placeholder={t('whereTo')}
+        onPress={onInputPress}
         placeholderTextColor={colors.textMuted}
         style={styles.searchInput}
       />

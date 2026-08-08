@@ -1,32 +1,35 @@
-import { useNavigation } from '@react-navigation/native';
-import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 import { useState } from 'react';
 import { useRideStore } from '../store/useRideStore';
+import { rideApi } from '../services/rideApi';
+import { RequestRideRequestDTO } from '../services/dto/ride.dto';
+import { Alert } from 'react-native';
+import { CurrentRide } from '../types/ride.types';
+import { TripStatus } from '../types/RideState';
 
 export function useConfirmRideViewModel() {
   const [isLoading, setIsLoading] = useState(false);
-  const navigation = useNavigation<HomeStackScreenProps<'ConfirmRide'>['navigation']>();
-  const rideData = useRideStore((state) => state.activeRide);
+  const { rideData, estimate, setCurrentRide, setRideDetails } = useRideStore();
 
   const handleFindDriver = async () => {
-    // setIsLoading(true);
-    // try {
-      // const driver = await rideService.findDriver(rideDetails);
-      
-      // 2. Navigate on success
-      // navigation.navigate('DriverFound', { driverId: driver.id });
-    // } catch (error) {
-      // 3. Handle errors (e.g., show an alert)
-      // Alert.alert('Error', 'Could not find a driver. Please try again.');
-    // } finally {
-      // setIsLoading(false);
-    // }
-    navigation.navigate('DriverFound', {driverId: '1'});  
+    setIsLoading(true);
+    try {
+      const response = await rideApi.confirmRide(
+        rideData as RequestRideRequestDTO,
+      );
+      console.log("contact phoneeee ", rideData.passenger_contact_phone);
+      setCurrentRide(response as CurrentRide);
+      setRideDetails({
+        ...rideData, status: TripStatus.PENDING });
+        console.log(rideData.passenger_contact_phone);
+
+      return response;
+    } catch (error) {
+      Alert.alert('Error', 'Could not find a driver. Please try again.');
+      return null;
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleBackPress = () => {
-    navigation.goBack();
-  }
-
-  return { handleFindDriver, isLoading, handleBackPress, rideData };
+  return { handleFindDriver, isLoading, rideData, estimate };
 }

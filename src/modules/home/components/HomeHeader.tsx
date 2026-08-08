@@ -10,7 +10,6 @@ import MenuIcon from '../../../assets/svg/common/menu.svg';
 import NotificationsIcon from '../../../assets/svg/common/notifications.svg';
 
 import {
-  //   Typography,
   Spacing,
   Radius,
   Shadows,
@@ -79,7 +78,6 @@ const createStyles = (colors: any) =>
   StyleSheet.create({
     container: {
       paddingTop: Spacing.smm,
-      //   backgroundColor: 'red',
     },
 
     header: {
@@ -98,7 +96,6 @@ const createStyles = (colors: any) =>
       backgroundColor: colors.surface,
       justifyContent: 'center',
       alignItems: 'center',
-
       ...Shadows.small,
     },
 

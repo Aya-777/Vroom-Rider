@@ -1,0 +1,10 @@
+{
+  "myTrips": "رحلاتي",
+  "savedPlaces": "الأماكن المحفوظة",
+  "wallet": "المحفظة",
+  "settings": "الإعدادات",
+  "help": "المساعدة",
+  "about": "حول التطبيق",
+  "logout": "تسجيل الخروج",
+  "version": "VROOM v{{version}}"
+}

@@ -25,10 +25,11 @@ import i18n from '../../core/i18n';
 const Tab = createBottomTabNavigator<MainTabsParamList>();
 
 const HIDE_TAB_ROUTES = [
-  'SelectRide',
-  'RideDetails',
-  'ConfirmRide',
-  'DriverFound',
+  'Ride',
+  'AddNewPlace',
+  'EditProfile',
+  'ChangePhoneOtp',
+  'ChangePassword',
 ];
 
 const getTabIconComponent = (

@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>NSCameraUsageDescription</key>
+    <string>نحتاج الكاميرا لالتقاط صورة البروفايل</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>نحتاج المعرض لاختيار صورة البروفايل</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -33,8 +37,10 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>Vroom Rider needs access to your location to show nearby drivers.</string>
+  <key>NSContactsUsageDescription</key>
+  <string>Vroom Rider needs access to your contacts so you can book a ride for someone else.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -60,5 +66,7 @@
 		<string>Lora-Regular.ttf</string>
 		<string>Lora-SemiBold.ttf</string>
 	</array>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>We use your location to find nearby drivers.</string>
 </dict>
 </plist>

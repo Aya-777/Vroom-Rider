@@ -1,7 +1,8 @@
 import { StyleSheet } from "react-native";
 import { Radius, Typography } from "../../core/theme/tokens";
+import { ThemeColors } from '../../core/theme/theme.types';
 
-export const createStyles = (colors: any) =>
+export const createStyles = (colors: ThemeColors) =>
     StyleSheet.create({
         defaultContainer: {
             marginBottom: 15,
@@ -44,10 +45,12 @@ export const createStyles = (colors: any) =>
             borderWidth: 1,
             textAlign: 'left',
             ...Typography.caption,
+            marginBottom: -4,
         },
         errorText: {
             color: colors.error,
             marginTop: 4,
+            marginBottom: 12,
             ...Typography.smallCaption,
         },
     });
