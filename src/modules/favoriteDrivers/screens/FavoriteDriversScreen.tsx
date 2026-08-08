@@ -1,29 +1,24 @@
 import React from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import {FlatList} from 'react-native';
 import { DriverSearchBar } from '../components/DriverSearchBar';
 import { DriverCard } from '../components/DriverCard';
-import { useFavoriteDriversStore } from '../store/useFavoriteDriversStore';
 import Header from '../../../shared/components/SubHeader';
 import { createStyles } from '../styles/favoriteDrivers.styles';
 import { useTheme } from '../../../core/theme/useTheme';
 import LinearBg from '../../../shared/components/LinearBg';
+import { useFavoriteDriversViewModel } from '../viewmodels/useFavoriteDriversViewModels';
+import { useTranslation } from 'react-i18next';
 
 export const FavoriteDriversScreen: React.FC = () => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
+  const { t } = useTranslation(['favoriteDrivers']);
 
-  const { drivers, searchQuery, setSearchQuery, setSelectedFilter } =
-    useFavoriteDriversStore();
-
-  const filteredDrivers = drivers.filter(
-    driver =>
-      driver.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      driver.plate.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
+  const vm = useFavoriteDriversViewModel();
 
   return (
     <>
-      <Header title="Favorite Drivers" onBackPress={() => {}} />
+      <Header title={t('favoriteDrivers.title')} onBackPress={vm.goBack} />
       <LinearBg
         colors={[colors.backgroundSoft, colors.background]}
         start={{ x: 0, y: 0 }}
@@ -31,14 +26,15 @@ export const FavoriteDriversScreen: React.FC = () => {
         style={styles.container}
       >
         <FlatList
-          data={filteredDrivers}
+          data={vm.filteredDrivers}
           keyExtractor={item => item.id}
           contentContainerStyle={styles.listContainer}
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={
             <DriverSearchBar
-              value={searchQuery}
-              onChangeText={setSearchQuery}
+              placeholder={t('favoriteDrivers.searchPlaceholder')}
+              value={vm.searchQuery}
+              onChangeText={vm.setSearchQuery}
               onFilterPress={() => {}}
             />
           }

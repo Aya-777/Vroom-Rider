@@ -6,7 +6,6 @@ export interface Driver {
   rating: number;
   phone: string;
   plate: string;
-  vehicleColor: string;
   vehicleName: string;
   status: DriverStatus;
   avatarUrl: string;
