@@ -1,23 +1,24 @@
 import React from 'react';
-import { View, FlatList, StyleSheet, SafeAreaView } from 'react-native';
-// import { useDriverStore } from '../store/useDriverStore';
+import { View, FlatList, StyleSheet} from 'react-native';
 import { DriverSearchBar } from '../components/DriverSearchBar';
 import { DriverCard } from '../components/DriverCard';
-import { Text } from 'react-native-svg';
+import { useFavoriteDriversStore } from '../store/useFavoriteDriversStore';
+import Header from '../../../shared/components/SubHeader';
 
 export const FavoriteDriversScreen: React.FC = () => {
-  // const { drivers, searchQuery, setSearchQuery, setSelectedFilter } = useDriverStore();
 
-  // const filteredDrivers = drivers.filter((driver) =>
-  //   driver.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  //   driver.plate.toLowerCase().includes(searchQuery.toLowerCase())
-  // );
-  // const filteredDrivers=[];
+  const { drivers, searchQuery, setSearchQuery, setSelectedFilter } = useFavoriteDriversStore();
+
+  const filteredDrivers = drivers.filter((driver) =>
+    driver.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    driver.plate.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
+    <>
+    <Header title='Favorite Drivers' onBackPress={() => {}}/>
     <View style={styles.container}>
-      <Text>FAvoriteeeeeee</Text>
-      {/* <FlatList
+      <FlatList
         data={filteredDrivers}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.listContainer}
@@ -36,8 +37,9 @@ export const FavoriteDriversScreen: React.FC = () => {
             onMessagePress={() => {}}
           />
         )}
-      /> */}
+      />
     </View>
+    </>
   );
 };
 
