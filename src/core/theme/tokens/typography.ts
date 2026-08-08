@@ -53,9 +53,19 @@ export const Typography = {
     fontSize: 12,
     fontFamily: 'Lora-Regular',
   },
+  
+  mediumBoldCaption: {
+    fontSize: 12,
+    fontFamily: 'Lora-Bold',
+  },
 
   smallCaption:{
     fontSize: 10,
     fontFamily: 'Lora-Regular',
-  }
+  },
+
+  smallBoldCaption:{
+    fontSize: 10,
+    fontFamily: 'Lora-Bold',
+  },
 };

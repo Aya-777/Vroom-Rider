@@ -1,6 +1,10 @@
 import React from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { useTheme } from '../../../core/theme/useTheme';
+import { createStyles } from '../styles/favoriteDrivers.styles';
 // import { Ionicons } from '@expo/vector-icons';
+import SearchIcon from '../../../assets/svg/common/search.svg'
+import FiltersIcon from '../../../assets/svg/ride/filters.svg'
 
 interface DriverSearchBarProps {
   value: string;
@@ -13,10 +17,13 @@ export const DriverSearchBar: React.FC<DriverSearchBarProps> = ({
   onChangeText,
   onFilterPress,
 }) => {
+
+  const { colors } = useTheme();
+  const styles = createStyles(colors);
   return (
-    <View style={styles.container}>
-      <View style={styles.searchContainer}>
-        {/* <Ionicons name="search-outline" size={18} color="#94a3b8" style={styles.searchIcon} /> */}
+    <View style={styles.searchContainer}>
+      <View style={styles.searchBarContainer}>
+        <SearchIcon width={16} height={16} fill={colors.textMuted}/>
         <TextInput
           style={styles.input}
           placeholder="Search by name, plate number..."
@@ -26,53 +33,9 @@ export const DriverSearchBar: React.FC<DriverSearchBarProps> = ({
         />
       </View>
       <TouchableOpacity style={styles.filterButton} onPress={onFilterPress} activeOpacity={0.8}>
-        {/* <Ionicons name="options-outline" size={16} color="#0f172a" /> */}
+        <FiltersIcon width={18} height={18} fill={colors.textPrimary}/>
         <Text style={styles.filterText}>Filters</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 16,
-    gap: 8,
-  },
-  searchContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#e2e8f0',
-    paddingHorizontal: 12,
-    height: 46,
-  },
-  searchIcon: {
-    marginRight: 8,
-  },
-  input: {
-    flex: 1,
-    fontSize: 14,
-    color: '#0f172a',
-  },
-  filterButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#e2e8f0',
-    paddingHorizontal: 14,
-    height: 46,
-    gap: 6,
-  },
-  filterText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#0f172a',
-  },
-});
