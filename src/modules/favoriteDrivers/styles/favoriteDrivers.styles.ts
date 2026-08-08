@@ -117,7 +117,7 @@ export const createStyles = (colors: ThemeColors) =>
     ...Typography.smallBoldCaption,
   },
   detailsGrid: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     marginBottom: Spacing.smm,
   },
   detailColumn: {
@@ -126,7 +126,7 @@ export const createStyles = (colors: ThemeColors) =>
   detailLabel: {
     ...Typography.smallBoldCaption,
     color: colors.textMuted,
-    marginBottom: Spacing.xs,
+    // marginBottom: Spacing.xs,
     letterSpacing: 0.5,
   },
   detailValue: {
@@ -139,18 +139,19 @@ export const createStyles = (colors: ThemeColors) =>
     paddingVertical: Spacing.xxs,
     borderRadius: Radius.sm -2,
     alignSelf: 'flex-start',
+    marginTop: Spacing.xs,
   },
   plateText: {
-    ...Typography.mediumBoldCaption,
+    ...Typography.boldCaption,
     color: colors.textPrimary,
   },
   vehicleSection: {
-    marginBottom: Spacing.md,
+    marginBottom: Spacing.sm,
   },
   vehicleRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: Spacing.sm,
+    // gap: Spacing.sm,
   },
   colorDot: {
     width: 10,
@@ -164,6 +165,8 @@ export const createStyles = (colors: ThemeColors) =>
   footerRow: {
     flexDirection: 'row',
     gap: Spacing.sm,
+    alignItems: 'center',
+    // justifyContent: 'space-between',
   },
   primaryButton: {
     flex: 1,
@@ -185,7 +188,7 @@ export const createStyles = (colors: ThemeColors) =>
   offlineButtonText: {
     color: '#94a3b8',
   },
-  chatButton: {
+  smallButton: {
     width: 44,
     height: 44,
     backgroundColor: colors.surface,

@@ -41,8 +41,10 @@ export const FavoriteDriversScreen: React.FC = () => {
           renderItem={({ item }) => (
             <DriverCard
               driver={item}
-              onActionPress={() => {}}
               onMessagePress={() => {}}
+              onCallPress={()=>{}}
+              onToggleFavorite={() => vm.toggleFavorite(item.id)}
+              isFavorite={true}
             />
           )}
         />

@@ -1,23 +1,28 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { Driver } from '../types/driver.type';
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/favoriteDrivers.styles';
 import MessageIcon from '../../../assets/svg/contact/chat.svg';
 import StarIcon from '../../../assets/svg/common/star.svg';
 import CallIcon from '../../../assets/svg/contact/call.svg';
+import HeartIcon from '../../../assets/svg/common/heart.svg'; // Or favorite.svg depending on your asset choice
 import { useTranslation } from 'react-i18next';
 
 interface DriverCardProps {
   driver: Driver;
-  onActionPress: () => void;
+  isFavorite?: boolean;
+  onCallPress: () => void;
   onMessagePress: () => void;
+  onToggleFavorite: () => void;
 }
 
 export const DriverCard: React.FC<DriverCardProps> = ({
   driver,
-  onActionPress,
+  isFavorite = true,
+  onCallPress,
   onMessagePress,
+  onToggleFavorite,
 }) => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
@@ -70,23 +75,37 @@ export const DriverCard: React.FC<DriverCardProps> = ({
         <View style={styles.headerInfo}>
           <Text style={styles.name}>{driver.name}</Text>
           <View style={styles.ratingRow}>
-            <StarIcon width={20} height={20} fill={'#eab308'} />
+            <StarIcon width={16} height={16} fill={'#eab308'} />
             <Text style={styles.ratingText}>
               {driver.rating} {t('favoriteDrivers.details.rating')}
             </Text>
           </View>
         </View>
-        {getStatusBadge()}
+
+        {/* Status View on the Left */}
+        <View>
+          {getStatusBadge()}
+        </View>
       </View>
 
       {/* Details Grid */}
       <View style={styles.detailsGrid}>
-        <View style={styles.detailColumn}>
+        {/* <View style={styles.detailColumn}>
           <Text style={styles.detailLabel}>
             {t('favoriteDrivers.details.phone')}
           </Text>
           <Text style={styles.detailValue}>{driver.phone}</Text>
+        </View> */}
+
+        <View style={styles.vehicleSection}>
+          <Text style={styles.detailLabel}>
+            {t('favoriteDrivers.details.vehicle')}
+          </Text>
+          <View style={styles.vehicleRow}>
+            <Text style={styles.vehicleName}>{driver.vehicleName}</Text>
+          </View>
         </View>
+
         <View style={styles.detailColumn}>
           <Text style={styles.detailLabel}>
             {t('favoriteDrivers.details.plate')}
@@ -97,47 +116,48 @@ export const DriverCard: React.FC<DriverCardProps> = ({
         </View>
       </View>
 
-      <View style={styles.vehicleSection}>
-        <Text style={styles.detailLabel}>
-          {t('favoriteDrivers.details.vehicle')}
-        </Text>
-        <View style={styles.vehicleRow}>
-          <Text style={styles.vehicleName}>{driver.vehicleName}</Text>
-        </View>
-      </View>
-
-      {/* Action Footer */}
+      {/* Action Footer (Call & Message Icons Only) */}
       <View style={styles.footerRow}>
         <TouchableOpacity
           style={[styles.primaryButton, isOffline && styles.offlineButton]}
-          onPress={onActionPress}
+          onPress={onCallPress}
           activeOpacity={0.8}
           disabled={isOffline}
         >
-          {driver.status === 'available' && (
-            <CallIcon width={16} height={16} color={colors.textSecondary} />
-          )}
-          {/*{driver.status === 'on_trip' && <Ionicons name="navigate" size={16} color="#ffffff" />}
-          {driver.status === 'offline' && <Ionicons name="notifications-outline" size={16} color="#94a3b8" />} */}
-
+          <CallIcon
+            width={18}
+            height={18}
+            fill={isOffline ? '#94a3b8' : colors.textSecondary}
+          />
           <Text
             style={[
               styles.primaryButtonText,
               isOffline && styles.offlineButtonText,
             ]}
           >
-            {driver.status === 'available' && 'Call Driver'}
-            {driver.status === 'on_trip' && 'Track Route'}
-            {driver.status === 'offline' && 'Notify When Active'}
+            {t('favoriteDrivers.actions.call', { defaultValue: 'Call Driver' })}
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={styles.chatButton}
+          style={styles.smallButton}
           onPress={onMessagePress}
           activeOpacity={0.8}
         >
           <MessageIcon width={20} height={20} fill={colors.textSecondary} />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.smallButton}
+          onPress={onToggleFavorite}
+          activeOpacity={0.8}
+        >
+          <HeartIcon
+            width={24}
+            height={24}
+            fill={isFavorite ? colors.error || '#ef4444' : 'transparent'}
+            stroke={colors.textSecondary}
+          />
         </TouchableOpacity>
       </View>
     </View>

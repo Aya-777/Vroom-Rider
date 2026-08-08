@@ -7,7 +7,7 @@ export const useFavoriteDriversViewModel = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
 
-  const { drivers, searchQuery, setSearchQuery, setSelectedFilter } =
+  const { drivers, searchQuery, setSearchQuery, setSelectedFilter, toggleFavorite } =
     useFavoriteDriversStore();
 
   const filteredDrivers = drivers.filter(
@@ -25,5 +25,6 @@ export const useFavoriteDriversViewModel = () => {
     searchQuery,
     setSearchQuery,
     goBack,
+    toggleFavorite,
   };
 };

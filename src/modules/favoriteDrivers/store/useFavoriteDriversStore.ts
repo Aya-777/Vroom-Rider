@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { Driver } from '../types/driver.type';
+import { favoriteDriverRepository } from '../repositories/favoriteDriverRepository';
 
 interface FavoriteDriversState {
   searchQuery: string;
@@ -12,6 +13,7 @@ interface FavoriteDriversState {
   setSearchQuery: (query: string) => void;
   setSelectedFilter: (filter: string) => void;
   fetchFavoriteDrivers: () => Promise<void>;
+  toggleFavorite: (driverId: string | number) => Promise<void>;
 }
 
 export const useFavoriteDriversStore = create<FavoriteDriversState>(
@@ -66,7 +68,7 @@ export const useFavoriteDriversStore = create<FavoriteDriversState>(
       set({ isLoading: true, error: null });
       try {
         // TODO: Replace with actual API call repository service when backend endpoint is ready
-        // const response = await driverRepository.getFavoriteDrivers();
+        // const response = await favoriteDriverRepository.getFavoriteDrivers();
         // set({ drivers: response, isLoading: false });
 
         setTimeout(() => {
@@ -76,6 +78,26 @@ export const useFavoriteDriversStore = create<FavoriteDriversState>(
         set({
           error: err.message || 'Failed to fetch favorite drivers',
           isLoading: false,
+        });
+      }
+    },
+    
+    toggleFavorite: async (driverId) => {
+      try {
+        set({ isLoading: true, error: null });
+        
+        const response = await favoriteDriverRepository.toggleFavorite(driverId);
+        const currentDrivers = get().drivers;
+        const updatedDrivers = currentDrivers.filter(driver => driver.id !== driverId);
+
+        set({ 
+          drivers: updatedDrivers, 
+          isLoading: false 
+        });
+      } catch (error: any) {
+        set({ 
+          error: error.message || 'Failed to toggle favorite driver', 
+          isLoading: false 
         });
       }
     },
