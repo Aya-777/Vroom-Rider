@@ -27,7 +27,9 @@ src/
 │       │   ├── close.svg
 │       │   ├── delete.svg
 │       │   ├── edit.svg
+│       │   ├── favorite.svg
 │       │   ├── gallery.svg
+│       │   ├── heart.svg
 │       │   ├── history.svg
 │       │   ├── home.svg
 │       │   ├── info.svg
@@ -79,6 +81,9 @@ src/
 │   │   │   │   ├── ar.json
 │   │   │   │   └── en.json
 │   │   │   ├── common
+│   │   │   │   ├── ar.json
+│   │   │   │   └── en.json
+│   │   │   ├── favoriteDrivers
 │   │   │   │   ├── ar.json
 │   │   │   │   └── en.json
 │   │   │   ├── home
@@ -256,6 +261,20 @@ src/
 │   │       ├── useSignupOtpViewModel.ts
 │   │       ├── useSignupViewModel.ts
 │   │       └── useSplashViewModel.ts
+│   ├── favoriteDrivers
+│   │   ├── components
+│   │   │   ├── DriverCard.tsx
+│   │   │   └── DriverSearchBar.tsx
+│   │   ├── screens
+│   │   │   └── FavoriteDriversScreen.tsx
+│   │   ├── store
+│   │   │   └── useFavoriteDriversStore.ts
+│   │   ├── styles
+│   │   │   └── favoriteDrivers.styles.ts
+│   │   ├── types
+│   │   │   └── driver.type.ts
+│   │   └── viewmodels
+│   │       └── useFavoriteDriversViewModels.ts
 │   ├── home
 │   │   ├── components
 │   │   │   ├── DestinationCard.tsx
