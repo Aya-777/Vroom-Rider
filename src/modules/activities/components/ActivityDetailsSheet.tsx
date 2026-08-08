@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { BaseBottomSheet } from '../../../shared/components/BaseBottomSheet';
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/activityDetails.styles';
@@ -15,9 +15,9 @@ export default function ActivityDetailsSheet({
   const { colors } = useTheme();
   const styles = createStyles(colors);
 
-  if (!activity) return null;
-
   const snapPoints = useMemo(() => ['80%'], []);
+
+  if (!activity) return null;
 
   return (
     <BaseBottomSheet

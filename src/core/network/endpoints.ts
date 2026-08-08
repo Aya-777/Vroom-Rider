@@ -21,15 +21,14 @@ export const ENDPOINTS = {
   },
 
   TRIPS: {
-  INITIAL_ESTIMATE: '/trips/trips/estimate/initial/',
-  REFINED_ESTIMATE: '/trips/trips/estimate/refined/',
-  SAVED_LOCATIONS: '/trips/saved-locations/',
-  SAVED_LOCATION: (id: number) => `/trips/saved-locations/${id}/`,
-  PREFERENCES: '/trips/preferences/',
-  CONFIRM: '/trips/confirm/',
-  CANCEL: (id: number) => `/trips/trips/${id}/cancel/`,
-  HISTORY: '/trips/history/',
-  RECENT: '/trips/recent/',
-},
-
+    INITIAL_ESTIMATE: '/trips/trips/estimate/initial/',
+    REFINED_ESTIMATE: '/trips/trips/estimate/refined/',
+    SAVED_LOCATIONS: '/trips/saved-locations/',
+    SAVED_LOCATION: (id: number) => `/trips/saved-locations/${id}/`,
+    PREFERENCES: '/trips/preferences/',
+    CONFIRM: '/trips/confirm/',
+    CANCEL: (id: number) => `/trips/trips/${id}/cancel/`,
+    HISTORY: '/trips/history/',
+    RECENT: '/trips/recent/',
+  },
 } as const;
