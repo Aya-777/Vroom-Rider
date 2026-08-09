@@ -250,7 +250,7 @@ export const useRideStore = create<RideState>(set => ({
       selectedMapLocation: location,
     }),
 
-  rideOtpVerified: false,
+  rideOtpVerified: true,
 
   setRideOtpVerified: value =>
     set({

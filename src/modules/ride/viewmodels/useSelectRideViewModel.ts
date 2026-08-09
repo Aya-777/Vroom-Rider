@@ -52,6 +52,11 @@ export function useSelectRideViewModel() {
     handleBottomSheet,
   );
 
+   const onUserChange = (value: string) => {
+    state.setSelectedPerson(value);
+    setRideOtpVerified(value === 'forMe' ? true : false);
+  }
+
   const validate = (): boolean => {
     const rawErrors = validateRideInputs(state.fromText, state.toText);
     const translatedErrors: RideValidationErrors = {};
@@ -67,67 +72,75 @@ export function useSelectRideViewModel() {
   };
 
   const onNextPress = async () => {
-    const stops = [
-      {
-        address: state.fromText,
-        latitude: state.pickupCoordinates.latitude,
-        longitude: state.pickupCoordinates.longitude,
-        order: 0,
-        stop_type: 'PICKUP' as const,
-      },
-      {
-        address: state.toText,
-        latitude: state.destinationCoordinates.latitude,
-        longitude: state.destinationCoordinates.longitude,
-        order: 1,
-        stop_type: 'DROP_OFF' as const,
-      },
-    ];
-    try {
-      const estimate = await rideApi.estimateInitial({
-        stops,
-      });
+  const stops = [
+    // Pickup
+    {
+      address: state.fromText,
+      latitude: state.pickupCoordinates.latitude,
+      longitude: state.pickupCoordinates.longitude,
+      order: 0,
+      stop_type: 'PICKUP' as const,
+    },
 
-      setEstimate(estimate);
+    // Intermediate stops
+    ...state.draftStops.map((stop, index) => ({
+      address: stop.address,
+      latitude: stop.latitude ?? 0,
+      longitude: stop.longitude ?? 0,
+      order: index + 1,
+      stop_type: 'STOP' as const,
+    })),
 
-      setRideDetails({
-        stops: [
-          {
-            address: state.fromText,
-            latitude: state.pickupCoordinates.latitude,
-            longitude: state.pickupCoordinates.longitude,
-            order: 0,
-            stop_type: 'PICKUP',
-          },
-          {
-            address: state.toText,
-            latitude: state.destinationCoordinates.latitude,
-            longitude: state.destinationCoordinates.longitude,
-            order: 1,
-            stop_type: 'DROP_OFF',
-          },
-        ],
-        scheduled_at: state.selectedTime,
-        is_for_someone_else: state.selectedPerson === 'forMe' ? false : true,
-        passenger_contact_phone: state.contactPhone ?? user?.phone_number,
-      },
-    );
-    } catch (error) {
-      console.log('Estimate Error:', error);
-    }
-    
-   const phoneNumber = (
-    state.contactPhone ?? user?.phone_number ?? ''
-    ).replace(/\D/g, '');
+    // Destination
+    {
+      address: state.toText,
+      latitude: state.destinationCoordinates.latitude,
+      longitude: state.destinationCoordinates.longitude,
+      order: state.draftStops.length + 1,
+      stop_type: 'DROP_OFF' as const,
+    },
+  ];
+
+  try {
+    const estimate = await rideApi.estimateInitial({
+      stops,
+    });
+
+    setEstimate(estimate);
+
+    setRideDetails({
+      stops,
+      scheduled_at: state.selectedTime,
+      is_for_someone_else:
+        state.selectedPerson === 'forMe' ? false : true,
+      passenger_contact_phone:
+        state.contactPhone ?? user?.phone_number,
+    });
+  } catch (error) {
+    console.log('Estimate Error:', error);
+  }
+
+  if (
+    state.selectedPerson !== 'forMe' && 
+    state.contactPhone &&
+    rideOtpVerified === false
+  ) {
+
+    const phoneNumber = state.contactPhone.replace(/\D/g, '');
 
     const localNumber = phoneNumber.startsWith('963')
       ? phoneNumber.substring(3)
       : phoneNumber;
-    const finalPhoneNumber = '0'+ localNumber
 
-    await sendRideOtp({phone_number: finalPhoneNumber}); 
+    const finalPhoneNumber = '0' + localNumber;
+
+    await sendRideOtp({
+      phone_number: finalPhoneNumber,
+    });
+
     navigation.navigate('RideOtp');
   }
+};
 
 
   const handleFlipModal = () => {
@@ -172,6 +185,7 @@ export function useSelectRideViewModel() {
 
   return {
     ...state,
+    setSelectedPerson : onUserChange,
     validate,
     handleFlipModal,
     handleBottomSheet,

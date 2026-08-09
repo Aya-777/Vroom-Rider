@@ -43,16 +43,18 @@ export default function SelectRideSheet({
     { key: 'schedule', label: t('common:schedule') },
   ];
 
-  useEffect(() => {
-    if (vm.rideOtpVerified) {
-      onNextPress();
-    }
-  }, [vm.rideOtpVerified]);
+  // useEffect(() => {
+  //   if (vm.rideOtpVerified) {
+  //     onNextPress();
+  //   }
+  // }, [vm.rideOtpVerified]);
 
   const handleNextPress = () => {
     if (vm.validate()) {
       vm.onNextPress();
-      // onNextPress();
+      if(vm.rideOtpVerified){
+        onNextPress();
+      }
     }
   };
   const snapPoints = useMemo(() => ['30%', '70%'], []);
