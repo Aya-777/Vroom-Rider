@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import HeartIcon from '../../../../assets/svg/common/heart.svg';
 import { useTheme } from '../../../../core/theme/useTheme';
 
-export default function ActivityDetailsList({ activity, styles }: any) {
+export default function ActivityDetailsList({ activity, styles, toggleFavorite }: any) {
     const { t } = useTranslation(['activities']);
     const { colors } = useTheme();
     const [isFavorite, setIsFavorite] = useState(false);

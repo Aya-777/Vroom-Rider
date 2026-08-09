@@ -11,6 +11,7 @@ import {
   STATUS_PARAM_BY_TAB,
 } from '../constants/activitiesData';
 import { toDisplayStatus } from '../constants/activitiesData';
+import { useFavoriteDriversStore } from '../../favoriteDrivers/store/useFavoriteDriversStore';
 
 const mapTripToActivity = (trip: TripHistoryItemDTO): Activity => {
   const pickup = trip.stops.find(s => s.stop_type === 'PICKUP');
@@ -43,6 +44,7 @@ export const useActivitiesViewModel = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const {toggleFavorite} =  useFavoriteDriversStore();
 
   const nextUrlRef = useRef<string | null>(null);
 
@@ -102,5 +104,6 @@ export const useActivitiesViewModel = () => {
     error,
     loadMore,
     openSidebar,
+    toggleFavorite,
   };
 };
