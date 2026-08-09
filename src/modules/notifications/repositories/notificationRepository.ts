@@ -1,14 +1,19 @@
-import { apiClient } from "../../../core/network/apiClient";
+import { apiClient } from '../../../core/network/apiClient';
 
 export async function registerDeviceToken(
   token: string,
   platform: 'android' | 'ios',
 ) {
-  return apiClient.post('/notifications/device-tokens/', { token, platform });
+  console.log(' FCM TOKEN:', token);
+  return apiClient.post('/api/v1/notifications/device-tokens/', {
+    token,
+    platform,
+  });
 }
 
 export async function deactivateDeviceToken(deviceTokenId: string) {
+  console.log('  DEACTIVATING DEVICE TOKEN:', deviceTokenId);
   return apiClient.patch(
-    `/notifications/device-tokens/${deviceTokenId}/deactivate/`,
+    `/api/v1/notifications/device-tokens/${deviceTokenId}/deactivate/`,
   );
 }

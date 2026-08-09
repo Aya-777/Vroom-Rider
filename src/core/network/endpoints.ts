@@ -30,5 +30,6 @@ export const ENDPOINTS = {
     CANCEL: (id: number) => `/trips/trips/${id}/cancel/`,
     HISTORY: '/trips/history/',
     RECENT: '/trips/recent/',
+    NOTIFICATION:'/api/v1/notifications/',
   },
 } as const;
