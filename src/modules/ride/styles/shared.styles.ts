@@ -137,6 +137,19 @@ export const createStyles = (colors: ThemeColors) =>
     },
     map: { flex: 1, zIndex: 0 },
 
+    stopMarker: {
+      width: 32,
+      height: 32,
+      borderRadius: 16,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+
+    stopNumber: {
+      fontSize: 14,
+      fontWeight: 'bold',
+    },
+
     searchResultsContainer: {
       maxHeight: 180,
       backgroundColor: colors.backgroundSoft,
