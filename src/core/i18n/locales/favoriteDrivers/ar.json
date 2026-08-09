@@ -1,26 +1,17 @@
 {
   "favoriteDrivers": {
     "title": "السائقون المفضلون",
-    "searchPlaceholder": "البحث بالاسم أو رقم اللوحة...",
-    "filters": "تصفية",
-
-    "status": {
-      "available": "متاح",
-      "onTrip": "في رحلة",
-      "offline": "غير متصل"
-    },
 
     "details": {
       "phone": "الهاتف",
       "plate": "رقم اللوحة",
       "vehicle": "المركبة",
+      "color": "اللون",
       "rating": "التقييم"
     },
 
     "actions": {
-      "callDriver": "الاتصال بالسائق",
-      "trackRoute": "تتبع المسار",
-      "notifyWhenActive": "إشعاري عند توفره"
+      "callDriver": "الاتصال بالسائق"
     }
   }
 }

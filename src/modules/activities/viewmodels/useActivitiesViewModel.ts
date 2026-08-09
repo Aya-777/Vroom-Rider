@@ -27,7 +27,9 @@ const mapTripToActivity = (trip: TripHistoryItemDTO): Activity => {
     date: new Date(dateSource).toLocaleString(),
     price: trip.price ? Number(trip.price) : null,
     currency: 'SP',
+    driverId: trip.driverId,
     driverName: trip.driver_name ?? '-',
+    isFavorite: trip.isFavorite,
     rideType: trip.vehicle_type ?? '-',
     distance: trip.distance,
     duration: trip.duration,
@@ -55,6 +57,7 @@ export const useActivitiesViewModel = () => {
       const response = await getTripHistory({
         status: STATUS_PARAM_BY_TAB[tab],
       });
+      // console.log(response.results);
       setActivities(response.results.map(mapTripToActivity));
       nextUrlRef.current = response.next;
     } catch (e) {

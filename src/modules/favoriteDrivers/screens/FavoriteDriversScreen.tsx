@@ -30,14 +30,6 @@ export const FavoriteDriversScreen: React.FC = () => {
           keyExtractor={item => item.driver_id.toString()}
           contentContainerStyle={styles.listContainer}
           showsVerticalScrollIndicator={false}
-          ListHeaderComponent={
-            <DriverSearchBar
-              placeholder={t('favoriteDrivers.searchPlaceholder')}
-              value={vm.searchQuery}
-              onChangeText={vm.setSearchQuery}
-              onFilterPress={() => {}}
-            />
-          }
           renderItem={({ item }) => (
             <DriverCard
               driver={item}

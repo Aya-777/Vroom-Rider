@@ -100,22 +100,6 @@ export const createStyles = (colors: ThemeColors) =>
     color: colors.textMuted,
     letterSpacing: 0.5,
   },
-  badge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: Spacing.smm,
-    paddingVertical: Spacing.xs,
-    borderRadius: Radius.lg,
-    gap: Spacing.xs,
-  },
-  dot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-  },
-  badgeText: {
-    ...Typography.smallBoldCaption,
-  },
   detailsGrid: {
     flexDirection: 'column',
     marginBottom: Spacing.smm,
@@ -147,16 +131,14 @@ export const createStyles = (colors: ThemeColors) =>
   },
   vehicleSection: {
     marginBottom: Spacing.sm,
+    flexDirection: 'row',
+    alignContent: 'center',
+    gap: '50',
   },
   vehicleRow: {
     flexDirection: 'row',
     alignItems: 'center',
     // gap: Spacing.sm,
-  },
-  colorDot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
   },
   vehicleName: {
     ...Typography.boldCaption,
@@ -178,15 +160,9 @@ export const createStyles = (colors: ThemeColors) =>
     justifyContent: 'center',
     gap: Spacing.sm,
   },
-  offlineButton: {
-    backgroundColor: '#f1f5f9',
-  },
   primaryButtonText: {
     ...Typography.boldCaption,
     color: colors.textSecondary,
-  },
-  offlineButtonText: {
-    color: '#94a3b8',
   },
   smallButton: {
     width: 44,
