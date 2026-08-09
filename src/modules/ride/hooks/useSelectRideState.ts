@@ -1,14 +1,12 @@
 // hooks/useSelectRideState.ts
 
 import { useEffect, useState } from 'react';
-import { RideParams, RideValidationErrors } from '../types/ride.types';
+import { ActiveInput, RideParams, RideValidationErrors } from '../types/ride.types';
 import { GeocodeResult } from '../../../core/services/location/GeoCodingService';
 import { useLocationSearch } from './useLocationSearch';
 import { useInitialPickup } from './useInitialPickup';
 import { useLocationStore } from '../../../core/store/locationStore';
 import { useCurrentUser } from '../../../core/store/userStore';
-
-export type ActiveInput = 'pickup' | 'destination' | null;
 
 export function useSelectRideState(rideData: Partial<RideParams>) {
   const currentLocation = useLocationStore(state => state.currentLocation);

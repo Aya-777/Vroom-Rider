@@ -2,11 +2,12 @@ import { useEffect } from "react";
 import { useRideRepository } from "../repositories/rideRepositories";
 import { useRideStore } from "../store/useRideStore";
 import { SavedPlace } from "../types/savedPlaces.types";
+import { ActiveInput } from "../types/ride.types";
 
 export function useSavedPlaces(
   isModalVisible: boolean,
   setIsModalVisible: (value: boolean) => void,
-  activeInput?: 'pickup' | 'destination' | null,
+  activeInput?: ActiveInput,
   setFromText?: (value: string) => void,
   setToText?: (value: string) => void,
   setPickupCoordinates?: (coords: { latitude: number; longitude: number }) => void,

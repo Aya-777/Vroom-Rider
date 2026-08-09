@@ -9,8 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { GeocodeResult } from '../../../../core/services/location/GeoCodingService';
 import SearchResults from '../shared/SearchResults';
 import PlusIcon from '../../../../assets/svg/common/add.svg';
-
-type ActiveInput = 'pickup' | 'destination' | null;
+import { ActiveInput } from '../../types/ride.types';
 
 type Props = {
   fromLocation: string;

@@ -11,7 +11,7 @@ export interface RideStopRequestDTO {
   order: number;
   latitude: number;
   longitude: number;
-  stop_type: 'PICKUP' | 'DROP_OFF';
+  stop_type: 'PICKUP' | 'DROP_OFF' | 'STOP' | null;
 }
 
 export interface EstimateInitialRequestDTO {
