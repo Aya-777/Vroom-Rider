@@ -12,6 +12,7 @@ import { useLocationSearch } from './useLocationSearch';
 import { useInitialPickup } from './useInitialPickup';
 import { useLocationStore } from '../../../core/store/locationStore';
 import { useCurrentUser } from '../../../core/store/userStore';
+import { SavedPlace } from '../types/savedPlaces.types';
 
 export function useSelectRideState(rideData: Partial<RideParams>) {
   const currentLocation = useLocationStore(
@@ -229,6 +230,28 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
     setActiveInput(null);
   };
 
+  const onSelectSavedStop = (place: SavedPlace) => {
+    if (!activeStopId) {
+      return;
+    }
+
+    setDraftStops(prev =>
+      prev.map(stop =>
+        stop.id === activeStopId
+          ? {
+              ...stop,
+              address: place.address,
+              latitude: place.latitude,
+              longitude: place.longitude,
+            }
+          : stop,
+      ),
+    );
+
+    setActiveStopId(null);
+    setActiveInput(null);
+  };
+
   // -----------------------------
   // Initial pickup
   // -----------------------------
@@ -304,6 +327,7 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
     changeStop,
     onStopFocus,
     onSelectStop,
+    onSelectSavedStop,
     stopSearch,
   };
 }

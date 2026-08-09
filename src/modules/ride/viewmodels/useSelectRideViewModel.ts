@@ -35,10 +35,14 @@ export function useSelectRideViewModel() {
     state.isModalVisible,
     state.setIsModalVisible,
     state.activeInput,
+
     state.setFromText,
     state.setToText,
+
     state.setPickupCoordinates,
     state.setDestinationCoordinates,
+
+    state.onSelectSavedStop,
   );
 
   const handleBottomSheet = (visible: boolean) => {
