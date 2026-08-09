@@ -1,26 +1,17 @@
 {
   "favoriteDrivers": {
     "title": "Favorite Drivers",
-    "searchPlaceholder": "Search by name, plate number...",
-    "filters": "Filters",
-
-    "status": {
-      "available": "Available",
-      "onTrip": "On Trip",
-      "offline": "Offline"
-    },
 
     "details": {
       "phone": "PHONE",
       "plate": "PLATE",
       "vehicle": "VEHICLE",
+      "color": "Color",
       "rating": "RATING"
     },
 
     "actions": {
-      "callDriver": "Call Driver",
-      "trackRoute": "Track Route",
-      "notifyWhenActive": "Notify When Active"
+      "callDriver": "Call Driver"
     }
   }
 }

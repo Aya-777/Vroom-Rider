@@ -14,7 +14,9 @@ export interface TripHistoryItemDTO {
   id: number;
   status: TerminalTripStatus;
   stops: TripHistoryStopDTO[];
+  driverId: number | null,
   driver_name: string | null;
+  isFavorite: boolean;
   vehicle_type: string | null;
   price: string | null;
   distance: number | null;
