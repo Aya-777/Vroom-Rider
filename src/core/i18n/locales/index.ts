@@ -30,6 +30,8 @@ import sideBarEn from './sidebar/en.json';
 import sideBarAr from './sidebar/ar.json';
 import rideStartedAr from './ride/rideStarted/ar.json';
 import rideStartedEn from './ride/rideStarted/en.json';
+import favoriteDriversEn from './favoriteDrivers/en.json'
+import favoriteDriversAr from './favoriteDrivers/ar.json'
 
 export {
   authEn,
@@ -63,6 +65,8 @@ export {
   sideBarEn,
   sideBarAr,
   rideStartedAr,
-  rideStartedEn
+  rideStartedEn,
+  favoriteDriversEn,
+  favoriteDriversAr,
 }
 

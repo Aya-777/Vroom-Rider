@@ -12,12 +12,12 @@ export interface Activity {
   dropoffLocation: string;
   date: string;
   price: number | null;
+  driverName: string;
   currency: string;
-  vehicleType: string;
+  rideType: string;
   distance: number | null;
   duration: number | null;
   cancellationReason: string | null;
-  driverId: number | null;
 }
 
 export interface ActivityDetailsSheetProps {

@@ -11,6 +11,7 @@ import {
   STATUS_PARAM_BY_TAB,
 } from '../constants/activitiesData';
 import { toDisplayStatus } from '../constants/activitiesData';
+import { useFavoriteDriversStore } from '../../favoriteDrivers/store/useFavoriteDriversStore';
 
 const mapTripToActivity = (trip: TripHistoryItemDTO): Activity => {
   const pickup = trip.stops.find(s => s.stop_type === 'PICKUP');
@@ -24,13 +25,13 @@ const mapTripToActivity = (trip: TripHistoryItemDTO): Activity => {
     pickupLocation: pickup?.address ?? '',
     dropoffLocation: dropoff?.address ?? '',
     date: new Date(dateSource).toLocaleString(),
-    price: trip.actual_price ? Number(trip.actual_price) : null,
+    price: trip.price ? Number(trip.price) : null,
     currency: 'SP',
-    vehicleType: trip.vehicle ? `Vehicle #${trip.vehicle}` : '-',
-    distance: trip.actual_distance,
-    duration: trip.actual_duration,
+    driverName: trip.driver_name ?? '-',
+    rideType: trip.vehicle_type ?? '-',
+    distance: trip.distance,
+    duration: trip.duration,
     cancellationReason: trip.cancellation_reason,
-    driverId: trip.driver,
   };
 };
 
@@ -43,6 +44,7 @@ export const useActivitiesViewModel = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const {toggleFavorite} =  useFavoriteDriversStore();
 
   const nextUrlRef = useRef<string | null>(null);
 
@@ -102,5 +104,6 @@ export const useActivitiesViewModel = () => {
     error,
     loadMore,
     openSidebar,
+    toggleFavorite,
   };
 };

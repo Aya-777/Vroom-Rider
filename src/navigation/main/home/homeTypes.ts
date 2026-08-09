@@ -6,6 +6,7 @@ export type HomeStackParamList = {
   Ride: { prefillDestination?: RecentDestinationParams } | undefined;
   RideOtp: undefined;
   AddNewPlace: undefined;
+  FavoriteDrivers: undefined
 };
 
 export type HomeStackScreenProps<T extends keyof HomeStackParamList> =
