@@ -1,7 +1,5 @@
-// hooks/useSelectRideState.ts
-
 import { useEffect, useState } from 'react';
-import { ActiveInput, RideParams, RideValidationErrors } from '../types/ride.types';
+import { ActiveInput, RideParams, RideStop, RideValidationErrors, DraftStop } from '../types/ride.types';
 import { GeocodeResult } from '../../../core/services/location/GeoCodingService';
 import { useLocationSearch } from './useLocationSearch';
 import { useInitialPickup } from './useInitialPickup';
@@ -23,6 +21,7 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
   const [isForMeDropdownOpen, setIsForMeDropdownOpen] = useState(false);
   const [errors, setErrors] = useState<RideValidationErrors>({});
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [draftStops, setDraftStops] = useState<DraftStop[]>([]);
 
   const [fromText, setFromText] = useState(pickupStop?.address ?? '');
 
@@ -99,6 +98,32 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
     });
   }, [pickup, pickupStop]);
 
+  const addStop = () => {
+    const newStop: DraftStop = {
+      id: `${Date.now()}-${Math.random()}`,
+      address: '',
+    };
+
+  setDraftStops(prev => [...prev, newStop]);
+};
+
+const removeStop = (id: string) => {
+  setDraftStops(prev => prev.filter(stop => stop.id !== id));
+};
+
+const changeStop = (id: string, address: string) => {
+  setDraftStops(prev =>
+    prev.map(stop =>
+      stop.id === id
+        ? {
+            ...stop,
+            address,
+          }
+        : stop,
+    ),
+  );
+};
+
   return {
     isNowDropdownOpen,
     setIsNowDropdownOpen,
@@ -147,5 +172,10 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
 
     onSelectPickup,
     onSelectDestination,
+
+    draftStops,
+    addStop,
+    removeStop,
+    changeStop,
   };
 }

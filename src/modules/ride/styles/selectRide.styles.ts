@@ -73,7 +73,7 @@ export const createStyles = (colors: ThemeColors) =>
       flexDirection: 'row',
       alignItems:'flex-start',
       justifyContent:'center',
-
+      marginBottom: -15,
     },
     addButton:{
       width: 42,

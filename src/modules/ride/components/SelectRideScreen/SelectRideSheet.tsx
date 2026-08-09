@@ -104,6 +104,11 @@ export default function SelectRideSheet({
           onPickupFocus={vm.onPickupFocus}
           onDestinationFocus={vm.onDestinationFocus}
           errors={vm.errors}
+          // Stops
+          draftStops={vm.draftStops}
+          onAddStop={vm.addStop}
+          onRemoveStop={vm.removeStop}
+          onChangeStop={vm.changeStop}
         />
 
         <View style={styles.actionRow}>

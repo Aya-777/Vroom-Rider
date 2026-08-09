@@ -50,6 +50,14 @@ export interface RideStop {
   longitude: number;
   stop_type: 'PICKUP' | 'DROP_OFF' | 'STOP';
 }
+
+export type DraftStop = {
+  id: string;
+  address: string;
+  latitude?: number;
+  longitude?: number;
+};
+
 export interface RideParams {
   id: number;
   vehicle_type_id: string;
