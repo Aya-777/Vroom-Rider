@@ -35,9 +35,15 @@ type Props = {
   activeInput: ActiveInput;
 
   draftStops: DraftStop[];
+
   onAddStop: () => void;
   onRemoveStop: (id: string) => void;
   onChangeStop: (id: string, text: string) => void;
+
+  onStopFocus: (id: string) => void;
+  onSelectStop: (place: GeocodeResult) => void;
+
+  stopResults: GeocodeResult[];
 };
 
 export default function RideLocationInputs({
@@ -58,6 +64,9 @@ export default function RideLocationInputs({
   onAddStop,
   onRemoveStop,
   onChangeStop,
+  onStopFocus,
+  onSelectStop,
+  stopResults
 }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
@@ -95,24 +104,39 @@ export default function RideLocationInputs({
 
         {/* Temporary stops */}
         {draftStops.map((stop, index) => (
-          <View key={stop.id} style={styles.addInputContainer}>
-            <Input
-              inputStyle={[styles.input, { width: '50%' }]}
-              placeholder={`${t('stop')} ${index + 1}`}
-              placeholderTextColor={colors.textMuted}
-              value={stop.address}
-              onChangeText={text => onChangeStop(stop.id, text)}
-            />
+          <React.Fragment key={stop.id}>
+            <View style={styles.addInputContainer}>
+              <Input
+                inputStyle={[styles.input, { width: '50%' }]}
+                placeholder={`${t('stop')} ${index + 1}`}
+                placeholderTextColor={colors.textMuted}
+                value={stop.address}
+                onChangeText={text =>
+                  onChangeStop(stop.id, text)
+                }
+                onFocus={() =>
+                  onStopFocus(stop.id)
+                }
+              />
 
-            <TouchableOpacity
-              style={styles.addButton}
-              onPress={() => onRemoveStop(stop.id)}
-            >
-              <View>
-                <Text style={{ color: colors.surface }}>−</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
+              <TouchableOpacity
+                style={styles.addButton}
+                onPress={() =>
+                  onRemoveStop(stop.id)
+                }
+              >
+                {/* minus icon */}
+              </TouchableOpacity>
+            </View>
+
+            {activeInput === `stop-${stop.id}` &&
+              stopResults.length > 0 && (
+                <SearchResults
+                  results={stopResults}
+                  onSelectItem={onSelectStop}
+                />
+              )}
+          </React.Fragment>
         ))}
 
         {/* Destination */}

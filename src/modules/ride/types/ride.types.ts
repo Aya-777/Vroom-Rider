@@ -41,7 +41,7 @@ export interface RideFilter {
   iconName?: string;
 }
 
-export type ActiveInput = 'pickup' | 'destination' | 'stop' | null;
+export type ActiveInput = 'pickup' | 'destination' | `stop-${string}` | null;
 
 export interface RideStop {
   address: string;

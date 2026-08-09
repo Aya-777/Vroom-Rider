@@ -96,19 +96,28 @@ export default function SelectRideSheet({
           toLocation={vm.toText}
           onChangeFrom={vm.setFromText}
           onChangeTo={vm.setToText}
+
           pickupResults={vm.pickupResults}
           destinationResults={vm.destinationResults}
+
           activeInput={vm.activeInput}
+
           onSelectPickup={vm.onSelectPickup}
           onSelectDestination={vm.onSelectDestination}
+
           onPickupFocus={vm.onPickupFocus}
           onDestinationFocus={vm.onDestinationFocus}
+
           errors={vm.errors}
-          // Stops
+
           draftStops={vm.draftStops}
           onAddStop={vm.addStop}
           onRemoveStop={vm.removeStop}
           onChangeStop={vm.changeStop}
+
+          onStopFocus={vm.onStopFocus}
+          onSelectStop={vm.onSelectStop}
+          stopResults={vm.stopSearch.results}
         />
 
         <View style={styles.actionRow}>
