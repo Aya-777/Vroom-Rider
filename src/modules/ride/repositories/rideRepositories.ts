@@ -13,7 +13,7 @@ import {
   CreateSavedPlaceRequestDTO,
   CreateSavedPlaceResponseDTO
  } from '../services/dto/savedPlaces.dto';
-import { ResendOtpRequestDTO, VerifyOtpRequestDTO, VerifyOtpResponseDTO } from '../../auth/services/dto/auth.dto';
+import { ResendOtpRequestDTO, VerifyOtpRequestDTO, VerifyOtpResponseDTO } from '../services/dto/ride.dto';
 
 export const useRideRepository = {
   useSavedPlaces: (enabled = true) =>
