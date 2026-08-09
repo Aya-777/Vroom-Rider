@@ -1,5 +1,9 @@
 import { create } from 'zustand';
-import { CurrentRide, RideParams, RideStop, Tiers } from '../types/ride.types';
+import {
+  CurrentRide,
+  RideParams,
+  RideStop,
+} from '../types/ride.types';
 import { SavedPlace } from '../types/savedPlaces.types';
 import { EstimateInitialResponseDTO } from '../services/dto/estimate.dto';
 import { TripStatus } from '../types/RideState';
@@ -30,7 +34,7 @@ interface RideState {
 
   updateStop: (order: number, stop: RideStop) => void;
 
-  addStop: (stop: RideStop, index?: number) => void;
+  addStop: (stop: RideStop) => void;
 
   removeStop: (order: number) => void;
 
@@ -45,16 +49,17 @@ interface RideState {
   selectedMapLocation: MapLocation | null;
 
   setSelectedMapLocation: (location: MapLocation | null) => void;
+
+  rideOtpVerified: boolean;
+
+  setRideOtpVerified: (value: boolean) => void;
 }
 
 const normalizeStops = (stops: RideStop[]): RideStop[] => {
-  return stops.map(
-    (stop, index, array): RideStop => ({
-      ...stop,
-      order: index,
-      stop_type: index === 0 ? 'PICKUP' : 'DROP_OFF',
-    }),
-  );
+  return stops.map((stop, index) => ({
+    ...stop,
+    order: index,
+  }));
 };
 
 export const useRideStore = create<RideState>(set => ({
@@ -114,16 +119,34 @@ export const useRideStore = create<RideState>(set => ({
       savedPlaces: places,
     }),
 
-  updateStop: (order, updatedStop) =>
+  setStops: stops =>
+    set(state => ({
+      rideData: {
+        ...state.rideData,
+        stops: normalizeStops(stops),
+      },
+    })),
+
+  addStop: stop =>
     set(state => {
       const stops = [...(state.rideData.stops ?? [])];
 
-      const index = stops.findIndex(s => s.order === order);
+      const destinationIndex = stops.findIndex(
+        currentStop => currentStop.stop_type === 'DROP_OFF',
+      );
 
-      if (index === -1) {
-        stops.push(updatedStop);
+      const newStop: RideStop = {
+        ...stop,
+        stop_type: 'STOP',
+      };
+
+      if (destinationIndex === -1) {
+        // No destination yet.
+        // Just append the stop.
+        stops.push(newStop);
       } else {
-        stops[index] = updatedStop;
+        // Insert before destination.
+        stops.splice(destinationIndex, 0, newStop);
       }
 
       return {
@@ -134,13 +157,24 @@ export const useRideStore = create<RideState>(set => ({
       };
     }),
 
-  addStop: (stop, index) =>
+  /**
+   * Update an existing stop without changing
+   * its position in the route.
+   */
+  updateStop: (order, updatedStop) =>
     set(state => {
       const stops = [...(state.rideData.stops ?? [])];
 
-      const insertIndex = index === undefined ? stops.length : index;
+      const index = stops.findIndex(stop => stop.order === order);
 
-      stops.splice(insertIndex, 0, stop);
+      if (index === -1) {
+        return state;
+      }
+
+      stops[index] = {
+        ...updatedStop,
+        order,
+      };
 
       return {
         rideData: {
@@ -150,23 +184,22 @@ export const useRideStore = create<RideState>(set => ({
       };
     }),
 
+  /**
+   * Remove a stop and re-number the remaining stops.
+   */
   removeStop: order =>
-    set(state => ({
-      rideData: {
-        ...state.rideData,
-        stops: normalizeStops(
-          (state.rideData.stops ?? []).filter(stop => stop.order !== order),
-        ),
-      },
-    })),
+    set(state => {
+      const stops = (state.rideData.stops ?? []).filter(
+        stop => stop.order !== order,
+      );
 
-  setStops: stops =>
-    set(state => ({
-      rideData: {
-        ...state.rideData,
-        stops,
-      },
-    })),
+      return {
+        rideData: {
+          ...state.rideData,
+          stops: normalizeStops(stops),
+        },
+      };
+    }),
 
   clearSavedPlaces: () =>
     set({
@@ -212,5 +245,15 @@ export const useRideStore = create<RideState>(set => ({
 
   selectedMapLocation: null,
 
-  setSelectedMapLocation: location => set({ selectedMapLocation: location }),
+  setSelectedMapLocation: location =>
+    set({
+      selectedMapLocation: location,
+    }),
+
+  rideOtpVerified: true,
+
+  setRideOtpVerified: value =>
+    set({
+      rideOtpVerified: value,
+    }),
 }));

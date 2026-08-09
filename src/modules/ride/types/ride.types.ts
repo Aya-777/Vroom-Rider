@@ -41,14 +41,23 @@ export interface RideFilter {
   iconName?: string;
 }
 
+export type ActiveInput = 'pickup' | 'destination' | `stop-${string}` | null;
 
 export interface RideStop {
   address: string;
   order: number;
   latitude: number;
   longitude: number;
-  stop_type: 'PICKUP' | 'DROP_OFF';
+  stop_type: 'PICKUP' | 'DROP_OFF' | 'STOP';
 }
+
+export type DraftStop = {
+  id: string;
+  address: string;
+  latitude?: number;
+  longitude?: number;
+};
+
 export interface RideParams {
   id: number;
   vehicle_type_id: string;

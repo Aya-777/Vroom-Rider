@@ -2,15 +2,17 @@ import { useEffect } from "react";
 import { useRideRepository } from "../repositories/rideRepositories";
 import { useRideStore } from "../store/useRideStore";
 import { SavedPlace } from "../types/savedPlaces.types";
+import { ActiveInput } from "../types/ride.types";
 
 export function useSavedPlaces(
   isModalVisible: boolean,
   setIsModalVisible: (value: boolean) => void,
-  activeInput?: 'pickup' | 'destination' | null,
+  activeInput?: ActiveInput,
   setFromText?: (value: string) => void,
   setToText?: (value: string) => void,
   setPickupCoordinates?: (coords: { latitude: number; longitude: number }) => void,
   setDestinationCoordinates?: (coords: { latitude: number; longitude: number }) => void,
+  onSelectSavedStop?: (place: SavedPlace) => void,
 ) {
   const {
     savedPlaces,
@@ -44,11 +46,22 @@ export function useSavedPlaces(
   const onSelectPlace = (place: SavedPlace) => {
     if (activeInput === 'pickup') {
       setFromText?.(place.address);
-      setPickupCoordinates?.({ latitude: place.latitude, longitude: place.longitude });
+
+      setPickupCoordinates?.({
+        latitude: place.latitude,
+        longitude: place.longitude,
+      });
     } else if (activeInput === 'destination') {
       setToText?.(place.address);
-      setDestinationCoordinates?.({ latitude: place.latitude, longitude: place.longitude });
+
+      setDestinationCoordinates?.({
+        latitude: place.latitude,
+        longitude: place.longitude,
+      });
+    } else if (activeInput?.startsWith('stop-')) {
+      onSelectSavedStop?.(place);
     }
+
     setIsModalVisible(false);
   };
 
