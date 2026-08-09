@@ -64,7 +64,17 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
   // Draft Stops
   // -----------------------------
 
-  const [draftStops, setDraftStops] = useState<DraftStop[]>([]);
+  const [draftStops, setDraftStops] = useState<DraftStop[]>(() =>
+    (rideData.stops ?? [])
+      .filter(stop => stop.stop_type === 'STOP')
+      .sort((a, b) => a.order - b.order)
+      .map(stop => ({
+        id: `${stop.order}-${Date.now()}-${Math.random()}`,
+        address: stop.address,
+        latitude: stop.latitude,
+        longitude: stop.longitude,
+      })),
+  );
 
   const [activeStopId, setActiveStopId] = useState<string | null>(
     null,

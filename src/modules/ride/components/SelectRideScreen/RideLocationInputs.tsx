@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { GeocodeResult } from '../../../../core/services/location/GeoCodingService';
 import SearchResults from '../shared/SearchResults';
 import PlusIcon from '../../../../assets/svg/common/add.svg';
+import MinusIcon from '../../../../assets/svg/common/minus.svg';
 import { ActiveInput, DraftStop, RideStop } from '../../types/ride.types';
 
 type Props = {
@@ -66,7 +67,7 @@ export default function RideLocationInputs({
   onChangeStop,
   onStopFocus,
   onSelectStop,
-  stopResults
+  stopResults,
 }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
@@ -111,31 +112,24 @@ export default function RideLocationInputs({
                 placeholder={`${t('stop')} ${index + 1}`}
                 placeholderTextColor={colors.textMuted}
                 value={stop.address}
-                onChangeText={text =>
-                  onChangeStop(stop.id, text)
-                }
-                onFocus={() =>
-                  onStopFocus(stop.id)
-                }
+                onChangeText={text => onChangeStop(stop.id, text)}
+                onFocus={() => onStopFocus(stop.id)}
               />
 
               <TouchableOpacity
                 style={styles.addButton}
-                onPress={() =>
-                  onRemoveStop(stop.id)
-                }
+                onPress={() => onRemoveStop(stop.id)}
               >
-                {/* minus icon */}
+                <MinusIcon width={20} height={20} fill={colors.primary} />
               </TouchableOpacity>
             </View>
 
-            {activeInput === `stop-${stop.id}` &&
-              stopResults.length > 0 && (
-                <SearchResults
-                  results={stopResults}
-                  onSelectItem={onSelectStop}
-                />
-              )}
+            {activeInput === `stop-${stop.id}` && stopResults.length > 0 && (
+              <SearchResults
+                results={stopResults}
+                onSelectItem={onSelectStop}
+              />
+            )}
           </React.Fragment>
         ))}
 
@@ -152,7 +146,7 @@ export default function RideLocationInputs({
           />
 
           <TouchableOpacity style={styles.addButton} onPress={onAddStop}>
-            <PlusIcon width={20} height={20} fill={colors.surface} />
+            <PlusIcon width={20} height={20} fill={colors.primary} />
           </TouchableOpacity>
         </View>
 
