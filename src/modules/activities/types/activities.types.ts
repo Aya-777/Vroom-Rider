@@ -12,7 +12,9 @@ export interface Activity {
   dropoffLocation: string;
   date: string;
   price: number | null;
+  driverId: number | null;
   driverName: string;
+  isFavorite: boolean;
   currency: string;
   rideType: string;
   distance: number | null;
