@@ -48,7 +48,7 @@ export function handleNotificationNavigation(
   data: NotificationData,
   navigate: NavigateFn,
 ) {
-  const type = data.type as NotificationType;
+  const type = (data.type ?? '').toUpperCase() as NotificationType;
   const entry = RIDER_NAVIGATION_MAP[type];
 
   if (!entry) {

@@ -282,8 +282,6 @@ src/
 │   ├── notifications
 │   │   ├── components
 │   │   │   └── NotificationCard.tsx
-│   │   ├── constants
-│   │   │   └── notificationsData.ts
 │   │   ├── hooks
 │   │   │   └── usePushNotifications.ts
 │   │   ├── repositories
@@ -301,7 +299,8 @@ src/
 │   │   │   └── notifications.types.ts
 │   │   ├── utils
 │   │   │   ├── formateDate.ts
-│   │   │   └── notificationIcon.tsx
+│   │   │   ├── notificationIcon.tsx
+│   │   │   └── notificationNavigation.ts
 │   │   └── viewmodels
 │   │       └── useNotificationsViewModel.ts
 │   ├── profile

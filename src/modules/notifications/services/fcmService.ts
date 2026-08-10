@@ -56,7 +56,6 @@ export async function getInitialNotification() {
   return _getInitialNotification(messagingInstance);
 }
 
-// Must be registered outside the React component tree, e.g. in index.js
 export function setBackgroundMessageHandler(
   handler: (message: any) => Promise<void>,
 ) {
