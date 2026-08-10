@@ -30,11 +30,11 @@ src/
 │       │   ├── favorite.svg
 │       │   ├── gallery.svg
 │       │   ├── heart.svg
-│       │   ├── heart.svg
 │       │   ├── history.svg
 │       │   ├── home.svg
 │       │   ├── info.svg
 │       │   ├── menu.svg
+│       │   ├── minus.svg
 │       │   ├── myLocation.svg
 │       │   ├── notifications.svg
 │       │   ├── password.svg
@@ -229,7 +229,6 @@ src/
 │   │   │       ├── SplashLogo.tsx
 │   │   │       ├── SplashRoad.tsx
 │   │   │       └── SplashText.tsx
-│   │   ├── constants
 │   │   ├── hooks
 │   │   │   ├── useAuthActions.ts
 │   │   │   ├── useSplashAnimation.ts
@@ -247,14 +246,12 @@ src/
 │   │   │   ├── authApi.ts
 │   │   │   └── dto
 │   │   │       └── auth.dto.ts
-│   │   ├── store
 │   │   ├── styles
 │   │   │   ├── Splash.styles.ts
 │   │   │   ├── forgotPassword.styles.ts
 │   │   │   ├── login.styles.ts
 │   │   │   ├── resetPassword.styles.ts
 │   │   │   └── signup.styles.ts
-│   │   ├── types
 │   │   ├── utils
 │   │   │   └── SplashPathUtils.ts
 │   │   └── viewmodels
@@ -269,8 +266,14 @@ src/
 │   │   ├── components
 │   │   │   ├── DriverCard.tsx
 │   │   │   └── DriverSearchBar.tsx
+│   │   ├── repositories
+│   │   │   └── favoriteDriverRepository.ts
 │   │   ├── screens
 │   │   │   └── FavoriteDriversScreen.tsx
+│   │   ├── services
+│   │   │   ├── dto
+│   │   │   │   └── favoriteDriver.dto.ts
+│   │   │   └── favoriteDriverApi.ts
 │   │   ├── store
 │   │   │   └── useFavoriteDriversStore.ts
 │   │   ├── styles
@@ -279,7 +282,6 @@ src/
 │   │   │   └── driver.type.ts
 │   │   └── viewmodels
 │   │       └── useFavoriteDriversViewModels.ts
-│   ├── constants
 │   ├── home
 │   │   ├── components
 │   │   │   ├── DestinationCard.tsx
@@ -391,6 +393,7 @@ src/
 │   │   │   │   └── VehicleSelector.tsx
 │   │   │   ├── Map
 │   │   │   │   ├── MapContainer.tsx
+│   │   │   │   ├── MapPin.tsx
 │   │   │   │   └── UserLocationMarker
 │   │   │   │       ├── BreathingDot.tsx
 │   │   │   │       └── UserLocationMarker.tsx
@@ -437,6 +440,7 @@ src/
 │   │   ├── screens
 │   │   │   ├── AddNewPlaceScreen.tsx
 │   │   │   ├── ChangeRidePhoneScreen.tsx
+│   │   │   ├── RideOtpScreen.tsx
 │   │   │   └── RideScreen.tsx
 │   │   ├── services
 │   │   │   ├── dto
@@ -474,6 +478,7 @@ src/
 │   │       ├── useDriverFoundViewModel.ts
 │   │       ├── useMapViewModel.ts
 │   │       ├── useRideDetailsViewModel.ts
+│   │       ├── useRideNumberVerificationViewModel.ts
 │   │       ├── useRideViewModel.ts
 │   │       ├── useSearchingForaDriverViewModel.ts
 │   │       ├── useSelectRideViewModel.ts
