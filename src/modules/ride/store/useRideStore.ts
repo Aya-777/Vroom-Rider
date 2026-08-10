@@ -1,12 +1,9 @@
 import { create } from 'zustand';
-import {
-  CurrentRide,
-  RideParams,
-  RideStop,
-} from '../types/ride.types';
+import { CurrentRide, RideParams, RideStop } from '../types/ride.types';
 import { SavedPlace } from '../types/savedPlaces.types';
 import { EstimateInitialResponseDTO } from '../services/dto/estimate.dto';
 import { TripStatus } from '../types/RideState';
+import { v4 as uuidv4 } from 'uuid';
 
 type MapLocation = {
   latitude: number;
@@ -53,6 +50,8 @@ interface RideState {
   rideOtpVerified: boolean;
 
   setRideOtpVerified: (value: boolean) => void;
+
+  getIdempotencyKey: () => string;
 }
 
 const normalizeStops = (stops: RideStop[]): RideStop[] => {
@@ -62,7 +61,7 @@ const normalizeStops = (stops: RideStop[]): RideStop[] => {
   }));
 };
 
-export const useRideStore = create<RideState>(set => ({
+export const useRideStore = create<RideState>((set, get) => ({
   rideData: {
     vehicle_type_id: '1',
     payment_method: 'CASH',
@@ -72,38 +71,10 @@ export const useRideStore = create<RideState>(set => ({
     preference_ids: [],
     scheduled_at: 'now',
     status: TripStatus.NULL,
+    idempotency_key: undefined,
   },
 
-  currentRide: {
-    id: 1,
-    rider: 1,
-    driver: null,
-    vehicle: null,
-    vehicle_type_id: '1',
-    status: TripStatus.PENDING,
-
-    stops: [],
-    preference_ids: [],
-
-    estimated_distance: 0,
-    estimated_duration: 0,
-    estimated_price: '0',
-
-    actual_distance: null,
-    actual_duration: null,
-    actual_price: null,
-
-    idempotency_key: '',
-
-    requested_at: '',
-    accepted_at: null,
-    started_at: null,
-    ended_at: null,
-
-    is_for_someone_else: false,
-    passenger_contact_phone: null,
-    payment_method: 'CASH',
-  },
+  currentRide: null,
 
   estimate: {
     estimated_distance_km: 0,
@@ -227,6 +198,7 @@ export const useRideStore = create<RideState>(set => ({
   clearRide: () =>
     set({
       rideData: {},
+      currentRide: null,
       estimate: {
         estimated_distance_km: 0,
         estimated_duration_minutes: 0,
@@ -256,4 +228,23 @@ export const useRideStore = create<RideState>(set => ({
     set({
       rideOtpVerified: value,
     }),
+
+  getIdempotencyKey: () => {
+    const existingKey = get().rideData.idempotency_key;
+
+    if (existingKey) {
+      return existingKey;
+    }
+
+    const newKey = uuidv4();
+
+    set(state => ({
+      rideData: {
+        ...state.rideData,
+        idempotency_key: newKey,
+      },
+    }));
+
+    return newKey;
+  },
 }));

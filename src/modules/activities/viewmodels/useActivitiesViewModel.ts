@@ -49,8 +49,8 @@ export const useActivitiesViewModel = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const {toggleFavorite} =  useFavoriteDriversStore();
-  const {setCurrentRide, setEstimate, setRideDetails} = useRideStore();
+  const { toggleFavorite } = useFavoriteDriversStore();
+  const { setCurrentRide, setEstimate, setRideDetails, getIdempotencyKey } = useRideStore();
 
   const nextUrlRef = useRef<string | null>(null);
 
@@ -101,52 +101,60 @@ export const useActivitiesViewModel = () => {
     }
   }, [isLoadingMore, isLoading]);
 
-  const onReride = useCallback(async (tripId: string) => {
-  try {
-    setError(null);
+  const onReride = useCallback(
+    async (tripId: string) => {
+      try {
+        setError(null);
+        const idempotencyKey = getIdempotencyKey();
+        const response = await rideApi.reorderTrip(
+          Number(tripId),
+          idempotencyKey,
+        );
+        const trip = response.data;
 
-    const response = await rideApi.reorderTrip(Number(tripId));
-    const trip = response.data;
+        setCurrentRide({
+          ...trip,
+          vehicle_type_id: trip.vehicle_type_id.toString(),
+        } as CurrentRide);
+        setRideDetails({
+          ...trip,
+          vehicle_type_id: trip.vehicle_type_id.toString(),
+          passenger_contact_phone: trip.passenger_contact_phone ?? undefined,
+        } as RideParams);
 
-    setCurrentRide({...trip, 
-      vehicle_type_id: trip.vehicle_type_id.toString(),
-    } as CurrentRide);
-    setRideDetails({...trip,
-      vehicle_type_id: trip.vehicle_type_id.toString(),
-      passenger_contact_phone: trip.passenger_contact_phone ?? undefined,
-    } as RideParams);
+        setEstimate({
+          estimated_distance_km: trip.estimated_distance,
+          estimated_duration_minutes: trip.estimated_duration,
+          pricing_tiers: [],
+          stops: trip.stops,
+          route_geometry: trip.estimated_route_geometry.map(
+            ([longitude, latitude]: [number, number]) => ({
+              longitude,
+              latitude,
+            }),
+          ),
+        });
 
-    setEstimate({
-      estimated_distance_km: trip.estimated_distance,
-      estimated_duration_minutes: trip.estimated_duration,
-      pricing_tiers: [],
-      stops: trip.stops,
-      route_geometry: trip.estimated_route_geometry.map(
-        ([longitude, latitude]: [number, number]) => ({
-          longitude,
-          latitude,
-        }),
-      ),
-    });
+        return {
+          success: true,
+          trip,
+        };
+      } catch (e) {
+        console.error('Failed to reorder trip:', e);
 
-    return {
-      success: true,
-      trip,
-    };
-  } catch (e) {
-    console.error('Failed to reorder trip:', e);
+        const message =
+          e instanceof Error ? e.message : 'Failed to reorder trip';
 
-    const message =
-      e instanceof Error ? e.message : 'Failed to reorder trip';
+        setError(message);
 
-    setError(message);
-
-    return {
-      success: false,
-      trip: null,
-    };
-  }
-}, [setCurrentRide, setEstimate, setRideDetails]);
+        return {
+          success: false,
+          trip: null,
+        };
+      }
+    },
+    [setCurrentRide, setEstimate, setRideDetails],
+  );
 
   return {
     statuses: ACTIVITY_TABS,
@@ -159,6 +167,6 @@ export const useActivitiesViewModel = () => {
     loadMore,
     openSidebar,
     toggleFavorite,
-    onReride
+    onReride,
   };
 };

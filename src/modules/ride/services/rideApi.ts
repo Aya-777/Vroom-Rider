@@ -96,9 +96,8 @@ export const rideApi = {
 
   confirmRide: async (
     data: RequestRideRequestDTO,
+    idempotencyKey: string,
   ): Promise<RequestRideResponseDTO> => {
-    const idempotencyKey = uuidv4();
-
     const response = await apiClient.post<RequestRideResponseDTO>(
       ENDPOINTS.TRIPS.CONFIRM,
       data,
@@ -152,8 +151,7 @@ export const rideApi = {
   },
 
   
-  reorderTrip: async (tripId: number) => {
-    const idempotencyKey = uuidv4();
+  reorderTrip: async (tripId: number, idempotencyKey: string) => {
     const response = await apiClient.post<ReorderTripResponseDTO>(
       ENDPOINTS.TRIPS.RERIDE(tripId),
       null,

@@ -69,6 +69,7 @@ export interface RideParams {
   preference_ids: number[];
   scheduled_at?: string;
   status: TripStatus;
+  idempotency_key?: string,
 }
 
 
