@@ -7,11 +7,13 @@ import {
   onForegroundMessage,
   onNotificationOpenedApp,
   getInitialNotification,
+  displayForegroundNotification,
 } from '../services/fcmService';
 import { registerDeviceToken } from '../repositories/notificationRepository';
+import { setDeviceTokenId } from '../../../core/store/authStore';
 
 type NotificationData = {
-  type?: string; // NEW_TRIP | RIDER_CANCELLED | NO_DRIVER_FOUND | DRIVER_CANCELLED | DRIVER_ACCEPTED
+  type?: string;
   trip_id?: string;
 };
 
@@ -32,17 +34,34 @@ export function usePushNotifications(
 
       const token = await getFcmToken();
       if (token) {
-        await registerDeviceToken(token, Platform.OS as 'android' | 'ios');
+        const id = await registerDeviceToken(
+          token,
+          Platform.OS as 'android' | 'ios',
+        );
+        setDeviceTokenId(id);
         registeredRef.current = true;
       }
     })();
 
     const unsubscribeRefresh = onTokenRefresh(async newToken => {
-      await registerDeviceToken(newToken, Platform.OS as 'android' | 'ios');
+      const id = await registerDeviceToken(
+        newToken,
+        Platform.OS as 'android' | 'ios',
+      );
+      setDeviceTokenId(id);
     });
 
     const unsubscribeForeground = onForegroundMessage(async remoteMessage => {
-      console.log('Foreground notification:', remoteMessage);
+      console.log(
+        '🔔 FOREGROUND MESSAGE RECEIVED:',
+        JSON.stringify(remoteMessage),
+      );
+      try {
+        await displayForegroundNotification(remoteMessage);
+        console.log('✅ notifee displayNotification succeeded');
+      } catch (e) {
+        console.error('❌ notifee displayNotification FAILED:', e);
+      }
     });
 
     const unsubscribeOpened = onNotificationOpenedApp(remoteMessage => {

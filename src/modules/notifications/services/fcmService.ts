@@ -1,4 +1,5 @@
 import { getApp } from '@react-native-firebase/app';
+import notifee, { AndroidImportance } from '@notifee/react-native';
 import {
   getMessaging,
   requestPermission,
@@ -23,6 +24,7 @@ export async function requestNotificationPermission(): Promise<boolean> {
   }
 
   const authStatus = await requestPermission(messagingInstance);
+  await notifee.requestPermission();
   return (
     authStatus === AuthorizationStatus.AUTHORIZED ||
     authStatus === AuthorizationStatus.PROVISIONAL
@@ -59,4 +61,22 @@ export function setBackgroundMessageHandler(
   handler: (message: any) => Promise<void>,
 ) {
   _setBackgroundMessageHandler(messagingInstance, handler);
+}
+
+export async function displayForegroundNotification(remoteMessage: any) {
+  const channelId = await notifee.createChannel({
+    id: 'default',
+    name: 'Default Channel',
+    importance: AndroidImportance.HIGH,
+  });
+
+  await notifee.displayNotification({
+    title: remoteMessage.notification?.title ?? remoteMessage.data?.title,
+    body: remoteMessage.notification?.body ?? remoteMessage.data?.body,
+    data: remoteMessage.data,
+    android: {
+      channelId,
+      pressAction: { id: 'default' },
+    },
+  });
 }

@@ -284,6 +284,8 @@ src/
 │   │   │   └── NotificationCard.tsx
 │   │   ├── constants
 │   │   │   └── notificationsData.ts
+│   │   ├── hooks
+│   │   │   └── usePushNotifications.ts
 │   │   ├── repositories
 │   │   │   └── notificationRepository.ts
 │   │   ├── screens
@@ -291,12 +293,14 @@ src/
 │   │   ├── services
 │   │   │   ├── dto
 │   │   │   │   └── notification.dto.ts
+│   │   │   ├── fcmService.ts
 │   │   │   └── notificationApi.ts
 │   │   ├── styles
 │   │   │   └── notifications.styles.ts
 │   │   ├── types
 │   │   │   └── notifications.types.ts
 │   │   ├── utils
+│   │   │   ├── formateDate.ts
 │   │   │   └── notificationIcon.tsx
 │   │   └── viewmodels
 │   │       └── useNotificationsViewModel.ts
