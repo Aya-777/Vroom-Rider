@@ -1,9 +1,10 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RecentDestinationParams } from '../../../modules/ride/types/recentDestination.types';
+import { RideState } from '../../../modules/ride/types/RideState';
 
 export type HomeStackParamList = {
   HomeScreen: undefined;
-  Ride: { prefillDestination?: RecentDestinationParams } | undefined;
+  Ride: { prefillDestination?: RecentDestinationParams, rideState?: RideState } | undefined;
   RideOtp: undefined;
   AddNewPlace: undefined;
   FavoriteDrivers: undefined

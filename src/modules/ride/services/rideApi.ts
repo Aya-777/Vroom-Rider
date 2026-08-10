@@ -25,6 +25,10 @@ import {
   VerifyOtpRequestDTO,
   VerifyOtpResponseDTO,
 } from './dto/ride.dto';
+import {
+  ReorderTripResponseDTO,
+} from './dto/tripHistory.dto';
+
 
 export const rideApi = {
   // Saved Places
@@ -92,9 +96,8 @@ export const rideApi = {
 
   confirmRide: async (
     data: RequestRideRequestDTO,
+    idempotencyKey: string,
   ): Promise<RequestRideResponseDTO> => {
-    const idempotencyKey = uuidv4();
-
     const response = await apiClient.post<RequestRideResponseDTO>(
       ENDPOINTS.TRIPS.CONFIRM,
       data,
@@ -145,6 +148,20 @@ export const rideApi = {
       ENDPOINTS.TRIPS.RECENT,
     );
     return response.data.data;
+  },
+
+  
+  reorderTrip: async (tripId: number, idempotencyKey: string) => {
+    const response = await apiClient.post<ReorderTripResponseDTO>(
+      ENDPOINTS.TRIPS.RERIDE(tripId),
+      null,
+      {
+        headers: {
+          'X-Idempotency-Key': idempotencyKey,
+        },
+      },
+    );
+    return response.data;
   },
 };
 

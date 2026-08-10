@@ -3,7 +3,6 @@ import PermissionService from '../../../core/services/location/PermissionService
 import LocationService, {
   Location,
 } from '../../../core/services/location/LocationService';
-import { useLocationStore } from '../../../core/store/locationStore';
 import { CameraRef, MapRef } from '@maplibre/maplibre-react-native';
 import { useRideStore } from '../store/useRideStore';
 import { TripStatus } from '../types/RideState';

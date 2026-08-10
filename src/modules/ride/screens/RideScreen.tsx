@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StatusBar, TouchableOpacity } from 'react-native';
 import Header from '../../../shared/components/SubHeader';
 import { useTheme } from '../../../core/theme/useTheme';
@@ -17,13 +17,16 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated';
 
-export default function RideScreen() {
+export default function RideScreen({
+  route,
+}: HomeStackScreenProps<'Ride'>) {
   const { colors, mode } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['selectRide', 'common']);
   const navigation =
     useNavigation<HomeStackScreenProps<'Ride'>['navigation']>();
-  const vm = useRideViewModel();
+  const { rideState } = route.params ?? {};
+  const vm = useRideViewModel(rideState);
   const mapVm = useMapViewModel();
   const animatedPosition = useSharedValue(0);
 
