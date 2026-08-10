@@ -71,16 +71,16 @@ export const createStyles = (colors: ThemeColors) =>
     },
 
     body: {
-      ...Typography.caption,
+      ...Typography.body,
       color: colors.textSecondary,
       lineHeight: 22,
-      marginTop: Spacing.sm,
+      marginTop: Spacing.smm,
+      marginBottom: Spacing.sm,
     },
 
     dateTimeRow: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginTop: Spacing.xs,
     },
 
     time: {

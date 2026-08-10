@@ -58,9 +58,9 @@ export function usePushNotifications(
       );
       try {
         await displayForegroundNotification(remoteMessage);
-        console.log('✅ notifee displayNotification succeeded');
+        console.log(' notifee displayNotification succeeded');
       } catch (e) {
-        console.error('❌ notifee displayNotification FAILED:', e);
+        console.error(' notifee displayNotification FAILED:', e);
       }
     });
 

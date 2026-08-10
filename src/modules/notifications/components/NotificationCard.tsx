@@ -58,9 +58,17 @@ const NotificationCard = ({
 
                         <Text
                             style={styles.title}
-                            numberOfLines={1}
+                            numberOfLines={2}
                         >
                             {notification.title}
+                        </Text>
+
+
+                        <Text
+                            style={styles.body}
+                            numberOfLines={3}
+                        >
+                            {notification.body}
                         </Text>
 
                         <View style={styles.dateTimeRow}>
