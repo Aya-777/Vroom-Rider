@@ -92,7 +92,6 @@ export const createStyles = (colors: ThemeColors) =>
     divider: {
       height: 1.2,
       backgroundColor: colors.surface,
-      marginTop: Spacing.lg,
       marginBottom: Spacing.md,
     },
 
@@ -100,7 +99,6 @@ export const createStyles = (colors: ThemeColors) =>
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      paddingVertical: Spacing.xs,
     },
 
     actionsRowRead: {
