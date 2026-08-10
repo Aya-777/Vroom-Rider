@@ -1,3 +1,5 @@
+import { RideStop } from "../../types/ride.types";
+
 export interface TripHistoryStopDTO {
   id: number;
   address: string;
@@ -39,4 +41,45 @@ export interface ApiEnvelope<T> {
   'status code': number;
   message: string;
   data: T;
+}
+
+export interface ReorderTripDTO {
+  id: number;
+  rider: number;
+  driver: number | null;
+  vehicle: number | null;
+  status: string;
+
+  stops: RideStop[];
+
+  estimated_distance: number;
+  estimated_duration: number;
+  estimated_price: string;
+
+  actual_distance: number | null;
+  actual_duration: number | null;
+  actual_price: string | null;
+
+  idempotency_key: string;
+
+  requested_at: string;
+  accepted_at: string | null;
+  started_at: string | null;
+  ended_at: string | null;
+
+  is_for_someone_else: boolean;
+  passenger_contact_phone: string | null;
+
+  payment_method: string;
+
+  estimated_route_geometry: [number, number][];
+
+  vehicle_type_id: number;
+  preference_ids: number[];
+}
+
+export interface ReorderTripResponseDTO {
+  'status code': number;
+  message: string;
+  data: ReorderTripDTO;
 }

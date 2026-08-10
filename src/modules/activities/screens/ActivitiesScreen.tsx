@@ -12,11 +12,16 @@ import { navigate } from '../../../navigation/rootTypes';
 import ActivityDetailsSheet from '../components/ActivityDetailsSheet';
 import { Activity } from '../types/activities.types';
 import ReviewModal from '../../review/components/ReviewModal';
+import { RideState } from '../../ride/types/RideState';
+import { useNavigation } from '@react-navigation/native';
 
 export default function ActivitiesScreen() {
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['activities']);
+  const navigation = useNavigation<any>();
+  const mainTabsNavigation = navigation.getParent();
+
 
   const [selectedActivity, setSelectedActivity] = useState<Activity | null>(
     null,
@@ -35,8 +40,32 @@ export default function ActivitiesScreen() {
     isLoadingMore,
     loadMore,
     openSidebar,
-    toggleFavorite
+    toggleFavorite,
+    onReride,
   } = useActivitiesViewModel();
+
+  const handleReride = async () => {
+    if (!selectedActivity) return;
+
+    const result = await onReride(selectedActivity.id);
+
+    if (!result.success) {
+      return;
+    }
+
+    const newTrip = result.trip;
+
+    console.log('New trip ID:', newTrip?.id);
+
+    // close bottom sheet
+    setDetailsVisible(false);
+    // then navigate to the appropriate screen
+    mainTabsNavigation.navigate('HomeTab', {
+        screen: 'Ride',
+        params: {rideState: RideState.SEARCHING_FOR_DRIVER},
+      },
+    );
+  };
 
   return (
     <LinearBg
@@ -111,7 +140,7 @@ export default function ActivitiesScreen() {
             setDetailsVisible(false);
             setReviewVisible(true);
           }}
-          onReride={() => {}}
+          onReride={handleReride}
           toggleFavorite={toggleFavorite}
         />
         <ReviewModal

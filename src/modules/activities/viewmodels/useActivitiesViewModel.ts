@@ -3,6 +3,7 @@ import { useMainDrawer } from '../../../navigation/hooks/useMainDrawer';
 import {
   getTripHistory,
   getTripHistoryByUrl,
+  rideApi,
 } from '../../ride/services/rideApi';
 import { TripHistoryItemDTO } from '../../ride/services/dto/tripHistory.dto';
 import { Activity, ActivityFilterTab } from '../types/activities.types';
@@ -12,6 +13,7 @@ import {
 } from '../constants/activitiesData';
 import { toDisplayStatus } from '../constants/activitiesData';
 import { useFavoriteDriversStore } from '../../favoriteDrivers/store/useFavoriteDriversStore';
+import { useRideStore } from '../../ride/store/useRideStore';
 
 const mapTripToActivity = (trip: TripHistoryItemDTO): Activity => {
   const pickup = trip.stops.find(s => s.stop_type === 'PICKUP');
@@ -47,6 +49,7 @@ export const useActivitiesViewModel = () => {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const {toggleFavorite} =  useFavoriteDriversStore();
+  const {setCurrentRide, setEstimate, estimate} = useRideStore();
 
   const nextUrlRef = useRef<string | null>(null);
 
@@ -97,6 +100,49 @@ export const useActivitiesViewModel = () => {
     }
   }, [isLoadingMore, isLoading]);
 
+  const onReride = useCallback(async (tripId: string) => {
+  try {
+    setError(null);
+
+    const response = await rideApi.reorderTrip(Number(tripId));
+    const trip = response.data;
+
+    setCurrentRide({...trip, 
+      vehicle_type_id: trip.vehicle_type_id.toString(),
+    });
+
+    setEstimate({
+      estimated_distance_km: trip.estimated_distance,
+      estimated_duration_minutes: trip.estimated_duration,
+      pricing_tiers: [],
+      stops: trip.stops,
+      route_geometry: trip.estimated_route_geometry.map(
+        ([longitude, latitude]: [number, number]) => ({
+          longitude,
+          latitude,
+        }),
+      ),
+    });
+
+    return {
+      success: true,
+      trip,
+    };
+  } catch (e) {
+    console.error('Failed to reorder trip:', e);
+
+    const message =
+      e instanceof Error ? e.message : 'Failed to reorder trip';
+
+    setError(message);
+
+    return {
+      success: false,
+      trip: null,
+    };
+  }
+}, [setCurrentRide, setEstimate]);
+
   return {
     statuses: ACTIVITY_TABS,
     selectedStatus,
@@ -108,5 +154,6 @@ export const useActivitiesViewModel = () => {
     loadMore,
     openSidebar,
     toggleFavorite,
+    onReride
   };
 };

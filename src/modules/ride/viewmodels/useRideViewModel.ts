@@ -15,8 +15,11 @@ const previousState: Partial<Record<RideState, RideState>> = {
   [RideState.CONFIRM_RIDE]: RideState.EXTRA_DETAILS,
 };
 
-export function useRideViewModel() {
-  const [rideState, setRideState] = useState(RideState.SELECT_RIDE);
+export function useRideViewModel(initialRideState?: RideState) {
+  const [rideState, setRideState] = useState<RideState>(
+      initialRideState ?? RideState.SELECT_RIDE,
+    );
+
   const [currentLocation, setCurrentLocation] = useState<Location>({
     address: '',
     latitude: 0,
@@ -49,6 +52,10 @@ export function useRideViewModel() {
     };
     loadLocation();
   }, []);
+
+  useEffect(() => {
+    setRideState(rideState);
+  }, [rideState]);
 
   const goToExtraDetails = async () => {
     setRideState(RideState.EXTRA_DETAILS);

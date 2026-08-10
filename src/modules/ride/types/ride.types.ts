@@ -1,6 +1,7 @@
 import { Double } from "react-native/Libraries/Types/CodegenTypes";
 import { RidePreferenceDTO } from "../services/dto/ride.dto";
 import { TripStatus } from "./RideState";
+import { Coordinate } from "../services/dto/estimate.dto";
 
 export type Car = {
   model: string;
@@ -77,10 +78,11 @@ export interface CurrentRide {
   driver: number | null;
   vehicle: number | null;
   vehicle_type_id: string;
-  status: TripStatus;
+  status: TripStatus | string;
 
   stops: RideStop[];
   preference_ids: number[];
+  route_geometry?: Coordinate[];
 
   estimated_distance: number;
   estimated_duration: number;
@@ -99,5 +101,5 @@ export interface CurrentRide {
 
   is_for_someone_else: boolean;
   passenger_contact_phone: string | null;
-  payment_method: 'CASH' | 'WALLET';
+  payment_method: 'CASH' | 'WALLET' | string;
 }
