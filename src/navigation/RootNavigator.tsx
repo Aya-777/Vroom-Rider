@@ -10,6 +10,7 @@ import { deepLinkingConfig } from './deepLinkingConfig';
 import NotificationsScreen from '../modules/notifications/screens/NotificationsScreen';
 import { isRTL } from '../core/i18n/utils/isRTL';
 import { usePushNotifications } from '../modules/notifications/hooks/usePushNotifications';
+import { handleNotificationNavigation } from '../modules/notifications/utils/notificationNavigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -17,21 +18,12 @@ function PushNotificationsHandler({ isLoggedIn }: { isLoggedIn: boolean }) {
   const navigation = useNavigation();
 
   usePushNotifications(isLoggedIn, data => {
-    switch (data.type) {
-      // case 'NEW_TRIP': // Driver
-        // navigation.navigate('ExtraDetailsScreen' as never);
-        // break;
-      case 'DRIVER_ACCEPTED': // Rider
-        navigation.navigate('DriverFoundScreen' as never);
-        break;
-      case 'DRIVER_CANCELLED': // Rider
-      // case 'RIDER_CANCELLED': // Driver
-        navigation.navigate('RideScreen' as never);
-        break;
-      case 'NO_DRIVER_FOUND': // Rider
-        navigation.navigate('SelectRideScreen' as never);
-        break;
-    }
+    handleNotificationNavigation(data, (screen, params) => {
+      (navigation.navigate as (screen: string, params?: object) => void)(
+        screen,
+        params,
+      );
+    });
   });
 
   return null;
