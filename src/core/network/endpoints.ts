@@ -39,4 +39,14 @@ export const ENDPOINTS = {
     TOGGLE: '/api/v1/users/favorite-drivers/toggle/',
     GET_FAVORITE_DRIVERS: '/api/v1/users/favorite-drivers/',
   },
+  
+  NOTIFICATIONS: {
+    LIST: '/api/v1/notifications/',
+    TYPES: '/api/v1/notifications/types/',
+    DEVICE_TOKENS: '/api/v1/notifications/device-tokens/',
+    DEACTIVATE: (id: number) =>
+      `/api/v1/notifications/device-tokens/${id}/deactivate/`,
+    MARK_READ: (id: number) => `/api/v1/notifications/${id}/read/`,
+    DELETE: (id: number) => `/api/v1/notifications/${id}/`,
+  },
 } as const;

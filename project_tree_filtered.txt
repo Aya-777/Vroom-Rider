@@ -30,6 +30,7 @@ src/
 │       │   ├── favorite.svg
 │       │   ├── gallery.svg
 │       │   ├── heart.svg
+│       │   ├── heart.svg
 │       │   ├── history.svg
 │       │   ├── home.svg
 │       │   ├── info.svg
@@ -228,6 +229,7 @@ src/
 │   │   │       ├── SplashLogo.tsx
 │   │   │       ├── SplashRoad.tsx
 │   │   │       └── SplashText.tsx
+│   │   ├── constants
 │   │   ├── hooks
 │   │   │   ├── useAuthActions.ts
 │   │   │   ├── useSplashAnimation.ts
@@ -245,12 +247,14 @@ src/
 │   │   │   ├── authApi.ts
 │   │   │   └── dto
 │   │   │       └── auth.dto.ts
+│   │   ├── store
 │   │   ├── styles
 │   │   │   ├── Splash.styles.ts
 │   │   │   ├── forgotPassword.styles.ts
 │   │   │   ├── login.styles.ts
 │   │   │   ├── resetPassword.styles.ts
 │   │   │   └── signup.styles.ts
+│   │   ├── types
 │   │   ├── utils
 │   │   │   └── SplashPathUtils.ts
 │   │   └── viewmodels
@@ -275,6 +279,7 @@ src/
 │   │   │   └── driver.type.ts
 │   │   └── viewmodels
 │   │       └── useFavoriteDriversViewModels.ts
+│   ├── constants
 │   ├── home
 │   │   ├── components
 │   │   │   ├── DestinationCard.tsx
@@ -296,8 +301,8 @@ src/
 │   ├── notifications
 │   │   ├── components
 │   │   │   └── NotificationCard.tsx
-│   │   ├── constants
-│   │   │   └── notificationsData.ts
+│   │   ├── hooks
+│   │   │   └── usePushNotifications.ts
 │   │   ├── repositories
 │   │   │   └── notificationRepository.ts
 │   │   ├── screens
@@ -305,13 +310,16 @@ src/
 │   │   ├── services
 │   │   │   ├── dto
 │   │   │   │   └── notification.dto.ts
+│   │   │   ├── fcmService.ts
 │   │   │   └── notificationApi.ts
 │   │   ├── styles
 │   │   │   └── notifications.styles.ts
 │   │   ├── types
 │   │   │   └── notifications.types.ts
 │   │   ├── utils
-│   │   │   └── notificationIcon.tsx
+│   │   │   ├── formateDate.ts
+│   │   │   ├── notificationIcon.tsx
+│   │   │   └── notificationNavigation.ts
 │   │   └── viewmodels
 │   │       └── useNotificationsViewModel.ts
 │   ├── profile
