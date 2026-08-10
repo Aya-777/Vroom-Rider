@@ -1,10 +1,9 @@
-// hooks/useRideMapLocation.ts
-
 import { reverseGeocode } from '../../../core/services/location/GeoCodingService';
 import { useRideStore } from '../store/useRideStore';
+import { ActiveInput } from '../types/ride.types';
 
 export function useRideMapLocation(
-  activeInput: 'pickup' | 'destination' | null,
+  activeInput: ActiveInput,
   setFromText: (value: string) => void,
   setToText: (value: string) => void,
   handleBottomSheet : (value: boolean) => void,

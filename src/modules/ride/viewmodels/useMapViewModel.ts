@@ -1,14 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import PermissionService from '../../../core/services/location/PermissionService';
-import LocationService, { Location } from '../../../core/services/location/LocationService';
+import LocationService, {
+  Location,
+} from '../../../core/services/location/LocationService';
 import { useLocationStore } from '../../../core/store/locationStore';
 import { CameraRef, MapRef } from '@maplibre/maplibre-react-native';
 import { useRideStore } from '../store/useRideStore';
 import { TripStatus } from '../types/RideState';
 
 export default function useMapViewModel() {
-  const [deviceLocation, setDeviceLocation] = useState<[number, number] | null>(null);
-  const {rideData} = useRideStore();
+  const [deviceLocation, setDeviceLocation] = useState<[number, number] | null>(
+    null,
+  );
+  const { rideData } = useRideStore();
   const isSearchingForDriver = rideData?.status === TripStatus.PENDING;
   const { estimate } = useRideStore();
 
@@ -95,38 +99,43 @@ export default function useMapViewModel() {
 
   const centerOnLocation = (location: Location) => {
     cameraRef.current?.easeTo({
-        center: [
-            location.longitude,
-            location.latitude,
-        ],
-        zoom: 16,
-        duration: 700,
+      center: [location.longitude, location.latitude],
+      zoom: 16,
+      duration: 700,
     });
-};
+  };
 
   const routeCoordinates =
-    estimate?.route_geometry.map(point => [
-      point.longitude,
-      point.latitude,
-    ]) ?? [];
-    
-    const routeBounds =
-      routeCoordinates.length > 0
-        ? routeCoordinates.reduce(
-            (bounds, [lng, lat]) => ({
-              west: Math.min(bounds.west, lng),
-              south: Math.min(bounds.south, lat),
-              east: Math.max(bounds.east, lng),
-              north: Math.max(bounds.north, lat),
-            }),
-            {
-              west: routeCoordinates[0][0],
-              south: routeCoordinates[0][1],
-              east: routeCoordinates[0][0],
-              north: routeCoordinates[0][1],
-            },
-          )
-        : null;
+    estimate?.route_geometry.map(point => [point.longitude, point.latitude]) ??
+    [];
+
+  const routeBounds =
+    routeCoordinates.length > 0
+      ? routeCoordinates.reduce(
+          (bounds, [lng, lat]) => ({
+            west: Math.min(bounds.west, lng),
+            south: Math.min(bounds.south, lat),
+            east: Math.max(bounds.east, lng),
+            north: Math.max(bounds.north, lat),
+          }),
+          {
+            west: routeCoordinates[0][0],
+            south: routeCoordinates[0][1],
+            east: routeCoordinates[0][0],
+            north: routeCoordinates[0][1],
+          },
+        )
+      : null;
+
+  const pickup = rideData.stops?.find(stop => stop.stop_type === 'PICKUP');
+
+  const destination = rideData.stops?.find(
+    stop => stop.stop_type === 'DROP_OFF',
+  );
+
+  const intermediateStops = rideData.stops?.filter(
+    stop => stop.stop_type === 'STOP',
+  );
 
   return {
     deviceLocation,
@@ -137,6 +146,10 @@ export default function useMapViewModel() {
     centerOnLocation,
     routeCoordinates,
     routeBounds,
-    isSearchingForDriver
+    isSearchingForDriver,
+
+    pickup,
+    destination,
+    intermediateStops,
   };
 }

@@ -1,0 +1,17 @@
+{
+  "favoriteDrivers": {
+    "title": "Favorite Drivers",
+
+    "details": {
+      "phone": "PHONE",
+      "plate": "PLATE",
+      "vehicle": "VEHICLE",
+      "color": "Color",
+      "rating": "RATING"
+    },
+
+    "actions": {
+      "callDriver": "Call Driver"
+    }
+  }
+}

@@ -31,6 +31,8 @@ import {
   notificationsAr,
   sideBarEn,
   sideBarAr,
+  favoriteDriversEn,
+  favoriteDriversAr
 } from './locales/index'
 
 
@@ -52,6 +54,7 @@ export const resources = {
     activities: activitiesEn,
     notifications: notificationsEn,
     sidebar: sideBarEn,
+    favoriteDrivers: favoriteDriversEn
   },
   
   ar: {
@@ -71,5 +74,6 @@ export const resources = {
     activities: activitiesAr,
     notifications: notificationsAr,
     sidebar: sideBarAr,
+    favoriteDrivers: favoriteDriversAr
   },
 };

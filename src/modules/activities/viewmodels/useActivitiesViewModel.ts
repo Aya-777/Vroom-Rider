@@ -11,6 +11,7 @@ import {
   STATUS_PARAM_BY_TAB,
 } from '../constants/activitiesData';
 import { toDisplayStatus } from '../constants/activitiesData';
+import { useFavoriteDriversStore } from '../../favoriteDrivers/store/useFavoriteDriversStore';
 
 const mapTripToActivity = (trip: TripHistoryItemDTO): Activity => {
   const pickup = trip.stops.find(s => s.stop_type === 'PICKUP');
@@ -26,7 +27,9 @@ const mapTripToActivity = (trip: TripHistoryItemDTO): Activity => {
     date: new Date(dateSource).toLocaleString(),
     price: trip.price ? Number(trip.price) : null,
     currency: 'SP',
+    driverId: trip.driverId,
     driverName: trip.driver_name ?? '-',
+    isFavorite: trip.isFavorite,
     rideType: trip.vehicle_type ?? '-',
     distance: trip.distance,
     duration: trip.duration,
@@ -43,6 +46,7 @@ export const useActivitiesViewModel = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const {toggleFavorite} =  useFavoriteDriversStore();
 
   const nextUrlRef = useRef<string | null>(null);
 
@@ -53,6 +57,7 @@ export const useActivitiesViewModel = () => {
       const response = await getTripHistory({
         status: STATUS_PARAM_BY_TAB[tab],
       });
+      // console.log(response.results);
       setActivities(response.results.map(mapTripToActivity));
       nextUrlRef.current = response.next;
     } catch (e) {
@@ -102,5 +107,6 @@ export const useActivitiesViewModel = () => {
     error,
     loadMore,
     openSidebar,
+    toggleFavorite,
   };
 };

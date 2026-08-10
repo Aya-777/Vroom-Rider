@@ -3,25 +3,28 @@ import { ENDPOINTS } from '../../../core/network/endpoints';
 import { v4 as uuidv4 } from 'uuid';
 import { RecentTripDTO } from './dto/recentTrip.dto';
 import { RequestRideRequestDTO, RequestRideResponseDTO } from './dto/ride.dto';
-
 import {
   SavedPlaceDTO,
   CreateSavedPlaceRequestDTO,
   CreateSavedPlaceResponseDTO,
 } from './dto/savedPlaces.dto';
-
 import { RideFilter } from '../types/ride.types';
-
 import {
   EstimateInitialRequestDTO,
   EstimateInitialResponseDTO,
 } from './dto/estimate.dto';
-
 import {
   TripHistoryItemDTO,
   PaginatedResult,
   ApiEnvelope,
 } from './dto/tripHistory.dto';
+import {
+  EnterRideNumberRequestDTO,
+  EnterRideNumberResponseDTO,
+  ResendOtpRequestDTO,
+  VerifyOtpRequestDTO,
+  VerifyOtpResponseDTO,
+} from './dto/ride.dto';
 
 export const rideApi = {
   // Saved Places
@@ -102,6 +105,37 @@ export const rideApi = {
       },
     );
 
+    return response.data;
+  },
+
+  enterRideNumber: async (
+    data: EnterRideNumberRequestDTO,
+  ): Promise<EnterRideNumberResponseDTO> => {
+    const response = await apiClient.post<EnterRideNumberResponseDTO>(
+      ENDPOINTS.TRIPS.VERIFY_NUMBER_ENTER,
+      data,
+    );
+
+    return response.data;
+  },
+
+  verifyRideOtp: async (
+    data: VerifyOtpRequestDTO,
+  ): Promise<VerifyOtpResponseDTO> => {
+    const response = await apiClient.post<VerifyOtpResponseDTO>(
+      ENDPOINTS.TRIPS.VERIFY_RIDE_OTP,
+      data,
+    );
+    return response.data;
+  },
+
+  resendRideOtp: async (
+    data: ResendOtpRequestDTO,
+  ): Promise<{ message: string }> => {
+    const response = await apiClient.post<{ message: string }>(
+      ENDPOINTS.TRIPS.VERIFY_RIDE_RESEND,
+      data,
+    );
     return response.data;
   },
 

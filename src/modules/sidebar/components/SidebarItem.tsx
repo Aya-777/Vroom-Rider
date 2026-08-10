@@ -29,7 +29,7 @@ const SidebarItem = ({item, onPress}: Props) => {
       <Icon width={18} height={18} style={styles.menuIcon as any} />
       
       <Text style={styles.menuLabel}>
-        {t(item.label)}
+        {t(`sidebar:${item.label}`)}
       </Text>
     
     </Pressable>

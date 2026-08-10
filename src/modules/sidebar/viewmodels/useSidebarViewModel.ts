@@ -33,6 +33,17 @@ export const useSidebarViewModel = (navigation: Navigation) => {
     }
     if(item.route === 'SavedPlaces'){
       setIsSavedPlacesOpen(true);
+      navigation.closeDrawer();
+      return;
+    }else if(item.route === 'FavoriteDrivers'){
+      navigation.navigate('MainTabs', {
+        screen: 'HomeTab',
+        params: {
+          screen: 'FavoriteDrivers',
+        },
+      });
+      navigation.closeDrawer();
+      return;
     }
 
     navigation.navigate('MainTabs', {

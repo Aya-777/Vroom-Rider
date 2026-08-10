@@ -4,10 +4,9 @@ import { useTranslation } from 'react-i18next';
 import HeartIcon from '../../../../assets/svg/common/heart.svg';
 import { useTheme } from '../../../../core/theme/useTheme';
 
-export default function ActivityDetailsList({ activity, styles }: any) {
+export default function ActivityDetailsList({ activity, styles, toggleFavorite }: any) {
     const { t } = useTranslation(['activities']);
     const { colors } = useTheme();
-    const [isFavorite, setIsFavorite] = useState(false);
 
     return (
         <ScrollView
@@ -18,20 +17,22 @@ export default function ActivityDetailsList({ activity, styles }: any) {
             <Text style={styles.title}>{t('activityDetails.title')}</Text>
 
             <View>
+              {activity.driverId !== undefined && 
                 <View style={styles.row}>
                     <Text style={styles.label}>{t('activityDetails.driverName')}</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
                         <Text style={styles.value}>{activity.driverName}</Text>
-                        <TouchableOpacity onPress={() => setIsFavorite(prev => !prev)}>
+                        <TouchableOpacity onPress={() => toggleFavorite(activity.driverId)}>
                             <HeartIcon
                                 width={20}
                                 height={20}
-                                fill={isFavorite ? colors.error : 'none'}
-                                stroke={isFavorite ? colors.error : colors.textSecondary}
+                                fill={activity.isFavorite ? colors.error : 'none'}
+                                stroke={activity.isFavorite ? colors.error : colors.textSecondary}
                             />
                         </TouchableOpacity>
                     </View>
                 </View>
+              }
 
                 <View style={styles.row}>
                     <Text style={styles.label}>{t('activityDetails.rideType')}</Text>

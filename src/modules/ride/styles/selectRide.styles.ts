@@ -68,6 +68,23 @@ export const createStyles = (colors: ThemeColors) =>
       paddingBottom: 0,
       paddingLeft: 10,
     },
+    addInputContainer:{
+      flex:1,
+      flexDirection: 'row',
+      alignItems:'flex-start',
+      justifyContent:'center',
+      marginBottom: -15,
+    },
+    addButton:{
+      width: 42,
+      height: 51,
+      borderRadius: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: colors.backgroundSoft,
+      marginStart: -24,
+      marginTop: 2,
+    },
 
     divider: {
       height: 1,

@@ -11,18 +11,21 @@ export const ENDPOINTS = {
     RESET_PASSWORD: '/api/v1/auth/forgot-password/reset-password/',
     LOGOUT: '/api/v1/auth/logout/',
   },
+  CHANGE_PASSWORD: '/api/v1/users/me/change-password/',
   USERS: {
     ME: '/api/v1/users/me/',
     EDIT_PROFILE: '/api/v1/users/me/profile/',
     CHANGE_PHONE_REQUEST: '/api/v1/users/me/change-phone/',
     CHANGE_PHONE_RESEND: '/api/v1/users/me/change-phone/resend-otp/',
     CHANGE_PHONE_VERIFY: '/api/v1/users/me/change-phone/verify-otp/',
-    CHANGE_PASSWORD: '/api/v1/users/me/change-password/',
   },
-
+  
   TRIPS: {
     INITIAL_ESTIMATE: '/trips/trips/estimate/initial/',
     REFINED_ESTIMATE: '/trips/trips/estimate/refined/',
+    VERIFY_NUMBER_ENTER: '/trips/contact-number/enter/',
+    VERIFY_RIDE_OTP: '/trips/contact-number/verify/',
+    VERIFY_RIDE_RESEND: '/trips/contact-number/resend/',
     SAVED_LOCATIONS: '/trips/saved-locations/',
     SAVED_LOCATION: (id: number) => `/trips/saved-locations/${id}/`,
     PREFERENCES: '/trips/preferences/',
@@ -30,6 +33,11 @@ export const ENDPOINTS = {
     CANCEL: (id: number) => `/trips/trips/${id}/cancel/`,
     HISTORY: '/trips/history/',
     RECENT: '/trips/recent/',
+},
+
+  FAVORITE_DRIVERS: {
+    TOGGLE: '/api/v1/users/favorite-drivers/toggle/',
+    GET_FAVORITE_DRIVERS: '/api/v1/users/favorite-drivers/',
   },
   
   NOTIFICATIONS: {

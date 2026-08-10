@@ -26,7 +26,9 @@ const Tab = createBottomTabNavigator<MainTabsParamList>();
 
 const HIDE_TAB_ROUTES = [
   'Ride',
+  'RideOtp',
   'AddNewPlace',
+  'FavoriteDrivers',
   'EditProfile',
   'ChangePhoneOtp',
   'ChangePassword',

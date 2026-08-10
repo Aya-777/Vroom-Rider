@@ -1,0 +1,17 @@
+{
+  "favoriteDrivers": {
+    "title": "السائقون المفضلون",
+
+    "details": {
+      "phone": "الهاتف",
+      "plate": "رقم اللوحة",
+      "vehicle": "المركبة",
+      "color": "اللون",
+      "rating": "التقييم"
+    },
+
+    "actions": {
+      "callDriver": "الاتصال بالسائق"
+    }
+  }
+}
