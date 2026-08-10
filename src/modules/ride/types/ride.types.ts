@@ -78,7 +78,7 @@ export interface CurrentRide {
   driver: number | null;
   vehicle: number | null;
   vehicle_type_id: string;
-  status: TripStatus | string;
+  status: TripStatus;
 
   stops: RideStop[];
   preference_ids: number[];
@@ -101,5 +101,5 @@ export interface CurrentRide {
 
   is_for_someone_else: boolean;
   passenger_contact_phone: string | null;
-  payment_method: 'CASH' | 'WALLET' | string;
+  payment_method: 'CASH' | 'WALLET';
 }

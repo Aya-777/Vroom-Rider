@@ -14,6 +14,7 @@ import {
 import { toDisplayStatus } from '../constants/activitiesData';
 import { useFavoriteDriversStore } from '../../favoriteDrivers/store/useFavoriteDriversStore';
 import { useRideStore } from '../../ride/store/useRideStore';
+import { CurrentRide, RideParams } from '../../ride/types/ride.types';
 
 const mapTripToActivity = (trip: TripHistoryItemDTO): Activity => {
   const pickup = trip.stops.find(s => s.stop_type === 'PICKUP');
@@ -49,7 +50,7 @@ export const useActivitiesViewModel = () => {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const {toggleFavorite} =  useFavoriteDriversStore();
-  const {setCurrentRide, setEstimate, estimate} = useRideStore();
+  const {setCurrentRide, setEstimate, setRideDetails} = useRideStore();
 
   const nextUrlRef = useRef<string | null>(null);
 
@@ -109,7 +110,11 @@ export const useActivitiesViewModel = () => {
 
     setCurrentRide({...trip, 
       vehicle_type_id: trip.vehicle_type_id.toString(),
-    });
+    } as CurrentRide);
+    setRideDetails({...trip,
+      vehicle_type_id: trip.vehicle_type_id.toString(),
+      passenger_contact_phone: trip.passenger_contact_phone ?? undefined,
+    } as RideParams);
 
     setEstimate({
       estimated_distance_km: trip.estimated_distance,
@@ -141,7 +146,7 @@ export const useActivitiesViewModel = () => {
       trip: null,
     };
   }
-}, [setCurrentRide, setEstimate]);
+}, [setCurrentRide, setEstimate, setRideDetails]);
 
   return {
     statuses: ACTIVITY_TABS,
