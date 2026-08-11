@@ -50,4 +50,8 @@ export const ENDPOINTS = {
     MARK_READ: (id: number) => `/api/v1/notifications/${id}/read/`,
     DELETE: (id: number) => `/api/v1/notifications/${id}/`,
   },
+
+  PUSHER:{
+    AUTH: 'trips/pusher-auth/',
+  }
 } as const;
