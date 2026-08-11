@@ -1,4 +1,4 @@
-import { RideStop } from '../../types/ride.types';
+import { Car, Driver, RideStop } from '../../types/ride.types';
 import { TripStatus } from '../../types/RideState';
 
 export interface RidePreferenceDTO {
@@ -21,8 +21,8 @@ export interface RequestRideRequestDTO {
 export interface RequestRideResponseDTO {
   id: number;
   rider: number;
-  driver: number | null;
-  vehicle: number | null;
+  driver: Driver | null;
+  vehicle: Car | null;
   vehicle_type_id: string;
   status: TripStatus;
 

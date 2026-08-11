@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   ScrollView,
   View,
@@ -16,7 +16,6 @@ import HeaderTopAppBar from '../components/HomeHeader';
 import { useHomeActions } from '../hooks/useHomeActions';
 import { useTranslation } from 'react-i18next';
 import { navigate } from '../../../navigation/rootTypes';
-import { pusherService } from '../../../core/realtime/pusher/PusherService';
 
 export default function HomeScreen() {
 
@@ -38,36 +37,6 @@ export default function HomeScreen() {
   const serviceActions: Record<string, () => void> = {
     '1': navigateToRide,
   };
-
-
-useEffect(() => {
-  const setupPusher = async () => {
-    try {
-      await pusherService.connect();
-
-      console.log('[Pusher Test] Connected');
-
-      const channels =
-        await pusherService.subscribeToUserChannels();
-
-      console.log(
-        '[Pusher Test] Subscribed to channels:',
-        channels,
-      );
-    } catch (error) {
-      console.error(
-        '[Pusher Test] Pusher setup failed:',
-        error,
-      );
-    }
-  };
-
-  setupPusher();
-
-  return () => {
-    pusherService.disconnect();
-  };
-}, []);
 
   return (
     <LinearBg

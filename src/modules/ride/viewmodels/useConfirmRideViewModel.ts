@@ -18,6 +18,7 @@ export function useConfirmRideViewModel() {
         rideData as RequestRideRequestDTO,
         idempotencyKey,
       );
+      console.log(response.id);
       setCurrentRide(response as CurrentRide);
       setRideDetails({
         status: TripStatus.PENDING,

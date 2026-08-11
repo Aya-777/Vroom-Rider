@@ -76,8 +76,8 @@ export interface RideParams {
 export interface CurrentRide {
   id: number;
   rider: number;
-  driver: number | null;
-  vehicle: number | null;
+  driver: Driver | null;
+  vehicle: Car | null;
   vehicle_type_id: string;
   status: TripStatus;
 

@@ -7,12 +7,14 @@ import {
 import { apiClient } from '../../network/apiClient';
 import { ENDPOINTS } from '../../network/endpoints';
 import { PUSHER_CONFIG } from '../../config/realtime.config';
+import { rideRealtimeService } from '../../../modules/ride/services/rideRealTimeService';
 
 const PUSHER_AUTH_ENDPOINT = ENDPOINTS.PUSHER.AUTH;
 
 class PusherService {
   private pusher = Pusher.getInstance();
   private initialized = false;
+  private eventListener?: (event: PusherEvent) => void;
 
   private async getAvailableChannels(): Promise<string[]> {
     try {
@@ -95,12 +97,20 @@ class PusherService {
         console.log('🔥🔥🔥 PUSHER EVENT RECEIVED 🔥🔥🔥');
         console.log('Event name:', event.eventName);
         console.log('Event data:', event.data);
+        this.eventListener?.(event);
+        rideRealtimeService.handleEvent(event);
       },
     });
 
     this.initialized = true;
 
     console.log('[Pusher] Initialized');
+  }
+  
+  setEventListener(
+    listener: (event: PusherEvent) => void,
+  ): void {
+    this.eventListener = listener;
   }
 
   private async authorizeChannel(
