@@ -53,5 +53,6 @@ export const ENDPOINTS = {
 
   PUSHER:{
     AUTH: 'trips/pusher-auth/',
+    CHANNELS: '/realtime/channels/',
   }
 } as const;

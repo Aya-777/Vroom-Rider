@@ -56,6 +56,12 @@ export function useRideViewModel(initialRideState?: RideState) {
   useEffect(() => {
     setRideState(rideState);
   }, [rideState]);
+  
+  useEffect(() => {
+    if(currentRide?.status === TripStatus.CANCELLED_BY_DRIVER){
+      clearRide();
+    }
+  }, [currentRide, currentRide?.status]);
 
   const goToExtraDetails = async () => {
     setRideState(RideState.EXTRA_DETAILS);

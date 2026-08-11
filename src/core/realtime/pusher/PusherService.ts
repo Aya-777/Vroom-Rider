@@ -14,6 +14,41 @@ class PusherService {
   private pusher = Pusher.getInstance();
   private initialized = false;
 
+  private async getAvailableChannels(): Promise<string[]> {
+    try {
+      console.log('[Pusher] Discovering available channels...');
+
+      const response = await apiClient.get(
+        ENDPOINTS.PUSHER.CHANNELS,
+      );
+
+      const channels = response.data?.data?.channels ?? [];
+
+      console.log('[Pusher] Available channels:', channels);
+
+      return channels;
+    } catch (error) {
+      console.error(
+        '[Pusher] Failed to discover channels:',
+        error,
+      );
+
+      throw error;
+    }
+  }
+
+  async subscribeToUserChannels(): Promise<string[]> {
+    await this.init();
+
+    const channels = await this.getAvailableChannels();
+
+    for (const channelName of channels) {
+      await this.subscribe(channelName);
+    }
+
+    return channels;
+  }
+
   async init(): Promise<void> {
     if (this.initialized) {
       return;
@@ -57,10 +92,9 @@ class PusherService {
       },
 
       onEvent: (event: PusherEvent) => {
-        console.log(
-          `[Pusher] Event received: ${event.eventName}`,
-          event.data,
-        );
+        console.log('🔥🔥🔥 PUSHER EVENT RECEIVED 🔥🔥🔥');
+        console.log('Event name:', event.eventName);
+        console.log('Event data:', event.data);
       },
     });
 
@@ -111,18 +145,38 @@ class PusherService {
   async disconnect(): Promise<void> {
     console.log('[Pusher] Disconnecting...');
 
+    for (const channelName of this.subscribedChannels) {
+      await this.pusher.unsubscribe({
+        channelName,
+      });
+    }
+
+    this.subscribedChannels.clear();
+
     await this.pusher.disconnect();
   }
 
   async subscribe(channelName: string): Promise<void> {
     await this.init();
 
+    if (this.subscribedChannels.has(channelName)) {
+      console.log(
+        '[Pusher] Already subscribed to:',
+        channelName,
+      );
+      return;
+    }
+
     console.log('[Pusher] Subscribing to:', channelName);
 
     await this.pusher.subscribe({
       channelName,
     });
+
+    this.subscribedChannels.add(channelName);
   }
+
+  private subscribedChannels = new Set<string>();
 
   async unsubscribe(channelName: string): Promise<void> {
     console.log('[Pusher] Unsubscribing from:', channelName);
@@ -130,6 +184,8 @@ class PusherService {
     await this.pusher.unsubscribe({
       channelName,
     });
+
+    this.subscribedChannels.delete(channelName);
   }
 
   getSocketId(): Promise<string> {

@@ -1,3 +1,4 @@
+import 'react-native-get-random-values';
 import { create } from 'zustand';
 import { CurrentRide, RideParams, RideStop } from '../types/ride.types';
 import { SavedPlace } from '../types/savedPlaces.types';
