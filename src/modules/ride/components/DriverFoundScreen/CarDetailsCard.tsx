@@ -26,12 +26,12 @@ export default function CarDetailsCard({ driver, styles, colors }: CarDetailsCar
         </Text>
 
         <Text style={styles.carModelText}>
-          {driver.car.model}
+          {/* {dri} */}
         </Text>
 
         <View style={styles.plateRow}>
           <Text style={styles.carColorText}>
-            {driver.car.color}
+            {/* {driver.car.color} */}
           </Text>
         </View>
       </View>

@@ -2,7 +2,7 @@ import { apiClient } from '../../../core/network/apiClient';
 import { ENDPOINTS } from '../../../core/network/endpoints';
 import { v4 as uuidv4 } from 'uuid';
 import { RecentTripDTO } from './dto/recentTrip.dto';
-import { RequestRideRequestDTO, RequestRideResponseDTO } from './dto/ride.dto';
+import { GetTripResponse, RequestRideRequestDTO, RequestRideResponseDTO } from './dto/ride.dto';
 import {
   SavedPlaceDTO,
   CreateSavedPlaceRequestDTO,
@@ -75,6 +75,14 @@ export const rideApi = {
   },
 
   // Ride
+  getTripById: async (id: number) => {
+    const response = await apiClient.get(
+      ENDPOINTS.TRIPS.GET_TRIP(id),
+    );
+
+    return response.data;
+  },
+
   estimateInitial: async (
     data: EstimateInitialRequestDTO,
   ): Promise<EstimateInitialResponseDTO> => {
@@ -87,7 +95,7 @@ export const rideApi = {
   },
 
   cancelRide: async (rideId: number, reason: string) => {
-    const response = await apiClient.post(ENDPOINTS.TRIPS.CANCEL(rideId), {
+    const response = await apiClient.post<GetTripResponse>(ENDPOINTS.TRIPS.CANCEL(rideId), {
       cancellation_reason: reason,
     });
 

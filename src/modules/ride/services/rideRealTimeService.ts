@@ -1,6 +1,7 @@
 import { PusherEvent } from '@pusher/pusher-websocket-react-native';
 import { useRideStore } from '../store/useRideStore';
 import { RideState, TripStatus } from '../types/RideState';
+import { rideApi } from './rideApi';
 
 class RideRealtimeService {
   handleEvent(event: PusherEvent) {
@@ -33,7 +34,7 @@ class RideRealtimeService {
     }
   }
 
-  private handleDriverAssigned(data: {
+  private async handleDriverAssigned(data: {
     trip_id: number;
     driver_id: number;
     driver_name: string;
@@ -56,12 +57,13 @@ class RideRealtimeService {
       );
       return;
     }
+    const trip = await rideApi.getTripById(currentRide.id);
     
     setCurrentRide({
       ...currentRide,
       status: data.status as TripStatus,
-      // driver: data.driver_id,
-      // driver_name: data.driver_name,
+      driver: trip.driver,
+      vehicle: trip.vehicle,
     });
     setRideState(RideState.DRIVER_FOUND);
   }

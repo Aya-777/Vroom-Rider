@@ -35,23 +35,16 @@ export default function DriverFoundSheet({
   const styles = createStyles(colors);
   const { t } = useTranslation(['driverFound', 'common']);
 
-  const { driver } = useDriverFoundViewModel();
+  const { driver, currentRide } = useDriverFoundViewModel();
 
   const snapPoints = useMemo(() => ['30%', '70%'], []);
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     onDriverFound();
-  //   }, 3000);
-  //   return () => clearTimeout(timer);
-  // }, []);
 
   return (
     <>
       <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1} animatedPosition={animatedPosition}>
         <DriverStatus text={t(driver.onTheWayMessage)} styles={styles} />
 
-        <DriverAvatar uri={driver.avatar} styles={styles} />
+        <DriverAvatar uri={currentRide?.driver?.profile_image ?? ''} styles={styles} />
 
         <DriverStatus text={t(driver.name)} styles={styles} />
 
@@ -59,7 +52,7 @@ export default function DriverFoundSheet({
 
         <ProgressBar styles={styles} colors={colors} />
 
-        <CarDetailsCard driver={driver} styles={styles} colors={colors} />
+        {/* <CarDetailsCard driver={driver} styles={styles} colors={colors} /> */}
 
         <ActionButton
           title={t('common:cancel')}
