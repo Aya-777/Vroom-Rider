@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RideState, TripStatus } from '../types/RideState';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -8,17 +8,13 @@ import LocationService, {
 } from '../../../core/services/location/LocationService';
 import { useRideStore } from '../store/useRideStore';
 import { rideApi } from '../services/rideApi';
-import BottomSheet from '@gorhom/bottom-sheet';
 
 const previousState: Partial<Record<RideState, RideState>> = {
   [RideState.EXTRA_DETAILS]: RideState.SELECT_RIDE,
   [RideState.CONFIRM_RIDE]: RideState.EXTRA_DETAILS,
 };
 
-export function useRideViewModel(initialRideState?: RideState) {
-  const [rideState, setRideState] = useState<RideState>(
-      initialRideState ?? RideState.SELECT_RIDE,
-    );
+export function useRideViewModel() {
 
   const [currentLocation, setCurrentLocation] = useState<Location>({
     address: '',
@@ -33,7 +29,10 @@ export function useRideViewModel(initialRideState?: RideState) {
     clearRide,
     currentRide,
     setCurrentRide,
+    rideState,
+    setRideState
   } = useRideStore();
+  
 
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
@@ -53,15 +52,6 @@ export function useRideViewModel(initialRideState?: RideState) {
     loadLocation();
   }, []);
 
-  useEffect(() => {
-    setRideState(rideState);
-  }, [rideState]);
-  
-  useEffect(() => {
-    if(currentRide?.status === TripStatus.CANCELLED_BY_DRIVER){
-      clearRide();
-    }
-  }, [currentRide, currentRide?.status]);
 
   const goToExtraDetails = async () => {
     setRideState(RideState.EXTRA_DETAILS);
@@ -132,7 +122,7 @@ export function useRideViewModel(initialRideState?: RideState) {
   };
 
   return {
-    rideState,
+    rideState ,
     currentLocation,
     estimate,
     isCancelling,

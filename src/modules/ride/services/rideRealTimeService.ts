@@ -1,6 +1,6 @@
 import { PusherEvent } from '@pusher/pusher-websocket-react-native';
 import { useRideStore } from '../store/useRideStore';
-import { TripStatus } from '../types/RideState';
+import { RideState, TripStatus } from '../types/RideState';
 
 class RideRealtimeService {
   handleEvent(event: PusherEvent) {
@@ -39,7 +39,7 @@ class RideRealtimeService {
     driver_name: string;
     status: string;
   }) {
-    const { currentRide, setCurrentRide } =
+    const { currentRide, setCurrentRide, setRideState } =
       useRideStore.getState();
 
     if (!currentRide) {
@@ -56,20 +56,21 @@ class RideRealtimeService {
       );
       return;
     }
-
+    
     setCurrentRide({
       ...currentRide,
       status: data.status as TripStatus,
       // driver: data.driver_id,
       // driver_name: data.driver_name,
     });
+    setRideState(RideState.DRIVER_FOUND);
   }
 
   private handleTripCancelled(data: {
     trip_id: number;
     status: string;
   }) {
-    const { currentRide, setCurrentRide } =
+    const { currentRide, clearRide, setCurrentRide, setRideState } =
       useRideStore.getState();
 
     if (!currentRide) {
@@ -80,12 +81,9 @@ class RideRealtimeService {
       return;
     }
 
-    setCurrentRide({
-      ...currentRide,
-      status: data.status as TripStatus,
-    });
-
-    
+    setRideState(RideState.SELECT_RIDE);
+    clearRide();
+    setCurrentRide(null);
   }
 }
 

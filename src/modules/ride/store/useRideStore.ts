@@ -5,6 +5,7 @@ import { SavedPlace } from '../types/savedPlaces.types';
 import { EstimateInitialResponseDTO } from '../services/dto/estimate.dto';
 import { TripStatus } from '../types/RideState';
 import { v4 as uuidv4 } from 'uuid';
+import { RideState as TripState } from '../types/RideState';
 
 type MapLocation = {
   latitude: number;
@@ -16,6 +17,8 @@ interface RideState {
 
   currentRide: CurrentRide | null;
 
+  rideState: TripState;
+
   estimate: EstimateInitialResponseDTO;
 
   savedPlaces: SavedPlace[];
@@ -23,6 +26,8 @@ interface RideState {
   setRideDetails: (details: Partial<RideParams>) => void;
 
   setCurrentRide: (ride: CurrentRide | null) => void;
+
+  setRideState: (state: TripState) => void;
 
   setEstimate: (estimate: EstimateInitialResponseDTO) => void;
 
@@ -76,6 +81,8 @@ export const useRideStore = create<RideState>((set, get) => ({
   },
 
   currentRide: null,
+
+  rideState: TripState.SELECT_RIDE,
 
   estimate: {
     estimated_distance_km: 0,
@@ -189,6 +196,11 @@ export const useRideStore = create<RideState>((set, get) => ({
   setCurrentRide: ride =>
     set({
       currentRide: ride,
+    }),
+
+  setRideState: state =>
+    set({
+      rideState: state,
     }),
 
   setEstimate: estimate =>
