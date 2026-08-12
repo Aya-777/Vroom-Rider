@@ -35,38 +35,54 @@ class RideRealtimeService {
   }
 
   private async handleDriverAssigned(data: {
-    trip_id: number;
-    driver_id: number;
-    driver_name: string;
-    status: string;
-  }) {
-    const { currentRide, setCurrentRide, setRideState } =
-      useRideStore.getState();
+  trip_id: number;
+  driver_id: number;
+  driver_name: string;
+  status: string;
+}) {
+  const {
+    currentRide,
+    setCurrentRide,
+    setRideState,
+  } = useRideStore.getState();
 
-    if (!currentRide) {
-      console.warn(
-        '[RideRealtime] No current ride found',
-      );
-      return;
-    }
+  if (!currentRide) {
+    console.warn('[RideRealtime] No current ride found');
+    return;
+  }
 
-    if (currentRide.id !== data.trip_id) {
-      console.warn(
-        '[RideRealtime] Event belongs to another trip:',
-        data.trip_id,
-      );
-      return;
-    }
+  if (currentRide.id !== data.trip_id) {
+    console.warn(
+      '[RideRealtime] Event belongs to another trip:',
+      data.trip_id,
+    );
+    return;
+  }
+
+  try {
+    // Wait for the backend to give us the complete trip
     const trip = await rideApi.getTripById(currentRide.id);
-    
+
+    console.log('[RideRealtime] Full trip:', trip);
+
+    // Update currentRide FIRST
     setCurrentRide({
       ...currentRide,
       status: data.status as TripStatus,
-      driver: trip.driver,
-      vehicle: trip.vehicle,
+      driver: trip.data.driver,
+      vehicle: trip.data.vehicle,
     });
+
+    // Only AFTER currentRide has been updated
     setRideState(RideState.DRIVER_FOUND);
+
+  } catch (error) {
+    console.error(
+      '[RideRealtime] Failed to fetch trip details:',
+      error,
+    );
   }
+}
 
   private handleTripCancelled(data: {
     trip_id: number;
