@@ -15,6 +15,7 @@
   "trackYourTrip": "Track your trip",
   "ride": "Ride",
   "filters": {
+    "filtersTotal": "Filters Total",
     "acceptAnimals": "Accept animals",
     "bigLuggage": "Big luggage",
     "childSeat": "Child seat",
@@ -29,6 +30,7 @@
   },
   "totalPrice" : "Total Price",
   "time": "Time",
+  "estimatedTime": "Estimated Time",
   
   "payment":{
     "estimatedPrice": "Estimated price",

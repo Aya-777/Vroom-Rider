@@ -23,14 +23,6 @@ export default function TripStartedScreen({ onTripEnded, animatedPosition }: Pro
 
   const vm = useTripStartedViewModel();
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      vm.setIsBillVisible(true);
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   const snapPoints = useMemo(() => ['30%', '70%'], []);
 
   return (
@@ -40,11 +32,12 @@ export default function TripStartedScreen({ onTripEnded, animatedPosition }: Pro
         <Text style={styles.tripStartedMessage}>{t('tripStarted')}</Text>
         {/* Driver Card */}
         <DriverInfoCard
-          name="David"
-          rating="4.9"
-          car="Black Toyota Camry"
-          plate="ABC-1234"
+          name={vm.currentRide?.driver?.first_name + " " + vm.currentRide?.driver?.last_name}
+          rating={vm.currentRide?.driver?.rating}
+          car={vm.currentRide?.vehicle?.car_model ?? vm.currentRide?.vehicle?.custom_model_name}
+          plate={vm.currentRide?.vehicle?.plate_number}
           styles={styles}
+          colors= {colors}
         />
 
         {/* Title */}
@@ -59,10 +52,10 @@ export default function TripStartedScreen({ onTripEnded, animatedPosition }: Pro
         <View style={styles.footerRow}>
           <View>
             <Text style={styles.subtotalLabel}>{t('subtotal')}</Text>
-            <Text style={styles.subtotalValue}>$24.50</Text>
+            <Text style={styles.subtotalValue}>{vm.currentRide?.estimated_price ?? 0 + vm.filtersTotal}</Text>
           </View>
           <View style={styles.payment_method}>
-            <Text style={styles.paymentText}>{t('common:payment.cash')}</Text>
+            <Text style={styles.paymentText}>{vm.currentRide?.payment_method}</Text>
           </View>
         </View>
         <View style={styles.disclaimerContainer}>

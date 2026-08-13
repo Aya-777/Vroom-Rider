@@ -20,6 +20,10 @@ class RideRealtimeService {
           this.handleDriverArrived(data);
           break;
 
+        case 'trip.started':
+          this.handleTripStarted(data);
+          break;
+
         case 'trip.cancelled':
           this.handleTripCancelled(data);
           break;
@@ -119,6 +123,20 @@ private handleDriverArrived(data: {
   })
 
   setRideState(RideState.DRIVER_ARRIVED);
+}
+
+private handleTripStarted(data: {
+  trip_id: number,
+  status: string,
+}){
+
+  const {
+    setRideState,
+    currentRide,
+    setCurrentRide,
+  } = useRideStore.getState();
+  
+  setRideState(RideState.TRIP_STARTED);
 }
 
   private handleTripCancelled(data: {
