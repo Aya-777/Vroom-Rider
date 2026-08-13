@@ -16,6 +16,10 @@ class RideRealtimeService {
           this.handleDriverAssigned(data);
           break;
 
+        case 'trip.driver.arrived':
+          this.handleDriverArrived(data);
+          break;
+
         case 'trip.cancelled':
           this.handleTripCancelled(data);
           break;
@@ -45,12 +49,61 @@ class RideRealtimeService {
     setCurrentRide,
     setRideState,
   } = useRideStore.getState();
+  
+  if (!currentRide) {
+    console.warn('[RideRealtime] No current ride found');
+    return;
+  }
+  
+  if (currentRide.id !== data.trip_id) {
+    console.warn(
+      '[RideRealtime] Event belongs to another trip:',
+      data.trip_id,
+    );
+    return;
+  }
+  
+  try {
+    // Wait for the backend to give us the complete trip
+    const trip = await rideApi.getTripById(currentRide.id);
+    
+    console.log('[RideRealtime] Full trip:', trip);
+    
+    // Update currentRide FIRST
+    setCurrentRide({
+      ...currentRide,
+      status: data.status as TripStatus,
+      driver: trip.data.driver,
+      vehicle: trip.data.vehicle,
+    });
+    
+    // Only AFTER currentRide has been updated
+    setRideState(RideState.DRIVER_FOUND);
+    
+  } catch (error) {
+    console.error(
+      '[RideRealtime] Failed to fetch trip details:',
+      error,
+    );
+  }
+}
+
+private handleDriverArrived(data: {
+  trip_id: number,
+  status: TripStatus,
+  pin: string}){
+
+  const {
+    setRideState,
+    currentRide,
+    setCurrentRide,
+  } = useRideStore.getState();
 
   if (!currentRide) {
     console.warn('[RideRealtime] No current ride found');
     return;
   }
-
+  
   if (currentRide.id !== data.trip_id) {
     console.warn(
       '[RideRealtime] Event belongs to another trip:',
@@ -59,29 +112,13 @@ class RideRealtimeService {
     return;
   }
 
-  try {
-    // Wait for the backend to give us the complete trip
-    const trip = await rideApi.getTripById(currentRide.id);
+  setCurrentRide({
+    ...currentRide,
+    pin: data.pin,
+    status: data.status,
+  })
 
-    console.log('[RideRealtime] Full trip:', trip);
-
-    // Update currentRide FIRST
-    setCurrentRide({
-      ...currentRide,
-      status: data.status as TripStatus,
-      driver: trip.data.driver,
-      vehicle: trip.data.vehicle,
-    });
-
-    // Only AFTER currentRide has been updated
-    setRideState(RideState.DRIVER_FOUND);
-
-  } catch (error) {
-    console.error(
-      '[RideRealtime] Failed to fetch trip details:',
-      error,
-    );
-  }
+  setRideState(RideState.DRIVER_ARRIVED);
 }
 
   private handleTripCancelled(data: {

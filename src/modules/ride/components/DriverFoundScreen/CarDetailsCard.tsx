@@ -17,7 +17,7 @@ export default function CarDetailsCard({car, styles, colors }: CarDetailsCardPro
   return (
     <View style={styles.carDetailsCard}>
       <View style={styles.carIconContainer}>
-        <CarIcon fill={colors.surface} />
+        <CarIcon fill={colors.primary} />
       </View>
 
       <View style={styles.carInfoTextDetails}>
@@ -30,6 +30,11 @@ export default function CarDetailsCard({car, styles, colors }: CarDetailsCardPro
         </Text>
 
         <View style={styles.plateRow}>
+          <View style={styles.plateContainer}>
+            <Text style={styles.plateText}>
+              {car?.plate_number ?? car?.plate_number}
+            </Text>
+          </View>
           <Text style={styles.carColorText}>
             {car?.custom_color_name ?? car?.color}
           </Text>

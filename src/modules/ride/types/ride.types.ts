@@ -94,6 +94,7 @@ export interface CurrentRide {
   vehicle: Car | null;
   vehicle_type_id: string;
   status: TripStatus;
+  pin?: string;
 
   stops: RideStop[];
   preference_ids: number[];

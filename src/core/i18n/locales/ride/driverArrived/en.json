@@ -1,5 +1,5 @@
 {
-  "driverArrived" : "Your driver has arrived at your location.",
-  "enterPin" : "Please enter the pin.",
+  "arrivedMessage" : "Your driver has arrived at your location.",
+  "pinMessage" : "Please enter the pin.",
   "carDetails" : "Car Details"
 }

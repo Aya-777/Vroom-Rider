@@ -35,33 +35,36 @@ export default function DriverArrivedSheet({
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['driverArrived', 'common']);
-  const { driver } = useDriverArrivedViewModel();
+  const { currentRide, driver } = useDriverArrivedViewModel();
 
   const snapPoints = useMemo(() => ['30%', '70%'], []);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      onTripStarted();
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <>
-      <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1} animatedPosition={animatedPosition}>
-        <DriverStatus text={t(driver.arrivedMessage)} styles={styles} />
+      <BaseBottomSheet
+        isVisible={true}
+        snapPoints={snapPoints}
+        index={1}
+        animatedPosition={animatedPosition}
+      >
+        <DriverStatus text={t('arrivedMessage')} styles={styles} />
         {/* 1. PIN Section */}
         <DriverPinEntry
-          pin="1234"
+          pin={currentRide?.pin ?? ""}
           styles={styles}
-          pinMessage={t(driver.pinMessage)}
+          pinMessage={t('pinMessage')}
         />
 
         {/* 2. Driver Info Row */}
         <View style={styles.driverInfoRow}>
-          <DriverAvatar uri={driver.avatar} styles={styles} />
+          <DriverAvatar
+            uri={currentRide?.driver?.profile_image || ''}
+            styles={styles}
+          />
           <View>
-            <Text style={styles.driverName}>{t(driver.name)}</Text>
+            <Text style={styles.driverName}>
+              {currentRide?.driver?.first_name} {currentRide?.driver?.last_name}
+            </Text>
             <CommunicationActions styles={styles} colors={colors} />
           </View>
         </View>
@@ -70,7 +73,11 @@ export default function DriverArrivedSheet({
         <ProgressBar styles={styles} colors={colors} />
 
         {/* 4. Car Details */}
-        <CarDetailsCard driver={driver} styles={styles} colors={colors} />
+        <CarDetailsCard
+          car={currentRide?.vehicle ?? driver.car}
+          styles={styles}
+          colors={colors}
+        />
 
         <ActionButton
           title={t('common:cancel')}
