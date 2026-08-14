@@ -11,7 +11,7 @@ export default function useMapViewModel() {
   const [deviceLocation, setDeviceLocation] = useState<[number, number] | null>(
     null,
   );
-  const { estimate, currentRide, rideData, rideState } = useRideStore();
+  const { estimate, currentRide, rideData, rideState, driverLocation } = useRideStore();
   const [isSearchingForDriver , setIsSearchingForDriver]= useState(rideData?.status === TripStatus.PENDING);
 
   const mapRef = useRef<MapRef>(null);
@@ -154,5 +154,6 @@ export default function useMapViewModel() {
     pickup,
     destination,
     intermediateStops,
+    driverLocation,
   };
 }

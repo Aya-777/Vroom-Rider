@@ -58,6 +58,11 @@ interface RideState {
   setRideOtpVerified: (value: boolean) => void;
 
   getIdempotencyKey: () => string;
+
+  driverLocation: MapLocation | null,
+
+  setDriverLocation: (value :MapLocation | null) => void; 
+  
 }
 
 const normalizeStops = (stops: RideStop[]): RideStop[] => {
@@ -260,4 +265,9 @@ export const useRideStore = create<RideState>((set, get) => ({
 
     return newKey;
   },
+
+  driverLocation: null as MapLocation | null,
+
+  setDriverLocation: (location: MapLocation | null) =>
+    set({ driverLocation: location }),
 }));

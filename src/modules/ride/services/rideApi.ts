@@ -179,6 +179,18 @@ export const rideApi = {
     );
     return response.data;
   },
+
+  // Location
+  getDriverLocation: async (
+    id: number,
+  ): Promise<LocationResponseDTO> => {
+    const response = await apiClient.get<LocationResponseDTO>(
+      ENDPOINTS.TRIPS.DRIVER_LOCATION(id),
+    );
+
+    return response.data;
+  },
+
 };
 
 // Trip History
@@ -200,13 +212,3 @@ export const getTripHistoryByUrl = async (
   return response.data.data;
 };
 
-// Location
-export const getDriverLocation = async (
-  id: number,
-): Promise<LocationResponseDTO> => {
-  const response = await apiClient.get<LocationResponseDTO>(
-    ENDPOINTS.TRIPS.DRIVER_LOCATION(id),
-  );
-
-  return response.data;
-};

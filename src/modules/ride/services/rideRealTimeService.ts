@@ -12,10 +12,9 @@ class RideRealtimeService {
       console.log('[RideRealtime] Data:', data);
 
       switch (event.eventName) {
-
         case 'trip.search.failed':
           this.handleSearchFailed(data);
-        break;
+          break;
 
         case 'trip.driver.assigned':
           this.handleDriverAssigned(data);
@@ -49,32 +48,28 @@ class RideRealtimeService {
     }
   }
 
-  private async handleSearchFailed(data: {
-      trip_id: number;
-      status: string;
-    }
-  ){
+  private async handleSearchFailed(data: { trip_id: number; status: string }) {
     const { currentRide, setCurrentRide, setRideState, clearRide } =
       useRideStore.getState();
 
-      if (!currentRide) {
-        console.warn('[RideRealtime] No current ride found');
-        return;
-      }
-    
-      if (currentRide.id !== data.trip_id) {
-        console.warn(
-          '[RideRealtime] Event belongs to another trip:',
-          data.trip_id,
-        );
-        return;
-      }
+    if (!currentRide) {
+      console.warn('[RideRealtime] No current ride found');
+      return;
+    }
 
-      setCurrentRide({
-        ...currentRide,
-        idempotency_key: '',
-      })
-      setRideState(RideState.NO_DRIVER_FOUND);
+    if (currentRide.id !== data.trip_id) {
+      console.warn(
+        '[RideRealtime] Event belongs to another trip:',
+        data.trip_id,
+      );
+      return;
+    }
+
+    setCurrentRide({
+      ...currentRide,
+      idempotency_key: '',
+    });
+    setRideState(RideState.NO_DRIVER_FOUND);
   }
 
   private async handleDriverAssigned(data: {
@@ -83,8 +78,13 @@ class RideRealtimeService {
     driver_name: string;
     status: string;
   }) {
-    const { currentRide, setCurrentRide, setRideState } =
-      useRideStore.getState();
+    const {
+      currentRide,
+      setCurrentRide,
+      setRideState,
+      setDriverLocation,
+      driverLocation,
+    } = useRideStore.getState();
 
     if (!currentRide) {
       console.warn('[RideRealtime] No current ride found');
@@ -104,13 +104,23 @@ class RideRealtimeService {
       const trip = await rideApi.getTripById(currentRide.id);
 
       console.log('[RideRealtime] Full trip:', trip);
-
       // Update currentRide FIRST
       setCurrentRide({
         ...currentRide,
         status: data.status as TripStatus,
         driver: trip.data.driver,
         vehicle: trip.data.vehicle,
+      });
+
+      // Get driver location
+      const location = await rideApi.getDriverLocation(data.trip_id);
+
+      console.log('[RideRealtime] Driver location:', location);
+
+      // Save it in Zustand
+      setDriverLocation({
+        latitude: location.latitude,
+        longitude: location.longitude,
       });
 
       // Only AFTER currentRide has been updated
@@ -217,8 +227,34 @@ class RideRealtimeService {
     setCurrentRide(null);
   }
 
-  private handleDriverLocation(data: any){
-    
+  private handleDriverLocation(data: {
+    trip_id: number;
+    driver_id: number;
+    latitude: number;
+    longitude: number;
+  }) {
+    const {
+      currentRide,
+      setDriverLocation,
+    } = useRideStore.getState();
+
+    if (!currentRide) {
+      console.warn('[RideRealtime] No current ride found');
+      return;
+    }
+
+    if (currentRide.id !== data.trip_id) {
+      console.warn(
+        '[RideRealtime] Event belongs to another trip:',
+        data.trip_id,
+      );
+      return;
+    }
+
+    setDriverLocation({
+      latitude: data.latitude,
+      longitude: data.longitude,
+    });
   }
 }
 
