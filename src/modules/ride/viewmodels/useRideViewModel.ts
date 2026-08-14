@@ -30,18 +30,17 @@ export function useRideViewModel() {
   const [isBillVisible, setIsBillVisible] = useState(false);
   const [filters, setFilters] = useState<RideFilter[]>([]);
   const {
-  rideData,
-  setRideDetails,
-  estimate,
-  setEstimate,
-  clearRide,
-  currentRide,
-  setCurrentRide,
-  rideState,
-  setRideState,
-  getIdempotencyKey,
-} = useRideStore();
-
+    rideData,
+    setRideDetails,
+    estimate,
+    setEstimate,
+    clearRide,
+    currentRide,
+    setCurrentRide,
+    rideState,
+    setRideState,
+    getIdempotencyKey,
+  } = useRideStore();
 
   useEffect(() => {
     let mounted = true;
@@ -60,43 +59,42 @@ export function useRideViewModel() {
   }, []);
 
   useEffect(() => {
-  let mounted = true;
+    let mounted = true;
 
-  const loadCurrentRide = async () => {
-    try {
-      const response = await rideApi.getCurrent();
+    const loadCurrentRide = async () => {
+      try {
+        const response = await rideApi.getCurrent();
 
-      if (!mounted) {
-        return;
+        if (!mounted) {
+          return;
+        }
+
+        const ride = response;
+
+        if (!ride) {
+          setCurrentRide(null);
+          setRideState(RideState.SELECT_RIDE);
+          return;
+        }
+
+        console.log('Current ride:', ride);
+
+        setCurrentRide(ride);
+
+        const state = getRideStateFromStatus(ride.status);
+
+        setRideState(state);
+      } catch (error) {
+        console.error('Failed to load current ride:', error);
       }
+    };
 
-      const ride = response;
+    loadCurrentRide();
 
-      if (!ride) {
-        setCurrentRide(null);
-        setRideState(RideState.SELECT_RIDE);
-        return;
-      }
-
-      console.log('Current ride:', ride);
-
-      setCurrentRide(ride);
-
-      const state = getRideStateFromStatus(ride.status);
-
-      setRideState(state);
-    } catch (error) {
-      console.error('Failed to load current ride:', error);
-    }
-  };
-
-  loadCurrentRide();
-
-  return () => {
-    mounted = false;
-  };
-}, [setCurrentRide, setRideState]);
-
+    return () => {
+      mounted = false;
+    };
+  }, [setCurrentRide, setRideState]);
 
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
@@ -180,7 +178,9 @@ export function useRideViewModel() {
 
   const handleRematch = async () => {
     try {
-      const response = await rideApi.rematch(currentRide?.id ?? rideData.id ?? 0);
+      const response = await rideApi.rematch(
+        currentRide?.id ?? rideData.id ?? 0,
+      );
       setRideDetails({
         status: TripStatus.PENDING,
       });
@@ -203,12 +203,29 @@ export function useRideViewModel() {
     }
   };
 
-  const handleSubmitReview = () => {
+  const handleSubmitReview = async (
+    rating: number,
+    review: string,
+    isComplaint: boolean,
+  ) => {
     setIsReviewVisible(false);
+
+    console.log('submiting.....');
+    try{
+      await rideApi.submitReview(
+        { rating: rating, comment: review, is_complaint: isComplaint },
+        currentRide?.id ?? rideData.id ?? 0,
+      );
+
+    }catch{
+      console.log('Error submitting review...');
+    }
+
     navigation.navigate('HomeScreen');
     setCurrentRide(null);
     clearRide();
     setRideState(RideState.SELECT_RIDE);
+    setIsReviewVisible(false);
   };
 
   const handleMaybeLater = () => {

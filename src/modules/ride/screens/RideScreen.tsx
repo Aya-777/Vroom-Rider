@@ -27,12 +27,6 @@ export default function RideScreen() {
   const mapVm = useMapViewModel();
   const animatedPosition = useSharedValue(0);
 
-  const handleTripEnded = () => {
-    vm.resetRide();
-
-    navigation.navigate('HomeScreen');
-  };
-
   const handleMyLocationPress = async () => {
     const location = await LocationService.getCurrentLocation();
 

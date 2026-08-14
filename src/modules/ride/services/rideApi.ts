@@ -8,6 +8,8 @@ import {
   LocationResponseDTO,
   RequestRideRequestDTO,
   RequestRideResponseDTO,
+  ReviewRequestDTO,
+  ReviewResponseDTO,
 } from './dto/ride.dto';
 import {
   SavedPlaceDTO,
@@ -160,6 +162,15 @@ export const rideApi = {
     return response.data;
   },
 
+  submitReview: async( data: ReviewRequestDTO, id: number ) => {
+    const response = await apiClient.post<ReviewResponseDTO>(
+      ENDPOINTS.TRIPS.SUBMIT_REVIEW(id),
+      data
+    )
+
+    return response;
+  },
+
   // Recent Trips
   getRecentTrips: async (): Promise<RecentTripDTO[]> => {
     const response = await apiClient.get<ApiEnvelope<RecentTripDTO[]>>(
@@ -181,6 +192,7 @@ export const rideApi = {
     return response.data;
   },
 
+  // curret trip
   getCurrent: async () => {
     const response = await apiClient.get<GetCurrentRideDTO>(
       ENDPOINTS.TRIPS.CURRENT,
