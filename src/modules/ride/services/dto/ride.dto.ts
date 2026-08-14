@@ -112,3 +112,9 @@ export interface VerifyOtpResponseDTO {
 export interface ResendOtpRequestDTO {
     phone_number: string;
 }
+
+export interface LocationResponseDTO {
+  latitude: number,
+  longitude: number,
+  last_updated: string,
+}

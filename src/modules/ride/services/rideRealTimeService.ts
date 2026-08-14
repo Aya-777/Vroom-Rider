@@ -37,6 +37,10 @@ class RideRealtimeService {
           this.handleTripCancelled(data);
           break;
 
+        case 'trip.driver.location.updated':
+          this.handleDriverLocation(data);
+          break;
+
         default:
           console.log('[RideRealtime] Unhandled event:', event.eventName);
       }
@@ -211,6 +215,10 @@ class RideRealtimeService {
     setRideState(RideState.SELECT_RIDE);
     clearRide();
     setCurrentRide(null);
+  }
+
+  private handleDriverLocation(data: any){
+    
   }
 }
 
