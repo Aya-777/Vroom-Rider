@@ -6,6 +6,7 @@
     "payment": {
       "addTip": "Add a tip?",
       "delay": "Delay"
-    }
+    },
+    "noFilters": "No Filters Added."
   }
 }

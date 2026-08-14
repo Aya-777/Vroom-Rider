@@ -76,12 +76,16 @@ export default function RideScreen() {
         onSelectRideNext={vm.goToExtraDetails}
         onExtraDetailsNext={vm.goToRideConfirmation}
         onRideConfirmed={vm.goToSearchingForaDriver}
-        onDriverFound={vm.goToDriverArrived}
-        onTripStarted={vm.goToTripStarted}
-        onTripEnded={handleTripEnded}
         onCancelPress={vm.cancelCurrentRide}
         onKeepRide={vm.keepRidePress}
         animatedPosition={animatedPosition}
+        isBillVisible={vm.isBillVisible}
+        isReviewVisible={vm.isReviewVisible}
+        setIsBillVisible={vm.setIsBillVisible}
+        setIsReviewVisible={vm.setIsReviewVisible}
+        filters={vm.filters}
+        handleSubmit={vm.handleSubmitReview}
+        handleMaybeLater={vm.handleMaybeLater}
       />
     </View>
   );

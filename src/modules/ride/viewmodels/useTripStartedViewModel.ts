@@ -1,49 +1,35 @@
 import { useEffect, useState } from 'react';
 import { useRideStore } from '../store/useRideStore';
 import { rideApi } from '../services/rideApi';
+import { TripStatus } from '../types/RideState';
+import { RideFilter } from '../types/ride.types';
+import {fetchFilters} from '../utils/fetchFilters';
 
 export function useTripStartedViewModel() {
-  const { currentRide } = useRideStore();
+  const currentRide = useRideStore(state => state.currentRide);
 
   // --- UI State ---
   const [tip, setTip] = useState('0');
   const [errors, setErrors] = useState({});
-  const [isReviewVisible, setIsReviewVisible] = useState(false);
-  const [isBillVisible, setIsBillVisible] = useState(false);
+
+  // --- Preferences ---
+  const [filters, setFilters] = useState<RideFilter[]>([]);
   const [filtersTotal, setFiltersTotal] = useState(0);
 
+  // Fetch filters
   useEffect(() => {
-    const fetchPreferences = async () => {
-      const preferenceIds = currentRide?.preference_ids;
+    let mounted = true;
 
-      if (!preferenceIds?.length) {
-        setFiltersTotal(0);
-        return;
-      }
+    (async () => {
+      const f = await fetchFilters();
+      if (mounted) setFilters(f);
+    })();
 
-      try {
-        const preferences = await rideApi.getFilters();
-
-        const total = preferences.reduce(
-          (sum, preference) => sum + Number(preference.extra_fee ?? 0),
-          0,
-        );
-
-        setFiltersTotal(total);
-      } catch (error) {
-        console.error(
-          '[TripStartedVM] Failed to fetch preferences:',
-          error,
-        );
-
-        setFiltersTotal(0);
-      }
+    return () => {
+      mounted = false;
     };
-
-    fetchPreferences();
   }, [currentRide?.preference_ids]);
 
-  // Actions
   const handleSubmit = () => {
     // navigation.navigate('HomeScreen');
   };
@@ -55,18 +41,17 @@ export function useTripStartedViewModel() {
   return {
     currentRide,
 
+    // Preferences
+    filters,
+    filtersTotal,
+
     // State
     tip,
     errors,
-    isReviewVisible,
-    isBillVisible,
-    filtersTotal,
 
     // Setters
     setTip,
     setErrors,
-    setIsBillVisible,
-    setIsReviewVisible,
 
     // Actions
     handleSubmit,

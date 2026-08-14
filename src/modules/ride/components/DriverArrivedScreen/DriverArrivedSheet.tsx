@@ -16,7 +16,6 @@ import { CancelModal } from '../shared/CancelModal';
 import { SharedValue } from 'react-native-reanimated';
 
 type Props = {
-  onTripStarted: () => void;
   onCancelPress: (reason: string) => void;
   isCancelling: boolean;
   setIsCancelling: (value: boolean) => void;
@@ -25,7 +24,6 @@ type Props = {
 };
 
 export default function DriverArrivedSheet({
-  onTripStarted,
   onCancelPress,
   isCancelling,
   setIsCancelling,

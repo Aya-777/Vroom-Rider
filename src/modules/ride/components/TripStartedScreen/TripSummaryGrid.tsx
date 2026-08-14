@@ -17,10 +17,10 @@ export const TripSummaryGrid = () => {
   return(
   <View style={styles.gridContainer}>
       {[
-        {label: t('common:payment.estimatedPrice'), value: vm.currentRide?.estimated_price}
-        , {label: t('common:estimatedTime'), value: vm.currentRide?.estimated_duration}
-        , {label: t('distance'), value: vm.currentRide?.estimated_distance}
-        , {label: t('common:filters.filtersTotal'), value: vm.filtersTotal}
+        {label: t('common:payment.estimatedPrice'), value: vm.currentRide?.estimated_price+'$'}
+        , {label: t('common:estimatedTime'), value: vm.currentRide?.estimated_duration+' min'}
+        , {label: t('distance'), value: vm.currentRide?.estimated_distance+' m'}
+        , {label: t('common:filters.filtersTotal'), value: vm.filtersTotal+"$"}
       ].map(({label, value}) => (
         <View key={label} style={styles.metricCard}>
           <Text style={styles.metricLabel}>{label}</Text>

@@ -24,125 +24,146 @@ class RideRealtimeService {
           this.handleTripStarted(data);
           break;
 
+        case 'trip.completed':
+          this.handleTripCompleted(data);
+          break;
+
         case 'trip.cancelled':
           this.handleTripCancelled(data);
           break;
 
         default:
-          console.log(
-            '[RideRealtime] Unhandled event:',
-            event.eventName,
-          );
+          console.log('[RideRealtime] Unhandled event:', event.eventName);
       }
     } catch (error) {
-      console.error(
-        '[RideRealtime] Failed to handle event:',
-        error,
-      );
+      console.error('[RideRealtime] Failed to handle event:', error);
     }
   }
 
   private async handleDriverAssigned(data: {
-  trip_id: number;
-  driver_id: number;
-  driver_name: string;
-  status: string;
-}) {
-  const {
-    currentRide,
-    setCurrentRide,
-    setRideState,
-  } = useRideStore.getState();
-  
-  if (!currentRide) {
-    console.warn('[RideRealtime] No current ride found');
-    return;
+    trip_id: number;
+    driver_id: number;
+    driver_name: string;
+    status: string;
+  }) {
+    const { currentRide, setCurrentRide, setRideState } =
+      useRideStore.getState();
+
+    if (!currentRide) {
+      console.warn('[RideRealtime] No current ride found');
+      return;
+    }
+
+    if (currentRide.id !== data.trip_id) {
+      console.warn(
+        '[RideRealtime] Event belongs to another trip:',
+        data.trip_id,
+      );
+      return;
+    }
+
+    try {
+      // Wait for the backend to give us the complete trip
+      const trip = await rideApi.getTripById(currentRide.id);
+
+      console.log('[RideRealtime] Full trip:', trip);
+
+      // Update currentRide FIRST
+      setCurrentRide({
+        ...currentRide,
+        status: data.status as TripStatus,
+        driver: trip.data.driver,
+        vehicle: trip.data.vehicle,
+      });
+
+      // Only AFTER currentRide has been updated
+      setRideState(RideState.DRIVER_FOUND);
+    } catch (error) {
+      console.error('[RideRealtime] Failed to fetch trip details:', error);
+    }
   }
-  
-  if (currentRide.id !== data.trip_id) {
-    console.warn(
-      '[RideRealtime] Event belongs to another trip:',
-      data.trip_id,
-    );
-    return;
+
+  private handleDriverArrived(data: {
+    trip_id: number;
+    status: TripStatus;
+    pin: string;
+  }) {
+    const { setRideState, currentRide, setCurrentRide } =
+      useRideStore.getState();
+
+    if (!currentRide) {
+      console.warn('[RideRealtime] No current ride found');
+      return;
+    }
+
+    if (currentRide.id !== data.trip_id) {
+      console.warn(
+        '[RideRealtime] Event belongs to another trip:',
+        data.trip_id,
+      );
+      return;
+    }
+
+    setCurrentRide({
+      ...currentRide,
+      pin: data.pin,
+      status: data.status,
+    });
+
+    setRideState(RideState.DRIVER_ARRIVED);
   }
-  
-  try {
-    // Wait for the backend to give us the complete trip
-    const trip = await rideApi.getTripById(currentRide.id);
-    
-    console.log('[RideRealtime] Full trip:', trip);
-    
-    // Update currentRide FIRST
+
+  private handleTripStarted(data: { trip_id: number; status: string }) {
+    const { setRideState, currentRide, setCurrentRide } =
+      useRideStore.getState();
+
+    if (!currentRide) {
+      console.warn('[RideRealtime] No current ride found');
+      return;
+    }
+
+    if (currentRide.id !== data.trip_id) {
+      console.warn(
+        '[RideRealtime] Event belongs to another trip:',
+        data.trip_id,
+      );
+      return;
+    }
+
     setCurrentRide({
       ...currentRide,
       status: data.status as TripStatus,
-      driver: trip.data.driver,
-      vehicle: trip.data.vehicle,
     });
-    
-    // Only AFTER currentRide has been updated
-    setRideState(RideState.DRIVER_FOUND);
-    
-  } catch (error) {
-    console.error(
-      '[RideRealtime] Failed to fetch trip details:',
-      error,
-    );
-  }
-}
 
-private handleDriverArrived(data: {
-  trip_id: number,
-  status: TripStatus,
-  pin: string}){
-
-  const {
-    setRideState,
-    currentRide,
-    setCurrentRide,
-  } = useRideStore.getState();
-
-  if (!currentRide) {
-    console.warn('[RideRealtime] No current ride found');
-    return;
-  }
-  
-  if (currentRide.id !== data.trip_id) {
-    console.warn(
-      '[RideRealtime] Event belongs to another trip:',
-      data.trip_id,
-    );
-    return;
+    setRideState(RideState.TRIP_STARTED);
   }
 
-  setCurrentRide({
-    ...currentRide,
-    pin: data.pin,
-    status: data.status,
-  })
+  private handleTripCompleted(data: { trip_id: number; status: string }) {
+    const { setRideState, currentRide, setCurrentRide } =
+      useRideStore.getState();
 
-  setRideState(RideState.DRIVER_ARRIVED);
-}
+    if (!currentRide) {
+      console.warn('[RideRealtime] No current ride found');
+      return;
+    }
 
-private handleTripStarted(data: {
-  trip_id: number,
-  status: string,
-}){
+    if (currentRide.id !== data.trip_id) {
+      console.warn(
+        '[RideRealtime] Event belongs to another trip:',
+        data.trip_id,
+      );
+      return;
+    }
 
-  const {
-    setRideState,
-    currentRide,
-    setCurrentRide,
-  } = useRideStore.getState();
-  
-  setRideState(RideState.TRIP_STARTED);
-}
+    setCurrentRide({
+      ...currentRide,
+      status: data.status as TripStatus,
+    });
 
-  private handleTripCancelled(data: {
-    trip_id: number;
-    status: string;
-  }) {
+    setRideState(RideState.TRIP_ENDED);
+  }
+
+  private handleTripCancelled(data: { trip_id: number; status: string }) {
     const { currentRide, clearRide, setCurrentRide, setRideState } =
       useRideStore.getState();
 
@@ -160,5 +181,4 @@ private handleTripStarted(data: {
   }
 }
 
-export const rideRealtimeService =
-  new RideRealtimeService();
+export const rideRealtimeService = new RideRealtimeService();

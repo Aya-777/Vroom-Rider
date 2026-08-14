@@ -8,6 +8,8 @@ import LocationService, {
 } from '../../../core/services/location/LocationService';
 import { useRideStore } from '../store/useRideStore';
 import { rideApi } from '../services/rideApi';
+import { RideFilter } from '../types/ride.types';
+import { fetchFilters } from '../utils/fetchFilters';
 
 const previousState: Partial<Record<RideState, RideState>> = {
   [RideState.EXTRA_DETAILS]: RideState.SELECT_RIDE,
@@ -22,6 +24,27 @@ export function useRideViewModel() {
     longitude: 0,
   });
   const [isCancelling, setIsCancelling] = useState(false);
+  const [isReviewVisible, setIsReviewVisible] = useState(false);
+  const [isBillVisible, setIsBillVisible] = useState(false);
+  const [filters, setFilters] = useState<RideFilter[]>([]);
+
+
+  useEffect(() => {
+    let mounted = true;
+    const loadFilters = async () => {
+      try {
+        const f = await fetchFilters();
+        if (mounted) setFilters(f);
+      } catch (e) {
+        console.error('Failed to load filters', e);
+      }
+    };
+    loadFilters();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   const {
     rideData,
     estimate,
@@ -51,6 +74,14 @@ export function useRideViewModel() {
     };
     loadLocation();
   }, []);
+
+useEffect(() => {
+  if (currentRide?.status === TripStatus.COMPLETED) {
+
+    setRideState(RideState.TRIP_ENDED);
+    setIsBillVisible(true);
+  }
+}, [currentRide?.status]);
 
 
   const goToExtraDetails = async () => {
@@ -121,12 +152,33 @@ export function useRideViewModel() {
     }
   };
 
+  const handleSubmitReview = () => {
+    setIsReviewVisible(false);
+    navigation.navigate('HomeScreen');
+    setCurrentRide(null);
+    clearRide();
+    setRideState(RideState.SELECT_RIDE);
+  }
+  
+  const handleMaybeLater = () => {
+    setIsReviewVisible(false);
+    navigation.navigate('HomeScreen');
+    setCurrentRide(null);
+    clearRide();
+    setRideState(RideState.SELECT_RIDE);
+  }
+
   return {
     rideState ,
     currentLocation,
     estimate,
     isCancelling,
     setIsCancelling,
+    isBillVisible,
+    isReviewVisible,
+    setIsBillVisible,
+    setIsReviewVisible,
+    filters,
 
     handleBackPress,
     goToExtraDetails,
@@ -139,5 +191,7 @@ export function useRideViewModel() {
     cancelCurrentRide,
     keepRidePress,
     onMyLocationPress,
+    handleSubmitReview,
+    handleMaybeLater,
   };
 }

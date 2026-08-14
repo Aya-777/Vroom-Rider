@@ -7,17 +7,25 @@ import { createStyles } from '../../styles/tripEndedModal.styles';
 import { useTheme } from '../../../../core/theme/useTheme';
 import LinearBg from '../../../../shared/components/LinearBg';
 import { useTranslation } from 'react-i18next';
+import { CurrentRide, RideFilter } from '../../types/ride.types';
 
 type Props = {
   visible: boolean;
   onConfirmPayment: () => void;
+  currentRide: CurrentRide | null;
+  filters: RideFilter[];
 };
 
-export default function TripEndedModal({ visible, onConfirmPayment }: Props) {
+export default function TripEndedModal({ currentRide, visible, onConfirmPayment, filters }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['tripEnded', 'common']);
   
+  const selectedFilters = filters.filter(filter =>
+    currentRide?.preference_ids?.includes(Number(filter.id))
+  );
+
+
   return (
     <Modal
       visible={visible}
@@ -37,12 +45,12 @@ export default function TripEndedModal({ visible, onConfirmPayment }: Props) {
 
           <View style={styles.divider} />
 
-          <Text style={styles.total}>25.50$</Text>
+          <Text style={styles.total}>{currentRide?.actual_price ?? currentRide?.estimated_price}$</Text>
 
           <View style={styles.divider} />
 
           <View style={styles.content}>
-            <TripMetrics />
+            <TripMetrics estimatedPrice={currentRide?.estimated_price ?? currentRide?.actual_price ?? '0'} filters={selectedFilters}/>
 
             <View style={styles.verticalDivider} />
 
