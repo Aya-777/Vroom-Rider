@@ -113,15 +113,15 @@ class RideRealtimeService {
       });
 
       // Get driver location
-      const location = await rideApi.getDriverLocation(data.trip_id);
+      // const location = await rideApi.getDriverLocation(data.trip_id);
 
-      console.log('[RideRealtime] Driver location:', location);
+      // console.log('[RideRealtime] Driver location:', location);
 
-      // Save it in Zustand
-      setDriverLocation({
-        latitude: location.latitude,
-        longitude: location.longitude,
-      });
+      // // Save it in Zustand
+      // setDriverLocation({
+      //   latitude: location.latitude,
+      //   longitude: location.longitude,
+      // });
 
       // Only AFTER currentRide has been updated
       setRideState(RideState.DRIVER_FOUND);
