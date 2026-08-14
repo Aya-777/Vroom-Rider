@@ -15,6 +15,7 @@
   "trackYourTrip": "تتبع رحلتك",
   "ride": "رحلة",
   "filters": {
+    "filtersTotal": "سعر التفضيلات",
     "acceptAnimals": "قبول الحيوانات الأليفة",
     "bigLuggage": "أمتعة كبيرة",
     "childSeat": "مقعد أطفال",
@@ -29,6 +30,7 @@
   },
   "totalPrice" : "السعر الإجمالي",
   "time": "الوقت المتوقع",
+  "estimatedTime": "الوقت المتوقع",
   
   "payment": {
     "estimated": "السعر المقدر",

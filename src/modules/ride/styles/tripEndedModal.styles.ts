@@ -51,12 +51,11 @@ export const createStyles = (colors: any) =>
 
     metricsColumn: {
       flex: 1,
-      justifyContent: 'space-between',
       paddingRight: Spacing.smm,
     },
 
     paymentColumn: {
-      flex: 1,
+      flex: 0.4,
       justifyContent: 'center',
       gap: Spacing.md,
       paddingLeft: Spacing.smm,
@@ -75,6 +74,7 @@ export const createStyles = (colors: any) =>
     metricLabel: {
       ...Typography.mediumCaption,
       color: colors.textPrimary,
+      marginStart: 2,
     },
 
     label: {
@@ -85,7 +85,7 @@ export const createStyles = (colors: any) =>
     metricRow: {
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-around',
+      justifyContent: 'center',
       minWidth: 60,
       height: 30,
       borderRadius: Radius.lg,
@@ -96,10 +96,16 @@ export const createStyles = (colors: any) =>
     valueText: {
       ...Typography.mediumCaption,
       color: colors.textPrimary,
+      marginEnd: 2,
+    },
+
+    tipLabel:{
+      ...Typography.body,
+      color: colors.textPrimary,
     },
 
     tipInput: {
-      width: 60,
+      width: "80%",
       height: 30,
       borderRadius: Radius.lg,
       backgroundColor: colors.surface,

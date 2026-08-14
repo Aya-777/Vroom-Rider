@@ -17,16 +17,13 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated';
 
-export default function RideScreen({
-  route,
-}: HomeStackScreenProps<'Ride'>) {
+export default function RideScreen() {
   const { colors, mode } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['selectRide', 'common']);
   const navigation =
     useNavigation<HomeStackScreenProps<'Ride'>['navigation']>();
-  const { rideState } = route.params ?? {};
-  const vm = useRideViewModel(rideState);
+  const vm = useRideViewModel();
   const mapVm = useMapViewModel();
   const animatedPosition = useSharedValue(0);
 
@@ -79,12 +76,17 @@ export default function RideScreen({
         onSelectRideNext={vm.goToExtraDetails}
         onExtraDetailsNext={vm.goToRideConfirmation}
         onRideConfirmed={vm.goToSearchingForaDriver}
-        onDriverFound={vm.goToDriverArrived}
-        onTripStarted={vm.goToTripStarted}
-        onTripEnded={handleTripEnded}
         onCancelPress={vm.cancelCurrentRide}
         onKeepRide={vm.keepRidePress}
+        rematch={vm.handleRematch}
         animatedPosition={animatedPosition}
+        isBillVisible={vm.isBillVisible}
+        isReviewVisible={vm.isReviewVisible}
+        setIsBillVisible={vm.setIsBillVisible}
+        setIsReviewVisible={vm.setIsReviewVisible}
+        filters={vm.filters}
+        handleSubmit={vm.handleSubmitReview}
+        handleMaybeLater={vm.handleMaybeLater}
       />
     </View>
   );

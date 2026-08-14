@@ -2,7 +2,12 @@ import { apiClient } from '../../../core/network/apiClient';
 import { ENDPOINTS } from '../../../core/network/endpoints';
 import { v4 as uuidv4 } from 'uuid';
 import { RecentTripDTO } from './dto/recentTrip.dto';
-import { RequestRideRequestDTO, RequestRideResponseDTO } from './dto/ride.dto';
+import {
+  GetTripResponse,
+  LocationResponseDTO,
+  RequestRideRequestDTO,
+  RequestRideResponseDTO,
+} from './dto/ride.dto';
 import {
   SavedPlaceDTO,
   CreateSavedPlaceRequestDTO,
@@ -25,10 +30,7 @@ import {
   VerifyOtpRequestDTO,
   VerifyOtpResponseDTO,
 } from './dto/ride.dto';
-import {
-  ReorderTripResponseDTO,
-} from './dto/tripHistory.dto';
-
+import { ReorderTripResponseDTO } from './dto/tripHistory.dto';
 
 export const rideApi = {
   // Saved Places
@@ -75,6 +77,12 @@ export const rideApi = {
   },
 
   // Ride
+  getTripById: async (id: number) => {
+    const response = await apiClient.get(ENDPOINTS.TRIPS.GET_TRIP(id));
+
+    return response.data;
+  },
+
   estimateInitial: async (
     data: EstimateInitialRequestDTO,
   ): Promise<EstimateInitialResponseDTO> => {
@@ -87,9 +95,12 @@ export const rideApi = {
   },
 
   cancelRide: async (rideId: number, reason: string) => {
-    const response = await apiClient.post(ENDPOINTS.TRIPS.CANCEL(rideId), {
-      cancellation_reason: reason,
-    });
+    const response = await apiClient.post<GetTripResponse>(
+      ENDPOINTS.TRIPS.CANCEL(rideId),
+      {
+        cancellation_reason: reason,
+      },
+    );
 
     return response.data;
   },
@@ -109,6 +120,12 @@ export const rideApi = {
     );
 
     return response.data;
+  },
+
+  rematch: async (id: number) => {
+    const response = await apiClient.post(ENDPOINTS.TRIPS.REMATCH(id));
+
+    return response;
   },
 
   enterRideNumber: async (
@@ -150,7 +167,6 @@ export const rideApi = {
     return response.data.data;
   },
 
-  
   reorderTrip: async (tripId: number, idempotencyKey: string) => {
     const response = await apiClient.post<ReorderTripResponseDTO>(
       ENDPOINTS.TRIPS.RERIDE(tripId),
@@ -163,6 +179,18 @@ export const rideApi = {
     );
     return response.data;
   },
+
+  // Location
+  getDriverLocation: async (
+    id: number,
+  ): Promise<LocationResponseDTO> => {
+    const response = await apiClient.get<LocationResponseDTO>(
+      ENDPOINTS.TRIPS.DRIVER_LOCATION(id),
+    );
+
+    return response.data;
+  },
+
 };
 
 // Trip History
@@ -183,3 +211,4 @@ export const getTripHistoryByUrl = async (
   >(url);
   return response.data.data;
 };
+

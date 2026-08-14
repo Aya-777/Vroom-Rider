@@ -42,6 +42,7 @@ export default function ActivitiesScreen() {
     openSidebar,
     toggleFavorite,
     onReride,
+    setRideState
   } = useActivitiesViewModel();
 
   const handleReride = async () => {
@@ -62,9 +63,9 @@ export default function ActivitiesScreen() {
     // then navigate to the appropriate screen
     mainTabsNavigation.navigate('HomeTab', {
         screen: 'Ride',
-        params: {rideState: RideState.SEARCHING_FOR_DRIVER},
       },
     );
+    setRideState(RideState.SEARCHING_FOR_DRIVER);
   };
 
   return (

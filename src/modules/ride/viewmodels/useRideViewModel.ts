@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RideState, TripStatus } from '../types/RideState';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -8,31 +8,54 @@ import LocationService, {
 } from '../../../core/services/location/LocationService';
 import { useRideStore } from '../store/useRideStore';
 import { rideApi } from '../services/rideApi';
-import BottomSheet from '@gorhom/bottom-sheet';
+import { CurrentRide, RideFilter } from '../types/ride.types';
+import { fetchFilters } from '../utils/fetchFilters';
+import { RequestRideRequestDTO } from '../services/dto/ride.dto';
+import { Alert } from 'react-native';
 
 const previousState: Partial<Record<RideState, RideState>> = {
   [RideState.EXTRA_DETAILS]: RideState.SELECT_RIDE,
   [RideState.CONFIRM_RIDE]: RideState.EXTRA_DETAILS,
 };
 
-export function useRideViewModel(initialRideState?: RideState) {
-  const [rideState, setRideState] = useState<RideState>(
-      initialRideState ?? RideState.SELECT_RIDE,
-    );
-
+export function useRideViewModel() {
   const [currentLocation, setCurrentLocation] = useState<Location>({
     address: '',
     latitude: 0,
     longitude: 0,
   });
   const [isCancelling, setIsCancelling] = useState(false);
+  const [isReviewVisible, setIsReviewVisible] = useState(false);
+  const [isBillVisible, setIsBillVisible] = useState(false);
+  const [filters, setFilters] = useState<RideFilter[]>([]);
+
+  useEffect(() => {
+    let mounted = true;
+    const loadFilters = async () => {
+      try {
+        const f = await fetchFilters();
+        if (mounted) setFilters(f);
+      } catch (e) {
+        console.error('Failed to load filters', e);
+      }
+    };
+    loadFilters();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   const {
     rideData,
+    setRideDetails,
     estimate,
     setEstimate,
     clearRide,
     currentRide,
     setCurrentRide,
+    rideState,
+    setRideState,
+    getIdempotencyKey,
   } = useRideStore();
 
   const navigation =
@@ -54,8 +77,11 @@ export function useRideViewModel(initialRideState?: RideState) {
   }, []);
 
   useEffect(() => {
-    setRideState(rideState);
-  }, [rideState]);
+    if (currentRide?.status === TripStatus.COMPLETED) {
+      setRideState(RideState.TRIP_ENDED);
+      setIsBillVisible(true);
+    }
+  }, [currentRide?.status]);
 
   const goToExtraDetails = async () => {
     setRideState(RideState.EXTRA_DETAILS);
@@ -63,7 +89,8 @@ export function useRideViewModel(initialRideState?: RideState) {
 
   const goToRideConfirmation = () => setRideState(RideState.CONFIRM_RIDE);
 
-  const goToSearchingForaDriver = () => setRideState(RideState.SEARCHING_FOR_DRIVER);
+  const goToSearchingForaDriver = () =>
+    setRideState(RideState.SEARCHING_FOR_DRIVER);
 
   const goToDriverFound = () => setRideState(RideState.DRIVER_FOUND);
 
@@ -100,9 +127,6 @@ export function useRideViewModel(initialRideState?: RideState) {
       setIsCancelling(true);
 
       await rideApi.cancelRide(currentRide.id, reason);
-      setCurrentRide({ ...currentRide, status: TripStatus.CANCELLED_BY_RIDER });
-      clearRide();
-      setRideState(RideState.SELECT_RIDE);
     } catch (error) {
       console.error('Failed to cancel ride:', error);
     } finally {
@@ -112,6 +136,20 @@ export function useRideViewModel(initialRideState?: RideState) {
 
   const keepRidePress = () => {
     setIsCancelling(false);
+  };
+
+  const handleRematch = async () => {
+    try {
+      const response = await rideApi.rematch(currentRide?.id ?? rideData.id ?? 0);
+      setRideDetails({
+        status: TripStatus.PENDING,
+      });
+      setRideState(RideState.SEARCHING_FOR_DRIVER);
+      return response;
+    } catch (error) {
+      Alert.alert('Error', 'Could not find a driver. Please try again.');
+      return null;
+    }
   };
 
   const onMyLocationPress = async () => {
@@ -125,12 +163,33 @@ export function useRideViewModel(initialRideState?: RideState) {
     }
   };
 
+  const handleSubmitReview = () => {
+    setIsReviewVisible(false);
+    navigation.navigate('HomeScreen');
+    setCurrentRide(null);
+    clearRide();
+    setRideState(RideState.SELECT_RIDE);
+  };
+
+  const handleMaybeLater = () => {
+    setIsReviewVisible(false);
+    navigation.navigate('HomeScreen');
+    setCurrentRide(null);
+    clearRide();
+    setRideState(RideState.SELECT_RIDE);
+  };
+
   return {
     rideState,
     currentLocation,
     estimate,
     isCancelling,
     setIsCancelling,
+    isBillVisible,
+    isReviewVisible,
+    setIsBillVisible,
+    setIsReviewVisible,
+    filters,
 
     handleBackPress,
     goToExtraDetails,
@@ -142,6 +201,9 @@ export function useRideViewModel(initialRideState?: RideState) {
     resetRide,
     cancelCurrentRide,
     keepRidePress,
+    handleRematch,
     onMyLocationPress,
+    handleSubmitReview,
+    handleMaybeLater,
   };
 }

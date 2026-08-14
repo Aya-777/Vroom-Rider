@@ -4,7 +4,7 @@ import { RideState } from '../../../modules/ride/types/RideState';
 
 export type HomeStackParamList = {
   HomeScreen: undefined;
-  Ride: { prefillDestination?: RecentDestinationParams, rideState?: RideState } | undefined;
+  Ride: { prefillDestination?: RecentDestinationParams} | undefined;
   RideOtp: undefined;
   AddNewPlace: undefined;
   FavoriteDrivers: undefined

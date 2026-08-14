@@ -50,7 +50,7 @@ export const useActivitiesViewModel = () => {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { toggleFavorite } = useFavoriteDriversStore();
-  const { setCurrentRide, setEstimate, setRideDetails, getIdempotencyKey } = useRideStore();
+  const { setCurrentRide, setEstimate, setRideDetails, getIdempotencyKey, setRideState } = useRideStore();
 
   const nextUrlRef = useRef<string | null>(null);
 
@@ -168,5 +168,6 @@ export const useActivitiesViewModel = () => {
     openSidebar,
     toggleFavorite,
     onReride,
+    setRideState
   };
 };

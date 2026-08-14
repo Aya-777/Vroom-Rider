@@ -5,15 +5,14 @@ import LocationService, {
 } from '../../../core/services/location/LocationService';
 import { CameraRef, MapRef } from '@maplibre/maplibre-react-native';
 import { useRideStore } from '../store/useRideStore';
-import { TripStatus } from '../types/RideState';
+import { RideState, TripStatus } from '../types/RideState';
 
 export default function useMapViewModel() {
   const [deviceLocation, setDeviceLocation] = useState<[number, number] | null>(
     null,
   );
-  const { rideData } = useRideStore();
-  const isSearchingForDriver = rideData?.status === TripStatus.PENDING;
-  const { estimate } = useRideStore();
+  const { estimate, currentRide, rideData, rideState, driverLocation } = useRideStore();
+  const [isSearchingForDriver , setIsSearchingForDriver]= useState(rideData?.status === TripStatus.PENDING);
 
   const mapRef = useRef<MapRef>(null);
   const cameraRef = useRef<CameraRef>(null);
@@ -65,6 +64,11 @@ export default function useMapViewModel() {
       }
     };
   }, []);
+
+   useEffect(()=>{
+    setIsSearchingForDriver(rideState === RideState.SEARCHING_FOR_DRIVER);
+  }, [rideState]);
+
 
   // Center the camera exactly once
   // when we receive the first real GPS location.
@@ -150,5 +154,6 @@ export default function useMapViewModel() {
     pickup,
     destination,
     intermediateStops,
+    driverLocation,
   };
 }

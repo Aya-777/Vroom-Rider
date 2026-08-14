@@ -207,6 +207,14 @@ export const createStyles = (colors: ThemeColors) =>
       marginBottom: 20,
       color: colors.textPrimary,
     },
+    
+    retryMessage: {
+      ...Typography.boldBody,
+      lineHeight: 22,
+      textAlign: 'center',
+      marginBottom: 30,
+      color: colors.textPrimary,
+    },
 
     Divider: {
       height: 2,

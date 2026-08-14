@@ -71,6 +71,8 @@ src/
 │       └── ride
 │           └── filters.svg
 ├── core
+│   ├── config
+│   │   └── realtime.config.ts
 │   ├── i18n
 │   │   ├── constants.ts
 │   │   ├── index.ts
@@ -138,6 +140,10 @@ src/
 │   │   ├── apiClient.ts
 │   │   └── endpoints.ts
 │   ├── realtime
+│   │   ├── pusher
+│   │   │   ├── PusherProvider.tsx
+│   │   │   ├── PusherService.ts
+│   │   │   └── pusher.types.ts
 │   │   ├── socketClient.ts
 │   │   └── socketManager.ts
 │   ├── services
@@ -397,6 +403,8 @@ src/
 │   │   │   │   └── UserLocationMarker
 │   │   │   │       ├── BreathingDot.tsx
 │   │   │   │       └── UserLocationMarker.tsx
+│   │   │   ├── NoDriverFound
+│   │   │   │   └── NoDriverFoundModal.tsx
 │   │   │   ├── RideConfirmationScreen
 │   │   │   │   ├── InfoBox.tsx
 │   │   │   │   └── RideConfirmationSheet.tsx
@@ -449,7 +457,8 @@ src/
 │   │   │   │   ├── ride.dto.ts
 │   │   │   │   ├── savedPlaces.dto.ts
 │   │   │   │   └── tripHistory.dto.ts
-│   │   │   └── rideApi.ts
+│   │   │   ├── rideApi.ts
+│   │   │   └── rideRealTimeService.ts
 │   │   ├── store
 │   │   │   └── useRideStore.ts
 │   │   ├── styles
@@ -469,6 +478,7 @@ src/
 │   │   │   ├── ride.types.ts
 │   │   │   └── savedPlaces.types.ts
 │   │   ├── utils
+│   │   │   ├── fetchFilters.ts
 │   │   │   ├── iconMap.ts
 │   │   │   └── selectRideValidation.ts
 │   │   └── viewmodels

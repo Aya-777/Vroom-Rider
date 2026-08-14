@@ -1,5 +1,5 @@
 {
-  "driverArrived" : "السائق وصل إلى موقعك.",
-  "enterPin" : "أدخل رمز الPIN من فضلك",
+  "arrivedMessage" : "السائق وصل إلى موقعك.",
+  "pinMessage" : "أدخل رمز الPIN من فضلك",
   "carDetails" : "تفاصيل السيارة"
 }

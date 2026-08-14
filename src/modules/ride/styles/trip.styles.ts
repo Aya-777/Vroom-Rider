@@ -60,8 +60,8 @@ export const createStyles = (colors: any) =>
       marginBottom: Spacing.sm,
     },
     gridContainer: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
+      width: '80%',
+      alignSelf: 'center',
       marginBottom: Spacing.md,
     },
     column: {

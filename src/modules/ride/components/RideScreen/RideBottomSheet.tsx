@@ -1,15 +1,17 @@
-import { Dispatch, SetStateAction } from 'react';
-import { RideState } from '../../types/RideState';
-import ExtraDetailsSheet from '../ExtraDetailsScreen/ExtraDetailsSheet';
-import SelectRideSheet from '../SelectRideScreen/SelectRideSheet';
-import RideConfirmationSheet from '../RideConfirmationScreen/RideConfirmationSheet';
-import DriverFoundSheet from '../DriverFoundScreen/DriverFoundSheet';
-import DriverArrivedSheet from '../DriverArrivedScreen/DriverArrivedSheet';
-import TripStartedSheet from '../TripStartedScreen/TripStartedSheet';
-import { Location } from '../../../../core/services/location/LocationService';
-import { EstimateInitialResponseDTO } from '../../services/dto/estimate.dto';
 import { SharedValue } from 'react-native-reanimated';
+import ReviewModal from '../../../review/components/ReviewModal';
+import { useRideStore } from '../../store/useRideStore';
+import { RideState } from '../../types/RideState';
+import DriverArrivedSheet from '../DriverArrivedScreen/DriverArrivedSheet';
+import DriverFoundSheet from '../DriverFoundScreen/DriverFoundSheet';
+import ExtraDetailsSheet from '../ExtraDetailsScreen/ExtraDetailsSheet';
+import RideConfirmationSheet from '../RideConfirmationScreen/RideConfirmationSheet';
 import SearchingForaDriverSheet from '../SearchingForaDriver/SearchingForaDriverSheet';
+import { NoDriverFoundModal } from '../NoDriverFound/NoDriverFoundModal';
+import SelectRideSheet from '../SelectRideScreen/SelectRideSheet';
+import TripEndedModal from '../TripEndedModal/TripEndedModal';
+import TripStartedSheet from '../TripStartedScreen/TripStartedSheet';
+import { RideFilter } from '../../types/ride.types';
 
 type Props = {
   rideState: RideState;
@@ -18,12 +20,17 @@ type Props = {
   onSelectRideNext: () => void;
   onExtraDetailsNext: () => void;
   onRideConfirmed: () => void;
-  onDriverFound: () => void;
-  onTripStarted: () => void;
-  onTripEnded: () => void;
   onCancelPress: (reason: string) => void;
   onKeepRide: () => void;
+  rematch: () => void;
   animatedPosition?: SharedValue<number>;
+  isBillVisible: boolean;
+  isReviewVisible: boolean;
+  setIsBillVisible: (value: boolean) => void;
+  setIsReviewVisible: (value: boolean) => void;
+  filters: RideFilter[];
+  handleSubmit: () => void;
+  handleMaybeLater: () => void;
 };
 
 export default function RideBottomSheet({
@@ -33,43 +40,69 @@ export default function RideBottomSheet({
   onSelectRideNext,
   onExtraDetailsNext,
   onRideConfirmed,
-  onDriverFound,
-  onTripStarted,
-  onTripEnded,
   onCancelPress,
   onKeepRide,
+  rematch,
   animatedPosition,
+  isBillVisible,
+  isReviewVisible,
+  setIsBillVisible,
+  setIsReviewVisible,
+  filters,
+  handleSubmit,
+  handleMaybeLater,
 }: Props) {
+  const { currentRide } = useRideStore();
+
   const renderSheet = () => {
     switch (rideState) {
       case RideState.SELECT_RIDE:
-        return <SelectRideSheet onNextPress={onSelectRideNext} 
-        animatedPosition={animatedPosition}
-        />;
+        return (
+          <SelectRideSheet
+            onNextPress={onSelectRideNext}
+            animatedPosition={animatedPosition}
+          />
+        );
 
       case RideState.EXTRA_DETAILS:
-        return <ExtraDetailsSheet onNextPress={onExtraDetailsNext} 
-        animatedPosition={animatedPosition}
-        />;
+        return (
+          <ExtraDetailsSheet
+            onNextPress={onExtraDetailsNext}
+            animatedPosition={animatedPosition}
+          />
+        );
 
       case RideState.CONFIRM_RIDE:
-        return <RideConfirmationSheet onNextPress={onRideConfirmed} 
-        animatedPosition={animatedPosition}
-        />;
+        return (
+          <RideConfirmationSheet
+            onNextPress={onRideConfirmed}
+            animatedPosition={animatedPosition}
+          />
+        );
 
       case RideState.SEARCHING_FOR_DRIVER:
-        return <SearchingForaDriverSheet 
-        onCancelPress={onCancelPress}
-        isCancelling={isCancelling}
-        setIsCancelling={setIsCancelling}
-        onKeepRide={onKeepRide}
-        animatedPosition={animatedPosition}
-        />;
+        return (
+          <SearchingForaDriverSheet
+            onCancelPress={onCancelPress}
+            isCancelling={isCancelling}
+            setIsCancelling={setIsCancelling}
+            onKeepRide={onKeepRide}
+            animatedPosition={animatedPosition}
+          />
+        );
+
+      case RideState.NO_DRIVER_FOUND:
+        return (
+          <NoDriverFoundModal 
+            cancelPress={() => onCancelPress('NoDriverFound')}
+            rematch={rematch}
+            isFailed={true}
+          />
+        );
 
       case RideState.DRIVER_FOUND:
         return (
           <DriverFoundSheet
-            onDriverFound={onDriverFound}
             onCancelPress={onCancelPress}
             onKeepRide={onKeepRide}
             isCancelling={isCancelling}
@@ -81,7 +114,6 @@ export default function RideBottomSheet({
       case RideState.DRIVER_ARRIVED:
         return (
           <DriverArrivedSheet
-            onTripStarted={onTripStarted}
             onCancelPress={onCancelPress}
             onKeepRide={onKeepRide}
             isCancelling={isCancelling}
@@ -91,10 +123,40 @@ export default function RideBottomSheet({
         );
 
       case RideState.TRIP_STARTED:
-        return <TripStartedSheet onTripEnded={onTripEnded} 
-        animatedPosition={animatedPosition}
-        />;
+        return <TripStartedSheet animatedPosition={animatedPosition} />;
+
+      case RideState.TRIP_ENDED:
+        return (
+          <TripEndedModal
+            visible={isBillVisible}
+            onConfirmPayment={() => {
+              setIsReviewVisible(true);
+              setIsBillVisible(false);
+            }}
+            currentRide={currentRide}
+            filters={filters}
+          />
+        );
+
+      default:
+        return null;
     }
   };
-  return <>{renderSheet()}</>;
+
+  return (
+    <>
+      {renderSheet()}
+
+      <ReviewModal
+        visible={isReviewVisible}
+        onClose={() => {
+          handleMaybeLater();
+        }}
+        onSubmit={(rating, review) => {
+          console.log(rating, review);
+          handleSubmit();
+        }}
+      />
+    </>
+  );
 }

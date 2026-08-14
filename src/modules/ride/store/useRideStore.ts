@@ -1,9 +1,11 @@
+import 'react-native-get-random-values';
 import { create } from 'zustand';
 import { CurrentRide, RideParams, RideStop } from '../types/ride.types';
 import { SavedPlace } from '../types/savedPlaces.types';
 import { EstimateInitialResponseDTO } from '../services/dto/estimate.dto';
 import { TripStatus } from '../types/RideState';
 import { v4 as uuidv4 } from 'uuid';
+import { RideState as TripState } from '../types/RideState';
 
 type MapLocation = {
   latitude: number;
@@ -15,6 +17,8 @@ interface RideState {
 
   currentRide: CurrentRide | null;
 
+  rideState: TripState;
+
   estimate: EstimateInitialResponseDTO;
 
   savedPlaces: SavedPlace[];
@@ -22,6 +26,8 @@ interface RideState {
   setRideDetails: (details: Partial<RideParams>) => void;
 
   setCurrentRide: (ride: CurrentRide | null) => void;
+
+  setRideState: (state: TripState) => void;
 
   setEstimate: (estimate: EstimateInitialResponseDTO) => void;
 
@@ -52,6 +58,11 @@ interface RideState {
   setRideOtpVerified: (value: boolean) => void;
 
   getIdempotencyKey: () => string;
+
+  driverLocation: MapLocation | null,
+
+  setDriverLocation: (value :MapLocation | null) => void; 
+  
 }
 
 const normalizeStops = (stops: RideStop[]): RideStop[] => {
@@ -75,6 +86,8 @@ export const useRideStore = create<RideState>((set, get) => ({
   },
 
   currentRide: null,
+
+  rideState: TripState.SELECT_RIDE,
 
   estimate: {
     estimated_distance_km: 0,
@@ -190,6 +203,11 @@ export const useRideStore = create<RideState>((set, get) => ({
       currentRide: ride,
     }),
 
+  setRideState: state =>
+    set({
+      rideState: state,
+    }),
+
   setEstimate: estimate =>
     set({
       estimate,
@@ -247,4 +265,9 @@ export const useRideStore = create<RideState>((set, get) => ({
 
     return newKey;
   },
+
+  driverLocation: null as MapLocation | null,
+
+  setDriverLocation: (location: MapLocation | null) =>
+    set({ driverLocation: location }),
 }));

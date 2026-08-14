@@ -3,9 +3,11 @@ import { useEffect } from 'react';
 import { useRideStore } from '../store/useRideStore';
 
 export function useDriverFoundViewModel() {
-  // لاحقاً هون ممكن تجيب data من API / socket
+  const {currentRide} = useRideStore();
+
 
   return {
     driver: driverMock,
+    currentRide,
   };
 }

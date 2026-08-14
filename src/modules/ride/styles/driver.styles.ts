@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Typography, Spacing, Shadows } from '../../../core/theme/tokens';
+import { Typography, Spacing, Shadows, Radius } from '../../../core/theme/tokens';
 import { ThemeColors } from '../../../core/theme/theme.types';
 
 export const createStyles = (colors: ThemeColors) =>
@@ -125,13 +125,13 @@ export const createStyles = (colors: ThemeColors) =>
     },
 
     carDetailsTitle: {
-      ...Typography.semiBoldCaption,
+      ...Typography.semiBoldBody,
       marginBottom: 4,
       color: colors.surface,
     },
 
     carModelText: {
-      ...Typography.semiBoldBody,
+      ...Typography.semiBoldCaption,
       marginBottom: 6,
       color: colors.surface,
     },
@@ -139,10 +139,26 @@ export const createStyles = (colors: ThemeColors) =>
     plateRow: {
       flexDirection: 'row',
       alignItems: 'center',
+      gap: 30,
+    },
+
+    
+    plateContainer: {
+      backgroundColor: colors.surface,
+      paddingHorizontal: Spacing.sm,
+      paddingVertical: Spacing.xxs,
+      borderRadius: Radius.sm -2,
+      alignSelf: 'flex-start',
+      marginTop: Spacing.xs,
+    },
+      
+    plateText: {
+      ...Typography.boldCaption,
+      color: colors.textPrimary,
     },
 
     carColorText: {
-      ...Typography.caption,
+      ...Typography.body,
       opacity: 0.8,
       color: colors.surface,
     },

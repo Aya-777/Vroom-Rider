@@ -21,6 +21,7 @@ export const ENDPOINTS = {
   },
   
   TRIPS: {
+    GET_TRIP:(id: number) => `/trips/${id}/`,
     INITIAL_ESTIMATE: '/trips/trips/estimate/initial/',
     REFINED_ESTIMATE: '/trips/trips/estimate/refined/',
     VERIFY_NUMBER_ENTER: '/trips/contact-number/enter/',
@@ -30,10 +31,12 @@ export const ENDPOINTS = {
     SAVED_LOCATION: (id: number) => `/trips/saved-locations/${id}/`,
     PREFERENCES: '/trips/preferences/',
     CONFIRM: '/trips/confirm/',
+    REMATCH:(id: number) => `/trips/${id}/rematch/`,
     CANCEL: (id: number) => `/trips/trips/${id}/cancel/`,
     HISTORY: '/trips/history/',
     RERIDE: (tripId: number) => `/trips/${tripId}/reorder/`,
     RECENT: '/trips/recent/',
+    DRIVER_LOCATION:(id:number) => `/trips/${id}/location/`
 },
 
   FAVORITE_DRIVERS: {
@@ -50,4 +53,9 @@ export const ENDPOINTS = {
     MARK_READ: (id: number) => `/api/v1/notifications/${id}/read/`,
     DELETE: (id: number) => `/api/v1/notifications/${id}/`,
   },
+
+  PUSHER:{
+    AUTH: 'trips/pusher-auth/',
+    CHANNELS: '/realtime/channels/',
+  }
 } as const;

@@ -3,10 +3,22 @@ import { RidePreferenceDTO } from "../services/dto/ride.dto";
 import { TripStatus } from "./RideState";
 import { Coordinate } from "../services/dto/estimate.dto";
 
+export type CarImage = {
+  id: number;
+  image_slot: string;
+  image_file: string;
+}
+
 export type Car = {
-  model: string;
-  color: string;
-  plate: string;
+  id: number;
+  car_brand: string | null;
+  car_model: string | null;
+  custom_brand_name: string | null;
+  custom_model_name: string | null;
+  color: string | null;
+  custom_color_name: string | null;
+  plate_number: string;
+  images: CarImage[];
 };
 
 export type Tiers = {
@@ -17,10 +29,12 @@ export type Tiers = {
 }
 
 export type Driver = {
-  name: string;
-  onTheWayMessage: string;
-  arrivedMessage: string;
-  car: Car;
+  id: number;
+  first_name: string;
+  last_name: string;
+  phone_number: string;
+  profile_image: string | null;
+  rating: Double;
 };
 
 export interface RideValidationErrors {
@@ -76,10 +90,11 @@ export interface RideParams {
 export interface CurrentRide {
   id: number;
   rider: number;
-  driver: number | null;
-  vehicle: number | null;
+  driver: Driver | null;
+  vehicle: Car | null;
   vehicle_type_id: string;
   status: TripStatus;
+  pin?: string;
 
   stops: RideStop[];
   preference_ids: number[];

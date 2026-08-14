@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useTheme } from '../../../../core/theme/useTheme';
 
-type MapPinType = 'pickup' | 'stop' | 'destination';
+type MapPinType = 'pickup' | 'stop' | 'destination' | 'driver';
 
 type Props = {
   type: MapPinType;
@@ -16,6 +16,7 @@ export default function MapPin({ type, label }: Props) {
     if (type === 'pickup') return 'P';
     if (type === 'destination') return 'D';
     if (type === 'stop') return 'S';
+    if(type === 'driver') return 'D';
     return label ?? '';
   };
 
@@ -24,6 +25,8 @@ export default function MapPin({ type, label }: Props) {
       ? colors.primary
       : type === 'destination'
       ? colors.error
+      : type === 'driver'
+      ? colors.surface
       : colors.textMuted;
 
   return (

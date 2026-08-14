@@ -11,6 +11,7 @@ import NotificationsScreen from '../modules/notifications/screens/NotificationsS
 import { isRTL } from '../core/i18n/utils/isRTL';
 import { usePushNotifications } from '../modules/notifications/hooks/usePushNotifications';
 import { handleNotificationNavigation } from '../modules/notifications/utils/notificationNavigation';
+import { PusherProvider } from '../core/realtime/pusher/PusherProvider';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -36,33 +37,35 @@ export default function RootNavigator() {
   const isAppReady = isSplashComplete && hasHydrated;
 
   return (
-    <NavigationContainer
-      linking={deepLinkingConfig}
-      ref={navigationRef}
-      direction={isRTL() ? 'rtl' : 'ltr'}
-    >
-      <PushNotificationsHandler isLoggedIn={isLoggedIn} />
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {!isAppReady ? (
-          <Stack.Screen name="Splash">
-            {(props) => (
-              <SplashScreen
-                {...props}
-                onAnimationEnd={() => setIsSplashComplete(true)}
-              />
-            )}
-          </Stack.Screen>
-        ) : isLoggedIn ? (
-          <Stack.Group>
-            <Stack.Screen name="Main" component={MainDrawer} />
-            <Stack.Screen name="Notifications" component={NotificationsScreen} />
-          </Stack.Group>
-        ) : (
-          <Stack.Group>
-            <Stack.Screen name="AuthStack" component={AuthStack} />
-          </Stack.Group>
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
+      <PusherProvider enabled={isAppReady && isLoggedIn}>
+        <NavigationContainer
+        linking={deepLinkingConfig}
+        ref={navigationRef}
+        direction={isRTL() ? 'rtl' : 'ltr'}
+      >
+        <PushNotificationsHandler isLoggedIn={isLoggedIn} />
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          {!isAppReady ? (
+            <Stack.Screen name="Splash">
+              {(props) => (
+                <SplashScreen
+                  {...props}
+                  onAnimationEnd={() => setIsSplashComplete(true)}
+                />
+              )}
+            </Stack.Screen>
+          ) : isLoggedIn ? (
+            <Stack.Group>
+              <Stack.Screen name="Main" component={MainDrawer} />
+              <Stack.Screen name="Notifications" component={NotificationsScreen} />
+            </Stack.Group>
+          ) : (
+            <Stack.Group>
+              <Stack.Screen name="AuthStack" component={AuthStack} />
+            </Stack.Group>
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </PusherProvider>
   );
 }

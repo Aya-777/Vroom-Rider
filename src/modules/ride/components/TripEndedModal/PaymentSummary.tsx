@@ -15,8 +15,7 @@ export default function PaymentSummary() {
   
   return (
     <View style={styles.paymentColumn}>
-      <View style={styles.metricRow}>
-        <Text style={styles.label} adjustsFontSizeToFit={true}>
+        <Text style={styles.tipLabel}>
           {t('tripEnded.payment.addTip')}
         </Text>
         <View>
@@ -28,16 +27,6 @@ export default function PaymentSummary() {
             onChangeText={vm.setTip}
           />
         </View>
-      </View>
-
-      <View style={styles.metricRow}>
-        <Text style={styles.label} adjustsFontSizeToFit={true}>
-          {t('tripEnded.payment.delay')}
-        </Text>
-        <Text style={styles.valueText} adjustsFontSizeToFit={true}>
-          $2.50
-        </Text>
-      </View>
     </View>
   );
 }

@@ -4,8 +4,9 @@
     "subtitle": "Thank you for riding with us",
     "confirmPayment": "Confirm Payment",
     "payment": {
-      "addTip": "Add a tip?",
+      "addTip": "Add a tip? (From your wallet)",
       "delay": "Delay"
-    }
+    },
+    "noFilters": "No Filters Added."
   }
 }

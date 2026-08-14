@@ -126,6 +126,15 @@ export const MapContainer = ({ vm }: MapContainerProps) => {
             />
           </GeoJSONSource>
         )}
+
+        {vm.driverLocation && (
+          <ViewAnnotation
+            id="driver-marker"
+            lngLat={[vm.driverLocation.longitude, vm.driverLocation.latitude]}
+          >
+            <MapPin type="driver" />
+          </ViewAnnotation>
+        )}
       </Map>
 
       {vm.isPickingLocation && (
