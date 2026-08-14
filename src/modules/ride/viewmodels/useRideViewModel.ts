@@ -12,6 +12,7 @@ import { CurrentRide, RideFilter } from '../types/ride.types';
 import { fetchFilters } from '../utils/fetchFilters';
 import { RequestRideRequestDTO } from '../services/dto/ride.dto';
 import { Alert } from 'react-native';
+import { getRideStateFromStatus } from '../utils/getRideStateFromStatus';
 
 const previousState: Partial<Record<RideState, RideState>> = {
   [RideState.EXTRA_DETAILS]: RideState.SELECT_RIDE,
@@ -28,6 +29,19 @@ export function useRideViewModel() {
   const [isReviewVisible, setIsReviewVisible] = useState(false);
   const [isBillVisible, setIsBillVisible] = useState(false);
   const [filters, setFilters] = useState<RideFilter[]>([]);
+  const {
+  rideData,
+  setRideDetails,
+  estimate,
+  setEstimate,
+  clearRide,
+  currentRide,
+  setCurrentRide,
+  rideState,
+  setRideState,
+  getIdempotencyKey,
+} = useRideStore();
+
 
   useEffect(() => {
     let mounted = true;
@@ -45,18 +59,44 @@ export function useRideViewModel() {
     };
   }, []);
 
-  const {
-    rideData,
-    setRideDetails,
-    estimate,
-    setEstimate,
-    clearRide,
-    currentRide,
-    setCurrentRide,
-    rideState,
-    setRideState,
-    getIdempotencyKey,
-  } = useRideStore();
+  useEffect(() => {
+  let mounted = true;
+
+  const loadCurrentRide = async () => {
+    try {
+      const response = await rideApi.getCurrent();
+
+      if (!mounted) {
+        return;
+      }
+
+      const ride = response;
+
+      if (!ride) {
+        setCurrentRide(null);
+        setRideState(RideState.SELECT_RIDE);
+        return;
+      }
+
+      console.log('Current ride:', ride);
+
+      setCurrentRide(ride);
+
+      const state = getRideStateFromStatus(ride.status);
+
+      setRideState(state);
+    } catch (error) {
+      console.error('Failed to load current ride:', error);
+    }
+  };
+
+  loadCurrentRide();
+
+  return () => {
+    mounted = false;
+  };
+}, [setCurrentRide, setRideState]);
+
 
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();

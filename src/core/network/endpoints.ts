@@ -22,6 +22,7 @@ export const ENDPOINTS = {
   
   TRIPS: {
     GET_TRIP:(id: number) => `/trips/${id}/`,
+    CURRENT: '/trips/current/',
     INITIAL_ESTIMATE: '/trips/trips/estimate/initial/',
     REFINED_ESTIMATE: '/trips/trips/estimate/refined/',
     VERIFY_NUMBER_ENTER: '/trips/contact-number/enter/',

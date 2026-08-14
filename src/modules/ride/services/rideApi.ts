@@ -3,6 +3,7 @@ import { ENDPOINTS } from '../../../core/network/endpoints';
 import { v4 as uuidv4 } from 'uuid';
 import { RecentTripDTO } from './dto/recentTrip.dto';
 import {
+  GetCurrentRideDTO,
   GetTripResponse,
   LocationResponseDTO,
   RequestRideRequestDTO,
@@ -180,17 +181,22 @@ export const rideApi = {
     return response.data;
   },
 
+  getCurrent: async () => {
+    const response = await apiClient.get<GetCurrentRideDTO>(
+      ENDPOINTS.TRIPS.CURRENT,
+    );
+
+    return response.data.data;
+  },
+
   // Location
-  getDriverLocation: async (
-    id: number,
-  ): Promise<LocationResponseDTO> => {
+  getDriverLocation: async (id: number): Promise<LocationResponseDTO> => {
     const response = await apiClient.get<LocationResponseDTO>(
       ENDPOINTS.TRIPS.DRIVER_LOCATION(id),
     );
 
     return response.data;
   },
-
 };
 
 // Trip History
@@ -211,4 +217,3 @@ export const getTripHistoryByUrl = async (
   >(url);
   return response.data.data;
 };
-

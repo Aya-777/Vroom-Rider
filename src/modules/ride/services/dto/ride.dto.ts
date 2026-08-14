@@ -1,4 +1,4 @@
-import { Car, Driver, RideStop } from '../../types/ride.types';
+import { Car, CurrentRide, Driver, RideStop } from '../../types/ride.types';
 import { TripStatus } from '../../types/RideState';
 
 export interface RidePreferenceDTO {
@@ -78,6 +78,12 @@ export interface GetTripResponse {
   is_for_someone_else: boolean;
   passenger_contact_phone: string | null;
   payment_method: 'CASH' | 'WALLET';
+}
+
+export interface GetCurrentRideDTO {
+  message: string;
+  'status code': number;
+  data: CurrentRide;
 }
 
 export interface EnterRideNumberRequestDTO {
