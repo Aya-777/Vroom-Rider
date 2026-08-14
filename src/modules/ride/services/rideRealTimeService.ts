@@ -12,6 +12,11 @@ class RideRealtimeService {
       console.log('[RideRealtime] Data:', data);
 
       switch (event.eventName) {
+
+        case 'trip.search.failed':
+          this.handleSearchFailed(data);
+        break;
+
         case 'trip.driver.assigned':
           this.handleDriverAssigned(data);
           break;
@@ -38,6 +43,30 @@ class RideRealtimeService {
     } catch (error) {
       console.error('[RideRealtime] Failed to handle event:', error);
     }
+  }
+
+  private async handleSearchFailed(data: {
+      trip_id: number;
+      status: string;
+    }
+  ){
+    const { currentRide, setCurrentRide, setRideState, clearRide } =
+      useRideStore.getState();
+
+      if (!currentRide) {
+        console.warn('[RideRealtime] No current ride found');
+        return;
+      }
+    
+      if (currentRide.id !== data.trip_id) {
+        console.warn(
+          '[RideRealtime] Event belongs to another trip:',
+          data.trip_id,
+        );
+        return;
+      }
+
+      setRideState(RideState.NO_DRIVER_FOUND);
   }
 
   private async handleDriverAssigned(data: {

@@ -78,6 +78,7 @@ export default function RideScreen() {
         onRideConfirmed={vm.goToSearchingForaDriver}
         onCancelPress={vm.cancelCurrentRide}
         onKeepRide={vm.keepRidePress}
+        rematch={vm.handleRematch}
         animatedPosition={animatedPosition}
         isBillVisible={vm.isBillVisible}
         isReviewVisible={vm.isReviewVisible}

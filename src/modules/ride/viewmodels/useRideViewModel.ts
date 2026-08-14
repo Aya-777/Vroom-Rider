@@ -8,8 +8,10 @@ import LocationService, {
 } from '../../../core/services/location/LocationService';
 import { useRideStore } from '../store/useRideStore';
 import { rideApi } from '../services/rideApi';
-import { RideFilter } from '../types/ride.types';
+import { CurrentRide, RideFilter } from '../types/ride.types';
 import { fetchFilters } from '../utils/fetchFilters';
+import { RequestRideRequestDTO } from '../services/dto/ride.dto';
+import { Alert } from 'react-native';
 
 const previousState: Partial<Record<RideState, RideState>> = {
   [RideState.EXTRA_DETAILS]: RideState.SELECT_RIDE,
@@ -17,7 +19,6 @@ const previousState: Partial<Record<RideState, RideState>> = {
 };
 
 export function useRideViewModel() {
-
   const [currentLocation, setCurrentLocation] = useState<Location>({
     address: '',
     latitude: 0,
@@ -27,7 +28,6 @@ export function useRideViewModel() {
   const [isReviewVisible, setIsReviewVisible] = useState(false);
   const [isBillVisible, setIsBillVisible] = useState(false);
   const [filters, setFilters] = useState<RideFilter[]>([]);
-
 
   useEffect(() => {
     let mounted = true;
@@ -47,15 +47,16 @@ export function useRideViewModel() {
 
   const {
     rideData,
+    setRideDetails,
     estimate,
     setEstimate,
     clearRide,
     currentRide,
     setCurrentRide,
     rideState,
-    setRideState
+    setRideState,
+    getIdempotencyKey,
   } = useRideStore();
-  
 
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
@@ -75,14 +76,12 @@ export function useRideViewModel() {
     loadLocation();
   }, []);
 
-useEffect(() => {
-  if (currentRide?.status === TripStatus.COMPLETED) {
-
-    setRideState(RideState.TRIP_ENDED);
-    setIsBillVisible(true);
-  }
-}, [currentRide?.status]);
-
+  useEffect(() => {
+    if (currentRide?.status === TripStatus.COMPLETED) {
+      setRideState(RideState.TRIP_ENDED);
+      setIsBillVisible(true);
+    }
+  }, [currentRide?.status]);
 
   const goToExtraDetails = async () => {
     setRideState(RideState.EXTRA_DETAILS);
@@ -90,7 +89,8 @@ useEffect(() => {
 
   const goToRideConfirmation = () => setRideState(RideState.CONFIRM_RIDE);
 
-  const goToSearchingForaDriver = () => setRideState(RideState.SEARCHING_FOR_DRIVER);
+  const goToSearchingForaDriver = () =>
+    setRideState(RideState.SEARCHING_FOR_DRIVER);
 
   const goToDriverFound = () => setRideState(RideState.DRIVER_FOUND);
 
@@ -127,9 +127,6 @@ useEffect(() => {
       setIsCancelling(true);
 
       await rideApi.cancelRide(currentRide.id, reason);
-      setCurrentRide({ ...currentRide, status: TripStatus.CANCELLED_BY_RIDER });
-      clearRide();
-      setRideState(RideState.SELECT_RIDE);
     } catch (error) {
       console.error('Failed to cancel ride:', error);
     } finally {
@@ -139,6 +136,26 @@ useEffect(() => {
 
   const keepRidePress = () => {
     setIsCancelling(false);
+  };
+
+  const handleRematch = async () => {
+    const idempotencyKey = getIdempotencyKey();
+    try {
+      const response = await rideApi.confirmRide(
+        rideData as RequestRideRequestDTO,
+        idempotencyKey,
+      );
+      console.log(response.id);
+      setCurrentRide(response as CurrentRide);
+      setRideDetails({
+        status: TripStatus.PENDING,
+      });
+
+      return response;
+    } catch (error) {
+      Alert.alert('Error', 'Could not find a driver. Please try again.');
+      return null;
+    }
   };
 
   const onMyLocationPress = async () => {
@@ -158,18 +175,18 @@ useEffect(() => {
     setCurrentRide(null);
     clearRide();
     setRideState(RideState.SELECT_RIDE);
-  }
-  
+  };
+
   const handleMaybeLater = () => {
     setIsReviewVisible(false);
     navigation.navigate('HomeScreen');
     setCurrentRide(null);
     clearRide();
     setRideState(RideState.SELECT_RIDE);
-  }
+  };
 
   return {
-    rideState ,
+    rideState,
     currentLocation,
     estimate,
     isCancelling,
@@ -190,6 +207,7 @@ useEffect(() => {
     resetRide,
     cancelCurrentRide,
     keepRidePress,
+    handleRematch,
     onMyLocationPress,
     handleSubmitReview,
     handleMaybeLater,

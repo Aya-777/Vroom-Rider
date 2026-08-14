@@ -7,6 +7,7 @@ import DriverFoundSheet from '../DriverFoundScreen/DriverFoundSheet';
 import ExtraDetailsSheet from '../ExtraDetailsScreen/ExtraDetailsSheet';
 import RideConfirmationSheet from '../RideConfirmationScreen/RideConfirmationSheet';
 import SearchingForaDriverSheet from '../SearchingForaDriver/SearchingForaDriverSheet';
+import { NoDriverFoundModal } from '../NoDriverFound/NoDriverFoundModal';
 import SelectRideSheet from '../SelectRideScreen/SelectRideSheet';
 import TripEndedModal from '../TripEndedModal/TripEndedModal';
 import TripStartedSheet from '../TripStartedScreen/TripStartedSheet';
@@ -21,6 +22,7 @@ type Props = {
   onRideConfirmed: () => void;
   onCancelPress: (reason: string) => void;
   onKeepRide: () => void;
+  rematch: () => void;
   animatedPosition?: SharedValue<number>;
   isBillVisible: boolean;
   isReviewVisible: boolean;
@@ -40,6 +42,7 @@ export default function RideBottomSheet({
   onRideConfirmed,
   onCancelPress,
   onKeepRide,
+  rematch,
   animatedPosition,
   isBillVisible,
   isReviewVisible,
@@ -85,6 +88,15 @@ export default function RideBottomSheet({
             setIsCancelling={setIsCancelling}
             onKeepRide={onKeepRide}
             animatedPosition={animatedPosition}
+          />
+        );
+
+      case RideState.NO_DRIVER_FOUND:
+        return (
+          <NoDriverFoundModal 
+            cancelPress={() => onCancelPress('NoDriverFound')}
+            rematch={rematch}
+            isFailed={true}
           />
         );
 

@@ -37,8 +37,8 @@ export default function RootNavigator() {
   const isAppReady = isSplashComplete && hasHydrated;
 
   return (
-    <PusherProvider>
-      <NavigationContainer
+      <PusherProvider enabled={isAppReady && isLoggedIn}>
+        <NavigationContainer
         linking={deepLinkingConfig}
         ref={navigationRef}
         direction={isRTL() ? 'rtl' : 'ltr'}
