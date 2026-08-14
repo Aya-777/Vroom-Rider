@@ -139,18 +139,12 @@ export function useRideViewModel() {
   };
 
   const handleRematch = async () => {
-    const idempotencyKey = getIdempotencyKey();
     try {
-      const response = await rideApi.confirmRide(
-        rideData as RequestRideRequestDTO,
-        idempotencyKey,
-      );
-      console.log(response.id);
-      setCurrentRide(response as CurrentRide);
+      const response = await rideApi.rematch(currentRide?.id ?? rideData.id ?? 0);
       setRideDetails({
         status: TripStatus.PENDING,
       });
-
+      setRideState(RideState.SEARCHING_FOR_DRIVER);
       return response;
     } catch (error) {
       Alert.alert('Error', 'Could not find a driver. Please try again.');

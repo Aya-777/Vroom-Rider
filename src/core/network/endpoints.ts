@@ -31,6 +31,7 @@ export const ENDPOINTS = {
     SAVED_LOCATION: (id: number) => `/trips/saved-locations/${id}/`,
     PREFERENCES: '/trips/preferences/',
     CONFIRM: '/trips/confirm/',
+    REMATCH:(id: number) => `/trips/${id}/rematch/`,
     CANCEL: (id: number) => `/trips/trips/${id}/cancel/`,
     HISTORY: '/trips/history/',
     RERIDE: (tripId: number) => `/trips/${tripId}/reorder/`,

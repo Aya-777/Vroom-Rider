@@ -66,6 +66,10 @@ class RideRealtimeService {
         return;
       }
 
+      setCurrentRide({
+        ...currentRide,
+        idempotency_key: '',
+      })
       setRideState(RideState.NO_DRIVER_FOUND);
   }
 

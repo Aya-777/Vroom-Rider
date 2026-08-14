@@ -119,6 +119,14 @@ export const rideApi = {
     return response.data;
   },
 
+  rematch: async (id: number) => {
+    const response = await apiClient.post(
+      ENDPOINTS.TRIPS.REMATCH(id),
+    );
+
+    return response;
+  },
+
   enterRideNumber: async (
     data: EnterRideNumberRequestDTO,
   ): Promise<EnterRideNumberResponseDTO> => {
