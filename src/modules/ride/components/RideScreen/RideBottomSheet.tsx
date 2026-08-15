@@ -29,7 +29,7 @@ type Props = {
   setIsBillVisible: (value: boolean) => void;
   setIsReviewVisible: (value: boolean) => void;
   filters: RideFilter[];
-  handleSubmit: () => void;
+  handleSubmit: (rating: number, comment: string, isComplaint: boolean) => void;
   handleMaybeLater: () => void;
 };
 
@@ -152,10 +152,7 @@ export default function RideBottomSheet({
         onClose={() => {
           handleMaybeLater();
         }}
-        onSubmit={(rating, review) => {
-          console.log(rating, review);
-          handleSubmit();
-        }}
+        onSubmit={handleSubmit}
       />
     </>
   );

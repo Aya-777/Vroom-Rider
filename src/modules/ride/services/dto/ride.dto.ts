@@ -119,6 +119,33 @@ export interface ResendOtpRequestDTO {
     phone_number: string;
 }
 
+export interface ReviewRequestDTO {
+  rating: number,
+  comment: string,
+  is_complaint: boolean
+}
+
+export interface ReviewResponseDTO {
+  id: number,
+  trip_id: number,
+  reviewer_type: string,
+  rating: number,
+  comment: string,
+  is_complaint: boolean,
+  created_at: string,
+  rider: {
+    "additionalProp1": string,
+    "additionalProp2": string,
+    "additionalProp3": string
+  },
+  driver: {
+    "additionalProp1": string,
+    "additionalProp2": string,
+    "additionalProp3": string
+  }
+
+}
+
 export interface LocationResponseDTO {
   latitude: number,
   longitude: number,

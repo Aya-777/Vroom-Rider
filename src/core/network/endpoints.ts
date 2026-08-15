@@ -34,6 +34,7 @@ export const ENDPOINTS = {
     CONFIRM: '/trips/confirm/',
     REMATCH:(id: number) => `/trips/${id}/rematch/`,
     CANCEL: (id: number) => `/trips/trips/${id}/cancel/`,
+    SUBMIT_REVIEW: (id: number) => `/trips/trips/${id}/reviews/`,
     HISTORY: '/trips/history/',
     RERIDE: (tripId: number) => `/trips/${tripId}/reorder/`,
     RECENT: '/trips/recent/',
