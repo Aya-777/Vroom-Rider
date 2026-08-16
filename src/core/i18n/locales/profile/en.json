@@ -1,8 +1,9 @@
-{
+﻿{
   "rideHistory": "Ride History",
   "notifications": "Notifications",
   "favoriteDrivers": "Favorite Drivers",
   "safety": "Safety",
+  "wallet": "Wallet",
   "becomeaDriver": "Become a Driver",
   "earnOnYourOwnSchedule": "Earn on your own schedule",
   "learnMore": "Learn more",
@@ -55,7 +56,7 @@
   "manageYourPersonalInformation": "Manage your personal information",
   "language": "Language",
   "english": "English",
-  "arabic": "العربية",
+  "arabic": "Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©",
   "appSettings": "App settings",
   "privacy": "Privacy",
   "privacyDesc": "Manage the data you share with us",
@@ -80,3 +81,4 @@
   "yes": "Yes",
   "no": "No"
 }
+
