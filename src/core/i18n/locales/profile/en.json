@@ -36,5 +36,19 @@
   "confirmPassword": "Confirm Password",
   "confirmNewPassword": "Confirm new password",
   "updatePassword": "Update Password",
-  "vroomDrivers": "Vroom Drivers"
+  "vroomDrivers": "Vroom Drivers",
+  "driveWithVroom": "Drive with Vroom",
+  "driveWithVroomSubtitle": "Earn on your own terms with industry-leading flexibility.",
+  "onboardingProcess": "Onboarding Process",
+  "step1Title": "Open the Application Form",
+  "step1Description": "Review the requirements and start your professional driver profile.",
+  "step2Title": "Personal & Vehicle Details",
+  "step2Description": "Upload your license, insurance, and vehicle registration documents securely.",
+  "step3Title": "Await Verification",
+  "step3Description": "Our team reviews all documents within 48 hours to get you on the road quickly.",
+  "readyToStart": "Ready to Start?",
+  "officialApplicationForm": "Official Application Form",
+  "applyNow": "Apply Now",
+  "needAssistance": "Need assistance?",
+  "contactSupport": "Contact Support"
 }

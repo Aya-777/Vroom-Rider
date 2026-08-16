@@ -9,29 +9,19 @@ import SubHeader from '../../../shared/components/SubHeader';
 import { useTranslation } from 'react-i18next';
 import LinearBg from '../../../shared/components/LinearBg';
 
-const steps: [string, string, string][] = [
-    [
-        '1',
-        'Open the Application Form',
-        'Review the requirements and start your professional driver profile.',
-    ],
-    [
-        '2',
-        'Personal & Vehicle Details',
-        'Upload your license, insurance, and vehicle registration documents securely.',
-    ],
-    [
-        '3',
-        'Await Verification',
-        'Our team reviews all documents within 48 hours to get you on the road quickly.',
-    ],
-];
+
 
 export default function DriverOnboardingScreen() {
     const { colors } = useTheme();
     const navigation = useNavigation<ProfileStackScreenProps<'DriverOnboarding'>['navigation']>();
-    const { t } = useTranslation(['profile']);
+    const { t } = useTranslation('profile');
     const styles = createStyles(colors);
+
+    const steps: [string, string, string][] = [
+        ['1', t('step1Title'), t('step1Description')],
+        ['2', t('step2Title'), t('step2Description')],
+        ['3', t('step3Title'), t('step3Description')],
+    ];
 
     return (
         <LinearBg style={styles.container} colors={[colors.backgroundSoft, colors.background]}>
@@ -50,15 +40,13 @@ export default function DriverOnboardingScreen() {
                         end={{ x: 0, y: 1 }}
                         style={styles.heroOverlay}
                     >
-                        <Text style={styles.heroTitle}>Drive with Vroom</Text>
-                        <Text style={styles.heroSub}>
-                            Earn on your own terms with industry-leading flexibility.
-                        </Text>
+                        <Text style={styles.heroTitle}>{t('driveWithVroom')}</Text>
+                        <Text style={styles.heroSub}>{t('driveWithVroomSubtitle')}</Text>
                     </LinearBg>
                 </ImageBackground>
 
                 {/* Onboarding Steps */}
-                <Text style={styles.section}>Onboarding Process</Text>
+                <Text style={styles.section}>{t('onboardingProcess')}</Text>
 
                 {steps.map(([number, stepTitle, description], index) => (
                     <View style={styles.row} key={number}>
@@ -78,10 +66,10 @@ export default function DriverOnboardingScreen() {
 
                 {/* Apply Now Card */}
                 <View style={styles.card}>
-                    <Text style={styles.cardTitle}>Ready to Start?</Text>
-                    <Text style={styles.cardSubtitle}>Official Application Form</Text>
+                    <Text style={styles.cardTitle}>{t('readyToStart')}</Text>
+                    <Text style={styles.cardSubtitle}>{t('officialApplicationForm')}</Text>
                     <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText}>Apply Now</Text>
+                        <Text style={styles.buttonText}>{t('applyNow')}</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -91,9 +79,9 @@ export default function DriverOnboardingScreen() {
                         <View style={styles.supportIcon}>
                             <Text style={styles.supportIconText}>?</Text>
                         </View>
-                        <Text style={styles.supportText}>Need assistance?</Text>
+                        <Text style={styles.supportText}>{t('needAssistance')}</Text>
                     </View>
-                    <Text style={styles.link}>Contact Support</Text>
+                    <Text style={styles.link}>{t('contactSupport')}</Text>
                 </View>
             </ScrollView>
         </LinearBg>

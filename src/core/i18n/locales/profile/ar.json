@@ -36,5 +36,19 @@
   "confirmPassword": "تأكيد كلمة السر",
   "confirmNewPassword": "أكد كلمة السر الجديدة",
   "updatePassword": "تحديث كلمة السر",
-  "vroomDrivers": "سائقو Vroom"
+  "vroomDrivers": "سائقو Vroom",
+  "driveWithVroom": "قُد مع Vroom",
+  "driveWithVroomSubtitle": "اكسب وفق شروطك مع مرونة تتصدر السوق.",
+  "onboardingProcess": "خطوات الانضمام",
+  "step1Title": "افتح استمارة الطلب",
+  "step1Description": "راجع المتطلبات وابدأ إنشاء ملفك كسائق محترف.",
+  "step2Title": "التفاصيل الشخصية وتفاصيل المركبة",
+  "step2Description": "ارفع رخصتك ووثيقة التأمين وأوراق تسجيل المركبة بشكل آمن.",
+  "step3Title": "بانتظار التحقق",
+  "step3Description": "يراجع فريقنا جميع المستندات خلال 48 ساعة ليتم تفعيلك بسرعة.",
+  "readyToStart": "جاهز للبدء؟",
+  "officialApplicationForm": "استمارة الطلب الرسمية",
+  "applyNow": "قدّم الآن",
+  "needAssistance": "بحاجة للمساعدة؟",
+  "contactSupport": "تواصل مع الدعم"
 }

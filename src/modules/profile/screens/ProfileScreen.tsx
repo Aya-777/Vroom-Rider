@@ -70,7 +70,7 @@ export default function ProfileScreen() {
             }
           />
 
-          <GridSection items={gridItems} />
+          <GridSection items={gridItems} onItemPress={(id) => id === '4' && navigation.navigate('Settings')} />
           <PromoBanner onPress={() => navigation.navigate('DriverOnboarding')} />
           <ListSection items={listItems} />
 
@@ -86,3 +86,5 @@ export default function ProfileScreen() {
     </LinearBg>
   );
 }
+
+

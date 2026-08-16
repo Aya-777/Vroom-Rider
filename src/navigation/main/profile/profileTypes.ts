@@ -3,6 +3,7 @@
 export type ProfileStackParamList = {
   ProfileHome: undefined;
   DriverOnboarding: undefined;
+  Settings: undefined;
   EditProfile:
   | { firstName?: string; lastName?: string; phone?: string; profileImage?: string | null }
   | undefined;
@@ -14,6 +15,8 @@ export type ProfileStackParamList = {
 
 export type ProfileStackScreenProps<T extends keyof ProfileStackParamList> =
   NativeStackScreenProps<ProfileStackParamList, T>;
+
+
 
 
 
