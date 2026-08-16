@@ -83,9 +83,26 @@ export function useRideViewModel() {
         setCurrentRide(ride);
 
         const state = getRideStateFromStatus(ride.status);
-
         setRideState(state);
-      } catch (error) {
+      } catch (error: any) {
+        if (!mounted) {
+          return;
+        }
+
+        // 404 means no active/current ride
+        if (
+          error?.response?.status === 404 &&
+          error?.response?.data?.message === 'trips.detail.no_current_trip'
+        ) {
+          console.log('No current ride.');
+
+          setCurrentRide(null);
+          setRideState(RideState.SELECT_RIDE);
+
+          return;
+        }
+
+        // Any other error is a real error
         console.error('Failed to load current ride:', error);
       }
     };
