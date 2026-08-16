@@ -1,5 +1,4 @@
-import HistoryIcon from '../../../assets/svg/common/history.svg';
-import SavedIcon from '../../../assets/svg/common/star.svg';
+﻿import SavedIcon from '../../../assets/svg/common/star.svg';
 import CardIcon from '../../../assets/svg/payment/creditcard.svg';
 import SettingsIcon from '../../../assets/svg/profile/settings.svg';
 import HelpIcon from '../../../assets/svg/profile/help.svg';
@@ -31,7 +30,7 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     id: 'settings',
     label: 'settings',
     icon: SettingsIcon,
-    // route: 'Settings',
+    route: 'Settings',
   },
   {
     id: 'help',
@@ -46,3 +45,5 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     // route: 'About',
   },
 ];
+
+

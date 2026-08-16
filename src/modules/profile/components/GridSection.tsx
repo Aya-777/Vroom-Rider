@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { View } from 'react-native';
 import GridCard from './GridCard';
 import { useTheme } from '../../../core/theme/useTheme';
@@ -10,9 +10,10 @@ type Props = {
         title: string;
         icon: React.ElementType;
     }[];
+    onItemPress?: (id: string) => void;
 };
 
-export default function GridSection({ items }: Props) {
+export default function GridSection({ items, onItemPress }: Props) {
     const { colors } = useTheme();
     const styles = createStyles(colors);
     return (
@@ -24,8 +25,10 @@ export default function GridSection({ items }: Props) {
                     key={item.id}
                     title={item.title}
                     Icon={item.icon}
+                    onPress={onItemPress ? () => onItemPress(item.id) : undefined}
                 />
             ))}
         </View>
     );
 }
+

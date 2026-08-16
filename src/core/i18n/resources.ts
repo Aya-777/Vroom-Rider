@@ -32,9 +32,10 @@ import {
   sideBarEn,
   sideBarAr,
   favoriteDriversEn,
-  favoriteDriversAr
-} from './locales/index'
-
+  favoriteDriversAr,
+  safetyEn,
+  safetyAr,
+} from './locales/index';
 
 export const resources = {
   en: {
@@ -54,9 +55,10 @@ export const resources = {
     activities: activitiesEn,
     notifications: notificationsEn,
     sidebar: sideBarEn,
-    favoriteDrivers: favoriteDriversEn
+    favoriteDrivers: favoriteDriversEn,
+    safety: safetyEn,
   },
-  
+
   ar: {
     auth: authAr,
     home: homeAr,
@@ -74,6 +76,7 @@ export const resources = {
     activities: activitiesAr,
     notifications: notificationsAr,
     sidebar: sideBarAr,
-    favoriteDrivers: favoriteDriversAr
+    favoriteDrivers: favoriteDriversAr,
+    safety: safetyAr,
   },
 };

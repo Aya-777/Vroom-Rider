@@ -10,6 +10,7 @@ src/
 │   │   └── Lora-SemiBold.ttf
 │   ├── images
 │   │   ├── comfort.png
+│   │   ├── driver-hero.png
 │   │   ├── economy.png
 │   │   ├── logo.png
 │   │   ├── logoWithName.png
@@ -62,10 +63,16 @@ src/
 │       │   ├── creditcard.svg
 │       │   └── price.svg
 │       ├── profile
+│       │   ├── accessibility.svg
+│       │   ├── appearance.svg
+│       │   ├── facebook.svg
 │       │   ├── help.svg
+│       │   ├── instagram.svg
 │       │   ├── logout.svg
+│       │   ├── manage.svg
 │       │   ├── privacy.svg
 │       │   ├── profile.svg
+│       │   ├── rideCheck.svg
 │       │   ├── safety.svg
 │       │   └── settings.svg
 │       └── ride
@@ -354,7 +361,8 @@ src/
 │   │   │   ├── ChangePhoneScreen.tsx
 │   │   │   ├── DriverOnboardingScreen.tsx
 │   │   │   ├── EditProfileScreen.tsx
-│   │   │   └── ProfileScreen.tsx
+│   │   │   ├── ProfileScreen.tsx
+│   │   │   └── SettingsScreen.tsx
 │   │   ├── services
 │   │   │   ├── dto
 │   │   │   │   └── profile.dto.ts
@@ -362,7 +370,8 @@ src/
 │   │   ├── styles
 │   │   │   ├── driver.styles.ts
 │   │   │   ├── editProfile.styles.ts
-│   │   │   └── profile.styles.ts
+│   │   │   ├── profile.styles.ts
+│   │   │   └── settings.styles.ts
 │   │   ├── types
 │   │   │   └── profile.types.ts
 │   │   └── viewmodels
@@ -424,6 +433,8 @@ src/
 │   │   │   ├── SelectRideScreen
 │   │   │   │   ├── RideLocationInputs.tsx
 │   │   │   │   └── SelectRideSheet.tsx
+│   │   │   ├── Sos
+│   │   │   │   └── SOSModal.tsx
 │   │   │   ├── TripEndedModal
 │   │   │   │   ├── PaymentSummary.tsx
 │   │   │   │   ├── TripEndedModal.tsx
@@ -468,6 +479,7 @@ src/
 │   │   ├── store
 │   │   │   └── useRideStore.ts
 │   │   ├── styles
+│   │   │   ├── SOSModal.styles.ts
 │   │   │   ├── addNewPlace.style.ts
 │   │   │   ├── confirmRide.styles.ts
 │   │   │   ├── driver.styles.ts
