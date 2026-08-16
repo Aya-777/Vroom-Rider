@@ -5,17 +5,17 @@ import { ProfileStackScreenProps } from '../../../navigation/main/profile/profil
 import LinearBg from '../../../shared/components/LinearBg';
 import SubHeader from '../../../shared/components/SubHeader';
 import { createSettingsStyles } from '../styles/settings.styles';
+import PrivacyIcon from '../../../assets/svg/profile/privacy.svg';
+import AppearanceIcon from '../../../assets/svg/profile/appearance.svg';
+import AccessibilityIcon from '../../../assets/svg/profile/accessibility.svg';
+import RideCheckIcon from '../../../assets/svg/profile/rideCheck.svg';
+import ManageIcon from '../../../assets/svg/profile/manage.svg';
+import FacebookIcon from '../../../assets/svg/profile/facebook.svg';
+import InstagramIcon from '../../../assets/svg/profile/instagram.svg';
+import ArrowIcon from '../../../assets/svg/arrows/arrow.svg';
 import { useNavigation } from '@react-navigation/native';
 
-const rows: [string, string][] = [
-    ['Privacy', 'Manage the data you share with us'],
-    ['Appearance', 'Use device settings'],
-    ['Accessibility', 'Manage your accessibility settings'],
-    ['Ride Check', 'Manage your RideCheck notifications'],
-    ['Manage Vroom Account', 'Update your profile and account details'],
-    ['Facebook', 'Follow Vroom on Facebook'],
-    ['Instagram', 'Follow Vroom on Instagram'],
-];
+const rows = [[PrivacyIcon, 'Privacy', 'Manage the data you share with us'], [AppearanceIcon, 'Appearance', 'Use device settings'], [AccessibilityIcon, 'Accessibility', 'Manage your accessibility settings'], [RideCheckIcon, 'Ride Check', 'Manage your RideCheck notifications'], [ManageIcon, 'Manage Vroom Account', 'Update your profile and account details'], [FacebookIcon, 'Facebook', 'Follow Vroom on Facebook'], [InstagramIcon, 'Instagram', 'Follow Vroom on Instagram']] as const;
 
 export default function SettingsScreen() {
     const { colors } = useTheme();
@@ -27,7 +27,7 @@ export default function SettingsScreen() {
             style={styles.container}
             colors={[colors.backgroundSoft, colors.background]}
         >
-            <SubHeader title="Settings" onBackPress={() => navigation.goBack()} />
+            <SubHeader title="Settings" onBackPress={() => navigation.navigate("ProfileHome")} />
 
             <ScrollView contentContainerStyle={styles.content}>
                 {/* Account Card */}
@@ -43,13 +43,13 @@ export default function SettingsScreen() {
                         </Text>
                     </View>
 
-                    <Text style={styles.arrow}>-&gt;</Text>
+                    <ArrowIcon width={20} height={20} fill={colors.textMuted} />
                 </View>
 
                 {/* App Settings */}
                 <Text style={styles.sectionTitle}>App settings</Text>
 
-                {rows.map(([title, subtitle], index) => (
+                {rows.map(([Icon, title, subtitle], index) => (
                     <View key={title}>
                         {index === 3 && (
                             <Text style={styles.sectionTitle}>Safety</Text>
@@ -59,14 +59,14 @@ export default function SettingsScreen() {
                         )}
 
                         <TouchableOpacity style={styles.row}>
-                            <Text style={styles.rowIconText}>*</Text>
+                            <Icon width={22} height={22} fill={colors.primary} />
 
                             <View style={styles.rowCopy}>
                                 <Text style={styles.rowTitle}>{title}</Text>
                                 <Text style={styles.rowSubtitle}>{subtitle}</Text>
                             </View>
 
-                            <Text style={styles.arrow}>-&gt;</Text>
+                            <ArrowIcon width={20} height={20} fill={colors.textMuted} />
                         </TouchableOpacity>
                     </View>
                 ))}
@@ -74,3 +74,6 @@ export default function SettingsScreen() {
         </LinearBg>
     );
 }
+
+
+

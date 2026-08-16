@@ -63,14 +63,15 @@ export const createSettingsStyles = (colors: ThemeColors) =>
     row: {
       minHeight: 66,
       flexDirection: 'row',
+      columnGap: 16,
       alignItems: 'center',
       borderBottomWidth: 1,
       borderBottomColor: colors.border,
     },
     rowIcon: {
-      width: 34,
+      width: 22,
       alignItems: 'center',
-      marginRight: Spacing.sm,
+      marginRight: 0,
     },
     rowIconText: {
       fontSize: 20,
@@ -108,3 +109,12 @@ export const createSettingsStyles = (colors: ThemeColors) =>
       marginBottom: Spacing.xs,
     },
   });
+
+
+
+
+
+
+
+
+

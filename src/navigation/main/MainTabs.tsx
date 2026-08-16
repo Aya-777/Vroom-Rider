@@ -135,7 +135,7 @@ export default function MainTabs() {
       <Tab.Screen
         name="ProfileTab"
         component={ProfileStack}
-        options={{ tabBarLabel: t('navigation:profile') }}
+        options={{ tabBarLabel: t('navigation:profile'), popToTopOnBlur: true }}
       />
     </Tab.Navigator>
   );
@@ -164,5 +164,6 @@ const styles = StyleSheet.create({
 
   tabIcon: {},
 });
+
 
 
