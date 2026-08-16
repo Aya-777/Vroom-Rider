@@ -216,6 +216,14 @@ export const rideApi = {
       ENDPOINTS.TRIPS.SOS(id)
     );
     return;
+  },
+
+  areYouSafePress: async (id: number, is_safe: boolean) => {
+    await apiClient.post(
+      ENDPOINTS.TRIPS.AREUSAFE(id),
+      { is_safe: is_safe }
+    );
+    return;
   }
 };
 

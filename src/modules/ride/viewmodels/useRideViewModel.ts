@@ -41,6 +41,10 @@ export function useRideViewModel() {
     rideState,
     setRideState,
     getIdempotencyKey,
+    sosVisible: storeSOSVisible,
+    setSOSVisible: setStoreSosVisible,
+    sosAlertId,
+    setDriverLocation,
   } = useRideStore();
 
   useEffect(() => {
@@ -60,59 +64,45 @@ export function useRideViewModel() {
   }, []);
 
   useEffect(() => {
-    let mounted = true;
+  const loadCurrentRide = async () => {
+    try {
+      const ride = await rideApi.getCurrent();
 
-    const loadCurrentRide = async () => {
-      try {
-        const response = await rideApi.getCurrent();
-
-        if (!mounted) {
-          return;
-        }
-
-        const ride = response;
-
-        if (!ride) {
-          setCurrentRide(null);
-          setRideState(RideState.SELECT_RIDE);
-          return;
-        }
-
-        console.log('Current ride:', ride);
-
-        setCurrentRide(ride);
-
-        const state = getRideStateFromStatus(ride.status);
-        setRideState(state);
-      } catch (error: any) {
-        if (!mounted) {
-          return;
-        }
-
-        // 404 means no active/current ride
-        if (
-          error?.response?.status === 404 &&
-          error?.response?.data?.message === 'trips.detail.no_current_trip'
-        ) {
-          console.log('No current ride.');
-
-          setCurrentRide(null);
-          setRideState(RideState.SELECT_RIDE);
-
-          return;
-        }
-
-        // Any other error is a real error
-        console.error('Failed to load current ride:', error);
+      if (!ride) {
+        setCurrentRide(null);
+        setRideState(RideState.SELECT_RIDE);
+        return;
       }
-    };
+      const state = getRideStateFromStatus(ride.status);
+      const location = await rideApi.getDriverLocation(ride.id);
 
-    loadCurrentRide();
+      console.log('[Ridevm] Driver location:', location);
 
-    return () => {
-      mounted = false;
-    };
-  }, [setCurrentRide, setRideState]);
+      // Save it in Zustand
+      setDriverLocation({
+        latitude: location.data.latitude,
+        longitude: location.data.longitude,
+      });
+
+
+      setCurrentRide(ride);
+      setRideState(state);
+    } catch (error: any) {
+      if (
+        error?.response?.status === 404 &&
+        error?.response?.data?.message === 'trips.detail.no_current_trip'
+      ) {
+        setCurrentRide(null);
+        setRideState(RideState.SELECT_RIDE);
+        return;
+      }
+      console.error('Failed to load current ride:', error);
+    }
+  };
+
+  loadCurrentRide();
+}, [setCurrentRide, setRideState]);
+
 
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
@@ -260,7 +250,11 @@ export function useRideViewModel() {
       return false;
     }
     try{
-      await rideApi.sosPress(currentRide?.id)
+      if(storeSOSVisible && sosAlertId){
+        await rideApi.areYouSafePress(sosAlertId, false);
+      }else{
+        await rideApi.sosPress(currentRide?.id)
+      }
       console.log('Sos sent successfully.');
       return true;
     }catch{
@@ -278,9 +272,11 @@ export function useRideViewModel() {
     isBillVisible,
     isReviewVisible,
     isSOSVisible,
+    storeSOSVisible,
     setIsBillVisible,
     setIsReviewVisible,
     setSOSVisible,
+    setStoreSosVisible,
     filters,
 
     handleBackPress,

@@ -39,7 +39,8 @@ export const ENDPOINTS = {
     RERIDE: (tripId: number) => `/trips/${tripId}/reorder/`,
     RECENT: '/trips/recent/',
     DRIVER_LOCATION:(id:number) => `/trips/${id}/location/`,
-    SOS: (id: number) => `/trips/trips/${id}/sos/`
+    SOS: (id: number) => `/trips/trips/${id}/sos/`,
+    AREUSAFE: (id: number) => `/trips/safety-alerts/${id}/respond/`
 },
 
   FAVORITE_DRIVERS: {

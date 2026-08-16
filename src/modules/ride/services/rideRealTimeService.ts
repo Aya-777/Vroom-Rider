@@ -40,6 +40,10 @@ class RideRealtimeService {
           this.handleDriverLocation(data);
           break;
 
+        case 'safety.alert.created':
+          this.handleSOSVisible(data);
+          break;
+
         default:
           console.log('[RideRealtime] Unhandled event:', event.eventName);
       }
@@ -119,8 +123,8 @@ class RideRealtimeService {
 
       // Save it in Zustand
       setDriverLocation({
-        latitude: location.latitude,
-        longitude: location.longitude,
+        latitude: location.data.latitude,
+        longitude: location.data.longitude,
       });
 
       // Only AFTER currentRide has been updated
@@ -250,11 +254,21 @@ class RideRealtimeService {
       );
       return;
     }
+    console.log("driver location updated");
 
     setDriverLocation({
       latitude: data.latitude,
       longitude: data.longitude,
     });
+  }
+
+  private async handleSOSVisible(data: {
+    alert_id: number, trip_id: number, alert_type: string
+  }){
+    const {setSOSVisible, setSOSAlertId} = useRideStore.getState();
+    setSOSVisible(true);
+    setSOSAlertId(data.alert_id);
+    
   }
 }
 
