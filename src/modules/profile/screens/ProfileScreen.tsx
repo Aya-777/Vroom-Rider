@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { View, ScrollView, RefreshControl } from 'react-native';
 
 import { useTheme } from '../../../core/theme/useTheme';
@@ -71,7 +71,7 @@ export default function ProfileScreen() {
           />
 
           <GridSection items={gridItems} />
-          <PromoBanner />
+          <PromoBanner onPress={() => navigation.navigate('DriverOnboarding')} />
           <ListSection items={listItems} />
 
           <ActionButton
