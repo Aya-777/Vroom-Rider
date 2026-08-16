@@ -71,5 +71,12 @@
   "facebookDesc": "Follow Vroom on Facebook",
   "instagram": "Instagram",
   "instagramDesc": "Follow Vroom on Instagram",
-  "connectWithVroom": "Connect with Vroom"
+  "connectWithVroom": "Connect with Vroom",
+  "deleteMyAccount": "Delete My Account",
+  "deleting": "Deleting...",
+  "deleteAccountConfirmation": "Are you sure you want to delete your account?",
+  "deleteFailedTitle": "Delete failed",
+  "deleteFailedMessage": "We could not delete your account. Please try again.",
+  "yes": "Yes",
+  "no": "No"
 }

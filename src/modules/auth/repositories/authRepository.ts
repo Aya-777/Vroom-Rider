@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+﻿import { useMutation } from '@tanstack/react-query';
 import { authApi } from '../services/authApi';
 import {
   SignupRequestDTO,
@@ -65,6 +65,10 @@ export const useAuthRepository = {
     });
   },
   
+  useDeleteAccount: () => {
+    return useMutation<{ message: string }, Error>({ mutationFn: authApi.deleteAccount });
+  },
+
   useLogout: () => {
     return useMutation<{ message: string }, Error>({
       mutationFn: authApi.logout,

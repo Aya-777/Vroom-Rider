@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
+﻿import { StyleSheet, Dimensions } from 'react-native';
 import {
   Radius,
   Spacing,
@@ -237,19 +237,17 @@ export const createStyles = (colors: ThemeColors) =>
     },
 
     logoutButton: {
-      backgroundColor: colors.error + '90',
+      marginTop: Spacing.lg,
+      paddingVertical: Spacing.md,
+      borderRadius: Radius.sm,
       borderWidth: 1,
       borderColor: colors.error,
-      borderRadius: 12,
-      paddingVertical: 14,
-      justifyContent: 'center',
+      backgroundColor: colors.error + '18',
       alignItems: 'center',
-      flexDirection: 'row',
       width: '90%',
     },
-
     logoutText: {
+      ...Typography.semiBoldBody,
       color: colors.error,
-      ...Typography.boldBody,
     },
   });

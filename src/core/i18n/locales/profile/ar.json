@@ -71,5 +71,12 @@
   "facebookDesc": "تابع Vroom على فيسبوك",
   "instagram": "انستغرام",
   "instagramDesc": "تابع Vroom على انستغرام",
-  "connectWithVroom": "تواصل مع Vroom"
+  "connectWithVroom": "تواصل مع Vroom",
+  "deleteMyAccount": "حذف حسابي",
+  "deleting": "جارٍ الحذف...",
+  "deleteAccountConfirmation": "هل أنت متأكد أنك تريد حذف حسابك؟",
+  "deleteFailedTitle": "فشل الحذف",
+  "deleteFailedMessage": "تعذر حذف حسابك. حاول مرة أخرى.",
+  "yes": "نعم",
+  "no": "لا"
 }

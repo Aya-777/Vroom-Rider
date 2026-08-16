@@ -1,4 +1,4 @@
-import { apiClient } from '../../../core/network/apiClient';
+﻿import { apiClient } from '../../../core/network/apiClient';
 import { ENDPOINTS } from '../../../core/network/endpoints';
 import {
     SignupRequestDTO,
@@ -124,6 +124,11 @@ export const authApi = {
             data
 
         );
+        return response.data;
+    },
+
+    deleteAccount: async (): Promise<{ message: string }> => {
+        const response = await apiClient.post<{ message: string }>(ENDPOINTS.AUTH.DELETE_ACCOUNT);
         return response.data;
     },
 

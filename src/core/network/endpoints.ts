@@ -1,4 +1,4 @@
-export const ENDPOINTS = {
+﻿export const ENDPOINTS = {
   AUTH: {
     SIGNUP: '/api/v1/auth/signup/',
     VERIFY_OTP: '/api/v1/auth/signup/verify-otp/',
@@ -10,6 +10,7 @@ export const ENDPOINTS = {
     FORGOT_PASSWORD_RESEND_OTP: '/api/v1/auth/forgot-password/resend-otp/',
     RESET_PASSWORD: '/api/v1/auth/forgot-password/reset-password/',
     LOGOUT: '/api/v1/auth/logout/',
+    DELETE_ACCOUNT: '/api/v1/auth/delete-account/',
   },
   CHANGE_PASSWORD: '/api/v1/users/me/change-password/',
   USERS: {
