@@ -9,6 +9,7 @@ import ChangePhoneScreen from '../../../modules/profile/screens/ChangePhoneScree
 import ChangePhoneOtpScreen from '../../../modules/profile/screens/ChangePhoneOtpScreen';
 import ChangePasswordScreen from '../../../modules/profile/screens/ChangePasswordScreen';
 import { ProfileStackParamList } from './profileTypes';
+import SafetyScreen from '../../../modules/profile/screens/SafetyScreen';
 
 const Stack = createNativeStackNavigator<ProfileStackParamList>();
 
@@ -22,6 +23,7 @@ export default function ProfileStack() {
       <Stack.Screen name="ChangePhone" component={ChangePhoneScreen} />
       <Stack.Screen name="ChangePhoneOtp" component={ChangePhoneOtpScreen} />
       <Stack.Screen name="ChangePassword" component={ChangePasswordScreen} />
+      <Stack.Screen name="Safety" component={SafetyScreen} />
     </Stack.Navigator>
   );
 }
