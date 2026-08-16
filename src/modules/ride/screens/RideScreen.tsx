@@ -100,13 +100,13 @@ export default function RideScreen() {
           handleMaybeLater={vm.handleMaybeLater}
         />
       </View>
-      {vm.isSOSVisible && (
+      {(vm.isSOSVisible || vm.storeSOSVisible) && (
         <SOSModal
-          visible={vm.isSOSVisible}
-          onCancel={() => vm.setSOSVisible(false)}
-          onConfirm={
-            vm.handleSosPress
-          }
+          visible={vm.isSOSVisible || vm.storeSOSVisible}
+          onCancel={() => {vm.setSOSVisible(false)
+            vm.setStoreSosVisible(false)
+          }}
+          onConfirm={vm.handleSosPress}
         />
       )}
     </>

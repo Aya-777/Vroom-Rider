@@ -147,7 +147,11 @@ export interface ReviewResponseDTO {
 }
 
 export interface LocationResponseDTO {
-  latitude: number,
-  longitude: number,
-  last_updated: string,
+  'status code': number,
+  message: string,
+  data:{
+    latitude: number,
+    longitude: number,
+    last_updated: string,
+  }
 }

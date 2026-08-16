@@ -62,8 +62,15 @@ interface RideState {
   driverLocation: MapLocation | null,
 
   setDriverLocation: (value :MapLocation | null) => void; 
-  
-}
+
+  sosVisible: boolean;
+  sosAlertId: number | null;
+
+  setSOSVisible: (visible: boolean) => void;
+  setSOSAlertId: (alertId: number | null) => void;
+
+};
+
 
 const normalizeStops = (stops: RideStop[]): RideStop[] => {
   return stops.map((stop, index) => ({
@@ -266,8 +273,15 @@ export const useRideStore = create<RideState>((set, get) => ({
     return newKey;
   },
 
-  driverLocation: null as MapLocation | null,
+  driverLocation: null,
 
   setDriverLocation: (location: MapLocation | null) =>
     set({ driverLocation: location }),
+
+  sosVisible: false,
+  sosAlertId: null,
+
+  setSOSVisible: visible => set({ sosVisible: visible }),
+
+  setSOSAlertId: alertId => set({ sosAlertId: alertId }),
 }));
