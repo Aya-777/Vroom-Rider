@@ -38,7 +38,8 @@ export const ENDPOINTS = {
     HISTORY: '/trips/history/',
     RERIDE: (tripId: number) => `/trips/${tripId}/reorder/`,
     RECENT: '/trips/recent/',
-    DRIVER_LOCATION:(id:number) => `/trips/${id}/location/`
+    DRIVER_LOCATION:(id:number) => `/trips/${id}/location/`,
+    SOS: (id: number) => `/trips/trips/${id}/sos/`
 },
 
   FAVORITE_DRIVERS: {

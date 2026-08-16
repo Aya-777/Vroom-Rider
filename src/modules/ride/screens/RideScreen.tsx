@@ -1,10 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  View,
-  StatusBar,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
+import { View, StatusBar, TouchableOpacity, Text } from 'react-native';
 import Header from '../../../shared/components/SubHeader';
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/selectRide.styles';
@@ -22,6 +17,7 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated';
 import { RideState } from '../types/RideState';
+import SOSModal from '../components/Sos/SOSModal';
 
 export default function RideScreen() {
   const { colors, mode } = useTheme();
@@ -47,61 +43,72 @@ export default function RideScreen() {
   }));
 
   return (
-    <View style={styles.container}>
-      <StatusBar
-        translucent
-        barStyle={mode === 'dark' ? 'light-content' : 'dark-content'}
-        backgroundColor="transparent"
-      />
+    <>
+      <View style={styles.container}>
+        <StatusBar
+          translucent
+          barStyle={mode === 'dark' ? 'light-content' : 'dark-content'}
+          backgroundColor="transparent"
+        />
 
-      <View>
-    <Header
-      title={t('common:ride')}
-      onBackPress={vm.handleBackPress}
-    />
-    {
-      vm.rideState === (RideState.DRIVER_FOUND || RideState.DRIVER_ARRIVED || RideState.TRIP_STARTED || RideState.TRIP_ENDED)
-      &&
-      <TouchableOpacity
-        style={styles.sosButton}
-        onPress={vm.handleSosPress}
-        activeOpacity={0.8}
-      >
-        <Text style={styles.sosText}>SOS</Text>
-      </TouchableOpacity>
-      }
-    </View>
+        <View>
+          <Header title={t('common:ride')} onBackPress={vm.handleBackPress} />
+          {(
+            vm.rideState === RideState.DRIVER_FOUND ||
+            vm.rideState === RideState.DRIVER_ARRIVED ||
+            vm.rideState === RideState.TRIP_STARTED ||
+            vm.rideState === RideState.TRIP_ENDED
+          ) && (
+            <TouchableOpacity
+              style={styles.sosButton}
+              onPress={() => vm.setSOSVisible(true)}
+              activeOpacity={0.8}
+            >
+              <Text style={styles.sosText}>SOS</Text>
+            </TouchableOpacity>
+          )}
+        </View>
 
-      <MapContainer vm={mapVm} />
+        <MapContainer vm={mapVm} />
 
-      <Animated.View style={buttonStyle}>
-        <TouchableOpacity
-          style={styles.myLocationButton}
-          onPress={handleMyLocationPress}
-        >
-          <MyLocationIcon fill={colors.primary} />
-        </TouchableOpacity>
-      </Animated.View>
+        <Animated.View style={buttonStyle}>
+          <TouchableOpacity
+            style={styles.myLocationButton}
+            onPress={handleMyLocationPress}
+          >
+            <MyLocationIcon fill={colors.primary} />
+          </TouchableOpacity>
+        </Animated.View>
 
-      <RideBottomSheet
-        rideState={vm.rideState}
-        isCancelling={vm.isCancelling}
-        setIsCancelling={vm.setIsCancelling}
-        onSelectRideNext={vm.goToExtraDetails}
-        onExtraDetailsNext={vm.goToRideConfirmation}
-        onRideConfirmed={vm.goToSearchingForaDriver}
-        onCancelPress={vm.cancelCurrentRide}
-        onKeepRide={vm.keepRidePress}
-        rematch={vm.handleRematch}
-        animatedPosition={animatedPosition}
-        isBillVisible={vm.isBillVisible}
-        isReviewVisible={vm.isReviewVisible}
-        setIsBillVisible={vm.setIsBillVisible}
-        setIsReviewVisible={vm.setIsReviewVisible}
-        filters={vm.filters}
-        handleSubmit={vm.handleSubmitReview}
-        handleMaybeLater={vm.handleMaybeLater}
-      />
-    </View>
+        <RideBottomSheet
+          rideState={vm.rideState}
+          isCancelling={vm.isCancelling}
+          setIsCancelling={vm.setIsCancelling}
+          onSelectRideNext={vm.goToExtraDetails}
+          onExtraDetailsNext={vm.goToRideConfirmation}
+          onRideConfirmed={vm.goToSearchingForaDriver}
+          onCancelPress={vm.cancelCurrentRide}
+          onKeepRide={vm.keepRidePress}
+          rematch={vm.handleRematch}
+          animatedPosition={animatedPosition}
+          isBillVisible={vm.isBillVisible}
+          isReviewVisible={vm.isReviewVisible}
+          setIsBillVisible={vm.setIsBillVisible}
+          setIsReviewVisible={vm.setIsReviewVisible}
+          filters={vm.filters}
+          handleSubmit={vm.handleSubmitReview}
+          handleMaybeLater={vm.handleMaybeLater}
+        />
+      </View>
+      {vm.isSOSVisible && (
+        <SOSModal
+          visible={vm.isSOSVisible}
+          onCancel={() => vm.setSOSVisible(false)}
+          onConfirm={
+            vm.handleSosPress
+          }
+        />
+      )}
+    </>
   );
 }

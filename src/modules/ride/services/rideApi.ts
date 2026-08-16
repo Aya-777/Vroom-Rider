@@ -209,6 +209,14 @@ export const rideApi = {
 
     return response.data;
   },
+
+  // SOS
+  sosPress: async (id: number) => {
+    await apiClient.post(
+      ENDPOINTS.TRIPS.SOS(id)
+    );
+    return;
+  }
 };
 
 // Trip History

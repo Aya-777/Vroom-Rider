@@ -79,7 +79,7 @@ export default function DriverArrivedSheet({
 
         <ActionButton
           title={t('common:cancel')}
-          onPress={() => setIsCancelling(false)}
+          onPress={() => setIsCancelling(true)}
           style={styles.canelButton}
           textStyle={styles.cancelButtonText}
         />
