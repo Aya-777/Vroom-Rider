@@ -17,6 +17,13 @@ export const createSettingsStyles = (colors: ThemeColors) =>
       paddingBottom: Spacing.xxl,
     },
 
+    languageBlock: { marginBottom: Spacing.sm },
+    languageSelector: { minHeight: 52, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: Spacing.md, borderWidth: 1, borderColor: colors.border, borderRadius: Radius.sm, backgroundColor: colors.surface },
+    languageValue: { ...Typography.body, color: colors.textPrimary },
+    languageOptions: { marginTop: Spacing.xs, borderRadius: Radius.sm, overflow: 'hidden', backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border },
+    languageOption: { padding: Spacing.md },
+    languageOptionActive: { backgroundColor: colors.primary + '18' },
+    languageOptionText: { ...Typography.body, color: colors.textPrimary },
     // Section
     sectionTitle: {
       ...Typography.h3,
@@ -109,6 +116,7 @@ export const createSettingsStyles = (colors: ThemeColors) =>
       marginBottom: Spacing.xs,
     },
   });
+
 
 
 
