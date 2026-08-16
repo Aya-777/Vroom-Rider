@@ -236,6 +236,10 @@ export function useRideViewModel() {
     setRideState(RideState.SELECT_RIDE);
   };
 
+    const handleSosPress = () => {
+      
+    }
+
   return {
     rideState,
     currentLocation,
@@ -262,5 +266,6 @@ export function useRideViewModel() {
     onMyLocationPress,
     handleSubmitReview,
     handleMaybeLater,
+    handleSosPress,
   };
 }

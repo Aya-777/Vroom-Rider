@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react';
-import { View, StatusBar, TouchableOpacity } from 'react-native';
+import {
+  View,
+  StatusBar,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
 import Header from '../../../shared/components/SubHeader';
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/selectRide.styles';
@@ -16,6 +21,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
+import { RideState } from '../types/RideState';
 
 export default function RideScreen() {
   const { colors, mode } = useTheme();
@@ -37,8 +43,6 @@ export default function RideScreen() {
   const buttonStyle = useAnimatedStyle(() => ({
     position: 'absolute',
     right: 20,
-
-    // 68 = button height (52) + 16px spacing
     top: animatedPosition.value - 68,
   }));
 
@@ -50,7 +54,23 @@ export default function RideScreen() {
         backgroundColor="transparent"
       />
 
-      <Header title={t('common:ride')} onBackPress={vm.handleBackPress} />
+      <View>
+    <Header
+      title={t('common:ride')}
+      onBackPress={vm.handleBackPress}
+    />
+    {
+      vm.rideState === (RideState.DRIVER_FOUND || RideState.DRIVER_ARRIVED || RideState.TRIP_STARTED || RideState.TRIP_ENDED)
+      &&
+      <TouchableOpacity
+        style={styles.sosButton}
+        onPress={vm.handleSosPress}
+        activeOpacity={0.8}
+      >
+        <Text style={styles.sosText}>SOS</Text>
+      </TouchableOpacity>
+      }
+    </View>
 
       <MapContainer vm={mapVm} />
 
