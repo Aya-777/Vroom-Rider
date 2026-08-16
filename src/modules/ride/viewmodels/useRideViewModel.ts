@@ -28,6 +28,7 @@ export function useRideViewModel() {
   const [isCancelling, setIsCancelling] = useState(false);
   const [isReviewVisible, setIsReviewVisible] = useState(false);
   const [isBillVisible, setIsBillVisible] = useState(false);
+  const [isSOSVisible, setSOSVisible] = useState(false);
   const [filters, setFilters] = useState<RideFilter[]>([]);
   const {
     rideData,
@@ -236,9 +237,20 @@ export function useRideViewModel() {
     setRideState(RideState.SELECT_RIDE);
   };
 
-    const handleSosPress = () => {
-      
+  const handleSosPress = async () => {
+    if(!currentRide){
+      console.log('There is no current ride');
+      return false;
     }
+    try{
+      await rideApi.sosPress(currentRide?.id)
+      console.log('Sos sent successfully.');
+      return true;
+    }catch{
+      console.log('failed to send sos, try again.');
+      return false;
+    }
+  }
 
   return {
     rideState,
@@ -248,8 +260,10 @@ export function useRideViewModel() {
     setIsCancelling,
     isBillVisible,
     isReviewVisible,
+    isSOSVisible,
     setIsBillVisible,
     setIsReviewVisible,
+    setSOSVisible,
     filters,
 
     handleBackPress,
