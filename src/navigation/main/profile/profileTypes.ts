@@ -1,7 +1,8 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+﻿import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 export type ProfileStackParamList = {
   ProfileHome: undefined;
+  DriverOnboarding: undefined;
   EditProfile:
   | { firstName?: string; lastName?: string; phone?: string; profileImage?: string | null }
   | undefined;
@@ -13,3 +14,6 @@ export type ProfileStackParamList = {
 
 export type ProfileStackScreenProps<T extends keyof ProfileStackParamList> =
   NativeStackScreenProps<ProfileStackParamList, T>;
+
+
+

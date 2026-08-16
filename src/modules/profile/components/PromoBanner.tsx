@@ -1,17 +1,18 @@
-import React from 'react';
+﻿import React from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/profile.styles';
 import { useTranslation } from 'react-i18next';
 
-export default function PromoBanner() {
+export default function PromoBanner({ onPress }: { onPress?: () => void }) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
-  const {t} = useTranslation('profile')
+  const { t } = useTranslation('profile')
 
   return (
     <TouchableOpacity
+      onPress={onPress}
       style={[
         styles.promoBanner,
         {

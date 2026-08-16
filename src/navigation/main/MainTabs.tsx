@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { View, StyleSheet, ViewStyle } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
@@ -32,6 +32,7 @@ const HIDE_TAB_ROUTES = [
   'EditProfile',
   'ChangePhoneOtp',
   'ChangePassword',
+  'DriverOnboarding',
 ];
 
 const getTabIconComponent = (
