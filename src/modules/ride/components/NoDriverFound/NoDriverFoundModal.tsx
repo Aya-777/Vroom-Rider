@@ -15,7 +15,7 @@ type Props = {
 export const NoDriverFoundModal = ({ cancelPress, isFailed, rematch }: Props) => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
-  const { t } = useTranslation(['selectRide', 'common']);
+  const { t } = useTranslation(['modals', 'common']);
 
   return (
     <Modal visible={isFailed} transparent={true} animationType="fade">
@@ -27,24 +27,24 @@ export const NoDriverFoundModal = ({ cancelPress, isFailed, rematch }: Props) =>
           style={styles.modal}
       >
           {/* Header */}
-          <Text style={styles.title}>Search Failed</Text>
+          <Text style={styles.title}>{t('modals:modals.noDriverFound.title')}</Text>
             <View style={styles.Divider} />
     
 
           <Text style={styles.retryMessage}>
-            We couldn't find a driver for your trip, do you want to retry?
+            {t('modals:modals.noDriverFound.message')}
           </Text>
 
           <View style={styles.actions}>
             <ActionButton
-              title="Cancel"
+              title={t('common:cancel')}
               onPress={cancelPress}
               style={styles.actionButton}
               textStyle={styles.actionButtonText}
             />
 
             <ActionButton
-              title="Retry"
+              title={t('modals:modals.noDriverFound.actionRetry')}
               onPress={rematch}
               style={styles.actionButton}
               textStyle={styles.actionButtonText}

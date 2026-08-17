@@ -16,7 +16,7 @@ type Props = {
 export const CancelModal = ({ cancelCurrentRide, isCancelling, keepRide }: Props) => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
-  const { t } = useTranslation(['selectRide', 'common']);
+  const { t } = useTranslation(['modals', 'common']);
   const [cancellationReason, setCancellationReason] = useState('');
 
   return (
@@ -29,18 +29,18 @@ export const CancelModal = ({ cancelCurrentRide, isCancelling, keepRide }: Props
           style={styles.modal}
       >
           {/* Header */}
-          <Text style={styles.title}>Cancel Ride?</Text>
+          <Text style={styles.title}>{t('modals:modals.cancelRide.title')}</Text>
             <View style={styles.Divider} />
     
 
           <Text style={styles.message}>
-            Are you sure you want to cancel this ride?
+            {t('modals:modals.cancelRide.message')}
           </Text>
 
           <Input
             value={cancellationReason}
             onChangeText={setCancellationReason}
-            placeholder="Why are you cancelling?"
+            placeholder={t('modals:modals.cancelRide.inputPlaceholder')}
             multiline
             numberOfLines={5}
             maxLength={500}
@@ -51,14 +51,14 @@ export const CancelModal = ({ cancelCurrentRide, isCancelling, keepRide }: Props
 
           <View style={styles.actions}>
             <ActionButton
-              title="Cancel Ride"
+              title={t('modals:modals.cancelRide.actionCancel')}
               onPress={() => cancelCurrentRide(cancellationReason)}
               style={styles.actionButton}
               textStyle={styles.actionButtonText}
             />
 
             <ActionButton
-              title="Keep Ride"
+              title={t('modals:modals.cancelRide.actionKeep')}
               onPress={keepRide}
               style={styles.actionButton}
               textStyle={styles.actionButtonText}

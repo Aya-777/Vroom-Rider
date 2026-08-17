@@ -34,6 +34,8 @@ import favoriteDriversEn from './favoriteDrivers/en.json';
 import favoriteDriversAr from './favoriteDrivers/ar.json';
 import safetyEn from './safety/en.json';
 import safetyAr from './safety/ar.json';
+import modalsEn from './modals/en.json';
+import modalsAr from './modals/ar.json';
 
 export {
   authEn,
@@ -72,4 +74,6 @@ export {
   favoriteDriversAr,
   safetyEn,
   safetyAr,
+  modalsEn,
+  modalsAr,
 };

@@ -84,6 +84,17 @@ export function useRideViewModel() {
         longitude: location.data.longitude,
       });
 
+      const route = await rideApi.getCurrentRoute(ride.id);
+
+      console.log('[RideVM] Raw route:', route);
+
+
+      // console.log('[RideVM] Converted route:', routeGeometry);
+
+      setEstimate({
+        ...estimate,
+        route_geometry: route,
+      });
 
       setCurrentRide(ride);
       setRideState(state);
