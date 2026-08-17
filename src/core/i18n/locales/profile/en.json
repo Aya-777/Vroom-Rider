@@ -56,7 +56,7 @@
   "manageYourPersonalInformation": "Manage your personal information",
   "language": "Language",
   "english": "English",
-  "arabic": "Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©",
+  "arabic": "Arabic",
   "appSettings": "App settings",
   "privacy": "Privacy",
   "privacyDesc": "Manage the data you share with us",
@@ -81,4 +81,3 @@
   "yes": "Yes",
   "no": "No"
 }
-
