@@ -1,7 +1,7 @@
 import { Double } from "react-native/Libraries/Types/CodegenTypes";
 import { RidePreferenceDTO } from "../services/dto/ride.dto";
 import { TripStatus } from "./RideState";
-import { Coordinate } from "../services/dto/estimate.dto";
+import {  RouteCoordinate } from "../services/dto/estimate.dto";
 
 export type CarImage = {
   id: number;
@@ -98,7 +98,7 @@ export interface CurrentRide {
 
   stops: RideStop[];
   preference_ids: number[];
-  route_geometry?: Coordinate[];
+  route_geometry?: RouteCoordinate[];
 
   estimated_distance: number;
   estimated_duration: number;

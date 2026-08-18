@@ -20,6 +20,7 @@ import { RideFilter } from '../types/ride.types';
 import {
   EstimateInitialRequestDTO,
   EstimateInitialResponseDTO,
+  RouteCoordinate,
 } from './dto/estimate.dto';
 import {
   TripHistoryItemDTO,
@@ -197,6 +198,12 @@ export const rideApi = {
     const response = await apiClient.get<GetCurrentRideDTO>(
       ENDPOINTS.TRIPS.CURRENT,
     );
+
+    return response.data.data;
+  },
+
+  getCurrentRoute: async (tripId: number): Promise<RouteCoordinate[]> => {
+    const response = await apiClient.get(ENDPOINTS.TRIPS.ROUTE(tripId));
 
     return response.data.data;
   },
