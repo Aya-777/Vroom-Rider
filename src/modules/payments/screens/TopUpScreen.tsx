@@ -25,7 +25,7 @@ export default function TopUpScreen({ navigation }: any) {
     if (result.success) {
       navigation.goBack();
     } else {
-      setError(t('wallet.topUpFailed'));
+      setError(result.message || t('wallet.topUpFailed'));
     }
   };
 

@@ -62,6 +62,7 @@ function App() {
     <StripeProvider
       publishableKey="pk_test_51U5RJpQXh4lHpggVNyf0lLpNMzJIUWHzwjJGIuyCKzYBZRO1GILu1HC8N7QcDNohzouq1CSwUyPRRQttJniEdXCI00Mgck4slU"
       merchantIdentifier="merchant.com.vroom"
+      // urlScheme="vroomrider"
     >
       <GestureHandlerRootView style={{ flex: 1 }}>
         <QueryClientProvider client={queryClient}>

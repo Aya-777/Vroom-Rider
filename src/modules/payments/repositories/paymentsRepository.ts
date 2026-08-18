@@ -6,6 +6,15 @@ import {
   TopUpResult,
 } from '../types/payments.types';
 
+type ApiEnvelope<T> = { data: T };
+
+const unwrap = <T>(payload: T | ApiEnvelope<T>): T => {
+  if (payload && typeof payload === 'object' && 'data' in payload) {
+    return (payload as ApiEnvelope<T>).data;
+  }
+  return payload as T;
+};
+
 const mapTransaction = (dto: WalletTransactionDto): WalletTransaction => ({
   id: dto.id,
   type: dto.type,
@@ -17,17 +26,20 @@ const mapTransaction = (dto: WalletTransactionDto): WalletTransaction => ({
 
 export const paymentsRepository = {
   async getBalance(): Promise<WalletBalance> {
-    const { data } = await paymentsApi.getWalletBalance();
+    const response = await paymentsApi.getWalletBalance();
+    const data = unwrap(response.data);
     return { balance: Number(data.balance), currency: data.currency };
   },
 
   async getTransactions(): Promise<WalletTransaction[]> {
-    const { data } = await paymentsApi.getTransactions();
+    const response = await paymentsApi.getTransactions();
+    const data = unwrap(response.data);
     return data.map(mapTransaction);
   },
 
   async initiateTopUp(amount: number): Promise<TopUpResult> {
-    const { data } = await paymentsApi.topUp(amount);
+    const response = await paymentsApi.topUp(amount);
+    const data = unwrap(response.data);
     return {
       clientSecret: data.client_secret,
       paymentIntentId: data.payment_intent_id,
