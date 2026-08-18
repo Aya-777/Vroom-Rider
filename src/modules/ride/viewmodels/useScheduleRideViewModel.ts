@@ -56,87 +56,87 @@ export function useScheduleRideViewModel() {
   const amPmOptions = ['AM', 'PM'];
 
 
-  const scheduledAt = useMemo(() => {
-    if (!dateValues[selectedIndexDate]) {
-      return null;
-    }
+//   const scheduledAt = useMemo(() => {
+//     if (!dateValues[selectedIndexDate]) {
+//       return null;
+//     }
 
-    let hour = Number(hours[selectedIndexHour]);
+//     let hour = Number(hours[selectedIndexHour]);
 
-    // Convert 12-hour time → 24-hour time
-    if (amPmOptions[selectedIndexAmPm] === 'AM') {
-      if (hour === 12) {
-        hour = 0;
-      }
-    } else {
-      if (hour !== 12) {
-        hour += 12;
-      }
-    }
-    dateValues[selectedIndexDate].setHours(hour);
+//     // Convert 12-hour time → 24-hour time
+//     if (amPmOptions[selectedIndexAmPm] === 'AM') {
+//       if (hour === 12) {
+//         hour = 0;
+//       }
+//     } else {
+//       if (hour !== 12) {
+//         hour += 12;
+//       }
+//     }
+//     dateValues[selectedIndexDate].setHours(hour);
 
-    const result = new Date(dateValues[selectedIndexDate]);
+//     const result = new Date(dateValues[selectedIndexDate]);
 
-    result.setHours(
-      hour,
-      Number(minutes[selectedIndexMinute]),
-      0,
-      0,
-    );
+//     result.setHours(
+//       hour,
+//       Number(minutes[selectedIndexMinute]),
+//       0,
+//       0,
+//     );
 
-    return result;
-  }, [
-    selectedIndexDate,
-    selectedIndexHour,
-    selectedIndexMinute,
-    selectedIndexAmPm,
-  ]);
+//     return result;
+//   }, [
+//     selectedIndexDate,
+//     selectedIndexHour,
+//     selectedIndexMinute,
+//     selectedIndexAmPm,
+//   ]);
 
-  /**
-   * Validate and auto-advance the date if the selected time has passed
-   * (e.g., selecting 12:00 AM on 'Today' when it's already past midnight).
-   */
-  useEffect(() => {
-  if (!scheduledAt) {
-    setScheduleError(null);
-    return;
-  }
+//   /**
+//    * Validate and auto-advance the date if the selected time has passed
+//    * (e.g., selecting 12:00 AM on 'Today' when it's already past midnight).
+//    */
+//   useEffect(() => {
+//   if (!scheduledAt) {
+//     setScheduleError(null);
+//     return;
+//   }
 
-  const previousAmPm = previousAmPmRef.current;
+//   const previousAmPm = previousAmPmRef.current;
 
-  // PM → AM means we crossed midnight
-  const crossedMidnight =
-    previousAmPm === 1 &&
-    selectedIndexAmPm === 0;
+//   // PM → AM means we crossed midnight
+//   const crossedMidnight =
+//     previousAmPm === 1 &&
+//     selectedIndexAmPm === 0;
 
-  if (crossedMidnight) {
-    setSelectedIndexDate(prev => {
-      if (prev >= dateValues.length - 1) {
-        return prev;
-      }
+//   if (crossedMidnight) {
+//     setSelectedIndexDate(prev => {
+//       if (prev >= dateValues.length - 1) {
+//         return prev;
+//       }
 
-      return prev + 1;
-    });
-  }
+//       return prev + 1;
+//     });
+//   }
 
-  // Remember the current AM/PM for the next change
-  previousAmPmRef.current = selectedIndexAmPm;
+//   // Remember the current AM/PM for the next change
+//   previousAmPmRef.current = selectedIndexAmPm;
 
-  // Validate
-  const now = new Date();
+//   // Validate
+//   const now = new Date();
 
-  if (scheduledAt <= now) {
-    setScheduleError(
-      'Please select a time in the future.',
-    );
-  } else {
-    setScheduleError(null);
-  }
-}, [
-  scheduledAt,
-  selectedIndexAmPm,
-  dateValues.length,
-]);
+//   if (scheduledAt <= now) {
+//     setScheduleError(
+//       'Please select a time in the future.',
+//     );
+//   } else {
+//     setScheduleError(null);
+//   }
+// }, [
+//   scheduledAt,
+//   selectedIndexAmPm,
+//   dateValues.length,
+// ]);
 
   return {
     dates,
@@ -150,8 +150,8 @@ export function useScheduleRideViewModel() {
     selectedIndexAmPm,
 
     // selectedDate,
-    scheduledAt,
-    scheduleError,
+    // scheduledAt,
+    // scheduleError,
 
     setSelectedIndexHour,
     setSelectedIndexMinute,
