@@ -1,0 +1,29 @@
+﻿{
+  "wallet": {
+    "balance": "Wallet balance",
+    "topUp": "Top up",
+    "recentTransactions": "Recent transactions",
+    "viewAll": "View all",
+    "types": {
+      "topup": "Top up",
+      "trip_payment": "Trip payment",
+      "refund": "Refund"
+    },
+    "enterAmount": "Enter amount",
+    "customAmount": "Custom amount",
+    "confirmTopUp": "Confirm top-up",
+    "topUpFailed": "Top-up failed, please try again",
+    "insufficientBalance": {
+      "pre_ride": {
+        "title": "Your wallet balance is insufficient",
+        "message": "There is not enough balance to complete this ride. You can pay by cash or top up your wallet."
+      },
+      "post_ride": {
+        "title": "Your wallet balance is insufficient",
+        "message": "The final ride price increased and your wallet balance is not enough. You can pay by cash or top up your wallet."
+      }
+    },
+    "switchToCash": "Cash",
+    "topUpNow": "Top up wallet"
+  }
+}
