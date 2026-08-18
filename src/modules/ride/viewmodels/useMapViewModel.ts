@@ -13,6 +13,7 @@ export default function useMapViewModel() {
   );
   const { estimate, currentRide, rideData, rideState, driverLocation } = useRideStore();
   const [isSearchingForDriver , setIsSearchingForDriver]= useState(rideData?.status === TripStatus.PENDING);
+  // const routeCoordinates = estimate.route_geometry;
 
   const mapRef = useRef<MapRef>(null);
   const cameraRef = useRef<CameraRef>(null);
@@ -108,9 +109,58 @@ export default function useMapViewModel() {
     });
   };
 
-  const routeCoordinates =
-    estimate?.route_geometry.map(point => [point.longitude, point.latitude]) ??
-    [];
+
+  const rawRouteCoordinates = estimate?.route_geometry ?? [];
+
+
+  console.log('ruote;;;;;;;;;;;;;;;;;;;;;;;;;;;', rawRouteCoordinates);
+
+const routeCoordinates: [number, number][] = Array.isArray(rawRouteCoordinates)
+  ? rawRouteCoordinates
+      .map((coordinate: any) => {
+        // Already [lng, lat]
+        if (Array.isArray(coordinate)) {
+          return [Number(coordinate[0]), Number(coordinate[1])] as [
+            number,
+            number,
+          ];
+        }
+
+        // { longitude, latitude }
+        if (
+          coordinate &&
+          coordinate.longitude != null &&
+          coordinate.latitude != null
+        ) {
+          return [
+            Number(coordinate.longitude),
+            Number(coordinate.latitude),
+          ] as [number, number];
+        }
+
+        // { lng, lat }
+        if (
+          coordinate &&
+          coordinate.lng != null &&
+          coordinate.lat != null
+        ) {
+          return [Number(coordinate.lng), Number(coordinate.lat)] as [
+            number,
+            number,
+          ];
+        }
+
+        return null;
+      })
+      .filter(
+        (coordinate): coordinate is [number, number] =>
+          coordinate !== null &&
+          Number.isFinite(coordinate[0]) &&
+          Number.isFinite(coordinate[1]),
+      )
+  : [];
+
+  console.log("routeee geomtry .......................................", routeCoordinates)
 
   const routeBounds =
     routeCoordinates.length > 0

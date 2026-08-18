@@ -1,10 +1,7 @@
 import { Double } from "react-native/Libraries/Types/CodegenTypes";
 import { RideStop, Tiers } from "../../types/ride.types";
 
-export interface Coordinate {
-  latitude: number;
- longitude: number;
-}
+export type RouteCoordinate = [number, number];
 
 export interface RideStopRequestDTO {
   address: string;
@@ -19,9 +16,9 @@ export interface EstimateInitialRequestDTO {
 }
 
 export interface EstimateInitialResponseDTO {
-  estimated_distance_km : Double;
+  estimated_distance_km: Double;
   estimated_duration_minutes: Double;
-  pricing_tiers:  Tiers[];
+  pricing_tiers: Tiers[];
   stops: RideStop[];
-  route_geometry: Coordinate[];
+  route_geometry: RouteCoordinate[];
 }
