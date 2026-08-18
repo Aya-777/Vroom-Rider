@@ -20,9 +20,9 @@
     CHANGE_PHONE_RESEND: '/api/v1/users/me/change-phone/resend-otp/',
     CHANGE_PHONE_VERIFY: '/api/v1/users/me/change-phone/verify-otp/',
   },
-  
+
   TRIPS: {
-    GET_TRIP:(id: number) => `/trips/${id}/`,
+    GET_TRIP: (id: number) => `/trips/${id}/`,
     CURRENT: '/trips/current/',
     INITIAL_ESTIMATE: '/trips/trips/estimate/initial/',
     REFINED_ESTIMATE: '/trips/trips/estimate/refined/',
@@ -33,22 +33,22 @@
     SAVED_LOCATION: (id: number) => `/trips/saved-locations/${id}/`,
     PREFERENCES: '/trips/preferences/',
     CONFIRM: '/trips/confirm/',
-    REMATCH:(id: number) => `/trips/${id}/rematch/`,
+    REMATCH: (id: number) => `/trips/${id}/rematch/`,
     CANCEL: (id: number) => `/trips/trips/${id}/cancel/`,
     SUBMIT_REVIEW: (id: number) => `/trips/trips/${id}/reviews/`,
     HISTORY: '/trips/history/',
     RERIDE: (tripId: number) => `/trips/${tripId}/reorder/`,
     RECENT: '/trips/recent/',
-    DRIVER_LOCATION:(id:number) => `/trips/${id}/location/`,
+    DRIVER_LOCATION: (id: number) => `/trips/${id}/location/`,
     SOS: (id: number) => `/trips/trips/${id}/sos/`,
-    AREUSAFE: (id: number) => `/trips/safety-alerts/${id}/respond/`
-},
+    AREUSAFE: (id: number) => `/trips/safety-alerts/${id}/respond/`,
+  },
 
   FAVORITE_DRIVERS: {
     TOGGLE: '/api/v1/users/favorite-drivers/toggle/',
     GET_FAVORITE_DRIVERS: '/api/v1/users/favorite-drivers/',
   },
-  
+
   NOTIFICATIONS: {
     LIST: '/api/v1/notifications/',
     TYPES: '/api/v1/notifications/types/',
@@ -59,8 +59,14 @@
     DELETE: (id: number) => `/api/v1/notifications/${id}/`,
   },
 
-  PUSHER:{
+  PUSHER: {
     AUTH: 'trips/pusher-auth/',
     CHANNELS: '/realtime/channels/',
-  }
+  },
+
+  PAYMENTS: {
+    WALLET: '/payments/wallet/',
+    WALLET_TOPUP: '/payments/wallet/topup/',
+    WALLET_TRANSACTIONS: '/payments/wallet/transactions/',
+  },
 } as const;

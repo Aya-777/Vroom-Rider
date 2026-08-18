@@ -8,11 +8,11 @@ import LocationService, {
 } from '../../../core/services/location/LocationService';
 import { useRideStore } from '../store/useRideStore';
 import { rideApi } from '../services/rideApi';
-import { CurrentRide, RideFilter } from '../types/ride.types';
+import { RideFilter } from '../types/ride.types';
 import { fetchFilters } from '../utils/fetchFilters';
-import { RequestRideRequestDTO } from '../services/dto/ride.dto';
 import { Alert } from 'react-native';
 import { getRideStateFromStatus } from '../utils/getRideStateFromStatus';
+import { useBalanceCheck } from '../../payments/hooks/useBalanceCheck';
 
 const previousState: Partial<Record<RideState, RideState>> = {
   [RideState.EXTRA_DETAILS]: RideState.SELECT_RIDE,
@@ -25,6 +25,10 @@ export function useRideViewModel() {
     latitude: 0,
     longitude: 0,
   });
+  const { hasSufficientBalance } = useBalanceCheck();
+  const [isPostRideInsufficientVisible, setPostRideInsufficientVisible] =
+    useState(false);
+
   const [isCancelling, setIsCancelling] = useState(false);
   const [isReviewVisible, setIsReviewVisible] = useState(false);
   const [isBillVisible, setIsBillVisible] = useState(false);
@@ -40,7 +44,6 @@ export function useRideViewModel() {
     setCurrentRide,
     rideState,
     setRideState,
-    getIdempotencyKey,
     sosVisible: storeSOSVisible,
     setSOSVisible: setStoreSosVisible,
     sosAlertId,
@@ -64,45 +67,43 @@ export function useRideViewModel() {
   }, []);
 
   useEffect(() => {
-  const loadCurrentRide = async () => {
-    try {
-      const ride = await rideApi.getCurrent();
+    const loadCurrentRide = async () => {
+      try {
+        const ride = await rideApi.getCurrent();
 
-      if (!ride) {
-        setCurrentRide(null);
-        setRideState(RideState.SELECT_RIDE);
-        return;
+        if (!ride) {
+          setCurrentRide(null);
+          setRideState(RideState.SELECT_RIDE);
+          return;
+        }
+        const state = getRideStateFromStatus(ride.status);
+        const location = await rideApi.getDriverLocation(ride.id);
+
+        console.log('[Ridevm] Driver location:', location);
+
+        // Save it in Zustand
+        setDriverLocation({
+          latitude: location.data.latitude,
+          longitude: location.data.longitude,
+        });
+
+        setCurrentRide(ride);
+        setRideState(state);
+      } catch (error: any) {
+        if (
+          error?.response?.status === 404 &&
+          error?.response?.data?.message === 'trips.detail.no_current_trip'
+        ) {
+          setCurrentRide(null);
+          setRideState(RideState.SELECT_RIDE);
+          return;
+        }
+        console.error('Failed to load current ride:', error);
       }
-      const state = getRideStateFromStatus(ride.status);
-      const location = await rideApi.getDriverLocation(ride.id);
+    };
 
-      console.log('[Ridevm] Driver location:', location);
-
-      // Save it in Zustand
-      setDriverLocation({
-        latitude: location.data.latitude,
-        longitude: location.data.longitude,
-      });
-
-
-      setCurrentRide(ride);
-      setRideState(state);
-    } catch (error: any) {
-      if (
-        error?.response?.status === 404 &&
-        error?.response?.data?.message === 'trips.detail.no_current_trip'
-      ) {
-        setCurrentRide(null);
-        setRideState(RideState.SELECT_RIDE);
-        return;
-      }
-      console.error('Failed to load current ride:', error);
-    }
-  };
-
-  loadCurrentRide();
-}, [setCurrentRide, setRideState]);
-
+    loadCurrentRide();
+  }, [setCurrentRide, setRideState, setDriverLocation]);
 
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
@@ -123,11 +124,34 @@ export function useRideViewModel() {
   }, []);
 
   useEffect(() => {
-    if (currentRide?.status === TripStatus.COMPLETED) {
+    const checkAndShowBill = async () => {
+      if (currentRide?.status !== TripStatus.COMPLETED) return;
+
       setRideState(RideState.TRIP_ENDED);
+
+      if (currentRide.payment_method === 'WALLET') {
+        const finalPrice = Number(
+          currentRide.actual_price ?? currentRide.estimated_price,
+        );
+        const sufficient = await hasSufficientBalance(finalPrice);
+        if (!sufficient) {
+          setPostRideInsufficientVisible(true);
+          return;
+        }
+      }
+
       setIsBillVisible(true);
-    }
-  }, [currentRide?.status]);
+    };
+
+    checkAndShowBill();
+  }, [
+    currentRide?.status,
+    currentRide?.payment_method,
+    currentRide?.actual_price,
+    currentRide?.estimated_price,
+    hasSufficientBalance,
+    setRideState,
+  ]);
 
   const goToExtraDetails = async () => {
     setRideState(RideState.EXTRA_DETAILS);
@@ -194,7 +218,7 @@ export function useRideViewModel() {
       });
       setRideState(RideState.SEARCHING_FOR_DRIVER);
       return response;
-    } catch (error) {
+    } catch {
       Alert.alert('Error', 'Could not find a driver. Please try again.');
       return null;
     }
@@ -219,13 +243,12 @@ export function useRideViewModel() {
     setIsReviewVisible(false);
 
     console.log('submiting.....');
-    try{
+    try {
       await rideApi.submitReview(
         { rating: rating, comment: review, is_complaint: isComplaint },
         currentRide?.id ?? rideData.id ?? 0,
       );
-
-    }catch{
+    } catch {
       console.log('Error submitting review...');
     }
 
@@ -245,23 +268,38 @@ export function useRideViewModel() {
   };
 
   const handleSosPress = async () => {
-    if(!currentRide){
+    if (!currentRide) {
       console.log('There is no current ride');
       return false;
     }
-    try{
-      if(storeSOSVisible && sosAlertId){
+    try {
+      if (storeSOSVisible && sosAlertId) {
         await rideApi.areYouSafePress(sosAlertId, false);
-      }else{
-        await rideApi.sosPress(currentRide?.id)
+      } else {
+        await rideApi.sosPress(currentRide?.id);
       }
       console.log('Sos sent successfully.');
       return true;
-    }catch{
+    } catch {
       console.log('failed to send sos, try again.');
       return false;
     }
-  }
+  };
+
+  const handlePostRideSwitchToCash = async () => {
+    console.log(
+      'TODO: switch payment_method to CASH on backend for ride',
+      currentRide?.id,
+    );
+
+    setPostRideInsufficientVisible(false);
+    setIsBillVisible(true);
+  };
+
+  const handlePostRideTopUp = () => {
+    setPostRideInsufficientVisible(false);
+    navigation.navigate('TopUp');
+  };
 
   return {
     rideState,
@@ -278,7 +316,10 @@ export function useRideViewModel() {
     setSOSVisible,
     setStoreSosVisible,
     filters,
-
+    isPostRideInsufficientVisible,
+    setPostRideInsufficientVisible,
+    handlePostRideSwitchToCash,
+    handlePostRideTopUp,
     handleBackPress,
     goToExtraDetails,
     goToRideConfirmation,

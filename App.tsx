@@ -5,7 +5,7 @@ import { ThemeProvider } from './src/core/theme/ThemeProvider';
 import { useTheme } from './src/core/theme/useTheme';
 import { enableScreens, enableFreeze } from 'react-native-screens';
 import RootNavigator from './src/navigation/RootNavigator';
-
+import { StripeProvider } from '@stripe/stripe-react-native';
 import './src/core/i18n';
 import { LanguageService } from './src/core/i18n/services/LanguageService';
 import { Platform, StatusBar, View } from 'react-native';
@@ -59,15 +59,20 @@ function App() {
   }
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          <SafeAreaProvider>
-            <AppContent />
-          </SafeAreaProvider>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </GestureHandlerRootView>
+    <StripeProvider
+      publishableKey="pk_test_51U5RJpQXh4lHpggVNyf0lLpNMzJIUWHzwjJGIuyCKzYBZRO1GILu1HC8N7QcDNohzouq1CSwUyPRRQttJniEdXCI00Mgck4slU"
+      merchantIdentifier="merchant.com.vroom"
+    >
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider>
+            <SafeAreaProvider>
+              <AppContent />
+            </SafeAreaProvider>
+          </ThemeProvider>
+        </QueryClientProvider>
+      </GestureHandlerRootView>
+    </StripeProvider>
   );
 }
 

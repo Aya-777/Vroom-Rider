@@ -7,7 +7,6 @@ import { useConfirmRideViewModel } from '../../viewmodels/useConfirmRideViewMode
 import CashIcon from '../../../../assets/svg/payment/cash.svg';
 import CarIcon from '../../../../assets/svg/common/ride.svg';
 import SearchIcon from '../../../../assets/svg/common/search.svg';
-
 import { createStyles } from '../../styles/confirmRide.styles';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../../core/theme/useTheme';
@@ -29,8 +28,9 @@ export default function RideConfirmationSheet({ onNextPress, animatedPosition }:
   const snapPoints = useMemo(() => ['30%', '70%'], []);
 
   const handleFindPress = async () => {
-    const response = await vm.handleFindDriver();
-    if(response){
+    if (!selectedVehicle) return;
+    const response = await vm.handleFindDriver(selectedVehicle.estimated_price);
+    if (response) {
       onNextPress();
     }
   };

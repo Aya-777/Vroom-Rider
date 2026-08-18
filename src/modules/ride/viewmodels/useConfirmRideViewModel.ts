@@ -5,12 +5,22 @@ import { RequestRideRequestDTO } from '../services/dto/ride.dto';
 import { Alert } from 'react-native';
 import { CurrentRide } from '../types/ride.types';
 import { TripStatus } from '../types/RideState';
+import { useBalanceCheck } from '../../payments/hooks/useBalanceCheck';
 
 export function useConfirmRideViewModel() {
   const [isLoading, setIsLoading] = useState(false);
-  const { rideData, estimate, setCurrentRide, setRideDetails, getIdempotencyKey } = useRideStore();
+  const [isInsufficientBalanceVisible, setInsufficientBalanceVisible] =
+    useState(false);
+  const {
+    rideData,
+    estimate,
+    setCurrentRide,
+    setRideDetails,
+    getIdempotencyKey,
+  } = useRideStore();
+  const { hasSufficientBalance, isChecking } = useBalanceCheck();
 
-  const handleFindDriver = async () => {
+  const proceedToFindDriver = async () => {
     setIsLoading(true);
     const idempotencyKey = getIdempotencyKey();
     try {
@@ -18,20 +28,44 @@ export function useConfirmRideViewModel() {
         rideData as RequestRideRequestDTO,
         idempotencyKey,
       );
-      console.log(response.id);
       setCurrentRide(response as CurrentRide);
-      setRideDetails({
-        status: TripStatus.PENDING,
-      });
-
+      setRideDetails({ status: TripStatus.PENDING });
       return response;
-    } catch (error) {
-      Alert.alert('Error', 'Could not find a driver. Please try again.');
+    } catch (err: any) {
+      Alert.alert(
+        err.response?.data?.message || err.message || 'Error',
+        'Could not find a driver. Please try again.',
+      );
       return null;
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { handleFindDriver, isLoading, rideData, estimate };
+  const handleFindDriver = async (selectedPrice: number) => {
+    if (rideData.payment_method === 'WALLET') {
+      const sufficient = await hasSufficientBalance(selectedPrice);
+      if (!sufficient) {
+        setInsufficientBalanceVisible(true);
+        return null;
+      }
+    }
+    return proceedToFindDriver();
+  };
+
+  const handleSwitchToCash = () => {
+    setRideDetails({ payment_method: 'CASH' });
+    setInsufficientBalanceVisible(false);
+    return proceedToFindDriver();
+  };
+
+  return {
+    handleFindDriver,
+    isLoading: isLoading || isChecking,
+    rideData,
+    estimate,
+    isInsufficientBalanceVisible,
+    setInsufficientBalanceVisible,
+    handleSwitchToCash,
+  };
 }
