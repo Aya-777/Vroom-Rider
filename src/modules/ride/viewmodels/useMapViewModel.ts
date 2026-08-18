@@ -113,8 +113,6 @@ export default function useMapViewModel() {
   const rawRouteCoordinates = estimate?.route_geometry ?? [];
 
 
-  console.log('ruote;;;;;;;;;;;;;;;;;;;;;;;;;;;', rawRouteCoordinates);
-
 const routeCoordinates: [number, number][] = Array.isArray(rawRouteCoordinates)
   ? rawRouteCoordinates
       .map((coordinate: any) => {
@@ -159,8 +157,6 @@ const routeCoordinates: [number, number][] = Array.isArray(rawRouteCoordinates)
           Number.isFinite(coordinate[1]),
       )
   : [];
-
-  console.log("routeee geomtry .......................................", routeCoordinates)
 
   const routeBounds =
     routeCoordinates.length > 0
