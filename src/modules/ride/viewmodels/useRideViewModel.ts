@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { RideState, TripStatus } from '../types/RideState';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -13,6 +13,7 @@ import { fetchFilters } from '../utils/fetchFilters';
 import { Alert } from 'react-native';
 import { getRideStateFromStatus } from '../utils/getRideStateFromStatus';
 import { useBalanceCheck } from '../../payments/hooks/useBalanceCheck';
+import { useWalletActions } from '../../payments/hooks/useWalletActions';
 
 const previousState: Partial<Record<RideState, RideState>> = {
   [RideState.EXTRA_DETAILS]: RideState.SELECT_RIDE,
@@ -26,6 +27,7 @@ export function useRideViewModel() {
     longitude: 0,
   });
   const { hasSufficientBalance } = useBalanceCheck();
+  const { topUp, isProcessing: isTopUpProcessing } = useWalletActions();
   const [isPostRideInsufficientVisible, setPostRideInsufficientVisible] =
     useState(false);
 
@@ -296,9 +298,15 @@ export function useRideViewModel() {
     setIsBillVisible(true);
   };
 
-  const handlePostRideTopUp = () => {
-    setPostRideInsufficientVisible(false);
-    navigation.navigate('TopUp');
+  const handlePostRideTopUp = async () => {
+    const finalPrice = Number(currentRide?.actual_price ?? currentRide?.estimated_price ?? 0);
+    const result = await topUp(finalPrice);
+    if (!result.success) return;
+    const sufficient = await hasSufficientBalance(finalPrice);
+    if (sufficient) {
+      setPostRideInsufficientVisible(false);
+      setIsBillVisible(true);
+    }
   };
 
   return {
@@ -317,6 +325,7 @@ export function useRideViewModel() {
     setStoreSosVisible,
     filters,
     isPostRideInsufficientVisible,
+    isTopUpProcessing,
     setPostRideInsufficientVisible,
     handlePostRideSwitchToCash,
     handlePostRideTopUp,
@@ -337,3 +346,5 @@ export function useRideViewModel() {
     handleSosPress,
   };
 }
+
+

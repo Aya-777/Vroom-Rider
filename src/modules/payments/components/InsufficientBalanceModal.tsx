@@ -1,36 +1,38 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Modal, View, Text, Pressable } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import ActionButton from '../../../shared/components/ActionButton';
-import { BaseBottomSheet } from '../../../shared/components/BaseBottomSheet';
+import { useTheme } from '../../../core/theme/useTheme';
 
-interface Props {
-    isVisible: boolean;
-    onClose: () => void;
-    onSwitchToCash: () => void;
-    onTopUp: () => void;
-    context: 'pre_ride' | 'post_ride';
-}
-
-export function InsufficientBalanceModal({
-    isVisible,
-    onClose,
-    onSwitchToCash,
-    onTopUp,
-    context,
-}: Props) {
-    const { t } = useTranslation('payments');
-
-    return (
-        <BaseBottomSheet isVisible={isVisible} onClose={onClose}>
-            <Text>{t(`wallet.insufficientBalance.${context}.title`)}</Text>
-            <Text>{t(`wallet.insufficientBalance.${context}.message`)}</Text>
-            <ActionButton title={t('wallet.switchToCash')} onPress={onSwitchToCash} />
-            <ActionButton
-                title={t('wallet.topUpNow')}
-                onPress={onTopUp}
-                style={{ backgroundColor: 'transparent', borderWidth: 1 }}
-            />
-        </BaseBottomSheet>
-    );
+type Props = {
+  isVisible: boolean;
+  onClose: () => void;
+  onSwitchToCash: () => void;
+  onTopUp: () => void;
+  context: 'pre_ride' | 'post_ride';
+};
+export function InsufficientBalanceModal({ isVisible, onClose, onSwitchToCash, onTopUp, context }: Props) {
+  const { t } = useTranslation('payments');
+  const { colors } = useTheme();
+  return (
+    <Modal visible={isVisible} transparent animationType="fade" statusBarTranslucent onRequestClose={onClose}>
+      <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.45)', justifyContent: 'center', alignItems: 'center', padding: 24 }}>
+        <View style={{ width: '100%', backgroundColor: colors.background, borderRadius: 24, padding: 24, borderWidth: 1, borderColor: colors.border }}>
+          <Text style={{ color: colors.primary, fontSize: 20, fontWeight: '700', textAlign: 'center', marginBottom: 12 }}>
+            {t(`wallet.insufficientBalance.${context}.title`)}
+          </Text>
+          <Text style={{ color: colors.textPrimary, fontSize: 15, lineHeight: 22, textAlign: 'center', marginBottom: 24 }}>
+            {t(`wallet.insufficientBalance.${context}.message`)}
+          </Text>
+<View style={{ flexDirection: 'row', gap: 10 }}>
+            <Pressable onPress={onSwitchToCash} style={{ flex: 1, minHeight: 44, borderWidth: 1, borderColor: colors.primary, borderRadius: 12, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8 }}>
+              <Text style={{ color: colors.primary, fontWeight: '700', textAlign: 'center' }}>{t('wallet.switchToCash')}</Text>
+            </Pressable>
+            <Pressable onPress={onTopUp} style={{ flex: 1, minHeight: 44, backgroundColor: colors.primary, borderRadius: 12, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8 }}>
+              <Text style={{ color: colors.background, fontWeight: '700', textAlign: 'center' }}>{t('wallet.topUpNow')}</Text>
+            </Pressable>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  );
 }
