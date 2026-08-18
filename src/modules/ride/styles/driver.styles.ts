@@ -27,6 +27,7 @@ export const createStyles = (colors: ThemeColors) =>
       paddingVertical: 8,
       borderRadius: 20,
       marginTop: 10,
+      direction: 'ltr',
     },
     pinSubMessage:{
       ...Typography.caption,
