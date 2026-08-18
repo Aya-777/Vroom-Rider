@@ -9,6 +9,7 @@ import { useTheme } from '../../../../core/theme/useTheme';
 import { BaseBottomSheet } from '../../../../shared/components/BaseBottomSheet';
 import { SharedValue } from 'react-native-reanimated';
 import WheelPicker from './WheelPicker';
+import { useScheduleRideViewModel } from '../../viewmodels/useScheduleRideViewModel';
 
 interface ScheduleOrderSheetProps {
   onClose: () => void;
@@ -23,40 +24,8 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
 }) => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
-
-  // Generate dynamic date options ( Today + next 7 days)
-  const dates = useMemo(() => {
-    const list = [];
-    for (let i = 0; i < 7; i++) {
-      const d = new Date();
-      d.setDate(d.getDate() + i);
-      const label =
-        i === 0
-          ? 'Today'
-          : d.toLocaleDateString('en-US', {
-              weekday: 'short',
-              day: 'numeric',
-              month: 'short',
-            });
-      list.push(label);
-    }
-    return list;
-  }, []);
-
-  const hours = useMemo(
-    () => Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0')),
-    [],
-  );
-  const minutes = useMemo(
-    () => Array.from({ length: 12 }, (_, i) => String(i * 5).padStart(2, '0')),
-    [],
-  );
-  const amPmOptions = ['AM', 'PM'];
-
-  const [selectedIndexDate, setSelectedIndexDate] = useState(0);
-  const [selectedIndexHour, setSelectedIndexHour] = useState(0);
-  const [selectedIndexMinute, setSelectedIndexMinute] = useState(0);
-  const [selectedIndexAmPm, setSelectedIndexAmPm] = useState(0);
+  const vm = useScheduleRideViewModel();
+  
   const snapPoints = useMemo(() => ['50%'], []);
   
   return (
@@ -85,54 +54,59 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
         <View style={styles.selectionHighlight} />
 
         <WheelPicker
-          items={amPmOptions.map(value => ({
+          items={vm.amPmOptions.map(value => ({
             value,
             label: value,
           }))}
-          selectedIndex={selectedIndexAmPm}
-          onChange={setSelectedIndexAmPm}
+          selectedIndex={vm.selectedIndexAmPm}
+          onChange={vm.setSelectedIndexAmPm}
           itemHeight={40}
           visibleItems={3}
           textSize={20}
-          flex={0.4}
         />
         <WheelPicker
-          items={minutes.map(minute => ({
+          items={vm.minutes.map(minute => ({
             value: minute,
             label: minute,
           }))}
-          selectedIndex={selectedIndexMinute}
-          onChange={setSelectedIndexMinute}
+          selectedIndex={vm.selectedIndexMinute}
+          onChange={vm.setSelectedIndexMinute}
           itemHeight={40}
           visibleItems={3}
           textSize={20}
         />
 
         <WheelPicker
-          items={hours.map(hour => ({
+          items={vm.hours.map(hour => ({
             value: hour,
             label: hour,
           }))}
-          selectedIndex={selectedIndexHour}
-          onChange={setSelectedIndexHour}
+          selectedIndex={vm.selectedIndexHour}
+          onChange={vm.setSelectedIndexHour}
           itemHeight={40}
           visibleItems={3}
           textSize={20}
         />
             <WheelPicker
-              items={dates.map(date => ({
+              items={vm.dates.map(date => ({
                 value: date,
                 label: date,
               }))}
-              selectedIndex={selectedIndexDate}
-              onChange={setSelectedIndexDate}
+              selectedIndex={vm.selectedIndexDate}
+              onChange={vm.setSelectedIndexDate}
               itemHeight={40}
               visibleItems={3}
               textSize={16}
-              flex={2}
+              flex={1.4}
               width={200}
             />
       </View>
+
+      {vm.scheduleError && (
+        <Text style={styles.scheduleError}>
+          {vm.scheduleError}
+        </Text>
+      )}
 
       <Text style={styles.footerText}>
         You will be notified when driver is assigned.
@@ -140,19 +114,25 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
 
       {/* Action Button */}
       <TouchableOpacity
-        style={styles.submitButton}
-        activeOpacity={0.8}
-        onPress={() => {
-          onSetupOrder({
-            date: dates[selectedIndexDate],
-            time: `${hours[selectedIndexHour]}:${minutes[selectedIndexMinute]}`,
-            amPm: amPmOptions[selectedIndexAmPm],
-          });
-          onClose();
-        }}
-      >
-        <Text style={styles.submitButtonText}>Set up your order</Text>
-      </TouchableOpacity>
+  style={[
+    styles.submitButton,
+    vm.scheduleError && styles.submitButtonDisabled,
+  ]}
+  disabled={!!vm.scheduleError}
+  onPress={() => {
+    onSetupOrder({
+      date: vm.dates[vm.selectedIndexDate],
+      time: `${vm.hours[vm.selectedIndexHour]}:${vm.minutes[vm.selectedIndexMinute]}`,
+      amPm: vm.amPmOptions[vm.selectedIndexAmPm],
+    });
+
+    onClose();
+  }}
+>
+  <Text style={styles.submitButtonText}>
+    Set up your order
+  </Text>
+</TouchableOpacity>
     </BaseBottomSheet>
   );
 };

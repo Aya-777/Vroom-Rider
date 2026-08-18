@@ -1,77 +1,45 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import {
-  DateItem,
-  ScheduleSelection,
-} from '../types/schedule.types';
-
-const DATE_COUNT = 30;
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 export const WHEEL_ITEM_HEIGHT = 48;
 
-export function useScheduleRideViewModel(
-  onContinue: (selection: ScheduleSelection) => void,
-) {
-  const [selectedDateIndex, setSelectedDateIndex] =
-    useState(0);
+export function useScheduleRideViewModel() {
+  const [selectedIndexDate, setSelectedIndexDate] = useState(0);
+  const [selectedIndexHour, setSelectedIndexHour] = useState(0);
+  const [selectedIndexMinute, setSelectedIndexMinute] = useState(0);
+  const [selectedIndexAmPm, setSelectedIndexAmPm] = useState(0);
+  const [scheduleError, setScheduleError] = useState<string | null>(null);
+  const previousAmPmRef = useRef(selectedIndexAmPm);
 
-  const [selectedHourIndex, setSelectedHourIndex] =
-    useState(0);
 
-  const [selectedMinuteIndex, setSelectedMinuteIndex] =
-    useState(0);
+  // Keep the actual dates separately (7 days)
+  const dateValues = useMemo(() => {
+    return Array.from({ length: 7 }, (_, i) => {
+      const date = new Date();
+      date.setHours(0, 0, 0, 0);
+      date.setDate(date.getDate() + i);
 
-  const [selectedPeriodIndex, setSelectedPeriodIndex] =
-    useState(0);
-
-  const dates = useMemo<DateItem[]>(() => {
-    return Array.from(
-      { length: DATE_COUNT },
-      (_, index) => {
-        const date = new Date();
-
-        date.setHours(0, 0, 0, 0);
-        date.setDate(
-          date.getDate() + index,
-        );
-
-        let label = '';
-
-        if (index === 0) {
-          label = 'Today';
-        } else if (index === 1) {
-          label = 'Tomorrow';
-        } else {
-          label = date.toLocaleDateString(
-            'en-US',
-            {
-              weekday: 'short',
-            },
-          );
-        }
-
-        return {
-          date,
-          label,
-          subLabel: date.toLocaleDateString(
-            'en-US',
-            {
-              month: 'short',
-              day: 'numeric',
-            },
-          ),
-        };
-      },
-    );
+      return date;
+    });
   }, []);
+
+  // Display values for the wheel
+  const dates = useMemo(() => {
+    return dateValues.map((date, i) =>
+      i === 0
+        ? 'Today'
+        : date.toLocaleDateString('en-US', {
+            weekday: 'short',
+            day: 'numeric',
+            month: 'short',
+          }),
+    );
+  }, [dateValues]);
 
   const hours = useMemo(
     () =>
       Array.from(
         { length: 12 },
-        (_, index) => ({
-          value: String(index + 1),
-          label: String(index + 1).padStart(2, '0'),
-        }),
+        (_, i) => String(i + 1).padStart(2, '0'),
       ),
     [],
   );
@@ -80,54 +48,23 @@ export function useScheduleRideViewModel(
     () =>
       Array.from(
         { length: 12 },
-        (_, index) => {
-          const minute = index * 5;
-
-          return {
-            value: String(minute),
-            label: String(minute).padStart(2, '0'),
-          };
-        },
+        (_, i) => String(i * 5).padStart(2, '0'),
       ),
     [],
   );
 
-  const periods = useMemo(
-    () => [
-      {
-        value: 'AM',
-        label: 'AM',
-      },
-      {
-        value: 'PM',
-        label: 'PM',
-      },
-    ],
-    [],
-  );
+  const amPmOptions = ['AM', 'PM'];
 
-  const selectedDate =
-    dates[selectedDateIndex]?.date;
-
-  const selectedHour =
-    Number(hours[selectedHourIndex]?.value ?? 12);
-
-  const selectedMinute =
-    Number(
-      minutes[selectedMinuteIndex]?.value ?? 0,
-    );
-
-  const selectedPeriod =
-    periods[selectedPeriodIndex]?.value ?? 'AM';
 
   const scheduledAt = useMemo(() => {
-    if (!selectedDate) {
+    if (!dateValues[selectedIndexDate]) {
       return null;
     }
 
-    let hour = selectedHour;
+    let hour = Number(hours[selectedIndexHour]);
 
-    if (selectedPeriod === 'AM') {
+    // Convert 12-hour time → 24-hour time
+    if (amPmOptions[selectedIndexAmPm] === 'AM') {
       if (hour === 12) {
         hour = 0;
       }
@@ -136,121 +73,89 @@ export function useScheduleRideViewModel(
         hour += 12;
       }
     }
+    dateValues[selectedIndexDate].setHours(hour);
 
-    const result = new Date(selectedDate);
+    const result = new Date(dateValues[selectedIndexDate]);
 
     result.setHours(
       hour,
-      selectedMinute,
+      Number(minutes[selectedIndexMinute]),
       0,
       0,
     );
 
     return result;
   }, [
-    selectedDate,
-    selectedHour,
-    selectedMinute,
-    selectedPeriod,
+    selectedIndexDate,
+    selectedIndexHour,
+    selectedIndexMinute,
+    selectedIndexAmPm,
   ]);
 
   /**
-   * When today is selected, automatically make sure
-   * the selected time isn't already in the past.
+   * Validate and auto-advance the date if the selected time has passed
+   * (e.g., selecting 12:00 AM on 'Today' when it's already past midnight).
    */
   useEffect(() => {
-    if (!scheduledAt) {
-      return;
-    }
+  if (!scheduledAt) {
+    setScheduleError(null);
+    return;
+  }
 
-    const now = new Date();
+  const previousAmPm = previousAmPmRef.current;
 
-    if (
-      selectedDate?.toDateString() ===
-        now.toDateString() &&
-      scheduledAt <= now
-    ) {
-      // Round current time up to next 5 minutes.
-      const roundedMinutes =
-        Math.ceil(
-          (now.getMinutes() + 1) / 5,
-        ) * 5;
+  // PM → AM means we crossed midnight
+  const crossedMidnight =
+    previousAmPm === 1 &&
+    selectedIndexAmPm === 0;
 
-      let hour = now.getHours();
-      let minute = roundedMinutes;
-
-      if (minute >= 60) {
-        hour += 1;
-        minute = 0;
+  if (crossedMidnight) {
+    setSelectedIndexDate(prev => {
+      if (prev >= dateValues.length - 1) {
+        return prev;
       }
 
-      const isPM = hour >= 12;
-
-      let displayHour = hour % 12;
-
-      if (displayHour === 0) {
-        displayHour = 12;
-      }
-
-      const hourIndex =
-        displayHour - 1;
-
-      const minuteIndex =
-        Math.floor(minute / 5);
-
-      const periodIndex =
-        isPM ? 1 : 0;
-
-      setSelectedHourIndex(
-        Math.min(hourIndex, 11),
-      );
-
-      setSelectedMinuteIndex(
-        Math.min(minuteIndex, 11),
-      );
-
-      setSelectedPeriodIndex(
-        periodIndex,
-      );
-    }
-  }, [selectedDateIndex]);
-
-  const handleContinue = useCallback(() => {
-    if (!selectedDate || !scheduledAt) {
-      return;
-    }
-
-    onContinue({
-      date: selectedDate,
-      time: scheduledAt,
-      scheduledAt,
+      return prev + 1;
     });
-  }, [
-    selectedDate,
-    scheduledAt,
-    onContinue,
-  ]);
+  }
+
+  // Remember the current AM/PM for the next change
+  previousAmPmRef.current = selectedIndexAmPm;
+
+  // Validate
+  const now = new Date();
+
+  if (scheduledAt <= now) {
+    setScheduleError(
+      'Please select a time in the future.',
+    );
+  } else {
+    setScheduleError(null);
+  }
+}, [
+  scheduledAt,
+  selectedIndexAmPm,
+  dateValues.length,
+]);
 
   return {
     dates,
-
     hours,
     minutes,
-    periods,
+    amPmOptions,
 
-    selectedDateIndex,
-    selectedHourIndex,
-    selectedMinuteIndex,
-    selectedPeriodIndex,
+    selectedIndexDate,
+    selectedIndexHour,
+    selectedIndexMinute,
+    selectedIndexAmPm,
 
-    selectedDate,
+    // selectedDate,
     scheduledAt,
+    scheduleError,
 
-    setSelectedDateIndex,
-    setSelectedHourIndex,
-    setSelectedMinuteIndex,
-    setSelectedPeriodIndex,
-
-    handleContinue,
+    setSelectedIndexHour,
+    setSelectedIndexMinute,
+    setSelectedIndexAmPm,
+    setSelectedIndexDate,
   };
 }

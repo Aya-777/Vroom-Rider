@@ -82,4 +82,14 @@ export const createStyles = (colors: ThemeColors) =>
       fontSize: 16,
       fontWeight: '600',
     },
+    scheduleError: {
+      textAlign: 'center',
+      fontSize: 13,
+      color: colors.error,
+      marginTop: 4,
+      marginBottom: 8,
+    },
+    submitButtonDisabled: {
+      opacity: 0.5,
+    },
   });
