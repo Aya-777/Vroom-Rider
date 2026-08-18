@@ -53,7 +53,7 @@ export default function RideBottomSheet({
   handleSubmit,
   handleMaybeLater,
 }: Props) {
-  const { currentRide } = useRideStore();
+  const { currentRide, setRideState } = useRideStore();
 
   const renderSheet = () => {
 
@@ -63,7 +63,7 @@ export default function RideBottomSheet({
         return(
           <ScheduleBottomSheet 
             onSetupOrder={()=>{}}
-            onClose={()=>{}}
+            onClose={() => setRideState(RideState.SELECT_RIDE)}
             animatedPosition={animatedPosition}
           />
         );

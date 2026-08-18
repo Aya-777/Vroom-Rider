@@ -1,8 +1,5 @@
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-} from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
+
 import {
   FlatList,
   NativeScrollEvent,
@@ -12,6 +9,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+
+import {
+  BottomSheetFlatList,
+  BottomSheetFlatListMethods,
+} from '@gorhom/bottom-sheet';
 
 export interface WheelPickerItem {
   value: string;
@@ -24,9 +26,9 @@ interface WheelPickerProps {
   onChange: (index: number) => void;
 
   width?: number;
+  flex?: number;
   itemHeight?: number;
   visibleItems?: number;
-
   textSize?: number;
 }
 
@@ -35,19 +37,18 @@ export default function WheelPicker({
   selectedIndex,
   onChange,
   width = 100,
+  flex = 1,
   itemHeight = 48,
-  visibleItems = 5,
+  visibleItems = 3,
   textSize = 18,
 }: WheelPickerProps) {
-  const listRef = useRef<FlatList<WheelPickerItem>>(null);
-
+  const listRef = useRef<BottomSheetFlatListMethods>(null);
   const pickerHeight = itemHeight * visibleItems;
 
-  const verticalPadding =
-    (pickerHeight - itemHeight) / 2;
+  const verticalPadding = (pickerHeight - itemHeight) / 2;
 
   /**
-   * Keep the selected item centered.
+   * Initial positioning.
    */
   useEffect(() => {
     requestAnimationFrame(() => {
@@ -56,32 +57,21 @@ export default function WheelPicker({
         animated: false,
       });
     });
-  }, [selectedIndex, itemHeight]);
+  }, []);
 
   const handleScrollEnd = useCallback(
-    (
-      event: NativeSyntheticEvent<NativeScrollEvent>,
-    ) => {
-      const offset =
-        event.nativeEvent.contentOffset.y;
+    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+      const offset = event.nativeEvent.contentOffset.y;
 
       const index = Math.round(offset / itemHeight);
 
-      const clampedIndex = Math.max(
-        0,
-        Math.min(index, items.length - 1),
-      );
+      const clampedIndex = Math.max(0, Math.min(index, items.length - 1));
 
       if (clampedIndex !== selectedIndex) {
         onChange(clampedIndex);
       }
     },
-    [
-      itemHeight,
-      items.length,
-      onChange,
-      selectedIndex,
-    ],
+    [itemHeight, items.length, onChange, selectedIndex],
   );
 
   const handlePress = (index: number) => {
@@ -100,19 +90,11 @@ export default function WheelPicker({
     item: WheelPickerItem;
     index: number;
   }) => {
-    const distance = Math.abs(
-      index - selectedIndex,
-    );
+    const distance = Math.abs(index - selectedIndex);
 
     const isSelected = distance === 0;
 
-    let opacity = 0.2;
-
-    if (distance === 0) {
-      opacity = 1;
-    } else if (distance === 1) {
-      opacity = 0.45;
-    }
+    const opacity = distance === 0 ? 1 : distance === 1 ? 0.45 : 0.2;
 
     return (
       <TouchableOpacity
@@ -127,16 +109,12 @@ export default function WheelPicker({
       >
         <Text
           style={[
-            styles.text,
-            {
+            styles.text,{
               fontSize: textSize,
               opacity,
-              fontWeight: isSelected
-                ? '500'
-                : '400',
-            },
-          ]}
-        >
+              fontWeight: isSelected ? '600' : '400',
+              },
+            ]}>
           {item.label}
         </Text>
       </TouchableOpacity>
@@ -149,12 +127,11 @@ export default function WheelPicker({
         styles.container,
         {
           width,
+          flex,
           height: pickerHeight,
         },
       ]}
     >
-      {/* Selected row highlight */}
-
       <View
         pointerEvents="none"
         style={[
@@ -166,44 +143,23 @@ export default function WheelPicker({
         ]}
       />
 
-      <FlatList
+      <BottomSheetFlatList
         ref={listRef}
         data={items}
-        keyExtractor={(item, index) =>
-          `${item.value}-${index}`
-        }
+        keyExtractor={(item, index) => `${item.value}-${index}`}
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
-
-        /**
-         * This is what makes it a wheel.
-         */
         snapToInterval={itemHeight}
-        decelerationRate="fast"
-        snapToAlignment="start"
-
-        /**
-         * Makes first/last items able to reach
-         * the center.
-         */
         contentContainerStyle={{
           paddingVertical: verticalPadding,
         }}
-
         getItemLayout={(_, index) => ({
           length: itemHeight,
           offset: itemHeight * index,
           index,
         })}
-
         onMomentumScrollEnd={handleScrollEnd}
         onScrollEndDrag={handleScrollEnd}
-
-        /**
-         * Prevent the FlatList from behaving like
-         * a normal long scrolling list.
-         */
-        nestedScrollEnabled
         bounces={false}
       />
     </View>
@@ -222,7 +178,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: '#111',
+    color: '#E5E5E5',
   },
 
   selectedRow: {
