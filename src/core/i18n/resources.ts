@@ -37,6 +37,8 @@
   safetyAr,
   paymentsEn,
   paymentsAr,
+  modalsEn,
+  modalsAr,
 } from './locales/index';
 
 export const resources = {
@@ -60,6 +62,7 @@ export const resources = {
     favoriteDrivers: favoriteDriversEn,
     safety: safetyEn,
     payments: paymentsEn,
+    modals: modalsEn,
   },
 
   ar: {
@@ -82,5 +85,6 @@ export const resources = {
     favoriteDrivers: favoriteDriversAr,
     safety: safetyAr,
     payments: paymentsAr,
+    modals: modalsAr,
   },
 };

@@ -85,7 +85,7 @@ export const createStyles = (colors: any) =>
     metricRow: {
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'space-evenly',
       minWidth: 60,
       height: 30,
       borderRadius: Radius.lg,
@@ -100,8 +100,9 @@ export const createStyles = (colors: any) =>
     },
 
     tipLabel:{
-      ...Typography.body,
+      ...Typography.caption,
       color: colors.textPrimary,
+      marginBottom: -20,
     },
 
     tipInput: {
@@ -111,7 +112,6 @@ export const createStyles = (colors: any) =>
       backgroundColor: colors.surface,
       paddingHorizontal: Spacing.sm,
       justifyContent: 'center',
-      marginBottom: -22,
     },
 
     tipText: {

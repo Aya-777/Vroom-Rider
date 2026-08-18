@@ -24,6 +24,7 @@
   TRIPS: {
     GET_TRIP: (id: number) => `/trips/${id}/`,
     CURRENT: '/trips/current/',
+    ROUTE:(id: number) => `/trips/trips/${id}/route/`,
     INITIAL_ESTIMATE: '/trips/trips/estimate/initial/',
     REFINED_ESTIMATE: '/trips/trips/estimate/refined/',
     VERIFY_NUMBER_ENTER: '/trips/contact-number/enter/',

@@ -30,7 +30,7 @@ export const SavedPlacesModal: React.FC<SavedPlacesModalProps> = ({
 }) => {
   const { colors, mode } = useTheme();
   const styles = createStyles(colors);
-  const { t } = useTranslation(['selectRide', 'common']);
+  const { t } = useTranslation(['modals', 'common']);
 
   return (
     <Modal
@@ -46,10 +46,9 @@ export const SavedPlacesModal: React.FC<SavedPlacesModalProps> = ({
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
         >
-          {/* <View style={styles.modalContainer}> */}
           {/* Header */}
           <View style={styles.header}>
-            <Text style={styles.headerTitle}>Saved Places</Text>
+            <Text style={styles.headerTitle}>{t('modals:modals.savedPlaces.title')}</Text>
             <TouchableOpacity onPress={onClose} style={styles.closeButton}>
               <CloseIcon width={20} height={20} fill={colors.textMuted} />
             </TouchableOpacity>
@@ -83,9 +82,8 @@ export const SavedPlacesModal: React.FC<SavedPlacesModalProps> = ({
             onPress={onAddPress}
           >
             <AddIcon width={18} height={18} fill={colors.backgroundSoft} />
-            <Text style={styles.addButtonText}>Add New Place</Text>
+            <Text style={styles.addButtonText}>{t('modals:modals.savedPlaces.addNew')}</Text>
           </TouchableOpacity>
-          {/* </View> */}
         </LinearBg>
       </View>
     </Modal>

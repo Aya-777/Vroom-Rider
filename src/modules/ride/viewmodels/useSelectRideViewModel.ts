@@ -110,6 +110,7 @@ export function useSelectRideViewModel() {
       stops,
     });
 
+
     setEstimate(estimate);
 
     setRideDetails({

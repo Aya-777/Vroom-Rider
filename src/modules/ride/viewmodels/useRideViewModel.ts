@@ -83,11 +83,23 @@ export function useRideViewModel() {
 
         console.log('[Ridevm] Driver location:', location);
 
-        // Save it in Zustand
-        setDriverLocation({
-          latitude: location.data.latitude,
-          longitude: location.data.longitude,
-        });
+      // Save it in Zustand
+      setDriverLocation({
+        latitude: location.data.latitude,
+        longitude: location.data.longitude,
+      });
+
+      const route = await rideApi.getCurrentRoute(ride.id);
+
+      console.log('[RideVM] Raw route:', route);
+
+
+      // console.log('[RideVM] Converted route:', routeGeometry);
+
+      setEstimate({
+        ...estimate,
+        route_geometry: route,
+      });
 
         setCurrentRide(ride);
         setRideState(state);

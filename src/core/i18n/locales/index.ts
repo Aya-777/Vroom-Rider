@@ -36,6 +36,8 @@ import safetyEn from './safety/en.json';
 import safetyAr from './safety/ar.json';
 import paymentsEn from './payments/en.json';
 import paymentsAr from './payments/ar.json';
+import modalsEn from './modals/en.json';
+import modalsAr from './modals/ar.json';
 
 export {
   authEn,
@@ -76,4 +78,6 @@ export {
   safetyAr,
   paymentsEn,
   paymentsAr,
+  modalsEn,
+  modalsAr,
 };

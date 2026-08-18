@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   ActiveInput,
   RideParams,
-  RideStop,
-  RideValidationErrors,
   DraftStop,
 } from '../types/ride.types';
 
@@ -23,6 +21,10 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
 
   const pickup = useInitialPickup(currentLocation);
 
+  // --------------------------------
+  // Existing ride data
+  // --------------------------------
+
   const pickupStop = rideData.stops?.find(
     stop => stop.stop_type === 'PICKUP',
   );
@@ -31,15 +33,22 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
     stop => stop.stop_type === 'DROP_OFF',
   );
 
-  const [isNowDropdownOpen, setIsNowDropdownOpen] = useState(false);
-  const [isForMeDropdownOpen, setIsForMeDropdownOpen] = useState(false);
+  // --------------------------------
+  // Pickup initialization
+  // --------------------------------
 
-  const [errors, setErrors] = useState({});
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  /**
+   * If rideData already has a pickup,
+   * we consider pickup initialized immediately.
+   *
+   * If it doesn't, we wait for GPS and initialize
+   * from GPS exactly once.
+   */
+  const hasInitializedPickup = useRef(!!pickupStop);
 
-  // -----------------------------
+  // --------------------------------
   // Pickup / Destination
-  // -----------------------------
+  // --------------------------------
 
   const [fromText, setFromText] = useState(
     pickupStop?.address ?? '',
@@ -60,9 +69,38 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
       longitude: destinationStop?.longitude ?? 0,
     });
 
-  // -----------------------------
+  // --------------------------------
+  // Initialize pickup from GPS once
+  // --------------------------------
+
+  useEffect(() => {
+    // rideData already had a pickup.
+    // Never touch it with GPS.
+    if (hasInitializedPickup.current) {
+      return;
+    }
+
+    // No GPS yet.
+    if (!pickup) {
+      return;
+    }
+
+    // Initialize from current location.
+    setFromText(pickup.address);
+
+    setPickupCoordinates({
+      latitude: pickup.latitude,
+      longitude: pickup.longitude,
+    });
+
+    // VERY IMPORTANT:
+    // From now on, GPS must never modify pickup.
+    hasInitializedPickup.current = true;
+  }, [pickup]);
+
+  // --------------------------------
   // Draft Stops
-  // -----------------------------
+  // --------------------------------
 
   const [draftStops, setDraftStops] = useState<DraftStop[]>(() =>
     (rideData.stops ?? [])
@@ -76,13 +114,12 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
       })),
   );
 
-  const [activeStopId, setActiveStopId] = useState<string | null>(
-    null,
-  );
+  const [activeStopId, setActiveStopId] =
+    useState<string | null>(null);
 
-  // -----------------------------
+  // --------------------------------
   // Location Searches
-  // -----------------------------
+  // --------------------------------
 
   const pickupSearch = useLocationSearch(fromText);
 
@@ -96,9 +133,20 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
     activeStop?.address ?? '',
   );
 
-  // -----------------------------
+  // --------------------------------
   // Other state
-  // -----------------------------
+  // --------------------------------
+
+  const [isNowDropdownOpen, setIsNowDropdownOpen] =
+    useState(false);
+
+  const [isForMeDropdownOpen, setIsForMeDropdownOpen] =
+    useState(false);
+
+  const [errors, setErrors] = useState({});
+
+  const [isModalVisible, setIsModalVisible] =
+    useState(false);
 
   const [selectedPerson, setSelectedPerson] = useState(
     rideData.is_for_someone_else
@@ -121,9 +169,9 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
   const [isSheetVisible, setIsSheetVisible] =
     useState(true);
 
-  // -----------------------------
+  // --------------------------------
   // Pickup
-  // -----------------------------
+  // --------------------------------
 
   const onPickupFocus = () => {
     setActiveStopId(null);
@@ -140,12 +188,16 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
       longitude: place.longitude,
     });
 
+    // User has explicitly selected a pickup.
+    // GPS must never replace it.
+    hasInitializedPickup.current = true;
+
     setActiveInput(null);
   };
 
-  // -----------------------------
+  // --------------------------------
   // Destination
-  // -----------------------------
+  // --------------------------------
 
   const onDestinationFocus = () => {
     setActiveStopId(null);
@@ -165,9 +217,9 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
     setActiveInput(null);
   };
 
-  // -----------------------------
+  // --------------------------------
   // Stops
-  // -----------------------------
+  // --------------------------------
 
   const addStop = () => {
     const newStop: DraftStop = {
@@ -262,23 +314,6 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
     setActiveInput(null);
   };
 
-  // -----------------------------
-  // Initial pickup
-  // -----------------------------
-
-  useEffect(() => {
-    if (!pickup || pickupStop) {
-      return;
-    }
-
-    setFromText(pickup.address);
-
-    setPickupCoordinates({
-      latitude: pickup.latitude,
-      longitude: pickup.longitude,
-    });
-  }, [pickup, pickupStop]);
-
   return {
     isNowDropdownOpen,
     setIsNowDropdownOpen,
@@ -322,15 +357,12 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
     isSheetVisible,
     setIsSheetVisible,
 
-    // Pickup
     onPickupFocus,
     onSelectPickup,
 
-    // Destination
     onDestinationFocus,
     onSelectDestination,
 
-    // Stops
     draftStops,
     addStop,
     removeStop,

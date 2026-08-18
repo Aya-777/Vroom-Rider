@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { useTheme } from '../../../../core/theme/useTheme';
 import { createStyles } from '../../styles/SOSModal.styles';
+import { useTranslation } from 'react-i18next';
 
 interface SOSModalProps {
   visible: boolean;
@@ -21,6 +22,7 @@ export default function SOSModal({
 }: SOSModalProps) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
+  const { t } = useTranslation(['modals', 'common']);
 
   const [isSent, setIsSent] = useState(false);
   const [isSending, setIsSending] = useState(false);
@@ -66,11 +68,11 @@ export default function SOSModal({
               </View>
 
               <Text style={styles.title}>
-                SOS Sent
+                {t('modals:modals.sos.sentTitle')}
               </Text>
 
               <Text style={styles.message}>
-                Sos message sent, Help will be there soon!
+                {t('modals:modals.sos.sentMessage')}
               </Text>
 
               <TouchableOpacity
@@ -79,7 +81,7 @@ export default function SOSModal({
                 activeOpacity={0.7}
               >
                 <Text style={styles.cancelText}>
-                  Close
+                  {t('common:close')}
                 </Text>
               </TouchableOpacity>
             </>
@@ -88,11 +90,11 @@ export default function SOSModal({
               <Text style={styles.icon}>⚠️</Text>
 
               <Text style={styles.title}>
-                Are you Safe?
+                {t('modals:modals.sos.questionTitle')}
               </Text>
 
               <Text style={styles.message}>
-                Do you want to send an emergency request?
+                {t('modals:modals.sos.questionMessage')}
               </Text>
 
               <TouchableOpacity
@@ -102,7 +104,7 @@ export default function SOSModal({
                 disabled={isSending}
               >
                 <Text style={styles.sosButtonText}>
-                  {isSending ? 'SENDING...' : 'SEND SOS'}
+                  {isSending ? t('modals:modals.sos.sending') : t('modals:modals.sos.sendSos')}
                 </Text>
               </TouchableOpacity>
 
@@ -113,7 +115,7 @@ export default function SOSModal({
                 disabled={isSending}
               >
                 <Text style={styles.cancelText}>
-                  Cancel
+                  {t('common:cancel')}
                 </Text>
               </TouchableOpacity>
             </>
