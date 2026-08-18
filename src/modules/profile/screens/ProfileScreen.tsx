@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { View, ScrollView, RefreshControl } from 'react-native';
 
 import { useTheme } from '../../../core/theme/useTheme';
@@ -64,13 +64,17 @@ export default function ProfileScreen() {
               navigation.navigate('EditProfile', {
                 firstName: profile?.firstName,
                 lastName: profile?.lastName,
-                phone: profile?.phone, 
+                phone: profile?.phone,
                 profileImage: profile?.profileImage,
               })
             }
           />
 
-          <GridSection items={gridItems} onItemPress={(id) => { if (id === '1') navigation.navigate('Safety'); if (id === '4') navigation.navigate('Settings'); }} />
+          <GridSection items={gridItems} onItemPress={(id) => {
+            if (id === '1') navigation.navigate('Safety');
+            if (id === '2') navigation.navigate('Wallet');
+            if (id === '4') navigation.navigate('Settings');
+          }} />
           <PromoBanner onPress={() => navigation.navigate('DriverOnboarding')} />
           <ListSection items={listItems} />
 

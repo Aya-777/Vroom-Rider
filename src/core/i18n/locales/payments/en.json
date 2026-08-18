@@ -1,9 +1,17 @@
-﻿{
+{
   "wallet": {
-    "balance": "Wallet balance",
-    "topUp": "Top up",
+    "title": "Wallet",
+    "balance": "Current balance",
+    "cardHolder": "Card holder",
+    "cardNotAvailable": "Card details unavailable",
+    "topUp": "Top up wallet",
     "recentTransactions": "Recent transactions",
     "viewAll": "View all",
+    "loading": "Loading wallet...",
+    "loadError": "Unable to load wallet",
+    "retry": "Try again",
+    "emptyTitle": "No transactions yet",
+    "emptyMessage": "You do not have any wallet transactions yet.",
     "types": {
       "topup": "Top up",
       "trip_payment": "Trip payment",

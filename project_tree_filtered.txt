@@ -107,6 +107,9 @@ src/
 │   │   │   ├── notifications
 │   │   │   │   ├── ar.json
 │   │   │   │   └── en.json
+│   │   │   ├── payments
+│   │   │   │   ├── ar.json
+│   │   │   │   └── en.json
 │   │   │   ├── profile
 │   │   │   │   ├── ar.json
 │   │   │   │   └── en.json
@@ -350,6 +353,7 @@ src/
 │   │   │   └── InsufficientBalanceModal.tsx
 │   │   ├── constants
 │   │   ├── hooks
+│   │   │   ├── useBalanceCheck.ts
 │   │   │   └── useWalletActions.ts
 │   │   ├── repositories
 │   │   │   └── paymentsRepository.ts

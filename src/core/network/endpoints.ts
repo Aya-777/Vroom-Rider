@@ -12,13 +12,13 @@
     LOGOUT: '/api/v1/auth/logout/',
     DELETE_ACCOUNT: '/api/v1/auth/delete-account/',
   },
-  CHANGE_PASSWORD: '/api/v1/users/me/change-password/',
   USERS: {
     ME: '/api/v1/users/me/',
     EDIT_PROFILE: '/api/v1/users/me/profile/',
     CHANGE_PHONE_REQUEST: '/api/v1/users/me/change-phone/',
     CHANGE_PHONE_RESEND: '/api/v1/users/me/change-phone/resend-otp/',
     CHANGE_PHONE_VERIFY: '/api/v1/users/me/change-phone/verify-otp/',
+    CHANGE_PASSWORD: '/api/v1/users/me/change-password/',
   },
 
   TRIPS: {
