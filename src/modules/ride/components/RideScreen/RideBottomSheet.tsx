@@ -12,6 +12,7 @@ import SelectRideSheet from '../SelectRideScreen/SelectRideSheet';
 import TripEndedModal from '../TripEndedModal/TripEndedModal';
 import TripStartedSheet from '../TripStartedScreen/TripStartedSheet';
 import { RideFilter } from '../../types/ride.types';
+import {ScheduleBottomSheet} from '../Schedule/ScheduleBottomSheet';
 
 type Props = {
   rideState: RideState;
@@ -55,7 +56,18 @@ export default function RideBottomSheet({
   const { currentRide } = useRideStore();
 
   const renderSheet = () => {
+
     switch (rideState) {
+
+      case RideState.SELECT_TIME:
+        return(
+          <ScheduleBottomSheet 
+            onSetupOrder={()=>{}}
+            onClose={()=>{}}
+            animatedPosition={animatedPosition}
+          />
+        );
+
       case RideState.SELECT_RIDE:
         return (
           <SelectRideSheet

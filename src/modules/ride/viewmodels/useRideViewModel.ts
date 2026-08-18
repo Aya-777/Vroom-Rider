@@ -70,7 +70,11 @@ export function useRideViewModel() {
 
       if (!ride) {
         setCurrentRide(null);
-        setRideState(RideState.SELECT_RIDE);
+        if(rideState === RideState.SELECT_TIME){
+          setRideState(RideState.SELECT_TIME)
+        }else{
+          setRideState(RideState.SELECT_RIDE);
+        }
         return;
       }
       const state = getRideStateFromStatus(ride.status);
@@ -93,7 +97,11 @@ export function useRideViewModel() {
         error?.response?.data?.message === 'trips.detail.no_current_trip'
       ) {
         setCurrentRide(null);
-        setRideState(RideState.SELECT_RIDE);
+        if(rideState === RideState.SELECT_TIME){
+          setRideState(RideState.SELECT_TIME)
+        }else{
+          setRideState(RideState.SELECT_RIDE);
+        }
         return;
       }
       console.error('Failed to load current ride:', error);
@@ -148,7 +156,7 @@ export function useRideViewModel() {
 
   const handleBackPress = () => {
     const previous = previousState[rideState];
-    if (rideState === RideState.SELECT_RIDE) {
+    if (rideState === RideState.SELECT_RIDE || rideState === RideState.SELECT_TIME) {
       navigation.goBack();
     } else if (previous) {
       setRideState(previous);

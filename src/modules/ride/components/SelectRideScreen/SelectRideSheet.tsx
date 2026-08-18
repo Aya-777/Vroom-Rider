@@ -62,7 +62,7 @@ export default function SelectRideSheet({
   return (
     <>
       <BaseBottomSheet
-        isVisible={vm.isSheetVisible}
+        isVisible={true}
         index={1}
         snapPoints={snapPoints}
         animatedPosition={animatedPosition}
