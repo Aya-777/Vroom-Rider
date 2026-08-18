@@ -226,7 +226,15 @@ export const createStyles = (c: ThemeColors) =>
       flexWrap: 'nowrap',
       gap: 8,
     },
-    topUpAmountInput: { marginTop: 22 },
-    topUpError: { textAlign: 'center', marginTop: 12 },
-    topUpButtonContainer: { alignItems: 'center', marginTop: 22 },
+    topUpAmountInput: {
+      marginTop: 22,
+    },
+    topUpError: {
+      textAlign: 'center',
+      marginTop: 12,
+    },
+    topUpButtonContainer: {
+      alignItems: 'center',
+      marginTop: 22,
+    },
   });

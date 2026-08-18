@@ -65,7 +65,12 @@ export default function TransactionWheel({ transactions }: Props) {
       {visible.map((item, position) => {
         const type = normalizeType(String(item.type));
         const positive = type === 'topup' || type === 'refund';
-        const description = cleanText(item.description) || t(positive ? 'wallet.types.topup' : 'wallet.types.trip_payment');
+        const labelKey = `wallet.types.${type}`;
+        const translatedLabel = t(labelKey);
+        const label = translatedLabel === labelKey
+          ? (positive ? t('wallet.types.topup') : t('wallet.types.trip_payment'))
+          : translatedLabel;
+        const description = cleanText(item.description) || label;
         const baseY = position * 34;
         const translateY = offset.interpolate({
           inputRange: [-90, 0, 90],

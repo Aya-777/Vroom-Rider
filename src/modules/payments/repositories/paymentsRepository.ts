@@ -16,7 +16,7 @@ const unwrap = <T>(payload: T | ApiEnvelope<T>): T => {
 };
 
 const mapTransaction = (dto: WalletTransactionDto): WalletTransaction => {
-  const rawType = String(dto.type);
+  const rawType = String(dto.type).toLowerCase().replace(/[-\\s]+/g, '_');
   const type = rawType === 'top_up' ? 'topup' : rawType === 'trip-payment' ? 'trip_payment' : rawType;
   return {
   id: dto.id,
@@ -32,7 +32,7 @@ export const paymentsRepository = {
   async getBalance(): Promise<WalletBalance> {
     const response = await paymentsApi.getWalletBalance();
     const data = unwrap(response.data);
-    return { balance: Number(data.balance), currency: data.currency };
+    return { balance: Number(data.balance), currency: '$' };
   },
 
   async getTransactions(): Promise<WalletTransaction[]> {

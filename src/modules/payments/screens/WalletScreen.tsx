@@ -16,8 +16,9 @@ export default function WalletScreen({ navigation }: any) {
   const styles = createStyles(colors);
   const user: any = useCurrentUser();
   const { balance, transactions, isLoading, error, refresh } = useWalletViewModel();
-  const holderName = [user?.first_name, user?.last_name].filter(Boolean).join(' ') || 'â€”';
-  const cardNumber = user?.wallet_card_number || user?.card_number || t('wallet.cardNotAvailable');
+  const holderName = [user?.first_name, user?.last_name].filter(Boolean).join(' ') || '-';
+  const walletIdentifier = String(user?.id ?? 0).padStart(4, '0').slice(-4);
+  const cardNumber = user?.wallet_card_number || user?.card_number || `VROOM **** **** **** ${walletIdentifier}`;
 
   return (
     <LinearBg colors={[colors.backgroundSoft, colors.background]} style={styles.screen}>
