@@ -128,7 +128,7 @@ export const createStyles = (c: ThemeColors) =>
     },
 
     debit: {
-      color: c.error,
+      color: c.success,
     },
 
     transactionDescription: {
@@ -214,8 +214,19 @@ export const createStyles = (c: ThemeColors) =>
       marginBottom: Spacing.sm,
     },
     topUpContent: { paddingTop: 28 },
-  topUpSectionTitle: { ...Typography.h3, color: c.textPrimary, textAlign: 'left', marginBottom: 18 },
-  topUpAmountRow: { flexDirection: 'row', justifyContent: 'center', flexWrap: 'nowrap', gap: 8 },
-  topUpAmountInput: { marginTop: 22 },
-  topUpError: { textAlign: 'center', marginTop: 12 },
-  topUpButtonContainer: { alignItems: 'center', marginTop: 22 },});
+    topUpSectionTitle: {
+      ...Typography.h3,
+      color: c.textPrimary,
+      textAlign: 'left',
+      marginBottom: 18,
+    },
+    topUpAmountRow: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      flexWrap: 'nowrap',
+      gap: 8,
+    },
+    topUpAmountInput: { marginTop: 22 },
+    topUpError: { textAlign: 'center', marginTop: 12 },
+    topUpButtonContainer: { alignItems: 'center', marginTop: 22 },
+  });

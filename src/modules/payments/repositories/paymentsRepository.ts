@@ -15,14 +15,18 @@ const unwrap = <T>(payload: T | ApiEnvelope<T>): T => {
   return payload as T;
 };
 
-const mapTransaction = (dto: WalletTransactionDto): WalletTransaction => ({
+const mapTransaction = (dto: WalletTransactionDto): WalletTransaction => {
+  const rawType = String(dto.type);
+  const type = rawType === 'top_up' ? 'topup' : rawType === 'trip-payment' ? 'trip_payment' : rawType;
+  return {
   id: dto.id,
-  type: dto.type,
+  type: type as WalletTransaction['type'],
   amount: Number(dto.amount),
   status: dto.status,
   createdAt: dto.created_at,
   description: dto.description,
-});
+  };
+};
 
 export const paymentsRepository = {
   async getBalance(): Promise<WalletBalance> {
@@ -33,8 +37,11 @@ export const paymentsRepository = {
 
   async getTransactions(): Promise<WalletTransaction[]> {
     const response = await paymentsApi.getTransactions();
-    const data = unwrap(response.data);
-    return data.map(mapTransaction);
+    const data = unwrap(response.data) as
+      | WalletTransactionDto[]
+      | { results?: WalletTransactionDto[] };
+    const rows = Array.isArray(data) ? data : data.results ?? [];
+    return rows.map(mapTransaction);
   },
 
   async initiateTopUp(amount: number): Promise<TopUpResult> {

@@ -25,7 +25,7 @@ export default function WalletScreen({ navigation }: any) {
       <View style={styles.content}>
         <LinearBg colors={[colors.surfaceAccent, colors.backgroundSoft]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.walletCard}>
           <Text style={styles.cardLabel}>{t('wallet.balance')}</Text>
-          <Text style={styles.balanceAmount}>{balance ? `${balance.balance.toFixed(2)} ${balance.currency}` : '0 SP'}</Text>
+          <Text style={styles.balanceAmount}>{balance ? `${balance.balance.toFixed(2)} ${balance.currency}` : '0 US'}</Text>
           <View style={styles.cardFooter}>
             <View>
               <Text style={styles.cardMeta}>{t('wallet.cardHolder')}</Text>
