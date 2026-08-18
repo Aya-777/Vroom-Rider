@@ -110,7 +110,6 @@ export function useSelectRideViewModel() {
       stops,
     });
 
-    console.log("estimateeeeeeee;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;", estimate);
 
     setEstimate(estimate);
 
