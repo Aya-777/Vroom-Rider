@@ -48,19 +48,19 @@ export default function ReviewModal({
             end={{ x: 1, y: 0.8 }}
             style={styles.modalContainer}
           >
-            <Text style={styles.modalTitle}>{t('modals:review.leaveReview')}</Text>
+            <Text style={styles.modalTitle}>{t('modals.review.leaveReview')}</Text>
             <View style={styles.Divider} />
             <View>
-              <Text style={styles.sectionTitle}>{t('modals:review.rateYourTrip')}</Text>
+              <Text style={styles.sectionTitle}>{t('modals.review.rateYourTrip')}</Text>
               <RatingStars rating={vm.rating} onChange={vm.setRating} />
               <View style={styles.Divider} />
             </View>
             <View>
-              <Text style={styles.sectionTitle}>{t('modals:review.writeYourReview')}</Text>
+              <Text style={styles.sectionTitle}>{t('modals.review.writeYourReview')}</Text>
               <Input
                 value={vm.review}
                 onChangeText={vm.setReview}
-                placeholder={t('modals:review.writeYourReview')+"..."}
+                placeholder={t('modals.review.writeYourReview')+"..."}
                 multiline
                 numberOfLines={5}
                 maxLength={500}
@@ -82,7 +82,7 @@ export default function ReviewModal({
                 {vm.isComplaint && <Text style={styles.checkmark}>✓</Text>}
               </View>
 
-              <Text style={styles.complaintLabel}>{t('modals:review.complaint')}</Text>
+              <Text style={styles.complaintLabel}>{t('modals.review.complaint')}</Text>
             </Pressable>
             <View style={styles.Divider} />
             <ReviewActions

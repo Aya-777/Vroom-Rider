@@ -1,6 +1,7 @@
 {
   "favoriteDrivers": {
     "title": "Favorite Drivers",
+    "noFavoriteDrivers": "No favorite drivers yet.",
 
     "details": {
       "phone": "PHONE",

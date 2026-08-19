@@ -222,6 +222,8 @@ export function useRideViewModel() {
       console.error('Failed to cancel ride:', error);
     } finally {
       setIsCancelling(false);
+      clearRide();
+      setCurrentRide(null);
     }
   };
 

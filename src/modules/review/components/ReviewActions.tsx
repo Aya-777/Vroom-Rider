@@ -26,7 +26,7 @@ export default function ReviewActions({
                 onPress={onCancel}
             >
                 <Text style={styles.cancelText}>
-                    {t('modals:review.maybeLater')}
+                    {t('modals.review.maybeLater')}
                 </Text>
             </TouchableOpacity>
 

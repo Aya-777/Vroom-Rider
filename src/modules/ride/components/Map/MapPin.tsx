@@ -44,7 +44,7 @@ export default function MapPin({ type, label }: Props) {
           style={[
             styles.label,
             {
-              color: colors.surface,
+              color: type === 'driver' ? colors.textSecondary : colors.surface,
             },
           ]}
         >
