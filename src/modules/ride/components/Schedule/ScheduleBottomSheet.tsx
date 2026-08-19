@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { createStyles } from '../../styles/schedule.styles';
 import { useTheme } from '../../../../core/theme/useTheme';
@@ -9,7 +9,7 @@ import DatePicker from 'react-native-date-picker';
 
 interface ScheduleOrderSheetProps {
   onClose: () => void;
-  onSetupOrder: (data: { date: string; time: string; amPm: string }) => void;
+  onSetupOrder: (data: { date: string; time: string; amPm: string; utcIso: string }) => void;
   animatedPosition?: SharedValue<number>;
 }
 
@@ -23,7 +23,6 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
   const vm = useScheduleRideViewModel();
 
   const snapPoints = useMemo(() => ['50%'], []);
-  const [date, setDate] = useState(new Date());
 
   return (
     <BaseBottomSheet
@@ -48,8 +47,8 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
 
       <View style={styles.pickerContainer}>
         <DatePicker 
-          date={date}
-          onDateChange={setDate}
+          date={vm.date}
+          onDateChange={vm.setDate}
           mode="datetime" 
           minuteInterval={5}
           minimumDate={new Date()}
@@ -62,18 +61,15 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
 
       {/* Action Button */}
       <TouchableOpacity
-        style={[
-          styles.submitButton,
-        ]}
+        style={[styles.submitButton]}
         onPress={() => {
           onSetupOrder({
-            date: vm.dates[vm.selectedIndexDate],
-            time: `${vm.hours[vm.selectedIndexHour]}:${
-              vm.minutes[vm.selectedIndexMinute]
-            }`,
-            amPm: vm.amPmOptions[vm.selectedIndexAmPm],
+            date: vm.formattedDate,
+            time: vm.timeString,
+            amPm: vm.amPm,
+            utcIso: vm.utcIsoString,
           });
-
+          console.log("dateeutc   ", vm.utcIsoString)
           onClose();
         }}
       >
