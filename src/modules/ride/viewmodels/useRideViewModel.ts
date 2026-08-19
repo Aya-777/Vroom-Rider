@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RideState, TripStatus } from '../types/RideState';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -41,7 +41,6 @@ export function useRideViewModel() {
     setRideDetails,
     estimate,
     setEstimate,
-    clearRide,
     currentRide,
     setCurrentRide,
     rideState,
@@ -96,7 +95,6 @@ export function useRideViewModel() {
         const route = await rideApi.getCurrentRoute(ride.id);
 
         console.log('[RideVM] Raw route:', route);
-
 
         setEstimate({
           ...estimate,
@@ -276,13 +274,22 @@ export function useRideViewModel() {
   };
 
   const handlePostRideSwitchToCash = async () => {
-    console.log(
-      'TODO: switch payment_method to CASH on backend for ride',
-      currentRide?.id,
-    );
-
-    setPostRideInsufficientVisible(false);
-    setIsBillVisible(true);
+    const tripId = currentRide?.id;
+    if (!tripId) {
+      Alert.alert('Error', 'Current trip was not found.');
+      return;
+    }
+    try {
+      await rideApi.setCashPaymentMethod(tripId);
+      setPostRideInsufficientVisible(false);
+      setIsBillVisible(true);
+    } catch (error: any) {
+      Alert.alert(
+        error?.response?.data?.message ||
+          error?.response?.data?.detail ||
+          'Unable to change payment method to cash.',
+      );
+    }
   };
 
   const handlePostRideTopUp = async () => {

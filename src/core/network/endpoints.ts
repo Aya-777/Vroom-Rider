@@ -24,7 +24,7 @@
   TRIPS: {
     GET_TRIP: (id: number) => `/trips/${id}/`,
     CURRENT: '/trips/current/',
-    ROUTE:(id: number) => `/trips/trips/${id}/route/`,
+    ROUTE: (id: number) => `/trips/trips/${id}/route/`,
     INITIAL_ESTIMATE: '/trips/trips/estimate/initial/',
     REFINED_ESTIMATE: '/trips/trips/estimate/refined/',
     VERIFY_NUMBER_ENTER: '/trips/contact-number/enter/',
@@ -69,5 +69,7 @@
     WALLET: '/payments/wallet/',
     WALLET_TOPUP: '/payments/wallet/topup/',
     WALLET_TRANSACTIONS: '/payments/wallet/transactions/',
+    SET_CASH_PAYMENT_METHOD: (tripId: number) =>
+      `/payments/trips/${tripId}/payment-method/cash/`,
   },
 } as const;
