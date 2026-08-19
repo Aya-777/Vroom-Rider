@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 export default function ActivityFooterActions({
@@ -6,6 +7,7 @@ export default function ActivityFooterActions({
     onReview,
     onReride,
 }: any) {
+    const { t } = useTranslation(['activities']);
     return (
         <View style={styles.footer}>
 
@@ -13,14 +15,14 @@ export default function ActivityFooterActions({
                 style={styles.reviewButton}
                 onPress={onReview}
             >
-                <Text style={styles.reviewText}>Leave Review</Text>
+                <Text style={styles.reviewText}>{t('action:leaveReview')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
                 style={styles.rerideButton}
                 onPress={onReride}
             >
-                <Text style={styles.rerideText}>Re-Ride</Text>
+                <Text style={styles.rerideText}>{t('action:reride')}</Text>
             </TouchableOpacity>
 
         </View>

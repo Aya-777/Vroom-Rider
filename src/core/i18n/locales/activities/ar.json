@@ -17,5 +17,9 @@
         "rideType": "نوع الرحلة",
         "distance": "المسافة",
         "duration": "المدة الزمنية"
+    },
+    "actions":{
+      "reride": "اعادة الطلب",
+      "leaveReview": "اترك تقييما"
     }
 }
