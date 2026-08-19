@@ -284,6 +284,7 @@ export function useRideViewModel() {
 
   const handleSetupRide = (date: Date) => {
     setRideDetails({
+      is_scheduled: true,
       scheduled_at: date
     })
   }

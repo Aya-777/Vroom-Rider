@@ -13,13 +13,17 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../../core/theme/useTheme';
 import TimePriceBox from '../ExtraDetailsScreen/TimePriceBox';
 import { SharedValue } from 'react-native-reanimated';
+import { Text } from 'react-native-gesture-handler';
 
 type Props = {
   onNextPress: () => void;
   animatedPosition?: SharedValue<number>;
 };
 
-export default function RideConfirmationSheet({ onNextPress, animatedPosition }: Props) {
+export default function RideConfirmationSheet({
+  onNextPress,
+  animatedPosition,
+}: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['confirmRide', 'common']);
@@ -30,7 +34,7 @@ export default function RideConfirmationSheet({ onNextPress, animatedPosition }:
 
   const handleFindPress = async () => {
     const response = await vm.handleFindDriver();
-    if(response){
+    if (response) {
       onNextPress();
     }
   };
@@ -40,7 +44,12 @@ export default function RideConfirmationSheet({ onNextPress, animatedPosition }:
   );
 
   return (
-    <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1} animatedPosition={animatedPosition}>
+    <BaseBottomSheet
+      isVisible={true}
+      snapPoints={snapPoints}
+      index={1}
+      animatedPosition={animatedPosition}
+    >
       <View style={styles.grid}>
         <TimePriceBox
           time={`${vm.estimate.estimated_duration_minutes}`}
@@ -65,6 +74,15 @@ export default function RideConfirmationSheet({ onNextPress, animatedPosition }:
           }
         />
       </View>
+
+      {vm.rideData.is_scheduled && vm.rideData.scheduled_at && (
+        <View style={styles.dateView}>
+          <Text style={styles.dateLabel}>{t('scheduledAt')}</Text>
+          <Text style={styles.dateValue} adjustsFontSizeToFit numberOfLines={1}>
+            {vm.rideData.scheduled_at.toLocaleString()}
+          </Text>
+        </View>
+      )}
 
       <ActionButton
         onPress={handleFindPress}

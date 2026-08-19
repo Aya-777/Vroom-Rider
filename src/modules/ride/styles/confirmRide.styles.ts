@@ -92,4 +92,20 @@ export const createStyles = (colors: ThemeColors) =>
       marginEnd: 6,
       marginBottom: 4,
     },
+
+    dateView:{
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 20,
+      marginBottom: 20,
+    },
+    dateLabel: {
+      color: colors.textPrimary,
+      ...Typography.body,
+    },
+    dateValue:{
+      color: colors.textPrimary,
+      ...Typography.boldCaption,
+    },
   });
