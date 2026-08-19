@@ -25,7 +25,8 @@ export function useSelectRideViewModel() {
     setRideDetails,
     setEstimate,
     rideOtpVerified,
-    setRideOtpVerified
+    setRideOtpVerified,
+    setRideState,
   } = useRideStore();
 
   const state = useSelectRideState(rideData);
@@ -215,6 +216,7 @@ export function useSelectRideViewModel() {
     onRideForChanged,
 
     rideOtpVerified,
-    setRideOtpVerified
+    setRideOtpVerified,
+    setRideState
   };
 }
