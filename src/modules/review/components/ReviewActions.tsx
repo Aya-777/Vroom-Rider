@@ -3,6 +3,7 @@ import { View, TouchableOpacity, Text } from 'react-native';
 
 import { useTheme } from '../../../core/theme/useTheme';
 import { createStyles } from '../styles/review.styles';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
     onCancel: () => void;
@@ -15,6 +16,7 @@ export default function ReviewActions({
 }: Props) {
     const { colors } = useTheme();
     const styles = createStyles(colors);
+    const { t } = useTranslation(['modals', 'common']); 
 
     return (
         <View style={styles.actionsContainer}>
@@ -24,7 +26,7 @@ export default function ReviewActions({
                 onPress={onCancel}
             >
                 <Text style={styles.cancelText}>
-                    Maybe Later
+                    {t('modals:review.maybeLater')}
                 </Text>
             </TouchableOpacity>
 
@@ -33,7 +35,7 @@ export default function ReviewActions({
                 onPress={onSubmit}
             >
                 <Text style={styles.submitText}>
-                    Submit
+                    {t('common:submit')}
                 </Text>
             </TouchableOpacity>
         </View>

@@ -14,6 +14,7 @@ import ReviewActions from './ReviewActions';
 import Input from '../../../shared/components/Input';
 import LinearBg from '../../../shared/components/LinearBg';
 import { useReviewViewModel } from '../../ride/viewmodels/useReviewViewModel';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   isVisible: boolean;
@@ -28,6 +29,7 @@ export default function ReviewModal({
 }: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
+  const { t } = useTranslation(['modals', 'common']); 
 
   const vm = useReviewViewModel(isVisible, setIsVisible, rideId);
 
@@ -46,19 +48,19 @@ export default function ReviewModal({
             end={{ x: 1, y: 0.8 }}
             style={styles.modalContainer}
           >
-            <Text style={styles.modalTitle}>Leave a Review</Text>
+            <Text style={styles.modalTitle}>{t('modals:review.leaveReview')}</Text>
             <View style={styles.Divider} />
             <View>
-              <Text style={styles.sectionTitle}>Rate your trip</Text>
+              <Text style={styles.sectionTitle}>{t('modals:review.rateYourTrip')}</Text>
               <RatingStars rating={vm.rating} onChange={vm.setRating} />
               <View style={styles.Divider} />
             </View>
             <View>
-              <Text style={styles.sectionTitle}>Write your review</Text>
+              <Text style={styles.sectionTitle}>{t('modals:review.writeYourReview')}</Text>
               <Input
                 value={vm.review}
                 onChangeText={vm.setReview}
-                placeholder="Write your review..."
+                placeholder={t('modals:review.writeYourReview')+"..."}
                 multiline
                 numberOfLines={5}
                 maxLength={500}
@@ -80,7 +82,7 @@ export default function ReviewModal({
                 {vm.isComplaint && <Text style={styles.checkmark}>✓</Text>}
               </View>
 
-              <Text style={styles.complaintLabel}>Complaint</Text>
+              <Text style={styles.complaintLabel}>{t('modals:review.complaint')}</Text>
             </Pressable>
             <View style={styles.Divider} />
             <ReviewActions
