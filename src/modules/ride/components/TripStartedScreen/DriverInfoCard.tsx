@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import ProfileIcon from '../../../../assets/svg/profile/profile.svg';
 import PhoneIcon from '../../../../assets/svg/contact/call.svg';
 import StarIcon from '../../../../assets/svg/common/star.svg';
+import HeartIcon from '../../../../assets/svg/common/heart.svg';
 
 export const DriverInfoCard = ({ name, rating, car, plate, styles, colors }: any) => (
   <View style={styles.driverCard}>
@@ -19,6 +20,9 @@ export const DriverInfoCard = ({ name, rating, car, plate, styles, colors }: any
       </View>
       <TouchableOpacity style={styles.callButton}>
         <PhoneIcon width={24} height={24} />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.callButton}>
+        <HeartIcon width={24} height={24} />
       </TouchableOpacity>
     </View>
   </View>

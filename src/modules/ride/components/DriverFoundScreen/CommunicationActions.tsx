@@ -5,17 +5,38 @@ import type { createStyles } from '../../styles/driver.styles';
 
 import PhoneNumberIcon from '../../../../assets/svg/contact/call.svg';
 import MessageIcon from '../../../../assets/svg/contact/chat.svg';
-import WhatsAppIcon from '../../../../assets/svg/contact/whatsapp.svg';
+import { Linking } from 'react-native';
 
 type CommunicationActionsProps = {
   styles: ReturnType<typeof createStyles>;
   colors: ThemeColors;
+  driver_number: string;
+};
+
+const callDriver = async (phoneNumber: string) => {
+  const url = `tel:${phoneNumber}`;
+
+  const supported = await Linking.canOpenURL(url);
+
+  if (supported) {
+    await Linking.openURL(url);
+  }
+};
+
+const messageDriver = async (phoneNumber: string) => {
+  const url = `sms:${phoneNumber}`;
+
+  const supported = await Linking.canOpenURL(url);
+
+  if (supported) {
+    await Linking.openURL(url);
+  }
 };
 
 export default function CommunicationActions({ styles, colors }: CommunicationActionsProps) {
   return (
     <View style={styles.communicationRow}>
-      <TouchableOpacity style={styles.iconButton}>
+      <TouchableOpacity style={styles.iconButton} onPress={() => callDriver}>
         <PhoneNumberIcon fill={colors.textPrimary} />
       </TouchableOpacity>
 
@@ -23,13 +44,6 @@ export default function CommunicationActions({ styles, colors }: CommunicationAc
         <MessageIcon fill={colors.textPrimary} />
       </TouchableOpacity>
 
-      <TouchableOpacity style={[styles.iconButton, {
-          backgroundColor: colors.primary,
-          height:35,
-          width:35
-        }]}>
-        <WhatsAppIcon fill={colors.textPrimary} height={24} width={24}/>
-      </TouchableOpacity>
     </View>
   );
 }
