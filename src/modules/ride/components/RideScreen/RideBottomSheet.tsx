@@ -13,6 +13,7 @@ import TripEndedModal from '../TripEndedModal/TripEndedModal';
 import TripStartedSheet from '../TripStartedScreen/TripStartedSheet';
 import { RideFilter } from '../../types/ride.types';
 import {ScheduleBottomSheet} from '../Schedule/ScheduleBottomSheet';
+import { InsufficientBalanceModal } from '../../../payments/components/InsufficientBalanceModal';
 
 type Props = {
   rideState: RideState;
@@ -33,6 +34,9 @@ type Props = {
   handleSubmit: (rating: number, comment: string, isComplaint: boolean) => void;
   handleMaybeLater: () => void;
   handleSetupRidePress: (date: Date) => void;
+  isPostRideInsufficientVisible: boolean;
+  onPostRideSwitchToCash: () => void;
+  onPostRideTopUp: () => void;
 };
 
 export default function RideBottomSheet({
@@ -53,7 +57,10 @@ export default function RideBottomSheet({
   filters,
   handleSubmit,
   handleMaybeLater,
-  handleSetupRidePress
+  handleSetupRidePress,
+  isPostRideInsufficientVisible,
+  onPostRideSwitchToCash,
+  onPostRideTopUp,
 }: Props) {
   const { currentRide, setRideState } = useRideStore();
 
@@ -107,7 +114,7 @@ export default function RideBottomSheet({
 
       case RideState.NO_DRIVER_FOUND:
         return (
-          <NoDriverFoundModal 
+          <NoDriverFoundModal
             cancelPress={() => onCancelPress('NoDriverFound')}
             rematch={rematch}
             isFailed={true}
@@ -157,6 +164,7 @@ export default function RideBottomSheet({
     }
   };
 
+
   return (
     <>
       {renderSheet()}
@@ -167,6 +175,14 @@ export default function RideBottomSheet({
           handleMaybeLater();
         }}
         onSubmit={handleSubmit}
+      />
+
+      <InsufficientBalanceModal
+        isVisible={isPostRideInsufficientVisible}
+        onClose={() => { }}
+        onSwitchToCash={onPostRideSwitchToCash}
+        onTopUp={onPostRideTopUp}
+        context="post_ride"
       />
     </>
   );

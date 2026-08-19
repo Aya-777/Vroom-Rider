@@ -1,4 +1,4 @@
-import authEn from './auth/en.json';
+﻿import authEn from './auth/en.json';
 import authAr from './auth/ar.json';
 import homeEn from './home/en.json';
 import homeAr from './home/ar.json';
@@ -34,6 +34,8 @@ import favoriteDriversEn from './favoriteDrivers/en.json';
 import favoriteDriversAr from './favoriteDrivers/ar.json';
 import safetyEn from './safety/en.json';
 import safetyAr from './safety/ar.json';
+import paymentsEn from './payments/en.json';
+import paymentsAr from './payments/ar.json';
 import modalsEn from './modals/en.json';
 import modalsAr from './modals/ar.json';
 import scheduleAr from './ride/schedule/ar.json'
@@ -76,6 +78,8 @@ export {
   favoriteDriversAr,
   safetyEn,
   safetyAr,
+  paymentsEn,
+  paymentsAr,
   modalsEn,
   modalsAr,
   scheduleAr,

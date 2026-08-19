@@ -1,4 +1,4 @@
-import { apiClient } from '../../../core/network/apiClient';
+﻿import { apiClient } from '../../../core/network/apiClient';
 import { ENDPOINTS } from '../../../core/network/endpoints';
 import { v4 as uuidv4 } from 'uuid';
 import { RecentTripDTO } from './dto/recentTrip.dto';
@@ -126,6 +126,10 @@ export const rideApi = {
     return response.data;
   },
 
+  updatePaymentMethod: async (id: number, payment_method: 'CASH' | 'WALLET') => {
+    const response = await apiClient.patch(ENDPOINTS.TRIPS.GET_TRIP(id), { payment_method });
+    return response.data;
+  },
   rematch: async (id: number) => {
     const response = await apiClient.post(ENDPOINTS.TRIPS.REMATCH(id));
 
@@ -252,3 +256,4 @@ export const getTripHistoryByUrl = async (
   >(url);
   return response.data.data;
 };
+

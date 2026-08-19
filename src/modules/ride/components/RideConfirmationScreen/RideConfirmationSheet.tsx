@@ -1,13 +1,13 @@
-import React, { useMemo } from 'react';
+﻿import React, { useMemo } from 'react';
 import { View } from 'react-native';
 import { BaseBottomSheet } from '../../../../shared/components/BaseBottomSheet';
 import InfoBox from './InfoBox';
 import ActionButton from '../../../../shared/components/ActionButton';
+import { InsufficientBalanceModal } from '../../../payments/components/InsufficientBalanceModal';
 import { useConfirmRideViewModel } from '../../viewmodels/useConfirmRideViewModel';
 import CashIcon from '../../../../assets/svg/payment/cash.svg';
 import CarIcon from '../../../../assets/svg/common/ride.svg';
 import SearchIcon from '../../../../assets/svg/common/search.svg';
-
 import { createStyles } from '../../styles/confirmRide.styles';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../../../core/theme/useTheme';
@@ -33,7 +33,9 @@ export default function RideConfirmationSheet({
   const snapPoints = useMemo(() => ['30%', '70%'], []);
 
   const handleFindPress = async () => {
-    const response = await vm.handleFindDriver();
+    // const response = await vm.handleFindDriver();
+    if (!selectedVehicle) return;
+      const response = await vm.handleFindDriver(selectedVehicle.estimated_price);
     if (response) {
       onNextPress();
     }
@@ -44,12 +46,8 @@ export default function RideConfirmationSheet({
   );
 
   return (
-    <BaseBottomSheet
-      isVisible={true}
-      snapPoints={snapPoints}
-      index={1}
-      animatedPosition={animatedPosition}
-    >
+    <>
+      <BaseBottomSheet isVisible={true} snapPoints={snapPoints} index={1} animatedPosition={animatedPosition}>
       <View style={styles.grid}>
         <TimePriceBox
           time={`${vm.estimate.estimated_duration_minutes}`}
@@ -92,5 +90,16 @@ export default function RideConfirmationSheet({
         style={styles.button}
       />
     </BaseBottomSheet>
+      <InsufficientBalanceModal
+        isVisible={vm.isInsufficientBalanceVisible}
+        onClose={() => vm.setInsufficientBalanceVisible(false)}
+        onSwitchToCash={vm.handleSwitchToCash}
+        onTopUp={() => vm.handleTopUp(selectedVehicle?.estimated_price ?? 0)}
+        context="pre_ride"
+      />
+    </>
   );
 }
+
+
+

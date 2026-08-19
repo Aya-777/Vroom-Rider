@@ -12,17 +12,17 @@
     LOGOUT: '/api/v1/auth/logout/',
     DELETE_ACCOUNT: '/api/v1/auth/delete-account/',
   },
-  CHANGE_PASSWORD: '/api/v1/users/me/change-password/',
   USERS: {
     ME: '/api/v1/users/me/',
     EDIT_PROFILE: '/api/v1/users/me/profile/',
     CHANGE_PHONE_REQUEST: '/api/v1/users/me/change-phone/',
     CHANGE_PHONE_RESEND: '/api/v1/users/me/change-phone/resend-otp/',
     CHANGE_PHONE_VERIFY: '/api/v1/users/me/change-phone/verify-otp/',
+    CHANGE_PASSWORD: '/api/v1/users/me/change-password/',
   },
-  
+
   TRIPS: {
-    GET_TRIP:(id: number) => `/trips/${id}/`,
+    GET_TRIP: (id: number) => `/trips/${id}/`,
     CURRENT: '/trips/current/',
     ROUTE:(id: number) => `/trips/trips/${id}/route/`,
     INITIAL_ESTIMATE: '/trips/trips/estimate/initial/',
@@ -34,22 +34,22 @@
     SAVED_LOCATION: (id: number) => `/trips/saved-locations/${id}/`,
     PREFERENCES: '/trips/preferences/',
     CONFIRM: '/trips/confirm/',
-    REMATCH:(id: number) => `/trips/${id}/rematch/`,
+    REMATCH: (id: number) => `/trips/${id}/rematch/`,
     CANCEL: (id: number) => `/trips/trips/${id}/cancel/`,
     SUBMIT_REVIEW: (id: number) => `/trips/trips/${id}/reviews/`,
     HISTORY: '/trips/history/',
     RERIDE: (tripId: number) => `/trips/${tripId}/reorder/`,
     RECENT: '/trips/recent/',
-    DRIVER_LOCATION:(id:number) => `/trips/${id}/location/`,
+    DRIVER_LOCATION: (id: number) => `/trips/${id}/location/`,
     SOS: (id: number) => `/trips/trips/${id}/sos/`,
-    AREUSAFE: (id: number) => `/trips/safety-alerts/${id}/respond/`
-},
+    AREUSAFE: (id: number) => `/trips/safety-alerts/${id}/respond/`,
+  },
 
   FAVORITE_DRIVERS: {
     TOGGLE: '/api/v1/users/favorite-drivers/toggle/',
     GET_FAVORITE_DRIVERS: '/api/v1/users/favorite-drivers/',
   },
-  
+
   NOTIFICATIONS: {
     LIST: '/api/v1/notifications/',
     TYPES: '/api/v1/notifications/types/',
@@ -60,8 +60,14 @@
     DELETE: (id: number) => `/api/v1/notifications/${id}/`,
   },
 
-  PUSHER:{
+  PUSHER: {
     AUTH: 'trips/pusher-auth/',
     CHANNELS: '/realtime/channels/',
-  }
+  },
+
+  PAYMENTS: {
+    WALLET: '/payments/wallet/',
+    WALLET_TOPUP: '/payments/wallet/topup/',
+    WALLET_TRANSACTIONS: '/payments/wallet/transactions/',
+  },
 } as const;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, StatusBar, TouchableOpacity, Text } from 'react-native';
 import Header from '../../../shared/components/SubHeader';
 import { useTheme } from '../../../core/theme/useTheme';
@@ -7,8 +7,6 @@ import { useTranslation } from 'react-i18next';
 import { MapContainer } from '../components/Map/MapContainer';
 import { useRideViewModel } from '../viewmodels/useRideViewModel';
 import RideBottomSheet from '../components/RideScreen/RideBottomSheet';
-import { useNavigation } from '@react-navigation/native';
-import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 import MyLocationIcon from '../../../assets/svg/common/myLocation.svg';
 import LocationService from '../../../core/services/location/LocationService';
 import useMapViewModel from '../viewmodels/useMapViewModel';
@@ -23,8 +21,6 @@ export default function RideScreen() {
   const { colors, mode } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['selectRide', 'common']);
-  const navigation =
-    useNavigation<HomeStackScreenProps<'Ride'>['navigation']>();
   const vm = useRideViewModel();
   const mapVm = useMapViewModel();
   const animatedPosition = useSharedValue(0);
@@ -59,14 +55,14 @@ export default function RideScreen() {
             vm.rideState === RideState.TRIP_STARTED ||
             vm.rideState === RideState.TRIP_ENDED
           ) && (
-            <TouchableOpacity
-              style={styles.sosButton}
-              onPress={() => vm.setSOSVisible(true)}
-              activeOpacity={0.8}
-            >
-              <Text style={styles.sosText}>SOS</Text>
-            </TouchableOpacity>
-          )}
+              <TouchableOpacity
+                style={styles.sosButton}
+                onPress={() => vm.setSOSVisible(true)}
+                activeOpacity={0.8}
+              >
+                <Text style={styles.sosText}>SOS</Text>
+              </TouchableOpacity>
+            )}
         </View>
 
         <MapContainer vm={mapVm} />
@@ -99,12 +95,16 @@ export default function RideScreen() {
           handleSubmit={vm.handleSubmitReview}
           handleMaybeLater={vm.handleMaybeLater}
           handleSetupRidePress={vm.handleSetupRide}
+          isPostRideInsufficientVisible={vm.isPostRideInsufficientVisible}
+          onPostRideSwitchToCash={vm.handlePostRideSwitchToCash}
+          onPostRideTopUp={vm.handlePostRideTopUp}
         />
       </View>
       {(vm.isSOSVisible || vm.storeSOSVisible) && (
         <SOSModal
           visible={vm.isSOSVisible || vm.storeSOSVisible}
-          onCancel={() => {vm.setSOSVisible(false)
+          onCancel={() => {
+            vm.setSOSVisible(false)
             vm.setStoreSosVisible(false)
           }}
           onConfirm={vm.handleSosPress}

@@ -1,4 +1,4 @@
-import {
+﻿import {
   authEn,
   authAr,
   homeEn,
@@ -35,6 +35,8 @@ import {
   favoriteDriversAr,
   safetyEn,
   safetyAr,
+  paymentsEn,
+  paymentsAr,
   modalsEn,
   modalsAr,
   scheduleEn,
@@ -61,6 +63,7 @@ export const resources = {
     sidebar: sideBarEn,
     favoriteDrivers: favoriteDriversEn,
     safety: safetyEn,
+    payments: paymentsEn,
     modals: modalsEn,
     schedule: scheduleEn,
   },
@@ -84,6 +87,7 @@ export const resources = {
     sidebar: sideBarAr,
     favoriteDrivers: favoriteDriversAr,
     safety: safetyAr,
+    payments: paymentsAr,
     modals: modalsAr,
     schedule: scheduleAr,
   },

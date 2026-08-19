@@ -1,4 +1,4 @@
-﻿import SavedIcon from '../../../assets/svg/common/star.svg';
+import SavedIcon from '../../../assets/svg/common/star.svg';
 import CardIcon from '../../../assets/svg/payment/creditcard.svg';
 import SettingsIcon from '../../../assets/svg/profile/settings.svg';
 import HelpIcon from '../../../assets/svg/profile/help.svg';
@@ -24,7 +24,7 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     id: 'wallet',
     label: 'wallet',
     icon: CardIcon,
-    // route: 'Card',
+    route: 'Wallet',
   },
   {
     id: 'settings',
