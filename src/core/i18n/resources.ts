@@ -37,6 +37,8 @@ import {
   safetyAr,
   modalsEn,
   modalsAr,
+  scheduleEn,
+  scheduleAr,
 } from './locales/index';
 
 export const resources = {
@@ -60,8 +62,9 @@ export const resources = {
     favoriteDrivers: favoriteDriversEn,
     safety: safetyEn,
     modals: modalsEn,
+    schedule: scheduleEn,
   },
-
+  
   ar: {
     auth: authAr,
     home: homeAr,
@@ -82,5 +85,6 @@ export const resources = {
     favoriteDrivers: favoriteDriversAr,
     safety: safetyAr,
     modals: modalsAr,
+    schedule: scheduleAr,
   },
 };

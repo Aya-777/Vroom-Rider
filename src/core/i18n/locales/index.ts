@@ -36,6 +36,8 @@ import safetyEn from './safety/en.json';
 import safetyAr from './safety/ar.json';
 import modalsEn from './modals/en.json';
 import modalsAr from './modals/ar.json';
+import scheduleAr from './ride/schedule/ar.json'
+import scheduleEn from './ride/schedule/en.json'
 
 export {
   authEn,
@@ -76,4 +78,6 @@ export {
   safetyAr,
   modalsEn,
   modalsAr,
+  scheduleAr,
+  scheduleEn,
 };

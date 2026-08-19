@@ -6,6 +6,7 @@ import { BaseBottomSheet } from '../../../../shared/components/BaseBottomSheet';
 import { SharedValue } from 'react-native-reanimated';
 import { useScheduleRideViewModel } from '../../viewmodels/useScheduleRideViewModel';
 import DatePicker from 'react-native-date-picker';
+import { useTranslation } from 'react-i18next';
 
 interface ScheduleOrderSheetProps {
   onClose: () => void;
@@ -21,6 +22,7 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const vm = useScheduleRideViewModel();
+  const {t} = useTranslation(['schedule', 'common']);
 
   const snapPoints = useMemo(() => ['50%'], []);
 
@@ -36,14 +38,14 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
       {/* Header */}
       <View style={styles.headerContainer}>
         <TouchableOpacity onPress={onClose}>
-          <Text style={styles.headerButton}>Order now</Text>
+          <Text style={styles.headerButton}>{t('orderNow')}</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={onClose}>
-          <Text style={styles.headerButton}>Cancel</Text>
+          <Text style={styles.headerButton}>{t('common:cancel')}</Text>
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.title}>When?</Text>
+      <Text style={styles.title}>{t('when')}</Text>
 
       <View style={styles.pickerContainer}>
         <DatePicker 
@@ -56,7 +58,7 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
       </View>
 
       <Text style={styles.footerText}>
-        You will be notified when driver is assigned.
+        {t('notificationMessage')}
       </Text>
 
       {/* Action Button */}
@@ -73,7 +75,7 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
           onClose();
         }}
       >
-        <Text style={styles.submitButtonText}>Set up your order</Text>
+        <Text style={styles.submitButtonText}>{t('schedule:setupYourOrder')}</Text>
       </TouchableOpacity>
     </BaseBottomSheet>
   );
