@@ -56,8 +56,8 @@ export default function TransactionWheel({ transactions }: Props) {
   })).current;
 
   if (!ordered.length) return null;
-  const visible = [0, 1, 2]
-    .map((position) => ordered[(activeIndex + position) % ordered.length])
+  const visible = [-1, 0, 1]
+    .map((relative) => ordered[(activeIndex + relative + ordered.length) % ordered.length])
     .filter(Boolean);
 
   return (
@@ -90,7 +90,7 @@ export default function TransactionWheel({ transactions }: Props) {
         });
         const rotateX = offset.interpolate({
           inputRange: [-90, 0, 90],
-          outputRange: position === 0 ? ['-14deg', '0deg', '14deg'] : ['0deg', '0deg', '0deg'],
+          outputRange: relative === 0 ? ['-14deg', '0deg', '14deg'] : ['0deg', '0deg', '0deg'],
           extrapolate: 'clamp',
         });
         return (
@@ -100,7 +100,7 @@ export default function TransactionWheel({ transactions }: Props) {
           >
             <LinearBg colors={[colors.surfaceAccent, colors.surface]} style={styles.transactionGradient}>
               <View style={styles.transactionTopRow}>
-                <Text style={styles.transactionType}>{t(`wallet.types.${type}`)}</Text>
+                <Text style={styles.transactionType}>{label}</Text>
                 <Text style={[styles.transactionAmount, positive ? styles.credit : styles.debit]}>{positive ? '+' : '-'}{Math.abs(item.amount).toFixed(2)}</Text>
               </View>
               <Text numberOfLines={1} style={styles.transactionDescription}>{description}</Text>
