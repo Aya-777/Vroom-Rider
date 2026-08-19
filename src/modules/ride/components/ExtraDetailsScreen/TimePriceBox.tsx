@@ -31,7 +31,7 @@ export default function TimePriceBox({ time, estimatedPrice, totalPrice }: Props
         icon={
           <EstimatedPriceIcon width={16} height={16} fill={colors.primary} />
         }
-        title={t('common:payment.estimated')}
+        title={t('common:payment.estimatedPrice')}
         value={`${estimatedPrice}$`}
         title2={t('common:totalPrice')}
         value2={`${totalPrice}$`}

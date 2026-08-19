@@ -31,9 +31,7 @@ type Props = {
   setIsBillVisible: (value: boolean) => void;
   setIsReviewVisible: (value: boolean) => void;
   filters: RideFilter[];
-  // handleSubmit: () => void;
-  // handleMaybeLater: () => void;
-  handleSetupRidePress: (date: Date) => void;
+  handleSetupRidePress: (value: string) => void;
   isPostRideInsufficientVisible: boolean;
   onPostRideSwitchToCash: () => void;
   onPostRideTopUp: () => void;
@@ -55,8 +53,6 @@ export default function RideBottomSheet({
   setIsBillVisible,
   setIsReviewVisible,
   filters,
-  // handleSubmit,
-  // handleMaybeLater,
   handleSetupRidePress,
   isPostRideInsufficientVisible,
   onPostRideSwitchToCash,

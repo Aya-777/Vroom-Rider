@@ -17,5 +17,9 @@
         "rideType": "Ride Type",
         "distance": "Distance",
         "duration": "Duration"
+    },
+    "actions":{
+      "reride": "Reride",
+      "leaveReview": "Leave Review"
     }
 }

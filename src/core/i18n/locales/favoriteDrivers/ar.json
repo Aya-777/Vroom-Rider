@@ -1,6 +1,7 @@
 {
   "favoriteDrivers": {
     "title": "السائقون المفضلون",
+    "noFavoriteDrivers": "لا يوجد سائقون مفضلون حتى اللآن.",
 
     "details": {
       "phone": "الهاتف",

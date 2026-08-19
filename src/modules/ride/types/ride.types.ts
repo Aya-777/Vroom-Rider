@@ -82,7 +82,7 @@ export interface RideParams {
   stops: RideStop[];
   preference_ids: number[];
   is_scheduled?: boolean;
-  scheduled_at?: Date;
+  scheduled_at?: string;
   status: TripStatus;
   idempotency_key?: string;
 }

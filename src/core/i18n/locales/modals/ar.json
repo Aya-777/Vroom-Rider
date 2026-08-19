@@ -23,6 +23,13 @@
     "savedPlaces": {
       "title": "الأماكن المحفوظة",
       "addNew": "إضافة مكان جديد"
+    },
+    "review":{
+      "leaveReview": "اترك تقييما",
+      "rateYourTrip":"قيم رحلتك",
+      "writeYourReview":"اكتب تعليقا",
+      "complaint":"شكوى",
+      "maybeLater":"ربما لاحقا"
     }
   }
 }

@@ -77,7 +77,6 @@ export default function HomeScreen() {
 
           <SectionHeader
             title={t('recentDestinations')}
-            actionText={t('seeAll')}
           />
 
           <View style={styles.destinationList}>

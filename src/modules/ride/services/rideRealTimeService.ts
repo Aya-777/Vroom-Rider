@@ -189,8 +189,8 @@ class RideRealtimeService {
     setRideState(RideState.TRIP_STARTED);
   }
 
-  private handleTripCompleted(data: { trip_id: number; status: string }) {
-    const { setRideState, currentRide, setCurrentRide } =
+  private async handleTripCompleted(data: { trip_id: number; status: string }) {
+    const { setRideState, currentRide, setCurrentRide, setDriverLocation } =
       useRideStore.getState();
 
     if (!currentRide) {
@@ -205,17 +205,24 @@ class RideRealtimeService {
       );
       return;
     }
+    const trip = await rideApi.getTripById(data.trip_id);
+
+    console.log(trip.actual_price);
 
     setCurrentRide({
       ...currentRide,
       status: data.status as TripStatus,
+      actual_price: trip.actual_price,
+      actual_distance: trip.actual_distance,
+      actual_duration: trip.actual_duration,
     });
 
     setRideState(RideState.TRIP_ENDED);
+    setDriverLocation(null);
   }
 
   private handleTripCancelled(data: { trip_id: number; status: string }) {
-    const { currentRide, clearRide, setCurrentRide, setRideState } =
+    const { currentRide, clearRide, setCurrentRide, setRideState, setDriverLocation } =
       useRideStore.getState();
 
     if (!currentRide) {
@@ -229,6 +236,7 @@ class RideRealtimeService {
     setRideState(RideState.SELECT_RIDE);
     clearRide();
     setCurrentRide(null);
+    setDriverLocation(null);
   }
 
   private handleDriverLocation(data: {
