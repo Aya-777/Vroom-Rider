@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:838931043594:android:7c4f63fe49bd480a4056f3",
+        "android_client_info": {
+          "package_name": "com.vroom"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBo3vonm5rDzZzGj4ujIllxsk8gIItY8lI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:838931043594:android:431e33e1e5f255ab4056f3",
         "android_client_info": {
           "package_name": "com.vroomrider"
