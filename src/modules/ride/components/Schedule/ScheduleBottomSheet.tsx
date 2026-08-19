@@ -53,7 +53,7 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
           onDateChange={vm.setDate}
           mode="datetime"
           minuteInterval={5}
-          minimumDate={new Date()}
+          minimumDate={vm.minimumDate}
         />
       </View>
 
