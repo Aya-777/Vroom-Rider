@@ -63,6 +63,7 @@ export default function TransactionWheel({ transactions }: Props) {
   return (
     <View style={styles.wheel} {...panResponder.panHandlers}>
       {visible.map((item, position) => {
+        const relative = position - 1;
         const type = normalizeType(String(item.type));
         const positive = type === 'topup' || type === 'refund';
         const labelKey = `wallet.types.${type}`;
@@ -71,20 +72,20 @@ export default function TransactionWheel({ transactions }: Props) {
           ? (positive ? t('wallet.types.topup') : t('wallet.types.trip_payment'))
           : translatedLabel;
         const description = cleanText(item.description) || label;
-        const baseY = position * 34;
+        const baseY = relative * 52;
         const translateY = offset.interpolate({
           inputRange: [-90, 0, 90],
-          outputRange: [position === 0 ? -180 : baseY - 34, baseY, position === 0 ? 180 : baseY + 34],
+          outputRange: relative === 0 ? [-120, 0, 120] : relative === 1 ? [0, baseY, baseY + 24] : [baseY - 24, baseY, 0],
           extrapolate: 'clamp',
         });
         const scale = offset.interpolate({
           inputRange: [-90, 0, 90],
-          outputRange: position === 0 ? [0.88, 1, 0.88] : position === 1 ? [1, 0.95, 0.9] : [0.95, 0.9, 0.86],
+          outputRange: relative === 0 ? [0.86, 1, 0.86] : relative === 1 ? [1, 0.92, 0.84] : [0.84, 0.92, 1],
           extrapolate: 'clamp',
         });
         const opacity = offset.interpolate({
           inputRange: [-90, 0, 90],
-          outputRange: position === 0 ? [0, 1, 0] : position === 1 ? [1, 0.82, 0.55] : [0.82, 0.62, 0.38],
+          outputRange: relative === 0 ? [0, 1, 0] : relative === 1 ? [1, 0.62, 0.28] : [0.28, 0.62, 1],
           extrapolate: 'clamp',
         });
         const rotateX = offset.interpolate({
@@ -95,7 +96,7 @@ export default function TransactionWheel({ transactions }: Props) {
         return (
           <Animated.View
             key={`${item.id}-${position}`}
-            style={[styles.transactionCard, { transform: [{ perspective: 700 }, { translateY }, { rotateX }, { scale }], opacity, zIndex: 3 - position }]}
+            style={[styles.transactionCard, { transform: [{ perspective: 700 }, { translateY }, { rotateX }, { scale }], opacity, zIndex: relative === 0 ? 3 : relative === 1 ? 2 : 1 }]}
           >
             <LinearBg colors={[colors.surfaceAccent, colors.surface]} style={styles.transactionGradient}>
               <View style={styles.transactionTopRow}>
