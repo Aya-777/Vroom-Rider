@@ -6,6 +6,7 @@ import type { createStyles } from '../../styles/driver.styles';
 import PhoneNumberIcon from '../../../../assets/svg/contact/call.svg';
 import MessageIcon from '../../../../assets/svg/contact/chat.svg';
 import { Linking } from 'react-native';
+import { callPhoneNumber, messagePhoneNumber } from '../../utils/conmmunications';
 
 type CommunicationActionsProps = {
   styles: ReturnType<typeof createStyles>;
@@ -13,34 +14,14 @@ type CommunicationActionsProps = {
   driver_number: string;
 };
 
-const callDriver = async (phoneNumber: string) => {
-  const url = `tel:${phoneNumber}`;
-
-  const supported = await Linking.canOpenURL(url);
-
-  if (supported) {
-    await Linking.openURL(url);
-  }
-};
-
-const messageDriver = async (phoneNumber: string) => {
-  const url = `sms:${phoneNumber}`;
-
-  const supported = await Linking.canOpenURL(url);
-
-  if (supported) {
-    await Linking.openURL(url);
-  }
-};
-
-export default function CommunicationActions({ styles, colors }: CommunicationActionsProps) {
+export default function CommunicationActions({ styles, colors, driver_number }: CommunicationActionsProps) {
   return (
     <View style={styles.communicationRow}>
-      <TouchableOpacity style={styles.iconButton} onPress={() => callDriver}>
+      <TouchableOpacity style={styles.iconButton} onPress={() => callPhoneNumber(driver_number)}>
         <PhoneNumberIcon fill={colors.textPrimary} />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.iconButton}>
+      <TouchableOpacity style={styles.iconButton} onPress={() => messagePhoneNumber(driver_number)}>
         <MessageIcon fill={colors.textPrimary} />
       </TouchableOpacity>
 

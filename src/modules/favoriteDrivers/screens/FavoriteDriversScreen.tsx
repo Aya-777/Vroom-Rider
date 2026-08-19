@@ -8,6 +8,7 @@ import { useTheme } from '../../../core/theme/useTheme';
 import LinearBg from '../../../shared/components/LinearBg';
 import { useFavoriteDriversViewModel } from '../viewmodels/useFavoriteDriversViewModels';
 import { useTranslation } from 'react-i18next';
+import { callPhoneNumber, messagePhoneNumber } from '../../ride/utils/conmmunications';
 
 export const FavoriteDriversScreen: React.FC = () => {
   const { colors } = useTheme();
@@ -38,8 +39,9 @@ export const FavoriteDriversScreen: React.FC = () => {
             renderItem={({ item }) => (
               <DriverCard
                 driver={item}
-                onMessagePress={() => {}}
-                onCallPress={() => {}}
+                onMessagePress={() => messagePhoneNumber(item.phone_number)}
+                onCallPress={() => {
+                  callPhoneNumber(item.phone_number)}}
                 onToggleFavorite={() => vm.toggleFavorite(item.driver_id)}
                 isFavorite={true}
               />
