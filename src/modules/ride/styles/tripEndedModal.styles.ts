@@ -52,6 +52,7 @@ export const createStyles = (colors: any) =>
     metricsColumn: {
       flex: 1,
       paddingRight: Spacing.smm,
+      justifyContent: 'center',
     },
 
     paymentColumn: {
@@ -112,6 +113,7 @@ export const createStyles = (colors: any) =>
       backgroundColor: colors.surface,
       paddingHorizontal: Spacing.sm,
       justifyContent: 'center',
+      marginTop: 10,
     },
 
     tipText: {

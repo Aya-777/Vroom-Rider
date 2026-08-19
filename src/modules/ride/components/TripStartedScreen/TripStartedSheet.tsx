@@ -25,7 +25,7 @@ export default function TripStartedScreen({
   const vm = useTripStartedViewModel();
 
   const snapPoints = useMemo(() => ['30%', '70%'], []);
-
+  
   return (
     <>
       <BaseBottomSheet
@@ -43,7 +43,7 @@ export default function TripStartedScreen({
             ' ' +
             vm.currentRide?.driver?.last_name
           }
-          rating={vm.currentRide?.driver?.rating}
+          rating={vm.currentRide?.driver?.rating.toFixed(2)}
           car={
             vm.currentRide?.vehicle?.car_model ??
             vm.currentRide?.vehicle?.custom_model_name

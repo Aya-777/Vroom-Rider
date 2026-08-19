@@ -60,6 +60,16 @@ export const createStyles = (colors: ThemeColors) =>
       color: colors.textPrimary,
     },
 
+    textContainer: {
+      height: '100%',
+      alignItems: 'center',
+      justifyContent: "center",
+    },
+    favoriteTitle:{
+      ...Typography.h3,
+      color: colors.textSecondary
+    },
+
     //Driver Card
     card: {
     backgroundColor: colors.backgroundSoft,

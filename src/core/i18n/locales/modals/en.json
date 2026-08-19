@@ -23,6 +23,13 @@
     "savedPlaces": {
       "title": "Saved Places",
       "addNew": "Add New Place"
+    },
+    "review":{
+      "leaveReview": "Leave a Review",
+      "rateYourTrip":"Rate your trip",
+      "writeYourReview":"Write your review",
+      "complaint":"Complaint",
+      "maybeLater":"Maybe Later"
     }
   }
 }

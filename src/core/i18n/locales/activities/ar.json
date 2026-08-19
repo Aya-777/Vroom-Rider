@@ -21,5 +21,9 @@
         "distance": "المسافة",
         "duration": "المدة الزمنية",
         "stop": "توقف"
+    },
+    "actions":{
+      "reride": "اعادة الطلب",
+      "leaveReview": "اترك تقييما"
     }
 }

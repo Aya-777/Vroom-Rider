@@ -21,5 +21,9 @@
         "distance": "Distance",
         "duration": "Duration",
         "stop": "Stop"
+    },
+    "actions":{
+      "reride": "Reride",
+      "leaveReview": "Leave Review"
     }
 }

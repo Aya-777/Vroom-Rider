@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useRideStore } from '../store/useRideStore';
 import { rideApi } from '../services/rideApi';
 import { TripStatus } from '../types/RideState';
@@ -14,15 +14,16 @@ export function useTripStartedViewModel() {
 
   // --- Preferences ---
   const [filters, setFilters] = useState<RideFilter[]>([]);
-  const [filtersTotal, setFiltersTotal] = useState(0);
 
-  // Fetch filters
   useEffect(() => {
     let mounted = true;
 
     (async () => {
       const f = await fetchFilters();
-      if (mounted) setFilters(f);
+
+      if (mounted) {
+        setFilters(f);
+      }
     })();
 
     return () => {
@@ -30,13 +31,16 @@ export function useTripStartedViewModel() {
     };
   }, [currentRide?.preference_ids]);
 
-  const handleSubmit = () => {
-    // navigation.navigate('HomeScreen');
-  };
-
-  const handleCloseReviewModal = () => {
-    // navigation.navigate('HomeScreen');
-  };
+  const filtersTotal = useMemo(() => {
+    return filters
+      .filter(filter =>
+        currentRide?.preference_ids?.includes(Number(filter.id))
+      )
+      .reduce(
+        (sum, filter) => sum + Number(filter.extra_fee),
+        0,
+      );
+  }, [filters, currentRide?.preference_ids]);
 
   return {
     currentRide,
@@ -53,8 +57,5 @@ export function useTripStartedViewModel() {
     setTip,
     setErrors,
 
-    // Actions
-    handleSubmit,
-    handleCloseReviewModal,
   };
 }

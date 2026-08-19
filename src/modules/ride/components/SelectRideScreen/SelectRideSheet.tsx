@@ -57,7 +57,7 @@ export default function SelectRideSheet({
   return (
     <>
       <BaseBottomSheet
-        isVisible={true}
+        isVisible={vm.isSheetVisible}
         index={1}
         snapPoints={snapPoints}
         animatedPosition={animatedPosition}
@@ -184,7 +184,7 @@ export default function SelectRideSheet({
             onPress={vm.onConfirmLocation}
           >
             <Text style={styles.confirmButtonText} numberOfLines={1}>
-              Confirm
+              {t('common:Confirm')}
             </Text>
           </TouchableOpacity>
         </BaseBottomSheet>

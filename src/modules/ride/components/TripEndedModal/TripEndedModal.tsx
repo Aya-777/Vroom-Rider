@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Modal, View, Text } from 'react-native';
 import TripMetrics from './TripMetrics';
 import PaymentSummary from './PaymentSummary';
@@ -24,6 +24,17 @@ export default function TripEndedModal({ currentRide, visible, onConfirmPayment,
   const selectedFilters = filters.filter(filter =>
     currentRide?.preference_ids?.includes(Number(filter.id))
   );
+  
+  const filtersTotal = useMemo(() => {
+    return filters
+      .filter(filter =>
+        currentRide?.preference_ids?.includes(Number(filter.id))
+      )
+      .reduce(
+        (sum, filter) => sum + Number(filter.extra_fee),
+        0,
+      );
+  }, [filters, currentRide?.preference_ids]);
 
 
   return (
@@ -45,7 +56,8 @@ export default function TripEndedModal({ currentRide, visible, onConfirmPayment,
 
           <View style={styles.divider} />
 
-          <Text style={styles.total}>{currentRide?.actual_price ?? currentRide?.estimated_price}$</Text>
+          <Text style={styles.total}>{currentRide?.actual_price ?? 
+            (Number(currentRide?.estimated_price ?? 0) + filtersTotal)}$</Text>
 
           <View style={styles.divider} />
 
