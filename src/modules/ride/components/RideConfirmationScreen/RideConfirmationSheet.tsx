@@ -14,6 +14,7 @@ import { useTheme } from '../../../../core/theme/useTheme';
 import TimePriceBox from '../ExtraDetailsScreen/TimePriceBox';
 import { SharedValue } from 'react-native-reanimated';
 import { Text } from 'react-native-gesture-handler';
+import { formatScheduledDate } from '../../utils/dateUtil';
 
 type Props = {
   onNextPress: () => void;
@@ -76,7 +77,7 @@ export default function RideConfirmationSheet({
         <View style={styles.dateView}>
           <Text style={styles.dateLabel}>{t('scheduledAt')}</Text>
           <Text style={styles.dateValue} adjustsFontSizeToFit numberOfLines={1}>
-            {vm.rideData.scheduled_at}
+            {formatScheduledDate(vm.rideData.scheduled_at)}
           </Text>
         </View>
       )}
