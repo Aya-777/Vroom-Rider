@@ -40,10 +40,21 @@ export default function ActivitiesScreen() {
     isLoadingMore,
     loadMore,
     openSidebar,
-    toggleFavorite,
+    toggleFavorite: toggleFavoriteDriver,
     onReride,
     setRideState
   } = useActivitiesViewModel();
+
+  const handleToggleFavorite = async (driverId: number) => {
+    const isFavorite = await toggleFavoriteDriver(driverId);
+
+    setSelectedActivity(previous =>
+      previous && previous.driverId === driverId
+        ? { ...previous, isFavorite }
+        : previous,
+    );
+
+  };
 
   const handleReride = async () => {
     if (!selectedActivity) return;
@@ -97,6 +108,7 @@ export default function ActivitiesScreen() {
           renderItem={({ item }) => (
             <ActivityCard
               rideType={item.rideType}
+              status={item.displayStatus}
               pickup={item.pickupLocation}
               destination={item.dropoffLocation}
               date={item.date}
@@ -143,7 +155,7 @@ export default function ActivitiesScreen() {
             setReviewVisible(true);
           }}
           onReride={handleReride}
-          toggleFavorite={toggleFavorite}
+          toggleFavorite={handleToggleFavorite}
         />
         <ReviewModal
           isVisible={reviewVisible}

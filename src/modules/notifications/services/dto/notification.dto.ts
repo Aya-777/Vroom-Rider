@@ -1,6 +1,8 @@
+import { NotificationType } from '../../types/notifications.types';
+
 export interface NotificationDTO {
   id: number;
-  type: string;
+  type: NotificationType;
   title: string;
   body: string;
   trip_id: number | null;

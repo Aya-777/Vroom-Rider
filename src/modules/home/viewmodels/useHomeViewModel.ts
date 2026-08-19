@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 import RideIcon from '../../../assets/svg/common/ride.svg';
 import ReserveIcon from '../../../assets/svg/home/reserve.svg';
 import PinIcon from '../../../assets/svg/common/pin.svg';
-import { useTranslation } from 'react-i18next';
 import { useMainDrawer } from '../../../navigation/hooks/useMainDrawer';
 import { useLocationTracking } from '../../../core/services/location/useLocationTracking';
 import { useLocationStore } from '../../../core/store/locationStore';
@@ -17,44 +18,48 @@ export const useHomeViewModel = () => {
   useLocationTracking();
 
   const currentLocation = useLocationStore(state => state.currentLocation);
-
-  const [recentDestinations, setRecentDestinations] = useState<DestinationItem[]>([]);
+  const [recentDestinations, setRecentDestinations] = useState<
+    DestinationItem[]
+  >([]);
   const [isLoadingRecent, setIsLoadingRecent] = useState(true);
 
-  useEffect(() => {
-    let isMounted = true;
+  const loadRecentDestinations = useCallback(async () => {
+    setIsLoadingRecent(true);
 
-    rideApi.getRecentTrips()
-      .then((trips: RecentTripDTO[]) => {
-        if (!isMounted) return;
+    try {
+      const trips: RecentTripDTO[] = await rideApi.getRecentTrips();
+      const mapped: DestinationItem[] = trips.map(trip => ({
+        id: String(trip.id),
+        title: trip.dropoff_address.split(',')[0],
+        subtitle: trip.dropoff_address,
+        icon: PinIcon,
+        dropoffLatitude: trip.dropoff_latitude,
+        dropoffLongitude: trip.dropoff_longitude,
+        vehicleTypeId: trip.vehicle_type_id,
+      }));
 
-        const mapped: DestinationItem[] = trips.map((trip: RecentTripDTO) => ({
-          id: String(trip.id),
-          title: trip.dropoff_address.split(',')[0],
-          subtitle: trip.dropoff_address,
-          icon: PinIcon,
-          dropoffLatitude: trip.dropoff_latitude,
-          dropoffLongitude: trip.dropoff_longitude,
-          vehicleTypeId: trip.vehicle_type_id,
-        }));
-
-        setRecentDestinations(mapped);
-      })
-      .catch(() => {
-        if (isMounted) setRecentDestinations([]);
-      })
-      .finally(() => {
-        if (isMounted) setIsLoadingRecent(false);
-      });
-
-    return () => {
-      isMounted = false;
-    };
+      setRecentDestinations(mapped);
+    } catch {
+      setRecentDestinations([]);
+    } finally {
+      setIsLoadingRecent(false);
+    }
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      loadRecentDestinations();
+    }, [loadRecentDestinations]),
+  );
 
   const services = [
     { id: '1', title: t('ride'), icon: RideIcon, active: true },
-    { id: '2', title: t('home:services.reserve'), icon: ReserveIcon, active: false },
+    {
+      id: '2',
+      title: t('home:services.reserve'),
+      icon: ReserveIcon,
+      active: false,
+    },
   ];
 
   return {
@@ -63,5 +68,6 @@ export const useHomeViewModel = () => {
     isLoadingRecent,
     openSidebar,
     currentLocation,
+    refreshRecentDestinations: loadRecentDestinations,
   };
 };

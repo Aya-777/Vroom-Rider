@@ -1,7 +1,10 @@
 import { createStyles } from './ActivityCard.styles';
 
+import { DisplayStatus } from '../../types/activities.types';
+
 export interface ActivityCardProps {
     rideType: string;
+    status: DisplayStatus;
     pickup: string;
     destination: string;
     date: string;

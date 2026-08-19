@@ -5,7 +5,9 @@
         "all": "الكل",
         "completed": "المكتملة",
         "cancelled": "الملغية",
-        "rejected": "المرفوضة"
+        "rejected": "المرفوضة",
+        "pending": "قيد الانتظار",
+        "scheduled": "مجدولة"
     },
     "activityDetails": {
         "title": "تفاصيل الرحلة",
@@ -15,8 +17,10 @@
         "date": "التاريخ",
         "price": "السعر",
         "rideType": "نوع الرحلة",
+        "vehicle": "المركبة",
         "distance": "المسافة",
-        "duration": "المدة الزمنية"
+        "duration": "المدة الزمنية",
+        "stop": "توقف"
     },
     "actions":{
       "reride": "اعادة الطلب",

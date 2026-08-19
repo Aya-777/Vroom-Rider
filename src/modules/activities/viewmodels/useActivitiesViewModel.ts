@@ -10,6 +10,7 @@ import { Activity, ActivityFilterTab } from '../types/activities.types';
 import {
   ACTIVITY_TABS,
   STATUS_PARAM_BY_TAB,
+  SCHEDULED_PARAM_BY_TAB,
 } from '../constants/activitiesData';
 import { toDisplayStatus } from '../constants/activitiesData';
 import { useFavoriteDriversStore } from '../../favoriteDrivers/store/useFavoriteDriversStore';
@@ -19,24 +20,32 @@ import { CurrentRide, RideParams } from '../../ride/types/ride.types';
 const mapTripToActivity = (trip: TripHistoryItemDTO): Activity => {
   const pickup = trip.stops.find(s => s.stop_type === 'PICKUP');
   const dropoff = trip.stops.find(s => s.stop_type === 'DROP_OFF');
-  const dateSource = trip.ended_at ?? trip.cancelled_at ?? trip.requested_at;
+  const dateSource =
+    trip.ended_at ??
+    trip.cancelled_at ??
+    trip.scheduled_at ??
+    trip.requested_at;
 
   return {
     id: String(trip.id),
     rawStatus: trip.status,
-    displayStatus: toDisplayStatus(trip.status),
+    displayStatus: toDisplayStatus(trip.status, trip.is_scheduled),
     pickupLocation: pickup?.address ?? '',
     dropoffLocation: dropoff?.address ?? '',
     date: new Date(dateSource).toLocaleString(),
     price: trip.price ? Number(trip.price) : null,
     currency: 'SP',
-    driverId: trip.driverId,
-    driverName: trip.driver_name ?? '-',
-    isFavorite: trip.isFavorite,
+    driverId: trip.driver_id,
+    driverName: trip.driver_name ?? 'None',
+    isFavorite: trip.is_favorite,
     rideType: trip.vehicle_type ?? '-',
     distance: trip.distance,
     duration: trip.duration,
     cancellationReason: trip.cancellation_reason,
+    stops: trip.stops,
+    paymentMethod: trip.payment_method,
+    isScheduled: trip.is_scheduled,
+    scheduledAt: trip.scheduled_at,
   };
 };
 
@@ -49,8 +58,14 @@ export const useActivitiesViewModel = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { toggleFavorite } = useFavoriteDriversStore();
-  const { setCurrentRide, setEstimate, setRideDetails, getIdempotencyKey, setRideState } = useRideStore();
+  const { toggleFavorite: toggleFavoriteDriver } = useFavoriteDriversStore();
+  const {
+    setCurrentRide,
+    setEstimate,
+    setRideDetails,
+    getIdempotencyKey,
+    setRideState,
+  } = useRideStore();
 
   const nextUrlRef = useRef<string | null>(null);
 
@@ -60,6 +75,7 @@ export const useActivitiesViewModel = () => {
     try {
       const response = await getTripHistory({
         status: STATUS_PARAM_BY_TAB[tab],
+        scheduled: SCHEDULED_PARAM_BY_TAB[tab],
       });
       // console.log(response.results);
       setActivities(response.results.map(mapTripToActivity));
@@ -101,6 +117,21 @@ export const useActivitiesViewModel = () => {
     }
   }, [isLoadingMore, isLoading]);
 
+  const toggleFavorite = useCallback(
+    async (driverId: number) => {
+      const isFavorite = await toggleFavoriteDriver(driverId);
+      setActivities(previous =>
+        previous.map(activity =>
+          activity.driverId === driverId
+            ? { ...activity, isFavorite }
+            : activity,
+        ),
+      );
+      return isFavorite;
+    },
+    [toggleFavoriteDriver],
+  );
+
   const onReride = useCallback(
     async (tripId: string) => {
       try {
@@ -128,10 +159,7 @@ export const useActivitiesViewModel = () => {
           pricing_tiers: [],
           stops: trip.stops,
           route_geometry: trip.estimated_route_geometry.map(
-            ([longitude, latitude]: [number, number]) => ({
-              longitude,
-              latitude,
-            }),
+            ([longitude, latitude]: [number, number]) => [longitude, latitude],
           ),
         });
 
@@ -153,7 +181,7 @@ export const useActivitiesViewModel = () => {
         };
       }
     },
-    [setCurrentRide, setEstimate, setRideDetails],
+    [setCurrentRide, setEstimate, setRideDetails, getIdempotencyKey],
   );
 
   return {
@@ -168,6 +196,6 @@ export const useActivitiesViewModel = () => {
     openSidebar,
     toggleFavorite,
     onReride,
-    setRideState
+    setRideState,
   };
 };

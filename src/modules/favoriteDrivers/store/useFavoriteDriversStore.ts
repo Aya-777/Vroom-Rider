@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import { Driver } from '../types/driver.type';
 import { favoriteDriverRepository } from '../repositories/favoriteDriverRepository';
-import { DriverDto } from '../services/dto/favoriteDriver.dto';
 
 interface FavoriteDriversState {
   searchQuery: string;
@@ -14,7 +13,7 @@ interface FavoriteDriversState {
   setSearchQuery: (query: string) => void;
   setSelectedFilter: (filter: string) => void;
   fetchFavoriteDrivers: () => Promise<void>;
-  toggleFavorite: (driverId: number) => Promise<void>;
+  toggleFavorite: (driverId: number) => Promise<boolean>;
 }
 
 export const useFavoriteDriversStore = create<FavoriteDriversState>(
@@ -54,20 +53,26 @@ export const useFavoriteDriversStore = create<FavoriteDriversState>(
     toggleFavorite: async (driverId) => {
       try {
         set({ isLoading: true, error: null });
-        
-        const response = await favoriteDriverRepository.toggleFavorite(driverId);
-        const currentDrivers = get().drivers;
-        const updatedDrivers = currentDrivers.filter(driver => driver.driver_id !== driverId);
 
-        set({ 
-          drivers: updatedDrivers, 
-          isLoading: false 
+        const response = await favoriteDriverRepository.toggleFavorite(driverId);
+        const isFavorite = response.data.is_favorite;
+        const currentDrivers = get().drivers;
+        const updatedDrivers = isFavorite
+          ? currentDrivers
+          : currentDrivers.filter(driver => driver.driver_id !== driverId);
+
+        set({
+          drivers: updatedDrivers,
+          isLoading: false,
         });
+
+        return isFavorite;
       } catch (error: any) {
-        set({ 
-          error: error.message || 'Failed to toggle favorite driver', 
-          isLoading: false 
+        set({
+          error: error.message || 'Failed to toggle favorite driver',
+          isLoading: false,
         });
+        throw error;
       }
     },
   }),
