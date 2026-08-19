@@ -17,6 +17,7 @@ import { TextInput, TouchableOpacity, View } from 'react-native';
 import { SavedPlacesModal } from '../SavedPlaces/SavedPlacesModal';
 import { Text } from 'react-native-gesture-handler';
 import { SharedValue } from 'react-native-reanimated';
+import { RideState } from '../../types/RideState';
 
 type Props = {
   onNextPress: () => void;
@@ -43,12 +44,6 @@ export default function SelectRideSheet({
     { key: 'schedule', label: t('common:schedule') },
   ];
 
-  // useEffect(() => {
-  //   if (vm.rideOtpVerified) {
-  //     onNextPress();
-  //   }
-  // }, [vm.rideOtpVerified]);
-
   const handleNextPress = () => {
     if (vm.validate()) {
       vm.onNextPress();
@@ -62,7 +57,7 @@ export default function SelectRideSheet({
   return (
     <>
       <BaseBottomSheet
-        isVisible={vm.isSheetVisible}
+        isVisible={true}
         index={1}
         snapPoints={snapPoints}
         animatedPosition={animatedPosition}
@@ -73,10 +68,16 @@ export default function SelectRideSheet({
             value={t(`common:${vm.selectedTime}`)}
             isOpen={vm.isNowDropdownOpen}
             items={timeItems}
-            onToggle={() => vm.setIsNowDropdownOpen(!vm.isNowDropdownOpen)}
+            onToggle={() => 
+              {
+              vm.setIsNowDropdownOpen(!vm.isNowDropdownOpen)
+            }}
             onSelect={item => {
               vm.setSelectedTime(item);
               vm.setIsNowDropdownOpen(false);
+              if(item === 'schedule'){
+                vm.setRideState(RideState.SELECT_TIME)
+              }
             }}
           />
 

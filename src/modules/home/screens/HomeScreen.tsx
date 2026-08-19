@@ -31,11 +31,13 @@ export default function HomeScreen() {
 
   const {
     navigateToRide,
+    navigateToSchedule,
     navigateToRideWithDestination,
   } = useHomeActions();
 
   const serviceActions: Record<string, () => void> = {
     '1': navigateToRide,
+    '2': navigateToSchedule,
   };
 
   return (

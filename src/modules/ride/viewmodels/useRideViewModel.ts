@@ -75,7 +75,11 @@ export function useRideViewModel() {
 
         if (!ride) {
           setCurrentRide(null);
-          setRideState(RideState.SELECT_RIDE);
+          if (rideState === RideState.SELECT_TIME) {
+            setRideState(RideState.SELECT_TIME);
+          } else {
+            setRideState(RideState.SELECT_RIDE);
+          }
           return;
         }
         const state = getRideStateFromStatus(ride.status);
@@ -83,23 +87,22 @@ export function useRideViewModel() {
 
         console.log('[Ridevm] Driver location:', location);
 
-      // Save it in Zustand
-      setDriverLocation({
-        latitude: location.data.latitude,
-        longitude: location.data.longitude,
-      });
+        // Save it in Zustand
+        setDriverLocation({
+          latitude: location.data.latitude,
+          longitude: location.data.longitude,
+        });
 
-      const route = await rideApi.getCurrentRoute(ride.id);
+        const route = await rideApi.getCurrentRoute(ride.id);
 
-      console.log('[RideVM] Raw route:', route);
+        console.log('[RideVM] Raw route:', route);
 
+        // console.log('[RideVM] Converted route:', routeGeometry);
 
-      // console.log('[RideVM] Converted route:', routeGeometry);
-
-      setEstimate({
-        ...estimate,
-        route_geometry: route,
-      });
+        setEstimate({
+          ...estimate,
+          route_geometry: route,
+        });
 
         setCurrentRide(ride);
         setRideState(state);
@@ -109,13 +112,15 @@ export function useRideViewModel() {
           error?.response?.data?.message === 'trips.detail.no_current_trip'
         ) {
           setCurrentRide(null);
-          setRideState(RideState.SELECT_RIDE);
+          if (rideState === RideState.SELECT_TIME) {
+            setRideState(RideState.SELECT_TIME);
+          } else {
+            setRideState(RideState.SELECT_RIDE);
+          }
           return;
         }
-        console.error('Failed to load current ride:', error);
       }
     };
-
     loadCurrentRide();
   }, [setCurrentRide, setRideState, setDriverLocation]);
 
@@ -186,7 +191,10 @@ export function useRideViewModel() {
 
   const handleBackPress = () => {
     const previous = previousState[rideState];
-    if (rideState === RideState.SELECT_RIDE) {
+    if (
+      rideState === RideState.SELECT_RIDE ||
+      rideState === RideState.SELECT_TIME
+    ) {
       navigation.goBack();
     } else if (previous) {
       setRideState(previous);
@@ -311,7 +319,9 @@ export function useRideViewModel() {
   };
 
   const handlePostRideTopUp = async () => {
-    const finalPrice = Number(currentRide?.actual_price ?? currentRide?.estimated_price ?? 0);
+    const finalPrice = Number(
+      currentRide?.actual_price ?? currentRide?.estimated_price ?? 0,
+    );
     const result = await topUp(finalPrice);
     if (!result.success) return;
     const sufficient = await hasSufficientBalance(finalPrice);
@@ -319,6 +329,13 @@ export function useRideViewModel() {
       setPostRideInsufficientVisible(false);
       setIsBillVisible(true);
     }
+  };
+
+  const handleSetupRide = (date: Date) => {
+    setRideDetails({
+      is_scheduled: true,
+      scheduled_at: date,
+    });
   };
 
   return {
@@ -356,7 +373,6 @@ export function useRideViewModel() {
     handleSubmitReview,
     handleMaybeLater,
     handleSosPress,
+    handleSetupRide,
   };
 }
-
-

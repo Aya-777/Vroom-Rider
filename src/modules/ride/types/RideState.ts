@@ -1,4 +1,5 @@
 export enum RideState {
+  SELECT_TIME = 'SELECT_TIME', //schedule
   SELECT_RIDE = 'SELECT_RIDE',
   EXTRA_DETAILS = 'EXTRA_DETAILS',
   CONFIRM_RIDE = 'CONFIRM_RIDE',

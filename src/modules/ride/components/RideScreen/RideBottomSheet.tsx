@@ -12,6 +12,7 @@ import SelectRideSheet from '../SelectRideScreen/SelectRideSheet';
 import TripEndedModal from '../TripEndedModal/TripEndedModal';
 import TripStartedSheet from '../TripStartedScreen/TripStartedSheet';
 import { RideFilter } from '../../types/ride.types';
+import {ScheduleBottomSheet} from '../Schedule/ScheduleBottomSheet';
 import { InsufficientBalanceModal } from '../../../payments/components/InsufficientBalanceModal';
 
 type Props = {
@@ -32,6 +33,7 @@ type Props = {
   filters: RideFilter[];
   handleSubmit: (rating: number, comment: string, isComplaint: boolean) => void;
   handleMaybeLater: () => void;
+  handleSetupRidePress: (date: Date) => void;
   isPostRideInsufficientVisible: boolean;
   onPostRideSwitchToCash: () => void;
   onPostRideTopUp: () => void;
@@ -55,14 +57,26 @@ export default function RideBottomSheet({
   filters,
   handleSubmit,
   handleMaybeLater,
+  handleSetupRidePress,
   isPostRideInsufficientVisible,
   onPostRideSwitchToCash,
   onPostRideTopUp,
 }: Props) {
-  const { currentRide } = useRideStore();
+  const { currentRide, setRideState } = useRideStore();
 
   const renderSheet = () => {
+
     switch (rideState) {
+
+      case RideState.SELECT_TIME:
+        return(
+          <ScheduleBottomSheet 
+            onSetupOrder={handleSetupRidePress}
+            onClose={() => setRideState(RideState.SELECT_RIDE)}
+            animatedPosition={animatedPosition}
+          />
+        );
+
       case RideState.SELECT_RIDE:
         return (
           <SelectRideSheet

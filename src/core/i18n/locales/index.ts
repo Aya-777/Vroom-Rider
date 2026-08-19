@@ -38,6 +38,8 @@ import paymentsEn from './payments/en.json';
 import paymentsAr from './payments/ar.json';
 import modalsEn from './modals/en.json';
 import modalsAr from './modals/ar.json';
+import scheduleAr from './ride/schedule/ar.json'
+import scheduleEn from './ride/schedule/en.json'
 
 export {
   authEn,
@@ -80,4 +82,6 @@ export {
   paymentsAr,
   modalsEn,
   modalsAr,
+  scheduleAr,
+  scheduleEn,
 };

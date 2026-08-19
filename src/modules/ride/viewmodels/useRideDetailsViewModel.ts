@@ -23,32 +23,31 @@ export function useRideDetailsViewModel() {
   }, [estimate, selectedVehicleId]);
 
   const updateRideDetails = (totalPrice: Double) => {
-  setRideDetails({
-    vehicle_type_id: selectedVehicleId.toString(),
-    payment_method: selectedPayment === 'cash' ? 'CASH' : 'WALLET',
-    preference_ids: selectedFilterIds.map(id => Number(id)),
-    scheduled_at: rideData.scheduled_at,
-  });
+    setRideDetails({
+      vehicle_type_id: selectedVehicleId.toString(),
+      payment_method: selectedPayment === 'cash' ? 'CASH' : 'WALLET',
+      preference_ids: selectedFilterIds.map(id => Number(id)),
+      is_scheduled: rideData.is_scheduled,
+    });
 
-  if (!estimate || totalPrice === null) {
-    return;
-  }
+    if (!estimate || totalPrice === null) {
+      return;
+    }
 
-  const updatedPricingTiers = estimate.pricing_tiers.map(tier =>
-    tier.tier_id === selectedVehicleId
-      ? {
-          ...tier,
-          estimated_price: totalPrice,
-        }
-      : tier,
-  );
+    const updatedPricingTiers = estimate.pricing_tiers.map(tier =>
+      tier.tier_id === selectedVehicleId
+        ? {
+            ...tier,
+            estimated_price: totalPrice,
+          }
+        : tier,
+    );
 
-  setEstimate({
-    ...estimate,
-    pricing_tiers: updatedPricingTiers,
-  });
-};
-  
+    setEstimate({
+      ...estimate,
+      pricing_tiers: updatedPricingTiers,
+    });
+  };
 
   const onSelectVehicle = (vehicleId: number) => {
     setSelectedVehicleId(vehicleId);
@@ -60,13 +59,15 @@ export function useRideDetailsViewModel() {
 
       const response = await rideApi.getFilters();
 
-      const mappedFilters: RideFilter[] = response.map((filter: RideFilter) => ({
-        id: String(filter.id),
-        code: filter.code,
-        title: filter.title,
-        extra_fee: Number(filter.extra_fee).toFixed(2),
-        iconName: filter.iconName ?? 'filter-outline',
-      }));
+      const mappedFilters: RideFilter[] = response.map(
+        (filter: RideFilter) => ({
+          id: String(filter.id),
+          code: filter.code,
+          title: filter.title,
+          extra_fee: Number(filter.extra_fee).toFixed(2),
+          iconName: filter.iconName ?? 'filter-outline',
+        }),
+      );
 
       setFilters(mappedFilters);
     } catch (error) {
@@ -79,7 +80,6 @@ export function useRideDetailsViewModel() {
   useEffect(() => {
     loadFilters();
   }, [loadFilters]);
-
 
   return {
     rideData,

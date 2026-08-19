@@ -3,6 +3,7 @@
 
   "selectedCar": "Selected car",
   "payment": "Payment",
+  "scheduledAt": "Scheduled at: ",
 
   "findaDriver": "Find a driver"
 }
