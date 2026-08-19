@@ -38,12 +38,23 @@ export default function ActivitiesScreen() {
     activities,
     isLoading,
     isLoadingMore,
+    refresh,
     loadMore,
     openSidebar,
     toggleFavorite: toggleFavoriteDriver,
     onReride,
     setRideState
   } = useActivitiesViewModel();
+
+  const handleStatusSelect = (status: typeof selectedStatus) => {
+    setSelectedStatus(status);
+
+    // Switching tabs triggers the view-model effect. Refresh explicitly when
+    // reopening the currently selected tab as well.
+    if (status === selectedStatus) {
+      refresh();
+    }
+  };
 
   const handleToggleFavorite = async (driverId: number) => {
     const isFavorite = await toggleFavoriteDriver(driverId);
@@ -94,7 +105,7 @@ export default function ActivitiesScreen() {
         <StatusTabs
           statuses={statuses}
           selectedStatus={selectedStatus}
-          onSelect={setSelectedStatus}
+          onSelect={handleStatusSelect}
           styles={styles}
         />
 

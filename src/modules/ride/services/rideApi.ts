@@ -1,6 +1,6 @@
 import { apiClient } from '../../../core/network/apiClient';
 import { ENDPOINTS } from '../../../core/network/endpoints';
-import { v4 as uuidv4 } from 'uuid';
+
 import { RecentTripDTO } from './dto/recentTrip.dto';
 import {
   GetCurrentRideDTO,
@@ -30,7 +30,6 @@ import {
 import {
   EnterRideNumberRequestDTO,
   EnterRideNumberResponseDTO,
-  ResendOtpRequestDTO,
   VerifyOtpRequestDTO,
   VerifyOtpResponseDTO,
 } from './dto/ride.dto';
@@ -171,12 +170,9 @@ export const rideApi = {
     return response.data;
   },
 
-  resendRideOtp: async (
-    data: ResendOtpRequestDTO,
-  ): Promise<{ message: string }> => {
+  resendRideOtp: async (): Promise<{ message: string }> => {
     const response = await apiClient.post<{ message: string }>(
       ENDPOINTS.TRIPS.VERIFY_RIDE_RESEND,
-      data,
     );
     return response.data;
   },

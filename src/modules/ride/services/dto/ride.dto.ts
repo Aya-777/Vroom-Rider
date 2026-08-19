@@ -15,6 +15,8 @@ export interface RequestRideRequestDTO {
   is_for_someone_else: boolean;
   passenger_contact_phone?: string;
   stops: RideStop[];
+  is_scheduled: boolean;
+  scheduled_at?: string;
 }
 
 
@@ -47,6 +49,8 @@ export interface RequestRideResponseDTO{
   is_for_someone_else: boolean;
   passenger_contact_phone: string | null;
   payment_method: 'CASH' | 'WALLET';
+  is_scheduled: boolean;
+  scheduled_at: string | null;
 }
 
 export interface GetTripResponse {
@@ -78,6 +82,8 @@ export interface GetTripResponse {
   is_for_someone_else: boolean;
   passenger_contact_phone: string | null;
   payment_method: 'CASH' | 'WALLET';
+  is_scheduled: boolean;
+  scheduled_at: string | null;
 }
 
 export interface GetCurrentRideDTO {
@@ -95,29 +101,18 @@ export interface EnterRideNumberResponseDTO {
 }
 
 export interface VerifyOtpRequestDTO {
-    phone_number: string;
-    otp: string;
+  otp: string;
 }
 
 export interface VerifyOtpResponseDTO {
-    message: string;
-    data: {
-        refresh: string;
-        access: string;
-        user: {
-            id: number;
-            phone_number: string;
-            first_name: string;
-            last_name: string;
-            role: string;
-            profile_image: string | null;
-        };
-    };
+  'status code': number;
+  message: string;
+  data: {
+    phone_number: string;
+  };
 }
 
-export interface ResendOtpRequestDTO {
-    phone_number: string;
-}
+export type ResendOtpRequestDTO = Record<string, never>;
 
 export interface ReviewRequestDTO {
   rating: number,
