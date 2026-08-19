@@ -49,6 +49,7 @@ export function useRideViewModel() {
     setSOSVisible: setStoreSosVisible,
     sosAlertId,
     setDriverLocation,
+    clearRide
   } = useRideStore();
 
   useEffect(() => {
