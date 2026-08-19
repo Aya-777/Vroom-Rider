@@ -8,6 +8,7 @@ import ChangePhoneScreen from '../../../modules/profile/screens/ChangePhoneScree
 import ChangePhoneOtpScreen from '../../../modules/profile/screens/ChangePhoneOtpScreen';
 import ChangePasswordScreen from '../../../modules/profile/screens/ChangePasswordScreen';
 import SafetyScreen from '../../../modules/profile/screens/SafetyScreen';
+import { FavoriteDriversScreen } from '../../../modules/favoriteDrivers/screens/FavoriteDriversScreen';
 import WalletScreen from '../../../modules/payments/screens/WalletScreen';
 import TopUpScreen from '../../../modules/payments/screens/TopUpScreen';
 import TransactionsScreen from '../../../modules/payments/screens/TransactionsScreen';
@@ -32,6 +33,7 @@ export default function ProfileStack() {
       <Stack.Screen name="TopUp" component={TopUpScreen} />
       <Stack.Screen name="Transactions" component={TransactionsScreen} />
       <Stack.Screen name="Safety" component={SafetyScreen} />
+      <Stack.Screen name="FavoriteDrivers" component={FavoriteDriversScreen} />
     </Stack.Navigator>
   );
 }

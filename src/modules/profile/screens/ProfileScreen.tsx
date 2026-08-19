@@ -73,6 +73,7 @@ export default function ProfileScreen() {
           <GridSection items={gridItems} onItemPress={(id) => {
             if (id === '1') navigation.navigate('Safety');
             if (id === '2') navigation.navigate('Wallet');
+            if (id === '3') navigation.navigate('FavoriteDrivers');
             if (id === '4') navigation.navigate('Settings');
           }} />
           <PromoBanner onPress={() => navigation.navigate('DriverOnboarding')} />
