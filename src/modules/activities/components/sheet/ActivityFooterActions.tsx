@@ -15,14 +15,14 @@ export default function ActivityFooterActions({
                 style={styles.reviewButton}
                 onPress={onReview}
             >
-                <Text style={styles.reviewText}>{t('action:leaveReview')}</Text>
+                <Text style={styles.reviewText}>{t('actions.leaveReview')}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
                 style={styles.rerideButton}
                 onPress={onReride}
             >
-                <Text style={styles.rerideText}>{t('action:reride')}</Text>
+                <Text style={styles.rerideText}>{t('actions.reride')}</Text>
             </TouchableOpacity>
 
         </View>
