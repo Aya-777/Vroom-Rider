@@ -4,7 +4,6 @@ import { createStyles } from '../../styles/schedule.styles';
 import { useTheme } from '../../../../core/theme/useTheme';
 import { BaseBottomSheet } from '../../../../shared/components/BaseBottomSheet';
 import { SharedValue } from 'react-native-reanimated';
-import WheelPicker from './WheelPicker';
 import { useScheduleRideViewModel } from '../../viewmodels/useScheduleRideViewModel';
 import DatePicker from 'react-native-date-picker';
 
@@ -25,7 +24,6 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
 
   const snapPoints = useMemo(() => ['50%'], []);
   const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
 
   return (
     <BaseBottomSheet
@@ -48,69 +46,15 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
 
       <Text style={styles.title}>When?</Text>
 
-      {/* Dynamic Pickers Container with active highlight overlay */}
       <View style={styles.pickerContainer}>
-        <View style={styles.selectionHighlight} />
-
-        {/* <WheelPicker
-          items={vm.amPmOptions.map(value => ({
-            value,
-            label: value,
-          }))}
-          selectedIndex={vm.selectedIndexAmPm}
-          onChange={vm.setSelectedIndexAmPm}
-          itemHeight={40}
-          visibleItems={3}
-          textSize={20}
-        />
-        <WheelPicker
-          items={vm.minutes.map(minute => ({
-            value: minute,
-            label: minute,
-          }))}
-          selectedIndex={vm.selectedIndexMinute}
-          onChange={vm.setSelectedIndexMinute}
-          itemHeight={40}
-          visibleItems={3}
-          textSize={20}
-        />
-
-        <WheelPicker
-          items={vm.hours.map(hour => ({
-            value: hour,
-            label: hour,
-          }))}
-          selectedIndex={vm.selectedIndexHour}
-          onChange={vm.setSelectedIndexHour}
-          itemHeight={40}
-          visibleItems={3}
-          textSize={20}
-        />
-        <WheelPicker
-          items={vm.dates.map(date => ({
-            value: date,
-            label: date,
-          }))}
-          selectedIndex={vm.selectedIndexDate}
-          onChange={vm.setSelectedIndexDate}
-          itemHeight={40}
-          visibleItems={3}
-          textSize={16}
-          flex={1.4}
-          width={200}
-        /> */}
         <DatePicker 
           date={date}
           onDateChange={setDate}
-          mode="datetime" // Gives you one unified wheel for Date + Time
+          mode="datetime" 
           minuteInterval={5}
-          minimumDate={new Date()} // Blocks past times
+          minimumDate={new Date()}
         />
       </View>
-
-      {/* {vm.scheduleError && (
-        <Text style={styles.scheduleError}>{vm.scheduleError}</Text>
-      )} */}
 
       <Text style={styles.footerText}>
         You will be notified when driver is assigned.
@@ -120,9 +64,7 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
       <TouchableOpacity
         style={[
           styles.submitButton,
-          // vm.scheduleError && styles.submitButtonDisabled,
         ]}
-        // disabled={!!vm.scheduleError}
         onPress={() => {
           onSetupOrder({
             date: vm.dates[vm.selectedIndexDate],

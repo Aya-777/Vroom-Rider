@@ -28,23 +28,11 @@ export const createStyles = (colors: ThemeColors) =>
     },
     pickerContainer: {
       flexDirection: 'row',
-      justifyContent: 'space-between',
-      height: 120,
+      justifyContent: 'center',
+      alignContent: 'center',
+      // height: 120,
       marginVertical: 30,
       overflow: 'hidden',
-    },
-    // Highlight window showing the selected active row
-    selectionHighlight: {
-      position: 'absolute',
-      top: 60,
-      left: 0,
-      right: 0,
-      height: 40,
-      borderTopWidth: StyleSheet.hairlineWidth,
-      borderBottomWidth: StyleSheet.hairlineWidth,
-      borderColor: colors.border || '#E5E7EB',
-      backgroundColor: 'transparent',
-      pointerEvents: 'none',
     },
     column: {
       flex: 1,
@@ -57,17 +45,17 @@ export const createStyles = (colors: ThemeColors) =>
     },
     itemText: {
       fontSize: 18,
-      color: colors.textMuted || '#9CAzia',
+      color: colors.textMuted,
     },
     selectedItemText: {
       fontSize: 22,
       fontWeight: '700',
-      color: colors.textPrimary || '#000000',
+      color: colors.textPrimary,
     },
     footerText: {
       textAlign: 'center',
       fontSize: 14,
-      color: colors.textMuted || '#6B7280',
+      color: colors.textMuted,
       marginVertical: 12,
     },
     submitButton: {
@@ -76,20 +64,11 @@ export const createStyles = (colors: ThemeColors) =>
       paddingVertical: 16,
       alignItems: 'center',
       ...Shadows.small,
+      marginBottom: 10,
     },
     submitButtonText: {
       color: colors.textPrimary,
       fontSize: 16,
       fontWeight: '600',
-    },
-    scheduleError: {
-      textAlign: 'center',
-      fontSize: 13,
-      color: colors.error,
-      marginTop: 4,
-      marginBottom: 8,
-    },
-    submitButtonDisabled: {
-      opacity: 0.5,
     },
   });
