@@ -177,9 +177,13 @@ export function useRideViewModel() {
 
   const goToRideConfirmation = () => setRideState(RideState.CONFIRM_RIDE);
 
-  const goToSearchingForaDriver = () =>
-    setRideState(RideState.SEARCHING_FOR_DRIVER);
-
+  const goToSearchingForaDriver = () =>{
+    if(rideData.is_scheduled){
+      setRideState(RideState.SELECT_RIDE);
+    }else{
+      setRideState(RideState.SEARCHING_FOR_DRIVER);
+    }
+  }
   const goToDriverFound = () => setRideState(RideState.DRIVER_FOUND);
 
   const goToDriverArrived = () => setRideState(RideState.DRIVER_ARRIVED);
@@ -300,10 +304,10 @@ export function useRideViewModel() {
     }
   };
 
-  const handleSetupRide = (date: Date) => {
+  const handleSetupRide = (value: string) => {
     setRideDetails({
       is_scheduled: true,
-      scheduled_at: date,
+      scheduled_at: value,
     });
   };
 

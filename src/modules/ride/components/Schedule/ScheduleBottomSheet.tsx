@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 
 interface ScheduleOrderSheetProps {
   onClose: () => void;
-  onSetupOrder: (date: Date) => void;
+  onSetupOrder: (value: string) => void;
   animatedPosition?: SharedValue<number>;
 }
 
@@ -48,10 +48,10 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
       <Text style={styles.title}>{t('when')}</Text>
 
       <View style={styles.pickerContainer}>
-        <DatePicker 
+        <DatePicker
           date={vm.date}
           onDateChange={vm.setDate}
-          mode="datetime" 
+          mode="datetime"
           minuteInterval={5}
           minimumDate={new Date()}
         />
@@ -65,8 +65,9 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
       <TouchableOpacity
         style={[styles.submitButton]}
         onPress={() => {
-          onSetupOrder(vm.date);
-          console.log("dateeutc   ", vm.date);
+          const dateString = vm.getDateString();
+          console.log('scheduled_at:', dateString);
+          onSetupOrder(dateString);
           onClose();
         }}
       >

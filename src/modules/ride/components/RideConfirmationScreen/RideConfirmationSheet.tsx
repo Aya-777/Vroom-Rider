@@ -33,7 +33,6 @@ export default function RideConfirmationSheet({
   const snapPoints = useMemo(() => ['30%', '70%'], []);
 
   const handleFindPress = async () => {
-    // const response = await vm.handleFindDriver();
     if (!selectedVehicle) return;
       const response = await vm.handleFindDriver(selectedVehicle.estimated_price);
     if (response) {
@@ -77,7 +76,7 @@ export default function RideConfirmationSheet({
         <View style={styles.dateView}>
           <Text style={styles.dateLabel}>{t('scheduledAt')}</Text>
           <Text style={styles.dateValue} adjustsFontSizeToFit numberOfLines={1}>
-            {vm.rideData.scheduled_at.toLocaleString()}
+            {vm.rideData.scheduled_at}
           </Text>
         </View>
       )}
