@@ -22,9 +22,19 @@ export const createStyles = (colors: ThemeColors) =>
             marginBottom: Spacing.md,
         },
 
+        headerInfo: {
+            flex: 1,
+            gap: Spacing.xs,
+        },
+
         rideType: {
             ...Typography.boldBody,
             color: colors.primary,
+        },
+
+        status: {
+            ...Typography.caption,
+            fontWeight: '600',
         },
 
         fare: {

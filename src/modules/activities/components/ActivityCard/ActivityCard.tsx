@@ -4,6 +4,7 @@ import {
     View,
     Text,
 } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 import { ActivityCardProps, LocationRowProps } from './ActivityCard.types';
 import { useTheme } from '../../../../core/theme/useTheme';
@@ -39,6 +40,7 @@ const LocationRow = ({
 
 const ActivityCard = ({
     rideType,
+    status,
     pickup,
     destination,
     date,
@@ -49,7 +51,16 @@ const ActivityCard = ({
 }: ActivityCardProps) => {
 
     const { colors } = useTheme();
+    const { t } = useTranslation(['activities']);
     const styles = createStyles(colors);
+
+    const statusColor = {
+        Completed: colors.success,
+        Cancelled: '#EAB308',
+        Rejected: colors.error,
+        Pending: '#F97316',
+        Scheduled: '#F97316',
+    }[status];
 
     return (
 
@@ -65,9 +76,14 @@ const ActivityCard = ({
                 style={styles.container}
             >
                 <View style={styles.header}>
-                    <Text style={styles.rideType}>
-                        {rideType}
-                    </Text>
+                    <View style={styles.headerInfo}>
+                        <Text style={styles.rideType}>
+                            {rideType}
+                        </Text>
+                        <Text style={[styles.status, { color: statusColor }]}>
+                            {t(`status.${status.toLowerCase()}`)}
+                        </Text>
+                    </View>
 
                     <Text style={styles.fare}>
                         {fare}

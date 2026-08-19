@@ -17,25 +17,25 @@ export default function ActivityDetailsList({ activity, styles, toggleFavorite }
             <Text style={styles.title}>{t('activityDetails.title')}</Text>
 
             <View>
-              {activity.driverId !== undefined && 
-                <View style={styles.row}>
+              <View style={styles.row}>
                     <Text style={styles.label}>{t('activityDetails.driverName')}</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
                         <Text style={styles.value}>{activity.driverName}</Text>
-                        <TouchableOpacity onPress={() => toggleFavorite(activity.driverId)}>
-                            <HeartIcon
-                                width={20}
-                                height={20}
-                                fill={activity.isFavorite ? colors.error : 'none'}
-                                stroke={activity.isFavorite ? colors.error : colors.textSecondary}
-                            />
-                        </TouchableOpacity>
+                        {activity.driverId !== null && (
+                            <TouchableOpacity onPress={() => toggleFavorite(activity.driverId)}>
+                                <HeartIcon
+                                    width={20}
+                                    height={20}
+                                    fill={activity.isFavorite ? colors.error : 'none'}
+                                    stroke={activity.isFavorite ? colors.error : colors.textSecondary}
+                                />
+                            </TouchableOpacity>
+                        )}
                     </View>
                 </View>
-              }
 
                 <View style={styles.row}>
-                    <Text style={styles.label}>{t('activityDetails.rideType')}</Text>
+                    <Text style={styles.label}>{t('activityDetails.vehicle')}</Text>
                     <Text style={styles.value}>{activity.rideType}</Text>
                 </View>
 
@@ -64,6 +64,17 @@ export default function ActivityDetailsList({ activity, styles, toggleFavorite }
                         {activity.price !== null ? `${activity.price} $` : '-'}
                     </Text>
                 </View>
+
+                {activity.stops
+                    .filter((stop: any) => stop.stop_type === 'STOP')
+                    .map((stop: any, index: number) => (
+                        <View style={styles.row} key={stop.id ?? `${stop.address}-${index}`}>
+                            <Text style={styles.label}>
+                                {t('activityDetails.stop')} {index + 1}
+                            </Text>
+                            <Text style={styles.value}>{stop.address}</Text>
+                        </View>
+                    ))}
             </View>
 
             <Text style={styles.sectionTitle}>{t('activityDetails.pickupLocation')}</Text>

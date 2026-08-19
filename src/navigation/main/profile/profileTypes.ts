@@ -20,6 +20,7 @@ export type ProfileStackParamList = {
   TopUp: undefined;
   Transactions: undefined;
   Safety: undefined;
+  FavoriteDrivers: undefined;
 };
 
 export type ProfileStackScreenProps<T extends keyof ProfileStackParamList> =

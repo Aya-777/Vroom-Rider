@@ -1,4 +1,4 @@
-import { RideStop } from "../../types/ride.types";
+import { RideStop } from '../../types/ride.types';
 
 export interface TripHistoryStopDTO {
   id: number;
@@ -8,17 +8,22 @@ export interface TripHistoryStopDTO {
 }
 
 export type TerminalTripStatus =
+  | 'PENDING'
+  | 'ACCEPTED'
   | 'COMPLETED'
   | 'CANCELLED_BY_RIDER'
-  | 'CANCELLED_BY_DRIVER';
+  | 'CANCELLED_BY_DRIVER'
+  | 'EXPIRED';
 
 export interface TripHistoryItemDTO {
   id: number;
   status: TerminalTripStatus;
   stops: TripHistoryStopDTO[];
-  driverId: number | null,
+  driver_id: number | null;
   driver_name: string | null;
-  isFavorite: boolean;
+  is_favorite: boolean;
+  is_scheduled: boolean;
+  scheduled_at: string | null;
   vehicle_type: string | null;
   price: string | null;
   distance: number | null;
