@@ -31,8 +31,8 @@ type Props = {
   setIsBillVisible: (value: boolean) => void;
   setIsReviewVisible: (value: boolean) => void;
   filters: RideFilter[];
-  handleSubmit: (rating: number, comment: string, isComplaint: boolean) => void;
-  handleMaybeLater: () => void;
+  // handleSubmit: () => void;
+  // handleMaybeLater: () => void;
   handleSetupRidePress: (date: Date) => void;
   isPostRideInsufficientVisible: boolean;
   onPostRideSwitchToCash: () => void;
@@ -55,8 +55,8 @@ export default function RideBottomSheet({
   setIsBillVisible,
   setIsReviewVisible,
   filters,
-  handleSubmit,
-  handleMaybeLater,
+  // handleSubmit,
+  // handleMaybeLater,
   handleSetupRidePress,
   isPostRideInsufficientVisible,
   onPostRideSwitchToCash,
@@ -170,11 +170,8 @@ export default function RideBottomSheet({
       {renderSheet()}
 
       <ReviewModal
-        visible={isReviewVisible}
-        onClose={() => {
-          handleMaybeLater();
-        }}
-        onSubmit={handleSubmit}
+        isVisible={isReviewVisible}
+        setIsVisible={setIsReviewVisible}
       />
 
       <InsufficientBalanceModal

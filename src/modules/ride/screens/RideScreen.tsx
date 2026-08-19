@@ -92,8 +92,6 @@ export default function RideScreen() {
           setIsBillVisible={vm.setIsBillVisible}
           setIsReviewVisible={vm.setIsReviewVisible}
           filters={vm.filters}
-          handleSubmit={vm.handleSubmitReview}
-          handleMaybeLater={vm.handleMaybeLater}
           handleSetupRidePress={vm.handleSetupRide}
           isPostRideInsufficientVisible={vm.isPostRideInsufficientVisible}
           onPostRideSwitchToCash={vm.handlePostRideSwitchToCash}

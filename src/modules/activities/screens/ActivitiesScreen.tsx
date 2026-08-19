@@ -101,14 +101,15 @@ export default function ActivitiesScreen() {
               destination={item.dropoffLocation}
               date={item.date}
               fare={
-                item.price !== null ? `${item.price} ${item.currency}` : '-'
+                item.price !== null ? `${item.price.toFixed(2)} ${item.currency}` : '-'
               }
               distance={
-                item.distance !== null ? `${item.distance} km` : undefined
+                item.distance !== null ? `${item.distance.toFixed(2)} km` : undefined
               }
               onPress={() => {
                 setSelectedActivity(item);
                 setDetailsVisible(true);
+                
               }}
             />
           )}
@@ -145,14 +146,9 @@ export default function ActivitiesScreen() {
           toggleFavorite={toggleFavorite}
         />
         <ReviewModal
-          visible={reviewVisible}
-          onClose={() => setReviewVisible(false)}
-          onSubmit={(rating, review) => {
-            console.log(rating);
-            console.log(review);
-
-            setReviewVisible(false);
-          }}
+          isVisible={reviewVisible}
+          setIsVisible={setReviewVisible}
+          rideId={Number(selectedActivity?.id)}
         />
       </View>
     </LinearBg>
