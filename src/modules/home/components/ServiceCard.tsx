@@ -12,7 +12,7 @@ import { SvgProps } from 'react-native-svg/lib/typescript/elements/Svg';
 
 interface Props {
   title: string;
-  icon: React.ElementType<SvgProps>; 
+  icon: React.ElementType<SvgProps>;
   active: boolean;
   onPress?: () => void;
 }
@@ -44,7 +44,7 @@ export default function ServiceCard({
         ]}
         onPress={onPress}
       >
-        <Icon width={24} height={24} fill={active ? colors.textSecondary : colors.textMuted} />
+        <Icon width={24} height={24} fill={colors.textSecondary} />
       </TouchableOpacity>
 
       <Text
