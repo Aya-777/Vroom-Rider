@@ -90,19 +90,21 @@ const ActivityCard = ({
                 <View style={styles.footer}>
                     <View style={styles.footerLeft}>
                         <Text style={styles.date}>{date}</Text>
+                    </View>
 
+                    <View>
                         {distance && (
                             <Text style={styles.distance}>{distance}</Text>
                         )}
                     </View>
 
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         onPress={onDelete}
                         activeOpacity={0.7}
                         style={styles.deleteButton}
                     >
                         <TrashIcon fill={colors.error} />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </LinearBg>
         </TouchableOpacity >

@@ -97,7 +97,6 @@ export function useRideViewModel() {
 
         console.log('[RideVM] Raw route:', route);
 
-        // console.log('[RideVM] Converted route:', routeGeometry);
 
         setEstimate({
           ...estimate,
@@ -257,38 +256,6 @@ export function useRideViewModel() {
     }
   };
 
-  const handleSubmitReview = async (
-    rating: number,
-    review: string,
-    isComplaint: boolean,
-  ) => {
-    setIsReviewVisible(false);
-
-    console.log('submiting.....');
-    try {
-      await rideApi.submitReview(
-        { rating: rating, comment: review, is_complaint: isComplaint },
-        currentRide?.id ?? rideData.id ?? 0,
-      );
-    } catch {
-      console.log('Error submitting review...');
-    }
-
-    navigation.navigate('HomeScreen');
-    setCurrentRide(null);
-    clearRide();
-    setRideState(RideState.SELECT_RIDE);
-    setIsReviewVisible(false);
-  };
-
-  const handleMaybeLater = () => {
-    setIsReviewVisible(false);
-    navigation.navigate('HomeScreen');
-    setCurrentRide(null);
-    clearRide();
-    setRideState(RideState.SELECT_RIDE);
-  };
-
   const handleSosPress = async () => {
     if (!currentRide) {
       console.log('There is no current ride');
@@ -370,8 +337,6 @@ export function useRideViewModel() {
     keepRidePress,
     handleRematch,
     onMyLocationPress,
-    handleSubmitReview,
-    handleMaybeLater,
     handleSosPress,
     handleSetupRide,
   };

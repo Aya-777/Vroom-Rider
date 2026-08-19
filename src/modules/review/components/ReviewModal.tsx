@@ -13,34 +13,27 @@ import RatingStars from './RatingStars';
 import ReviewActions from './ReviewActions';
 import Input from '../../../shared/components/Input';
 import LinearBg from '../../../shared/components/LinearBg';
+import { useReviewViewModel } from '../../ride/viewmodels/useReviewViewModel';
 
 type Props = {
-  visible: boolean;
-  onClose: () => void;
-  onSubmit: (rating: number, review: string, isComplaint: boolean) => void;
+  isVisible: boolean;
+  setIsVisible: (value: boolean) => void;
+  rideId?: number;
 };
 
-export default function ReviewModal({ visible, onClose, onSubmit }: Props) {
+export default function ReviewModal({
+  isVisible,
+  rideId,
+  setIsVisible,
+}: Props) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
-  const [rating, setRating] = useState(0);
-  const [review, setReview] = useState('');
-  const [isComplaint, setIsComplaint] = useState(false);
-  const handleSubmit = () => {
-    onSubmit(rating, review, isComplaint);
-    setRating(0);
-    setReview('');
-    onClose();
-  };
-  const handleCancel = () => {
-    setRating(0);
-    setReview('');
-    onClose();
-  };
+
+  const vm = useReviewViewModel(isVisible, setIsVisible, rideId);
 
   return (
     <Modal
-      visible={visible}
+      visible={isVisible}
       transparent
       animationType="fade"
       statusBarTranslucent
@@ -57,14 +50,14 @@ export default function ReviewModal({ visible, onClose, onSubmit }: Props) {
             <View style={styles.Divider} />
             <View>
               <Text style={styles.sectionTitle}>Rate your trip</Text>
-              <RatingStars rating={rating} onChange={setRating} />
+              <RatingStars rating={vm.rating} onChange={vm.setRating} />
               <View style={styles.Divider} />
             </View>
             <View>
               <Text style={styles.sectionTitle}>Write your review</Text>
               <Input
-                value={review}
-                onChangeText={setReview}
+                value={vm.review}
+                onChangeText={vm.setReview}
                 placeholder="Write your review..."
                 multiline
                 numberOfLines={5}
@@ -72,21 +65,34 @@ export default function ReviewModal({ visible, onClose, onSubmit }: Props) {
                 containerStyle={styles.reviewInputContainer}
                 inputBoxStyle={styles.reviewInputBox}
                 inputStyle={styles.reviewInput}
-                
               />
             </View>
             <Pressable
               style={styles.complaintRow}
-              onPress={() => setIsComplaint(prev => !prev)}
+              onPress={() => vm.setIsComplaint(prev => !prev)}
             >
-              <View style={[styles.checkbox, isComplaint && styles.checkboxChecked]}>
-                {isComplaint && <Text style={styles.checkmark}>✓</Text>}
+              <View
+                style={[
+                  styles.checkbox,
+                  vm.isComplaint && styles.checkboxChecked,
+                ]}
+              >
+                {vm.isComplaint && <Text style={styles.checkmark}>✓</Text>}
               </View>
 
               <Text style={styles.complaintLabel}>Complaint</Text>
             </Pressable>
             <View style={styles.Divider} />
-            <ReviewActions onCancel={handleCancel} onSubmit={handleSubmit} />
+            <ReviewActions
+              onCancel={() => {
+                setIsVisible(false);
+                vm.handleMaybeLater();
+              }}
+              onSubmit={() => {
+                vm.handleSubmitReview();
+                setIsVisible(false);
+              }}
+            />
           </LinearBg>
         </View>
       </TouchableWithoutFeedback>
