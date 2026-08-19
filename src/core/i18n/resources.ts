@@ -1,4 +1,4 @@
-import {
+﻿import {
   authEn,
   authAr,
   homeEn,
@@ -35,6 +35,8 @@ import {
   favoriteDriversAr,
   safetyEn,
   safetyAr,
+  paymentsEn,
+  paymentsAr,
   modalsEn,
   modalsAr,
 } from './locales/index';
@@ -59,6 +61,7 @@ export const resources = {
     sidebar: sideBarEn,
     favoriteDrivers: favoriteDriversEn,
     safety: safetyEn,
+    payments: paymentsEn,
     modals: modalsEn,
   },
 
@@ -81,6 +84,7 @@ export const resources = {
     sidebar: sideBarAr,
     favoriteDrivers: favoriteDriversAr,
     safety: safetyAr,
+    payments: paymentsAr,
     modals: modalsAr,
   },
 };

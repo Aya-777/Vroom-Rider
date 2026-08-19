@@ -1,4 +1,4 @@
-﻿import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 export type ProfileStackParamList = {
   ProfileHome: undefined;
@@ -16,6 +16,9 @@ export type ProfileStackParamList = {
   ChangePhoneOtp: { newPhone: string };
   ChangePassword: undefined;
   PaymentMethods: undefined;
+  Wallet: undefined;
+  TopUp: undefined;
+  Transactions: undefined;
   Safety: undefined;
 };
 

@@ -1,6 +1,5 @@
-﻿import React from 'react';
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import ProfileScreen from '../../../modules/profile/screens/ProfileScreen';
 import DriverOnboardingScreen from '../../../modules/profile/screens/DriverOnboardingScreen';
 import SettingsScreen from '../../../modules/profile/screens/SettingsScreen';
@@ -8,8 +7,11 @@ import EditProfileScreen from '../../../modules/profile/screens/EditProfileScree
 import ChangePhoneScreen from '../../../modules/profile/screens/ChangePhoneScreen';
 import ChangePhoneOtpScreen from '../../../modules/profile/screens/ChangePhoneOtpScreen';
 import ChangePasswordScreen from '../../../modules/profile/screens/ChangePasswordScreen';
-import { ProfileStackParamList } from './profileTypes';
 import SafetyScreen from '../../../modules/profile/screens/SafetyScreen';
+import WalletScreen from '../../../modules/payments/screens/WalletScreen';
+import TopUpScreen from '../../../modules/payments/screens/TopUpScreen';
+import TransactionsScreen from '../../../modules/payments/screens/TransactionsScreen';
+import { ProfileStackParamList } from './profileTypes';
 
 const Stack = createNativeStackNavigator<ProfileStackParamList>();
 
@@ -26,11 +28,10 @@ export default function ProfileStack() {
       <Stack.Screen name="ChangePhone" component={ChangePhoneScreen} />
       <Stack.Screen name="ChangePhoneOtp" component={ChangePhoneOtpScreen} />
       <Stack.Screen name="ChangePassword" component={ChangePasswordScreen} />
+      <Stack.Screen name="Wallet" component={WalletScreen} />
+      <Stack.Screen name="TopUp" component={TopUpScreen} />
+      <Stack.Screen name="Transactions" component={TransactionsScreen} />
       <Stack.Screen name="Safety" component={SafetyScreen} />
     </Stack.Navigator>
   );
 }
-
-
-
-
