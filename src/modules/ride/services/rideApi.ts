@@ -250,6 +250,7 @@ export const rideApi = {
 // Trip History
 export const getTripHistory = async (params?: {
   status?: string;
+  scheduled?: boolean;
 }): Promise<PaginatedResult<TripHistoryItemDTO>> => {
   const response = await apiClient.get<
     ApiEnvelope<PaginatedResult<TripHistoryItemDTO>>

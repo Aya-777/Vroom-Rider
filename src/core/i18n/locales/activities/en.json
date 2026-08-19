@@ -5,7 +5,9 @@
         "all": "All",
         "completed": "Completed",
         "cancelled": "Cancelled",
-        "rejected": "Rejected"
+        "rejected": "Rejected",
+        "pending": "Pending",
+        "scheduled": "Scheduled"
     },
     "activityDetails": {
         "title": "Trip Details",
@@ -15,7 +17,9 @@
         "date": "Date",
         "price": "Price",
         "rideType": "Ride Type",
+        "vehicle": "Vehicle",
         "distance": "Distance",
-        "duration": "Duration"
+        "duration": "Duration",
+        "stop": "Stop"
     }
 }
