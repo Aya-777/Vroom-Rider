@@ -32,6 +32,7 @@ type Props = {
   filters: RideFilter[];
   handleSubmit: (rating: number, comment: string, isComplaint: boolean) => void;
   handleMaybeLater: () => void;
+  handleSetupRidePress: (date: Date) => void;
 };
 
 export default function RideBottomSheet({
@@ -52,6 +53,7 @@ export default function RideBottomSheet({
   filters,
   handleSubmit,
   handleMaybeLater,
+  handleSetupRidePress
 }: Props) {
   const { currentRide, setRideState } = useRideStore();
 
@@ -62,7 +64,7 @@ export default function RideBottomSheet({
       case RideState.SELECT_TIME:
         return(
           <ScheduleBottomSheet 
-            onSetupOrder={()=>{}}
+            onSetupOrder={handleSetupRidePress}
             onClose={() => setRideState(RideState.SELECT_RIDE)}
             animatedPosition={animatedPosition}
           />

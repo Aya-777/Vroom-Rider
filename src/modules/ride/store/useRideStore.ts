@@ -59,18 +59,16 @@ interface RideState {
 
   getIdempotencyKey: () => string;
 
-  driverLocation: MapLocation | null,
+  driverLocation: MapLocation | null;
 
-  setDriverLocation: (value :MapLocation | null) => void; 
+  setDriverLocation: (value: MapLocation | null) => void;
 
   sosVisible: boolean;
   sosAlertId: number | null;
 
   setSOSVisible: (visible: boolean) => void;
   setSOSAlertId: (alertId: number | null) => void;
-
-};
-
+}
 
 const normalizeStops = (stops: RideStop[]): RideStop[] => {
   return stops.map((stop, index) => ({
@@ -87,7 +85,8 @@ export const useRideStore = create<RideState>((set, get) => ({
     passenger_contact_phone: undefined,
     stops: [],
     preference_ids: [],
-    scheduled_at: 'now',
+    is_scheduled: false,
+    scheduled_at: undefined,
     status: TripStatus.NULL,
     idempotency_key: undefined,
   },

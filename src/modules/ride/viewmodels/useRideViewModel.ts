@@ -282,6 +282,12 @@ export function useRideViewModel() {
     }
   }
 
+  const handleSetupRide = (date: Date) => {
+    setRideDetails({
+      scheduled_at: date
+    })
+  }
+
   return {
     rideState,
     currentLocation,
@@ -313,5 +319,6 @@ export function useRideViewModel() {
     handleSubmitReview,
     handleMaybeLater,
     handleSosPress,
+    handleSetupRide,
   };
 }

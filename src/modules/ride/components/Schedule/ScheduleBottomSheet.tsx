@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 
 interface ScheduleOrderSheetProps {
   onClose: () => void;
-  onSetupOrder: (data: { date: string; time: string; amPm: string; utcIso: string }) => void;
+  onSetupOrder: (date: Date) => void;
   animatedPosition?: SharedValue<number>;
 }
 
@@ -22,7 +22,7 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const vm = useScheduleRideViewModel();
-  const {t} = useTranslation(['schedule', 'common']);
+  const { t } = useTranslation(['schedule', 'common']);
 
   const snapPoints = useMemo(() => ['50%'], []);
 
@@ -65,13 +65,8 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
       <TouchableOpacity
         style={[styles.submitButton]}
         onPress={() => {
-          onSetupOrder({
-            date: vm.formattedDate,
-            time: vm.timeString,
-            amPm: vm.amPm,
-            utcIso: vm.utcIsoString,
-          });
-          console.log("dateeutc   ", vm.utcIsoString)
+          onSetupOrder(vm.date);
+          console.log("dateeutc   ", vm.date);
           onClose();
         }}
       >

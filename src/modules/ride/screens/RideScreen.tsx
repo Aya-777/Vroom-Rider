@@ -98,6 +98,7 @@ export default function RideScreen() {
           filters={vm.filters}
           handleSubmit={vm.handleSubmitReview}
           handleMaybeLater={vm.handleMaybeLater}
+          handleSetupRidePress={vm.handleSetupRide}
         />
       </View>
       {(vm.isSOSVisible || vm.storeSOSVisible) && (

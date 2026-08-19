@@ -1,13 +1,13 @@
-import { Double } from "react-native/Libraries/Types/CodegenTypes";
-import { RidePreferenceDTO } from "../services/dto/ride.dto";
-import { TripStatus } from "./RideState";
-import {  RouteCoordinate } from "../services/dto/estimate.dto";
+import { Double } from 'react-native/Libraries/Types/CodegenTypes';
+import { RidePreferenceDTO } from '../services/dto/ride.dto';
+import { TripStatus } from './RideState';
+import { RouteCoordinate } from '../services/dto/estimate.dto';
 
 export type CarImage = {
   id: number;
   image_slot: string;
   image_file: string;
-}
+};
 
 export type Car = {
   id: number;
@@ -22,11 +22,11 @@ export type Car = {
 };
 
 export type Tiers = {
-  tier_id : number;
-  tier_name : string;
-  estimated_price : Double;
+  tier_id: number;
+  tier_name: string;
+  estimated_price: Double;
   image: string;
-}
+};
 
 export type Driver = {
   id: number;
@@ -42,10 +42,10 @@ export interface RideValidationErrors {
   toLocation?: string;
 }
 
-export interface Prefrences{
-  name: string,
-  code: string,
-  price: Double,
+export interface Prefrences {
+  name: string;
+  code: string;
+  price: Double;
 }
 
 export interface RideFilter {
@@ -81,11 +81,11 @@ export interface RideParams {
   passenger_contact_phone?: string;
   stops: RideStop[];
   preference_ids: number[];
-  scheduled_at?: string;
+  is_scheduled?: boolean;
+  scheduled_at?: Date;
   status: TripStatus;
-  idempotency_key?: string,
+  idempotency_key?: string;
 }
-
 
 export interface CurrentRide {
   id: number;
