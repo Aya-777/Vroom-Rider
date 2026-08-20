@@ -85,7 +85,7 @@ export default function SelectRideSheet({
 
           <RideDropdown
             icon={<ProfileIcon fill={colors.primary} />}
-            value={t(`selectRide:${vm.selectedPerson}`)}
+            value={ vm.rideData.is_for_someone_else ? vm.selectedPerson : t(`selectRide:${vm.selectedPerson}`)}
             isOpen={vm.isForMeDropdownOpen}
             items={personItems}
             onToggle={() => vm.setIsForMeDropdownOpen(!vm.isForMeDropdownOpen)}

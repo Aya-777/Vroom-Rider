@@ -245,7 +245,7 @@ export function useRideViewModel() {
       setRideState(RideState.SEARCHING_FOR_DRIVER);
       return response;
     } catch {
-      Alert.alert('Error', 'Could not find a driver. Please try again.');
+      console.log('search failed [Ride vm]');
       return null;
     }
   };
