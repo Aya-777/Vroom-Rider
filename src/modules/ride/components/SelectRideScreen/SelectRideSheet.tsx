@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useSelectRideViewModel } from '../../viewmodels/useSelectRideViewModel';
 import { BaseBottomSheet } from '../../../../shared/components/BaseBottomSheet';
 import RideDropdown from '../../components/shared/RideDropdown';
@@ -22,17 +22,19 @@ import { RideState } from '../../types/RideState';
 type Props = {
   onNextPress: () => void;
   animatedPosition?: SharedValue<number>;
+  destinationText?: string;
 };
 
 export default function SelectRideSheet({
   onNextPress,
   animatedPosition,
+  destinationText,
 }: Props) {
-  const { colors, mode } = useTheme();
+  const { colors } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['selectRide', 'common']);
 
-  const vm = useSelectRideViewModel();
+  const vm = useSelectRideViewModel(destinationText);
 
   const personItems = [
     { key: 'forMe', label: t('selectRide:forMe'), value: true },

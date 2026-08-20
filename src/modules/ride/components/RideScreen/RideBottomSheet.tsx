@@ -35,6 +35,7 @@ type Props = {
   isPostRideInsufficientVisible: boolean;
   onPostRideSwitchToCash: () => void;
   onPostRideTopUp: () => void;
+  destinationText?: string;
 };
 
 export default function RideBottomSheet({
@@ -57,6 +58,7 @@ export default function RideBottomSheet({
   isPostRideInsufficientVisible,
   onPostRideSwitchToCash,
   onPostRideTopUp,
+  destinationText,
 }: Props) {
   const { currentRide, setRideState } = useRideStore();
 
@@ -78,6 +80,7 @@ export default function RideBottomSheet({
           <SelectRideSheet
             onNextPress={onSelectRideNext}
             animatedPosition={animatedPosition}
+            destinationText={destinationText}
           />
         );
 

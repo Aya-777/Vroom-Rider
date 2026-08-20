@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 import ScheduleIcon from '../../assets/svg/common/schedule.svg';
@@ -12,24 +12,37 @@ import { HomeStackParamList } from '../../navigation/main/home/homeTypes';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 
-
 function SearchBar() {
-  const { t } = useTranslation(['home','common']);
+  const { t } = useTranslation(['home', 'common']);
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const navigation = useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
+  const [query, setQuery] = useState('');
 
-  const onInputPress = () => {
-    navigation.navigate('Ride');
-  }
+  const submitSearch = () => {
+    const destinationText = query.trim();
+    navigation.navigate(
+      'Ride',
+      destinationText ? { destinationText } : undefined,
+    );
+  };
 
   return (
     <View style={styles.searchContainer}>
-      <SearchIcon fill={colors.primary} />
+      <TouchableOpacity
+        onPress={submitSearch}
+        accessibilityRole="button"
+        accessibilityLabel={t('common:search')}
+      >
+        <SearchIcon fill={colors.primary} />
+      </TouchableOpacity>
 
       <TextInput
         placeholder={t('whereTo')}
-        onPress={onInputPress}
+        value={query}
+        onChangeText={setQuery}
+        onSubmitEditing={submitSearch}
+        returnKeyType="search"
         placeholderTextColor={colors.textMuted}
         style={styles.searchInput}
       />
@@ -90,3 +103,4 @@ const createStyles = (colors: ThemeColors) =>
   });
 
 export default SearchBar;
+

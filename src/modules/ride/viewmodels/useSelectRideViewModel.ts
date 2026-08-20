@@ -11,10 +11,12 @@ import { useRideMapLocation } from '../hooks/useRideMapLocations';
 import { useCurrentUser } from '../../../core/store/userStore';
 import ContactService from '../../../core/services/ContactService';
 import PermissionService from '../../../core/services/location/PermissionService';
-import { HomeStackParamList } from '../../../navigation/main/home/homeTypes';
+import {
+  HomeStackParamList,
+} from '../../../navigation/main/home/homeTypes';
 import { useRideRepository } from '../repositories/rideRepositories';
 
-export function useSelectRideViewModel() {
+export function useSelectRideViewModel(initialDestinationText = '') {
   const navigation =
     useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
   const { mutateAsync: sendRideOtp } = useRideRepository.useEnterRideNumber();
@@ -29,7 +31,7 @@ export function useSelectRideViewModel() {
     setRideState,
   } = useRideStore();
 
-  const state = useSelectRideState(rideData);
+  const state = useSelectRideState(rideData, initialDestinationText);
   const user = useCurrentUser();
 
   const savedPlacesVM = useSavedPlaces(
