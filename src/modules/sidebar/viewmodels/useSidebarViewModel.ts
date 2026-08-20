@@ -57,6 +57,16 @@ export const useSidebarViewModel = (navigation: Navigation) => {
       });
       navigation.closeDrawer();
       return;
+    }else if(item.route === 'ContactUs'){
+      navigation.navigate('MainTabs', {
+        screen: 'HomeTab',
+        params: {
+          screen: 'ContactUs',
+        },
+      });
+      navigation.closeDrawer();
+      return;
+
     }
 
     navigation.navigate('MainTabs', {

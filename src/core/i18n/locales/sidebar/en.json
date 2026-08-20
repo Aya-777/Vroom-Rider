@@ -4,8 +4,7 @@
   "favoriteDrivers" : "Favorite Drivers",
   "wallet": "Wallet",
   "settings": "Settings",
-  "help": "Help",
-  "about": "About",
+  "contactUs": "Contact Us",
   "logout": "Logout",
   "version": "VROOM v{{version}}"
 }

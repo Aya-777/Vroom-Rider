@@ -41,7 +41,7 @@ export const DriverCard: React.FC<DriverCardProps> = ({
           <View style={styles.ratingRow}>
             <StarIcon width={16} height={16} fill={'#eab308'} />
             <Text style={styles.ratingText}>
-              {driver.rating} {t('favoriteDrivers.details.rating')}
+              {driver.rating.toFixed(2)} {t('favoriteDrivers.details.rating')}
             </Text>
           </View>
         </View>

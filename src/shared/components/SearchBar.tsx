@@ -11,6 +11,8 @@ import { ThemeColors } from '../../core/theme/theme.types';
 import { HomeStackParamList } from '../../navigation/main/home/homeTypes';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
+import { useRideStore } from '../../modules/ride/store/useRideStore';
+import { RideState } from '../../modules/ride/types/RideState';
 
 function SearchBar() {
   const { t } = useTranslation(['home', 'common']);
@@ -18,6 +20,7 @@ function SearchBar() {
   const styles = createStyles(colors);
   const navigation = useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
   const [query, setQuery] = useState('');
+  const {setRideState} = useRideStore();
 
   const submitSearch = () => {
     const destinationText = query.trim();
@@ -49,7 +52,10 @@ function SearchBar() {
 
       <View style={styles.divider} />
 
-      <TouchableOpacity style={styles.timeButton}>
+      <TouchableOpacity style={styles.timeButton} onPress={() => {
+        navigation.navigate('Ride');
+        setRideState(RideState.SELECT_TIME);
+      }}>
         <ScheduleIcon fill={colors.primary} />
         <Text style={styles.timeText}>{t('common:now')}</Text>
       </TouchableOpacity>

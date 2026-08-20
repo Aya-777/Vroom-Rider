@@ -24,27 +24,35 @@ export const useHomeViewModel = () => {
   const [isLoadingRecent, setIsLoadingRecent] = useState(true);
 
   const loadRecentDestinations = useCallback(async () => {
-    setIsLoadingRecent(true);
+  console.log('[HomeVM] Loading recent destinations...');
 
-    try {
-      const trips: RecentTripDTO[] = await rideApi.getRecentTrips();
-      const mapped: DestinationItem[] = trips.map(trip => ({
-        id: String(trip.id),
-        title: trip.dropoff_address.split(',')[0],
-        subtitle: trip.dropoff_address,
-        icon: PinIcon,
-        dropoffLatitude: trip.dropoff_latitude,
-        dropoffLongitude: trip.dropoff_longitude,
-        vehicleTypeId: trip.vehicle_type_id,
-      }));
+  setIsLoadingRecent(true);
 
-      setRecentDestinations(mapped);
-    } catch {
-      setRecentDestinations([]);
-    } finally {
-      setIsLoadingRecent(false);
-    }
-  }, []);
+  try {
+    const trips: RecentTripDTO[] = await rideApi.getRecentTrips();
+
+    console.log('[HomeVM] Recent trips response:', trips);
+
+    const mapped: DestinationItem[] = trips.map(trip => ({
+      id: String(trip.id),
+      title: trip.dropoff_address.split(',')[0],
+      subtitle: trip.dropoff_address,
+      icon: PinIcon,
+      dropoffLatitude: trip.dropoff_latitude,
+      dropoffLongitude: trip.dropoff_longitude,
+      vehicleTypeId: trip.vehicle_type_id,
+    }));
+
+    console.log('[HomeVM] Mapped destinations:', mapped);
+
+    setRecentDestinations(mapped);
+  } catch (error) {
+    console.error('[HomeVM] Failed to load recent destinations:', error);
+    setRecentDestinations([]);
+  } finally {
+    setIsLoadingRecent(false);
+  }
+}, []);
 
   useFocusEffect(
     useCallback(() => {

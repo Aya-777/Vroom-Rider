@@ -19,7 +19,7 @@ type Props = {
 export default function SearchingForaDriverSheet({ onCancelPress, animatedPosition, isCancelling, setIsCancelling, onKeepRide }: Props) {
   const { colors, mode } = useTheme();
   const styles = createStyles(colors);
-  const { t } = useTranslation(['selectRide', 'common']);
+  const { t } = useTranslation([ 'common']);
 
   const vm = useSearchingForaDriverViewModel();
 
@@ -32,7 +32,7 @@ return(
       animatedPosition={animatedPosition}
       >
         <TouchableOpacity style={styles.confirmButton} onPress={setIsCancelling.bind(null, true)}>
-          <Text style={styles.confirmButtonText} numberOfLines={1}>Cancel</Text>
+          <Text style={styles.confirmButtonText} numberOfLines={1}>{t('common:cancel')}</Text>
         </TouchableOpacity>
       </BaseBottomSheet>
 

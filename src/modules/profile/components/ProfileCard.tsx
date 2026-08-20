@@ -68,7 +68,7 @@ export default function ProfileCard({
         </View>
         <View style={styles.iconText}>
           <StarIcon width={18} height={18} fill={colors.background} />
-          <Text style={styles.infoText}>{isLoading ? '...' : Rating?.toFixed(1) || '—'}</Text>
+          <Text style={styles.infoText}>{isLoading ? '...' : Rating?.toFixed(2) || '—'}</Text>
         </View>
       </View>        
     </View>

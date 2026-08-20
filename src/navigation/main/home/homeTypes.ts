@@ -13,6 +13,7 @@ export type HomeStackParamList = {
   Wallet: undefined;
   TopUp: undefined;
   Transactions: undefined;
+  ContactUs: undefined;
 };
 
 export type HomeStackScreenProps<T extends keyof HomeStackParamList> =

@@ -34,7 +34,11 @@ export default function DriverArrivedSheet({ onCancelPress, onKeepRide, isCancel
           <DriverAvatar uri={currentRide?.driver?.profile_image || ''} styles={styles} />
           <View>
             <Text style={styles.driverName}>{currentRide?.driver?.first_name} {currentRide?.driver?.last_name}</Text>
-            <CommunicationActions styles={styles} colors={colors} />
+            <CommunicationActions
+              styles={styles}
+              colors={colors}
+              driver_number={currentRide?.driver?.phone_number ?? ''}
+            />
           </View>
         </View>
         <ProgressBar styles={styles} colors={colors} />
