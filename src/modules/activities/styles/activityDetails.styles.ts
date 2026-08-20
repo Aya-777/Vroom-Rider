@@ -55,6 +55,7 @@ export const createStyles = (colors: ThemeColors) =>
       flexDirection: 'row',
       gap: 12,
       paddingVertical: 16,
+      marginBottom: -10,
     },
 
     reviewButton: {
@@ -90,4 +91,25 @@ export const createStyles = (colors: ThemeColors) =>
       borderTopRightRadius: 28,
       paddingHorizontal: 20,
     },
+    
+    confirmButtonText: {
+      ...Typography.semiBoldBody,
+      color: colors.error,
+    },
+    
+    confirmButton: {
+      marginTop: Spacing.lg,
+      paddingVertical: Spacing.md,
+      borderRadius: Radius.sm,
+      borderWidth: 1,
+      borderColor: colors.error,
+      backgroundColor: colors.error + '18',
+      alignItems: 'center',
+      width: '90%',
+    },
+    actionsContainer:{
+      justifyContent: 'center',
+      alignItems:'center',
+    }
+    
   });

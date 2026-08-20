@@ -22,33 +22,12 @@ export default function ActivitiesScreen() {
   const navigation = useNavigation<any>();
   const mainTabsNavigation = navigation.getParent();
 
-
-  const [selectedActivity, setSelectedActivity] = useState<Activity | null>(
-    null,
-  );
-
-  const [detailsVisible, setDetailsVisible] = useState(false);
-
-  const [reviewVisible, setReviewVisible] = useState(false);
-
-  const {
-    statuses,
-    selectedStatus,
-    setSelectedStatus,
-    activities,
-    isLoading,
-    isLoadingMore,
-    loadMore,
-    openSidebar,
-    toggleFavorite: toggleFavoriteDriver,
-    onReride,
-    setRideState
-  } = useActivitiesViewModel();
+  const vm = useActivitiesViewModel();
 
   const handleToggleFavorite = async (driverId: number) => {
-    const isFavorite = await toggleFavoriteDriver(driverId);
+    const isFavorite = await vm.toggleFavoriteDriver(driverId);
 
-    setSelectedActivity(previous =>
+    vm.setSelectedActivity(previous =>
       previous && previous.driverId === driverId
         ? { ...previous, isFavorite }
         : previous,
@@ -57,9 +36,9 @@ export default function ActivitiesScreen() {
   };
 
   const handleReride = async () => {
-    if (!selectedActivity) return;
+    if (!vm.selectedActivity) return;
 
-    const result = await onReride(selectedActivity.id);
+    const result = await vm.onReride(vm.selectedActivity.id);
 
     if (!result.success) {
       return;
@@ -70,13 +49,13 @@ export default function ActivitiesScreen() {
     console.log('New trip ID:', newTrip?.id);
 
     // close bottom sheet
-    setDetailsVisible(false);
+    vm.setDetailsVisible(false);
     // then navigate to the appropriate screen
     mainTabsNavigation.navigate('HomeTab', {
         screen: 'Ride',
       },
     );
-    setRideState(RideState.SEARCHING_FOR_DRIVER);
+    vm.setRideState(RideState.SEARCHING_FOR_DRIVER);
   };
 
   return (
@@ -87,24 +66,24 @@ export default function ActivitiesScreen() {
       <Header
         title={t('yourActivity')}
         onNotificationPress={() => navigate('Notifications')}
-        onMenuPress={openSidebar}
+        onMenuPress={vm.openSidebar}
       />
 
       <View style={styles.container}>
         <StatusTabs
-          statuses={statuses}
-          selectedStatus={selectedStatus}
-          onSelect={setSelectedStatus}
+          statuses={vm.statuses}
+          selectedStatus={vm.selectedStatus}
+          onSelect={vm.setSelectedStatus}
           styles={styles}
         />
 
         <FlatList
-          data={activities}
+          data={vm.activities}
           keyExtractor={item => item.id}
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
           onEndReachedThreshold={0.4}
-          onEndReached={loadMore}
+          onEndReached={vm.loadMore}
           renderItem={({ item }) => (
             <ActivityCard
               rideType={item.rideType}
@@ -119,14 +98,14 @@ export default function ActivitiesScreen() {
                 item.distance !== null ? `${item.distance.toFixed(2)} km` : undefined
               }
               onPress={() => {
-                setSelectedActivity(item);
-                setDetailsVisible(true);
+                vm.setSelectedActivity(item);
+                vm.setDetailsVisible(true);
                 
               }}
             />
           )}
           ListFooterComponent={
-            isLoadingMore ? (
+            vm.isLoadingMore ? (
               <ActivityIndicator
                 style={{ marginVertical: 16 }}
                 color={colors.primary}
@@ -134,7 +113,7 @@ export default function ActivitiesScreen() {
             ) : null
           }
           ListEmptyComponent={
-            !isLoading ? (
+            !vm.isLoading ? (
               <View style={styles.emptyContainer}>
                 <Text style={styles.emptyText}>{t('noActivities')}</Text>
               </View>
@@ -147,20 +126,21 @@ export default function ActivitiesScreen() {
           }
         />
         <ActivityDetailsSheet
-          visible={detailsVisible}
-          activity={selectedActivity}
-          onClose={() => setDetailsVisible(false)}
+          visible={vm.detailsVisible}
+          activity={vm.selectedActivity}
+          onClose={() => vm.setDetailsVisible(false)}
           onReview={() => {
-            setDetailsVisible(false);
-            setReviewVisible(true);
+            vm.setDetailsVisible(false);
+            vm.setReviewVisible(true);
           }}
           onReride={handleReride}
           toggleFavorite={handleToggleFavorite}
+          onCancel={vm.cancelActivity}
         />
         <ReviewModal
-          isVisible={reviewVisible}
-          setIsVisible={setReviewVisible}
-          rideId={Number(selectedActivity?.id)}
+          isVisible={vm.reviewVisible}
+          setIsVisible={vm.setReviewVisible}
+          rideId={Number(vm.selectedActivity?.id)}
         />
       </View>
     </LinearBg>

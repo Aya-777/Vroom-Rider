@@ -6,9 +6,12 @@ export default function ActivityFooterActions({
     styles,
     onReview,
     onReride,
+    onCancel,
+    isScheduled,
 }: any) {
-    const { t } = useTranslation(['activities']);
+    const { t } = useTranslation(['activities', 'common']);
     return (
+      <View style={styles.actionsContainer}>
         <View style={styles.footer}>
 
             <TouchableOpacity
@@ -26,5 +29,11 @@ export default function ActivityFooterActions({
             </TouchableOpacity>
 
         </View>
+        {isScheduled && 
+          <TouchableOpacity style={styles.confirmButton} onPress={onCancel}>
+            <Text style={styles.confirmButtonText} numberOfLines={1}>{t('common:cancel')}</Text>
+          </TouchableOpacity>
+        }
+      </View>
     );
 }

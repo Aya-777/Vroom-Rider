@@ -11,7 +11,8 @@ export default function ActivityDetailsSheet({
   onClose,
   onReview,
   onReride,
-  toggleFavorite
+  toggleFavorite,
+  onCancel
 }: any) {
   const { colors } = useTheme();
   const styles = createStyles(colors);
@@ -39,6 +40,8 @@ export default function ActivityDetailsSheet({
         styles={styles}
         onReview={onReview}
         onReride={onReride}
+        onCancel={onCancel}
+        isScheduled={activity.isScheduled}
       />
     </BaseBottomSheet>
   );
