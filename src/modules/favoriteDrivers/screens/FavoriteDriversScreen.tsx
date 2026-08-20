@@ -1,6 +1,5 @@
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
-import { DriverSearchBar } from '../components/DriverSearchBar';
 import { DriverCard } from '../components/DriverCard';
 import Header from '../../../shared/components/SubHeader';
 import { createStyles } from '../styles/favoriteDrivers.styles';
@@ -18,7 +17,13 @@ export const FavoriteDriversScreen: React.FC = () => {
   const vm = useFavoriteDriversViewModel();
 
   return (
-    <>
+
+    <LinearBg
+      colors={[colors.backgroundSoft, colors.background]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0.8 }}
+      style={styles.container}
+    >
       <Header title={t('favoriteDrivers.title')} onBackPress={vm.goBack} />
       <LinearBg
         colors={[colors.backgroundSoft, colors.background]}

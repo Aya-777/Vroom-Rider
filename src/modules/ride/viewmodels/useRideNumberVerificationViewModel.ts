@@ -14,7 +14,7 @@ export const useRideNumberVerificationViewModel = (navigation: any, route: any) 
 
     const otp = useOtpFlow({
         verifyOtp: async (code) => {
-          const response = await verifyMutation.mutateAsync({ phone_number: phoneNumber, otp: code });
+          await verifyMutation.mutateAsync({ otp: code });
         },
         onSuccess: () => {
           setRideOtpVerified(true);
@@ -24,7 +24,7 @@ export const useRideNumberVerificationViewModel = (navigation: any, route: any) 
 
     const handleResend = async () => {
         try {
-            await resendMutation.mutateAsync({ phone_number: phoneNumber });
+            await resendMutation.mutateAsync();
             otp.resetCode();
         } catch (err: any) {
             const { message, waitSeconds } = parseWaitSecondsError(err);

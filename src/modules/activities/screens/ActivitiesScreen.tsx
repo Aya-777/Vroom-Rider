@@ -24,6 +24,16 @@ export default function ActivitiesScreen() {
 
   const vm = useActivitiesViewModel();
 
+  const handleStatusSelect = (status: typeof vm.selectedStatus) => {
+    vm.setSelectedStatus(status);
+
+    // Switching tabs triggers the view-model effect. Refresh explicitly when
+    // reopening the currently selected tab as well.
+    if (status === vm.selectedStatus) {
+      vm.refresh();
+    }
+  };
+
   const handleToggleFavorite = async (driverId: number) => {
     const isFavorite = await vm.toggleFavoriteDriver(driverId);
 

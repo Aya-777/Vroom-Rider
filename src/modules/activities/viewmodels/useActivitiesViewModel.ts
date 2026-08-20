@@ -98,9 +98,13 @@ export const useActivitiesViewModel = () => {
     }
   }, []);
 
-  useEffect(() => {
+    useEffect(() => {
     loadInitial(selectedStatus);
   }, [selectedStatus, loadInitial]);
+
+  const refresh = useCallback(() => {
+    return loadInitial(selectedStatus);
+  }, [loadInitial, selectedStatus]);
 
   const loadMore = useCallback(async () => {
     if (!nextUrlRef.current || isLoadingMore || isLoading) return;
@@ -222,6 +226,7 @@ export const useActivitiesViewModel = () => {
     isLoading,
     isLoadingMore,
     error,
+    refresh,
     loadMore,
     openSidebar,
     toggleFavorite,
