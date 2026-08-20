@@ -1,4 +1,4 @@
-import { apiClient } from '../../../core/network/apiClient';
+﻿import { apiClient } from '../../../core/network/apiClient';
 import { ENDPOINTS } from '../../../core/network/endpoints';
 
 import { RecentTripDTO } from './dto/recentTrip.dto';
@@ -80,6 +80,11 @@ export const rideApi = {
   },
 
   // Ride
+  resendTripPin: async (id: number): Promise<{ message?: string }> => {
+    const response = await apiClient.post<{ message?: string }>(ENDPOINTS.TRIPS.RESEND_PIN(id));
+    return response.data;
+  },
+
   getTripById: async (id: number) => {
     const response = await apiClient.get(ENDPOINTS.TRIPS.GET_TRIP(id));
 
@@ -262,3 +267,4 @@ export const getTripHistoryByUrl = async (
   >(url);
   return response.data.data;
 };
+

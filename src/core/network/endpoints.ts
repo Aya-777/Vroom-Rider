@@ -24,6 +24,7 @@
   TRIPS: {
     GET_TRIP: (id: number) => `/trips/${id}/`,
     CURRENT: '/trips/current/',
+    RESEND_PIN: (id: number) => `/trips/${id}/resend-pin/`,
     ROUTE: (id: number) => `/trips/trips/${id}/route/`,
     INITIAL_ESTIMATE: '/trips/trips/estimate/initial/',
     REFINED_ESTIMATE: '/trips/trips/estimate/refined/',
