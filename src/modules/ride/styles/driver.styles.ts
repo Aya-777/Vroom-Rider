@@ -1,5 +1,10 @@
-import { StyleSheet } from 'react-native';
-import { Typography, Spacing, Shadows, Radius } from '../../../core/theme/tokens';
+﻿import { StyleSheet } from 'react-native';
+import {
+  Typography,
+  Spacing,
+  Shadows,
+  Radius,
+} from '../../../core/theme/tokens';
 import { ThemeColors } from '../../../core/theme/theme.types';
 
 export const createStyles = (colors: ThemeColors) =>
@@ -29,7 +34,7 @@ export const createStyles = (colors: ThemeColors) =>
       marginTop: 10,
       direction: 'ltr',
     },
-    pinSubMessage:{
+    pinSubMessage: {
       ...Typography.caption,
       color: colors.textPrimary,
     },
@@ -143,16 +148,15 @@ export const createStyles = (colors: ThemeColors) =>
       gap: 30,
     },
 
-    
     plateContainer: {
       backgroundColor: colors.surface,
       paddingHorizontal: Spacing.sm,
       paddingVertical: Spacing.xxs,
-      borderRadius: Radius.sm -2,
+      borderRadius: Radius.sm - 2,
       alignSelf: 'flex-start',
       marginTop: Spacing.xs,
     },
-      
+
     plateText: {
       ...Typography.boldCaption,
       color: colors.textPrimary,
@@ -163,7 +167,7 @@ export const createStyles = (colors: ThemeColors) =>
       opacity: 0.8,
       color: colors.surface,
     },
-    canelButton:{
+    canelButton: {
       backgroundColor: colors.error + '90',
       borderWidth: 1,
       borderColor: colors.error,
@@ -178,5 +182,8 @@ export const createStyles = (colors: ThemeColors) =>
     cancelButtonText: {
       color: colors.error,
       ...Typography.boldBody,
-    }
+    },
+  resendPinButton: { alignSelf: 'center', marginTop: 8, paddingVertical: 8 },
+    resendPinButtonDisabled: { opacity: 0.55 },
+    resendPinText: { color: colors.primary, fontSize: 14, fontWeight: '600' },
   });

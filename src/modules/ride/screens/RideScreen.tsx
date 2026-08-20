@@ -16,8 +16,9 @@ import Animated, {
 } from 'react-native-reanimated';
 import { RideState } from '../types/RideState';
 import SOSModal from '../components/Sos/SOSModal';
+import { HomeStackScreenProps } from '../../../navigation/main/home/homeTypes';
 
-export default function RideScreen() {
+export default function RideScreen({ route }: HomeStackScreenProps<'Ride'>) {
   const { colors, mode } = useTheme();
   const styles = createStyles(colors);
   const { t } = useTranslation(['selectRide', 'common']);
@@ -96,6 +97,7 @@ export default function RideScreen() {
           isPostRideInsufficientVisible={vm.isPostRideInsufficientVisible}
           onPostRideSwitchToCash={vm.handlePostRideSwitchToCash}
           onPostRideTopUp={vm.handlePostRideTopUp}
+          destinationText={route.params?.destinationText}
         />
       </View>
       {(vm.isSOSVisible || vm.storeSOSVisible) && (

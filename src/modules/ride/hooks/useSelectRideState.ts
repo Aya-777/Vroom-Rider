@@ -8,7 +8,10 @@ import { useLocationStore } from '../../../core/store/locationStore';
 import { useCurrentUser } from '../../../core/store/userStore';
 import { SavedPlace } from '../types/savedPlaces.types';
 
-export function useSelectRideState(rideData: Partial<RideParams>) {
+export function useSelectRideState(
+  rideData: Partial<RideParams>,
+  initialDestinationText = '',
+) {
   const currentLocation = useLocationStore(state => state.currentLocation);
 
   const user = useCurrentUser();
@@ -44,7 +47,9 @@ export function useSelectRideState(rideData: Partial<RideParams>) {
 
   const [fromText, setFromText] = useState(pickupStop?.address ?? '');
 
-  const [toText, setToText] = useState(destinationStop?.address ?? '');
+  const [toText, setToText] = useState(
+    initialDestinationText || destinationStop?.address || '',
+  );
 
   const [pickupCoordinates, setPickupCoordinates] = useState({
     latitude: pickupStop?.latitude ?? 0,

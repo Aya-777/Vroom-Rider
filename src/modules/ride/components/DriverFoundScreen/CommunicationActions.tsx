@@ -5,7 +5,7 @@ import type { createStyles } from '../../styles/driver.styles';
 
 import PhoneNumberIcon from '../../../../assets/svg/contact/call.svg';
 import MessageIcon from '../../../../assets/svg/contact/chat.svg';
-import { Linking } from 'react-native';
+
 import { callPhoneNumber, messagePhoneNumber } from '../../utils/conmmunications';
 
 type CommunicationActionsProps = {

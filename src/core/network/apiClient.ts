@@ -9,8 +9,8 @@ import { performLogout } from '../store/session';
 import { ENDPOINTS } from './endpoints';
 
 export const apiClient = axios.create({
-  baseURL: 'https://w2zns7v8-8000.uks1.devtunnels.ms',
-  // baseURL: 'https://10.49.70.12:8000/',
+  baseURL: 'https://wxfr7kmg-8000.eun1.devtunnels.ms',
+  // baseURL: 'http://10.49.70.227:8000/',
   timeout: 10000,
   headers: { 'Content-Type': 'application/json' },
 });
