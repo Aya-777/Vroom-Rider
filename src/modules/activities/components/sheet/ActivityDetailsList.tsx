@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React from 'react';
 import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import HeartIcon from '../../../../assets/svg/common/heart.svg';
@@ -23,7 +23,7 @@ export default function ActivityDetailsList({
       <View>
         <View style={styles.row}>
           <Text style={styles.label}>{t('activityDetails.driverName')}</Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+          <View style={styles.driverInfoRow}>
             <Text style={styles.value}>{activity.driverName}</Text>
             {activity.driverId !== null && (
               <TouchableOpacity
@@ -55,14 +55,14 @@ export default function ActivityDetailsList({
         <View style={styles.row}>
           <Text style={styles.label}>{t('activityDetails.distance')}</Text>
           <Text style={styles.value}>
-            {activity.distance !== null ? `${activity.distance} km` : '-'}
+            {activity.distance !== null ? `${Number(activity.distance).toFixed(3)} km` : '-'}
           </Text>
         </View>
 
         <View style={styles.row}>
           <Text style={styles.label}>{t('activityDetails.duration')}</Text>
           <Text style={styles.value}>
-            {activity.duration !== null ? `${activity.duration} min` : '-'}
+            {activity.duration !== null ? `${Number(activity.duration).toFixed(3)} min` : '-'}
           </Text>
         </View>
 
@@ -100,3 +100,7 @@ export default function ActivityDetailsList({
     </ScrollView>
   );
 }
+
+
+
+

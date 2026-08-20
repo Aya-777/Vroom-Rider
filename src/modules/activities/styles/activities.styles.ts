@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+﻿import { StyleSheet } from 'react-native';
 import { ThemeColors } from '../../../core/theme/theme.types';
 import { Spacing, Typography, Radius } from '../../../core/theme/tokens';
 
@@ -38,6 +38,12 @@ export const createStyles = (colors: ThemeColors) =>
             color: colors.primary,
         },
 
+        loadingMoreIndicator: {
+            marginVertical: 16,
+        },
+        emptyLoadingIndicator: {
+            marginTop: 40,
+        },
         emptyContainer: {
             flex: 1,
             alignItems: 'center',
