@@ -58,6 +58,12 @@ export const useActivitiesViewModel = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  
+  const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
+  const [detailsVisible, setDetailsVisible] = useState(false);
+  const [reviewVisible, setReviewVisible] = useState(false);
+  const [isCancelling, setIsCancelling] = useState(false);
+
   const { toggleFavorite: toggleFavoriteDriver } = useFavoriteDriversStore();
   const {
     setCurrentRide,
@@ -188,10 +194,34 @@ export const useActivitiesViewModel = () => {
     [setCurrentRide, setEstimate, setRideDetails, getIdempotencyKey],
   );
 
+  
+  const cancelActivity = async (reason: string) => {
+    try {
+      if (!selectedActivity?.id) {
+        console.log('No selected activity');
+        return;
+      }
+      setIsCancelling(true);
+
+      await rideApi.cancelRide(Number(selectedActivity.id), reason);
+    } catch (error) {
+      console.error('Failed to cancel activity:', error);
+    } finally {
+      setIsCancelling(false);
+    }
+  };
+
+
   return {
     statuses: ACTIVITY_TABS,
     selectedStatus,
     setSelectedStatus,
+    selectedActivity,
+    setSelectedActivity,
+    detailsVisible,
+    setDetailsVisible,
+    reviewVisible,
+    setReviewVisible,
     activities,
     isLoading,
     isLoadingMore,
@@ -202,5 +232,7 @@ export const useActivitiesViewModel = () => {
     toggleFavorite,
     onReride,
     setRideState,
+    toggleFavoriteDriver,
+    cancelActivity
   };
 };

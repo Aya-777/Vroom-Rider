@@ -4,8 +4,7 @@
   "favoriteDrivers" : "السائقون المفضلون",
   "wallet": "المحفظة",
   "settings": "الإعدادات",
-  "help": "المساعدة",
-  "about": "حول التطبيق",
+  "contactUs": "تواصل معنا",
   "logout": "تسجيل الخروج",
   "version": "VROOM v{{version}}"
 }

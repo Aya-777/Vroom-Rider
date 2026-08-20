@@ -38,19 +38,12 @@ export default function TripStartedScreen({
         <Text style={styles.tripStartedMessage}>{t('tripStarted')}</Text>
         {/* Driver Card */}
         <DriverInfoCard
-          name={
-            vm.currentRide?.driver?.first_name +
-            ' ' +
-            vm.currentRide?.driver?.last_name
-          }
-          rating={vm.currentRide?.driver?.rating.toFixed(2)}
-          car={
-            vm.currentRide?.vehicle?.car_model ??
-            vm.currentRide?.vehicle?.custom_model_name
-          }
-          plate={vm.currentRide?.vehicle?.plate_number}
+          driver={vm.currentRide?.driver}
+          vehicle={vm.currentRide?.vehicle}
           styles={styles}
           colors={colors}
+          toggleFavorite={vm.toggleFavorite}
+          isFavorite={vm.isFavorite}
         />
 
         {/* Title */}

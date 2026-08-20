@@ -51,6 +51,7 @@ export const useFavoriteDriversStore = create<FavoriteDriversState>(
     },
     
     toggleFavorite: async (driverId) => {
+      console.log("[Favorite Store] driverId" , driverId)
       try {
         set({ isLoading: true, error: null });
 

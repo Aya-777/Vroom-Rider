@@ -26,6 +26,7 @@ export default function HomeScreen() {
   const {
     services,
     recentDestinations,
+    refreshRecentDestinations,
     openSidebar,
   } = useHomeViewModel();
 
@@ -39,6 +40,8 @@ export default function HomeScreen() {
     '1': navigateToRide,
     '2': navigateToSchedule,
   };
+
+  
 
   return (
     <LinearBg

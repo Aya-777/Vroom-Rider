@@ -7,6 +7,9 @@ import { SharedValue } from 'react-native-reanimated';
 import { useScheduleRideViewModel } from '../../viewmodels/useScheduleRideViewModel';
 import DatePicker from 'react-native-date-picker';
 import { useTranslation } from 'react-i18next';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
+import { HomeStackParamList } from '../../../../navigation/main/home/homeTypes';
 
 interface ScheduleOrderSheetProps {
   onClose: () => void;
@@ -23,6 +26,7 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
   const styles = createStyles(colors);
   const vm = useScheduleRideViewModel();
   const { t } = useTranslation(['schedule', 'common']);
+  const navigation = useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
 
   const snapPoints = useMemo(() => ['50%'], []);
 
@@ -40,7 +44,10 @@ export const ScheduleBottomSheet: React.FC<ScheduleOrderSheetProps> = ({
         <TouchableOpacity onPress={onClose}>
           <Text style={styles.headerButton}>{t('orderNow')}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={onClose}>
+        <TouchableOpacity onPress={() => {
+            onClose();
+            navigation.navigate('HomeScreen');
+          }}>
           <Text style={styles.headerButton}>{t('common:cancel')}</Text>
         </TouchableOpacity>
       </View>

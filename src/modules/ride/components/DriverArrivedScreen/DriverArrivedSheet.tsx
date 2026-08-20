@@ -63,7 +63,7 @@ export default function DriverArrivedSheet({
             <Text style={styles.driverName}>
               {currentRide?.driver?.first_name} {currentRide?.driver?.last_name}
             </Text>
-            <CommunicationActions styles={styles} colors={colors} />
+            <CommunicationActions driver_number={currentRide?.driver?.phone_number ?? ''} styles={styles} colors={colors} />
           </View>
         </View>
 

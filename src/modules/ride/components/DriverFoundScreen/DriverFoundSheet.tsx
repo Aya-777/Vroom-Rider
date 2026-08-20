@@ -46,7 +46,7 @@ export default function DriverFoundSheet({
 
         <DriverStatus text={t(currentRide?.driver?.first_name + ' ' + currentRide?.driver?.last_name)} styles={styles} />
 
-        <CommunicationActions styles={styles} colors={colors} />
+        <CommunicationActions driver_number={currentRide?.driver?.phone_number ?? ''} styles={styles} colors={colors} />
 
         <ProgressBar styles={styles} colors={colors} />
 
