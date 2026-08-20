@@ -33,16 +33,10 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
     route: 'Settings',
   },
   {
-    id: 'help',
-    label: 'help',
+    id: 'contactUs',
+    label: 'contactUs',
     icon: HelpIcon,
-    // route: 'Help',
-  },
-  {
-    id: 'about',
-    label: 'about',
-    icon: InfoIcon,
-    // route: 'About',
+    route: 'ContactUs',
   },
 ];
 

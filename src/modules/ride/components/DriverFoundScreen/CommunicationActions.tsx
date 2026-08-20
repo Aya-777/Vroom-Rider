@@ -5,31 +5,26 @@ import type { createStyles } from '../../styles/driver.styles';
 
 import PhoneNumberIcon from '../../../../assets/svg/contact/call.svg';
 import MessageIcon from '../../../../assets/svg/contact/chat.svg';
-import WhatsAppIcon from '../../../../assets/svg/contact/whatsapp.svg';
+import { Linking } from 'react-native';
+import { callPhoneNumber, messagePhoneNumber } from '../../utils/conmmunications';
 
 type CommunicationActionsProps = {
   styles: ReturnType<typeof createStyles>;
   colors: ThemeColors;
+  driver_number: string;
 };
 
-export default function CommunicationActions({ styles, colors }: CommunicationActionsProps) {
+export default function CommunicationActions({ styles, colors, driver_number }: CommunicationActionsProps) {
   return (
     <View style={styles.communicationRow}>
-      <TouchableOpacity style={styles.iconButton}>
+      <TouchableOpacity style={styles.iconButton} onPress={() => callPhoneNumber(driver_number)}>
         <PhoneNumberIcon fill={colors.textPrimary} />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.iconButton}>
+      <TouchableOpacity style={styles.iconButton} onPress={() => messagePhoneNumber(driver_number)}>
         <MessageIcon fill={colors.textPrimary} />
       </TouchableOpacity>
 
-      <TouchableOpacity style={[styles.iconButton, {
-          backgroundColor: colors.primary,
-          height:35,
-          width:35
-        }]}>
-        <WhatsAppIcon fill={colors.textPrimary} height={24} width={24}/>
-      </TouchableOpacity>
     </View>
   );
 }
