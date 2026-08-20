@@ -8,7 +8,8 @@ import DriverStatus from '../../components/DriverFoundScreen/DriverStatus';
 import DriverAvatar from '../../components/DriverFoundScreen/DriverAvatar';
 import CommunicationActions from '../../components/DriverFoundScreen/CommunicationActions';
 import CarDetailsCard from '../../components/DriverFoundScreen/CarDetailsCard';
-import { DriverPinEntry } from './DriverPinEntry';
+import { DriverPinEntry } from '../DriverArrivedScreen/DriverPinEntry';
+import ProgressBar from '../DriverFoundScreen/ProgressBar';
 import ActionButton from '../../../../shared/components/ActionButton';
 import { CancelModal } from '../shared/CancelModal';
 import { useTranslation } from 'react-i18next';
@@ -36,6 +37,7 @@ export default function DriverArrivedSheet({ onCancelPress, onKeepRide, isCancel
             <CommunicationActions styles={styles} colors={colors} />
           </View>
         </View>
+        <ProgressBar styles={styles} colors={colors} />
         <CarDetailsCard car={currentRide?.vehicle ?? driver.car} styles={styles} colors={colors} />
         <ActionButton title={t('common:cancel')} onPress={() => setIsCancelling(true)} style={styles.canelButton} textStyle={styles.cancelButtonText} />
       </BaseBottomSheet>
@@ -43,4 +45,3 @@ export default function DriverArrivedSheet({ onCancelPress, onKeepRide, isCancel
     </>
   );
 }
-
