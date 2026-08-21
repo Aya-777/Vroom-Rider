@@ -90,6 +90,7 @@ export const createStyles = (c: ThemeColors) =>
       height: 230,
       justifyContent: 'flex-start',
       paddingTop: Spacing.sm,
+      marginTop: 60,
     },
 
     transactionCard: {

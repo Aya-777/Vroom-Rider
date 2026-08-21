@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React from 'react';
 import { View, FlatList, Text, ActivityIndicator } from 'react-native';
 import ActivityCard from '../components/ActivityCard';
 import LinearBg from '../../../shared/components/LinearBg';
@@ -10,7 +10,6 @@ import { useTranslation } from 'react-i18next';
 import Header from '../../../shared/components/Header';
 import { navigate } from '../../../navigation/rootTypes';
 import ActivityDetailsSheet from '../components/ActivityDetailsSheet';
-import { Activity } from '../types/activities.types';
 import ReviewModal from '../../review/components/ReviewModal';
 import { RideState } from '../../ride/types/RideState';
 import { useNavigation } from '@react-navigation/native';
@@ -24,15 +23,7 @@ export default function ActivitiesScreen() {
 
   const vm = useActivitiesViewModel();
 
-  const handleStatusSelect = (status: typeof vm.selectedStatus) => {
-    vm.setSelectedStatus(status);
 
-    // Switching tabs triggers the view-model effect. Refresh explicitly when
-    // reopening the currently selected tab as well.
-    if (status === vm.selectedStatus) {
-      vm.refresh();
-    }
-  };
 
   const handleToggleFavorite = async (driverId: number) => {
     const isFavorite = await vm.toggleFavoriteDriver(driverId);
@@ -105,7 +96,7 @@ export default function ActivitiesScreen() {
                 item.price !== null ? `${item.price.toFixed(2)} ${item.currency}` : '-'
               }
               distance={
-                item.distance !== null ? `${item.distance.toFixed(2)} km` : undefined
+                item.distance !== null ? `${item.distance.toFixed(3)} km` : undefined
               }
               onPress={() => {
                 vm.setSelectedActivity(item);
@@ -117,7 +108,7 @@ export default function ActivitiesScreen() {
           ListFooterComponent={
             vm.isLoadingMore ? (
               <ActivityIndicator
-                style={{ marginVertical: 16 }}
+                style={styles.loadingMoreIndicator}
                 color={colors.primary}
               />
             ) : null
@@ -129,7 +120,7 @@ export default function ActivitiesScreen() {
               </View>
             ) : (
               <ActivityIndicator
-                style={{ marginTop: 40 }}
+                style={styles.emptyLoadingIndicator}
                 color={colors.primary}
               />
             )
@@ -156,3 +147,7 @@ export default function ActivitiesScreen() {
     </LinearBg>
   );
 }
+
+
+
+

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+﻿import { StyleSheet } from 'react-native';
 import { ThemeColors } from '../../../core/theme/theme.types';
 import { Radius, Spacing, Typography } from '../../../core/theme/tokens';
 
@@ -113,3 +113,4 @@ export const createStyles = (colors: ThemeColors) =>
     }
     
   });
+
