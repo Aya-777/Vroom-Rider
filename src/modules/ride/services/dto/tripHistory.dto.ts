@@ -79,7 +79,7 @@ export interface ReorderTripDTO {
 
   estimated_route_geometry: [number, number][];
 
-  vehicle_type_id: number;
+  vehicle_type_id: string;
   preference_ids: number[];
 }
 

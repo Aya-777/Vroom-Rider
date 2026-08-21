@@ -16,6 +16,7 @@ import { toDisplayStatus } from '../constants/activitiesData';
 import { useFavoriteDriversStore } from '../../favoriteDrivers/store/useFavoriteDriversStore';
 import { useRideStore } from '../../ride/store/useRideStore';
 import { CurrentRide, RideParams } from '../../ride/types/ride.types';
+import { RideState } from '../../ride/types/RideState';
 
 const mapTripToActivity = (trip: TripHistoryItemDTO): Activity => {
   const pickup = trip.stops.find(s => s.stop_type === 'PICKUP');
@@ -172,6 +173,7 @@ export const useActivitiesViewModel = () => {
             ([longitude, latitude]: [number, number]) => [longitude, latitude],
           ),
         });
+        setRideState(RideState.SEARCHING_FOR_DRIVER);
 
         return {
           success: true,
@@ -233,6 +235,7 @@ export const useActivitiesViewModel = () => {
     onReride,
     setRideState,
     toggleFavoriteDriver,
-    cancelActivity
+    cancelActivity,
+    setCurrentRide
   };
 };
