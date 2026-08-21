@@ -250,6 +250,11 @@ export const rideApi = {
   contactUS : async (message: string) => {
     await apiClient.post(ENDPOINTS.CONTACTUS.send, { message });
     return;
+  },
+
+  confirmPayment: async(id: number) => {
+    await apiClient.post(ENDPOINTS.TRIPS.CONFIRM_PAYMENT(id));
+    return;
   }
 };
 

@@ -36,6 +36,7 @@ type Props = {
   onPostRideSwitchToCash: () => void;
   onPostRideTopUp: () => void;
   destinationText?: string;
+  confirmPayment: (id:number)=>void;
 };
 
 export default function RideBottomSheet({
