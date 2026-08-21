@@ -1,8 +1,16 @@
-import { Linking, Platform } from 'react-native';
+import { Alert, Linking, Platform } from 'react-native';
+import i18n from '../../../core/i18n';
 
 export const callPhoneNumber = async (
-  phoneNumber: string,
+  phoneNumber?: string,
 ): Promise<void> => {
+  if (!phoneNumber) {
+    Alert.alert(
+      i18n.t('contactUS:userNotFound'),
+    );
+    return;
+  }
+
   const cleanNumber = phoneNumber.replace(/[^\d+]/g, '');
 
   const url = Platform.select({
@@ -23,9 +31,16 @@ export const callPhoneNumber = async (
 };
 
 export const messagePhoneNumber = async (
-  phoneNumber: string,
+  phoneNumber?: string,
   message?: string,
-) => {
+): Promise<void> => {
+  if (!phoneNumber) {
+    Alert.alert(
+      i18n.t('contactUS:userNotFound'),
+    );
+    return;
+  }
+
   const cleanNumber = phoneNumber.replace(/[^\d+]/g, '');
 
   const body = message
