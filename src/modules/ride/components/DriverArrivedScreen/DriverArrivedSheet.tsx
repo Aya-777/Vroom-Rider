@@ -14,7 +14,7 @@ import ActionButton from '../../../../shared/components/ActionButton';
 import { CancelModal } from '../shared/CancelModal';
 import { useTranslation } from 'react-i18next';
 
-type Props = { onCancelPress: () => void; onKeepRide: () => void; isCancelling: boolean; setIsCancelling: (value: boolean) => void; animatedPosition?: any };
+type Props = { onCancelPress: (reason : string) => void; onKeepRide: () => void; isCancelling: boolean; setIsCancelling: (value: boolean) => void; animatedPosition?: any };
 
 export default function DriverArrivedSheet({ onCancelPress, onKeepRide, isCancelling, setIsCancelling, animatedPosition }: Props) {
   const { colors } = useTheme();
