@@ -41,14 +41,14 @@ export const ContactUsScreen = () => {
 };
 
     const { colors } = useTheme();
-    const { t } = useTranslation(['selectRide', 'common']);
+    const { t } = useTranslation(['contactUs', 'common']);
     const navigation = useNavigation<any>();
     
 
   return (
     <>
       {/* Header */}
-      <Header title='Contact Us' onBackPress={() => navigation.goBack()} />
+      <Header title={t('contactUs.title')} onBackPress={() => navigation.goBack()} />
 
       <LinearBg 
       colors={[colors.backgroundSoft, colors.background]}
@@ -57,17 +57,17 @@ export const ContactUsScreen = () => {
         {/* Title & Subtitle */}
         <View style={styles.titleContainer}>
           <Text style={[Typography.h2, { color: colors.textPrimary, textAlign: 'center' }]}>
-            Get in Touch
+            {t('contactUs.subTitle')}
           </Text>
           <Text style={[Typography.caption, { color: colors.textMuted, textAlign: 'center', marginTop: Spacing.xs }]}>
-            We'd love to hear from you. Please fill out the form below or reach out via our alternative contact methods.
+            {t('contactUs.message')}
           </Text>
         </View>
 
         {/* Message Form Card */}
         <View style={[styles.card, { backgroundColor: colors.backgroundSoft, borderColor: colors.border }]}>
           <Text style={[Typography.semiBoldCaption, { color: colors.textPrimary, marginBottom: Spacing.sm }]}>
-            Message
+            {t('contactUs.inputTitle')}
           </Text>
           <TextInput
             style={[
@@ -79,7 +79,7 @@ export const ContactUsScreen = () => {
               },
               Typography.body,
             ]}
-            placeholder="How can we help you?"
+            placeholder={t('contactUs.inputholder')}
             placeholderTextColor={colors.textMuted}
             multiline
             numberOfLines={4}
@@ -93,7 +93,7 @@ export const ContactUsScreen = () => {
             activeOpacity={0.8}
           >
             <Text style={[Typography.semiBoldBody, { color: colors.background }]}>
-              Send Message
+              {t('contactUs.sendButton')}
             </Text>
           </TouchableOpacity>
         </View>
@@ -101,7 +101,7 @@ export const ContactUsScreen = () => {
         {/* Footer Links & Copyright */}
         <View style={styles.footerContainer}>
           <Text style={[Typography.smallCaption, { color: colors.textMuted, textAlign: 'center', marginTop: Spacing.sm }]}>
-            © 2024 Professional Corp. All rights reserved.
+            © 2024 {t('contactUs.footer')}
           </Text>
         </View>
       </LinearBg>
