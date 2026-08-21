@@ -98,6 +98,7 @@ export default function RideScreen({ route }: HomeStackScreenProps<'Ride'>) {
           onPostRideSwitchToCash={vm.handlePostRideSwitchToCash}
           onPostRideTopUp={vm.handlePostRideTopUp}
           destinationText={route.params?.destinationText}
+          confirmPayment={vm.confirmPayment}
         />
       </View>
       {(vm.isSOSVisible || vm.storeSOSVisible) && (
