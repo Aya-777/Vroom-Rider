@@ -319,6 +319,12 @@ export function useRideViewModel() {
     });
   };
 
+  const confirmPayment = async (id: number) => {
+    const response = await rideApi.confirmPayment(id);
+    setIsReviewVisible(true);
+    setIsBillVisible(false);
+  }
+
   return {
     rideState,
     currentLocation,
@@ -353,5 +359,6 @@ export function useRideViewModel() {
     onMyLocationPress,
     handleSosPress,
     handleSetupRide,
+    confirmPayment
   };
 }

@@ -35,6 +35,7 @@
     SAVED_LOCATION: (id: number) => `/trips/saved-locations/${id}/`,
     PREFERENCES: '/trips/preferences/',
     CONFIRM: '/trips/confirm/',
+    CONFIRM_PAYMENT:(id: number) => `/trips/${id}/confirm-payment/`,
     REMATCH: (id: number) => `/trips/${id}/rematch/`,
     CANCEL: (id: number) => `/trips/trips/${id}/cancel/`,
     SUBMIT_REVIEW: (id: number) => `/trips/trips/${id}/reviews/`,
