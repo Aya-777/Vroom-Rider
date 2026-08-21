@@ -107,24 +107,6 @@ export function useSelectRideViewModel(initialDestinationText = '') {
         stop_type: 'DROP_OFF' as const,
       },
     ];
-
-    try {
-      const estimate = await rideApi.estimateInitial({
-        stops,
-      });
-
-      setEstimate(estimate);
-
-      setRideDetails({
-        stops,
-        is_scheduled: state.selectedTime === 'now' ? false : true,
-        is_for_someone_else: state.selectedPerson === 'forMe' ? false : true,
-        passenger_contact_phone: state.contactPhone ?? user?.phone_number,
-      });
-    } catch (error) {
-      console.log('Estimate Error:', error);
-    }
-
     if (
       state.selectedPerson !== 'forMe' &&
       state.contactPhone &&
@@ -144,6 +126,24 @@ export function useSelectRideViewModel(initialDestinationText = '') {
 
       navigation.navigate('RideOtp');
     }
+
+    try {
+      const estimate = await rideApi.estimateInitial({
+        stops,
+      });
+
+      setEstimate(estimate);
+
+      setRideDetails({
+        stops,
+        is_scheduled: state.selectedTime === 'now' ? false : true,
+        is_for_someone_else: state.selectedPerson === 'forMe' ? false : true,
+        passenger_contact_phone: state.contactPhone ?? user?.phone_number,
+      });
+    } catch (error) {
+      console.log('Estimate Error:', error);
+    }
+
   };
 
   const handleFlipModal = () => {
@@ -175,9 +175,12 @@ export function useSelectRideViewModel(initialDestinationText = '') {
       });
       state.setContactPhone(contact.phone);
       state.setSelectedPerson(contact.name);
+      setRideOtpVerified(false);
       return;
     }
 
+    state.setSelectedPerson('forMe');
+    setRideOtpVerified(true);
     setRideDetails({
       ...rideData,
       is_for_someone_else: false,
@@ -191,6 +194,7 @@ export function useSelectRideViewModel(initialDestinationText = '') {
     validate,
     handleFlipModal,
     handleBottomSheet,
+    rideData,
 
     pickupResults: state.pickupSearch.results,
     destinationResults: state.destinationSearch.results,

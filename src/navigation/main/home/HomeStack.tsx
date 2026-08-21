@@ -10,7 +10,7 @@ import { FavoriteDriversScreen } from '../../../modules/favoriteDrivers/screens/
 import WalletScreen from '../../../modules/payments/screens/WalletScreen';
 import TopUpScreen from '../../../modules/payments/screens/TopUpScreen';
 import TransactionsScreen from '../../../modules/payments/screens/TransactionsScreen';
-// import { ContactUsScreen } from '../../../modules/contactUs/ContactUsScreen';
+import { ContactUsScreen } from '../../../modules/contactUs/ContactUsScreen';
 
 const Stack = createNativeStackNavigator<HomeStackParamList>();
 
@@ -25,7 +25,7 @@ export default function HomeStack() {
       <Stack.Screen name="Wallet" component={WalletScreen} />
       <Stack.Screen name="TopUp" component={TopUpScreen} />
       <Stack.Screen name="Transactions" component={TransactionsScreen} />
-      {/* <Stack.Screen name="ContactUs" component={ContactUsScreen} /> */}
+      <Stack.Screen name="ContactUs" component={ContactUsScreen} />
     </Stack.Navigator>
   );
 }

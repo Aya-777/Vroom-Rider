@@ -18,11 +18,13 @@ export function useConfirmRideViewModel() {
     setCurrentRide,
     setRideDetails,
     getIdempotencyKey,
+    clearRide
   } = useRideStore();
   const { hasSufficientBalance, isChecking } = useBalanceCheck();
   const { topUp, isProcessing: isTopUpProcessing } = useWalletActions();
 
   const proceedToFindDriver = async () => {
+    console.log(rideData.id);
     setIsLoading(true);
     const idempotencyKey = getIdempotencyKey();
     try {
@@ -30,14 +32,16 @@ export function useConfirmRideViewModel() {
         rideData as RequestRideRequestDTO,
         idempotencyKey,
       );
-      setCurrentRide(response as CurrentRide);
-      setRideDetails({ status: TripStatus.PENDING });
+      if(rideData.is_scheduled){
+        setCurrentRide(null);
+        clearRide();
+      }else{
+        setCurrentRide(response as CurrentRide);
+        setRideDetails({ status: TripStatus.PENDING });
+      }
       return response;
     } catch (err: any) {
-      Alert.alert(
-        err.response?.data?.message || err.message || 'Error',
-        'Could not find a driver. Please try again.',
-      );
+      console.log('error finding a driver, ', err);
       return null;
     } finally {
       setIsLoading(false);

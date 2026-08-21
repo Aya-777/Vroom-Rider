@@ -73,4 +73,8 @@
     SET_CASH_PAYMENT_METHOD: (tripId: number) =>
       `/payments/trips/${tripId}/payment-method/cash/`,
   },
+
+  CONTACTUS:{
+    send: '/api/v1/users/contact-us/',
+  }
 } as const;
