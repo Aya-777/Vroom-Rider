@@ -1,4 +1,4 @@
-import { useTheme } from '../../core/theme/useTheme';
+﻿import { useTheme } from '../../core/theme/useTheme';
 import { createStyles } from '../styles/sheet.styles';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import BottomSheet, {
@@ -9,7 +9,7 @@ import { StyleSheet, ViewStyle } from 'react-native';
 import SheetBackground from './SheetBackground';
 import {
   SharedValue,
-  useSharedValue,
+
 } from 'react-native-reanimated';
 
 interface BaseBottomSheetProps extends Omit<BottomSheetProps, 'children'> {
@@ -59,6 +59,7 @@ export const BaseBottomSheet: React.FC<BaseBottomSheetProps> = ({
   return (
     <>
       <BottomSheet
+      style={styles.bottomSheet}
         ref={bottomSheetRef}
         index={-1}
         snapPoints={snapPoints}
@@ -73,3 +74,7 @@ export const BaseBottomSheet: React.FC<BaseBottomSheetProps> = ({
     </>
   );
 };
+
+
+
+

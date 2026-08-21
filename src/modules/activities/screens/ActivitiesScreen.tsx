@@ -1,4 +1,4 @@
-﻿import React, { useEffect } from 'react';
+﻿import React from 'react';
 import { View, FlatList, Text, ActivityIndicator } from 'react-native';
 import ActivityCard from '../components/ActivityCard';
 import LinearBg from '../../../shared/components/LinearBg';
@@ -23,12 +23,6 @@ export default function ActivitiesScreen() {
 
   const vm = useActivitiesViewModel();
 
-  useEffect(() => {
-    mainTabsNavigation?.setOptions({
-      tabBarStyle: vm.detailsVisible ? { display: 'none' } : undefined,
-    });
-    return () => mainTabsNavigation?.setOptions({ tabBarStyle: undefined });
-  }, [mainTabsNavigation, vm.detailsVisible]);
 
 
   const handleToggleFavorite = async (driverId: number) => {
@@ -153,6 +147,7 @@ export default function ActivitiesScreen() {
     </LinearBg>
   );
 }
+
 
 
 
