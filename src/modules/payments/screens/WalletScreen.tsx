@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { useFocusEffect } from '@react-navigation/native';
 import { useTheme } from '../../../core/theme/useTheme';
 import { useCurrentUser } from '../../../core/store/userStore';
 import SubHeader from '../../../shared/components/SubHeader';
@@ -16,6 +17,12 @@ export default function WalletScreen({ navigation }: any) {
   const styles = createStyles(colors);
   const user: any = useCurrentUser();
   const { balance, transactions, isLoading, error, refresh } = useWalletViewModel();
+
+  useFocusEffect(
+    useCallback(() => {
+      refresh();
+    }, [refresh]),
+  );
   const holderName = [user?.first_name, user?.last_name].filter(Boolean).join(' ') || '-';
   const walletIdentifier = String(user?.id ?? 0).padStart(4, '0').slice(-4);
   const cardNumber = user?.wallet_card_number || user?.card_number || `VROOM **** **** **** ${walletIdentifier}`;

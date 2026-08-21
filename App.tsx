@@ -60,9 +60,9 @@ function App() {
 
   return (
     <StripeProvider
-      publishableKey="pk_test_51U4zaU07t2n4HgaIrwsO9U5N21rP9BWp7mRBIRBwynlHKVlfmIDJV868qcmlJfaQTU81yRZInTM1ypLjVOJwANNa00aGIhh5wP"
+      publishableKey="pk_test_51U5RJpQXh4lHpggVNyf0lLpNMzJIUWHzwjJGIuyCKzYBZRO1GILu1HC8N7QcDNohzouq1CSwUyPRRQttJniEdXCI00Mgck4slU"
       merchantIdentifier="merchant.com.vroom"
-      // urlScheme="vroomrider"
+    // urlScheme="vroomrider"
     >
       <GestureHandlerRootView style={{ flex: 1 }}>
         <QueryClientProvider client={queryClient}>
