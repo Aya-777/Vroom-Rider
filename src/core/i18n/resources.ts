@@ -41,6 +41,8 @@
   modalsAr,
   scheduleEn,
   scheduleAr,
+  contactUsEn,
+  contactUsAr
 } from './locales/index';
 
 export const resources = {
@@ -66,6 +68,7 @@ export const resources = {
     payments: paymentsEn,
     modals: modalsEn,
     schedule: scheduleEn,
+    contactUS: contactUsEn,
   },
   
   ar: {
@@ -90,5 +93,6 @@ export const resources = {
     payments: paymentsAr,
     modals: modalsAr,
     schedule: scheduleAr,
+    contactUS: contactUsAr,
   },
 };
