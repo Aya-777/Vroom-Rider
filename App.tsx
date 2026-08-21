@@ -60,7 +60,7 @@ function App() {
 
   return (
     <StripeProvider
-      publishableKey="pk_test_51U4zaU07t2n4HgaIrwsO9U5N21rP9BWp7mRBIRBwynlHKVlfmIDJV868qcmlJfaQTU81yRZInTM1ypLjVOJwANNa00aGIhh5wP"
+      publishableKey="pk_test_51U671zR71RvcTXyvCWzwFOFaw1GkWH3O4Cml7j8A8TCdt22hWul8CAuF0rlwrGjJbLKEQNXJA1KYUyDyqENGPGaK00yLkWyUCZ"
       merchantIdentifier="merchant.com.vroom"
       // urlScheme="vroomrider"
     >

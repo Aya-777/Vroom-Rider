@@ -107,7 +107,6 @@ export function useSelectRideViewModel(initialDestinationText = '') {
         stop_type: 'DROP_OFF' as const,
       },
     ];
-    console.log('selected person' , state.selectedPerson);
     if (
       state.selectedPerson !== 'forMe' &&
       state.contactPhone &&
@@ -176,10 +175,12 @@ export function useSelectRideViewModel(initialDestinationText = '') {
       });
       state.setContactPhone(contact.phone);
       state.setSelectedPerson(contact.name);
+      setRideOtpVerified(false);
       return;
     }
 
     state.setSelectedPerson('forMe');
+    setRideOtpVerified(true);
     setRideDetails({
       ...rideData,
       is_for_someone_else: false,
