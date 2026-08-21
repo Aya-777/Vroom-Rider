@@ -131,7 +131,7 @@ export const createStyles = (colors: ThemeColors) =>
         },
 
         halfInput: {
-            width: '55%',
+            width: '57%',
         },
 
         halfInputText: {
