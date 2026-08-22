@@ -11,12 +11,12 @@ import {
   Spacing,
   Typography,
 } from '../../core/theme/tokens';
-import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../core/theme/useTheme';
 import Header from '../../shared/components/SubHeader';
 import LinearBg from '../../shared/components/LinearBg';
 import { useNavigation } from '@react-navigation/native';
 import { rideApi } from '../ride/services/rideApi';
+import { useTranslation } from 'react-i18next';
 
 export const ContactUsScreen = () => {
   const [message, setMessage] = useState('');
@@ -41,7 +41,7 @@ export const ContactUsScreen = () => {
 };
 
     const { colors } = useTheme();
-    const { t } = useTranslation(['contactUs', 'common']);
+    const { t } = useTranslation(['contactUS', 'common']);
     const navigation = useNavigation<any>();
     
 
